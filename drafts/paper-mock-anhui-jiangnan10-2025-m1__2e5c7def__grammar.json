@@ -1,0 +1,1110 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-anhui-jiangnan10-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill": {
+      "overview": "外国博主创造的流行语“city不city”走红网络，背后是中国不断放宽的过境免签政策和更便利的支付、签证服务，让外国游客能亲身体验中国日常生活。",
+      "fullTranslationZh": "你听说过“city不city”（字面意思是“城市还是不城市”）吗？这是外国博主保保熊在北京游览长城时创造的一个网络流行语。这个说法是在质疑一个地方是否具有大城市的时尚氛围。\n数以百万计的外国人像保保熊一样正在探索中国，他们的旅行视频最近在网上走红。这一潮流部分得益于72小时和144小时过境免签政策，该政策允许来自54个国家的旅客，只要持有有效的旅行证件和72小时或144小时内出境的联程客票，就可以免签在中国游玩最多六天。\n这项政策旨在推动高水平对外开放，已帮助促进了中国的旅游业。过境免签政策2013年首次推出时，只适用于北京、上海等七个大城市，而且只允许停留72小时。如今，它覆盖19个省、自治区和直辖市的41个出入境口岸，停留时间延长到144小时。中国还通过提升移动支付的便利性、优化签证办理流程，让外国游客来华更加便利。\n眼见为实。这项政策不仅为外国游客带来了便利，还邀请他们去体验中国的日常生活。这是他们重新审视西方媒体对中国的刻板描述的好机会。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+          "sourceText": "This trend is partly due to the 72-and 144-hour visa-free transit(过境) policy, __59__ allows travelers from 54 countries to explore China for up to six days without needing a visa if they have a valid travel document __60__ a connecting ticket for departure within 72or 144 hours.",
+          "displayText": "This trend is partly due to the 72-and 144-hour visa-free transit(过境) policy, which allows travelers from 54 countries to explore China for up to six days without needing a visa if they have a valid travel document and a connecting ticket for departure within 72or 144 hours.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:59",
+            "question:paper-mock-anhui-jiangnan10-2025-m1:60"
+          ],
+          "translationZh": "这一潮流部分得益于72小时和144小时过境免签政策，该政策允许来自54个国家的旅客，只要持有有效的旅行证件和72小时或144小时内出境的联程客票，就可以免签在中国游玩最多六天。",
+          "analysisZh": "主干是 This trend is partly due to the … policy，说这一潮流部分归因于过境免签政策。逗号后 which 引导非限制性定语从句补充说明这项政策：allows travelers … to explore China，即 allow sb to do。从句里 without needing a visa 说明方式，if 引导条件状语，条件是同时持有 a valid travel document and a connecting ticket 两样东西。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 27,
+              "quote": "This trend is partly due to"
+            },
+            {
+              "start": 78,
+              "end": 100,
+              "quote": "which allows travelers"
+            },
+            {
+              "start": 178,
+              "end": 190,
+              "quote": "if they have"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+          "sourceText": "When the visa-free transit policy was first introduced in 2013, it only applied __62__ seven big cities like Beijing and Shanghai and allowed just 72 hours of stay.",
+          "displayText": "When the visa-free transit policy was first introduced in 2013, it only applied to seven big cities like Beijing and Shanghai and allowed just 72 hours of stay.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:62"
+          ],
+          "translationZh": "过境免签政策2013年首次推出时，只适用于北京、上海等七个大城市，而且只允许停留72小时。",
+          "analysisZh": "主干是 it only applied to seven big cities … and allowed just 72 hours of stay，主语 it 指过境免签政策，and 连接两个并列谓语：只适用于七个大城市，只允许停留72小时。句首 When 引导时间状语从句，交代时间是2013年首次推出时，与下一句的 Now 形成今昔对比。",
+          "underlineRanges": [
+            {
+              "start": 64,
+              "end": 82,
+              "quote": "it only applied to"
+            },
+            {
+              "start": 126,
+              "end": 151,
+              "quote": "and allowed just 72 hours"
+            },
+            {
+              "start": 0,
+              "end": 54,
+              "quote": "When the visa-free transit policy was first introduced"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 86,
+              "quote": "你听说过“city不city”（字面意思是“城市还是不城市”）吗？这是外国博主保保熊在北京游览长城时创造的一个网络流行语。这个说法是在质疑一个地方是否具有大城市的时尚氛围。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2"
+              ],
+              "start": 87,
+              "end": 212,
+              "quote": "数以百万计的外国人像保保熊一样正在探索中国，他们的旅行视频最近在网上走红。这一潮流部分得益于72小时和144小时过境免签政策，该政策允许来自54个国家的旅客，只要持有有效的旅行证件和72小时或144小时内出境的联程客票，就可以免签在中国游玩最多六天。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3"
+              ],
+              "start": 213,
+              "end": 365,
+              "quote": "这项政策旨在推动高水平对外开放，已帮助促进了中国的旅游业。过境免签政策2013年首次推出时，只适用于北京、上海等七个大城市，而且只允许停留72小时。如今，它覆盖19个省、自治区和直辖市的41个出入境口岸，停留时间延长到144小时。中国还通过提升移动支付的便利性、优化签证办理流程，让外国游客来华更加便利。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:5"
+              ],
+              "start": 366,
+              "end": 429,
+              "quote": "眼见为实。这项政策不仅为外国游客带来了便利，还邀请他们去体验中国的日常生活。这是他们重新审视西方媒体对中国的刻板描述的好机会。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+            "text": "Have you ever heard of “city b u city” (literally meaning city or not city)? It’s an internet buzzword coined by a foreign blogger named Baobaoxiong during his visit to the Great Wall in Beijing. The phrase questions whether/if a place has the fashionable atmosphere of a big city."
+          },
+          {
+            "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+            "text": "Millions of foreigners, like Baobaoxiong, are now exploring China, and their travel vlogs have gone/have been going viral online recently. This trend is partly due to the 72-and 144-hour visa-free transit(过境) policy, which allows travelers from 54 countries to explore China for up to six days without needing a visa if they have a valid travel document and a connecting ticket for departure within 72or 144 hours."
+          },
+          {
+            "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+            "text": "Aiming for high-level opening-up, this policy has helped boost tourism in China. When the visa-free transit policy was first introduced in 2013, it only applied to seven big cities like Beijing and Shanghai and allowed just 72 hours of stay. Now, it covers 41 exit-entry ports across 19 provinces, autonomous regions and municipalities(直辖市), expanding to 144 hours. China has also made it easier for foreign visitors by improving mobile payment accessibility and the visa application process."
+          },
+          {
+            "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+            "text": "Seeing is believing. The policy not only brings convenience for foreign travelers but also invites them to experience everyday life in China. It’s a great chance for them to rethink Western media’s stereotypical(刻板的)"
+          },
+          {
+            "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:5",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:5",
+            "text": "description(s) of China."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 82,
+                "end": 102,
+                "quote": "an internet buzzword"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 117,
+                "end": 137,
+                "quote": "by a foreign blogger"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 55,
+                "end": 60,
+                "quote": "网络流行语"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 35,
+                "end": 39,
+                "quote": "外国博主"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:56"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 103,
+                "end": 109,
+                "quote": "coined"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 50,
+                "end": 53,
+                "quote": "创造的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 214,
+                "end": 223,
+                "quote": "questions"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 231,
+                "end": 283,
+                "quote": "a place has the fashionable atmosphere of a big city"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 67,
+                "end": 69,
+                "quote": "质疑"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 69,
+                "end": 73,
+                "quote": "一个地方"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:57"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 217,
+                "end": 227,
+                "quote": "whether/if"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:1",
+                "start": 73,
+                "end": 75,
+                "quote": "是否"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 71,
+                "end": 89,
+                "quote": "their travel vlogs"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 115,
+                "end": 123,
+                "quote": "recently"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 22,
+                "end": 29,
+                "quote": "他们的旅行视频"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 29,
+                "end": 31,
+                "quote": "最近"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:58"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 90,
+                "end": 115,
+                "quote": "have gone/have been going"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 34,
+                "end": 36,
+                "quote": "走红"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 173,
+                "end": 201,
+                "quote": "visa-free transit(过境) policy"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 210,
+                "end": 244,
+                "quote": "allows travelers from 54 countries"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 56,
+                "end": 62,
+                "quote": "过境免签政策"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 66,
+                "end": 78,
+                "quote": "允许来自54个国家的旅客"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:59"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 217,
+                "end": 222,
+                "quote": "which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 63,
+                "end": 66,
+                "quote": "该政策"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 317,
+                "end": 340,
+                "quote": "a valid travel document"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 348,
+                "end": 367,
+                "quote": "a connecting ticket"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 83,
+                "end": 90,
+                "quote": "有效的旅行证件"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 105,
+                "end": 109,
+                "quote": "联程客票"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:60"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 354,
+                "end": 357,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 50,
+                "end": 51,
+                "quote": "和"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 40,
+                "end": 51,
+                "quote": "this policy"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 13,
+                "end": 38,
+                "quote": "for high-level opening-up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 0,
+                "end": 4,
+                "quote": "这项政策"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 6,
+                "end": 15,
+                "quote": "推动高水平对外开放"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:61"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 0,
+                "end": 6,
+                "quote": "Aiming"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 4,
+                "end": 6,
+                "quote": "旨在"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 151,
+                "end": 166,
+                "quote": "it only applied"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 46,
+                "end": 47,
+                "quote": "只"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:62"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 161,
+                "end": 163,
+                "quote": "to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 47,
+                "end": 50,
+                "quote": "适用于"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 382,
+                "end": 398,
+                "quote": "has also made it"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 434,
+                "end": 446,
+                "quote": "by improving"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 140,
+                "end": 147,
+                "quote": "让外国游客来华"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 118,
+                "end": 122,
+                "quote": "通过提升"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:63"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 389,
+                "end": 395,
+                "quote": "easier"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 147,
+                "end": 151,
+                "quote": "更加便利"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "start": 91,
+                "end": 103,
+                "quote": "invites them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "start": 23,
+                "end": 27,
+                "quote": "邀请他们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:64"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "start": 104,
+                "end": 117,
+                "quote": "to experience"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "start": 27,
+                "end": 30,
+                "quote": "去体验"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "start": 188,
+                "end": 203,
+                "quote": "Western media’s"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "start": 180,
+                "end": 187,
+                "quote": "rethink"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "start": 46,
+                "end": 50,
+                "quote": "西方媒体"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "start": 42,
+                "end": 46,
+                "quote": "重新审视"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:65"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:5",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:5",
+                "start": 0,
+                "end": 14,
+                "quote": "description(s)"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:4",
+                "start": 56,
+                "end": 58,
+                "quote": "描述"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:59",
+              "question:paper-mock-anhui-jiangnan10-2025-m1:60"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 139,
+                "end": 414,
+                "quote": "This trend is partly due to the 72-and 144-hour visa-free transit(过境) policy, which allows travelers from 54 countries to explore China for up to six days without needing a visa if they have a valid travel document and a connecting ticket for departure within 72or 144 hours."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:2",
+                "start": 37,
+                "end": 125,
+                "quote": "这一潮流部分得益于72小时和144小时过境免签政策，该政策允许来自54个国家的旅客，只要持有有效的旅行证件和72小时或144小时内出境的联程客票，就可以免签在中国游玩最多六天。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:62"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 81,
+                "end": 241,
+                "quote": "When the visa-free transit policy was first introduced in 2013, it only applied to seven big cities like Beijing and Shanghai and allowed just 72 hours of stay."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:grammar-fill:3",
+                "start": 29,
+                "end": 74,
+                "quote": "过境免签政策2013年首次推出时，只适用于北京、上海等七个大城市，而且只允许停留72小时。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-anhui-jiangnan10-2025-m1:56": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "coin",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "coined",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格修饰名词「网络流行语」（an internet buzzword），句子已有谓语（is），这里只能用非谓语。流行语是被博主创造出来的，后面的（by a foreign blogger）点出动作执行者，所以用过去分词作后置定语（coined）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "an internet buzzword",
+          "signalSide": "passage",
+          "relation": "空格修饰的名词，流行语是被创造出来的。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "by a foreign blogger",
+          "signalSide": "passage",
+          "relation": "介词（by）引出动作执行者，说明流行语是被创造的。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:57": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:57",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "whether/if",
+      "role": null,
+      "similarityProfile": {
+        "route": "whether-if",
+        "features": [
+          "object-clause"
+        ]
+      },
+      "reason": "空格引导的从句作动词「质疑」（questions）的宾语。从句（a place has the fashionable atmosphere of a big city）主谓宾齐全，不缺成分，缺的是“是否”这层意思，所以填（whether）或（if）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "The phrase questions",
+          "signalSide": "passage",
+          "relation": "动词「质疑」（questions）后接宾语从句，质疑的是“是否”。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "a place has the fashionable atmosphere",
+          "signalSide": "passage",
+          "relation": "从句成分完整，连接词不在从句中充当成分。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:58": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "go",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "have gone/have been going",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-perfect-explicit-marker",
+        "features": []
+      },
+      "reason": "空格是并列连词（and）后面那个分句的谓语，主语是复数的「他们的旅行视频」（their travel vlogs）。句末时间词「最近」（recently）表示走红从过去持续影响到现在，所以用现在完成时（have gone），也可用现在完成进行时（have been going）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "their travel vlogs",
+          "signalSide": "passage",
+          "relation": "主语是复数名词，助动词用（have）。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "recently",
+          "signalSide": "passage",
+          "relation": "“最近”提示现在完成时。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:59": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导非限制性定语从句，先行词是逗号前的「过境免签政策」（visa-free transit policy）。从句（allows travelers …）缺主语，先行词指物，所以用（which）。逗号后不能用（that）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "visa-free transit(过境) policy",
+          "signalSide": "passage",
+          "relation": "先行词是政策，指物。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "allows travelers from 54 countries",
+          "signalSide": "passage",
+          "relation": "从句谓语（allows）前缺主语。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:60": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接两个并列的名词短语：「有效的旅行证件」（a valid travel document）和「联程客票」（a connecting ticket），二者都作「持有」（have）的宾语，旅客要同时具备，所以用（and）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "a valid travel document",
+          "signalSide": "passage",
+          "relation": "并列的第一项。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "a connecting ticket",
+          "signalSide": "passage",
+          "relation": "并列的第二项，与前一项同为「持有」（have）的宾语。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:61": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "aim",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "Aiming",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "空格所在短语在句首作状语，句子谓语是（has helped）。它的逻辑主语就是句子主语「这项政策」（this policy），政策主动“旨在”（aim for）高水平开放，所以用现在分词，句首大写（Aiming）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "this policy",
+          "signalSide": "passage",
+          "relation": "分词的逻辑主语，政策主动“旨在”（aim），是主动关系。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "for high-level opening-up",
+          "signalSide": "passage",
+          "relation": "“以……为目标”（aim for）的对象是高水平开放。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:62": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "to",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把「七个大城市」（seven big cities）接到动词「适用」（applied）上，说明政策适用于哪些地方。“适用于”是（apply to），所以用介词（to）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "it only applied",
+          "signalSide": "passage",
+          "relation": "动词「适用」（applied）要用介词（to）引出适用的对象。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:63": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "easy",
+      "facetKey": "grammar-fill.given.adjective.comparison",
+      "answer": "easier",
+      "role": null,
+      "similarityProfile": {
+        "route": "comparative",
+        "features": [
+          "semantic-comparison"
+        ]
+      },
+      "reason": "空格作宾语（it）的补足语，说明让情况变得怎样，要用形容词。后面说通过改进（by improving）移动支付和签证流程，意思是比以前更方便，所以用比较级（easier）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "has also made it",
+          "signalSide": "passage",
+          "relation": "「使……变得」（made it）后接形容词作宾语补足语。"
+        },
+        {
+          "type": "comparison",
+          "signalText": "by improving",
+          "signalSide": "passage",
+          "relation": "改进后与以前相比，暗含比较。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:64": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "experience",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to experience",
+      "role": "object-complement",
+      "similarityProfile": {
+        "route": "object-complement-general",
+        "features": []
+      },
+      "reason": "空格说明宾语「他们」（them）要去做的事，作动词「邀请」（invites）的宾语补足语。“邀请某人做某事”是（invite sb to do），所以用不定式（to experience）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "invites them",
+          "signalSide": "passage",
+          "relation": "「邀请」（invites）后接宾语，再接不定式作宾补。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:65": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "describe",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "description(s)",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作动词「重新审视」（rethink）的宾语中心词，前面有所有格（Western media’s）和形容词「刻板的」（stereotypical）修饰，后接（of China），所以要用名词。动词（describe）的名词形式是（description），单复数均可。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "Western media’s",
+          "signalSide": "passage",
+          "relation": "所有格后接名词。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "rethink",
+          "signalSide": "passage",
+          "relation": "动词「重新审视」（rethink）后需要名词作宾语。"
+        }
+      ]
+    }
+  }
+}

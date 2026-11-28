@@ -1,0 +1,135 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Jack,\n\nI’m writing to share some good news with you. Our school has just launched a series of creative cultural works, and I’ve picked one of them as a gift for you.\n\nIt is a canvas bag printed with a drawing of the old ginkgo tree in the middle of our campus. The drawing was done by students in our art club. The tree is over a hundred years old, and every autumn its golden leaves cover the whole playground.\n\nTo us, the tree stands for our school’s long history and reminds us that real growth takes time. I hope the bag will be useful and remind you of our friendship. It should reach you within a week!\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "电子邮件，沿用题面给出的称呼 Dear Jack, 和落款 Yours, / Li Hua",
+        "personTense": "第一人称；介绍作品用一般现在时，交代学校推出作品、自己挑选礼物用现在完成时",
+        "readerTone": "写给英国好友，语气亲切自然，像朋友聊天，可以带一点期待和小惊喜",
+        "goal": "告诉 Jack 要送他一件学校的文创作品，并让他知道这件东西是什么、为什么值得珍惜"
+      },
+      "taskRequires": [
+        "说明写信目的：告诉 Jack 学校推出了文创作品，我要送他一件",
+        "介绍这件文创作品的样子",
+        "说明这件作品的意义"
+      ],
+      "thisEssayChooses": "标准版选了一个印着校园百年银杏树的帆布包：先交代图案由美术社同学绘制、银杏树每到秋天落叶铺满操场，再说银杏代表学校悠久的历史和“成长需要时间”，最后落到礼物的实用和友谊上。"
+    },
+    "standard": {
+      "essay": "Dear Jack,\n\nI’m writing to share some good news with you. Our school has just launched a series of creative cultural works, and I’ve picked one of them as a gift for you.\n\nIt is a canvas bag printed with a drawing of the old ginkgo tree in the middle of our campus. The drawing was done by students in our art club. The tree is over a hundred years old, and every autumn its golden leaves cover the whole playground.\n\nTo us, the tree stands for our school’s long history and reminds us that real growth takes time. I hope the bag will be useful and remind you of our friendship. It should reach you within a week!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明写信目的",
+          "quote": "Our school has just launched a series of creative cultural works, and I’ve picked one of them as a gift for you."
+        },
+        {
+          "point": "介绍此文创作品",
+          "quote": "It is a canvas bag printed with a drawing of the old ginkgo tree in the middle of our campus."
+        },
+        {
+          "point": "说明作品的意义",
+          "quote": "To us, the tree stands for our school’s long history and reminds us that real growth takes time."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "寒暄一句后直接交代写信目的：学校推出文创作品，我挑了一件送给你。",
+          "items": [
+            {
+              "quote": "I’m writing to share some good news with you.",
+              "explain": "开门见山，用“分享好消息”定下轻松的调子，朋友读到这里就知道接下来是件开心事，比一上来就说“我要送你礼物”更有铺垫。"
+            },
+            {
+              "quote": "I’ve picked one of them as a gift for you",
+              "explain": "用 picked 表明是自己从一系列作品里专门挑的，礼物就带上了心意；one of them 也顺带回应了题面的“系列”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "介绍作品：是什么东西、图案是什么、谁画的、图上的树有什么特别。",
+          "items": [
+            {
+              "quote": "a canvas bag printed with a drawing of the old ginkgo tree",
+              "explain": "过去分词短语 printed with ... 直接挂在名词后面，一句话交代了“什么东西 + 上面印着什么”，读者马上有画面。"
+            },
+            {
+              "quote": "The drawing was done by students in our art club.",
+              "explain": "点明是同学自己画的，和题面“宣传学校”呼应：这不是买来的普通商品，而是学生亲手做的作品。"
+            },
+            {
+              "quote": "every autumn its golden leaves cover the whole playground",
+              "explain": "给出一个具体的校园画面，Jack 没来过学校也想象得出来，比只说 beautiful 更有说服力。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "说明意义，再把话题收回到朋友身上，告诉他什么时候能收到。",
+          "items": [
+            {
+              "quote": "the tree stands for our school’s long history",
+              "explain": "stand for 意为“代表”，把图案和学校联系起来，完成“介绍意义”这一要点。"
+            },
+            {
+              "quote": "reminds us that real growth takes time",
+              "explain": "意义没有停在“历史悠久”，而是落到学生自己的体会上，百年老树和慢慢成长正好对得上。"
+            },
+            {
+              "quote": "It should reach you within a week!",
+              "explain": "用一个具体的下一步结尾，Jack 知道该期待什么，比“希望你喜欢”这类万能结尾更像真实的朋友邮件。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "launch a series of creative cultural works",
+          "function": "交代学校推出了一系列文创作品，launch 是“推出新产品”的常用动词，直接用上题面给的 creative cultural works。"
+        },
+        {
+          "expression": "sth. is printed with a drawing of ...",
+          "function": "介绍文创产品上的图案，衣服、杯子、书签都能套用。"
+        },
+        {
+          "expression": "stand for ... and remind sb. that ...",
+          "function": "先说图案代表什么，再说它让人想到什么道理，把作品的意义讲出两层。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Jack,\n\nLong time no see! Knowing how much you love things with a story behind them, I’m writing to share some news. Our school has just launched a series of creative cultural works, and I’ve chosen one especially for you.\n\nIt’s a canvas tote bag with a design drawn by students in our art club. It shows the old ginkgo tree standing at the heart of our campus. The tree is over a hundred years old, and every November its leaves turn the playground into a golden carpet.\n\nFor us, the tree is a living witness to our school’s long history, reminding us that real growth takes time. I hope the bag comes in handy when you go shopping, and that each time you use it, it brings back our chats about my school life. It’s already in the post, so keep an eye on your mailbox!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明写信目的",
+          "quote": "Our school has just launched a series of creative cultural works, and I’ve chosen one especially for you."
+        },
+        {
+          "point": "介绍此文创作品",
+          "quote": "It’s a canvas tote bag with a design drawn by students in our art club."
+        },
+        {
+          "point": "说明作品的意义",
+          "quote": "For us, the tree is a living witness to our school’s long history, reminding us that real growth takes time."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "Knowing how much you love things with a story behind them",
+          "explain": "开头先说中 Jack 的喜好，说明为什么挑这件礼物送他，比标准版的寒暄更贴近两人的关系。"
+        },
+        {
+          "quote": "its leaves turn the playground into a golden carpet",
+          "explain": "turn ... into a golden carpet 把“落叶铺满操场”写成一幅画，比 cover the whole playground 更生动。"
+        },
+        {
+          "quote": "it brings back our chats about my school life",
+          "explain": "把礼物和两人过去聊天的经历连起来，意义从学校延伸到友谊，结尾也更具体。"
+        }
+      ]
+    }
+  }
+}

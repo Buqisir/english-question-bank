@@ -1,0 +1,927 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-anhui-jiangnan10-2025-m1",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: Ben, I just got a text from Mum. She says if the traffic isn’t bad, she’ll be here from the airport in about an hour.\nM: Oh, no. The kitchen! The dishwasher is full and we haven’t taken the rubbish out! We need a plan.",
+      "translationZh": "女：本，我刚收到妈妈的短信。她说如果路上不堵，她大约一小时后就从机场到这儿。\n男：哎呀，不好。厨房！洗碗机塞满了，我们还没把垃圾拿出去！我们得想个办法。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "妈妈一小时后从机场到家，兄妹俩发现厨房还没收拾，急着商量办法。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "本，我刚收到妈妈的短信。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "她说如果路上不堵，她大约一小时后就从机场到这儿。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "哎呀，不好。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "厨房！"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "洗碗机塞满了，我们还没把垃圾拿出去！"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "我们得想个办法。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Hey, I’ve just looked over the list you sent me. What do you mean by “party stuff”?\nM: Oh, just a few things, like balloons, decorations and other items. Don’t spend more than\n20 dollars.",
+      "translationZh": "女：嘿，我刚看了你发给我的清单。你说的“派对用品”是指什么？\n男：哦，就几样东西，比如气球、装饰品和其他物品。别花超过20美元。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士发清单请女士买气球、装饰等派对用品，并叮嘱花费别超过20美元。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "嘿，我刚看了你发给我的清单。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "你说的“派对用品”是指什么？"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "哦，就几样东西，比如气球、装饰品和其他物品。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "别花超过"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "20美元。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: Ella, I’ve heard that you quit your job recently. How are things going?\nW: I used to have a very busy daily schedule. Now I’ve picked up painting again and rediscovered my passion for art. I find myself lost in the world of colors.",
+      "translationZh": "男：埃拉，我听说你最近辞职了。现在过得怎么样？\n女：我以前每天的日程都排得很满。现在我重新拿起了画笔，重新找回了对艺术的热爱。我发现自己沉浸在色彩的世界里。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "积极的生活态度"
+      },
+      "summaryZh": "埃拉辞职后重拾绘画，找回对艺术的热爱，沉浸在色彩中，对现在的生活很满意。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "埃拉，我听说你最近辞职了。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "现在过得怎么样？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "我以前每天的日程都排得很满。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "现在我重新拿起了画笔，重新找回了对艺术的热爱。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "我发现自己沉浸在色彩的世界里。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Hi, I just started working last week. However, my key card doesn’t always work, so I need to ask someone else to open the door for me.\nM: OK. I can issue a new one for you.",
+      "translationZh": "女：你好，我上周刚开始上班。可是我的门卡不是每次都能用，所以我得请别人帮我开门。\n男：好的。我可以给你办一张新卡。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "新员工的门卡时灵时不灵，只好请别人开门，男士答应给她换一张新卡。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "你好，我上周刚开始上班。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "可是我的门卡不是每次都能用，所以我得请别人帮我开门。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "我可以给你办一张新卡。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: Mary told me that you were awarded a weekend in Marbella for a successful project. How was it?\nW: Yes, it was amazing! The moment I arrived in Marbella, I was greeted with warm sunshine and the beautiful sights of the Mediterranean Sea.",
+      "translationZh": "男：玛丽告诉我，你因为一个项目做得成功，获得了在马贝拉度周末的奖励。怎么样？\n女：是的，太棒了！我一到马贝拉，迎接我的就是温暖的阳光和地中海的美景。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士因项目成功获奖去马贝拉度周末，向男士讲述那里的阳光和海景。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "玛丽告诉我，你因为一个项目做得成功，获得了在马贝拉度周末的奖励。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "怎么样？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "是的，太棒了！"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "我一到马贝拉，迎接我的就是温暖的阳光和地中海的美景。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Alice, did you see the new courses at the community center?\nW: Oh, what kind of things are they doing?\nM: They’re offering multiple options on top of the usual fitness course, such as a six-week programming course and an eight-week creative writing course.\nW: Great! I’m interested in creative expression through written work. Are they beginning on September 15th as usual?\nM: No, they’re giving the first class ten days later than usual. And the deadline for registration is October 1st.",
+      "translationZh": "男：爱丽丝，你看到社区中心开的新课程了吗？\n女：哦，他们开了些什么？\n男：除了平常的健身课，他们还提供多种选择，比如为期六周的编程课和为期八周的创意写作课。\n女：太好了！我对通过文字进行创意表达很感兴趣。课程还是像往常一样9月15日开始吗？\n男：不是，第一节课比往常晚十天。报名截止日期是10月1日。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "社区中心新开编程课和写作课，爱丽丝想学写作，第一节课比往常推迟十天。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "爱丽丝，你看到社区中心开的新课程了吗？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "哦，他们开了些什么？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "除了平常的健身课，他们还提供多种选择，比如为期六周的编程课和为期八周的创意写作课。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "太好了！"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "我对通过文字进行创意表达很感兴趣。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "课程还是像往常一样9月15日开始吗？"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "不是，第一节课比往常晚十天。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "报名截止日期是10月1日。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "M: Hello, is that Christine Andrews?\nW: Yes.\nM: Oh, hello. This is Paul Jennings from Interbank. I’m afraid we’ve made a mistake on your account. Is this a good time to talk?\nW: Yes, it’s fine. What’s happened?\nM: Unfortunately, a cheque for a different Christine Andrews was paid into your account by mistake. The person has the same name and almost the same account number – only one number is different. We’re very sorry but I’m afraid this was a computer error.\nW: Ah, that explains it.\nM: We’ll make the necessary arrangements and the money will be returned to the correct account today.\nW: Wait a minute, I’ve booked a holiday with the money, so I need to call the holiday company to cancel it right now.",
+      "translationZh": "男：你好，请问是克里斯汀·安德鲁斯吗？\n女：是的。\n男：哦，你好。我是国际银行的保罗·詹宁斯。恐怕我们在你的账户上出了个错。现在方便说话吗？\n女：方便。出什么事了？\n男：很遗憾，一张开给另一位克里斯汀·安德鲁斯的支票被错存进了你的账户。那个人和你同名，账号也几乎一样，只差一个数字。我们非常抱歉，恐怕这是电脑出的错。\n女：啊，这就说得通了。\n男：我们会做必要的安排，这笔钱今天会退回到正确的账户。\n女：等一下，我已经用这笔钱订了一次度假，所以我得马上给度假公司打电话取消。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "银行职员来电告知别人的支票误存入女士账户，钱要退回，女士急着取消已订的度假。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "你好，请问是克里斯汀·安德鲁斯吗？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "是的。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "哦，你好。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "我是国际银行的保罗·詹宁斯。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "恐怕我们在你的账户上出了个错。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "现在方便说话吗？"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "方便。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "出什么事了？"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "很遗憾，一张开给另一位克里斯汀·安德鲁斯的支票被错存进了你的账户。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "那个人和你同名，账号也几乎一样，只差一个数字。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "我们非常抱歉，恐怕这是电脑出的错。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "啊，这就说得通了。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我们会做必要的安排，这笔钱今天会退回到正确的账户。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "等一下，我已经用这笔钱订了一次度假，所以我得马上给度假公司打电话取消。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Hello, this is Sunshine Hotel. How may I help you?\nM: Well, I’ve seen your website and I’m calling to check a couple of things. I noticed that you offer Internet access in each room. Is that access wireless, and is the connection reliable?\nW: Yes, we provide high-speed Wi-Fi in all our rooms. The connection is quite reliable, and we often receive positive comments from our guests. And there is no extra charge for that.\nM: OK, I’ll probably arrive a little late, around 10 pm.\nW: All right.\nM: And another thing – does the hotel have a fitness room?\nW: Yes, we also have a swimming pool.\nM: That sounds perfect for me. I’d like to book a single room for three nights, starting from this Tuesday. Can I make the reservation now, please?\nW: Certainly. Could you tell me your name and contact information?",
+      "translationZh": "女：你好，这里是阳光酒店。有什么可以帮您？\n男：嗯，我看了你们的网站，打电话来确认几件事。我注意到你们每个房间都提供上网服务。是无线网络吗？连接稳定吗？\n女：是的，我们所有房间都有高速无线网络。连接相当稳定，我们经常收到客人的好评。而且不另外收费。\n男：好的，我可能会晚一点到，大约晚上10点。\n女：没问题。\n男：还有一件事：酒店有健身房吗？\n女：有，我们还有一个游泳池。\n男：这对我来说太合适了。我想订一间单人房，住三晚，从这周二开始。现在可以预订吗？\n女：当然可以。能告诉我您的姓名和联系方式吗？",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士致电酒店询问无线网络和健身房，随后预订从周二起三晚的单人房。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "你好，这里是阳光酒店。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "嗯，我看了你们的网站，打电话来确认几件事。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "我注意到你们每个房间都提供上网服务。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "是无线网络吗？连接稳定吗？"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "是的，我们所有房间都有高速无线网络。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "连接相当稳定，我们经常收到客人的好评。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "而且不另外收费。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "好的，我可能会晚一点到，大约晚上10点。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "没问题。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "还有一件事：酒店有健身房吗？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "有，我们还有一个游泳池。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "这对我来说太合适了。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "我想订一间单人房，住三晚，从这周二开始。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "现在可以预订吗？"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "当然可以。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "能告诉我您的姓名和联系方式吗？"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "W: Hello, everyone, this is Weather Watch! Today, we have a special guest who’s taking us to the heart of nature’s most powerful storms – storm tracker Alex Wilson. Alex, welcome to the show!\nM: Thanks, Emma! It’s great to be here.\nW: So Alex, do you need any certification to become a storm tracker?\nM: Yes, anybody who wants to track storms should contact their local National Weather Service and go through a spotter training class. That’s the first step. For those who want to continue and conduct research, they should consider pursuing a degree related to it.\nW: How often do you go out, tracking a storm?\nM: Well, we go to Tornado Alley quite often. And we’re expecting this year’s sixth trip there next week. That’s about average, but it all depends on the season.\nW: You’ve gotten pretty close to “tornadoes” – a special form of storm. What is that like?\nM: You can see in detail the tornado and the wind flow; you can actually hear it. And the sounds are different. In an open field, it sounds like rushing water, but in a populated area, it becomes more of a thundering sound.",
+      "translationZh": "女：大家好，这里是《天气观察》！今天我们请来一位特别嘉宾，他将带我们走进大自然最猛烈的风暴的中心——风暴追踪者亚历克斯·威尔逊。亚历克斯，欢迎来到节目！\n男：谢谢你，艾玛！很高兴来到这里。\n女：那么亚历克斯，成为风暴追踪者需要什么资格证书吗？\n男：需要。任何想追踪风暴的人都应该联系当地的国家气象局，参加一个观测员培训班。这是第一步。想继续深入做研究的人，应该考虑攻读相关的学位。\n女：你们多久出去追踪一次风暴？\n男：嗯，我们经常去龙卷风走廊。下周我们就要去那里进行今年的第六次考察。这差不多是平均水平，不过全看季节。\n女：你曾经离“龙卷风”这种特殊形式的风暴非常近。那是什么感觉？\n男：你能清楚地看到龙卷风和气流的细节，还能真切地听到它。而且声音各不相同。在空旷的田野里，它听起来像奔流的水声，但在人口密集的地区，它更像雷鸣声。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "灾害防范",
+        "subtopic": "自然灾害与防范"
+      },
+      "summaryZh": "主持人采访风暴追踪者亚历克斯，谈入行资格、追踪频率和近距离听到的龙卷风声音。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "大家好，这里是《天气观察》！"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "今天我们请来一位特别嘉宾，他将带我们走进大自然最猛烈的风暴的中心——风暴追踪者亚历克斯·威尔逊。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "亚历克斯，欢迎来到节目！"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "谢谢你，艾玛！"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "很高兴来到这里。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "那么亚历克斯，成为风暴追踪者需要什么资格证书吗？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "需要。任何想追踪风暴的人都应该联系当地的国家气象局，参加一个观测员培训班。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "这是第一步。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "想继续深入做研究的人，应该考虑攻读相关的学位。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "你们多久出去追踪一次风暴？"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "嗯，我们经常去龙卷风走廊。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "下周我们就要去那里进行今年的第六次考察。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "这差不多是平均水平，不过全看季节。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "你曾经离“龙卷风”这种特殊形式的风暴非常近。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "那是什么感觉？"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "你能清楚地看到龙卷风和气流的细节，还能真切地听到它。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "而且声音各不相同。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "在空旷的田野里，它听起来像奔流的水声，但在人口密集的地区，它更像雷鸣声。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Welcome to Entertainment Talk. Tonight we’ll be speaking to a member of the famous band Attam Family. The Attam Family has performed at the Music Hall every summer, but this year the concert will not feature the voice of Batima Attam. Instead, it will be a single guitar performance by her brother, Amir Attam. Amir picked up his first guitar at the age of eight. Since then, he has poured his heart into practicing and learning the guitar. He loved listening to different styles of music, especially rock and blues. Over the years, he has combined elements of folk, jazz, and even classical music into his pieces, making him truly remarkable. Tonight, Amir will share his experiences of growing up in a musical family and how it shaped his passion for playing the guitar. He’ll also talk about the guitarists who inspired him. So now, let’s welcome Amir to the stage.",
+      "translationZh": "欢迎收听《娱乐访谈》。今晚我们将与著名乐队阿塔姆家族的一位成员对话。阿塔姆家族每年夏天都在音乐厅演出，但今年的音乐会将不会有芭蒂玛·阿塔姆的歌声。取而代之的是她哥哥阿米尔·阿塔姆的吉他独奏。阿米尔八岁时拿起了他的第一把吉他。从那以后，他全身心投入吉他的练习和学习。他喜欢听各种风格的音乐，尤其是摇滚和布鲁斯。多年来，他把民谣、爵士甚至古典音乐的元素融入自己的作品，这让他真正与众不同。今晚，阿米尔将分享他在音乐家庭中成长的经历，以及这段经历如何塑造了他对弹吉他的热情。他还会谈谈那些启发过他的吉他手。现在，让我们欢迎阿米尔登台。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "音乐领域的概况及其发展"
+      },
+      "summaryZh": "节目介绍吉他手阿米尔：今年由他独奏替代妹妹演唱，他融合多种风格，即将上台受访。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "欢迎收听《娱乐访谈》。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "今晚我们将与著名乐队阿塔姆家族的一位成员对话。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "阿塔姆家族每年夏天都在音乐厅演出，但今年的音乐会将不会有芭蒂玛·阿塔姆的歌声。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "取而代之的是她哥哥阿米尔·阿塔姆的吉他独奏。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "阿米尔八岁时拿起了他的第一把吉他。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "从那以后，他全身心投入吉他的练习和学习。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "他喜欢听各种风格的音乐，尤其是摇滚和布鲁斯。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "多年来，他把民谣、爵士甚至古典音乐的元素融入自己的作品，这让他真正与众不同。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "今晚，阿米尔将分享他在音乐家庭中成长的经历，以及这段经历如何塑造了他对弹吉他的热情。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "他还会谈谈那些启发过他的吉他手。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "现在，让我们欢迎阿米尔登台。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "对话最可能发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在家里。",
+        "B": "在机场。",
+        "C": "在商店。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The dishwasher is full and we haven’t taken the rubbish out!"
+      },
+      "reasonZh": "妈妈要“到这儿”（be here），男士又惦记厨房（The kitchen）、洗碗机和垃圾，可见两人在家等妈妈回来，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "机场（airport）是妈妈出发的地方，她一小时后才从机场到这儿，两人并不在机场。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士想让女士做什么？",
+      "optionTranslationsZh": {
+        "A": "参加派对。",
+        "B": "布置房间。",
+        "C": "去买些东西。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Oh, just a few things, like balloons, decorations and other items."
+      },
+      "reasonZh": "男士发了清单（the list），列出气球、装饰品等，又叮嘱别花超过20美元（Don’t spend more than），可见是让女士照单去买东西，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "派对（party）只出现在“派对用品”（party stuff）里，说的是要买的东西，男士没有邀请女士参加派对。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士对现在的生活感觉如何？",
+      "optionTranslationsZh": {
+        "A": "满意。",
+        "B": "困惑。",
+        "C": "担忧。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Now I’ve picked up painting again and rediscovered my passion for art."
+      },
+      "reasonZh": "女士辞职后重拾绘画、找回对艺术的热爱，还说自己沉浸在色彩的世界里（lost in the world of colors），可见她对现在的生活很满意，选 A。"
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士为什么和男士交谈？",
+      "optionTranslationsZh": {
+        "A": "为了报到上班。",
+        "B": "为了换一张门卡。",
+        "C": "为了找人修门。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "However, my key card doesn’t always work, so I need to ask someone else to open the door for me."
+      },
+      "reasonZh": "女士说门卡不好用（my key card doesn’t always work），男士答应给她办张新的（issue a new one），可见她是来换门卡的，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "门（door）只是她请别人帮忙开的东西，出问题的是门卡，不是门本身。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "说话人主要在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一个旅行计划。",
+        "B": "一种特殊的气候。",
+        "C": "一份应得的奖励。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Mary told me that you were awarded a weekend in Marbella for a successful project."
+      },
+      "reasonZh": "女士因项目成功获奖（were awarded … for a successful project），得到在马贝拉度周末的机会，两人谈的就是这份靠成绩换来的奖励，选 C。"
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "爱丽丝会上哪门课？",
+      "optionTranslationsZh": {
+        "A": "健身课。",
+        "B": "编程课。",
+        "C": "写作课。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’m interested in creative expression through written work."
+      },
+      "reasonZh": "爱丽丝说自己对通过文字进行创意表达感兴趣（creative expression through written work），对应男士提到的创意写作课，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "健身课（fitness course）是社区中心平常就有的课，男士只是顺带提到，爱丽丝感兴趣的是写作。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "编程课（programming course）是男士列举的新课之一，爱丽丝听完说感兴趣的是文字表达。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "爱丽丝什么时候上第一节课？",
+      "optionTranslationsZh": {
+        "A": "九月中旬。",
+        "B": "九月下旬。",
+        "C": "十月上旬。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "No, they’re giving the first class ten days later than usual."
+      },
+      "reasonZh": "往常9月15日开课（September 15th），今年晚十天（ten days later），15日 + 10天 = 9月25日，属于九月下旬，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "10月1日（October 1st）是报名截止日期，不是第一节课的时间。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "说话人之间最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "银行职员和客户。",
+        "B": "导游和游客。",
+        "C": "老板和员工。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "This is Paul Jennings from Interbank."
+      },
+      "reasonZh": "男士自称来自国际银行（from Interbank），又说在女士的账户（your account）上出了错，可见他是银行职员，女士是客户，选 A。"
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士为什么给女士打电话？",
+      "optionTranslationsZh": {
+        "A": "为了寻求帮助。",
+        "B": "为了介绍一项服务。",
+        "C": "为了告诉她出了一个差错。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’m afraid we’ve made a mistake on your account."
+      },
+      "reasonZh": "男士开口就说银行在她的账户上出了错（made a mistake on your account），接着解释支票被误存，打电话就是来告知这个差错，选 C。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "取一些钱。",
+        "B": "联系旅行公司。",
+        "C": "提供她的信息。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Wait a minute, I’ve booked a holiday with the money, so I need to call the holiday company to cancel it right now."
+      },
+      "reasonZh": "“联系旅行公司”就是女士说的马上给度假公司打电话取消预订（call the holiday company … right now），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "钱（money）是被误存、今天要退回的那笔钱，女士已经用它订了度假，接下来要做的是打电话取消，不是取钱。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士关心酒店的第一件事是什么？",
+      "optionTranslationsZh": {
+        "A": "价格。",
+        "B": "上网服务。",
+        "C": "环境。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I noticed that you offer Internet access in each room."
+      },
+      "reasonZh": "男士说要确认几件事，最先问的就是房间里的上网服务（Internet access）是否无线、是否稳定，选 B。"
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士打算在酒店做什么？",
+      "optionTranslationsZh": {
+        "A": "锻炼身体。",
+        "B": "处理业务。",
+        "C": "举办典礼。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "And another thing – does the hotel have a fitness room?"
+      },
+      "reasonZh": "男士专门问有没有健身房（a fitness room），听说还有游泳池后说这对他太合适了（perfect for me），可见他想在酒店锻炼，选 A。"
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士什么时候离开酒店？",
+      "optionTranslationsZh": {
+        "A": "本周二。",
+        "B": "本周四。",
+        "C": "本周五。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’d like to book a single room for three nights, starting from this Tuesday."
+      },
+      "reasonZh": "从本周二入住（starting from this Tuesday），住三晚（three nights）：周二、周三、周四三晚，周五离店，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "周二（Tuesday）是入住那天，不是离开的日子。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士最可能是什么身份？",
+      "optionTranslationsZh": {
+        "A": "教练。",
+        "B": "节目主持人。",
+        "C": "教授。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Alex, welcome to the show!"
+      },
+      "reasonZh": "女士开场介绍节目《天气观察》，请出特别嘉宾，又说欢迎来到节目（welcome to the show），可见她是节目主持人，选 B。"
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "要成为风暴追踪者，首先要做什么？",
+      "optionTranslationsZh": {
+        "A": "参加观测员培训班。",
+        "B": "攻读与天气相关的学位。",
+        "C": "在气象中心做志愿者。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Yes, anybody who wants to track storms should contact their local National Weather Service and go through a spotter training class."
+      },
+      "reasonZh": "男士说想追踪风暴的人要参加观测员培训班（go through a spotter training class），紧接着说这是第一步（the first step），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "攻读学位（pursuing a degree）是想继续做研究的人后面才考虑的事，不是第一步。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "气象局（National Weather Service）是要联系的机构，男士没说去那里做志愿者。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "亚历克斯今年去过龙卷风走廊几次？",
+      "optionTranslationsZh": {
+        "A": "5次。",
+        "B": "6次。",
+        "C": "7次。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "And we’re expecting this year’s sixth trip there next week."
+      },
+      "reasonZh": "下周才是今年第六次去（this year’s sixth trip … next week），所以到现在已经去过 6 − 1 = 5 次，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "6 次是把下周那趟也算了进去，第六次还没去。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "在空旷地带，龙卷风听起来像什么？",
+      "optionTranslationsZh": {
+        "A": "响亮的烟花声。",
+        "B": "雷声。",
+        "C": "湍急的水流声。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "In an open field, it sounds like rushing water, but in a populated area, it becomes more of a thundering sound."
+      },
+      "reasonZh": "题干里的空旷地带就是男士说的空旷的田野（an open field），那里的龙卷风听起来像奔流的水（rushing water），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "雷声（thundering sound）是人口密集地区的声音，转折词后面说的是另一种地方。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "芭蒂玛·阿塔姆在以往的演出中可能做什么？",
+      "optionTranslationsZh": {
+        "A": "她跳舞。",
+        "B": "她唱歌。",
+        "C": "她弹吉他。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The Attam Family has performed at the Music Hall every summer, but this year the concert will not feature the voice of Batima Attam."
+      },
+      "reasonZh": "往年演出都有她，今年却听不到芭蒂玛的歌声（not feature the voice of Batima Attam），可见她以往在演出中唱歌，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "弹吉他（guitar）的是她哥哥阿米尔，今年由他吉他独奏来代替她的歌声。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "阿米尔有什么特别之处？",
+      "optionTranslationsZh": {
+        "A": "他融合多种风格的音乐。",
+        "B": "他高超的技巧。",
+        "C": "他的舞台经验。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Over the years, he has combined elements of folk, jazz, and even classical music into his pieces, making him truly remarkable."
+      },
+      "reasonZh": "“融合多种风格”就是阿米尔把民谣、爵士甚至古典音乐的元素融入作品（combined elements of folk, jazz, and even classical music），这让他与众不同，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "舞台（stage）出现在最后一句，是欢迎阿米尔登台，不是在说他舞台经验多。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "听众接下来会听到什么？",
+      "optionTranslationsZh": {
+        "A": "一首歌。",
+        "B": "一段访谈。",
+        "C": "一则广告。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Tonight we’ll be speaking to a member of the famous band Attam Family."
+      },
+      "reasonZh": "节目叫《娱乐访谈》，主持人说今晚要和乐队成员对话（speaking to a member），阿米尔会分享经历，接着请他上台，所以接下来是访谈，选 B。"
+    }
+  }
+}

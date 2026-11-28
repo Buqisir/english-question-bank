@@ -1,0 +1,744 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-anhui-jiangnan10-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-anhui-jiangnan10-2025-m1:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-anhui-jiangnan10-2025-m1:reading-b": {
+      "overview": "荷兰 LAM 博物馆一件形似两个空啤酒罐的手绘艺术品被新来的机修工当垃圾扔掉，馆长及时找回；馆方不怪罪机修工，并解释在意外之处展出作品是为了给参观者惊喜。",
+      "fullTranslationZh": "一家荷兰博物馆找回了一件看起来像两个空啤酒罐的艺术品，此前一名工作人员不小心把它扔进了垃圾桶。\n这件作品名为《我们共度的所有美好时光》，出自法国艺术家亚历山大·拉韦之手，乍一看就像两个被丢弃的、瘪了的啤酒罐。然而仔细一看就会发现，它们是精心手绘而成的，创作时花费了大量时间和精力。一名机修工没有看出它们的艺术价值，他看到它们摆在电梯里，就把它们扔进了垃圾桶。馆长埃莉萨·范登贝赫短暂休假回来，发现罐子不见了。就在它们即将被运走的时候，她从一个垃圾袋里把它们找了回来。\n荷兰西部利瑟市 LAM 博物馆的弗鲁克耶·布丁说，艺术品常被放在不寻常的地方——所以才会摆在电梯里。“我们一直在努力给参观者制造惊喜，”她说，“现在我们已经把这件作品放到一个更传统的位置——一个底座上，好让它在这番历险之后歇一歇。”她强调，大家对那名机修工并无怨气，他刚到博物馆工作不久，只是在履行自己的职责。\n博物馆馆长西茨克·范赞滕强调，博物馆的使命是鼓励参观者用全新的眼光看待日常物品。“通过在意想不到的地方展示艺术品，我们增强了这种体验，让参观者时刻打起精神，”他补充道。\n布丁还指出，这对罐子不太可能在传统底座上久留，他们需要好好想一想，下一次要把它们放在一个经过慎重考虑的地方。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b-1",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+          "sourceText": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin.",
+          "displayText": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:24"
+          ],
+          "translationZh": "一名机修工没有看出它们的艺术价值，他看到它们摆在电梯里，就把它们扔进了垃圾桶。",
+          "analysisZh": "主干是 Their artistic value was lost on a mechanic。be lost on sb 不是“丢在某人身上”，而是“某人没领会到”，所以这句的意思是机修工没看出它们的艺术价值。逗号后的 who 引导非限制性定语从句，补充这名机修工做了什么：saw them displayed in a lift（看到它们摆在电梯里，displayed 是过去分词作宾语补足语，罐子是被摆放的）和 threw them in the bin（把它们扔进垃圾桶），两个动作由 and 并列，前一个是后一个的原因。",
+          "underlineRanges": [
+            {
+              "start": 21,
+              "end": 43,
+              "quote": "was lost on a mechanic"
+            },
+            {
+              "start": 49,
+              "end": 77,
+              "quote": "saw them displayed in a lift"
+            },
+            {
+              "start": 82,
+              "end": 103,
+              "quote": "threw them in the bin"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b-2",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:5",
+          "sourceText": "Budding also noted the cans were unlikely to stay on their traditional plinth for long and that they needed to think hard about a careful place to put them next.",
+          "displayText": "Budding also noted the cans were unlikely to stay on their traditional plinth for long and that they needed to think hard about a careful place to put them next.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:27"
+          ],
+          "translationZh": "布丁还指出，这对罐子不太可能在传统底座上久留，他们需要好好想一想，下一次要把它们放在一个经过慎重考虑的地方。",
+          "analysisZh": "主干是 Budding also noted + 两个宾语从句：第一个 the cans were unlikely to stay … 前省略了 that，第二个由 and that 引出，两个从句并列，都是她“指出”的内容。be unlikely to do 意为“不太可能做”，for long 意为“长久”，合起来说罐子不会一直留在传统底座上。第二个从句里 think hard about 意为“认真考虑”，to put them next 是不定式作定语修饰 a careful place，即“下一次用来放它们的、经过慎重考虑的地方”。",
+          "underlineRanges": [
+            {
+              "start": 28,
+              "end": 49,
+              "quote": "were unlikely to stay"
+            },
+            {
+              "start": 87,
+              "end": 127,
+              "quote": "and that they needed to think hard about"
+            },
+            {
+              "start": 128,
+              "end": 160,
+              "quote": "a careful place to put them next"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:1"
+              ],
+              "start": 0,
+              "end": 47,
+              "quote": "一家荷兰博物馆找回了一件看起来像两个空啤酒罐的艺术品，此前一名工作人员不小心把它扔进了垃圾桶。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2"
+              ],
+              "start": 48,
+              "end": 233,
+              "quote": "这件作品名为《我们共度的所有美好时光》，出自法国艺术家亚历山大·拉韦之手，乍一看就像两个被丢弃的、瘪了的啤酒罐。然而仔细一看就会发现，它们是精心手绘而成的，创作时花费了大量时间和精力。一名机修工没有看出它们的艺术价值，他看到它们摆在电梯里，就把它们扔进了垃圾桶。馆长埃莉萨·范登贝赫短暂休假回来，发现罐子不见了。就在它们即将被运走的时候，她从一个垃圾袋里把它们找了回来。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3"
+              ],
+              "start": 234,
+              "end": 389,
+              "quote": "荷兰西部利瑟市 LAM 博物馆的弗鲁克耶·布丁说，艺术品常被放在不寻常的地方——所以才会摆在电梯里。“我们一直在努力给参观者制造惊喜，”她说，“现在我们已经把这件作品放到一个更传统的位置——一个底座上，好让它在这番历险之后歇一歇。”她强调，大家对那名机修工并无怨气，他刚到博物馆工作不久，只是在履行自己的职责。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:4"
+              ],
+              "start": 390,
+              "end": 474,
+              "quote": "博物馆馆长西茨克·范赞滕强调，博物馆的使命是鼓励参观者用全新的眼光看待日常物品。“通过在意想不到的地方展示艺术品，我们增强了这种体验，让参观者时刻打起精神，”他补充道。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:5"
+              ],
+              "start": 475,
+              "end": 529,
+              "quote": "布丁还指出，这对罐子不太可能在传统底座上久留，他们需要好好想一想，下一次要把它们放在一个经过慎重考虑的地方。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-reading-b-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+                "start": 94,
+                "end": 162,
+                "quote": "appears on first glance to be two abandoned and dented(瘪的) beer tins"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+                "start": 274,
+                "end": 378,
+                "quote": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 37,
+                "end": 55,
+                "quote": "乍一看就像两个被丢弃的、瘪了的啤酒罐"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 92,
+                "end": 131,
+                "quote": "一名机修工没有看出它们的艺术价值，他看到它们摆在电梯里，就把它们扔进了垃圾桶。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-b-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3",
+                "start": 319,
+                "end": 453,
+                "quote": "there were no hard feelings towards the mechanic, who had just started at the museum, stating that he was simply performing his duties"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 120,
+                "end": 154,
+                "quote": "大家对那名机修工并无怨气，他刚到博物馆工作不久，只是在履行自己的职责"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-b-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:4",
+                "start": 138,
+                "end": 241,
+                "quote": "By displaying artworks in unexpected places, we enhance this experience and keep visitors on their toes"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3",
+                "start": 146,
+                "end": 186,
+                "quote": "We try to surprise visitors all the time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 41,
+                "end": 77,
+                "quote": "通过在意想不到的地方展示艺术品，我们增强了这种体验，让参观者时刻打起精神"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 51,
+                "end": 66,
+                "quote": "我们一直在努力给参观者制造惊喜"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-b-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:5",
+                "start": 96,
+                "end": 160,
+                "quote": "they needed to think hard about a careful place to put them next"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 23,
+                "end": 53,
+                "quote": "他们需要好好想一想，下一次要把它们放在一个经过慎重考虑的地方"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+                "start": 274,
+                "end": 378,
+                "quote": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 92,
+                "end": 131,
+                "quote": "一名机修工没有看出它们的艺术价值，他看到它们摆在电梯里，就把它们扔进了垃圾桶。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:27"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:5",
+                "start": 0,
+                "end": 161,
+                "quote": "Budding also noted the cans were unlikely to stay on their traditional plinth for long and that they needed to think hard about a careful place to put them next."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 0,
+                "end": 54,
+                "quote": "布丁还指出，这对罐子不太可能在传统底座上久留，他们需要好好想一想，下一次要把它们放在一个经过慎重考虑的地方。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先交代作品被误扔又被找回的新闻，再讲误扔经过，接着写馆方的回应和不怪罪的态度，然后说明在意外之处展出作品的用意，最后交代作品今后的去向。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:1",
+            "summary": "荷兰一家博物馆找回了被工作人员误扔的、形似空啤酒罐的艺术品。",
+            "function": "开门见山交代新闻事件。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+            "summary": "作品乍看像废弃啤酒罐，机修工没看出其艺术价值将其扔掉，馆长及时从垃圾袋中找回。",
+            "function": "交代事件经过和误扔的原因。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3",
+            "summary": "布丁解释作品常摆在不寻常的地方，现已移到底座上，并表示不怪罪那名机修工。",
+            "function": "交代馆方的回应和对当事人的态度。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:4",
+            "summary": "馆长强调博物馆想让参观者用新眼光看日常物品，在意外之处展出作品正是为此。",
+            "function": "说明博物馆这样摆放作品的用意。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:5",
+            "summary": "布丁指出作品不会在底座上久留，下一处摆放地点需要慎重考虑。",
+            "function": "交代作品今后的去向。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-anhui-jiangnan10-2025-m1:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出机修工把作品扔掉的原因，原因藏在作品乍看的样子里。",
+      "stemTranslationZh": "机修工为什么把这件艺术品扔进了垃圾桶？",
+      "locateBy": "stem",
+      "locateFindZh": "往前找罐子乍一看像什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "因为它挡了路。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Because it stood in the way.",
+            "explanation": "原文只说机修工看到罐子摆在电梯里就扔了，没说它挡了谁的路。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "因为它占了很多地方。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Because it took much space.",
+            "explanation": "原文没提作品占多大地方，扔掉它是因为机修工没看出这是艺术品（artistic value was lost on）。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "因为它看起来像真的垃圾。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+              "quote": "appears on first glance to be two abandoned and dented(瘪的) beer tins",
+              "anchor": "乍看像被丢弃的瘪啤酒罐"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+              "quote": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin.",
+              "anchor": "机修工没看出艺术价值"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "因为它在电梯里看起来很奇怪。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "lift",
+            "optionText": "lift",
+            "matchType": "exact",
+            "relationNote": "选项借了原文的 lift（电梯），电梯只是作品摆放的地方；原文没说他觉得它摆在那儿古怪，而是没看出它是艺术品。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+              "quote": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin.",
+              "anchor": "作品摆在电梯里"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mechanic",
+          "sourceRole": "stem",
+          "targetText": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "appears on first glance to be two abandoned and dented(瘪的) beer tins",
+          "bridgeZh": "lost on 指他没看出艺术价值，只看到它乍看的样子",
+          "note": "题干 mechanic 原词出现在原文。"
+        },
+        {
+          "sourceText": "Because it looked like real trash.",
+          "sourceRole": "correctOption",
+          "targetText": "appears on first glance to be two abandoned and dented(瘪的) beer tins",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“像真垃圾”（real trash）就是原文的“被丢弃的瘪啤酒罐”（abandoned and dented … beer tins）。机修工看到的正是这副样子，就当垃圾扔了，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:25": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从布丁谈到机修工时说的话，判断她对误扔一事的态度。",
+      "stemTranslationZh": "布丁对机修工的行为持什么态度？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "理解的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3",
+              "quote": "there were no hard feelings towards the mechanic, who had just started at the museum, stating that he was simply performing his duties",
+              "anchor": "不怪他，说他只是尽职"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "担忧的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Concerned.",
+            "explanation": "作品已经找回，她还轻松地说让它在历险后歇一歇（rest after its adventure），话里没有担心。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "批评的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "She stressed there were no hard feelings towards the mechanic",
+            "sourceHighlight": "no hard feelings",
+            "optionText": "Critical.",
+            "optionHighlight": "Critical",
+            "explanation": "她特意强调对机修工没有怨气（no hard feelings），一句责备的话也没说，谈不上批评。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3",
+              "quote": "She stressed there were no hard feelings towards the mechanic",
+              "anchor": "没有怨气"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "不肯原谅的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "stating that he was simply performing his duties",
+            "sourceHighlight": "simply performing his duties",
+            "optionText": "Unforgiving.",
+            "optionHighlight": "Unforgiving",
+            "explanation": "她认为机修工只是在做分内事（simply performing his duties），根本没把这件事算成他的错，不存在原不原谅。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3",
+              "quote": "stating that he was simply performing his duties",
+              "anchor": "只是在履行职责"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mechanic",
+          "sourceRole": "stem",
+          "targetText": "She stressed there were no hard feelings towards the mechanic, who had just started at the museum, stating that he was simply performing his duties.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "there were no hard feelings towards the mechanic, who had just started at the museum, stating that he was simply performing his duties",
+          "note": "题干 mechanic 原词出现在原文，这句的 She 就是布丁。"
+        },
+        {
+          "sourceText": "Understanding.",
+          "sourceRole": "correctOption",
+          "targetText": "there were no hard feelings towards the mechanic",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "“理解”是从她的话推出的：她说对机修工没有怨气（no hard feelings），还替他解释他刚来不久、只是在尽职（simply performing his duties）。不怪他，还替他说话，就是理解，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:26": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "phrase",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据画线短语所在句的前半句和上文布丁的话，推出 keep visitors on their toes 在这里的意思。",
+      "stemTranslationZh": "第 4 段中画线短语是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 By 引出的做法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "让参观者对惊喜有所准备。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:4",
+              "quote": "By displaying artworks in unexpected places, we enhance this experience and keep visitors on their toes",
+              "anchor": "在意想不到的地方展示作品"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3",
+              "quote": "We try to surprise visitors all the time",
+              "anchor": "一直想给参观者惊喜"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "提醒参观者注意危险。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Remind visitors of dangers.",
+            "explanation": "放进去就成了“在意想不到的地方展示作品，提醒参观者注意危险”，可这里讲的是给观众惊喜，没有任何危险。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "警告参观者不要乱扔垃圾。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin.",
+            "sourceEntity": "a mechanic",
+            "optionText": "Warn visitors not to litter.",
+            "optionEntity": "visitors",
+            "explanation": "扔作品的是机修工（a mechanic），不是参观者；放进去就成了“在意外之处摆作品，警告参观者别乱扔垃圾”，前后毫不相干。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+              "quote": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin.",
+              "anchor": "扔作品的是机修工"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "带参观者参观博物馆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Show visitors around the museum.",
+            "explanation": "放进去就成了“在意外之处摆作品，带参观者参观博物馆”，可前半句讲的是作品摆在哪儿，不是有人带路。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "underlined phrase",
+          "sourceRole": "stem",
+          "targetText": "“By displaying artworks in unexpected places, we enhance this experience and keep visitors on their toes,” he added.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:4",
+          "relationType": "locationCue",
+          "targetCue": "keep visitors on their toes",
+          "sourceZh": "画线短语",
+          "targetCueZh": "让参观者打起精神",
+          "answerText": "displaying artworks in unexpected places",
+          "note": "题干问的画线短语就是原文 keep visitors on their toes。"
+        },
+        {
+          "sourceText": "Make visitors ready for surprises.",
+          "sourceRole": "correctOption",
+          "targetText": "By displaying artworks in unexpected places",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "同句的做法是把作品摆在意想不到的地方（in unexpected places），所以画线部分必须是这种摆法给观众带来的状态。放回去：作品总在想不到的地方出现，参观者就得随时准备迎接惊喜；[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:3|We try to surprise visitors all the time]]也说馆方一直想给观众惊喜（surprise visitors），选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据布丁对作品下一步摆放的打算，推断作品将来的去处。",
+      "stemTranslationZh": "这件艺术品将来可能会怎样？",
+      "locateBy": "stem",
+      "locateFindZh": "看后半句馆方的打算",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它将被存放在保险柜里。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It will be kept in a safe.",
+            "explanation": "原文只说要慎重选下一个摆放位置，没提锁进保险柜；馆方反而喜欢把作品放在出人意料的地方。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它将被放在一个精心挑选的地方。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:5",
+              "quote": "they needed to think hard about a careful place to put them next",
+              "anchor": "慎重考虑下一个摆放地点"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它将被送回电梯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "lift",
+            "optionText": "lift",
+            "matchType": "exact",
+            "relationNote": "选项借了原文的 lift（电梯），那是作品被误扔前的位置；原文只说下一处要仔细挑选，没说放回电梯。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:2",
+              "quote": "Their artistic value was lost on a mechanic, who saw them displayed in a lift and threw them in the bin.",
+              "anchor": "作品原先摆在电梯里"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它将被放在传统的位置。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "the cans were unlikely to stay on their traditional plinth for long",
+            "sourceHighlight": "unlikely to stay on their traditional plinth",
+            "optionText": "It will be placed in a traditional setting.",
+            "optionHighlight": "placed in a traditional setting",
+            "explanation": "作品现在就摆在传统底座上，原文说它不太可能在那儿久留（unlikely to stay），选项把要离开的地方说成了将来的去处。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:5",
+              "quote": "the cans were unlikely to stay on their traditional plinth for long",
+              "anchor": "不会在传统底座上久留"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "in the future",
+          "sourceRole": "stem",
+          "targetText": "Budding also noted the cans were unlikely to stay on their traditional plinth for long and that they needed to think hard about a careful place to put them next.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:5",
+          "relationType": "locationCue",
+          "targetCue": "put them next",
+          "sourceZh": "将来",
+          "targetCueZh": "下一次摆放",
+          "answerText": "they needed to think hard about a careful place to put them next",
+          "note": "题干 in the future 对应原文 put them next，问的是作品下一步放哪儿。"
+        },
+        {
+          "sourceText": "It will be put in a selected place.",
+          "sourceRole": "correctOption",
+          "targetText": "a careful place to put them next",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "选项的“精心挑选的地方”（a selected place）就是原文的“慎重考虑过的地方”（a careful place）：馆方要认真想想（think hard）下一步把罐子放哪儿。这还只是打算，所以题干用 might，选 B。"
+        }
+      ]
+    }
+  }
+}

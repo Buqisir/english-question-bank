@@ -1,0 +1,1994 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-anhui-jiangnan10-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-anhui-jiangnan10-2025-m1:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-anhui-jiangnan10-2025-m1:cloze": {
+      "overview": "“我”向往白崖艺术营，却因怕独自面对生人而想放弃；画松树时，邻居谈起树根要向外伸展才能长高，“我”由此领悟，当晚报了名。",
+      "fullTranslationZh": "我小声对自己说：“今年夏天在白崖有一个为期五天的艺术营。”对我这样一个热爱画画的人来说，白崖实在太有吸引力了。可是一想到要独自去那里，我就心里发慌。后来，我拨通了我唯一的朋友艾米丽的电话，却发现她另有事要忙。我叹了口气，垂下了头。身边没有熟悉的面孔，我真的很难投入一件新事情。沮丧之下，我走到外面去画韦斯顿家那棵高耸的松树。坐在台阶上，我想着艺术营的事，希望自己能再勇敢一点。可是等到开始素描时，我已经说服自己：不去艺术营是我心甘情愿做出的决定。\n我仔细地画出松树粗壮的树干，挺直而结实，又添上优美的枝条。一旦沉浸在素描中，我几乎没注意到身边嗡嗡乱飞的苍蝇。因此，当韦斯顿先生突然开口时，我吓了一跳：“你把这棵树的力量精髓画得真美。”“谢谢。”我抬头看了一眼，笑了笑。“如果把靠近地表的树根铺展开，这棵树就能吸收足够的水分，长得更高。”我注意到，树的四周都有树根的疙瘩状突起伸出地面。我从没意识到树根会向外伸展得这么远。我突然想到，如果我想成长，我也得开始向外伸展。\n那天晚上，我填好了艺术营的申请表，准备把我的根伸向新的土地。我想，我就是那棵松树。",
+      "mainLine": {
+        "theme": {
+          "text": "想要成长，就得像松树把根伸向远处那样主动走出去（if I wanted to grow）。",
+          "quote": "if I wanted to grow"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+            "text": "作者很想去艺术营，却怕独自前往，好友又没空。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+            "text": "作者怕生又沮丧，出门画松树，说服自己不去。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+            "text": "韦斯顿先生谈树根，作者领悟成长要先向外伸展。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4",
+            "text": "作者当晚报名，决心像松树一样向外扎根。"
+          }
+        ],
+        "emotion": "向往→紧张→沮丧→退缩→领悟→坚定"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+          "sourceText": "If you spread out the roots near the surface, the tree could __51__ sufficient water and soar even higher.",
+          "displayText": "If you spread out the roots near the surface, the tree could absorb sufficient water and soar even higher.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:51"
+          ],
+          "translationZh": "如果把靠近地表的树根铺展开，这棵树就能吸收足够的水分，长得更高。",
+          "analysisZh": "主干是 the tree could absorb … and soar even higher，情态动词 could 后并列两个动作：吸收足够的水分，再长得更高。前面 If 引导条件状语从句，说出前提：把靠近地表的根铺展开。先铺根、再吸水、后长高，正是全文要讲的道理。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 27,
+              "quote": "If you spread out the roots"
+            },
+            {
+              "start": 61,
+              "end": 84,
+              "quote": "absorb sufficient water"
+            },
+            {
+              "start": 89,
+              "end": 105,
+              "quote": "soar even higher"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+          "sourceText": "It struck me that if I wanted to grow, I had to start __54__ too.",
+          "displayText": "It struck me that if I wanted to grow, I had to start reaching out too.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:54"
+          ],
+          "translationZh": "我突然想到，如果我想成长，我也得开始向外伸展。",
+          "analysisZh": "主干是 It struck me，It 是形式主语，真正的主语是 that 引导的从句，意思是“我突然想到……”。that 从句里又套了 if 条件句：如果我想成长，我就得开始向外伸展。start 后接动名词 reaching out，句末 too 把作者和前面的树根连在一起。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "It struck me"
+            },
+            {
+              "start": 18,
+              "end": 37,
+              "quote": "if I wanted to grow"
+            },
+            {
+              "start": 54,
+              "end": 70,
+              "quote": "reaching out too"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2"
+              ],
+              "start": 0,
+              "end": 223,
+              "quote": "我小声对自己说：“今年夏天在白崖有一个为期五天的艺术营。”对我这样一个热爱画画的人来说，白崖实在太有吸引力了。可是一想到要独自去那里，我就心里发慌。后来，我拨通了我唯一的朋友艾米丽的电话，却发现她另有事要忙。我叹了口气，垂下了头。身边没有熟悉的面孔，我真的很难投入一件新事情。沮丧之下，我走到外面去画韦斯顿家那棵高耸的松树。坐在台阶上，我想着艺术营的事，希望自己能再勇敢一点。可是等到开始素描时，我已经说服自己：不去艺术营是我心甘情愿做出的决定。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3"
+              ],
+              "start": 224,
+              "end": 433,
+              "quote": "我仔细地画出松树粗壮的树干，挺直而结实，又添上优美的枝条。一旦沉浸在素描中，我几乎没注意到身边嗡嗡乱飞的苍蝇。因此，当韦斯顿先生突然开口时，我吓了一跳：“你把这棵树的力量精髓画得真美。”“谢谢。”我抬头看了一眼，笑了笑。“如果把靠近地表的树根铺展开，这棵树就能吸收足够的水分，长得更高。”我注意到，树的四周都有树根的疙瘩状突起伸出地面。我从没意识到树根会向外伸展得这么远。我突然想到，如果我想成长，我也得开始向外伸展。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4"
+              ],
+              "start": 434,
+              "end": 475,
+              "quote": "那天晚上，我填好了艺术营的申请表，准备把我的根伸向新的土地。我想，我就是那棵松树。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+            "text": "I whispered to myself, “A five-day art camp at White Cliff this summer.” White Cliff was really irresistible for an enthusiastic painter like me. But at the thought of going there alone, I had butterflies in my stomach. Later, I dialed my only friend Emily’s number, only to discover that she would be otherwise occupied. I sighed and dropped"
+          },
+          {
+            "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+            "text": "my head. I had really had a hard time jumping into something without familiar faces around. Frustrated, I went outside to draw the Westons’ towering pine tree. Sitting on the stairs, I thought about the art camp and wished to feel a little braver. But by the time I started sketching, I had convinced myself that skipping the camp was my content decision."
+          },
+          {
+            "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+            "text": "I carefully drew the pine’s strong trunk, straight and solid, and added the graceful branches. Once lost in my sketching, I barely noticed the fly buzzing around me. Hence, I jumped when Mr. Weston suddenly remarked, “You’ve captured the essence of the tree’s strength beautifully on paper.” “Thanks.” I smiled, glancing up. “If you spread out the roots near the surface, the tree could absorb sufficient water and soar even higher.” I noticed the knobby bumps(疙瘩状突起) of roots sticking out of the ground all around the tree. I’d never realized how far a tree’s roots stretched outward. It struck me that if I wanted to grow, I had to start reaching out too."
+          },
+          {
+            "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4",
+            "text": "That evening, I filled out the art camp application, ready to stretch my roots out into new earth. I thought I am the pine."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 107,
+                "end": 130,
+                "quote": "an enthusiastic painter"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 35,
+                "end": 41,
+                "quote": "热爱画画的人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:41"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 96,
+                "end": 108,
+                "quote": "irresistible"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 49,
+                "end": 53,
+                "quote": "有吸引力"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 161,
+                "end": 178,
+                "quote": "going there alone"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 60,
+                "end": 66,
+                "quote": "要独自去那里"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:42"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 157,
+                "end": 164,
+                "quote": "thought"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 57,
+                "end": 60,
+                "quote": "一想到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 295,
+                "end": 304,
+                "quote": "otherwise"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 313,
+                "end": 321,
+                "quote": "I sighed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 98,
+                "end": 100,
+                "quote": "另有"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 104,
+                "end": 109,
+                "quote": "我叹了口气"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:43"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 312,
+                "end": 320,
+                "quote": "occupied"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 99,
+                "end": 103,
+                "quote": "有事要忙"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 161,
+                "end": 178,
+                "quote": "going there alone"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 229,
+                "end": 243,
+                "quote": "my only friend"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 61,
+                "end": 66,
+                "quote": "独自去那里"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 82,
+                "end": 87,
+                "quote": "唯一的朋友"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:44"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "start": 69,
+                "end": 77,
+                "quote": "familiar"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 119,
+                "end": 122,
+                "quote": "熟悉的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 313,
+                "end": 333,
+                "quote": "I sighed and dropped"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "start": 22,
+                "end": 37,
+                "quote": "had a hard time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 104,
+                "end": 114,
+                "quote": "我叹了口气，垂下了头"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 128,
+                "end": 137,
+                "quote": "很难投入一件新事情"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:45"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "start": 92,
+                "end": 102,
+                "quote": "Frustrated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 138,
+                "end": 140,
+                "quote": "沮丧"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 186,
+                "end": 211,
+                "quote": "butterflies in my stomach"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "start": 38,
+                "end": 60,
+                "quote": "jumping into something"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 69,
+                "end": 73,
+                "quote": "心里发慌"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 130,
+                "end": 137,
+                "quote": "投入一件新事情"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:46"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "start": 240,
+                "end": 246,
+                "quote": "braver"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 183,
+                "end": 185,
+                "quote": "勇敢"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "start": 242,
+                "end": 245,
+                "quote": "But"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "start": 285,
+                "end": 301,
+                "quote": "convinced myself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 188,
+                "end": 190,
+                "quote": "可是"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 201,
+                "end": 205,
+                "quote": "说服自己"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:47"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:2",
+                "start": 313,
+                "end": 321,
+                "quote": "skipping"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:1",
+                "start": 206,
+                "end": 208,
+                "quote": "不去"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 68,
+                "end": 95,
+                "quote": "added the graceful branches"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 20,
+                "end": 28,
+                "quote": "又添上优美的枝条"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:48"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 12,
+                "end": 16,
+                "quote": "drew"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 4,
+                "end": 6,
+                "quote": "画出"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 102,
+                "end": 122,
+                "quote": "lost in my sketching"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 168,
+                "end": 173,
+                "quote": "Hence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 31,
+                "end": 37,
+                "quote": "沉浸在素描中"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 55,
+                "end": 57,
+                "quote": "因此"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:49"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 124,
+                "end": 130,
+                "quote": "barely"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 39,
+                "end": 42,
+                "quote": "几乎没"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 30,
+                "end": 42,
+                "quote": "strong trunk"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 44,
+                "end": 62,
+                "quote": "straight and solid"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 8,
+                "end": 13,
+                "quote": "粗壮的树干"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 14,
+                "end": 19,
+                "quote": "挺直而结实"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:50"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 260,
+                "end": 268,
+                "quote": "strength"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 83,
+                "end": 85,
+                "quote": "力量"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 333,
+                "end": 353,
+                "quote": "spread out the roots"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 394,
+                "end": 410,
+                "quote": "sufficient water"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 113,
+                "end": 124,
+                "quote": "把靠近地表的树根铺展开"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 132,
+                "end": 137,
+                "quote": "足够的水分"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:51"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 387,
+                "end": 393,
+                "quote": "absorb"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 130,
+                "end": 132,
+                "quote": "吸收"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 484,
+                "end": 501,
+                "quote": "out of the ground"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 448,
+                "end": 460,
+                "quote": "knobby bumps"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 163,
+                "end": 167,
+                "quote": "伸出地面"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 158,
+                "end": 163,
+                "quote": "疙瘩状突起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:52"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 477,
+                "end": 485,
+                "quote": "sticking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 163,
+                "end": 165,
+                "quote": "伸出"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 502,
+                "end": 521,
+                "quote": "all around the tree"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 568,
+                "end": 585,
+                "quote": "stretched outward"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 149,
+                "end": 153,
+                "quote": "树的四周"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 177,
+                "end": 181,
+                "quote": "向外伸展"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:53"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 548,
+                "end": 551,
+                "quote": "far"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 184,
+                "end": 185,
+                "quote": "远"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 568,
+                "end": 585,
+                "quote": "stretched outward"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 648,
+                "end": 651,
+                "quote": "too"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 177,
+                "end": 181,
+                "quote": "向外伸展"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 199,
+                "end": 202,
+                "quote": "我也得"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:54"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 640,
+                "end": 652,
+                "quote": "reaching out"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 204,
+                "end": 208,
+                "quote": "向外伸展"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 333,
+                "end": 353,
+                "quote": "spread out the roots"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4",
+                "start": 110,
+                "end": 123,
+                "quote": "I am the pine"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 119,
+                "end": 124,
+                "quote": "树根铺展开"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4",
+                "start": 33,
+                "end": 40,
+                "quote": "我就是那棵松树"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:55"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4",
+                "start": 73,
+                "end": 78,
+                "quote": "roots"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:4",
+                "start": 22,
+                "end": 23,
+                "quote": "根"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:51"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 326,
+                "end": 432,
+                "quote": "If you spread out the roots near the surface, the tree could absorb sufficient water and soar even higher."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 111,
+                "end": 143,
+                "quote": "如果把靠近地表的树根铺展开，这棵树就能吸收足够的水分，长得更高。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:54"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 586,
+                "end": 657,
+                "quote": "It struck me that if I wanted to grow, I had to start reaching out too."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-anhui-jiangnan10-2025-m1:cloze:3",
+                "start": 186,
+                "end": 209,
+                "quote": "我突然想到，如果我想成长，我也得开始向外伸展。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "向往→紧张→沮丧→退缩→领悟→坚定"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-anhui-jiangnan10-2025-m1:41": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:41",
+      "blankNo": 41,
+      "pos": "adjective",
+      "role": "main",
+      "context": "白崖是作者向往的地方，这里要一个表示“很想去”的正面评价。",
+      "find": {
+        "check": "affect",
+        "text": "白崖对热爱画画的人（an enthusiastic painter）来说是好事，后面才用转折（But）写到紧张（butterflies）。",
+        "quotes": [
+          "an enthusiastic painter",
+          "But",
+          "butterflies"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "极有诱惑力的",
+        "meaning": "让人特别想去",
+        "reason": "白崖是作者向往的地方，这里要一个表示“很想去”的正面评价。形容词看情感：白崖对热爱画画的人（an enthusiastic painter）来说是好事，后面才用转折（But）写到紧张（butterflies）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unbelievable",
+          "meaning": "难以置信的；我只是念出夏令营的安排（A five-day art camp），没有让人不敢相信的事。",
+          "quote": "A five-day art camp"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "uncontrollable",
+          "meaning": "无法控制的；修饰的是白崖这个地方，这里说它吸引热爱画画的人（an enthusiastic painter）。",
+          "quote": "an enthusiastic painter"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "irreplaceable",
+          "meaning": "不可替代的；后文只说它吸引热爱画画的人（an enthusiastic painter），没拿它和别处比较。",
+          "quote": "an enthusiastic painter"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "an enthusiastic painter",
+          "signalSide": "context-after",
+          "targetText": "irresistible for an enthusiastic painter",
+          "relation": "对热爱画画的人来说，艺术营是让人想去的好事。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "butterflies in my stomach",
+          "signalSide": "context-after",
+          "relation": "转折（But）后才写紧张，前面应是向往的正面情绪。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:42": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "detail",
+      "context": "作者还没出发，只是想到要独自去就紧张，这里要“想到”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "空格夹在（at the … of）里，后接独自去那里（going there alone）这件还没发生的事，只能是“一想到”。",
+        "quotes": [
+          "going there alone"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "想法",
+        "meaning": "一想到",
+        "reason": "作者还没出发，只是想到要独自去就紧张，这里要“想到”的意思。名词看搭配：空格夹在（at the … of）里，后接独自去那里（going there alone）这件还没发生的事，只能是“一想到”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sight",
+          "meaning": "看见；独自去那里（going there alone）还没发生，作者看不到，只能是想到。",
+          "quote": "going there alone"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "request",
+          "meaning": "请求；没有人向作者提要求，是她自己想到独自去（going there alone）就发慌。",
+          "quote": "going there alone"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "core",
+          "meaning": "核心；独自去（going there alone）是作者担心的一件事，不是某个事物的核心部分。",
+          "quote": "going there alone"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of going there alone",
+          "signalSide": "context-after",
+          "targetText": "at the thought of going there alone",
+          "relation": "“一想到独自去那里”，后接还没发生的事。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "butterflies in my stomach",
+          "signalSide": "context-after",
+          "relation": "只是想到就心里发慌（butterflies in my stomach），说明事情还没发生。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:43": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "main",
+      "context": "好友不能陪作者去，这里要表示艾米丽另有安排、没空。",
+      "find": {
+        "check": "collocation",
+        "text": "另外（otherwise）和空格连用指“另有事”；打电话的结果出乎意料（only to discover），接着作者叹气（I sighed）。",
+        "quotes": [
+          "otherwise",
+          "only to discover",
+          "I sighed"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "忙碌的",
+        "meaning": "另有事要忙",
+        "reason": "好友不能陪作者去，这里要表示艾米丽另有安排、没空。形容词看搭配：另外（otherwise）和空格连用指“另有事”；打电话的结果出乎意料（only to discover），接着作者叹气（I sighed）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "rejected",
+          "meaning": "被拒绝的；打电话的是作者，想找唯一的朋友（my only friend Emily）陪她，艾米丽没有被谁拒绝。",
+          "quote": "my only friend Emily"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "attracted",
+          "meaning": "被吸引的；艾米丽只是来不了，作者叹气（I sighed）是因为没人陪她，不是因为朋友被别的事吸引。",
+          "quote": "I sighed"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "addicted",
+          "meaning": "上瘾的；作者打给唯一的朋友（my only friend Emily）是想找人陪，得知的是对方没空。",
+          "quote": "my only friend Emily"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "otherwise",
+          "signalSide": "context-before",
+          "targetText": "otherwise occupied",
+          "relation": "另有事要忙，所以不能陪作者去。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I sighed",
+          "signalSide": "context-after",
+          "relation": "朋友来不了，作者失望地叹气。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:44": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:44",
+      "blankNo": 44,
+      "pos": "adjective",
+      "role": "main",
+      "context": "这是作者不敢去的原因：身边没有认识的人，这里要“熟悉的”。",
+      "find": {
+        "check": "echo",
+        "text": "前文的独自去（going there alone）和唯一的朋友（my only friend）都说明身边没有熟人。",
+        "quotes": [
+          "going there alone",
+          "my only friend"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "熟悉的",
+        "reason": "这是作者不敢去的原因：身边没有认识的人，这里要“熟悉的”。形容词看复现：前文的独自去（going there alone）和唯一的朋友（my only friend）都说明身边没有熟人。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "gentle",
+          "meaning": "温和的；作者怕的是独自去（going there alone）、身边没熟人，不是别人脾气温不温和。",
+          "quote": "going there alone"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "confident",
+          "meaning": "自信的；缺自信的是作者自己，空格修饰的是身边别人的面孔（faces around）。",
+          "quote": "faces around"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "beautiful",
+          "meaning": "美丽的；让作者难以投入的是身边没有熟人（faces around），与相貌美不美无关。",
+          "quote": "faces around"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "faces around",
+          "signalSide": "context-after",
+          "targetText": "without familiar faces around",
+          "relation": "身边没有熟悉的面孔。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "going there alone",
+          "signalSide": "context-before",
+          "relation": "独自去，正是身边没有熟人的处境。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:45": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "main",
+      "context": "好友没空、自己又怕生，这里是作者情绪的低谷，要负面的情绪。",
+      "find": {
+        "check": "affect",
+        "text": "前面作者叹气垂头（I sighed and dropped），又说很难独自投入新事（had a hard time）。",
+        "quotes": [
+          "I sighed and dropped",
+          "had a hard time"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "沮丧的",
+        "reason": "好友没空、自己又怕生，这里是作者情绪的低谷，要负面的情绪。形容词看情感：前面作者叹气垂头（I sighed and dropped），又说很难独自投入新事（had a hard time）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Delighted",
+          "meaning": "高兴的；作者刚叹气垂头（I sighed and dropped），此时没有让她高兴的事。",
+          "quote": "I sighed and dropped"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Relieved",
+          "meaning": "宽慰的；好友来不了，作者叹气垂头（I sighed and dropped），问题没解决，谈不上松口气。",
+          "quote": "I sighed and dropped"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Shocked",
+          "meaning": "震惊的；朋友没空只让作者失望叹气（I sighed and dropped），她随后出门画画，并没受到惊吓。",
+          "quote": "I sighed and dropped"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "I sighed and dropped",
+          "signalSide": "context-before",
+          "relation": "叹气垂头，情绪低落。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I went outside to draw",
+          "signalSide": "context-after",
+          "targetText": "Frustrated, I went outside to draw",
+          "relation": "沮丧之下出门画画，句首形容词说明她出门时的心情。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:46": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:46",
+      "blankNo": 46,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者想着艺术营，盼自己能克服紧张敢独自去，这里要“更有胆量”。",
+      "find": {
+        "check": "affect",
+        "text": "前文的心里发慌（butterflies in my stomach）和难以投入新事（jumping into something）缺的都是勇气。",
+        "quotes": [
+          "butterflies in my stomach",
+          "jumping into something"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "更勇敢的",
+        "reason": "作者想着艺术营，盼自己能克服紧张敢独自去，这里要“更有胆量”。形容词看情感：前文的心里发慌（butterflies in my stomach）和难以投入新事（jumping into something）缺的都是勇气。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cleverer",
+          "meaning": "更聪明的；作者独自去时心里发慌（butterflies in my stomach），缺的是胆量，不是聪明。",
+          "quote": "butterflies in my stomach"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "luckier",
+          "meaning": "更幸运的；作者难以独自投入新事（jumping into something），要靠自己鼓起勇气，不是靠运气。",
+          "quote": "jumping into something"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "happier",
+          "meaning": "更快乐的；困扰作者的是心里发慌（butterflies in my stomach），能解决它的是勇气，不是快乐。",
+          "quote": "butterflies in my stomach"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "wished to feel a little",
+          "signalSide": "context-before",
+          "targetText": "wished to feel a little braver",
+          "relation": "希望自己感到再勇敢一点。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "butterflies in my stomach",
+          "signalSide": "context-before",
+          "relation": "紧张发慌，需要勇气来克服。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:47": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者想勇敢却没做到，转而说服自己退缩，这里要“不去”艺术营。",
+      "find": {
+        "check": "collocation",
+        "text": "转折（But）把前面盼着更勇敢（wished to feel a little）转开，后接说服自己（convinced myself），退缩才需要这样说服。",
+        "quotes": [
+          "But",
+          "wished to feel a little",
+          "convinced myself"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "不参加",
+        "meaning": "放弃去艺术营",
+        "reason": "作者想勇敢却没做到，转而说服自己退缩，这里要“不去”艺术营。动词看搭配：转折（But）把前面盼着更勇敢（wished to feel a little）转开，后接说服自己（convinced myself），退缩才需要这样说服。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "attending",
+          "meaning": "参加；转折（But）之后作者说服自己（convinced myself），是在给退缩找理由。",
+          "quote": "convinced myself"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "reserving",
+          "meaning": "预订；作者到当晚才填申请表（filled out the art camp application），此时还没打算预订。",
+          "quote": "filled out the art camp application"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "delaying",
+          "meaning": "推迟；艺术营定在今年夏天（this summer），作者能决定的是去不去，营期不由她推迟。",
+          "quote": "this summer"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the camp",
+          "signalSide": "context-after",
+          "targetText": "skipping the camp",
+          "relation": "不去艺术营。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "convinced myself",
+          "signalSide": "context-before",
+          "relation": "说服自己，说明这个决定是在给退缩找理由。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:48": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者在给松树写生，这里要一个在纸上描出树干的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "空格的宾语是树干（strong trunk），后面又添上树枝（added the graceful branches），都是作画。",
+        "quotes": [
+          "strong trunk",
+          "added the graceful branches"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "画",
+        "reason": "作者在给松树写生，这里要一个在纸上描出树干的动作。动词看搭配：空格的宾语是树干（strong trunk），后面又添上树枝（added the graceful branches），都是作画。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "wrote",
+          "meaning": "写；作者在写生（sketching），树干是画出来的，不是写出来的字。",
+          "quote": "sketching"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "watched",
+          "meaning": "观看；后面接着添上树枝（added the graceful branches），说明是在纸上画，光看留不下线条。",
+          "quote": "added the graceful branches"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cut",
+          "meaning": "砍；作者是在作画，接着添上树枝（added the graceful branches），并没有动手砍树。",
+          "quote": "added the graceful branches"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the pine’s strong trunk",
+          "signalSide": "context-after",
+          "targetText": "drew the pine’s strong trunk",
+          "relation": "画出松树粗壮的树干。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "added the graceful branches",
+          "signalSide": "context-after",
+          "relation": "先画树干再添树枝，是同一幅画。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:49": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:49",
+      "blankNo": 49,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "作者画得入迷，对身边的苍蝇几乎没察觉，这里要“几乎没有”。",
+      "find": {
+        "check": "direction",
+        "text": "一旦画入迷（lost in my sketching）就顾不上周围，所以（Hence）才被突然的话吓一跳。",
+        "quotes": [
+          "lost in my sketching",
+          "Hence"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "几乎不",
+        "reason": "作者画得入迷，对身边的苍蝇几乎没察觉，这里要“几乎没有”。副词看走向：一旦画入迷（lost in my sketching）就顾不上周围，所以（Hence）才被突然的话吓一跳。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "desperately",
+          "meaning": "拼命地；画入迷（lost in my sketching）的人顾不上周围，不会拼命去留意一只苍蝇。",
+          "quote": "lost in my sketching"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "narrowly",
+          "meaning": "勉强地；作者画入迷（lost in my sketching），是几乎没察觉苍蝇，不是费劲才注意到。",
+          "quote": "lost in my sketching"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "suddenly",
+          "meaning": "突然；突然注意到苍蝇会打断作画，后面却说她因此（Hence）被先生的话吓了一跳。",
+          "quote": "Hence"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "noticed the fly",
+          "signalSide": "context-after",
+          "targetText": "barely noticed the fly",
+          "relation": "几乎没注意到苍蝇。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Hence",
+          "signalSide": "context-after",
+          "relation": "因此（Hence）被吓一跳，说明她完全沉浸在画里。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:50": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "main",
+      "context": "先生称赞画出了树的某种特质，要和前面粗壮挺直的树干一致。",
+      "find": {
+        "check": "echo",
+        "text": "作者刚画的是粗壮的树干（strong trunk），挺直坚实（straight and solid），名词要与它们同义。",
+        "quotes": [
+          "strong trunk",
+          "straight and solid"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "力量",
+        "reason": "先生称赞画出了树的某种特质，要和前面粗壮挺直的树干一致。名词看复现：作者刚画的是粗壮的树干（strong trunk），挺直坚实（straight and solid），名词要与它们同义。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "magic",
+          "meaning": "魔力；作者画的是粗壮的树干（strong trunk），画出的是树的力量，不是神奇的魔力。",
+          "quote": "strong trunk"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "function",
+          "meaning": "功能；作者画的是挺直坚实（straight and solid）的样子，先生夸的是画面气势，不是树的用途。",
+          "quote": "straight and solid"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "mystery",
+          "meaning": "神秘；画中的树干挺直坚实（straight and solid），一目了然，谈不上神秘。",
+          "quote": "straight and solid"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the essence of the tree’s",
+          "signalSide": "context-before",
+          "targetText": "the essence of the tree’s strength",
+          "relation": "树的力量的精髓。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "strong trunk",
+          "signalSide": "context-before",
+          "relation": "粗壮（strong）与力量（strength）同根复现。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:51": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "先生的比喻：根铺开，树才能把足够的水分吸进来，再长得更高。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是树（the tree），宾语是足够的水分（sufficient water），前提是把根铺开（spread out the roots）。",
+        "quotes": [
+          "the tree",
+          "sufficient water",
+          "spread out the roots"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "吸收",
+        "reason": "先生的比喻：根铺开，树才能把足够的水分吸进来，再长得更高。动词看搭配：主语是树（the tree），宾语是足够的水分（sufficient water），前提是把根铺开（spread out the roots）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "supply",
+          "meaning": "供应；树铺开根（spread out the roots）是给自己取水，不是把水供给别处。",
+          "quote": "spread out the roots"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "fetch",
+          "meaning": "去拿来；树不会走去别处取水，是靠铺开的根（spread out the roots）在土里吸水。",
+          "quote": "spread out the roots"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "contain",
+          "meaning": "容纳；根铺开是为了多吸水、长得更高（soar even higher），不是让树装着水。",
+          "quote": "soar even higher"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "sufficient water",
+          "signalSide": "context-after",
+          "targetText": "absorb sufficient water",
+          "relation": "吸收足够的水分。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "spread out the roots",
+          "signalSide": "context-before",
+          "relation": "根铺开，吸水的范围才大。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:52": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者看到树根的疙瘩露出地面，这里要“伸出、突出”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "空格后接出地面（out of the ground），主语是根的疙瘩状突起（knobby bumps），合起来是“伸出地面”。",
+        "quotes": [
+          "out of the ground",
+          "knobby bumps"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "伸出",
+        "meaning": "露出（地面）",
+        "reason": "作者看到树根的疙瘩露出地面，这里要“伸出、突出”的意思。动词看搭配：空格后接出地面（out of the ground），主语是根的疙瘩状突起（knobby bumps），合起来是“伸出地面”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "hiding",
+          "meaning": "躲藏；作者一眼就看到（I noticed）了根的疙瘩，它们露在地面上，不是藏起来。",
+          "quote": "I noticed"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "digging",
+          "meaning": "挖掘；根不会自己挖东西，这里说的是根的疙瘩露出地面（out of the ground）。",
+          "quote": "out of the ground"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lifting",
+          "meaning": "举起；这里没有被举起的东西，只是根的疙瘩露出地面（out of the ground）。",
+          "quote": "out of the ground"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "out of the ground",
+          "signalSide": "context-after",
+          "targetText": "sticking out of the ground",
+          "relation": "伸出地面。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:53": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:53",
+      "blankNo": 53,
+      "pos": "adverb",
+      "role": "main",
+      "context": "这是作者的新发现：树根向外伸展的范围很大，这里要表示“远”的程度。",
+      "find": {
+        "check": "collocation",
+        "text": "空格与（how）一起修饰向外伸展（stretched outward），刚看到树的四周都有根（all around the tree）。",
+        "quotes": [
+          "stretched outward",
+          "all around the tree"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "远",
+        "reason": "这是作者的新发现：树根向外伸展的范围很大，这里要表示“远”的程度。副词看搭配：空格与（how）一起修饰向外伸展（stretched outward），刚看到树的四周都有根（all around the tree）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "well",
+          "meaning": "好；作者惊讶的是四周都有根（all around the tree），说的是伸展的范围，不是好坏。",
+          "quote": "all around the tree"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "deep",
+          "meaning": "深；后面说的是向外伸展（stretched outward），是水平方向伸得远，不是往下扎得深。",
+          "quote": "stretched outward"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "long",
+          "meaning": "长久；放进去问的成了伸展了多久，作者看到四周都有根（all around the tree），说的是距离。",
+          "quote": "all around the tree"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "stretched outward",
+          "signalSide": "context-after",
+          "targetText": "how far a tree’s roots stretched outward",
+          "relation": "树根向外伸展得多远。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "all around the tree",
+          "signalSide": "context-before",
+          "relation": "四周都有根，说明根伸得很远。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:54": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:54",
+      "blankNo": 54,
+      "pos": "phrase",
+      "role": "main",
+      "context": "作者由树根想到自己：要成长，也得像根一样向外伸，主动接触外界。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "句末的也（too）表示作者要学树根，树根刚说过是向外伸展（stretched outward），词组要同向。",
+        "quotes": [
+          "too",
+          "stretched outward"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "伸出",
+        "meaning": "主动走向外界",
+        "reason": "作者由树根想到自己：要成长，也得像根一样向外伸，主动接触外界。词组看语境义：句末的也（too）表示作者要学树根，树根刚说过是向外伸展（stretched outward），词组要同向。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "growing up",
+          "meaning": "长大；想成长（if I wanted to grow）是目标，这里要的是做法，也就是像树根那样向外伸。",
+          "quote": "if I wanted to grow"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "wising up",
+          "meaning": "醒悟；作者此刻已经想明白（It struck me），后面要接的是她要采取的行动。",
+          "quote": "It struck me"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "turning out",
+          "meaning": "结果是；也（too）说明作者要学树根，树根做的是向外伸展（stretched outward）。",
+          "quote": "stretched outward"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "had to start",
+          "signalSide": "context-before",
+          "targetText": "had to start reaching out",
+          "relation": "必须开始向外伸展。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "stretched outward",
+          "signalSide": "context-before",
+          "relation": "向外伸展（reaching out）与树根向外伸（stretched outward）呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "out",
+          "signalSide": "option",
+          "targetText": "reaching out",
+          "relation": "小品词（out）表示向外。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:55": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者报了名，把自己比作松树，要把自己的“根”伸进新土地，点出全文比喻。",
+      "find": {
+        "check": "echo",
+        "text": "前文讲的是树根（the roots），最后一句又说我就是松树（I am the pine），伸进新土地的应是根。",
+        "quotes": [
+          "the roots",
+          "I am the pine"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "根",
+        "meaning": "比喻自己向外扎根",
+        "reason": "作者报了名，把自己比作松树，要把自己的“根”伸进新土地，点出全文比喻。名词看复现：前文讲的是树根（the roots），最后一句又说我就是松树（I am the pine），伸进新土地的应是根。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "life",
+          "meaning": "生活；伸进新土地（into new earth）的应是树根，作者把自己比作松树（I am the pine）。",
+          "quote": "I am the pine"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "camp",
+          "meaning": "营地；营地是作者要去的新地方，相当于新土地（new earth），不是伸出去的东西。",
+          "quote": "new earth"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "interests",
+          "meaning": "兴趣；最后一句我就是松树（I am the pine），伸向新土地的应是根。",
+          "quote": "I am the pine"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "out into new earth",
+          "signalSide": "context-after",
+          "targetText": "stretch my roots out into new earth",
+          "relation": "把根伸进新的土地。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I am the pine",
+          "signalSide": "context-after",
+          "relation": "作者把自己比作松树，所以伸出的是“根”。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,838 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-anhui-jiangnan10-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-anhui-jiangnan10-2025-m1:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-anhui-jiangnan10-2025-m1:reading-d": {
+      "overview": "文章介绍“预说服”：最有效的说服是在人们知道信息内容之前就让其认同。作者用沙发店背景图实验和甲壳虫汽车广告说明其原理，并指出多数说服者因满足于说服技巧而忽视了它。",
+      "fullTranslationZh": "今天，以及每一天，我们都是广告商、募捐者和政客的目标，他们想方设法劝说我们买点什么、做点什么，或者以某种方式思考。而且他们很擅长这一点。\n多年来，他们已经摸清了要在一则传播信息里加入哪些特点、该拨动哪些心理之弦，来提高它的成功率。但是，由于只专注于信息本身，他们忽略了这一过程中一个至关重要的组成部分。\n过去 15 年的研究表明，最好的说服是通过“预说服”实现的——也就是设法让人们在还不知道信息内容之前，就已经认同这一信息。\n预说服的原理是把人们的注意力集中到某个选定的概念上，这反过来又会促使他们把这个概念看得比相关概念更重要。在一项研究中，一家网上沙发店的访客在登录页面的背景里看到的要么是柔软的云朵，要么是小硬币。看到云朵的人更倾向于购买柔软舒适的沙发，而看到钱的人则更喜欢便宜的款式。\n早在科学家开始研究预说服的过程之前，少数著名的传播者就已经凭直觉领会了它。\n例如，20 世纪 50 年代末，广告公司恒美（Doyle Dane Bernbach）就运用了预说服策略，把外形古怪的大众甲壳虫汽车推向一个被大马力、船一般的大型汽车所主导的美国市场。“我们很丑，但……”这一系列广告先有策略地承认这款车外观上的不足，再大力宣扬它经济、可靠、简单等优点。这场广告被认为打开了美国的小型车市场，并被评为有史以来最伟大的广告之一。\n社会影响力的实践者们一向在诉求中加入各种说服元素——高度赞扬、情感吸引、最后机会——并取得了相当大的成功。或许正因为这份成功，他们大多忽视了与之相伴的一个事实。要想获得最大的影响，关键不仅在于你做什么，还在于你在做你要做的事之前的那一刻做了什么。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d-1",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:3",
+          "sourceText": "Research done in the last 15 years shows that the best persuasion is achieved through pre-suasion – the practice of arranging for people to agree with a message before they even know what’s in it.",
+          "displayText": "Research done in the last 15 years shows that the best persuasion is achieved through pre-suasion – the practice of arranging for people to agree with a message before they even know what’s in it.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:32",
+            "question:paper-mock-anhui-jiangnan10-2025-m1:33"
+          ],
+          "translationZh": "过去 15 年的研究表明，最好的说服是通过“预说服”实现的——也就是设法让人们在还不知道信息内容之前，就已经认同这一信息。",
+          "analysisZh": "主干是 Research … shows that …（研究表明……），done in the last 15 years 是过去分词短语作后置定语修饰 Research。that 宾语从句里是被动语态：the best persuasion is achieved through pre-suasion（最好的说服是通过预说服实现的）。破折号后的 the practice of … 是 pre-suasion 的同位语，给它下定义：arranging for people to agree with a message（设法让人们认同信息），before they even know what’s in it 是时间状语从句，点出关键：在人们还不知道内容之前。",
+          "underlineRanges": [
+            {
+              "start": 35,
+              "end": 45,
+              "quote": "shows that"
+            },
+            {
+              "start": 66,
+              "end": 97,
+              "quote": "is achieved through pre-suasion"
+            },
+            {
+              "start": 161,
+              "end": 195,
+              "quote": "before they even know what’s in it"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d-2",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+          "sourceText": "For maximum impact, it’s not only what you do; it’s also what you do just before you do what you do.",
+          "displayText": "For maximum impact, it’s not only what you do; it’s also what you do just before you do what you do.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:35"
+          ],
+          "translationZh": "要想获得最大的影响，关键不仅在于你做什么，还在于你在做你要做的事之前的那一刻做了什么。",
+          "analysisZh": "句首 For maximum impact 是目的状语（为了最大的影响）。后面是 not only … ; also … 结构，分号两边各是一个 it’s + 表语从句：it’s not only what you do（不只是你做什么），it’s also what you do just before you do what you do（还有你在做要做的事之前做了什么）。第二个表语从句里 just before 引出时间状语从句，从句里又嵌了一个 what you do 作宾语，读时把它看成“你正式要做的事”，整句说的就是事前那一步也决定效果，也就是预说服。",
+          "underlineRanges": [
+            {
+              "start": 20,
+              "end": 45,
+              "quote": "it’s not only what you do"
+            },
+            {
+              "start": 47,
+              "end": 68,
+              "quote": "it’s also what you do"
+            },
+            {
+              "start": 69,
+              "end": 99,
+              "quote": "just before you do what you do"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:1"
+              ],
+              "start": 0,
+              "end": 68,
+              "quote": "今天，以及每一天，我们都是广告商、募捐者和政客的目标，他们想方设法劝说我们买点什么、做点什么，或者以某种方式思考。而且他们很擅长这一点。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:2"
+              ],
+              "start": 69,
+              "end": 151,
+              "quote": "多年来，他们已经摸清了要在一则传播信息里加入哪些特点、该拨动哪些心理之弦，来提高它的成功率。但是，由于只专注于信息本身，他们忽略了这一过程中一个至关重要的组成部分。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:3"
+              ],
+              "start": 152,
+              "end": 213,
+              "quote": "过去 15 年的研究表明，最好的说服是通过“预说服”实现的——也就是设法让人们在还不知道信息内容之前，就已经认同这一信息。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:4"
+              ],
+              "start": 214,
+              "end": 347,
+              "quote": "预说服的原理是把人们的注意力集中到某个选定的概念上，这反过来又会促使他们把这个概念看得比相关概念更重要。在一项研究中，一家网上沙发店的访客在登录页面的背景里看到的要么是柔软的云朵，要么是小硬币。看到云朵的人更倾向于购买柔软舒适的沙发，而看到钱的人则更喜欢便宜的款式。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:5"
+              ],
+              "start": 348,
+              "end": 385,
+              "quote": "早在科学家开始研究预说服的过程之前，少数著名的传播者就已经凭直觉领会了它。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6"
+              ],
+              "start": 386,
+              "end": 565,
+              "quote": "例如，20 世纪 50 年代末，广告公司恒美（Doyle Dane Bernbach）就运用了预说服策略，把外形古怪的大众甲壳虫汽车推向一个被大马力、船一般的大型汽车所主导的美国市场。“我们很丑，但……”这一系列广告先有策略地承认这款车外观上的不足，再大力宣扬它经济、可靠、简单等优点。这场广告被认为打开了美国的小型车市场，并被评为有史以来最伟大的广告之一。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7"
+              ],
+              "start": 566,
+              "end": 689,
+              "quote": "社会影响力的实践者们一向在诉求中加入各种说服元素——高度赞扬、情感吸引、最后机会——并取得了相当大的成功。或许正因为这份成功，他们大多忽视了与之相伴的一个事实。要想获得最大的影响，关键不仅在于你做什么，还在于你在做你要做的事之前的那一刻做了什么。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-reading-d-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:3",
+                "start": 100,
+                "end": 195,
+                "quote": "the practice of arranging for people to agree with a message before they even know what’s in it"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:2",
+                "start": 157,
+                "end": 251,
+                "quote": "But by concentrating on the message itself, they’ve missed a crucial component of the process."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 34,
+                "end": 60,
+                "quote": "设法让人们在还不知道信息内容之前，就已经认同这一信息"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 60,
+                "end": 81,
+                "quote": "他们忽略了这一过程中一个至关重要的组成部分"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-d-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:4",
+                "start": 0,
+                "end": 136,
+                "quote": "Pre-suasion works by focusing people’s attention on a selected concept, which in turn stimulates them to overvalue it over related ones."
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:4",
+                "start": 151,
+                "end": 283,
+                "quote": "visitors to an online sofa store were greeted with images of either soft clouds or small coins in the background of its landing page"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 0,
+                "end": 52,
+                "quote": "预说服的原理是把人们的注意力集中到某个选定的概念上，这反过来又会促使他们把这个概念看得比相关概念更重要。"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 59,
+                "end": 96,
+                "quote": "一家网上沙发店的访客在登录页面的背景里看到的要么是柔软的云朵，要么是小硬币"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-d-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6",
+                "start": 13,
+                "end": 160,
+                "quote": "the pre-suasive strategy was employed in the late 1950s by the advertising firm Doyle Dane Bernbach to introduce the oddly shaped Volkswagen Beetle"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 3,
+                "end": 68,
+                "quote": "20 世纪 50 年代末，广告公司恒美（Doyle Dane Bernbach）就运用了预说服策略，把外形古怪的大众甲壳虫汽车推向"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-d-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+                "start": 181,
+                "end": 258,
+                "quote": "Perhaps because of that success, they’ve mostly missed an accompanying truth."
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+                "start": 306,
+                "end": 358,
+                "quote": "it’s also what you do just before you do what you do"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p7",
+                "start": 53,
+                "end": 80,
+                "quote": "或许正因为这份成功，他们大多忽视了与之相伴的一个事实。"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p7",
+                "start": 101,
+                "end": 122,
+                "quote": "还在于你在做你要做的事之前的那一刻做了什么"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:32",
+              "question:paper-mock-anhui-jiangnan10-2025-m1:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:3",
+                "start": 0,
+                "end": 196,
+                "quote": "Research done in the last 15 years shows that the best persuasion is achieved through pre-suasion – the practice of arranging for people to agree with a message before they even know what’s in it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 0,
+                "end": 61,
+                "quote": "过去 15 年的研究表明，最好的说服是通过“预说服”实现的——也就是设法让人们在还不知道信息内容之前，就已经认同这一信息。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+                "start": 259,
+                "end": 359,
+                "quote": "For maximum impact, it’s not only what you do; it’s also what you do just before you do what you do."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-d",
+                "paragraphId": "zh-reading-d-p7",
+                "start": 80,
+                "end": 123,
+                "quote": "要想获得最大的影响，关键不仅在于你做什么，还在于你在做你要做的事之前的那一刻做了什么。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写广告商等擅长说服却忽略了一个关键环节，接着提出并定义预说服，用沙发店实验解释原理，再以甲壳虫广告为例，最后回到说服者的盲点，总结事前那一步同样决定效果。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:1",
+            "summary": "广告商、募捐者和政客每天都在设法说服我们，而且很擅长。",
+            "function": "引出“说服”这一话题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:2",
+            "summary": "他们摸透了信息该有的特点和心理技巧，却因只盯着信息本身而忽略了一个关键环节。",
+            "function": "指出说服者的盲点，引出下文。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:3",
+            "summary": "研究表明最好的说服靠“预说服”：让人在知道信息内容前就先认同它。",
+            "function": "提出并定义核心概念“预说服”。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:4",
+            "summary": "预说服靠引导注意力起作用，网上沙发店的背景图实验说明了这一点。",
+            "function": "解释原理并用实验举例。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:5",
+            "summary": "科学家研究之前，少数著名传播者已凭直觉懂得预说服。",
+            "function": "过渡，引出历史实例。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6",
+            "summary": "20 世纪 50 年代甲壳虫汽车的“我们很丑，但……”广告先认缺点再夸优点，大获成功。",
+            "function": "用广告实例说明预说服。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+            "summary": "说服者大多因靠说服元素成功而忽视了预说服；要获得最大影响，还要看事前做了什么。",
+            "function": "回到开头的盲点，总结全文观点。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-anhui-jiangnan10-2025-m1:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出广告商忽略的那个关键环节具体指什么。",
+      "stemTranslationZh": "根据本文，广告的哪个方面普遍被忽视了？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找这个组成部分是什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "利用心理之弦来影响人们。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "psychological strings",
+            "optionText": "psychological strings",
+            "matchType": "exact",
+            "relationNote": "选项照搬了 psychological strings（心理之弦），原文说广告商早已摸透该拨哪根弦，这是他们擅长的，不是忽略的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:2",
+              "quote": "which psychological strings to pull at to increase its success",
+              "anchor": "早已摸透心理之弦"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在人们不知情的情况下说服他们的做法。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:3",
+              "quote": "the practice of arranging for people to agree with a message before they even know what’s in it",
+              "anchor": "在人们知道内容前就让其认同"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:2",
+              "quote": "But by concentrating on the message itself, they’ve missed a crucial component of the process.",
+              "anchor": "忽略了关键环节"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为取得更大成功而选择传播渠道。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "communication",
+            "optionText": "communication",
+            "matchType": "exact",
+            "relationNote": "选项借了原文的 communication（传播信息），原文说的是一则信息里该加入哪些特点，没谈选什么渠道。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:2",
+              "quote": "which features to build into a communication",
+              "anchor": "信息里加入哪些特点"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "改进信息内容以吸引买家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "by concentrating on the message itself",
+            "sourceHighlight": "concentrating on the message itself",
+            "optionText": "The improvement of message contents to attract buyers.",
+            "optionHighlight": "The improvement of message contents",
+            "explanation": "原文说广告商一直专注于信息本身（concentrating on the message itself），改进内容正是他们在做的，不是被忽略的部分。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:2",
+              "quote": "by concentrating on the message itself",
+              "anchor": "专注于信息本身"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "overlooked",
+          "sourceRole": "stem",
+          "targetText": "But by concentrating on the message itself, they’ve missed a crucial component of the process.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:2",
+          "relationType": "locationCue",
+          "targetCue": "missed",
+          "sourceZh": "被忽视",
+          "targetCueZh": "忽略了",
+          "answerText": "arranging for people to agree with a message before they even know what’s in it",
+          "bridgeZh": "a crucial component 就是紧接着提出的预说服",
+          "note": "题干 overlooked 对应原文 missed。"
+        },
+        {
+          "sourceText": "The effort to convince people without their knowledge.",
+          "sourceRole": "correctOption",
+          "targetText": "the practice of arranging for people to agree with a message before they even know what’s in it",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项是预说服的定义用别的词写出来：“说服”对应让人认同信息（agree with a message），“在他们不知情时”对应在他们还不知道内容之前（before they even know what’s in it），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:33": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "situation-match",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "用文中预说服的定义和沙发店实验去衡量四个新场景，找出最符合的一个。",
+      "stemTranslationZh": "下列哪个例子最能说明预说服这一概念？",
+      "locateBy": "options",
+      "locateFindZh": "按 [[block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:4]] 的原理，看每个做法是否先引导注意力",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一家网店大力宣传特价商品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "trumpeting",
+            "optionText": "trumpeting",
+            "matchType": "exact",
+            "relationNote": "选项借了原文的 online store 和 trumpeting（鼓吹），可宣传特价是直接推销信息本身；文中网店是先换背景图，不讲优惠。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6",
+              "quote": "before trumpeting（鼓吹） the auto’s strengths",
+              "anchor": "鼓吹优点"
+            },
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:4",
+              "quote": "visitors to an online sofa store were greeted with images of either soft clouds or small coins in the background of its landing page",
+              "anchor": "网店换背景图"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一位银行职员向客户解释利率。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A banker explaining interest rates to customers.",
+            "explanation": "解释利率是在讲信息本身，没有在信息出现前先把客户的注意力引向某个概念这一步。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一位汽车经销商给潜在买家打折。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "cars",
+            "optionText": "car",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了甲壳虫广告里的汽车（small cars），可打折是直接用让利说服买家，没有事先引导他们注意什么。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6",
+              "quote": "Credited with breaking open the US market for small cars",
+              "anchor": "小型车市场"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一家商店在圣诞季播放《铃儿响叮当》。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:4",
+              "quote": "Pre-suasion works by focusing people’s attention on a selected concept, which in turn stimulates them to overvalue it over related ones.",
+              "anchor": "把注意力集中到选定概念上"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:4",
+              "quote": "visitors to an online sofa store were greeted with images of either soft clouds or small coins in the background of its landing page",
+              "anchor": "网店用背景图引导顾客"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A shop playing Jingle Bells in Christmas season.",
+          "sourceRole": "correctOption",
+          "targetText": "Pre-suasion works by focusing people’s attention on a selected concept, which in turn stimulates them to overvalue it over related ones.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "这是把原文原理套到新场景上推出的：放《铃儿响叮当》并不推销哪件商品，只是先把顾客的注意力引到圣诞节上（focusing people’s attention on a selected concept），和沙发店先放云朵背景图（soft clouds）一样，让人还没看商品就先想到节日，更愿意买应节的东西，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读甲壳虫广告这个例子，找出与原文描述一致的选项。",
+      "stemTranslationZh": "关于 20 世纪 50 年代大众甲壳虫的广告活动，我们可以了解到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它侧重情感诉求。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "emotional",
+            "optionText": "emotional",
+            "matchType": "exact",
+            "relationNote": "选项借了 [[block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7]] 的 emotional（情感的），那是一般说服者常用的元素；甲壳虫广告靠的是先认丑、再讲经济可靠等实际优点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+              "quote": "With considerable success, practitioners of social influence have always featured persuasive elements – great praises, emotional pull, last-chance opportunities – in their appeals.",
+              "anchor": "情感吸引是一般说服元素"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它没能突出自己的优点。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "before trumpeting（鼓吹） the auto’s strengths such as economy, reliability and simplicity",
+            "sourceHighlight": "trumpeting（鼓吹） the auto’s strengths",
+            "optionText": "It failed to highlight its strengths.",
+            "optionHighlight": "failed to highlight its strengths",
+            "explanation": "广告先承认外观不足，随后大力宣扬（trumpeting）经济、可靠、简单等优点，选项说没能突出优点，正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6",
+              "quote": "before trumpeting（鼓吹） the auto’s strengths such as economy, reliability and simplicity",
+              "anchor": "大力宣扬优点"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它彻底改变了美国的小型车市场。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Credited with breaking open the US market for small cars",
+            "sourceHighlight": "breaking open",
+            "optionText": "It thoroughly changed the US small-sized car market.",
+            "optionHighlight": "thoroughly changed",
+            "explanation": "原文说它被认为打开了（breaking open）美国小型车市场，即让小车进得去，没说彻底改变了这个市场。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6",
+              "quote": "Credited with breaking open the US market for small cars",
+              "anchor": "打开小型车市场"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它有策略地推出了一款非传统的产品。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6",
+              "quote": "the pre-suasive strategy was employed in the late 1950s by the advertising firm Doyle Dane Bernbach to introduce the oddly shaped Volkswagen Beetle",
+              "anchor": "用预说服策略推出外形古怪的甲壳虫"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Volkswagen Beetle",
+          "sourceRole": "stem",
+          "targetText": "For example, the pre-suasive strategy was employed in the late 1950s by the advertising firm Doyle Dane Bernbach to introduce the oddly shaped Volkswagen Beetle to a US market dominated by big, powerful, boat-like vehicles.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6",
+          "relationType": "locationCue",
+          "answerText": "the pre-suasive strategy was employed in the late 1950s by the advertising firm Doyle Dane Bernbach to introduce the oddly shaped Volkswagen Beetle",
+          "note": "题干 Volkswagen Beetle 原词出现在原文。"
+        },
+        {
+          "sourceText": "It strategically introduced an unconventional product.",
+          "sourceRole": "correctOption",
+          "targetText": "For example, the pre-suasive strategy was employed in the late 1950s by the advertising firm Doyle Dane Bernbach to introduce the oddly shaped Volkswagen Beetle to a US market dominated by big, powerful, boat-like vehicles.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项两部分各有落点：“有策略地”对应运用预说服策略（the pre-suasive strategy was employed）；“非传统的产品”对应外形古怪的甲壳虫（oddly shaped），当时美国满街是又大又重、像船一样的车（boat-like vehicles），小巧怪样的甲壳虫正是另类，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:35": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读出社会影响力实践者忽视的那个事实指什么，推断他们对预说服的态度。",
+      "stemTranslationZh": "关于社会影响力的实践者，我们可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找他们因成功而忽视了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们一直擅长运用预说服。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "a few notable communicators already had an intuitive（直觉的） understanding of it",
+            "sourceEntity": "a few notable communicators",
+            "optionText": "They have been expert at applying pre-suasion.",
+            "optionEntity": "They",
+            "explanation": "凭直觉懂预说服的只是少数著名传播者（a few notable communicators），社会影响力实践者大多没注意到它。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:5",
+              "quote": "a few notable communicators already had an intuitive（直觉的） understanding of it",
+              "anchor": "只有少数人懂"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们已经靠说服把影响做到了最大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "For maximum impact, it’s not only what you do; it’s also what you do just before you do what you do.",
+            "sourceHighlight": "For maximum impact",
+            "optionText": "They have maximized their impact with persuasion.",
+            "optionHighlight": "maximized their impact",
+            "explanation": "他们靠说服元素已经很成功，但原文说要达到最大影响（maximum impact）还得有事前那一步，他们恰恰缺了它。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+              "quote": "For maximum impact, it’s not only what you do; it’s also what you do just before you do what you do.",
+              "anchor": "最大影响还需事前那一步"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们普遍忽视了预说服的效果。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+              "quote": "Perhaps because of that success, they’ve mostly missed an accompanying truth.",
+              "anchor": "大多忽视了相伴的事实"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+              "quote": "it’s also what you do just before you do what you do",
+              "anchor": "事前做什么也很关键"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们有效地把预说服和说服结合了起来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "they’ve mostly missed an accompanying truth",
+            "sourceHighlight": "mostly missed",
+            "optionText": "They have combined pre-suasion with persuasion effectively.",
+            "optionHighlight": "combined pre-suasion with persuasion effectively",
+            "explanation": "他们大多忽视了（mostly missed）事前那一步，手里只有说服元素，谈不上把两者有效结合。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+              "quote": "Perhaps because of that success, they’ve mostly missed an accompanying truth.",
+              "anchor": "大多忽视"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "practitioners of social influence",
+          "sourceRole": "stem",
+          "targetText": "With considerable success, practitioners of social influence have always featured persuasive elements – great praises, emotional pull, last-chance opportunities – in their appeals.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+          "relationType": "locationCue",
+          "answerText": "they’ve mostly missed an accompanying truth",
+          "bridgeZh": "they 指这些实践者，正是这份成功让他们忽视了一个事实",
+          "note": "题干 practitioners of social influence 原词出现在原文。"
+        },
+        {
+          "sourceText": "They have generally ignored the effectiveness of pre-suasion.",
+          "sourceRole": "correctOption",
+          "targetText": "Perhaps because of that success, they’ve mostly missed an accompanying truth.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7",
+          "relationType": "paraphrase",
+          "note": "“普遍忽视”就是原文的“大多忽视了”（mostly missed）；被忽视的那个事实是[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-d:7|what you do just before you do what you do]]，即事前那一步，也就是预说服。由此推出他们大多没重视预说服的作用，选 C。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,939 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-anhui-jiangnan10-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-anhui-jiangnan10-2025-m1:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-anhui-jiangnan10-2025-m1:reading-a": {
+      "overview": "伦敦一场野生动物摄影展的宣传介绍：展览迎来第六十届，用照片、声景、影片和专家见解展现自然之美，提醒人们关注和保护自然，并附导览时间、展期、地址和高峰与非高峰票价。",
+      "fullTranslationZh": "我们的摄影展迎来第六十个年头，再度回归，为你揭示更多大自然的故事。\n它将带你穿越不同的自然环境，开启一场视觉探险，并为你打开一扇窗，让你看到以这些环境为家的野生动物。\n● 亲眼看看我们的种种活动——无论好坏——正在如何塑造自然世界\n● 欣赏令人惊叹的影像，从正在捕猎的凶猛掠食者到构图惊艳的作品\n● 见证关于生存、脆弱以及生命微妙平衡的动人故事\n每一张照片都在提醒我们自然世界的奇妙。\n除了精彩的摄影作品，你还将通过声景、影片和专家见解，发现地球生命的多样与美丽，以及我们可以携手做些什么来保护它。\n你可以跟随我们的讲解员，参加“年度野生动物摄影师”展览的特别导览（上午 9:00 至 9:45 开放），发现那些没有写进说明文字的故事和细节。\n时间：2024 年 10 月 11 日至 2025 年 6 月 29 日\n地址：伦敦南肯辛顿，东馆画廊\n高峰时段票价\n周末、学校假期和法定假日。\n成人（17—59 岁）：18 英镑\n儿童（4—16 岁）：10.95 英镑\n家庭（2 名成人、1 名儿童）：37.50 英镑\n家庭（2 名成人、2 名儿童）：46 英镑\n家庭（2 名成人、3 名儿童）：54.95 英镑\n非高峰时段票价\n周一至周五，学校假期和法定假日除外。\n成人（17—59 岁）：15.50 英镑\n儿童（4—16 岁）：9.25 英镑\n家庭（2 名成人、1 名儿童）：32.25 英镑\n家庭（2 名成人、2 名儿童）：39.50 英镑\n家庭（2 名成人、3 名儿童）：47 英镑",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a-1",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7",
+          "sourceText": "Alongside the stunning photography, you’ll discover through soundscapes, films and expert insights, the diversity and beauty of life on Earth and what we can do together to protect it.",
+          "displayText": "Alongside the stunning photography, you’ll discover through soundscapes, films and expert insights, the diversity and beauty of life on Earth and what we can do together to protect it.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:21",
+            "question:paper-mock-anhui-jiangnan10-2025-m1:23"
+          ],
+          "translationZh": "除了精彩的摄影作品，你还将通过声景、影片和专家见解，发现地球生命的多样与美丽，以及我们可以携手做些什么来保护它。",
+          "analysisZh": "主干是 you’ll discover + 宾语：你将发现两样东西，一是 the diversity and beauty of life on Earth（地球生命的多样与美丽），二是 what we can do together to protect it（我们能一起做什么来保护它），两者由 and 并列，后者是 what 引导的宾语从句，it 指地球生命。through soundscapes, films and expert insights 是插在动词和宾语之间的方式状语，说明靠什么去发现，所以宾语被推到了后面；句首 Alongside the stunning photography 表示“除了照片之外”。读时先跳过插入的方式状语，把 discover 和它的两个宾语接起来。",
+          "underlineRanges": [
+            {
+              "start": 36,
+              "end": 51,
+              "quote": "you’ll discover"
+            },
+            {
+              "start": 52,
+              "end": 98,
+              "quote": "through soundscapes, films and expert insights"
+            },
+            {
+              "start": 146,
+              "end": 183,
+              "quote": "what we can do together to protect it"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a-2",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:8",
+          "sourceText": "You can join our hosts for a special tour of the Wildlife Photographer of the Year exhibition(available from 9:00 am to 9:45 am) and discover the stories and details that didn’t make it into the captions(说明文字).",
+          "displayText": "You can join our hosts for a special tour of the Wildlife Photographer of the Year exhibition(available from 9:00 am to 9:45 am) and discover the stories and details that didn’t make it into the captions(说明文字).",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:21"
+          ],
+          "translationZh": "你可以跟随我们的讲解员，参加“年度野生动物摄影师”展览的特别导览（上午 9:00 至 9:45 开放），发现那些没有写进说明文字的故事和细节。",
+          "analysisZh": "主干是 You can join … and discover …：情态动词 can 后接两个并列的动词 join 和 discover，说明观众能做的两件事。join our hosts for a special tour 意为“跟随讲解员参加特别导览”，括号里的 available from 9:00 am to 9:45 am 补充导览开放的时间。that 引导定语从句修饰 the stories and details，make it into 意为“被收进、进入”，整个从句说的是“没写进说明文字的”故事和细节。",
+          "underlineRanges": [
+            {
+              "start": 8,
+              "end": 41,
+              "quote": "join our hosts for a special tour"
+            },
+            {
+              "start": 133,
+              "end": 165,
+              "quote": "discover the stories and details"
+            },
+            {
+              "start": 166,
+              "end": 203,
+              "quote": "that didn’t make it into the captions"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:1"
+              ],
+              "start": 0,
+              "end": 33,
+              "quote": "我们的摄影展迎来第六十个年头，再度回归，为你揭示更多大自然的故事。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:2"
+              ],
+              "start": 34,
+              "end": 83,
+              "quote": "它将带你穿越不同的自然环境，开启一场视觉探险，并为你打开一扇窗，让你看到以这些环境为家的野生动物。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:3"
+              ],
+              "start": 84,
+              "end": 115,
+              "quote": "● 亲眼看看我们的种种活动——无论好坏——正在如何塑造自然世界"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:4"
+              ],
+              "start": 116,
+              "end": 147,
+              "quote": "● 欣赏令人惊叹的影像，从正在捕猎的凶猛掠食者到构图惊艳的作品"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:5"
+              ],
+              "start": 148,
+              "end": 172,
+              "quote": "● 见证关于生存、脆弱以及生命微妙平衡的动人故事"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:6"
+              ],
+              "start": 173,
+              "end": 192,
+              "quote": "每一张照片都在提醒我们自然世界的奇妙。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7"
+              ],
+              "start": 193,
+              "end": 249,
+              "quote": "除了精彩的摄影作品，你还将通过声景、影片和专家见解，发现地球生命的多样与美丽，以及我们可以携手做些什么来保护它。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:8"
+              ],
+              "start": 250,
+              "end": 321,
+              "quote": "你可以跟随我们的讲解员，参加“年度野生动物摄影师”展览的特别导览（上午 9:00 至 9:45 开放），发现那些没有写进说明文字的故事和细节。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:9"
+              ],
+              "start": 322,
+              "end": 358,
+              "quote": "时间：2024 年 10 月 11 日至 2025 年 6 月 29 日"
+            },
+            {
+              "paragraphId": "zh-reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:10"
+              ],
+              "start": 359,
+              "end": 373,
+              "quote": "地址：伦敦南肯辛顿，东馆画廊"
+            },
+            {
+              "paragraphId": "zh-reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:11"
+              ],
+              "start": 374,
+              "end": 380,
+              "quote": "高峰时段票价"
+            },
+            {
+              "paragraphId": "zh-reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:12"
+              ],
+              "start": 381,
+              "end": 394,
+              "quote": "周末、学校假期和法定假日。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:13"
+              ],
+              "start": 395,
+              "end": 412,
+              "quote": "成人（17—59 岁）：18 英镑"
+            },
+            {
+              "paragraphId": "zh-reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:14"
+              ],
+              "start": 413,
+              "end": 432,
+              "quote": "儿童（4—16 岁）：10.95 英镑"
+            },
+            {
+              "paragraphId": "zh-reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:15"
+              ],
+              "start": 433,
+              "end": 457,
+              "quote": "家庭（2 名成人、1 名儿童）：37.50 英镑"
+            },
+            {
+              "paragraphId": "zh-reading-a-p16",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:16"
+              ],
+              "start": 458,
+              "end": 479,
+              "quote": "家庭（2 名成人、2 名儿童）：46 英镑"
+            },
+            {
+              "paragraphId": "zh-reading-a-p17",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:17"
+              ],
+              "start": 480,
+              "end": 504,
+              "quote": "家庭（2 名成人、3 名儿童）：54.95 英镑"
+            },
+            {
+              "paragraphId": "zh-reading-a-p18",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:18"
+              ],
+              "start": 505,
+              "end": 512,
+              "quote": "非高峰时段票价"
+            },
+            {
+              "paragraphId": "zh-reading-a-p19",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:19"
+              ],
+              "start": 513,
+              "end": 531,
+              "quote": "周一至周五，学校假期和法定假日除外。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p20",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:20"
+              ],
+              "start": 532,
+              "end": 552,
+              "quote": "成人（17—59 岁）：15.50 英镑"
+            },
+            {
+              "paragraphId": "zh-reading-a-p21",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:21"
+              ],
+              "start": 553,
+              "end": 571,
+              "quote": "儿童（4—16 岁）：9.25 英镑"
+            },
+            {
+              "paragraphId": "zh-reading-a-p22",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:22"
+              ],
+              "start": 572,
+              "end": 596,
+              "quote": "家庭（2 名成人、1 名儿童）：32.25 英镑"
+            },
+            {
+              "paragraphId": "zh-reading-a-p23",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:23"
+              ],
+              "start": 597,
+              "end": 621,
+              "quote": "家庭（2 名成人、2 名儿童）：39.50 英镑"
+            },
+            {
+              "paragraphId": "zh-reading-a-p24",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:24"
+              ],
+              "start": 622,
+              "end": 643,
+              "quote": "家庭（2 名成人、3 名儿童）：47 英镑"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-reading-a-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7",
+                "start": 52,
+                "end": 98,
+                "quote": "through soundscapes, films and expert insights"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:8",
+                "start": 8,
+                "end": 41,
+                "quote": "join our hosts for a special tour"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p7",
+                "start": 13,
+                "end": 25,
+                "quote": "通过声景、影片和专家见解"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p8",
+                "start": 12,
+                "end": 32,
+                "quote": "参加“年度野生动物摄影师”展览的特别导览"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-a-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:12",
+                "start": 0,
+                "end": 44,
+                "quote": "Weekends, school holidays and bank holidays."
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:16",
+                "start": 0,
+                "end": 32,
+                "quote": "Family(2adults, 2 children): £46"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p12",
+                "start": 0,
+                "end": 13,
+                "quote": "周末、学校假期和法定假日。"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p16",
+                "start": 0,
+                "end": 21,
+                "quote": "家庭（2 名成人、2 名儿童）：46 英镑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-a-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:3",
+                "start": 2,
+                "end": 85,
+                "quote": "see first-hand how our activities, both good and bad, are shaping the natural world"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:6",
+                "start": 0,
+                "end": 66,
+                "quote": "Every photograph is a reminder of the wonder of the natural world."
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7",
+                "start": 146,
+                "end": 183,
+                "quote": "what we can do together to protect it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 2,
+                "end": 31,
+                "quote": "亲眼看看我们的种种活动——无论好坏——正在如何塑造自然世界"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p6",
+                "start": 0,
+                "end": 19,
+                "quote": "每一张照片都在提醒我们自然世界的奇妙。"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p7",
+                "start": 41,
+                "end": 55,
+                "quote": "我们可以携手做些什么来保护它"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:21",
+              "question:paper-mock-anhui-jiangnan10-2025-m1:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7",
+                "start": 0,
+                "end": 184,
+                "quote": "Alongside the stunning photography, you’ll discover through soundscapes, films and expert insights, the diversity and beauty of life on Earth and what we can do together to protect it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p7",
+                "start": 0,
+                "end": 56,
+                "quote": "除了精彩的摄影作品，你还将通过声景、影片和专家见解，发现地球生命的多样与美丽，以及我们可以携手做些什么来保护它。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:8",
+                "start": 0,
+                "end": 210,
+                "quote": "You can join our hosts for a special tour of the Wildlife Photographer of the Year exhibition(available from 9:00 am to 9:45 am) and discover the stories and details that didn’t make it into the captions(说明文字)."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-a",
+                "paragraphId": "zh-reading-a-p8",
+                "start": 0,
+                "end": 71,
+                "quote": "你可以跟随我们的讲解员，参加“年度野生动物摄影师”展览的特别导览（上午 9:00 至 9:45 开放），发现那些没有写进说明文字的故事和细节。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先介绍展览主题和三条看点，点明照片提醒人们关注自然；再补充声景、影片等展示形式和特别导览；最后列出展期、地址以及高峰、非高峰两档票价。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:1",
+            "summary": "摄影展迎来第六十年，继续讲述大自然的故事。",
+            "function": "开篇点出展览及其主题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:2",
+            "summary": "展览带观众领略不同环境和栖居其中的野生动物。",
+            "function": "概括展览带给观众的体验。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:3",
+            "summary": "看点之一：亲眼看到人类活动正如何影响自然。",
+            "function": "列举展览看点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:4",
+            "summary": "看点之二：欣赏从掠食者捕猎到精美构图的影像。",
+            "function": "列举展览看点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:5",
+            "summary": "看点之三：见证生存、脆弱与生命平衡的故事。",
+            "function": "列举展览看点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:6",
+            "summary": "每张照片都在提醒人们自然世界的奇妙。",
+            "function": "点明展览的用意。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7",
+            "summary": "照片之外，还有声景、影片和专家见解，介绍生命之美和保护之道。",
+            "function": "补充展览的其他展示形式。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:8",
+            "summary": "观众可在上午 9:00 至 9:45 参加特别导览，了解说明文字之外的故事。",
+            "function": "介绍导览服务。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:9",
+            "summary": "展期为 2024 年 10 月 11 日至 2025 年 6 月 29 日。",
+            "function": "交代展期。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:10",
+            "summary": "展览地点在伦敦南肯辛顿的东馆画廊。",
+            "function": "交代地点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:11",
+            "summary": "高峰时段票价表的标题。",
+            "function": "引出高峰票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:12",
+            "summary": "高峰时段指周末、学校假期和法定假日。",
+            "function": "说明高峰票价的适用日期。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:13",
+            "summary": "高峰时段成人票 18 英镑。",
+            "function": "列出票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:14",
+            "summary": "高峰时段儿童票 10.95 英镑。",
+            "function": "列出票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:15",
+            "summary": "高峰时段两大一小家庭票 37.50 英镑。",
+            "function": "列出票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:16",
+            "summary": "高峰时段两大两小家庭票 46 英镑。",
+            "function": "列出票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:17",
+            "summary": "高峰时段两大三小家庭票 54.95 英镑。",
+            "function": "列出票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:18",
+            "summary": "非高峰时段票价表的标题。",
+            "function": "引出非高峰票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:19",
+            "summary": "非高峰时段指周一至周五，学校假期和法定假日除外。",
+            "function": "说明非高峰票价的适用日期。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:20",
+            "summary": "非高峰时段成人票 15.50 英镑。",
+            "function": "列出票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:21",
+            "summary": "非高峰时段儿童票 9.25 英镑。",
+            "function": "列出票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:22",
+            "summary": "非高峰时段两大一小家庭票 32.25 英镑。",
+            "function": "列出票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:23",
+            "summary": "非高峰时段两大两小家庭票 39.50 英镑。",
+            "function": "列出票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:24",
+            "summary": "非高峰时段两大三小家庭票 47 英镑。",
+            "function": "列出票价。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-anhui-jiangnan10-2025-m1:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四种活动形式逐一放回展览介绍，找出展览真正提供的那一种。",
+      "stemTranslationZh": "参观者可以在展览中期待什么？",
+      "locateBy": "options",
+      "locateFindZh": "带着四种活动形式回原文，找展览实际提供的项目",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "故事创作工作坊。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "stories",
+            "optionText": "Story",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了原文的 stories（故事），原文是导览带观众发现照片背后的故事，不是让观众动手编故事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:8",
+              "quote": "discover the stories and details that didn’t make it into the captions",
+              "anchor": "导览讲说明文字之外的故事"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "摄影讲座。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "you’ll discover through soundscapes, films and expert insights, the diversity and beauty of life on Earth",
+            "sourceEntity": "expert insights",
+            "optionText": "Lectures on photography.",
+            "optionEntity": "Lectures on photography",
+            "explanation": "原文的专家见解（expert insights）讲的是地球生命的多样与美丽，不是讲怎样拍照，也没说办讲座。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7",
+              "quote": "you’ll discover through soundscapes, films and expert insights, the diversity and beauty of life on Earth",
+              "anchor": "专家见解讲生命之美"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一场虚拟现实探险。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "adventure",
+            "optionText": "adventure",
+            "matchType": "exact",
+            "relationNote": "选项照搬了原文的 adventure（探险），原文说的是看照片带来的视觉探险（a visual adventure），并不涉及虚拟现实设备。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:2",
+              "quote": "It’ll take you on a visual adventure through different environments",
+              "anchor": "视觉探险"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一场视听导览。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7",
+              "quote": "through soundscapes, films and expert insights",
+              "anchor": "声景、影片和专家见解"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:8",
+              "quote": "join our hosts for a special tour",
+              "anchor": "跟随讲解员参加特别导览"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "An audio-visual tour.",
+          "sourceRole": "correctOption",
+          "targetText": "through soundscapes, films and expert insights",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "选项由两处合成：“视听”出自[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7|through soundscapes, films and expert insights]]，声景（soundscapes）是听的，影片（films）是看的；“导览”出自[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:8|join our hosts for a special tour]]（a special tour）。两处合起来正是视听导览，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "situation-match",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "先判断学校假期属于哪个票价时段，再在那张表里找两大两小的家庭票。",
+      "stemTranslationZh": "一个有两个孩子的家庭在学校假期参观展览要付多少钱？",
+      "locateBy": "stem",
+      "locateFindZh": "往下找这一栏的两大两小家庭票",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "37.50 英镑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Family(2adults, 1 child): £37.50",
+            "sourceEntity": "1 child",
+            "optionText": "£37.50.",
+            "optionEntity": "£37.50",
+            "explanation": "37.50 英镑是高峰时段两大一小（1 child）的家庭票，比题中的家庭少一个孩子。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:15",
+              "quote": "Family(2adults, 1 child): £37.50",
+              "anchor": "高峰两大一小"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "39.50 英镑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "Monday to Friday, excluding school holidays and bank holidays.",
+            "sourceHighlight": "excluding school holidays",
+            "optionText": "£39.50.",
+            "optionHighlight": "£39.50",
+            "explanation": "39.50 英镑是非高峰表里的两大两小家庭票，非高峰明确不含学校假期（excluding school holidays）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:19",
+              "quote": "Monday to Friday, excluding school holidays and bank holidays.",
+              "anchor": "非高峰不含学校假期"
+            },
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:23",
+              "quote": "Family(2 adults,2 children): £39.50",
+              "anchor": "非高峰两大两小"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "46 英镑。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:16",
+              "quote": "Family(2adults, 2 children): £46",
+              "anchor": "高峰两大两小家庭票"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:12",
+              "quote": "Weekends, school holidays and bank holidays.",
+              "anchor": "学校假期属高峰时段"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "49.50 英镑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "£49.50.",
+            "explanation": "两张票价表里都没有 49.50 英镑这一档，成人票、儿童票和各种家庭票都不是这个价。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "school holiday",
+          "sourceRole": "stem",
+          "targetText": "Weekends, school holidays and bank holidays.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:12",
+          "relationType": "locationCue",
+          "targetCue": "school holidays",
+          "sourceZh": "学校假期",
+          "targetCueZh": "学校假期",
+          "answerText": "Family(2adults, 2 children): £46",
+          "bridgeZh": "学校假期列在高峰时段下，票价就看高峰这张表",
+          "note": "题干 school holiday 对应高峰日期里的 school holidays。"
+        },
+        {
+          "sourceText": "£46.",
+          "sourceRole": "correctOption",
+          "targetText": "Family(2adults, 2 children): £46",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:16",
+          "relationType": "paraphrase",
+          "note": "选项金额照抄高峰表里两大两小的家庭票（2 children: £46）。同样两大两小，非高峰表是 39.50 英镑，但学校假期不能按非高峰算，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:23": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把展览介绍里几处讲展览用意的话合起来，概括展览想让观众得到什么。",
+      "stemTranslationZh": "这个展览的主要目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:3]] 的三条看点读到 [[block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7]]，看展览反复要观众留意什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "评选最佳野生动物摄影师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Wildlife Photographer",
+            "optionText": "wildlife photographer",
+            "matchType": "exact",
+            "relationNote": "选项借展览名里的 Wildlife Photographer（野生动物摄影师）猜它要评奖，原文只介绍展出的照片和导览，没讲评选。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:8",
+              "quote": "a special tour of the Wildlife Photographer of the Year exhibition",
+              "anchor": "展览名称"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "展示它的历史和意义。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Our photography exhibition is back for its sixtieth year",
+            "sourceEntity": "its sixtieth year",
+            "optionText": "To present its history and significance.",
+            "optionEntity": "its history and significance",
+            "explanation": "原文提到展览办到第六十年（its sixtieth year），只是交代届数；全文介绍的是照片里的自然，不是展览自己的历史。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:1",
+              "quote": "Our photography exhibition is back for its sixtieth year",
+              "anchor": "第六十届"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "提高人们对自然世界的认识。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:6",
+              "quote": "Every photograph is a reminder of the wonder of the natural world.",
+              "anchor": "每张照片都在提醒自然之奇妙"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:3",
+              "quote": "see first-hand how our activities, both good and bad, are shaping the natural world",
+              "anchor": "看人类活动如何影响自然"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7",
+              "quote": "what we can do together to protect it",
+              "anchor": "我们能怎样保护它"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为野生动物保护筹集资金。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To collect funds for wildlife conservation.",
+            "explanation": "原文讲到大家可以一起保护自然（protect it），也列了票价，但没说门票收入用于保护野生动物，更没提筹款。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To raise awareness of the natural world.",
+          "sourceRole": "correctOption",
+          "targetText": "Every photograph is a reminder of the wonder of the natural world.",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:6",
+          "relationType": "paraphrase",
+          "note": "选项是把几处合起来的概括：[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:3]] 让观众亲眼看人类活动怎样塑造自然（shaping the natural world），[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:6]] 说每张照片都在提醒自然的奇妙（a reminder of the wonder），[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-a:7]] 还讲大家能怎样保护它（protect it）。都是让人更了解、更在意自然，“提高对自然世界的认识”把这几处都包了进去，选 C。"
+        }
+      ]
+    }
+  }
+}

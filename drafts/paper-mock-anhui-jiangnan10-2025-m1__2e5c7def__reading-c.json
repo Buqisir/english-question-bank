@@ -1,0 +1,838 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-anhui-jiangnan10-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-anhui-jiangnan10-2025-m1:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-anhui-jiangnan10-2025-m1:reading-c": {
+      "overview": "葡萄牙阿尔克瓦人工湖上的漂浮式太阳能电站：文章介绍项目构成，分析漂浮光伏面临的挑战与不占地、并网快、效率高等优势，并展望 EDP 的扩建计划和这项技术的发展前景。",
+      "fullTranslationZh": "在葡萄牙阿尔克瓦镇附近，坐落着欧洲最大的人工湖，湖上有一座创新的漂浮式太阳能电站，由领先的可再生能源公司 EDP 开发。尽管人们起初对漂浮式太阳能技术的高成本和潜在问题心存疑虑，但这个项目标志着该行业已经走向成熟，并做好了扩张的准备。\n在阿尔克瓦项目的第一阶段，工程师们在漂浮平台上安装了约 12,000 块光伏组件，平台由部分回收的塑料和本地出产的软木制成。这些组件连接着一个由电池组成的储能系统，并与水电站大坝的发电站整合在一起。\n漂浮式太阳能项目确实面临诸多挑战。设备必须防水、抗浪、抗风、抗风暴，这增加了复杂性和成本。湖里的鱼引来大量鸟类，鸟粪会遮挡阳光。为解决这个问题，阿尔克瓦项目的工程师开发了遥控清洁机器人，并正在研制能自主工作的机器人。\n不过，漂浮式太阳能项目也有几大优势。建在现有的水电站大坝上时，它们不需要额外占用土地，而且可以接入电网，不必像太阳能项目通常那样等上好几年。水面的降温作用提高了组件的效率，研究表明其效率比陆上光伏高出 5% 到 15%；同时，组件产生的阴影还能减缓湖水的流失。\nEDP 将漂浮式太阳能视为其可再生能源战略的基石。阿尔克瓦最初 5 兆瓦的装机容量看似不大，但这只是开始。公司正在规划第二阶段，到 2025 年将新增 70 兆瓦装机容量。据领先的咨询公司伍德麦肯兹称，到 2031 年，漂浮式太阳能技术在全球可提供多达 60,000 兆瓦的可再生能源。“与截至去年已安装的 1,600,000 兆瓦太阳能装机容量相比，这或许相形见绌。但每一点都很重要，”他补充道。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c-1",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+          "sourceText": "Despite initial skepticism about the high costs and potential issues of floating solar technology, this project represents the sector’s maturation and readiness for expansion.",
+          "displayText": "Despite initial skepticism about the high costs and potential issues of floating solar technology, this project represents the sector’s maturation and readiness for expansion.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:28",
+            "question:paper-mock-anhui-jiangnan10-2025-m1:31"
+          ],
+          "translationZh": "尽管人们起初对漂浮式太阳能技术的高成本和潜在问题心存疑虑，但这个项目标志着该行业已经走向成熟，并做好了扩张的准备。",
+          "analysisZh": "主干是 this project represents the sector’s maturation and readiness（这个项目代表着该行业的成熟和就绪），represents 后接两个并列的名词，for expansion 修饰 readiness，即“准备好扩张”。句首 Despite 是介词，后面只跟名词短语 initial skepticism about …，表示让步：“尽管起初有人怀疑……”；about 后面的 the high costs and potential issues 是怀疑的内容。先让步、再落到主句，作者真正想说的是项目已成熟、可扩张。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 26,
+              "quote": "Despite initial skepticism"
+            },
+            {
+              "start": 99,
+              "end": 122,
+              "quote": "this project represents"
+            },
+            {
+              "start": 136,
+              "end": 174,
+              "quote": "maturation and readiness for expansion"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c-2",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+          "sourceText": "The cooling effect of being on water boosts the efficiency of the modules, with studies suggesting gains of between 5% and 15% over land-based PV, while the shade they produce slows the water loss of the lake.",
+          "displayText": "The cooling effect of being on water boosts the efficiency of the modules, with studies suggesting gains of between 5% and 15% over land-based PV, while the shade they produce slows the water loss of the lake.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:29"
+          ],
+          "translationZh": "水面的降温作用提高了组件的效率，研究表明其效率比陆上光伏高出 5% 到 15%；同时，组件产生的阴影还能减缓湖水的流失。",
+          "analysisZh": "主干是 The cooling effect … boosts the efficiency of the modules（降温作用提高了组件效率），of being on water 说明是“处在水面上”带来的降温。with studies suggesting gains … 是“with + 名词 + 现在分词”的独立结构，补充研究数据：比陆上光伏（over land-based PV）高 5% 到 15%。while 在这里表示并列对照，引出另一个好处：the shade they produce slows the water loss，they produce 是省略 that 的定语从句修饰 the shade，they 指光伏组件。",
+          "underlineRanges": [
+            {
+              "start": 37,
+              "end": 73,
+              "quote": "boosts the efficiency of the modules"
+            },
+            {
+              "start": 127,
+              "end": 145,
+              "quote": "over land-based PV"
+            },
+            {
+              "start": 176,
+              "end": 208,
+              "quote": "slows the water loss of the lake"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1"
+              ],
+              "start": 0,
+              "end": 117,
+              "quote": "在葡萄牙阿尔克瓦镇附近，坐落着欧洲最大的人工湖，湖上有一座创新的漂浮式太阳能电站，由领先的可再生能源公司 EDP 开发。尽管人们起初对漂浮式太阳能技术的高成本和潜在问题心存疑虑，但这个项目标志着该行业已经走向成熟，并做好了扩张的准备。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:2"
+              ],
+              "start": 118,
+              "end": 217,
+              "quote": "在阿尔克瓦项目的第一阶段，工程师们在漂浮平台上安装了约 12,000 块光伏组件，平台由部分回收的塑料和本地出产的软木制成。这些组件连接着一个由电池组成的储能系统，并与水电站大坝的发电站整合在一起。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:3"
+              ],
+              "start": 218,
+              "end": 326,
+              "quote": "漂浮式太阳能项目确实面临诸多挑战。设备必须防水、抗浪、抗风、抗风暴，这增加了复杂性和成本。湖里的鱼引来大量鸟类，鸟粪会遮挡阳光。为解决这个问题，阿尔克瓦项目的工程师开发了遥控清洁机器人，并正在研制能自主工作的机器人。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4"
+              ],
+              "start": 327,
+              "end": 457,
+              "quote": "不过，漂浮式太阳能项目也有几大优势。建在现有的水电站大坝上时，它们不需要额外占用土地，而且可以接入电网，不必像太阳能项目通常那样等上好几年。水面的降温作用提高了组件的效率，研究表明其效率比陆上光伏高出 5% 到 15%；同时，组件产生的阴影还能减缓湖水的流失。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5"
+              ],
+              "start": 458,
+              "end": 657,
+              "quote": "EDP 将漂浮式太阳能视为其可再生能源战略的基石。阿尔克瓦最初 5 兆瓦的装机容量看似不大，但这只是开始。公司正在规划第二阶段，到 2025 年将新增 70 兆瓦装机容量。据领先的咨询公司伍德麦肯兹称，到 2031 年，漂浮式太阳能技术在全球可提供多达 60,000 兆瓦的可再生能源。“与截至去年已安装的 1,600,000 兆瓦太阳能装机容量相比，这或许相形见绌。但每一点都很重要，”他补充道。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-reading-c-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:3",
+                "start": 114,
+                "end": 144,
+                "quote": "which adds complexity and cost"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:2",
+                "start": 104,
+                "end": 189,
+                "quote": "floating platforms made from partially recycled plastic and locally sourced soft wood"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+                "start": 145,
+                "end": 179,
+                "quote": "a leading renewable energy company"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 34,
+                "end": 44,
+                "quote": "这增加了复杂性和成本"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 41,
+                "end": 61,
+                "quote": "平台由部分回收的塑料和本地出产的软木制成"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 42,
+                "end": 52,
+                "quote": "领先的可再生能源公司"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-c-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+                "start": 147,
+                "end": 233,
+                "quote": "can be connected to the grid（电网） without the multi-year wait common for solar projects"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 45,
+                "end": 69,
+                "quote": "可以接入电网，不必像太阳能项目通常那样等上好几年"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-c-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+                "start": 0,
+                "end": 74,
+                "quote": "EDP views floating solar as a cornerstone of its renewable energy strategy"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+                "start": 144,
+                "end": 171,
+                "quote": "but it’s just the beginning"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+                "start": 173,
+                "end": 211,
+                "quote": "The company is planning a second phase"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 0,
+                "end": 24,
+                "quote": "EDP 将漂浮式太阳能视为其可再生能源战略的基石"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 46,
+                "end": 52,
+                "quote": "但这只是开始"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 53,
+                "end": 63,
+                "quote": "公司正在规划第二阶段"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-c-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+                "start": 280,
+                "end": 355,
+                "quote": "this project represents the sector’s maturation and readiness for expansion"
+              },
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+                "start": 0,
+                "end": 58,
+                "quote": "Yet floating solar projects also enjoy several advantages."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 90,
+                "end": 116,
+                "quote": "这个项目标志着该行业已经走向成熟，并做好了扩张的准备"
+              },
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 0,
+                "end": 18,
+                "quote": "不过，漂浮式太阳能项目也有几大优势。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:28",
+              "question:paper-mock-anhui-jiangnan10-2025-m1:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+                "start": 181,
+                "end": 356,
+                "quote": "Despite initial skepticism about the high costs and potential issues of floating solar technology, this project represents the sector’s maturation and readiness for expansion."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 60,
+                "end": 117,
+                "quote": "尽管人们起初对漂浮式太阳能技术的高成本和潜在问题心存疑虑，但这个项目标志着该行业已经走向成熟，并做好了扩张的准备。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+                "start": 235,
+                "end": 444,
+                "quote": "The cooling effect of being on water boosts the efficiency of the modules, with studies suggesting gains of between 5% and 15% over land-based PV, while the shade they produce slows the water loss of the lake."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-anhui-jiangnan10-2025-m1:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 70,
+                "end": 130,
+                "quote": "水面的降温作用提高了组件的效率，研究表明其效率比陆上光伏高出 5% 到 15%；同时，组件产生的阴影还能减缓湖水的流失。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先引出阿尔克瓦的漂浮式太阳能项目并判断行业已成熟，再介绍项目构成，接着先写挑战、后用 Yet 转写优势，最后展望 EDP 的扩建计划和全球前景。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+            "summary": "葡萄牙阿尔克瓦人工湖上建起 EDP 的漂浮式太阳能电站，尽管起初受到质疑，它标志着这一行业已经成熟、准备扩张。",
+            "function": "引出话题，亮明项目已成熟的总体判断。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:2",
+            "summary": "项目第一阶段在用回收塑料和软木做的平台上安装约 12,000 块光伏组件，并与储能系统和水电站相连。",
+            "function": "介绍项目的具体构成。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:3",
+            "summary": "漂浮式太阳能面临设备耐候、鸟粪遮光等挑战，工程师开发了遥控清洁机器人应对。",
+            "function": "写项目面临的困难及对策。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+            "summary": "漂浮式太阳能也有优势：不占额外土地、并网快、效率更高、还能减少湖水流失。",
+            "function": "以 Yet 转折，写项目的优势。"
+          },
+          {
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+            "summary": "EDP 把漂浮太阳能视为战略基石，计划扩建第二阶段，业内也预计其全球规模会不断增长。",
+            "function": "展望前景，呼应开头的“准备扩张”。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-anhui-jiangnan10-2025-m1:28": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项对 EDP 项目的描述逐一放回原文核对，选出两半都有依据的一项。",
+      "stemTranslationZh": "下列哪一项最能描述 EDP 的这个项目？",
+      "locateBy": "options",
+      "locateFindZh": "按选项里的质疑、成本、扩张和电站连接逐个回原文核对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它从未受到质疑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Despite initial skepticism about the high costs and potential issues of floating solar technology",
+            "sourceHighlight": "initial skepticism",
+            "optionText": "It went unquestioned.",
+            "optionHighlight": "unquestioned",
+            "explanation": "原文明说起初有人怀疑它成本高、问题多（initial skepticism），并非没人质疑。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+              "quote": "Despite initial skepticism about the high costs and potential issues of floating solar technology",
+              "anchor": "起初受到质疑"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它可能成本高但很环保。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:3",
+              "quote": "which adds complexity and cost",
+              "anchor": "增加成本"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:2",
+              "quote": "floating platforms made from partially recycled plastic and locally sourced soft wood",
+              "anchor": "平台用回收塑料制成"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+              "quote": "a leading renewable energy company",
+              "anchor": "可再生能源公司"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它已经扩大了规模。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "this project represents the sector’s maturation and readiness for expansion",
+            "sourceHighlight": "readiness for expansion",
+            "optionText": "It has already expanded.",
+            "optionHighlight": "already expanded",
+            "explanation": "原文只说已准备好扩张（readiness for expansion），第二阶段还在规划，选项把打算说成了已经做到。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+              "quote": "this project represents the sector’s maturation and readiness for expansion",
+              "anchor": "准备扩张"
+            },
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+              "quote": "The company is planning a second phase",
+              "anchor": "第二阶段尚在规划"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它与发电站是分开的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "are integrated with the hydroelectric dam’s power station",
+            "sourceHighlight": "integrated with",
+            "optionText": "It is separated from the power station.",
+            "optionHighlight": "separated from",
+            "explanation": "原文说组件与水电站大坝的发电站整合在一起（integrated with），选项说成分开，正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:2",
+              "quote": "are integrated with the hydroelectric dam’s power station",
+              "anchor": "与发电站整合"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It can be costly but eco-friendly.",
+          "sourceRole": "correctOption",
+          "targetText": "which adds complexity and cost",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项前后两半各有落点：“成本可能高”出自[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:3|which adds complexity and cost]]（adds … cost）；“环保”是概括出来的，平台用部分回收塑料制成（partially recycled plastic），发的又是可再生能源（renewable energy）。两半都有依据，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项分别放回讲挑战和讲优势的部分，核对细节是否与原文一致。",
+      "stemTranslationZh": "关于漂浮式太阳能项目，我们可以了解到什么？",
+      "locateBy": "options",
+      "locateFindZh": "带着机器人、电网、效率、水位四点回原文核对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "工程师已经研制出自动清洁机器人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "have developed remote-controlled cleaning robots and are working on autonomous ones",
+            "sourceHighlight": "are working on autonomous ones",
+            "optionText": "Engineers have developed auto cleaning robots.",
+            "optionHighlight": "have developed auto cleaning robots",
+            "explanation": "已研制出的是遥控清洁机器人（remote-controlled），能自主工作的还在研制中（are working on），选项把在做的说成了做成的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:3",
+              "quote": "have developed remote-controlled cleaning robots and are working on autonomous ones",
+              "anchor": "自主机器人仍在研制"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "漂浮式太阳能项目接入电网所需的时间更少。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+              "quote": "can be connected to the grid（电网） without the multi-year wait common for solar projects",
+              "anchor": "并网不必等好几年"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "陆上光伏组件比漂浮的效率更高。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "with studies suggesting gains of between 5% and 15% over land-based PV",
+            "sourceHighlight": "gains of between 5% and 15% over land-based PV",
+            "optionText": "Land-based PV modules are more productive than floating ones.",
+            "optionHighlight": "more productive than floating ones",
+            "explanation": "原文说漂浮组件比陆上光伏效率高 5% 到 15%（gains … over land-based PV），高的是漂浮的一方，选项把两边比反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+              "quote": "with studies suggesting gains of between 5% and 15% over land-based PV",
+              "anchor": "漂浮组件效率更高"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "光伏组件降低了湖的水位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "the shade they produce slows the water loss of the lake",
+            "sourceHighlight": "slows the water loss",
+            "optionText": "The PV modules decrease the water level of the lake.",
+            "optionHighlight": "decrease the water level",
+            "explanation": "原文说组件的阴影减缓了湖水流失（slows the water loss），是帮湖少丢水，选项却说它让水位下降。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+              "quote": "the shade they produce slows the water loss of the lake",
+              "anchor": "减缓湖水流失"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Floating solar projects demand less time for grid access.",
+          "sourceRole": "correctOption",
+          "targetText": "can be connected to the grid（电网） without the multi-year wait common for solar projects",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“接入电网”（grid access）就是原文的 connected to the grid；“所需时间更少”是从“不必像一般太阳能项目那样等好几年”（without the multi-year wait）推出的：别的项目要等，它不用等，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:30": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读最后一段 EDP 对眼前规模和后续计划的说法，推断 EDP 对这项技术的看法。",
+      "stemTranslationZh": "根据最后一段，EDP 可能会同意下列哪种说法？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5]]，看 EDP 怎样看待眼下的 5 兆瓦和以后的计划",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "阿尔克瓦项目立刻取得了成功。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "may seem modest, but it’s just the beginning",
+            "sourceHighlight": "may seem modest",
+            "optionText": "The project at Alqueva is an instant success.",
+            "optionHighlight": "an instant success",
+            "explanation": "原文承认最初的 5 兆瓦看起来不大（may seem modest），只是开始；EDP 看好的是以后，没说它一上来就大获成功。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+              "quote": "may seem modest, but it’s just the beginning",
+              "anchor": "看似不大，只是开始"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "到 2025 年阿尔克瓦项目将提供 70 兆瓦的装机容量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "which will see an additional 70MW capacity by 2025",
+            "sourceHighlight": "an additional 70MW",
+            "optionText": "By 2025 the project at Alqueva will provide 70MW capacity.",
+            "optionHighlight": "will provide 70MW capacity",
+            "explanation": "70 兆瓦是第二阶段新增的（an additional 70MW），加上原有的 5 兆瓦，到 2025 年应为 5+70=75 兆瓦。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+              "quote": "which will see an additional 70MW capacity by 2025",
+              "anchor": "新增 70 兆瓦"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "该项目将产生全球大部分的可再生能源。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "This may pale in comparison to the 1,600,000MW of solar capacity installed as of last year.",
+            "sourceHighlight": "pale in comparison",
+            "optionText": "The project will generate the majority of global renewable power.",
+            "optionHighlight": "the majority of global renewable power",
+            "explanation": "到 2031 年全球漂浮太阳能最多也就 60,000 兆瓦，比起已装的太阳能都相形见绌（pale in comparison），谈不上占大部分。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+              "quote": "This may pale in comparison to the 1,600,000MW of solar capacity installed as of last year.",
+              "anchor": "相形见绌"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "漂浮式太阳能技术前景光明。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+              "quote": "EDP views floating solar as a cornerstone of its renewable energy strategy",
+              "anchor": "战略基石"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+              "quote": "but it’s just the beginning",
+              "anchor": "只是开始"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+              "quote": "The company is planning a second phase",
+              "anchor": "规划第二阶段"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The floating solar technology has a promising future.",
+          "sourceRole": "correctOption",
+          "targetText": "EDP views floating solar as a cornerstone of its renewable energy strategy",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "“前景光明”是把 [[block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5]] 几处合起来推出的：EDP 把漂浮太阳能当作战略基石（a cornerstone），说 5 兆瓦只是开始（just the beginning），还在规划第二阶段（a second phase）。一家公司这样看重它、还要继续加码，可见它认为这项技术前景光明，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括全文围绕漂浮式太阳能写了什么、整体态度如何，选出能涵盖全文的标题。",
+      "stemTranslationZh": "本文最合适的标题是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1]] 的总体判断读起，看后几段写挑战、优势和前景时落到哪个结论",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "漂浮式太阳能蓄势待发",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+              "quote": "this project represents the sector’s maturation and readiness for expansion",
+              "anchor": "行业成熟、准备扩张"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+              "quote": "Yet floating solar projects also enjoy several advantages.",
+              "anchor": "漂浮太阳能有几大优势"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "太阳能还是水电",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "hydroelectric",
+            "optionText": "Hydro Power",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了原文的 hydroelectric（水力发电），原文提水电站只是说光伏板建在大坝水面、与电站相连，没拿两者比高下。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4",
+              "quote": "When located at existing hydroelectric dams they do not require any additional land",
+              "anchor": "建在水电站大坝上"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "可再生能源的黎明",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "EDP views floating solar as a cornerstone of its renewable energy strategy",
+            "sourceHighlight": "floating solar",
+            "optionText": "The Dawn of Renewable Energy",
+            "optionHighlight": "Renewable Energy",
+            "explanation": "全文只写漂浮式太阳能（floating solar）这一种技术，选项扩大成了整个可再生能源。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+              "quote": "EDP views floating solar as a cornerstone of its renewable energy strategy",
+              "anchor": "只谈漂浮太阳能"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "全球漂浮式太阳能电站一瞥",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "floating solar technology could deliver up to 60,000MW of renewable energy globally by 2031",
+            "sourceHighlight": "globally",
+            "optionText": "A Glimpse into Global Floating Solar Farms",
+            "optionHighlight": "Global Floating Solar Farms",
+            "explanation": "全文围绕阿尔克瓦这一个项目来写，“全球”（globally）只出现在对 2031 年的预测里，没有介绍各地的漂浮电站。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5",
+              "quote": "floating solar technology could deliver up to 60,000MW of renewable energy globally by 2031",
+              "anchor": "全球只出现在预测里"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Floating Solar Ready to Shine",
+          "sourceRole": "correctOption",
+          "targetText": "this project represents the sector’s maturation and readiness for expansion",
+          "targetParagraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "几段写的都是漂浮太阳能已经能大展身手：[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:1]] 说行业成熟、准备扩张（readiness for expansion），[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:3]] 的挑战有了对策，[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:4]] 列出优势，[[block:paper-mock-anhui-jiangnan10-2025-m1:reading-c:5]] 说这只是开始。标题的 Floating Solar 点明对象，Ready to Shine（蓄势待发、准备大放光彩）正好概括它已成熟、前景可期，选 A。"
+        }
+      ]
+    }
+  }
+}

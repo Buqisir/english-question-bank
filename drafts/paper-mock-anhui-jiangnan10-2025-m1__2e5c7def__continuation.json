@@ -1,0 +1,188 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: As I concluded the session, my trainer approached me. He handed me a towel and asked how I felt. I told him that my mind was clear. He smiled and explained his trick. He had seen that my kicks were clumsy at first, but I did not stop and kept adjusting until they hit the target. “Maths works the same way,” he said. A wrong answer, he told me, was just a missed kick that showed me what to fix next. I had been treating every mistake in my practice papers as proof that I was meant to fail, but it was really a chance to improve. I thanked him and left the gym.\n\nParagraph 2: The next day, stepping into the classroom, I pulled out the maths practice papers confidently. Instead of skipping the questions I had got wrong, I went through them one by one, just as I would practise a move in the gym. I found that most of my mistakes came from careless steps, not from a lack of ability. Whenever I felt stuck, I took a deep breath and tried again. By the end of the lesson, I had corrected half of the wrong answers. The air of tension was still there, but it no longer weighed on me. Exercise had given me more than fun and relaxation. It had taught me how to face my problems.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写要动笔的是“我”和泰拳教练：“我”因数学复习不顺而焦虑，教练在电话里说自己有个妙招，让“我”来拳馆。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”回忆往事，一般过去时；句子中等长短，以叙述为主，原文没有一句带引号的直接引语，人物的话都是转述。续写也用转述为主，最多在关键处留一句短的直接引语。",
+          "evidence": [
+            "I poured my worries to my trainer on the phone"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在“我”练完一小时、烦躁一扫而空；教练的“妙招”是什么还没揭开，“我”的数学难题也还没解决。原文开头已经点明，这次经历让“我”明白运动的意义不只是乐趣和放松。",
+          "evidence": [
+            "made me realize how important exercise was to my life, going beyond fun and relaxation"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我（I）",
+          "role": "正在备考的中学生，课余练泰拳",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "把数学复习搞好，摆脱一做练习卷就错一大片的局面。",
+              "evidence": "my recent maths revision was not going well"
+            },
+            {
+              "label": "表现",
+              "text": "遇到挫折容易往坏处想，觉得自己没进步、注定失败。",
+              "evidence": "I started feeling that I was not improving, and that I was meant to fail."
+            },
+            {
+              "label": "此刻",
+              "text": "一小时训练后，烦躁情绪已经消散，但还不知道教练的妙招是什么。",
+              "evidence": "I was surprised to realize my frustration melted away once I put on my gloves."
+            }
+          ]
+        },
+        {
+          "name": "教练（my trainer）",
+          "role": "“我”学泰拳的拳馆教练",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "听“我”诉苦时没有讲大道理，而是开玩笑说自己有个妙招。",
+              "evidence": "he joked he had a trick up his sleeve"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "he joked he had a trick up his sleeve",
+          "use": "第 1 段由教练揭开这个妙招：用“我”刚才练拳的过程打比方，让“我”把练拳的办法用到数学上。"
+        },
+        {
+          "sourceQuote": "Despite starting off unsatisfactorily, my punches and kicks soon were on the right track.",
+          "use": "第 1 段教练拿“开头踢不好、后来越打越准”作比方，说明错题也能一步步改对；第 2 段“我”照这个办法逐题订正。"
+        },
+        {
+          "sourceQuote": "I was getting many questions wrong in the practice papers",
+          "use": "第 2 段“我”拿出的正是这些练习卷，把满卷错题逐个订正，让原文的数学困境有个着落。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "教练借“我”开头踢不好、后来越打越准的过程揭开妙招：错题就像没踢中的一脚，只是告诉你哪里要改；第二天“我”用练拳的办法逐题订正练习卷，焦虑变成了行动。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "以教练走过来开头，写出他对“我”说了什么、“我”明白了什么。第二段首句说“我”第二天自信地拿出数学练习卷，所以第一段结束时，“我”必须已经找回面对数学的底气。",
+          "draft": "教练递来毛巾问“我”感觉如何，指出“我”一开始踢得笨拙却没停下、一直调整到踢中，说数学也一样，错题只是没踢中的一脚；“我”意识到错题不是失败的证明，道谢后离开。",
+          "bridgeQuote": "I pulled out the maths practice papers confidently",
+          "bridge": "第一段结束时，是什么让“我”有底气第二天拿出那些满是错题的练习卷？"
+        },
+        {
+          "paragraph": 2,
+          "must": "以第二天走进教室、自信地拿出数学练习卷开头，写“我”怎样面对这些练习卷，并落到原文开头说的“运动的意义不只是乐趣和放松”。",
+          "draft": "“我”像练动作一样逐题订正错题，发现错误多来自步骤粗心；卡住时深呼吸再试，一节课改对了一半；教室里依旧紧张，但已压不住“我”，“我”明白运动教会了自己怎样面对难题。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: As I concluded the session, my trainer approached me. He handed me a towel and asked how I felt. I told him that my mind was clear. He smiled and explained his trick. He had seen that my kicks were clumsy at first, but I did not stop and kept adjusting until they hit the target. “Maths works the same way,” he said. A wrong answer, he told me, was just a missed kick that showed me what to fix next. I had been treating every mistake in my practice papers as proof that I was meant to fail, but it was really a chance to improve. I thanked him and left the gym.\n\nParagraph 2: The next day, stepping into the classroom, I pulled out the maths practice papers confidently. Instead of skipping the questions I had got wrong, I went through them one by one, just as I would practise a move in the gym. I found that most of my mistakes came from careless steps, not from a lack of ability. Whenever I felt stuck, I took a deep breath and tried again. By the end of the lesson, I had corrected half of the wrong answers. The air of tension was still there, but it no longer weighed on me. Exercise had given me more than fun and relaxation. It had taught me how to face my problems.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "教练揭开妙招，“我”从练拳的过程里想通了怎样看待错题，为第二天自信拿出练习卷做好准备。",
+          "items": [
+            {
+              "quote": "I told him that my mind was clear.",
+              "explain": "用转述交代“我”的状态，接住原文“烦躁一扫而空”，也和原文转述人物话语的写法一致。"
+            },
+            {
+              "quote": "He had seen that my kicks were clumsy at first, but I did not stop and kept adjusting until they hit the target.",
+              "explain": "教练的妙招不是凭空说教，而是借原文“开头不顺、后来走上正轨”的训练过程打比方，伏笔就这样用上了。"
+            },
+            {
+              "quote": "A wrong answer, he told me, was just a missed kick that showed me what to fix next.",
+              "explain": "把错题比作没踢中的一脚，泰拳和数学这两条线在这里接上，整篇的转折就靠这一句。"
+            },
+            {
+              "quote": "I had been treating every mistake in my practice papers as proof that I was meant to fail",
+              "explain": "回扣原文“我觉得自己注定失败”，写出“我”想法的变化，第二段的自信才有来由。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "“我”把练拳的办法用到数学上，用具体行动解决原文的数学困境，并收回到运动的意义。",
+          "items": [
+            {
+              "quote": "just as I would practise a move in the gym",
+              "explain": "让第二段的行动和第一段教练的话对上：“我”真的照练拳的方法去做题。"
+            },
+            {
+              "quote": "most of my mistakes came from careless steps, not from a lack of ability",
+              "explain": "写出订正带来的具体发现，“我不行”的想法被事实推翻，而不是靠一句“我变自信了”带过。"
+            },
+            {
+              "quote": "By the end of the lesson, I had corrected half of the wrong answers.",
+              "explain": "结果写得有分寸：改对一半，而不是突然全会了，故事更可信。"
+            },
+            {
+              "quote": "Exercise had given me more than fun and relaxation.",
+              "explain": "呼应原文“运动不只是乐趣和放松”，结尾落在这次经历上，没有另起一句空泛的大道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "a missed kick that showed me what to fix next",
+          "function": "用泰拳里的动作比喻错题，把运动和学习连在一起，是本题最关键的一处表达。"
+        },
+        {
+          "expression": "took a deep breath and tried again",
+          "function": "写“我”卡住时怎样调整，情绪落实到动作上，也和练拳时的专注对应。"
+        },
+        {
+          "expression": "it no longer weighed on me",
+          "function": "原文说考前“紧张焦虑的气氛”，这里用 weigh on 写它不再压着“我”，变化一眼看得出。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "让教练直接帮“我”讲数学题，或让同学、老师来解决问题",
+          "why": "原文里教练是泰拳教练，妙招应来自练拳本身；靠别人替“我”解题，就丢掉了“运动让我找到方法”这条主线。"
+        },
+        {
+          "pitfall": "第一段只写“我”很开心、很感激，没交代想通了什么",
+          "why": "第二段首句要求“我”第二天自信地拿出练习卷，第一段必须先给出这份自信的来由，否则两段接不上。"
+        },
+        {
+          "pitfall": "第二段写“我”突然全做对了、考了满分",
+          "why": "原文写的是长期复习不顺，一次训练之后一下子全会不可信；写出方法和一点进步更合理。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: As I concluded the session, my trainer approached me. Tossing me a towel, he asked whether his trick had worked. I nodded, still catching my breath, and admitted that my head felt lighter than it had in weeks. Then he pointed out something I had not noticed myself. At the start, my kicks had been sloppy and off target, yet I had not given up. I had kept adjusting until every strike landed. “That’s all maths is,” he said. He explained that a wrong answer was no different from a missed kick: it told me which part of my technique needed work. His words hit me harder than any punch. For weeks I had read every red cross on my practice papers as a sign that I was doomed to fail, when each one had been pointing the way forward. I pulled off my gloves and thanked him, my head held high.\n\nParagraph 2: The next day, stepping into the classroom, I pulled out the maths practice papers confidently. This time, instead of hiding the pages covered in mistakes, I spread them across my desk and worked through them one at a time, the way I would drill a move until it became second nature. Before long, a pattern appeared: most of my errors came from rushing through the steps, not from failing to understand the ideas. Whenever a question refused to give in, I paused, took a slow breath and tried a different angle. By the end of the lesson, half the red crosses had been turned into neat corrections. The classroom was as tense as ever, but the tension no longer had a grip on me. Exercise, I realized, had given me far more than fun and relaxation. It had taught me to keep throwing punches until I got things right.",
+      "beyondStandard": [
+        {
+          "quote": "Tossing me a towel, he asked whether his trick had worked.",
+          "explain": "用动作开场，并直接接上原文“教练有个妙招”，比标准版的 handed me a towel 更利落、更贴原文。"
+        },
+        {
+          "quote": "For weeks I had read every red cross on my practice papers as a sign that I was doomed to fail",
+          "explain": "用“练习卷上的红叉”这个具体画面代替 every mistake，第二段又让红叉变成订正，前后呼应。"
+        },
+        {
+          "quote": "It had taught me to keep throwing punches until I got things right.",
+          "explain": "结尾仍用泰拳的动作 keep throwing punches 来说学习，比标准版的 how to face my problems 更形象，也不落入空泛口号。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1099 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-anhui-jiangnan10-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-anhui-jiangnan10-2025-m1:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-anhui-jiangnan10-2025-m1:seven-choices": {
+      "overview": "本文介绍应对抑郁的五种方法：找人倾诉、审视并质疑消极想法、参与有益的活动、练习感恩和学会接纳抑郁，并说明每种方法怎样帮助人缓解抑郁、过上更充实的生活。",
+      "fullTranslationZh": "懂得如何应对抑郁，能帮助你过上更充实、更有成效的生活。下面这些应对方法有助于缓解这种心理健康问题。\n找人倾诉\n这听起来也许很简单，但很有效。与他人保持联系对控制抑郁大有帮助。这会提醒你：你并不孤单。研究表明，增加社交联系、感到与他人相连，有助于减轻抑郁症状。\n审视并质疑你的想法\n抑郁可能通过大量消极想法表现出来，但凭借方法和努力，你可以学会质疑这些想法。这并不意味着只是告诉自己一切都好。相反，这是一种正视自身真实处境、找回积极心态的方式。比如，你可以提醒自己是被爱着的，然后举出具体例子来支撑这种新的思维方式。\n参与有益的活动\n参与有益的活动能帮助你保持活跃、走出抑郁。这可以包括一些按计划进行的心理调节活动。例如，你可以用积极的自我对话开启一天，再写下一件让你心怀感激的事来结束这一天。把这些活动纳入日常生活，有助于应对抑郁。\n练习感恩\n当你正与抑郁抗争时，心怀感激可能很难。然而，懂得感恩对心理健康有好处。专注于感恩能增强你的幸福感，并帮助你把对自己所拥有的东西和能力的认识转化为感恩的来源。\n学会接纳它\n有时人们觉得被迫贴上了一个自己并不想要的标签，但这个标签不必成为身份的一部分。拼命不肯承认它的存在只会带来更多痛苦。接纳抑郁能让你敞开心扉，去弄清是什么导致了抑郁。抑郁是身心在告诉你需要做出改变的一种方式，所以接纳它会促成这种改变。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:1",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+          "sourceText": "Focusing on gratitude can bring you an increased sense of well-being, and help you transform your understanding of belongings and abilities into sources of gratitude.",
+          "displayText": "Focusing on gratitude can bring you an increased sense of well-being, and help you transform your understanding of belongings and abilities into sources of gratitude.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:39"
+          ],
+          "translationZh": "专注于感恩能增强你的幸福感，并帮助你把对自己所拥有的东西和能力的认识转化为感恩的来源。",
+          "analysisZh": "主干是动名词短语作主语的 Focusing on gratitude can bring you ... and help you ...：主语是“专注于感恩”，can 后面并列两个谓语 bring 和 help。bring you an increased sense of well-being 是“给你带来更强的幸福感”；help you transform A into B 是“帮你把 A 变成 B”，A 是 your understanding of belongings and abilities（你对所拥有的东西和能力的认识），B 是 sources of gratitude（感恩的来源）。这句正是第 39 题答案里 mental health benefits 的具体内容。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "Focusing on gratitude"
+            },
+            {
+              "start": 26,
+              "end": 68,
+              "quote": "bring you an increased sense of well-being"
+            },
+            {
+              "start": 83,
+              "end": 165,
+              "quote": "transform your understanding of belongings and abilities into sources of gratitude"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:2",
+          "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11",
+          "sourceText": "Depression is one of the mind and body’s ways of saying you need to make a change, so accepting it will help facilitate that change.",
+          "displayText": "Depression is one of the mind and body’s ways of saying you need to make a change, so accepting it will help facilitate that change.",
+          "relatedQuestionIds": [
+            "question:paper-mock-anhui-jiangnan10-2025-m1:40"
+          ],
+          "translationZh": "抑郁是身心在告诉你需要做出改变的一种方式，所以接纳它会促成这种改变。",
+          "analysisZh": "这是 so 连接的两个分句：前一句主干是 Depression is one of ... ways（抑郁是……方式之一），of saying you need to make a change 修饰 ways，说明是“告诉你需要改变”的方式，saying 后面省略了 that；后一句主干是 accepting it will help facilitate that change，动名词 accepting it 作主语，help 后直接跟动词原形 facilitate。so 表示因果：既然抑郁是在提醒你要改变，接纳它就能推动改变。这正是第 40 题小标题“学会接纳它”的理由。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 45,
+              "quote": "Depression is one of the mind and body’s ways"
+            },
+            {
+              "start": 83,
+              "end": 85,
+              "quote": "so"
+            },
+            {
+              "start": 86,
+              "end": 131,
+              "quote": "accepting it will help facilitate that change"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "总分结构。首段点明应对抑郁的方法能帮人过上更充实的生活；后面五个小标题各介绍一种方法，每段先给做法，再说明它为什么有用或怎样去做。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "paragraphIds": [
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:1"
+            ],
+            "summary": "引出话题：懂得应对抑郁很重要，下面介绍几种应对方法。"
+          },
+          {
+            "unitId": "unit-talk",
+            "heading": "Talk to someone",
+            "paragraphIds": [
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:2",
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3"
+            ],
+            "summary": "找人倾诉：方法简单却有效，保持联系让人知道自己并不孤单。"
+          },
+          {
+            "unitId": "unit-thoughts",
+            "heading": "Explore and challenge your thoughts",
+            "paragraphIds": [
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:4",
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5"
+            ],
+            "summary": "质疑消极想法：不是自我安慰，而是正视现实、找回积极心态，并举例说明。"
+          },
+          {
+            "unitId": "unit-activities",
+            "heading": "Engage in rewarding activities",
+            "paragraphIds": [
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:6",
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7"
+            ],
+            "summary": "参与有益活动：举出早晚两件小事，建议把它们变成日常习惯。"
+          },
+          {
+            "unitId": "unit-gratitude",
+            "heading": "Practice gratitude",
+            "paragraphIds": [
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:8",
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9"
+            ],
+            "summary": "练习感恩：抑郁时难以感恩，但感恩能增强幸福感。"
+          },
+          {
+            "unitId": "unit-accept",
+            "paragraphIds": [
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:10",
+              "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11"
+            ],
+            "summary": "学会接纳：抗拒只会更痛苦，接纳抑郁才能找到原因、做出改变。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 40,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项借了第 40 题下一段开头的 \"label\"，又是动词开头，像小标题。但下一段说 \"Struggling to accept its existence only brings more pain\"，主张接纳，而不是不去理会。",
+          "quotes": [
+            "label",
+            "Struggling to accept its existence only brings more pain"
+          ]
+        },
+        "D": {
+          "target": 38,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项的 \"Engaging\" 复现第 38 题所在段开头的 \"Engaging in rewarding activities\"，像段尾总结。但空前举的例子是 \"positive self-talk\" 和写下感激的事，都不是体育锻炼（physical exercise）。",
+          "quotes": [
+            "Engaging",
+            "Engaging in rewarding activities",
+            "positive self-talk",
+            "physical exercise"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 49,
+              "quote": "懂得如何应对抑郁，能帮助你过上更充实、更有成效的生活。下面这些应对方法有助于缓解这种心理健康问题。"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:2"
+              ],
+              "start": 50,
+              "end": 54,
+              "quote": "找人倾诉"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3"
+              ],
+              "start": 55,
+              "end": 129,
+              "quote": "这听起来也许很简单，但很有效。与他人保持联系对控制抑郁大有帮助。这会提醒你：你并不孤单。研究表明，增加社交联系、感到与他人相连，有助于减轻抑郁症状。"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:4"
+              ],
+              "start": 130,
+              "end": 139,
+              "quote": "审视并质疑你的想法"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5"
+              ],
+              "start": 140,
+              "end": 257,
+              "quote": "抑郁可能通过大量消极想法表现出来，但凭借方法和努力，你可以学会质疑这些想法。这并不意味着只是告诉自己一切都好。相反，这是一种正视自身真实处境、找回积极心态的方式。比如，你可以提醒自己是被爱着的，然后举出具体例子来支撑这种新的思维方式。"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:6",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:6"
+              ],
+              "start": 258,
+              "end": 265,
+              "quote": "参与有益的活动"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7"
+              ],
+              "start": 266,
+              "end": 366,
+              "quote": "参与有益的活动能帮助你保持活跃、走出抑郁。这可以包括一些按计划进行的心理调节活动。例如，你可以用积极的自我对话开启一天，再写下一件让你心怀感激的事来结束这一天。把这些活动纳入日常生活，有助于应对抑郁。"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:8",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:8"
+              ],
+              "start": 367,
+              "end": 371,
+              "quote": "练习感恩"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9"
+              ],
+              "start": 372,
+              "end": 450,
+              "quote": "当你正与抑郁抗争时，心怀感激可能很难。然而，懂得感恩对心理健康有好处。专注于感恩能增强你的幸福感，并帮助你把对自己所拥有的东西和能力的认识转化为感恩的来源。"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:10",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:10"
+              ],
+              "start": 451,
+              "end": 456,
+              "quote": "学会接纳它"
+            },
+            {
+              "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11",
+              "sourceParagraphIds": [
+                "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11"
+              ],
+              "start": 457,
+              "end": 573,
+              "quote": "有时人们觉得被迫贴上了一个自己并不想要的标签，但这个标签不必成为身份的一部分。拼命不肯承认它的存在只会带来更多痛苦。接纳抑郁能让你敞开心扉，去弄清是什么导致了抑郁。抑郁是身心在告诉你需要做出改变的一种方式，所以接纳它会促成这种改变。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3",
+            "text": "It may sound simple, but it’s effective. Staying connected can go a long way toward managing your depression. This reminds you that you’re not alone. According to research, increased social connection and feeling connected can help decrease depressive symptoms."
+          },
+          {
+            "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5",
+            "text": "Depression can surface through a lot of negative thoughts, but you can learn how to challenge them with know-how and effort. This doesn’t mean just telling yourself everything’s fine. Rather, it’s a way to look at your real situation and restore your positivity. For instance, you might remind yourself that you are loved and then give specific examples to support this new thought pattern."
+          },
+          {
+            "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7",
+            "text": "Engaging in rewarding activities can help you stay active and out of depression. This can involve scheduled activities of mental health strategies. For example, you can start your day with positive self-talk and end it by writing down something you are grateful for. Including these activities into your routine can help with depression."
+          },
+          {
+            "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+            "text": "When you’re struggling with depression, it can be difficult to be grateful. However, being appreciative has mental health benefits. Focusing on gratitude can bring you an increased sense of well-being, and help you transform your understanding of belongings and abilities into sources of gratitude."
+          },
+          {
+            "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:10",
+            "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:10",
+            "text": "Learn to accept it"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:paper-mock-anhui-jiangnan10-2025-m1:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:2",
+                "start": 0,
+                "end": 15,
+                "quote": "Talk to someone"
+              },
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3",
+                "start": 8,
+                "end": 75,
+                "quote": "Staying connected can go a long way toward managing your depression"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:2",
+                "start": 0,
+                "end": 4,
+                "quote": "找人倾诉"
+              },
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3",
+                "start": 15,
+                "end": 31,
+                "quote": "与他人保持联系对控制抑郁大有帮助"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:paper-mock-anhui-jiangnan10-2025-m1:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5",
+                "start": 133,
+                "end": 210,
+                "quote": "Rather, it’s a way to look at your real situation and restore your positivity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5",
+                "start": 55,
+                "end": 80,
+                "quote": "相反，这是一种正视自身真实处境、找回积极心态的方式"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:paper-mock-anhui-jiangnan10-2025-m1:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7",
+                "start": 148,
+                "end": 265,
+                "quote": "For example, you can start your day with positive self-talk and end it by writing down something you are grateful for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7",
+                "start": 41,
+                "end": 79,
+                "quote": "例如，你可以用积极的自我对话开启一天，再写下一件让你心怀感激的事来结束这一天"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:paper-mock-anhui-jiangnan10-2025-m1:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+                "start": 40,
+                "end": 74,
+                "quote": "it can be difficult to be grateful"
+              },
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+                "start": 84,
+                "end": 152,
+                "quote": "Focusing on gratitude can bring you an increased sense of well-being"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+                "start": 10,
+                "end": 18,
+                "quote": "心怀感激可能很难"
+              },
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+                "start": 35,
+                "end": 48,
+                "quote": "专注于感恩能增强你的幸福感"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:paper-mock-anhui-jiangnan10-2025-m1:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11",
+                "start": 111,
+                "end": 167,
+                "quote": "Struggling to accept its existence only brings more pain"
+              },
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11",
+                "start": 169,
+                "end": 254,
+                "quote": "Accepting depression helps you become open to figuring out what led to the depression"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11",
+                "start": 39,
+                "end": 57,
+                "quote": "拼命不肯承认它的存在只会带来更多痛苦"
+              },
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11",
+                "start": 58,
+                "end": 81,
+                "quote": "接纳抑郁能让你敞开心扉，去弄清是什么导致了抑郁"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:paper-mock-anhui-jiangnan10-2025-m1:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:36"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3",
+                "start": 0,
+                "end": 39,
+                "quote": "It may sound simple, but it’s effective"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3",
+                "start": 0,
+                "end": 15,
+                "quote": "这听起来也许很简单，但很有效。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:paper-mock-anhui-jiangnan10-2025-m1:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:37"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5",
+                "start": 125,
+                "end": 182,
+                "quote": "This doesn’t mean just telling yourself everything’s fine"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5",
+                "start": 38,
+                "end": 55,
+                "quote": "这并不意味着只是告诉自己一切都好。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:paper-mock-anhui-jiangnan10-2025-m1:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:38"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7",
+                "start": 267,
+                "end": 336,
+                "quote": "Including these activities into your routine can help with depression"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7",
+                "start": 80,
+                "end": 100,
+                "quote": "把这些活动纳入日常生活，有助于应对抑郁。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:paper-mock-anhui-jiangnan10-2025-m1:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:39"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+                "start": 76,
+                "end": 130,
+                "quote": "However, being appreciative has mental health benefits"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+                "start": 19,
+                "end": 35,
+                "quote": "然而，懂得感恩对心理健康有好处。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:paper-mock-anhui-jiangnan10-2025-m1:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:40"
+            ],
+            "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:10",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:10",
+                "start": 0,
+                "end": 18,
+                "quote": "Learn to accept it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:10",
+                "start": 0,
+                "end": 5,
+                "quote": "学会接纳它"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:39"
+            ],
+            "selectedSentenceId": "sentence:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+                "start": 84,
+                "end": 249,
+                "quote": "Focusing on gratitude can bring you an increased sense of well-being, and help you transform your understanding of belongings and abilities into sources of gratitude"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+                "start": 35,
+                "end": 77,
+                "quote": "专注于感恩能增强你的幸福感，并帮助你把对自己所拥有的东西和能力的认识转化为感恩的来源"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-anhui-jiangnan10-2025-m1:40"
+            ],
+            "selectedSentenceId": "sentence:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11",
+                "start": 256,
+                "end": 387,
+                "quote": "Depression is one of the mind and body’s ways of saying you need to make a change, so accepting it will help facilitate that change"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-anhui-jiangnan10-2025-m1:seven-choices",
+                "paragraphId": "translation-paragraph:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:11",
+                "start": 82,
+                "end": 115,
+                "quote": "抑郁是身心在告诉你需要做出改变的一种方式，所以接纳它会促成这种改变"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-anhui-jiangnan10-2025-m1:36": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:36",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Talk to someone",
+        "Staying connected",
+        "go a long way",
+        "you’re not alone",
+        "social connection"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:3",
+        "headingAnchor": "Talk to someone",
+        "beforeQuote": "",
+        "afterQuote": "Staying connected can go a long way toward managing your depression"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "Talk to someone",
+          "relation": "It 指小标题说的找人倾诉这个办法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Talk to someone",
+          "signalSide": "context-before",
+          "targetText": "It",
+          "relation": "小标题给出做法，段首这句用 It 接着评价它。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "effective",
+          "signalSide": "option",
+          "targetText": "go a long way toward managing your depression",
+          "relation": "effective 先下判断，空后 go a long way 说明它怎样有效。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "go a long way",
+          "signalSide": "context-after",
+          "targetText": "effective",
+          "relation": "go a long way 意为大有帮助，具体落实选项说的有效。"
+        }
+      ],
+      "lock": [
+        "Talk to someone",
+        "effective",
+        "go a long way"
+      ],
+      "find": {
+        "text": "先看小标题 \"Talk to someone\"：段首要先评价这个办法，\"It may sound simple\" 的 It 就指找人倾诉，空后 \"go a long way\" 接住 effective。",
+        "quotes": [
+          "Talk to someone",
+          "It may sound simple",
+          "go a long way"
+        ]
+      },
+      "explain": "小标题只给出做法，这句先打消“太简单、没用”的顾虑；空后再用保持联系的好处和研究结果说明它为什么有效。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Talk to someone",
+            "optionSide": "It may sound simple",
+            "relation": "找人倾诉听上去太普通，选项先承认这一点。"
+          },
+          {
+            "contextSide": "go a long way toward managing your depression",
+            "optionSide": "but it’s effective",
+            "relation": "空后说明大有帮助，对应选项的“有效”。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "小标题只给出做法，这句先打消“太简单、没用”的顾虑；空后再用保持联系的好处和研究结果说明它为什么有效。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:37": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "negative thoughts",
+        "challenge them",
+        "look at your real situation",
+        "restore your positivity"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:5",
+        "beforeQuote": "but you can learn how to challenge them with know-how and effort",
+        "afterQuote": "Rather, it’s a way to look at your real situation and restore your positivity"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Rather",
+          "signalSide": "context-after",
+          "targetText": "doesn’t mean",
+          "relation": "Rather 意为“而是”，前面要先否定一种理解。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "doesn’t mean",
+          "signalSide": "option",
+          "targetText": "Rather",
+          "relation": "选项先否定“只是安慰自己”，空后 Rather 再给出正确理解。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "option",
+          "targetText": "challenge them",
+          "relation": "This 指空前说的质疑消极想法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "challenge them",
+          "signalSide": "context-before",
+          "targetText": "This",
+          "relation": "质疑消极想法这件事，由选项的 This 接过来解释。"
+        }
+      ],
+      "lock": [
+        "doesn’t mean",
+        "Rather"
+      ],
+      "find": {
+        "text": "先看空后 \"Rather\"：它前面要先否定一种说法。七个选项里只有 \"This doesn’t mean\" 是否定句，Rather 再给出正确的理解。",
+        "quotes": [
+          "Rather",
+          "This doesn’t mean"
+        ]
+      },
+      "explain": "空前说要学会质疑消极想法，这句先排除一种误解：质疑不是自我安慰；空后再说明它其实是正视现实、找回积极心态。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "challenge them",
+            "optionSide": "This",
+            "relation": "This 承接质疑消极想法这件事。"
+          },
+          {
+            "contextSide": "Rather, it’s a way to look at your real situation",
+            "optionSide": "doesn’t mean just telling yourself everything’s fine",
+            "relation": "先说不是什么，再说是什么。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "空前说要学会质疑消极想法，这句先排除一种误解：质疑不是自我安慰；空后再说明它其实是正视现实、找回积极心态。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:38": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:38",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "rewarding activities",
+        "scheduled activities",
+        "start your day",
+        "end it",
+        "out of depression"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:7",
+        "beforeQuote": "This can involve scheduled activities of mental health strategies. For example, you can start your day with positive self-talk and end it by writing down something you are grateful for",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these activities",
+          "signalSide": "option",
+          "targetText": "positive self-talk / writing down something you are grateful for",
+          "relation": "these activities 回指空前早晚各做的两件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "scheduled activities",
+          "signalSide": "context-before",
+          "targetText": "these activities",
+          "relation": "空前先说按计划进行的活动，选项用 these activities 收回。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "routine",
+          "signalSide": "option",
+          "targetText": "start your day / end it",
+          "relation": "routine 概括空前一天开头和结尾的固定安排。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "start your day",
+          "signalSide": "context-before",
+          "targetText": "routine",
+          "relation": "一天的开头和结尾都安排了事，正是日常习惯。"
+        }
+      ],
+      "lock": [
+        "these activities",
+        "scheduled activities",
+        "routine"
+      ],
+      "find": {
+        "text": "空在段尾，空前举了 \"start your day\" 和 \"end it\" 两件事，\"these activities\" 回指它们，\"routine\" 对应每天早晚的安排。",
+        "quotes": [
+          "start your day",
+          "end it",
+          "these activities",
+          "routine"
+        ]
+      },
+      "explain": "段首说有益活动能帮人走出抑郁，中间举了早晚各一件小事，这句把例子收回到建议上：把它们变成每天的习惯才有用。",
+      "distractors": [
+        {
+          "label": "F",
+          "text": "空前 \"grateful\" 和 F 的 \"appreciative\" 意思相近，但 \"However\" 要求前面有相反的意思，空前一直在举正面例子。",
+          "quotes": [
+            "grateful",
+            "appreciative",
+            "However"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "scheduled activities of mental health strategies",
+            "optionSide": "these activities",
+            "relation": "选项用 these activities 指代前面说的计划性活动。"
+          },
+          {
+            "contextSide": "start your day ... end it",
+            "optionSide": "into your routine",
+            "relation": "早晚固定做的事，就是日常习惯。"
+          },
+          {
+            "contextSide": "stay active and out of depression",
+            "optionSide": "can help with depression",
+            "relation": "段尾回应段首说的走出抑郁。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "段首说有益活动能帮人走出抑郁，中间举了早晚各一件小事，这句把例子收回到建议上：把它们变成每天的习惯才有用。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "空前 \"grateful\" 和 F 的 \"appreciative\" 意思相近，但 \"However\" 要求前面有相反的意思，空前一直在举正面例子。"
+        },
+        {
+          "optionLabel": "D",
+          "reason": "选项的 \"Engaging\" 复现第 38 题所在段开头的 \"Engaging in rewarding activities\"，像段尾总结。但空前举的例子是 \"positive self-talk\" 和写下感激的事，都不是体育锻炼（physical exercise）。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:39": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "difficult to be grateful",
+        "Focusing on gratitude",
+        "increased sense of well-being",
+        "sources of gratitude"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:9",
+        "beforeQuote": "When you’re struggling with depression, it can be difficult to be grateful",
+        "afterQuote": "Focusing on gratitude can bring you an increased sense of well-being"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "option",
+          "targetText": "difficult to be grateful",
+          "relation": "However 把空前的“难以感恩”转到感恩的好处上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "difficult to be grateful",
+          "signalSide": "context-before",
+          "targetText": "However",
+          "relation": "空前先说难处，选项用 However 转折。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "mental health benefits",
+          "signalSide": "option",
+          "targetText": "increased sense of well-being",
+          "relation": "选项先说有好处，空后具体说是更强的幸福感。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "well-being",
+          "signalSide": "context-after",
+          "targetText": "mental health benefits",
+          "relation": "well-being 是 mental health benefits 的具体表现。"
+        }
+      ],
+      "lock": [
+        "However",
+        "difficult to be grateful",
+        "well-being"
+      ],
+      "find": {
+        "text": "空前说 \"difficult to be grateful\"，\"However\" 正好转过来；空后的 \"well-being\" 又具体说明了 \"mental health benefits\"。",
+        "quotes": [
+          "difficult to be grateful",
+          "However",
+          "well-being",
+          "mental health benefits"
+        ]
+      },
+      "explain": "空前承认抑郁时很难感恩，这句马上转回感恩的价值；空后再具体说好处在哪：增强幸福感，把自己拥有的东西变成感恩的来源。",
+      "distractors": [
+        {
+          "label": "C",
+          "text": "C 的 \"but it’s effective\" 像在说好处，但 \"It may sound simple\" 和空前的 \"difficult\" 正好相反。",
+          "quotes": [
+            "but it’s effective",
+            "It may sound simple",
+            "difficult"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "it can be difficult to be grateful",
+            "optionSide": "However, being appreciative",
+            "relation": "先说难，再用 However 转到感恩上。"
+          },
+          {
+            "contextSide": "an increased sense of well-being",
+            "optionSide": "mental health benefits",
+            "relation": "空后的幸福感就是选项说的心理健康益处。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前承认抑郁时很难感恩，这句马上转回感恩的价值；空后再具体说好处在哪：增强幸福感，把自己拥有的东西变成感恩的来源。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 的 \"but it’s effective\" 像在说好处，但 \"It may sound simple\" 和空前的 \"difficult\" 正好相反。"
+        }
+      ]
+    },
+    "question:paper-mock-anhui-jiangnan10-2025-m1:40": {
+      "blankId": "blank:paper-mock-anhui-jiangnan10-2025-m1:40",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Struggling to accept its existence",
+        "Accepting depression",
+        "accepting it",
+        "make a change"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-anhui-jiangnan10-2025-m1:seven-choices:10",
+        "beforeQuote": "",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "accept it",
+          "signalSide": "option",
+          "targetText": "Accepting depression",
+          "relation": "小标题的 accept it 概括下一段反复说的接纳抑郁。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Accepting depression",
+          "signalSide": "context-after",
+          "targetText": "accept it",
+          "relation": "下一段直接说接纳抑郁的好处，标题要说的就是接纳。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "accept its existence",
+          "signalSide": "context-after",
+          "targetText": "Learn to accept it",
+          "relation": "下一段先说抗拒接受只会更痛苦，从反面说明要接纳。"
+        }
+      ],
+      "lock": [
+        "Learn to accept",
+        "Accepting depression"
+      ],
+      "find": {
+        "text": "小标题空，先跳过，做完后面几段再回来。下一段说 \"Accepting depression helps you\"，B 的 \"Learn to accept\" 正是这个意思，it 指抑郁。",
+        "quotes": [
+          "Accepting depression helps you",
+          "Learn to accept"
+        ]
+      },
+      "explain": "前面几个小标题都是动词开头的做法，这一条也是；下一段先说抗拒只会带来更多痛苦，再讲接纳的好处，标题一句话概括了这一段。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Accepting depression / accepting it",
+            "optionSide": "Learn to accept it",
+            "relation": "下一段反复出现接纳，小标题用 accept it 概括。"
+          },
+          {
+            "contextSide": "Talk to someone / Practice gratitude",
+            "optionSide": "Learn to accept it",
+            "relation": "和其他小标题一样，用动词开头给出做法。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "前面几个小标题都是动词开头的做法，这一条也是；下一段先说抗拒只会带来更多痛苦，再讲接纳的好处，标题一句话概括了这一段。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "选项借了第 40 题下一段开头的 \"label\"，又是动词开头，像小标题。但下一段说 \"Struggling to accept its existence only brings more pain\"，主张接纳，而不是不去理会。"
+        }
+      ]
+    }
+  }
+}
