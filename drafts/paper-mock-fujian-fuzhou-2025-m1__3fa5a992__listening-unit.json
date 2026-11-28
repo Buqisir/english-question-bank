@@ -1,0 +1,1069 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-fujian-fuzhou-2025-m1",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: I’m feeling so burnt out from work. I need something fun.\nM: How about we hit the gym together tonight, and then watch a movie before heading home?\nW: The first part sounds good.",
+      "translationZh": "女：我工作累得精疲力尽，需要点好玩的事。\n男：要不今晚我们一起去健身房，然后回家前再看场电影？\n女：前半部分听起来不错。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "女士抱怨工作太累想放松，男士提议今晚的安排，两人商量下班后做什么。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我工作累得精疲力尽。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "我需要点好玩的事。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "要不今晚我们一起去健身房，然后回家前再看场电影？"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "前半部分听起来不错。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: Why are there so many insects? It’s noisy.\nW: And it’s so hot. I told you, camping is like this.\nM: Let’s drive into town and find a hotel to get away from the noise. It might be expensive, but at least we can sleep in peace tonight.\nW: Good idea.",
+      "translationZh": "男：怎么这么多虫子？太吵了。\n女：而且还这么热。我跟你说过，露营就是这样。\n男：我们开车进城找家旅馆吧，躲开这些噪音。可能会贵一些，但至少今晚能睡个安稳觉。\n女：好主意。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "一对男女在野外露营，抱怨虫多、吵闹又炎热，男士提出换个地方过夜。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "怎么这么多虫子？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "太吵了。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "而且还这么热。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "我跟你说过，露营就是这样。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "我们开车进城找家旅馆吧，躲开这些噪音。"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "可能会贵一些，但至少今晚能睡个安稳觉。"
+        },
+        {
+          "id": "listening-text-2:7",
+          "zh": "好主意。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: My school uniform is too tight around the ankles. Do you know where I can buy a new one?\nW: Sunshine Uniforms at Maple Street. It offers both online and in-store shopping.\nBut why not just get your uniform fixed to fit better?\nM: Sounds great. I can save some money that way.",
+      "translationZh": "男：我的校服脚踝那里太紧了。你知道哪里能买到新的吗？\n女：枫树街的阳光校服店。那家店网上和实体店都能买。不过，为什么不把你的校服改一改，让它更合身呢？\n男：听起来不错。那样我还能省点钱。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男生的校服裤脚太紧，向女士打听哪里能买新校服，女士给出建议。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "我的校服脚踝那里太紧了。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "你知道哪里能买到新的吗？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "枫树街的阳光校服店。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "那家店网上和实体店都能买。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "不过，为什么不把你的校服改一改，让它更合身呢？"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "听起来不错。"
+        },
+        {
+          "id": "listening-text-3:7",
+          "zh": "那样我还能省点钱。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Jimmy, are you watching a bird show on TV?\nM: No, I’m doing my homework. Maybe it’s the birds singing by the window?\nW: Oh, it’s my phone ringing. Who changed my phone tone?\nM: It must have been Cindy.",
+      "translationZh": "女：吉米，你在看电视上的鸟类节目吗？\n男：没有，我在写作业。也许是窗边的鸟在叫？\n女：哦，是我的手机在响。谁改了我的手机铃声？\n男：肯定是辛迪。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "女士在家听到像鸟叫的声音，问正在写作业的吉米，两人找声音的来源。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "吉米，你在看电视上的鸟类节目吗？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "没有，我在写作业。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "也许是窗边的鸟在叫？"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "哦，是我的手机在响。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "谁改了我的手机铃声？"
+        },
+        {
+          "id": "listening-text-4:6",
+          "zh": "肯定是辛迪。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: Tom, you look under the weather. What happened?\nM: I trusted the weather forecast and didn’t bring an umbrella, so I ended up getting wet on the way home. Then, I stayed up late studying for an exam last night.",
+      "translationZh": "女：汤姆，你看起来不太舒服。怎么了？\n男：我信了天气预报，没带伞，结果在回家路上淋湿了。后来昨晚我又为了准备考试熬夜学习。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "女士问汤姆怎么了，汤姆讲了自己回家路上淋雨和昨晚熬夜复习的经过。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "汤姆，你看起来不太舒服。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "怎么了？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我信了天气预报，没带伞，结果在回家路上淋湿了。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "后来昨晚我又为了准备考试熬夜学习。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Hello! How can I help you?\nW: Hi, I live right below you. I’ve been knocking for a while. Were you busy with something?\nM: [6] Sorry about that, I was in the kitchen and my kid was playing the piano, so I didn’t hear you. And, what brings you upstairs?\nW: [7] It looks like there might be a leak on your floor. Water is coming in onto the ceiling of my study and has even damaged some of my paintings.\nM: Oh no, let’s go downstairs and take a look together.",
+      "translationZh": "男：你好！有什么事吗？\n女：你好，我就住在你楼下。我敲了好一会儿门了。你刚才在忙什么吗？\n男：抱歉，我刚才在厨房，孩子又在弹钢琴，所以没听见。那么，你上楼来有什么事？\n女：看起来你家地板可能漏水了。水渗到了我书房的天花板上，甚至把我的几幅画都弄坏了。\n男：哎呀，我们一起下楼去看看吧。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "社区生活"
+      },
+      "summaryZh": "楼下的女邻居敲门找男士，男士解释没听见的原因，女士说明上楼的来意。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "你好！"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "有什么事吗？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "你好，我就住在你楼下。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "我敲了好一会儿门了。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "你刚才在忙什么吗？"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "抱歉，我刚才在厨房，孩子又在弹钢琴，所以没听见。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "那么，你上楼来有什么事？"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "看起来你家地板可能漏水了。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "水渗到了我书房的天花板上，甚至把我的几幅画都弄坏了。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "哎呀，我们一起下楼去看看吧。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "M: Have you heard about the new urban park project downtown?\nW: [8][9] Yes, I read that they’re planning to transform an old railway line into a green space. [8]② It’s on the front page of Greenville Daily.\nM: It could provide a great play area for the city. But do you think it’s worth the high cost?\nW: Honestly, I think putting money into green spaces is vital for improving city life. It’s good for the environment and the community.\nM: I agree, but with our city’s tight budget, might there be a better use for the funds?\nW: Possibly, but I believe that the benefits of more green spaces, like cleaner air and a happier community, outweigh the costs in the long run.\nM: [10]Good point. I’m looking to feature the project in my next TV program.\nW: [10]Great! Let me know when it airs.",
+      "translationZh": "男：你听说市中心新的城市公园项目了吗？\n女：听说了，我读到他们计划把一条旧铁路线改造成一片绿地。这条消息登在《格林维尔日报》的头版上。\n男：它能为城市提供一个很棒的游玩场所。但你觉得它值得这么高的花费吗？\n女：说实话，我认为投资绿地对改善城市生活至关重要。这对环境和社区都有好处。\n男：我同意，但我们城市的预算这么紧，这笔钱会不会有更好的用处？\n女：也许吧，但我相信从长远看，更多绿地带来的好处，比如更清新的空气和更快乐的社区，会超过它的成本。\n男：说得好。我打算在我的下一期电视节目里报道这个项目。\n女：太好了！节目播出时告诉我一声。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "环境保护",
+        "subtopic": "社会发展与环境的关系"
+      },
+      "summaryZh": "男女二人谈论市中心新的城市公园项目，讨论它是否值得高昂的花费。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "你听说市中心新的城市公园项目了吗？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "听说了，我读到他们计划把一条旧铁路线改造成一片绿地。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "这条消息登在《格林维尔日报》的头版上。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "它能为城市提供一个很棒的游玩场所。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "但你觉得它值得这么高的花费吗？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "说实话，我认为投资绿地对改善城市生活至关重要。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "这对环境和社区都有好处。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "我同意，但我们城市的预算这么紧，这笔钱会不会有更好的用处？"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "也许吧，但我相信从长远看，更多绿地带来的好处，比如更清新的空气和更快乐的社区，会超过它的成本。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "说得好。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "我打算在我的下一期电视节目里报道这个项目。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "太好了！"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "节目播出时告诉我一声。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Hello. How may I help you?\nM: Hi, I left my shopping bag under the seat on the plane.\nW: Which flight was it?\nM: [11] MF302, a direct flight from Iceland to Denmark at 9:30 a.m.\nW: [12] Could you please provide your seat number?\nM: [12] 31D, it’s next to the walkway. Oh, wait, I actually placed the bag under the seat in front of me.\nW: Alright, that would be seat 30D. Let me check, sir.\nM: Okay.\nW: Your shopping bag is still on the plane. The crew has put it aside for you. However, the plane took off half an hour ago. [11] Since it’s a round trip between Iceland and Denmark, it will arrive back at the Denmark airport in six hours. [13] You can come back here to the service desk at 7 p.m. to pick it up.\nM: [13] That works for me. My flight to Norway is at 8:40 p.m. tonight, will I make it?\nW: It should be fine, sir.",
+      "translationZh": "女：您好。有什么可以帮您？\n男：你好，我把购物袋落在飞机座位下面了。\n女：是哪个航班？\n男：MF302，上午 9:30 从冰岛直飞丹麦的航班。\n女：请提供一下您的座位号好吗？\n男：31D，靠过道。哦，等一下，我其实把包放在了前排座位下面。\n女：好的，那就是 30D 座位。我查一下，先生。\n男：好的。\n女：您的购物袋还在飞机上，机组人员已经替您收好了。不过，飞机半小时前已经起飞了。因为这是冰岛和丹麦之间的往返航班，它六小时后会飞回丹麦机场。您可以晚上 7 点回到这里的服务台来取。\n男：这个时间我可以。我今晚 8:40 飞挪威，来得及吗？\n女：应该没问题，先生。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男乘客到机场服务台求助，说自己把购物袋落在了飞机上，工作人员帮他查找。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "您好。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "你好，我把购物袋落在飞机座位下面了。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "是哪个航班？"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "MF302，上午 9:30 从冰岛直飞丹麦的航班。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "请提供一下您的座位号好吗？"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "31D，靠过道。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "哦，等一下，我其实把包放在了前排座位下面。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "好的，那就是 30D 座位。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "我查一下，先生。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "您的购物袋还在飞机上。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "机组人员已经替您收好了。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "不过，飞机半小时前已经起飞了。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "因为这是冰岛和丹麦之间的往返航班，它六小时后会飞回丹麦机场。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "您可以晚上 7 点回到这里的服务台来取。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "这个时间我可以。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "我今晚 8:40 飞挪威，来得及吗？"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "应该没问题，先生。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "W: Hi, Jonny. [14] There’s a party at Hummingbird this Saturday to celebrate Anny’s promotion. Come join us?\nM: Sure. She’s being shifted to the headquarters in London, right?\nW: Yes, she’s leaving in October, probably a month after the promotion announcement goes official next Tuesday. Everyone should have received an email by then.\nM: That’s soon. I need to get her a gift.\nW: Me, too. Do you have any idea?\nM: [16] I’m thinking of buying a Scottish music CD so she can remember us when she listens to music from her hometown while relaxing.\nW: Nice one! I plan to give her a dinner set. I remembered she bought a bunch of spoons last time she was in Wales for training.\nM: [14] [17] Let’s head for Buchanan Street the day after tomorrow to pick something, then we can drive straight to Anny’s party afterward.\nW: [17] That works. Buchanan Street is too far to walk.\nM: Deal. I’ll pick you up at Springburn Road station at 2 p.m.",
+      "translationZh": "女：嗨，乔尼。这周六在蜂鸟餐厅有个派对，庆祝安妮升职。来参加吗？\n男：当然。她要调到伦敦总部去了，对吧？\n女：是的，她十月走，大概在下周二升职通知正式公布一个月以后。到那时大家应该都会收到邮件。\n男：真快啊。我得给她买份礼物。\n女：我也是。你有什么想法吗？\n男：我想买一张苏格兰音乐 CD，这样她放松时听着家乡的音乐，就能想起我们。\n女：好主意！我打算送她一套餐具。我记得她上次去威尔士培训时买了一大把勺子。\n男：我们后天去布坎南街挑礼物吧，买完就可以直接开车去安妮的派对。\n女：可以。布坎南街太远了，走不过去。\n男：一言为定。我下午 2 点到斯普林本路车站接你。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "女士邀请乔尼参加为安妮升职举办的派对，两人商量给安妮送什么礼物、何时去买。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "嗨，乔尼。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "这周六在蜂鸟餐厅有个派对，庆祝安妮升职。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "来参加吗？"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "她要调到伦敦总部去了，对吧？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "是的，她十月走，大概在下周二升职通知正式公布一个月以后。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "到那时大家应该都会收到邮件。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "真快啊。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "我得给她买份礼物。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我也是。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "你有什么想法吗？"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "我想买一张苏格兰音乐 CD，这样她放松时听着家乡的音乐，就能想起我们。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "好主意！"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "我打算送她一套餐具。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "我记得她上次去威尔士培训时买了一大把勺子。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "我们后天去布坎南街挑礼物吧，买完就可以直接开车去安妮的派对。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "可以。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "布坎南街太远了，走不过去。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "一言为定。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "我下午 2 点到斯普林本路车站接你。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "W: Many of us donate old clothes to charity shops, but did you know that most aren't sold? According to The Guardian, only about 20% are sold. The rest are packed and sent abroad, often to places like Ghana, either for resale or to be thrown away.\n[18] In Ghana’s capital, Accra, there is a huge secondhand clothing market called\nKantamanto. It’s one of the biggest markets in the world. [19] Every week, this market receives around 20 million pieces of used clothing. Unfortunately, about 40% of these clothes end up as waste. Workers either burn this waste or bury it underground, but since Accra is close to the sea and doesn’t have enough space for landfills, a lot of waste ends up on the beaches and in the water.\nThis is a big problem for the environment. Clothing waste harms sea life. Sea birds might mistake parts of old clothes for food, and fish often get caught in the old clothes, preventing them from growing properly. This also hurts the local economy. [20] Fishermen find it harder to catch fish because their nets often bring up clothes instead.",
+      "translationZh": "女：我们很多人会把旧衣服捐给慈善商店，但你知道吗，大部分其实卖不出去。据《卫报》报道，只有约 20% 能卖掉。其余的被打包运往国外，常常运到加纳这样的地方，要么再转卖，要么被扔掉。\n在加纳首都阿克拉，有一个巨大的二手服装市场，名叫坎塔曼托。它是世界上最大的市场之一。这个市场每周大约收到 2000 万件旧衣服。不幸的是，其中大约 40% 最后成了垃圾。工人们要么焚烧这些垃圾，要么把它们埋到地下，但由于阿克拉靠海，又没有足够的填埋场地，大量垃圾最终流到了海滩上和海水里。\n这对环境是个大问题。服装垃圾危害海洋生物。海鸟可能把旧衣服的碎片误当成食物，鱼也常被旧衣服缠住，无法正常生长。这也损害了当地经济。渔民越来越难捕到鱼，因为他们的渔网常常捞上来的是衣服。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "环境保护",
+        "subtopic": "人与环境"
+      },
+      "summaryZh": "一位女士讲述人们捐出的旧衣服被运往加纳之后的去向，以及服装垃圾带来的问题。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "我们很多人会把旧衣服捐给慈善商店，但你知道吗，大部分其实卖不出去。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "据《卫报》报道，只有约 20% 能卖掉。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "其余的被打包运往国外，常常运到加纳这样的地方，要么再转卖，要么被扔掉。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "在加纳首都阿克拉，有一个巨大的二手服装市场，名叫"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "坎塔曼托。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "它是世界上最大的市场之一。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "这个市场每周大约收到 2000 万件旧衣服。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "不幸的是，其中大约 40% 最后成了垃圾。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "工人们要么焚烧这些垃圾，要么把它们埋到地下，但由于阿克拉靠海，又没有足够的填埋场地，大量垃圾最终流到了海滩上和海水里。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "这对环境是个大问题。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "服装垃圾危害海洋生物。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "海鸟可能把旧衣服的碎片误当成食物，鱼也常被旧衣服缠住，无法正常生长。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "这也损害了当地经济。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "渔民越来越难捕到鱼，因为他们的渔网常常捞上来的是衣服。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士同意今天下班后做什么？",
+      "optionTranslationsZh": {
+        "A": "锻炼。",
+        "B": "在家做饭。",
+        "C": "看电影。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The first part sounds good."
+      },
+      "reasonZh": "男士提议先去健身房（hit the gym）再看电影，女士只认可前半部分（The first part），前半部分就是去健身，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的“回家”是男士说看完电影再回家（before heading home），讲的是回家的时间，不是在家做饭。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "看电影是男士提议的后半部分（watch a movie），女士只答应了前半部分，没答应看电影。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士为什么想住旅馆？",
+      "optionTranslationsZh": {
+        "A": "更凉快。",
+        "B": "更安静。",
+        "C": "更安全。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Let’s drive into town and find a hotel to get away from the noise."
+      },
+      "reasonZh": "男士说进城找旅馆是为了躲开噪音（get away from the noise），躲开吵闹就是图个安静，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "嫌热的是女士（it’s so hot），男士找旅馆说的理由是躲开噪音，没说旅馆凉快。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "男士说的睡个安稳觉（sleep in peace）指不受吵闹，承接的是前面的躲开噪音，不是说旅馆更安全。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士建议男士做什么？",
+      "optionTranslationsZh": {
+        "A": "去裁缝店。",
+        "B": "在网上买校服。",
+        "C": "去阳光校服店。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "But why not just get your uniform fixed to fit better?"
+      },
+      "reasonZh": "女士转而建议把校服改一改、改得更合身（get your uniform fixed），改衣服要找裁缝店，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "网上购物是女士介绍那家店时顺带说的（online and in-store shopping），她随即转开话头（But why not），建议改旧校服而不是买新的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "阳光校服店是女士回答哪里能买新校服时说的（Sunshine Uniforms），她接着建议不买新的，改一改旧的。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "声音是从哪里来的？",
+      "optionTranslationsZh": {
+        "A": "电视。",
+        "B": "一部手机。",
+        "C": "窗外的鸟。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Oh, it’s my phone ringing."
+      },
+      "reasonZh": "女士发现是自己的手机在响（my phone ringing），听着像鸟叫是因为铃声被人换了（changed my phone tone），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士起初以为吉米在看电视上的鸟类节目（a bird show on TV），吉米说他在写作业。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "窗边鸟叫只是吉米的猜测（Maybe it’s the birds），女士随后发现是手机在响。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "说话人主要在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "天气预报。",
+        "B": "备考。",
+        "C": "身体状况。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Tom, you look under the weather."
+      },
+      "reasonZh": "女士说汤姆看起来不舒服（under the weather），汤姆接着讲淋雨、熬夜，都是在说他为什么身体不适，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "天气预报是汤姆解释淋雨的原因（trusted the weather forecast），信了预报没带伞，只是一个细节。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "为考试熬夜（studying for an exam）是汤姆不舒服的另一个原因，两人并没有谈怎么备考。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士刚才在做什么？",
+      "optionTranslationsZh": {
+        "A": "做饭。",
+        "B": "弹钢琴。",
+        "C": "画画。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Sorry about that, I was in the kitchen and my kid was playing the piano, so I didn’t hear you."
+      },
+      "reasonZh": "男士说自己刚才在厨房（I was in the kitchen），在厨房里忙，可推知是在做饭，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "弹钢琴的是男士的孩子（my kid was playing the piano），不是男士本人。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士为什么上楼？",
+      "optionTranslationsZh": {
+        "A": "抱怨钢琴声。",
+        "B": "处理天花板漏水的问题。",
+        "C": "请教绘画。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It looks like there might be a leak on your floor."
+      },
+      "reasonZh": "女士说男士家地板可能漏水（a leak on your floor），下一句又说水渗到她书房天花板上（the ceiling of my study），她是为天花板漏水上楼的，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "钢琴是男士解释没听见敲门时提到的（my kid was playing the piano），女士开口说的是漏水。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "画是女士说被水弄坏的东西（damaged some of my paintings），她不是来请教画画的。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士可能是从哪里得知这个项目的？",
+      "optionTranslationsZh": {
+        "A": "电视上。",
+        "B": "男士那里。",
+        "C": "报纸上。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "It’s on the front page of Greenville Daily."
+      },
+      "reasonZh": "女士先说自己是读到的（I read），又说消息登在《格林维尔日报》头版（front page of Greenville Daily），日报就是报纸，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "电视节目是男士说自己下一期节目要报道这个项目（my next TV program），女士是读报得知的。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "关于这座城市，我们可以知道什么？",
+      "optionTranslationsZh": {
+        "A": "城市预算很充裕。",
+        "B": "一座新的城市公园已经建成。",
+        "C": "一条旧铁路线可能会被改造。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Yes, I read that they’re planning to transform an old railway line into a green space."
+      },
+      "reasonZh": "女士说他们计划把一条旧铁路线改成绿地（planning to transform an old railway line），还只是计划，所以说可能被改造，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男士说的是城市预算紧张（tight budget），和预算充裕正相反。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "新城市公园是一个项目（the new urban park project），女士说还在计划中（planning），并没有建成。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士可能是做什么的？",
+      "optionTranslationsZh": {
+        "A": "老师。",
+        "B": "导演。",
+        "C": "建筑师。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’m looking to feature the project in my next TV program."
+      },
+      "reasonZh": "男士说要在自己的下一期电视节目里报道这个项目（feature the project in my next TV program），做电视节目的人最可能是导演，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "公园项目容易让人想到建筑师，但男士谈的是项目值不值这么多钱（worth the high cost）和自己的节目，不是设计建造。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士现在在哪里？",
+      "optionTranslationsZh": {
+        "A": "在冰岛。",
+        "B": "在丹麦。",
+        "C": "在挪威。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Since it’s a round trip between Iceland and Denmark, it will arrive back at the Denmark airport in six hours."
+      },
+      "reasonZh": "男士坐的是冰岛飞丹麦的航班，工作人员说飞机会飞回丹麦机场（arrive back at the Denmark airport），让他回这里取包（come back here），可见他在丹麦，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "冰岛是男士所乘航班的出发地（from Iceland to Denmark），他已经飞到了丹麦。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "挪威是男士今晚 8:40 要飞去的地方（My flight to Norway），他还没出发。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士的座位号是多少？",
+      "optionTranslationsZh": {
+        "A": "30D。",
+        "B": "31B。",
+        "C": "31D。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "31D, it’s next to the walkway."
+      },
+      "reasonZh": "工作人员问座位号，男士直接报出 31D，选项沿用，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "30D 是男士前排的座位（seat 30D），他把包放在了前排座位下，自己坐的是 31D。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "31 对得上排号，但男士报的是 31D，座位字母是 D，不是 B。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士将要做什么？",
+      "optionTranslationsZh": {
+        "A": "改签航班。",
+        "B": "在机场等候。",
+        "C": "晚些时候回到机场。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "You can come back here to the service desk at 7 p.m. to pick it up."
+      },
+      "reasonZh": "工作人员让男士晚上 7 点回服务台取包（come back here … at 7 p.m.），男士答应了（That works for me），也就是晚些时候再回机场，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男士提到今晚 8:40 飞挪威的航班（My flight to Norway），只是问来不来得及，并不改签。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "录音里的“等一下”（Oh, wait）是男士改口时说的，工作人员让他 7 点再回来，不是让他一直在机场等。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "这段对话发生在哪天？",
+      "optionTranslationsZh": {
+        "A": "星期二。",
+        "B": "星期三。",
+        "C": "星期四。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Let’s head for Buchanan Street the day after tomorrow to pick something, then we can drive straight to Anny’s party afterward."
+      },
+      "reasonZh": "派对在本周六（this Saturday），男士说后天去买礼物、买完直接去派对（the day after tomorrow … Anny’s party），后天是周六，周六往前推两天是周四，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "周二是升职通知正式公布的日子（next Tuesday），不是两人谈话的这一天。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "说话人之间可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "同事。",
+        "B": "老同学。",
+        "C": "夫妻。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "She’s being shifted to the headquarters in London, right?"
+      },
+      "reasonZh": "男士知道安妮要调去伦敦总部（the headquarters），女士又说升职通知公布后大家都会收到邮件（received an email），两人在同一单位，应是同事，选 A。"
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "安妮的出生地是哪里？",
+      "optionTranslationsZh": {
+        "A": "威尔士。",
+        "B": "苏格兰。",
+        "C": "英格兰。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’m thinking of buying a Scottish music CD so she can remember us when she listens to music from her hometown while relaxing."
+      },
+      "reasonZh": "男士要送苏格兰音乐唱片，让她听听家乡的音乐（Scottish music … music from her hometown），可见安妮的家乡在苏格兰，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "威尔士是安妮上次去培训的地方（in Wales for training），不是她的家乡。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "伦敦是安妮要调去的总部所在地（the headquarters in London），说的是她将来工作的地方。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "说话人将怎样去布坎南街？",
+      "optionTranslationsZh": {
+        "A": "开车。",
+        "B": "步行。",
+        "C": "坐公交车。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Let’s head for Buchanan Street the day after tomorrow to pick something, then we can drive straight to Anny’s party afterward."
+      },
+      "reasonZh": "男士说买完礼物直接开车去派对（drive straight），女士也说布坎南街太远走不过去，男士还要到车站接她（pick you up），所以是开车去，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士说布坎南街太远，走不过去（too far to walk），正好排除了步行。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "斯普林本路车站是男士开车去接女士的地方（pick you up at Springburn Road station），不是坐公交。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "关于坎塔曼托，我们可以知道什么？",
+      "optionTranslationsZh": {
+        "A": "它是加纳的首都。",
+        "B": "它是一个二手市场。",
+        "C": "它是世界上最大的城市。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "In Ghana’s capital, Accra, there is a huge secondhand clothing market called"
+      },
+      "reasonZh": "录音说加纳首都阿克拉有个巨大的二手服装市场（secondhand clothing market），市场名字就是紧接着说出的坎塔曼托（Kantamanto），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "加纳首都是阿克拉（Ghana’s capital, Accra），坎塔曼托是阿克拉城里的一个市场。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音说它是世界上最大的市场之一（one of the biggest markets），说的是市场，不是城市。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "坎塔曼托每周有多少捐赠的衣服成为垃圾？",
+      "optionTranslationsZh": {
+        "A": "约 800 万件。",
+        "B": "约 2000 万件。",
+        "C": "约 4000 万件。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Unfortunately, about 40% of these clothes end up as waste."
+      },
+      "reasonZh": "上一句说市场每周收到约 2000 万件旧衣（20 million），这里说约 40% 成了垃圾（40%），2000 万 × 40% = 800 万件，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "2000 万是市场每周收到的旧衣总数（receives around 20 million），不是成为垃圾的数量。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "40 是成为垃圾的比例（about 40%），不是 4000 万件。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "服装垃圾对阿克拉的捕鱼有什么影响？",
+      "optionTranslationsZh": {
+        "A": "鱼常把旧衣服的碎片误当成食物。",
+        "B": "海鸟常被旧衣服缠住。",
+        "C": "渔网常捞到旧衣服。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Fishermen find it harder to catch fish because their nets often bring up clothes instead."
+      },
+      "reasonZh": "渔民的网常常捞上来的是衣服（nets often bring up clothes），“捞到旧衣服”就是这句话换了个说法，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "把旧衣碎片误当食物的是海鸟（Sea birds might mistake），选项换成了鱼。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "被旧衣服缠住的是鱼（fish often get caught），选项换成了海鸟。"
+        }
+      ]
+    }
+  }
+}

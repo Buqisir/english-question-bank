@@ -1,0 +1,138 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Mike,\n\nI’m writing to share with you a class of labour education. Our school offers one such class every week, and last Friday we learned to make dumplings in the school canteen.\n\nFirst, the cooks showed us how to mix pork and cabbage into the filling and fold the wrappers. My first few dumplings looked like broken boats, which made the whole group laugh. With the cooks’ patient help, however, my later ones stood up neatly. Finally, we boiled them and shared them with our teachers.\n\nTasting my own dumplings, I felt really proud. I also realized how much work goes into the meals we often take for granted. When you visit China, I’d love to teach you how to make them!\n\nBest regards,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给外国朋友的电子邮件，沿用题面给出的称呼、首句、结束语和署名",
+        "personTense": "第一人称；讲那次劳动课用一般过去时，说感想和发出邀请用现在时",
+        "readerTone": "写给外国朋友 Mike，语气亲切自然，可以带一点轻松的幽默",
+        "goal": "让 Mike 知道一次劳动课具体做了什么，以及我从中得到的感受"
+      },
+      "taskRequires": [
+        "活动过程：讲清一次劳动课具体做了什么",
+        "你的感想：说出这次经历带给你的感受或收获"
+      ],
+      "thisEssayChooses": "选在学校食堂学包饺子这一次：过程按“学调馅、包饺子 → 头几个包坏 → 在师傅帮助下包好 → 煮好请老师吃”的顺序写；感想落在吃到自己包的饺子时的自豪，以及体会到日常饭菜来之不易；结尾邀请 Mike 来中国时学包饺子。"
+    },
+    "standard": {
+      "essay": "Dear Mike,\n\nI’m writing to share with you a class of labour education. Our school offers one such class every week, and last Friday we learned to make dumplings in the school canteen.\n\nFirst, the cooks showed us how to mix pork and cabbage into the filling and fold the wrappers. My first few dumplings looked like broken boats, which made the whole group laugh. With the cooks’ patient help, however, my later ones stood up neatly. Finally, we boiled them and shared them with our teachers.\n\nTasting my own dumplings, I felt really proud. I also realized how much work goes into the meals we often take for granted. When you visit China, I’d love to teach you how to make them!\n\nBest regards,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "活动过程",
+          "quote": "First, the cooks showed us how to mix pork and cabbage into the filling and fold the wrappers."
+        },
+        {
+          "point": "你的感想",
+          "quote": "Tasting my own dumplings, I felt really proud."
+        },
+        {
+          "point": "你的感想",
+          "quote": "I also realized how much work goes into the meals we often take for granted."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接在给定首句后面，交代劳动课多久一次、这次学的是什么。",
+          "items": [
+            {
+              "quote": "Our school offers one such class every week",
+              "explain": "交代题面说的“每周一节”；one such class 指的就是首句里的 a class of labour education，不用再把这几个词重复一遍。"
+            },
+            {
+              "quote": "last Friday we learned to make dumplings in the school canteen",
+              "explain": "时间、内容、地点一句说清，Mike 一读就知道下面要讲的是哪一次课。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点一“活动过程”：按先后顺序写，中间放一个包坏饺子的小插曲。",
+          "items": [
+            {
+              "quote": "First, the cooks showed us how to mix pork and cabbage into the filling and fold the wrappers.",
+              "explain": "First 点明从哪一步讲起；mix ... into the filling、fold the wrappers 是包饺子的真实动作，比一句 we made dumplings 具体得多。"
+            },
+            {
+              "quote": "My first few dumplings looked like broken boats, which made the whole group laugh.",
+              "explain": "用“像破船”写包坏的样子，which 指前面整件事。跟朋友讲经历，这点自嘲让过程有画面，也为下一句的进步作对照。"
+            },
+            {
+              "quote": "With the cooks’ patient help, however, my later ones stood up neatly.",
+              "explain": "however 把话从失败转到进步，my later ones 和前一句的 my first few dumplings 前后对照，读者看得出变化从哪来。"
+            },
+            {
+              "quote": "Finally, we boiled them and shared them with our teachers.",
+              "explain": "Finally 收住过程，First 到 Finally 一条线，活动有始有终。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成要点二“你的感想”，最后回到 Mike 身上收尾。",
+          "items": [
+            {
+              "quote": "Tasting my own dumplings, I felt really proud.",
+              "explain": "分词短语交代自豪从哪来：吃到自己包的饺子。感受有具体的事撑着，不是一句空泛的“很有意义”。"
+            },
+            {
+              "quote": "how much work goes into the meals we often take for granted",
+              "explain": "take ... for granted 意为“视为理所当然”，把收获从这一节课推到对每天饭菜的新认识。"
+            },
+            {
+              "quote": "When you visit China, I’d love to teach you how to make them!",
+              "explain": "用邀请收尾，Mike 读完有一件可以回应的事；them 指饺子，和前文连在一起。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "show sb how to do sth",
+          "function": "交代谁教了我们什么，写劳动或学技能的过程时直接可用。"
+        },
+        {
+          "expression": "With sb’s patient help, ...",
+          "function": "写在别人帮助下有了进步，让过程里出现从不会到会的变化。"
+        },
+        {
+          "expression": "take sth for granted",
+          "function": "把感想落到对日常小事的新认识上，比 It is meaningful 具体。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Mike,\n\nI’m writing to share with you a class of labour education. Every Friday afternoon, our school swaps textbooks for tools, and last week my class learned to make dumplings in the school canteen.\n\nTo begin with, the cooks showed us how to mix pork and cabbage into a juicy filling and pinch the edges of each wrapper. It looked easy, but my first few dumplings collapsed like broken boats, which sent the group into laughter. Guided patiently by the cooks, I slowed down, and my later ones stood up neatly. We then boiled them and proudly served them to our teachers.\n\nBiting into a dumpling I had made myself, I felt a joy no exam score had ever given me. The class also made me realize how much effort goes into the meals we often take for granted, so I now help my parents cook at weekends. When you visit China, I’d love to teach you this skill!\n\nBest regards,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "活动过程",
+          "quote": "To begin with, the cooks showed us how to mix pork and cabbage into a juicy filling and pinch the edges of each wrapper."
+        },
+        {
+          "point": "你的感想",
+          "quote": "Biting into a dumpling I had made myself, I felt a joy no exam score had ever given me."
+        },
+        {
+          "point": "你的感想",
+          "quote": "The class also made me realize how much effort goes into the meals we often take for granted, so I now help my parents cook at weekends."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "our school swaps textbooks for tools",
+          "explain": "swap A for B 写出劳动课“放下课本、拿起工具”的变化，比 offers one such class 更形象，也点出劳动课和平时上课的不同。"
+        },
+        {
+          "quote": "pinch the edges of each wrapper",
+          "explain": "pinch the edges 是捏饺子边的准确动作，比 fold the wrappers 更具体，外国朋友也能想象出手上的动作。"
+        },
+        {
+          "quote": "I felt a joy no exam score had ever given me",
+          "explain": "拿考试分数作对比，说出这种快乐为什么特别；后面再写到周末帮父母做饭，感想落成了实际行动。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,2031 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-fujian-fuzhou-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-fujian-fuzhou-2025-m1:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-fujian-fuzhou-2025-m1:cloze": {
+      "overview": "作者曾以做饭为乐，几次割伤后远离厨房；生活成本上涨后，她下决心重回厨房，第一次做成红酒炖牛肉带来成就感，重新爱上做饭，并体会到做饭可以是一种自我表达。",
+      "fullTranslationZh": "做饭一直是我的一点小乐趣。大约十年前，我从头学着做出美味的饭菜，从中找到了极大的快乐。然而，一连串的意外，包括几次不幸的割伤，让我对下厨变得犹豫。于是我逐渐远离了做饭，更多地依靠丈夫下厨或者叫外卖。不过最近，我决定重拾对做饭的热爱，这给我带来了很大的改变。\n重新开始做饭并不容易。过去手受伤的记忆还在，害怕再次弄伤自己的恐惧也冒了出来。然而，随着生活成本不断上涨，我意识到只靠餐馆吃饭难以为继。于是，我带着决心重新走进了厨房。\n真正重燃我做饭热情的一道菜谱，是朱莉娅·蔡尔德的红酒炖牛肉。电影《朱莉与朱莉娅》上映时，我爱上了做饭，却从未尝试过这道经典法国菜。它无疑是一项出于热爱的辛苦活，需要大量的时间、耐心和对细节的关注。从用盐和胡椒给牛肉调味，到把牛肉和红酒拌在一起，每一个步骤都是对风味与技艺的欢乐庆祝。第一次做这道菜给了我一种成就感，让我想起自己当初为什么爱上做饭。\n做饭不必是一种负担——它可以是一种自我表达。",
+      "mainLine": {
+        "theme": {
+          "text": "做饭不必是负担，它可以成为一种自我表达（a form of self-expression）。",
+          "quote": "a form of self-expression"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+            "text": "作者曾以做饭为乐，因几次受伤疏远厨房，近来重拾这份热爱。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+            "text": "她怕再伤到手，但生活成本上涨，于是下决心重回厨房。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+            "text": "红酒炖牛肉重燃热情，费时费心的过程带来成就感。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:4",
+            "text": "作者点明做饭不必是负担，而是一种自我表达。"
+          }
+        ],
+        "emotion": "享受→犹豫→害怕→坚定→满足"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sls-1",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+          "sourceText": "However, a series of __42__, including a few unfortunate cuts, left me __43__ to cook.",
+          "displayText": "However, a series of accidents, including a few unfortunate cuts, left me hesitant to cook.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:42",
+            "question:paper-mock-fujian-fuzhou-2025-m1:43"
+          ],
+          "translationZh": "然而，一连串的意外，包括几次不幸的割伤，让我对下厨变得犹豫。",
+          "analysisZh": "主干是“一连串的意外让我对下厨犹豫”（a series of accidents left me hesitant to cook）：谓语 left 后接宾语 me，形容词 hesitant 作宾补，不定式 to cook 说明对什么犹豫。两个逗号之间的 including a few unfortunate cuts 是插入的补充，举例说明意外包括哪些。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 30,
+              "quote": "a series of accidents"
+            },
+            {
+              "start": 66,
+              "end": 90,
+              "quote": "left me hesitant to cook"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sls-2",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+          "sourceText": "From seasoning the beef with salt and pepper to mixing it with wine, every __53__ is a joyous celebration of flavor and technique.",
+          "displayText": "From seasoning the beef with salt and pepper to mixing it with wine, every step is a joyous celebration of flavor and technique.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:53"
+          ],
+          "translationZh": "从用盐和胡椒给牛肉调味，到把牛肉和红酒拌在一起，每一个步骤都是对风味与技艺的欢乐庆祝。",
+          "analysisZh": "主干是“每一个步骤都是一场欢乐的庆祝”（every step is a joyous celebration），系动词 is 后接表语。句首的 From … to … 作状语，用两个动名词短语交代过程的起点和终点；表语后的 of flavor and technique 说明庆祝的是风味与技艺。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 23,
+              "quote": "From seasoning the beef"
+            },
+            {
+              "start": 45,
+              "end": 67,
+              "quote": "to mixing it with wine"
+            },
+            {
+              "start": 69,
+              "end": 103,
+              "quote": "every step is a joyous celebration"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1"
+              ],
+              "start": 0,
+              "end": 128,
+              "quote": "做饭一直是我的一点小乐趣。大约十年前，我从头学着做出美味的饭菜，从中找到了极大的快乐。然而，一连串的意外，包括几次不幸的割伤，让我对下厨变得犹豫。于是我逐渐远离了做饭，更多地依靠丈夫下厨或者叫外卖。不过最近，我决定重拾对做饭的热爱，这给我带来了很大的改变。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2"
+              ],
+              "start": 129,
+              "end": 213,
+              "quote": "重新开始做饭并不容易。过去手受伤的记忆还在，害怕再次弄伤自己的恐惧也冒了出来。然而，随着生活成本不断上涨，我意识到只靠餐馆吃饭难以为继。于是，我带着决心重新走进了厨房。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3"
+              ],
+              "start": 214,
+              "end": 387,
+              "quote": "真正重燃我做饭热情的一道菜谱，是朱莉娅·蔡尔德的红酒炖牛肉。电影《朱莉与朱莉娅》上映时，我爱上了做饭，却从未尝试过这道经典法国菜。它无疑是一项出于热爱的辛苦活，需要大量的时间、耐心和对细节的关注。从用盐和胡椒给牛肉调味，到把牛肉和红酒拌在一起，每一个步骤都是对风味与技艺的欢乐庆祝。第一次做这道菜给了我一种成就感，让我想起自己当初为什么爱上做饭。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:cloze:4"
+              ],
+              "start": 388,
+              "end": 410,
+              "quote": "做饭不必是一种负担——它可以是一种自我表达。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+            "text": "Cooking has always been a small enjoyment of mine. About a decade ago, I found great joy in creating delicious meals from the beginning. However, a series of accidents, including a few unfortunate cuts, left me hesitant to cook. So I gradually distanced myself from cooking, relying more on my husband to cook or takeout. Recently, however, I decided to rediscover my love for cooking, and it’s been transformative."
+          },
+          {
+            "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+            "text": "Getting back into cooking wasn’t easy. Memories of past accidents with my hands remained, and the fear of injuring myself again appeared. However, as the cost of living continued to rise, I realized that relying only on restaurants wasn’t sustainable. So, with determination, I stepped back into the kitchen."
+          },
+          {
+            "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+            "text": "One recipe that has truly refueled my passion for cooking is Julia Child’s Beef Bourguignon（红酒炖牛肉）. When the movie Julie and Julia came out, I fell in love with cooking but never attempted this classic French dish. It’s certainly a labor of love, requiring a lot of time, patience, and attention to detail. From seasoning the beef with salt and pepper to mixing it with wine, every step is a joyous celebration of flavor and technique. Making it for the first time gave me a sense of accomplishment, reminding me why I fell in love with cooking."
+          },
+          {
+            "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:4",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:4",
+            "text": "Cooking doesn’t have to be a burden— it can be a form of self-expression."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 24,
+                "end": 41,
+                "quote": "a small enjoyment"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 73,
+                "end": 84,
+                "quote": "found great"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 7,
+                "end": 12,
+                "quote": "一点小乐趣"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 34,
+                "end": 40,
+                "quote": "找到了极大的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:41"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 85,
+                "end": 88,
+                "quote": "joy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 40,
+                "end": 42,
+                "quote": "快乐"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 179,
+                "end": 201,
+                "quote": "a few unfortunate cuts"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 51,
+                "end": 65,
+                "quote": "past accidents"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 55,
+                "end": 62,
+                "quote": "几次不幸的割伤"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 11,
+                "end": 16,
+                "quote": "过去手受伤"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:42"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 158,
+                "end": 167,
+                "quote": "accidents"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 50,
+                "end": 52,
+                "quote": "意外"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 140,
+                "end": 147,
+                "quote": "However"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 185,
+                "end": 201,
+                "quote": "unfortunate cuts"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 242,
+                "end": 258,
+                "quote": "distanced myself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 43,
+                "end": 45,
+                "quote": "然而"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 57,
+                "end": 62,
+                "quote": "不幸的割伤"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 78,
+                "end": 81,
+                "quote": "远离了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:43"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 211,
+                "end": 219,
+                "quote": "hesitant"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 70,
+                "end": 72,
+                "quote": "犹豫"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 272,
+                "end": 306,
+                "quote": "relying more on my husband to cook"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 87,
+                "end": 93,
+                "quote": "依靠丈夫下厨"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:44"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 266,
+                "end": 273,
+                "quote": "cooking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 81,
+                "end": 83,
+                "quote": "做饭"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 319,
+                "end": 336,
+                "quote": "Recently, however"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 358,
+                "end": 377,
+                "quote": "my love for cooking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 99,
+                "end": 103,
+                "quote": "不过最近"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 109,
+                "end": 115,
+                "quote": "对做饭的热爱"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:45"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 354,
+                "end": 364,
+                "quote": "rediscover"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 107,
+                "end": 109,
+                "quote": "重拾"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 51,
+                "end": 79,
+                "quote": "past accidents with my hands"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 185,
+                "end": 201,
+                "quote": "unfortunate cuts"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 11,
+                "end": 16,
+                "quote": "过去手受伤"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 57,
+                "end": 62,
+                "quote": "不幸的割伤"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:46"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 106,
+                "end": 114,
+                "quote": "injuring"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 26,
+                "end": 28,
+                "quote": "弄伤"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 169,
+                "end": 186,
+                "quote": "continued to rise"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 232,
+                "end": 250,
+                "quote": "wasn’t sustainable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 48,
+                "end": 52,
+                "quote": "不断上涨"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 63,
+                "end": 67,
+                "quote": "难以为继"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:47"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 154,
+                "end": 158,
+                "quote": "cost"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 46,
+                "end": 48,
+                "quote": "成本"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 94,
+                "end": 105,
+                "quote": "the fear of"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 271,
+                "end": 300,
+                "quote": "stepped back into the kitchen"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 31,
+                "end": 33,
+                "quote": "恐惧"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 76,
+                "end": 83,
+                "quote": "重新走进了厨房"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:48"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 261,
+                "end": 274,
+                "quote": "determination"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:2",
+                "start": 74,
+                "end": 76,
+                "quote": "决心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 75,
+                "end": 91,
+                "quote": "Beef Bourguignon"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 186,
+                "end": 210,
+                "quote": "this classic French dish"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 24,
+                "end": 29,
+                "quote": "红酒炖牛肉"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 57,
+                "end": 64,
+                "quote": "这道经典法国菜"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:49"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 4,
+                "end": 10,
+                "quote": "recipe"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 12,
+                "end": 14,
+                "quote": "菜谱"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 434,
+                "end": 462,
+                "quote": "Making it for the first time"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 173,
+                "end": 178,
+                "quote": "never"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 141,
+                "end": 148,
+                "quote": "第一次做这道菜"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 52,
+                "end": 54,
+                "quote": "从未"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:50"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 179,
+                "end": 188,
+                "quote": "attempted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 54,
+                "end": 56,
+                "quote": "尝试"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 245,
+                "end": 268,
+                "quote": "requiring a lot of time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 80,
+                "end": 87,
+                "quote": "需要大量的时间"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:51"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 232,
+                "end": 237,
+                "quote": "labor"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 76,
+                "end": 79,
+                "quote": "辛苦活"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 255,
+                "end": 268,
+                "quote": "a lot of time"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 282,
+                "end": 301,
+                "quote": "attention to detail"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 82,
+                "end": 87,
+                "quote": "大量的时间"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 91,
+                "end": 97,
+                "quote": "对细节的关注"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:52"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 272,
+                "end": 280,
+                "quote": "patience"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 88,
+                "end": 90,
+                "quote": "耐心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 303,
+                "end": 326,
+                "quote": "From seasoning the beef"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 351,
+                "end": 370,
+                "quote": "mixing it with wine"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 104,
+                "end": 109,
+                "quote": "给牛肉调味"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 111,
+                "end": 121,
+                "quote": "把牛肉和红酒拌在一起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:53"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 382,
+                "end": 386,
+                "quote": "step"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 125,
+                "end": 127,
+                "quote": "步骤"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 434,
+                "end": 462,
+                "quote": "Making it for the first time"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 490,
+                "end": 534,
+                "quote": "reminding me why I fell in love with cooking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 141,
+                "end": 148,
+                "quote": "第一次做这道菜"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 157,
+                "end": 172,
+                "quote": "让我想起自己当初为什么爱上做饭"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:54"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 484,
+                "end": 498,
+                "quote": "accomplishment"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 153,
+                "end": 156,
+                "quote": "成就感"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:4",
+                "start": 47,
+                "end": 72,
+                "quote": "a form of self-expression"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:4",
+                "start": 15,
+                "end": 21,
+                "quote": "一种自我表达"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:55"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:4",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:4",
+                "start": 29,
+                "end": 35,
+                "quote": "burden"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:4",
+                "start": 7,
+                "end": 9,
+                "quote": "负担"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:42",
+              "question:paper-mock-fujian-fuzhou-2025-m1:43"
+            ],
+            "selectedSentenceId": "sls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 146,
+                "end": 167,
+                "quote": "a series of accidents"
+              },
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 203,
+                "end": 227,
+                "quote": "left me hesitant to cook"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:1",
+                "start": 46,
+                "end": 72,
+                "quote": "一连串的意外，包括几次不幸的割伤，让我对下厨变得犹豫"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:53"
+            ],
+            "selectedSentenceId": "sls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 307,
+                "end": 330,
+                "quote": "From seasoning the beef"
+              },
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 352,
+                "end": 374,
+                "quote": "to mixing it with wine"
+              },
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 376,
+                "end": 410,
+                "quote": "every step is a joyous celebration"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:cloze:3",
+                "start": 122,
+                "end": 140,
+                "quote": "每一个步骤都是对风味与技艺的欢乐庆祝"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "享受→犹豫→害怕→坚定→满足"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-fujian-fuzhou-2025-m1:41": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:41",
+      "blankNo": 41,
+      "pos": "noun",
+      "role": "main",
+      "context": "开篇交代作者当年做饭的感受，要一个正面的情绪名词。",
+      "find": {
+        "check": "echo",
+        "text": "首句说做饭是自己的一点小乐趣（a small enjoyment），空格复现这份乐趣，搭配找到（found great）。",
+        "quotes": [
+          "a small enjoyment",
+          "found great"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "快乐",
+        "reason": "开篇交代作者当年做饭的感受，要一个正面的情绪名词。名词看复现：首句说做饭是自己的一点小乐趣（a small enjoyment），空格复现这份乐趣，搭配找到（found great）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "loss",
+          "meaning": "损失；首句说做饭是自己的乐趣（a small enjoyment），不会说从做饭中找到很大的损失。",
+          "quote": "a small enjoyment"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "courage",
+          "meaning": "勇气；这里承接首句的乐趣（a small enjoyment），讲做饭带来的享受，不是讲胆量。",
+          "quote": "a small enjoyment"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "trouble",
+          "meaning": "麻烦；首句说做饭是乐趣（a small enjoyment），这里顺着讲当年的享受，转向负面在下一句。",
+          "quote": "a small enjoyment"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "found great",
+          "signalSide": "context-before",
+          "targetText": "found great joy in creating delicious meals",
+          "relation": "找到很大的（found great）后面接一种感受，说她在做饭中得到了什么。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a small enjoyment",
+          "signalSide": "context-before",
+          "relation": "首句的乐趣（enjoyment）与空格是同一种感受，前后复现。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:42": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "main",
+      "context": "转折处，要一类负面经历，并能概括后面几次不幸的割伤。",
+      "find": {
+        "check": "echo",
+        "text": "空后说其中包括几次不幸的割伤（a few unfortunate cuts），下段又称过去的事故（past accidents），复现锁定答案。",
+        "quotes": [
+          "a few unfortunate cuts",
+          "past accidents"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "事故",
+        "meaning": "意外受伤",
+        "reason": "转折处，要一类负面经历，并能概括后面几次不幸的割伤。名词看复现：空后说其中包括几次不幸的割伤（a few unfortunate cuts），下段又称过去的事故（past accidents），复现锁定答案。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "choices",
+          "meaning": "选择；空后举的例子是几次不幸的割伤（a few unfortunate cuts），割伤不是一种选择。",
+          "quote": "a few unfortunate cuts"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "treatments",
+          "meaning": "治疗；空后说其中包括割伤（a few unfortunate cuts），割伤是受的伤，不是一次次治疗。",
+          "quote": "a few unfortunate cuts"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "questions",
+          "meaning": "问题、疑问；割伤（a few unfortunate cuts）是做饭时出的意外，不是一串疑问。",
+          "quote": "a few unfortunate cuts"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a series of",
+          "signalSide": "context-before",
+          "targetText": "a series of accidents",
+          "relation": "一连串（a series of）后接复数名词，说一次次发生的事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "past accidents",
+          "signalSide": "context-after",
+          "relation": "下段的过去的事故（past accidents）回指这里的一连串意外。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:43": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "main",
+      "context": "几次受伤后作者对下厨的态度转向负面，要一个表示迟疑、不敢的词。",
+      "find": {
+        "check": "affect",
+        "text": "句首转折（However），又有不幸的割伤（unfortunate cuts），后文她逐渐远离厨房（distanced myself），所以是负面态度。",
+        "quotes": [
+          "However",
+          "unfortunate cuts",
+          "distanced myself"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "犹豫的",
+        "reason": "几次受伤后作者对下厨的态度转向负面，要一个表示迟疑、不敢的词。形容词看情感：句首转折（However），又有不幸的割伤（unfortunate cuts），后文她逐渐远离厨房（distanced myself），所以是负面态度。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "excited",
+          "meaning": "兴奋的；几次不幸的割伤（unfortunate cuts）之后她远离了厨房，不会兴奋地去做饭。",
+          "quote": "unfortunate cuts"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "curious",
+          "meaning": "好奇的；后文说她渐渐远离了厨房（distanced myself），好奇会让人想去试，与远离相反。",
+          "quote": "distanced myself"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "ready",
+          "meaning": "准备好的；乐意去做饭与随后远离厨房（distanced myself）矛盾。",
+          "quote": "distanced myself"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "left me",
+          "signalSide": "context-before",
+          "targetText": "left me hesitant to cook",
+          "relation": "使我处于某种状态（left me）后接形容词和动词不定式（to cook），说她对下厨的态度。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "unfortunate cuts",
+          "signalSide": "context-before",
+          "relation": "不幸的割伤（unfortunate cuts）定下了负面的情绪方向。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:44": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者远离的正是让她受伤的那件事，要指自己下厨本身。",
+      "find": {
+        "check": "echo",
+        "text": "后半句说改靠丈夫做饭或叫外卖（relying more on my husband to cook），远离的就是做饭，空格与做饭（to cook）复现。",
+        "quotes": [
+          "relying more on my husband to cook",
+          "to cook"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "烹饪",
+        "meaning": "自己下厨",
+        "reason": "作者远离的正是让她受伤的那件事，要指自己下厨本身。名词看复现：后半句说改靠丈夫做饭或叫外卖（relying more on my husband to cook），远离的就是做饭，空格与做饭（to cook）复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cleaning",
+          "meaning": "打扫；后面说靠丈夫做饭或叫外卖（relying more on my husband to cook），替代的是做饭，不是打扫。",
+          "quote": "relying more on my husband to cook"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hospital",
+          "meaning": "医院；靠丈夫做饭或叫外卖（relying more on my husband to cook）替代的是下厨，远离医院接不上。",
+          "quote": "relying more on my husband to cook"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "restaurant",
+          "meaning": "餐馆；下段说她曾只靠餐馆吃饭（relying only on restaurants），她远离的不是餐馆。",
+          "quote": "relying only on restaurants"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "distanced myself from",
+          "signalSide": "context-before",
+          "targetText": "distanced myself from cooking",
+          "relation": "远离（distanced myself from）的对象是她不敢再做的那件事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "relying more on my husband to cook",
+          "signalSide": "context-after",
+          "relation": "靠丈夫做饭（to cook）说明她不再自己下厨，与空格复现。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:45": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "转折后作者重新找回对做饭的热爱，这是主线由低谷回升的起点。",
+      "find": {
+        "check": "echo",
+        "text": "十年前她就在做饭中找到乐趣（I found great），中间远离，此时转折（Recently, however），是把失去的热爱重新找回。",
+        "quotes": [
+          "I found great",
+          "Recently, however"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "重新发现",
+        "meaning": "重拾",
+        "reason": "转折后作者重新找回对做饭的热爱，这是主线由低谷回升的起点。动词看复现：十年前她就在做饭中找到乐趣（I found great），中间远离，此时转折（Recently, however），是把失去的热爱重新找回。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "convey",
+          "meaning": "传达；转折（Recently, however）后说的是她自己找回热爱，不是把热爱传达给别人。",
+          "quote": "Recently, however"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "test",
+          "meaning": "检验；后文说这带来了很大改变（it’s been transformative），讲的是热爱回来了，不是检验热爱。",
+          "quote": "it’s been transformative"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "forget",
+          "meaning": "忘记；转折（Recently, however）后应与远离厨房相反，忘记热爱就和前面一样了。",
+          "quote": "Recently, however"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my love for cooking",
+          "signalSide": "context-after",
+          "targetText": "rediscover my love for cooking",
+          "relation": "找回的对象是她对做饭的热爱（my love for cooking）。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Recently, however",
+          "signalSide": "context-before",
+          "relation": "转折（however）说明她不再远离做饭，态度回升。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:46": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "detail",
+      "context": "她害怕再次发生的是手受伤的事，要一个表示弄伤自己的动作。",
+      "find": {
+        "check": "echo",
+        "text": "前文说手上出过事故（past accidents with my hands），首段有割伤（unfortunate cuts），再加上又一次（again），要的是再伤到自己。",
+        "quotes": [
+          "past accidents with my hands",
+          "unfortunate cuts",
+          "again"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "伤害",
+        "meaning": "弄伤自己",
+        "reason": "她害怕再次发生的是手受伤的事，要一个表示弄伤自己的动作。动词看复现：前文说手上出过事故（past accidents with my hands），首段有割伤（unfortunate cuts），再加上又一次（again），要的是再伤到自己。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "excusing",
+          "meaning": "原谅；手上出过事故（past accidents with my hands），她怕的是再受伤，不是怕原谅自己。",
+          "quote": "past accidents with my hands"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "blaming",
+          "meaning": "责备；记忆里是手上的事故（past accidents with my hands），担心的是再伤一次手，不是自责。",
+          "quote": "past accidents with my hands"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "changing",
+          "meaning": "改变；怕的是手上的事故（past accidents with my hands）重演，改变自己不是会让她怕重演的事。",
+          "quote": "past accidents with my hands"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the fear of",
+          "signalSide": "context-before",
+          "targetText": "the fear of injuring myself again",
+          "relation": "害怕（the fear of）后接她担心再次发生的事。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "past accidents with my hands",
+          "signalSide": "context-before",
+          "relation": "手上的事故（accidents with my hands）就是受伤，空格把它再说一遍。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:47": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:47",
+      "blankNo": 47,
+      "pos": "noun",
+      "role": "main",
+      "context": "这是她决定回厨房的现实原因，要一个上涨后让下馆子难以为继的东西。",
+      "find": {
+        "check": "collocation",
+        "text": "与生活（of living）搭配，又不断上涨（continued to rise），使只靠餐馆吃饭不可持续（wasn’t sustainable），是生活成本。",
+        "quotes": [
+          "of living",
+          "continued to rise",
+          "wasn’t sustainable"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "费用",
+        "meaning": "生活开销",
+        "reason": "这是她决定回厨房的现实原因，要一个上涨后让下馆子难以为继的东西。名词看搭配：与生活（of living）搭配，又不断上涨（continued to rise），使只靠餐馆吃饭不可持续（wasn’t sustainable），是生活成本。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "level",
+          "meaning": "水平；生活水平上涨推不出只靠餐馆不可持续（wasn’t sustainable），钱紧才吃不起馆子。",
+          "quote": "wasn’t sustainable"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "value",
+          "meaning": "价值；生活的价值上升推不出下馆子难以为继（wasn’t sustainable）。",
+          "quote": "wasn’t sustainable"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "quality",
+          "meaning": "质量；生活质量提高是好事，推不出只靠餐馆吃饭不可持续（wasn’t sustainable）。",
+          "quote": "wasn’t sustainable"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of living",
+          "signalSide": "context-after",
+          "targetText": "the cost of living",
+          "relation": "与生活（of living）合成生活成本（the cost of living）。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "wasn’t sustainable",
+          "signalSide": "context-after",
+          "relation": "花费涨了，只靠餐馆吃饭才难以为继（wasn’t sustainable）。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:48": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "main",
+      "context": "心里还怕受伤，却仍要重回厨房，要一个表示下定决心的名词。",
+      "find": {
+        "check": "affect",
+        "text": "前有怕再受伤（the fear of），又认清只靠餐馆不可持续（wasn’t sustainable），带着决心走回厨房（stepped back into the kitchen）。",
+        "quotes": [
+          "the fear of",
+          "wasn’t sustainable",
+          "stepped back into the kitchen"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "决心",
+        "reason": "心里还怕受伤，却仍要重回厨房，要一个表示下定决心的名词。名词看情感：前有怕再受伤（the fear of），又认清只靠餐馆不可持续（wasn’t sustainable），带着决心走回厨房（stepped back into the kitchen）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "energy",
+          "meaning": "精力；她要克服的是对受伤的害怕（the fear of），靠的是决心，不是体力。",
+          "quote": "the fear of"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dream",
+          "meaning": "梦想；她回厨房是因为只靠餐馆不可持续（wasn’t sustainable），是现实所迫下的决定。",
+          "quote": "wasn’t sustainable"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "pleasure",
+          "meaning": "乐趣；此时她还怕再受伤（the fear of），乐趣要到做红酒炖牛肉时才重新出现。",
+          "quote": "the fear of"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "stepped back into the kitchen",
+          "signalSide": "context-after",
+          "targetText": "with determination, I stepped back into the kitchen",
+          "relation": "带着某种状态（with）走回厨房，说她怎样迈出这一步。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "the fear of",
+          "signalSide": "context-before",
+          "relation": "先有害怕（the fear of），再回厨房，需要克服恐惧的决心。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:49": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "detail",
+      "context": "空格要概括后面的红酒炖牛肉，指一道菜及其做法。",
+      "find": {
+        "check": "topic",
+        "text": "表语是朱莉娅的红酒炖牛肉（Beef Bourguignon），后文又称它为经典法国菜（this classic French dish），属做菜话题。",
+        "quotes": [
+          "Beef Bourguignon",
+          "this classic French dish"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "食谱",
+        "meaning": "一道菜的做法",
+        "reason": "空格要概括后面的红酒炖牛肉，指一道菜及其做法。名词看话题：表语是朱莉娅的红酒炖牛肉（Beef Bourguignon），后文又称它为经典法国菜（this classic French dish），属做菜话题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gift",
+          "meaning": "礼物；红酒炖牛肉是她亲手做的经典法国菜（this classic French dish），不是别人送的礼物。",
+          "quote": "this classic French dish"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "idea",
+          "meaning": "想法；红酒炖牛肉（Beef Bourguignon）是一道具体的菜，不是一个想法。",
+          "quote": "Beef Bourguignon"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "advertisement",
+          "meaning": "广告；她是看电影（the movie Julie and Julia）爱上做饭的，红酒炖牛肉是要照着做的菜。",
+          "quote": "the movie Julie and Julia"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Julia Child’s Beef Bourguignon",
+          "signalSide": "context-after",
+          "targetText": "One recipe … is Julia Child’s Beef Bourguignon",
+          "relation": "空格作主语，表语是一道具体的菜（Beef Bourguignon）。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "this classic French dish",
+          "signalSide": "context-after",
+          "relation": "经典法国菜（French dish）把话题落在做菜上。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:50": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "main",
+      "context": "她爱上做饭却一直没做过这道菜，要一个表示动手去做的动作。",
+      "find": {
+        "check": "echo",
+        "text": "后文说第一次做它（Making it for the first time），反推之前从未动手做过（never）。",
+        "quotes": [
+          "Making it for the first time",
+          "never"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "尝试",
+        "reason": "她爱上做饭却一直没做过这道菜，要一个表示动手去做的动作。动词看复现：后文说第一次做它（Making it for the first time），反推之前从未动手做过（never）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sold",
+          "meaning": "出售；她是在家学做菜的人，后文写的是第一次做它（Making it for the first time），不是卖菜。",
+          "quote": "Making it for the first time"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "mentioned",
+          "meaning": "提到；她正在讲这道菜，后文第一次做它（Making it for the first time）对应的是从未动手做过。",
+          "quote": "Making it for the first time"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "accepted",
+          "meaning": "接受；后文说第一次做它（Making it for the first time），缺的是动手去做，不是接受这道菜。",
+          "quote": "Making it for the first time"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "this classic French dish",
+          "signalSide": "context-after",
+          "targetText": "never attempted this classic French dish",
+          "relation": "空格的宾语是一道菜（this classic French dish），动作是去做它。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Making it for the first time",
+          "signalSide": "context-after",
+          "relation": "第一次做（for the first time）回应此前从未尝试。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:51": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "detail",
+      "context": "形容这道菜是出于热爱而费力去做的事，要一个表示辛劳的名词。",
+      "find": {
+        "check": "collocation",
+        "text": "与爱（of love）合成出于热爱的辛苦活，后面需要大量时间（requiring a lot of time）说明它费力。",
+        "quotes": [
+          "of love",
+          "requiring a lot of time"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "劳动",
+        "meaning": "心甘情愿的辛苦活",
+        "reason": "形容这道菜是出于热爱而费力去做的事，要一个表示辛劳的名词。名词看搭配：与爱（of love）合成出于热爱的辛苦活，后面需要大量时间（requiring a lot of time）说明它费力。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "rule",
+          "meaning": "规则；后面说它需要大量时间（requiring a lot of time），讲的是费工夫，不是一条规则。",
+          "quote": "requiring a lot of time"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "mark",
+          "meaning": "标志；需要大量时间（requiring a lot of time）说的是做这道菜很费力，不是爱的标志。",
+          "quote": "requiring a lot of time"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promise",
+          "meaning": "承诺；后面列的是做菜要花的时间和心思（requiring a lot of time），不是一个许诺。",
+          "quote": "requiring a lot of time"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of love",
+          "signalSide": "context-after",
+          "targetText": "a labor of love",
+          "relation": "与爱（of love）合成出于热爱而做的辛苦活（a labor of love）。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "requiring a lot of time",
+          "signalSide": "context-after",
+          "relation": "需要大量时间（requiring a lot of time）补充说明这件事费力。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:52": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "detail",
+      "context": "与时间、对细节的关注并列，说做这道菜还需要的一种付出。",
+      "find": {
+        "check": "collocation",
+        "text": "和大量时间（a lot of time）、对细节的关注（attention to detail）并列作需要的宾语，长时间慢工要的是耐心。",
+        "quotes": [
+          "a lot of time",
+          "attention to detail"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "耐心",
+        "reason": "与时间、对细节的关注并列，说做这道菜还需要的一种付出。名词看搭配：和大量时间（a lot of time）、对细节的关注（attention to detail）并列作需要的宾语，长时间慢工要的是耐心。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "space",
+          "meaning": "空间；并列的时间和对细节的关注（attention to detail）都是做菜人的付出，厨房空间不属这一类。",
+          "quote": "attention to detail"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "belief",
+          "meaning": "信念；与大量时间（a lot of time）并列，讲的是花大量时间做菜要耐得住，不是信念。",
+          "quote": "a lot of time"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "caution",
+          "meaning": "谨慎；细心已由对细节的关注（attention to detail）说出，与花大量时间并列的是耐得住性子。",
+          "quote": "attention to detail"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "requiring a lot of time",
+          "signalSide": "context-before",
+          "targetText": "requiring a lot of time, patience, and attention to detail",
+          "relation": "需要（requiring）后并列三项投入，空格是其中之一。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "attention to detail",
+          "signalSide": "context-after",
+          "relation": "与对细节的关注（attention to detail）并列，同属做菜人的付出。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:53": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "detail",
+      "context": "从调味到加酒，空格指做菜过程中的每一个环节。",
+      "find": {
+        "check": "echo",
+        "text": "前面列出从给牛肉调味（From seasoning the beef）到加红酒（mixing it with wine）的过程，每一个指其中的每一步。",
+        "quotes": [
+          "From seasoning the beef",
+          "mixing it with wine"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "步骤",
+        "reason": "从调味到加酒，空格指做菜过程中的每一个环节。名词看复现：前面列出从给牛肉调味（From seasoning the beef）到加红酒（mixing it with wine）的过程，每一个指其中的每一步。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "dish",
+          "meaning": "菜肴；从调味到加酒（From seasoning the beef）说的是一道菜的各个环节，不是每一道菜。",
+          "quote": "From seasoning the beef"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "event",
+          "meaning": "事件；调味、加酒（mixing it with wine）是做菜的操作环节，不是一件件事件。",
+          "quote": "mixing it with wine"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "secret",
+          "meaning": "秘诀；调味、加酒（mixing it with wine）都是普通做法，这里说的是每一步。",
+          "quote": "mixing it with wine"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "every",
+          "signalSide": "context-before",
+          "targetText": "every step",
+          "relation": "每一个（every）后接单数可数名词，指过程里的每一环。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "From seasoning the beef",
+          "signalSide": "context-before",
+          "relation": "调味到加酒（From … to …）列出的就是一个个步骤。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:54": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "第一次做成这道费工夫的菜，作者的情绪到达高点，要一种做成后的正面感受。",
+      "find": {
+        "check": "affect",
+        "text": "第一次做成（Making it for the first time），又让她想起为何爱上做饭（reminding me why I fell in love），是成就感。",
+        "quotes": [
+          "Making it for the first time",
+          "reminding me why I fell in love"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "成就",
+        "meaning": "成就感",
+        "reason": "第一次做成这道费工夫的菜，作者的情绪到达高点，要一种做成后的正面感受。名词看情感：第一次做成（Making it for the first time），又让她想起为何爱上做饭（reminding me why I fell in love），是成就感。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "relief",
+          "meaning": "宽慰；她不是从压力中解脱，第一次做成（Making it for the first time）带来的是做到了的满足。",
+          "quote": "Making it for the first time"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "warmth",
+          "meaning": "温暖；想起为何爱上做饭（reminding me why I fell in love）来自自己做成难菜，不是被人关怀。",
+          "quote": "reminding me why I fell in love"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "responsibility",
+          "meaning": "责任；第一次做成（Making it for the first time）这道费工夫的菜，带来的是满足，不是责任。",
+          "quote": "Making it for the first time"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a sense of",
+          "signalSide": "context-before",
+          "targetText": "a sense of accomplishment",
+          "relation": "一种……感（a sense of）后接做成后的感受。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "reminding me why I fell in love with cooking",
+          "signalSide": "context-after",
+          "relation": "想起为何爱上做饭，说明这种感受是正面的。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:55": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "结尾点题，被不必是（doesn’t have to be）否定的，是与自我表达相对的负面看法。",
+      "find": {
+        "check": "affect",
+        "text": "破折号后说它可以是一种自我表达（a form of self-expression），前半句否定的应是与之相对的负面说法。",
+        "quotes": [
+          "a form of self-expression"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "负担",
+        "reason": "结尾点题，被不必是（doesn’t have to be）否定的，是与自我表达相对的负面看法。名词看情感：破折号后说它可以是一种自我表达（a form of self-expression），前半句否定的应是与之相对的负面说法。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "surprise",
+          "meaning": "惊喜；破折号后是积极的自我表达（a form of self-expression），被否定的应是消极说法，惊喜不消极。",
+          "quote": "a form of self-expression"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "regret",
+          "meaning": "遗憾；与一种自我表达（a form of self-expression）相对的是把做饭当苦差事，遗憾对不上。",
+          "quote": "a form of self-expression"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "danger",
+          "meaning": "危险；割伤是过去的意外，这里讲怎么看待做饭，与自我表达（a form of self-expression）相对的是苦差事。",
+          "quote": "a form of self-expression"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "doesn’t have to be",
+          "signalSide": "context-before",
+          "targetText": "doesn’t have to be a burden",
+          "relation": "不必是（doesn’t have to be）后接一种被否定的负面看法。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "a form of self-expression",
+          "signalSide": "context-after",
+          "relation": "破折号后的自我表达是正面看法，空格与它相对。"
+        }
+      ]
+    }
+  }
+}

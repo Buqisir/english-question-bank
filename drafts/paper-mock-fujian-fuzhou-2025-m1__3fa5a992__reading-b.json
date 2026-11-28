@@ -1,0 +1,823 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-fujian-fuzhou-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-fujian-fuzhou-2025-m1:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-fujian-fuzhou-2025-m1:reading-b": {
+      "overview": "记者原以为“森林浴”要下水，跟着持证森林疗法向导体验后才明白，它是调动全部感官、放慢脚步融入自然的活动；协会创始人 Clifford 还希望医疗体系把森林疗法纳入减压服务。",
+      "fullTranslationZh": "编辑让我去报道“森林浴”时，我收拾了一件泳衣。我以为这一定要下水。结果发现，我的理解太按字面意思了。\n我在华盛顿特区的一片城市森林里见到了持证的森林疗法向导梅拉妮·肖卡斯-布拉德利。在这里，我开始明白了。森林浴既不是洗澡，也不是徒步。我们确实在林间小路上走，但只是随意漫步，心里并没有特定的目的地。\n肖卡斯-布拉德利解释说，森林浴的目的是放慢脚步，让自己沉浸在自然环境中。她帮我们留意森林里的气味、味道和景色。我们调动所有感官去感受周围的环境。穿过一片树林时，我们摸了摸树干。我们闻了闻黑胡桃，它散发着怡人的香气。我们还被熟透的桑葚淋了一小阵“雨”。“闭上眼睛，只管呼吸。”肖卡斯-布拉德利对我们说。睁开眼后，绿色看上去绿多了。我开始看到以前没注意到的东西。\n“森林向导帮助我们身在此处，而不是心在别处，”自然与森林疗法协会的创始人阿莫斯·克利福德说，这个协会负责认证向导。向导支持森林所能给予我们的一切，引导我们进行各种练习，加深身体的在场感、愉悦感，以及与自然的伙伴关系。当我们以这种方式与自然相连时，我们也在与自己相连。\n克利福德的目标是鼓励医疗服务提供者把森林疗法纳入减压方案。在美国，与工作有关的压力每年造成的医疗费用高达1900亿美元。“我希望医疗体系能把森林疗法纳入服务范围，”克利福德说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:4",
+          "sourceText": "They support what the forests could offer us, inviting us into practices that deepen physical presence, pleasure, and partnership with nature.",
+          "displayText": "They support what the forests could offer us, inviting us into practices that deepen physical presence, pleasure, and partnership with nature.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:26"
+          ],
+          "translationZh": "向导支持森林所能给予我们的一切，引导我们进行各种练习，加深身体的在场感、愉悦感，以及与自然的伙伴关系。",
+          "analysisZh": "主干是 They support what …（向导支持……），They 指上一句的森林向导，what the forests could offer us 是宾语从句，指森林能给我们的东西。inviting us into practices 是现在分词短语，说向导怎样做：引导我们做一些练习；后面的 that 定语从句修饰 practices，三个并列名词 physical presence, pleasure, and partnership 说明练习加深的是什么。整句说明向导的作用是把人的注意力引回眼前的自然。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 44,
+              "quote": "They support what the forests could offer us"
+            },
+            {
+              "start": 46,
+              "end": 72,
+              "quote": "inviting us into practices"
+            },
+            {
+              "start": 73,
+              "end": 141,
+              "quote": "that deepen physical presence, pleasure, and partnership with nature"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+          "sourceText": "Clifford’s goal is to encourage health care providers to integrate forest therapy as a stress- reduction strategy.",
+          "displayText": "Clifford’s goal is to encourage health care providers to integrate forest therapy as a stress- reduction strategy.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:27"
+          ],
+          "translationZh": "克利福德的目标是鼓励医疗服务提供者把森林疗法纳入减压方案。",
+          "analysisZh": "主干是 Clifford’s goal is to encourage …，不定式作表语，说明目标是什么。encourage sb to do 结构里，sb 是 health care providers（医疗服务提供者），to integrate … 说明鼓励他们做什么；integrate A as B 意为“把 A 纳入、作为 B”，即把森林疗法当作一种减压手段。这句和段末 Clifford 的原话一起说明，他希望森林疗法进入医疗服务。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "Clifford’s goal is"
+            },
+            {
+              "start": 19,
+              "end": 53,
+              "quote": "to encourage health care providers"
+            },
+            {
+              "start": 54,
+              "end": 113,
+              "quote": "to integrate forest therapy as a stress- reduction strategy"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:1"
+              ],
+              "start": 0,
+              "end": 50,
+              "quote": "编辑让我去报道“森林浴”时，我收拾了一件泳衣。我以为这一定要下水。结果发现，我的理解太按字面意思了。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:2"
+              ],
+              "start": 51,
+              "end": 149,
+              "quote": "我在华盛顿特区的一片城市森林里见到了持证的森林疗法向导梅拉妮·肖卡斯-布拉德利。在这里，我开始明白了。森林浴既不是洗澡，也不是徒步。我们确实在林间小路上走，但只是随意漫步，心里并没有特定的目的地。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3"
+              ],
+              "start": 150,
+              "end": 329,
+              "quote": "肖卡斯-布拉德利解释说，森林浴的目的是放慢脚步，让自己沉浸在自然环境中。她帮我们留意森林里的气味、味道和景色。我们调动所有感官去感受周围的环境。穿过一片树林时，我们摸了摸树干。我们闻了闻黑胡桃，它散发着怡人的香气。我们还被熟透的桑葚淋了一小阵“雨”。“闭上眼睛，只管呼吸。”肖卡斯-布拉德利对我们说。睁开眼后，绿色看上去绿多了。我开始看到以前没注意到的东西。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:4"
+              ],
+              "start": 330,
+              "end": 463,
+              "quote": "“森林向导帮助我们身在此处，而不是心在别处，”自然与森林疗法协会的创始人阿莫斯·克利福德说，这个协会负责认证向导。向导支持森林所能给予我们的一切，引导我们进行各种练习，加深身体的在场感、愉悦感，以及与自然的伙伴关系。当我们以这种方式与自然相连时，我们也在与自己相连。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5"
+              ],
+              "start": 464,
+              "end": 552,
+              "quote": "克利福德的目标是鼓励医疗服务提供者把森林疗法纳入减压方案。在美国，与工作有关的压力每年造成的医疗费用高达1900亿美元。“我希望医疗体系能把森林疗法纳入服务范围，”克利福德说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-b-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:26"
+            ],
+            "selectedSentenceId": "sentence-reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:4",
+                "start": 169,
+                "end": 311,
+                "quote": "They support what the forests could offer us, inviting us into practices that deepen physical presence, pleasure, and partnership with nature."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 57,
+                "end": 108,
+                "quote": "向导支持森林所能给予我们的一切，引导我们进行各种练习，加深身体的在场感、愉悦感，以及与自然的伙伴关系。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:27"
+            ],
+            "selectedSentenceId": "sentence-reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+                "start": 0,
+                "end": 114,
+                "quote": "Clifford’s goal is to encourage health care providers to integrate forest therapy as a stress- reduction strategy."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 0,
+                "end": 29,
+                "quote": "克利福德的目标是鼓励医疗服务提供者把森林疗法纳入减压方案。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:2",
+                "start": 0,
+                "end": 103,
+                "quote": "I met certified Forest Therapy（治疗）guide Melanie Choukas-Bradley at an urban forest in Washington, D. C."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+                "start": 0,
+                "end": 115,
+                "quote": "The aim of forest bathing, Choukas-Bradley explained, is to slow down and throw oneself in the natural environment."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+                "start": 57,
+                "end": 113,
+                "quote": "integrate forest therapy as a stress- reduction strategy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 18,
+                "end": 39,
+                "quote": "持证的森林疗法向导梅拉妮·肖卡斯-布拉德利"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 12,
+                "end": 35,
+                "quote": "森林浴的目的是放慢脚步，让自己沉浸在自然环境中"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 17,
+                "end": 28,
+                "quote": "把森林疗法纳入减压方案"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+                "start": 0,
+                "end": 115,
+                "quote": "The aim of forest bathing, Choukas-Bradley explained, is to slow down and throw oneself in the natural environment."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+                "start": 187,
+                "end": 239,
+                "quote": "We took in our surroundings by using all our senses."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 12,
+                "end": 35,
+                "quote": "森林浴的目的是放慢脚步，让自己沉浸在自然环境中"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 55,
+                "end": 71,
+                "quote": "我们调动所有感官去感受周围的环境"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:4",
+                "start": 0,
+                "end": 168,
+                "quote": "“A forest guide helps us be here, not there,” says Amos Clifford, the founder of the Association of Nature & Forest Therapy, the organization that certifies the guides."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+                "start": 116,
+                "end": 186,
+                "quote": "She helped us be aware of the smells, tastes and sights of the forest."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 0,
+                "end": 23,
+                "quote": "“森林向导帮助我们身在此处，而不是心在别处，”"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 36,
+                "end": 54,
+                "quote": "她帮我们留意森林里的气味、味道和景色"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+                "start": 223,
+                "end": 334,
+                "quote": "“It’s my hope that the health care system will include forest therapy in the range of services,” Clifford says."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+                "start": 0,
+                "end": 114,
+                "quote": "Clifford’s goal is to encourage health care providers to integrate forest therapy as a stress- reduction strategy."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 60,
+                "end": 82,
+                "quote": "“我希望医疗体系能把森林疗法纳入服务范围，”"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 0,
+                "end": 28,
+                "quote": "克利福德的目标是鼓励医疗服务提供者把森林疗法纳入减压方案"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者从自己对“森林浴”的误解说起，接着写跟随向导的亲身体验，指出森林浴是放慢节奏、用全部感官融入自然；再引协会创始人的话说明向导的作用，最后落到把森林疗法纳入医疗减压服务的期望。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:1",
+            "summary": "作者接到报道任务时以为森林浴要下水，还带了泳衣，后来发现理解得太按字面。",
+            "function": "以作者的误解引出话题，制造悬念。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:2",
+            "summary": "作者跟着持证向导进入城市森林，明白森林浴不是洗澡也不是徒步，而是没有目的地的漫步。",
+            "function": "先说森林浴不是什么，纠正误解。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+            "summary": "向导带大家放慢脚步，用触觉、嗅觉、味觉和视觉感受森林，作者因此看到了以前没注意的东西。",
+            "function": "用亲身体验具体说明森林浴怎么做、有什么效果。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:4",
+            "summary": "Clifford 说向导帮人把心放回眼前，引导人加深与自然的联系，也就是与自己的联系。",
+            "function": "引用专家的话，说明向导的作用。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+            "summary": "Clifford 希望医疗机构把森林疗法作为减压办法纳入服务，因为工作压力带来巨额医疗花费。",
+            "function": "把话题推向森林疗法的社会意义，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-fujian-fuzhou-2025-m1:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "从作者纠正误解的地方和向导的身份里，归纳出森林浴到底是什么。",
+      "stemTranslationZh": "森林浴是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往前找带她体验的人是什么身份",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一次登山徒步。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Forest bathing isn’t a bath or a hike.",
+            "sourceHighlight": "isn’t a bath or a hike",
+            "optionText": "A hike up the mountain.",
+            "optionHighlight": "A hike",
+            "explanation": "原文明说森林浴不是徒步（isn’t … a hike），地点也只是城里的一片森林（an urban forest），没有登山。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:2",
+              "quote": "Forest bathing isn’t a bath or a hike.",
+              "anchor": "不是洗澡也不是徒步"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一次林中探险。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "An adventure in the woods.",
+            "explanation": "他们确实走了林间小路，但只是放慢脚步、随意走走（wandered with no particular destination），原文没写冒险。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一次野外游泳。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "I assumed it must involve getting in the water.",
+            "sourceHighlight": "getting in the water",
+            "optionText": "A swimming in open water.",
+            "optionHighlight": "swimming in open water",
+            "explanation": "要下水是作者出发前的猜想，她接着就说这样理解太按字面（too literal）；选项拿的正是被她自己否定的想法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:1",
+              "quote": "I assumed it must involve getting in the water.",
+              "anchor": "作者以为要下水"
+            },
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:1",
+              "quote": "It turns out, my interpretation was too literal.",
+              "anchor": "理解太按字面"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一种有向导带领的自然疗愈活动。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:2",
+              "quote": "I met certified Forest Therapy（治疗）guide Melanie Choukas-Bradley at an urban forest in Washington, D. C.",
+              "anchor": "持证森林疗法向导"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+              "quote": "The aim of forest bathing, Choukas-Bradley explained, is to slow down and throw oneself in the natural environment.",
+              "anchor": "融入自然环境"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+              "quote": "integrate forest therapy as a stress- reduction strategy",
+              "anchor": "作为减压办法"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "forest bathing",
+          "sourceRole": "stem",
+          "targetText": "Forest bathing isn’t a bath or a hike.",
+          "relationType": "locationCue",
+          "answerText": "certified Forest Therapy（治疗）guide",
+          "bridgeZh": "作者正是跟着这位疗法向导才弄懂森林浴的",
+          "note": "题干 forest bathing 原词出现在原文，这句先说它不是什么。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:2"
+        },
+        {
+          "sourceText": "A guided nature healing practice.",
+          "sourceRole": "correctOption",
+          "targetText": "certified Forest Therapy（治疗）guide",
+          "relationType": "paraphrase",
+          "note": "选项的三个意思各有落点：“有向导带领”落在[[block:paper-mock-fujian-fuzhou-2025-m1:reading-b:2|I met certified Forest Therapy]]的向导（guide）；“自然”落在[[block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3|The aim of forest bathing]]的自然环境（the natural environment）；“疗愈”落在向导头衔里的森林疗法（Forest Therapy），[[block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5]]又说它可作减压办法（a stress- reduction strategy）。合起来就是有向导带领的自然疗愈活动，选 D。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:2"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从向导对森林浴目的的解释和随后的体验里，找出人们靠什么方式从中受益。",
+      "stemTranslationZh": "我们怎样从森林浴中获益？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过提高我们的觉察力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "aware",
+            "optionText": "awareness",
+            "matchType": "wordFamily",
+            "relationNote": "“觉察力”（awareness）由[[block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3|She helped us be aware]]里的“留意”（aware）变来，原文是向导带大家留意森林的气味、味道和景色，留意的始终是眼前的自然；选项丢了自然，只剩笼统的提高觉察力。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+              "quote": "She helped us be aware of the smells, tastes and sights of the forest.",
+              "anchor": "留意森林的气味和景色"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过高强度训练。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "The aim of forest bathing, Choukas-Bradley explained, is to slow down and throw oneself in the natural environment.",
+            "sourceHighlight": "slow down",
+            "optionText": "By doing intense training.",
+            "optionHighlight": "intense training",
+            "explanation": "森林浴要的是放慢节奏（slow down），走路也没有目的地；选项说高强度训练，方向正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+              "quote": "The aim of forest bathing, Choukas-Bradley explained, is to slow down and throw oneself in the natural environment.",
+              "anchor": "放慢脚步"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过用心体验自然。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+              "quote": "The aim of forest bathing, Choukas-Bradley explained, is to slow down and throw oneself in the natural environment.",
+              "anchor": "放慢脚步融入自然"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+              "quote": "We took in our surroundings by using all our senses.",
+              "anchor": "用所有感官感受"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过做视力测试。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By carrying out eyesight tests.",
+            "explanation": "作者睁眼后觉得绿色更绿了（the green looked a lot greener），这是用心感受后的变化，原文没有任何视力测试。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "forest bathing",
+          "sourceRole": "stem",
+          "targetText": "The aim of forest bathing, Choukas-Bradley explained, is to slow down and throw oneself in the natural environment.",
+          "relationType": "locationCue",
+          "answerText": "slow down and throw oneself in the natural environment",
+          "note": "题干 forest bathing 原词出现在这句，句中说的正是它的目的和做法。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3"
+        },
+        {
+          "sourceText": "By experiencing nature mindfully.",
+          "sourceRole": "correctOption",
+          "targetText": "slow down and throw oneself in the natural environment",
+          "relationType": "paraphrase",
+          "note": "选项的“用心体验自然”（experiencing nature mindfully）概括了两处：放慢脚步、沉浸在自然中（throw oneself in the natural environment），接着又写调动所有感官去感受（using all our senses）。这样做之后作者看到了以前没注意到的东西，选 C。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从 Clifford 对森林向导作用的描述里，看出向导帮人做什么。",
+      "stemTranslationZh": "向导能帮助森林浴的参与者做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "找到并采摘成熟的果子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "ripe",
+            "optionText": "ripe",
+            "matchType": "exact",
+            "relationNote": "“成熟的”（ripe）出自[[block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3|We got a little shower of ripe mulberries]]，是熟透的桑葚落在大家身上，向导并没有带人找果子、摘果子。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+              "quote": "We got a little shower of ripe mulberries, too.",
+              "anchor": "熟桑葚落下"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "把锻炼计划付诸行动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Put exercise plans into action.",
+            "explanation": "原文说森林浴不是徒步，走路也没有目的地（no particular destination），向导没有安排锻炼计划。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "辨认不同的树和鸟。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "trees",
+            "optionText": "trees",
+            "matchType": "exact",
+            "relationNote": "树（trees）出自[[block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3|As we passed through a stand of trees]]，大家只是走过树林时摸摸树干（touched the trunks），用触觉去感受，没有学认树种，鸟也没提。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+              "quote": "As we passed through a stand of trees, we touched the trunks.",
+              "anchor": "摸树干"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "专注于周围的自然。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:4",
+              "quote": "“A forest guide helps us be here, not there,” says Amos Clifford, the founder of the Association of Nature & Forest Therapy, the organization that certifies the guides.",
+              "anchor": "向导帮我们身在此处"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3",
+              "quote": "She helped us be aware of the smells, tastes and sights of the forest.",
+              "anchor": "向导带人留意森林"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "guide",
+          "sourceRole": "stem",
+          "targetText": "“A forest guide helps us be here, not there,” says Amos Clifford, the founder of the Association of Nature & Forest Therapy, the organization that certifies the guides.",
+          "relationType": "locationCue",
+          "answerText": "helps us be here, not there",
+          "note": "题干 guide 原词出现在 Clifford 这句话里：A forest guide helps。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:4"
+        },
+        {
+          "sourceText": "Concentrate on the surrounding nature.",
+          "sourceRole": "correctOption",
+          "targetText": "helps us be here, not there",
+          "relationType": "paraphrase",
+          "note": "这句的“这里”（here）指身边这片森林，“那里”（there）指别处的事；向导帮人把心放回眼前（be here, not there），就是专注于周围的自然。[[block:paper-mock-fujian-fuzhou-2025-m1:reading-b:3|She helped us be aware]]写的向导带大家留意气味、味道和景色，正是这样做的，选 D。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:4"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从 Clifford 希望医疗体系纳入森林疗法的话里，推出他对森林疗法的定位。",
+      "stemTranslationZh": "从最后一段 Clifford 的话中我们能了解到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "医疗体系需要更新。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "“It’s my hope that the health care system will include forest therapy in the range of services,”",
+            "sourceHighlight": "include forest therapy in the range of services",
+            "optionText": "Health care system needs updating.",
+            "optionHighlight": "needs updating",
+            "explanation": "太宽：Clifford 只希望医疗体系把森林疗法这一项加进服务范围，选项说整个医疗体系需要更新，说得比原文大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+              "quote": "“It’s my hope that the health care system will include forest therapy in the range of services,” Clifford says.",
+              "anchor": "Clifford 的希望"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "基于自然的疗法花费太高。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In the United States, work- related stress accounts for up to $ 190 billion in health care costs each year.",
+            "sourceEntity": "work- related stress",
+            "optionText": "Nature-based therapy costs too much.",
+            "optionEntity": "Nature-based therapy",
+            "explanation": "每年高达 1900 亿美元的医疗花费是工作压力造成的（work- related stress），选项把这笔钱安到了自然疗法头上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+              "quote": "In the United States, work- related stress accounts for up to $ 190 billion in health care costs each year.",
+              "anchor": "工作压力的医疗花费"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "与压力有关的疾病很常见。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Stress-related diseases are commonly seen.",
+            "explanation": "工作压力带来巨额医疗花费是作者交代的背景，不是 Clifford 的话；原文也只给了花费数字，没说压力相关的疾病有多常见。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "森林疗法可以成为一种替代疗法。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+              "quote": "“It’s my hope that the health care system will include forest therapy in the range of services,” Clifford says.",
+              "anchor": "Clifford 希望纳入医疗服务"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5",
+              "quote": "Clifford’s goal is to encourage health care providers to integrate forest therapy as a stress- reduction strategy.",
+              "anchor": "作为减压办法"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Clifford",
+          "sourceRole": "stem",
+          "targetText": "“It’s my hope that the health care system will include forest therapy in the range of services,” Clifford says.",
+          "relationType": "locationCue",
+          "answerText": "the health care system will include forest therapy in the range of services",
+          "note": "题干 Clifford’s words 指这句引号里 Clifford 的原话。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5"
+        },
+        {
+          "sourceText": "Forest therapy could be an alternative treatment.",
+          "sourceRole": "correctOption",
+          "targetText": "the health care system will include forest therapy in the range of services",
+          "relationType": "paraphrase",
+          "note": "Clifford 希望医疗体系把森林疗法纳入服务范围（include forest therapy in the range of services），他的目标也是让医疗机构拿它来减压；能进医疗服务，就意味着它可以作为另一种治疗手段。原文说的是希望（hope），所以只推到“可以成为”（could be），选 D。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-b:5"
+        }
+      ]
+    }
+  }
+}

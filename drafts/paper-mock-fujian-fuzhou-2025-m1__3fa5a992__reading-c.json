@@ -1,0 +1,793 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-fujian-fuzhou-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-fujian-fuzhou-2025-m1:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-fujian-fuzhou-2025-m1:reading-c": {
+      "overview": "NASA 卫星拍下北极海冰随洋流沿格陵兰东海岸南下的一幕；文章解释海冰碎裂成图案的原因，指出近年海冰变薄、经弗拉姆海峡外流减少，并说明这会影响全球洋流热量输送和当地海温。",
+      "fullTranslationZh": "2024年春，北极海冰碎块随洋流沿格陵兰东海岸向南漂流，翻卷成错综复杂的图案。2024年6月4日，美国国家航空航天局“特拉”卫星上的中分辨率成像光谱仪捕捉到了这段令人眼花缭乱的旅程中的一个瞬间。\n这些冰很可能已经漂流了很远才到达这里。弗拉姆海峡连接北冰洋与格陵兰海，是海冰流出北极的主要通道。\n一路上，海冰碎裂成更小的块，并在较暖的海水中开始融化。“漂浮的冰越小，形成的图案就越‘纤细轻薄’，”海冰科学家沃尔特·迈尔说。这些小冰块可能只有几米宽——小到在光谱仪图像中无法分辨。它们聚在一起，形成了从水面升起的烟雾般的云团。\n随着夏季推进，海冰将继续被带出北极。但美国国家航空航天局戈达德太空飞行中心的海冰科学家安杰拉·布利斯指出，近年来，北冰洋越来越多的海冰太“年轻”、太薄，无法完成南下的旅程。“过去，北极有更多海冰能熬过夏季融化期，变得更厚、更老，那时就会有更多的海冰经由弗拉姆海峡输送出去，”她说。\n一些气候科学家正在密切关注这股减少的冰流。海冰和淡水流出北极，是洋流模式的组成部分，而洋流把热量输送到全球各地。“全球海洋传送带”把冷水向南输送、把暖水向北输送，影响着全世界的气候状况。“冰和淡水的输送减少，会对该地区的海洋生产力以及上层海水升温产生重大影响，”布利斯说。\n2023年的一项研究考察了二十年来的相关观测，发现东格陵兰洋流经由弗拉姆海峡输送的海冰正在减少，主要原因是海冰变薄。研究人员观察到，格陵兰外海的夏季表层水温有所上升，部分原因是吸热的开阔水域增多了。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:4",
+          "sourceText": "Historically, when more of the Arctic sea ice would survive the summer melt season, growing thicker and older, a larger volume of sea ice would be transported through the Fram Strait",
+          "displayText": "Historically, when more of the Arctic sea ice would survive the summer melt season, growing thicker and older, a larger volume of sea ice would be transported through the Fram Strait",
+          "relatedQuestionIds": [],
+          "translationZh": "过去，北极有更多海冰能熬过夏季融化期，变得更厚、更老，那时就会有更多的海冰经由弗拉姆海峡输送出去。",
+          "analysisZh": "主干在后半句：a larger volume of sea ice would be transported through the Fram Strait（更多海冰会被输送过弗拉姆海峡），would be transported 是被动语态，would 表示过去常有的情况。前面 when 引导时间状语从句，交代条件：更多海冰熬过夏季融化期；growing thicker and older 是现在分词短语，补充说明这些冰随之变厚变老。开头的 Historically 点明这是过去，和上一句“近年海冰太年轻太薄”形成对照。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 82,
+              "quote": "when more of the Arctic sea ice would survive the summer melt season"
+            },
+            {
+              "start": 84,
+              "end": 109,
+              "quote": "growing thicker and older"
+            },
+            {
+              "start": 111,
+              "end": 158,
+              "quote": "a larger volume of sea ice would be transported"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5",
+          "sourceText": "The movement of sea ice and freshwater out of the Arctic is a component of ocean circulation（洋流）patterns that distribute heat around the planet.",
+          "displayText": "The movement of sea ice and freshwater out of the Arctic is a component of ocean circulation（洋流）patterns that distribute heat around the planet.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:30"
+          ],
+          "translationZh": "海冰和淡水流出北极，是洋流模式的组成部分，而洋流把热量输送到全球各地。",
+          "analysisZh": "主语很长：The movement of sea ice and freshwater out of the Arctic（海冰和淡水流出北极这一运动），谓语是 is a component of（是……的组成部分）。that distribute heat around the planet 是定语从句，修饰 ocean circulation patterns，说明洋流在全球输送热量。读懂这层关系，就明白为什么冰流减少会牵动全球热量分布，这正是第 30 题的依据。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 56,
+              "quote": "The movement of sea ice and freshwater out of the Arctic"
+            },
+            {
+              "start": 57,
+              "end": 74,
+              "quote": "is a component of"
+            },
+            {
+              "start": 105,
+              "end": 143,
+              "quote": "that distribute heat around the planet"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1"
+              ],
+              "start": 0,
+              "end": 97,
+              "quote": "2024年春，北极海冰碎块随洋流沿格陵兰东海岸向南漂流，翻卷成错综复杂的图案。2024年6月4日，美国国家航空航天局“特拉”卫星上的中分辨率成像光谱仪捕捉到了这段令人眼花缭乱的旅程中的一个瞬间。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:2"
+              ],
+              "start": 98,
+              "end": 146,
+              "quote": "这些冰很可能已经漂流了很远才到达这里。弗拉姆海峡连接北冰洋与格陵兰海，是海冰流出北极的主要通道。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:3"
+              ],
+              "start": 147,
+              "end": 261,
+              "quote": "一路上，海冰碎裂成更小的块，并在较暖的海水中开始融化。“漂浮的冰越小，形成的图案就越‘纤细轻薄’，”海冰科学家沃尔特·迈尔说。这些小冰块可能只有几米宽——小到在光谱仪图像中无法分辨。它们聚在一起，形成了从水面升起的烟雾般的云团。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:4"
+              ],
+              "start": 262,
+              "end": 402,
+              "quote": "随着夏季推进，海冰将继续被带出北极。但美国国家航空航天局戈达德太空飞行中心的海冰科学家安杰拉·布利斯指出，近年来，北冰洋越来越多的海冰太“年轻”、太薄，无法完成南下的旅程。“过去，北极有更多海冰能熬过夏季融化期，变得更厚、更老，那时就会有更多的海冰经由弗拉姆海峡输送出去，”她说。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5"
+              ],
+              "start": 403,
+              "end": 539,
+              "quote": "一些气候科学家正在密切关注这股减少的冰流。海冰和淡水流出北极，是洋流模式的组成部分，而洋流把热量输送到全球各地。“全球海洋传送带”把冷水向南输送、把暖水向北输送，影响着全世界的气候状况。“冰和淡水的输送减少，会对该地区的海洋生产力以及上层海水升温产生重大影响，”布利斯说。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6"
+              ],
+              "start": 540,
+              "end": 639,
+              "quote": "2023年的一项研究考察了二十年来的相关观测，发现东格陵兰洋流经由弗拉姆海峡输送的海冰正在减少，主要原因是海冰变薄。研究人员观察到，格陵兰外海的夏季表层水温有所上升，部分原因是吸热的开阔水域增多了。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-c-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:4",
+                "start": 268,
+                "end": 450,
+                "quote": "Historically, when more of the Arctic sea ice would survive the summer melt season, growing thicker and older, a larger volume of sea ice would be transported through the Fram Strait"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 86,
+                "end": 137,
+                "quote": "“过去，北极有更多海冰能熬过夏季融化期，变得更厚、更老，那时就会有更多的海冰经由弗拉姆海峡输送出去，”"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:30"
+            ],
+            "selectedSentenceId": "sentence-reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5",
+                "start": 66,
+                "end": 210,
+                "quote": "The movement of sea ice and freshwater out of the Arctic is a component of ocean circulation（洋流）patterns that distribute heat around the planet."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 21,
+                "end": 56,
+                "quote": "海冰和淡水流出北极，是洋流模式的组成部分，而洋流把热量输送到全球各地。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1",
+                "start": 0,
+                "end": 148,
+                "quote": "Floating pieces of Arctic sea ice rolled into complicated patterns as ocean currents carried them south along Greenland’s east coast in spring 2024."
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1",
+                "start": 149,
+                "end": 245,
+                "quote": "The MODIS（光谱仪）on NASA’s Terra satellite seized a moment of this dizzying journey on June 4,2024."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 7,
+                "end": 27,
+                "quote": "北极海冰碎块随洋流沿格陵兰东海岸向南漂流"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 75,
+                "end": 96,
+                "quote": "捕捉到了这段令人眼花缭乱的旅程中的一个瞬间"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:3",
+                "start": 281,
+                "end": 355,
+                "quote": "Their gathering forms the smoke-like clouds rising from the water surface."
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:3",
+                "start": 189,
+                "end": 280,
+                "quote": "The small ice pieces may only be meters across – too small to distinguish in MODIS imagery."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 91,
+                "end": 113,
+                "quote": "它们聚在一起，形成了从水面升起的烟雾般的云团"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 77,
+                "end": 90,
+                "quote": "小到在光谱仪图像中无法分辨"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5",
+                "start": 66,
+                "end": 210,
+                "quote": "The movement of sea ice and freshwater out of the Arctic is a component of ocean circulation（洋流）patterns that distribute heat around the planet."
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5",
+                "start": 211,
+                "end": 339,
+                "quote": "The “global ocean conveyor belt” transports cold water south and warm water north, contributing to climate conditions worldwide."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 21,
+                "end": 55,
+                "quote": "海冰和淡水流出北极，是洋流模式的组成部分，而洋流把热量输送到全球各地"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 81,
+                "end": 92,
+                "quote": "影响着全世界的气候状况"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6",
+                "start": 0,
+                "end": 180,
+                "quote": "A 2023 study looking at two decades of related observations found that the East Greenland Current is moving less sea ice through the Fram Strait, primarily due to sea ice thinning."
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6",
+                "start": 181,
+                "end": 342,
+                "quote": "The researchers observed that summertime surface water temperatures off Greenland have risen, in part due to the increased presence of heat-absorbing open water."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p6",
+                "start": 23,
+                "end": 57,
+                "quote": "发现东格陵兰洋流经由弗拉姆海峡输送的海冰正在减少，主要原因是海冰变薄"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p6",
+                "start": 66,
+                "end": 98,
+                "quote": "格陵兰外海的夏季表层水温有所上升，部分原因是吸热的开阔水域增多了"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章从一张卫星图像说起，先描述海冰南下途中卷成的图案，再解释图案成因，接着转到近年海冰变薄、外流减少，最后说明这种变化与全球洋流热量输送和当地海温的联系。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1",
+            "summary": "2024 年春北极海冰随洋流沿格陵兰东海岸南下，NASA 卫星在 6 月 4 日拍下了这一幕。",
+            "function": "以卫星图像引出话题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:2",
+            "summary": "这些冰已漂流很远，弗拉姆海峡是海冰流出北极的主要通道。",
+            "function": "交代海冰漂流的路线。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:3",
+            "summary": "海冰一路碎裂融化，冰块越小图案越纤细，聚在一起像水面升起的烟。",
+            "function": "解释图像中图案的成因。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:4",
+            "summary": "近年更多海冰太年轻太薄，无法南下，过去厚冰多时外流的冰更多。",
+            "function": "转到海冰外流减少的新变化。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5",
+            "summary": "气候科学家关注外流减少，因为它是全球洋流输送热量的一部分，会影响海洋生产力和海温。",
+            "function": "说明这一变化为什么重要。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6",
+            "summary": "2023 年研究发现海冰变薄使外流减少，开阔水面增多又让格陵兰外海夏季水温升高。",
+            "function": "用研究结果把海冰变化和气候联系起来，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-fujian-fuzhou-2025-m1:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "弄清卫星图像拍下的“这段旅程”指什么。",
+      "stemTranslationZh": "NASA 的这张图像主要展示了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "“这段旅程”指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "海岸线的长度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "coast",
+            "optionText": "coastline",
+            "matchType": "wordFamily",
+            "relationNote": "“海岸”（coast）出自[[block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1|along Greenland’s east coast]]，只交代海冰沿格陵兰东海岸南下的路线；图像拍的是海冰，没有量海岸线多长。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1",
+              "quote": "Floating pieces of Arctic sea ice rolled into complicated patterns as ocean currents carried them south along Greenland’s east coast in spring 2024.",
+              "anchor": "沿格陵兰东海岸"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "前往北极的旅程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "The Fram Strait, connecting the Arctic Ocean with the Greenland Sea, serves as the primary route for sea ice out of the Arctic.",
+            "sourceHighlight": "out of the Arctic",
+            "optionText": "The journey to the Arctic.",
+            "optionHighlight": "to the Arctic",
+            "explanation": "“旅程”确实是原文的说法（journey），但海冰是被洋流带着向南、流出北极（out of the Arctic），选项说成去往北极，方向反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1",
+              "quote": "Floating pieces of Arctic sea ice rolled into complicated patterns as ocean currents carried them south along Greenland’s east coast in spring 2024.",
+              "anchor": "海冰向南漂"
+            },
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:2",
+              "quote": "The Fram Strait, connecting the Arctic Ocean with the Greenland Sea, serves as the primary route for sea ice out of the Arctic.",
+              "anchor": "流出北极的通道"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "海冰移动的一个场景。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1",
+              "quote": "Floating pieces of Arctic sea ice rolled into complicated patterns as ocean currents carried them south along Greenland’s east coast in spring 2024.",
+              "anchor": "海冰随洋流南下"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1",
+              "quote": "The MODIS（光谱仪）on NASA’s Terra satellite seized a moment of this dizzying journey on June 4,2024.",
+              "anchor": "卫星拍下旅程的一刻"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "北极冰的一种图案。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "complicated patterns",
+            "optionText": "A pattern",
+            "matchType": "wordFamily",
+            "relationNote": "“图案”（patterns）出自[[block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1|rolled into complicated patterns]]，是海冰漂动时卷出的花纹；卫星拍下的是旅程中的一刻（a moment of this dizzying journey），重点是冰在移动，图案只是途中的样子。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1",
+              "quote": "Floating pieces of Arctic sea ice rolled into complicated patterns as ocean currents carried them south along Greenland’s east coast in spring 2024.",
+              "anchor": "卷成复杂图案"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "NASA",
+          "sourceRole": "stem",
+          "targetText": "The MODIS（光谱仪）on NASA’s Terra satellite seized a moment of this dizzying journey on June 4,2024.",
+          "relationType": "locationCue",
+          "answerText": "Floating pieces of Arctic sea ice rolled into complicated patterns as ocean currents carried them south",
+          "bridgeZh": "“这段旅程”指的是海冰被洋流带着南下",
+          "note": "题干 NASA 原词出现在这句，卫星拍下的是“这段旅程”的一刻。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1"
+        },
+        {
+          "sourceText": "A scene of sea ice movement.",
+          "sourceRole": "correctOption",
+          "targetText": "Floating pieces of Arctic sea ice rolled into complicated patterns as ocean currents carried them south",
+          "relationType": "paraphrase",
+          "note": "选项的“一个场景”（a scene）对应卫星捕捉的“一刻”（a moment），“海冰移动”（sea ice movement）对应洋流带着海冰南下（ocean currents carried them south）。图像拍的就是海冰漂流途中的一个画面，选 C。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:1"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:29": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据“冰越小，图案越 wispy”和后文对小冰块的描写，猜出 wispy 的意思。",
+      "stemTranslationZh": "画线词 wispy 的意思可能是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看小冰块聚成什么样",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "典型的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Typical.",
+            "explanation": "放进去就成了“冰越小，图案越典型”；原文没有拿图案和常见样子作比，后文写的是小冰块小到看不清、聚起来像轻烟。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "纤细的；轻薄的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:3",
+              "quote": "Their gathering forms the smoke-like clouds rising from the water surface.",
+              "anchor": "像轻烟的云团"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:3",
+              "quote": "The small ice pieces may only be meters across – too small to distinguish in MODIS imagery.",
+              "anchor": "小到看不清"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "明显的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "The small ice pieces may only be meters across – too small to distinguish in MODIS imagery.",
+            "sourceHighlight": "too small to distinguish",
+            "optionText": "Evident.",
+            "optionHighlight": "Evident",
+            "explanation": "放进去就成了“冰越小，图案越明显”；后文却说小冰块小到在图像里分辨不出（too small to distinguish），方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:3",
+              "quote": "The small ice pieces may only be meters across – too small to distinguish in MODIS imagery.",
+              "anchor": "小到无法分辨"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "相似的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Similar.",
+            "explanation": "放进去就成了“冰越小，图案越相似”；可句中没有拿两样东西比较，“相似”没有比较对象，后文写的是图案像轻烟一样淡。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "wispy",
+          "sourceRole": "stem",
+          "targetText": "“The smaller the floating ice, the more ‘wispy’ the patterns,” said Walt Meier, a sea ice scientist.",
+          "relationType": "locationCue",
+          "answerText": "the smoke-like clouds rising from the water surface",
+          "bridgeZh": "小冰块聚成的样子，正是 wispy 图案的模样",
+          "note": "题干 wispy 原词就是这句里的画线词。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:3"
+        },
+        {
+          "sourceText": "Delicate.",
+          "sourceRole": "correctOption",
+          "targetText": "the smoke-like clouds rising from the water surface",
+          "relationType": "paraphrase",
+          "note": "由“冰越小，图案越……”可知，wispy 必须是冰碎成小块后才有的样子；后文说小冰块小到图像里分辨不出（too small to distinguish），聚在一起像水面升起的轻烟（smoke-like clouds）。所以 wispy 必须是又细又淡的样子。放回去：冰越小，图案越纤细轻薄，选 B。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:3"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出气候科学家密切关注冰流减少的原因。",
+      "stemTranslationZh": "气候科学家为什么在监测这股减少的冰流？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找这股冰流牵动着什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它影响全球热量的平衡。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5",
+              "quote": "The movement of sea ice and freshwater out of the Arctic is a component of ocean circulation（洋流）patterns that distribute heat around the planet.",
+              "anchor": "洋流在全球输送热量"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5",
+              "quote": "The “global ocean conveyor belt” transports cold water south and warm water north, contributing to climate conditions worldwide.",
+              "anchor": "影响全球气候"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它促进北极海洋的多样性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“Less ice and freshwater transport have big impacts on ocean productivity, as well as warming upper ocean temperatures, in the region,” said Bliss.",
+            "sourceEntity": "ocean productivity",
+            "optionText": "It encourages Arctic ocean diversity.",
+            "optionEntity": "Arctic ocean diversity",
+            "explanation": "Bliss 说冰流减少会对海洋生产力（ocean productivity）产生重大影响，只说影响大，没说是好事；选项换成促进北极海洋多样性，对象和方向都变了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5",
+              "quote": "“Less ice and freshwater transport have big impacts on ocean productivity, as well as warming upper ocean temperatures, in the region,” said Bliss.",
+              "anchor": "Bliss 说影响海洋生产力"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它导致淡水污染。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "freshwater",
+            "optionText": "freshwater",
+            "matchType": "exact",
+            "relationNote": "“淡水”（freshwater）出自[[block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5|The movement of sea ice and freshwater out of the Arctic]]，说的是淡水随海冰一起流出北极，原文没说淡水被污染。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5",
+              "quote": "The movement of sea ice and freshwater out of the Arctic is a component of ocean circulation（洋流）patterns that distribute heat around the planet.",
+              "anchor": "海冰和淡水流出北极"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它让“海洋传送带”加速。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It speeds up the “ocean conveyor belt”.",
+            "explanation": "原文只介绍“全球海洋传送带”把冷水往南、暖水往北送（transports cold water south and warm water north），没说冰流减少会让它加速。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "climate scientists",
+          "sourceRole": "stem",
+          "targetText": "Some climate scientists are watching this decreased flow closely.",
+          "relationType": "locationCue",
+          "answerText": "ocean circulation（洋流）patterns that distribute heat around the planet",
+          "bridgeZh": "关注的理由是这股冰流属于全球洋流的一环",
+          "note": "题干 climate scientists 原词出现在这句，monitoring 对应 watching。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5"
+        },
+        {
+          "sourceText": "It affects the balance of global heat.",
+          "sourceRole": "correctOption",
+          "targetText": "ocean circulation（洋流）patterns that distribute heat around the planet",
+          "relationType": "paraphrase",
+          "note": "选项的“全球热量平衡”（balance of global heat）来自原文的洋流在全球分配热量（distribute heat around the planet）。冰和淡水外流是洋流的一部分，外流变少，热量在全球的分配也会跟着变，所以科学家要盯着它，选 A。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:5"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:31": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括最后一段关于海冰变化讲了什么。",
+      "stemTranslationZh": "关于正在变化的海冰，我们从最后一段能了解到什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6]] 先讲冰变薄使外流减少，再讲开阔水面吸热、海水升温，看两件事怎样相连",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它的理论依据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Its theoretical basis.",
+            "explanation": "[[block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6]] 讲的是一项研究对二十年观测数据的发现（two decades of related observations），没讲海冰变化的理论依据。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它的经济前景。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Its economic promise.",
+            "explanation": "[[block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6]] 只写海冰外流和海水温度的变化，没提任何经济方面的内容。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它对弗拉姆海峡的影响。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Fram Strait",
+            "optionText": "Fram Strait",
+            "matchType": "exact",
+            "relationNote": "弗拉姆海峡（Fram Strait）原样出自[[block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6|moving less sea ice through the Fram Strait]]，海峡只是冰流经过的通道；段里说穿过海峡的冰变少了，不是海峡本身受到什么影响。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6",
+              "quote": "A 2023 study looking at two decades of related observations found that the East Greenland Current is moving less sea ice through the Fram Strait, primarily due to sea ice thinning.",
+              "anchor": "穿过海峡的冰变少"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它与气候系统的联系。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6",
+              "quote": "A 2023 study looking at two decades of related observations found that the East Greenland Current is moving less sea ice through the Fram Strait, primarily due to sea ice thinning.",
+              "anchor": "冰变薄使外流减少"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6",
+              "quote": "The researchers observed that summertime surface water temperatures off Greenland have risen, in part due to the increased presence of heat-absorbing open water.",
+              "anchor": "开阔水面增多使水温升高"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Its link with the climate system.",
+          "sourceRole": "correctOption",
+          "targetText": "The researchers observed that summertime surface water temperatures off Greenland have risen, in part due to the increased presence of heat-absorbing open water.",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6]] 先说洋流带走的海冰变少，主要因为海冰变薄（primarily due to sea ice thinning）；再说冰少了、吸热的开阔水面多了，格陵兰外海夏季水温随之升高（have risen）。海冰的变化和洋流、海温连成一串，这正是它与气候系统的联系，选 D。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-c:6"
+        }
+      ]
+    }
+  }
+}

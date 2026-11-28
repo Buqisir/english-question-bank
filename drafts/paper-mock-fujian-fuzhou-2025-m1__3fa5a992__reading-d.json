@@ -1,0 +1,830 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-fujian-fuzhou-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-fujian-fuzhou-2025-m1:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-fujian-fuzhou-2025-m1:reading-d": {
+      "overview": "这是一篇书评，介绍 Engel 的《儿童的智识生活》：孩子天生好奇，真正的思考发生在充分探索和玩耍中；作者批评美国教育忽视孩子的思维生活，书中用科学见解和生动实例给家长提供建议。",
+      "fullTranslationZh": "在一个重视批判性思维和创新想法的数字化、全球化世界里，从摇篮到职场的儿童教育方式必须关注孩子如何学会学习，而不仅仅是学什么。《儿童的智识生活》让读者得以走进孩子的内心，看他们在日常时刻如何探索和学习，并强调什么才构成真正的学习。\n孩子生来就带着爱玩的好奇心。他们对一切都会发问——树为什么有叶子？太阳为什么会升起？这些问题帮助孩子发现事物之间的因果关系——这一切都离不开大人的引导。\n然而，探索需要时间。正如恩格尔所写：“当孩子被允许深入钻研一个话题时，他们……会把互不相关的事实联系起来，并产生新的想法。”真正的思维活动发生在玩耍之中——比如孩子用椅子搭起一个台子，去够放在高处够不着的饼干盒里的饼干。这些时刻里蕴藏着被强化的好奇心和创新能力。匆忙的家长往往没法给出这样的时间，生怕孩子赶不上下一项安排好的活动。\n“显而易见，美国的教育体系并不关心孩子的智识生活，”恩格尔在书中警告说。相反，她希望把学校重新设想为建立在激发好奇心之上的“创意工厂”：“设想在一些新的项目下评估学生的进步：提出有趣的问题……并花时间解决它们。”\n在一个动人的例子中，恩格尔描述了一位老师，她向学生发起挑战，要搭出一条长达3.8英里、打破纪录的吸管链。“赢了会很有趣，但认知上的收获会更深远，”这位老师解释说，她的目的是帮助孩子们更好地理解马里亚纳海沟有多深。\n凭借科学的见解和生动的例子，恩格尔的书就如何让学习更加看得见提供了建议。她鼓励家长把孩子看作主动的思考者，并提出，通过问开放式问题、让孩子去探索，孩子们将为一个复杂多变的世界做好更充分的准备。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-d-1",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6",
+          "sourceText": "She encourages parents to see children as active thinkers and suggests that by asking open-ended questions and letting them explore, children will be better prepared for a complex and ever-changing world.",
+          "displayText": "She encourages parents to see children as active thinkers and suggests that by asking open-ended questions and letting them explore, children will be better prepared for a complex and ever-changing world.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:34",
+            "question:paper-mock-fujian-fuzhou-2025-m1:35"
+          ],
+          "translationZh": "她鼓励家长把孩子看作主动的思考者，并提出，通过问开放式问题、让孩子去探索，孩子们将为一个复杂多变的世界做好更充分的准备。",
+          "analysisZh": "主语 She 带两个并列谓语：encourages parents to see children as active thinkers（鼓励家长把孩子看作主动的思考者）和 suggests that …（提出……）。that 宾语从句的主干是 children will be better prepared for a complex and ever-changing world；by asking open-ended questions and letting them explore 是插在中间的方式状语，说明靠什么让孩子准备得更好。这句点出全书主张：让孩子主动思考、自由探索。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 57,
+              "quote": "She encourages parents to see children as active thinkers"
+            },
+            {
+              "start": 62,
+              "end": 75,
+              "quote": "suggests that"
+            },
+            {
+              "start": 133,
+              "end": 203,
+              "quote": "children will be better prepared for a complex and ever-changing world"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-d-2",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+          "sourceText": "Hurried parents often lack the ability to allow that time, fearing that their children might be late for their next scheduled activity.",
+          "displayText": "Hurried parents often lack the ability to allow that time, fearing that their children might be late for their next scheduled activity.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:32",
+            "question:paper-mock-fujian-fuzhou-2025-m1:34"
+          ],
+          "translationZh": "匆忙的家长往往没法给出这样的时间，生怕孩子赶不上下一项安排好的活动。",
+          "analysisZh": "主干是 Hurried parents often lack the ability to allow that time（匆忙的家长往往没能力给出那段时间），that time 指本段开头说的“探索需要的时间”。fearing that … 是现在分词短语作原因状语，说明家长为什么不给时间：怕孩子赶不上下一项排好的活动。这句把“排满日程”放在了充分探索的对立面，第 32、34 题的干扰项都借了这里的词。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 57,
+              "quote": "Hurried parents often lack the ability to allow that time"
+            },
+            {
+              "start": 59,
+              "end": 71,
+              "quote": "fearing that"
+            },
+            {
+              "start": 105,
+              "end": 134,
+              "quote": "their next scheduled activity"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:1"
+              ],
+              "start": 0,
+              "end": 114,
+              "quote": "在一个重视批判性思维和创新想法的数字化、全球化世界里，从摇篮到职场的儿童教育方式必须关注孩子如何学会学习，而不仅仅是学什么。《儿童的智识生活》让读者得以走进孩子的内心，看他们在日常时刻如何探索和学习，并强调什么才构成真正的学习。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:2"
+              ],
+              "start": 115,
+              "end": 191,
+              "quote": "孩子生来就带着爱玩的好奇心。他们对一切都会发问——树为什么有叶子？太阳为什么会升起？这些问题帮助孩子发现事物之间的因果关系——这一切都离不开大人的引导。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3"
+              ],
+              "start": 192,
+              "end": 357,
+              "quote": "然而，探索需要时间。正如恩格尔所写：“当孩子被允许深入钻研一个话题时，他们……会把互不相关的事实联系起来，并产生新的想法。”真正的思维活动发生在玩耍之中——比如孩子用椅子搭起一个台子，去够放在高处够不着的饼干盒里的饼干。这些时刻里蕴藏着被强化的好奇心和创新能力。匆忙的家长往往没法给出这样的时间，生怕孩子赶不上下一项安排好的活动。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4"
+              ],
+              "start": 358,
+              "end": 464,
+              "quote": "“显而易见，美国的教育体系并不关心孩子的智识生活，”恩格尔在书中警告说。相反，她希望把学校重新设想为建立在激发好奇心之上的“创意工厂”：“设想在一些新的项目下评估学生的进步：提出有趣的问题……并花时间解决它们。”"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:5"
+              ],
+              "start": 465,
+              "end": 571,
+              "quote": "在一个动人的例子中，恩格尔描述了一位老师，她向学生发起挑战，要搭出一条长达3.8英里、打破纪录的吸管链。“赢了会很有趣，但认知上的收获会更深远，”这位老师解释说，她的目的是帮助孩子们更好地理解马里亚纳海沟有多深。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6"
+              ],
+              "start": 572,
+              "end": 668,
+              "quote": "凭借科学的见解和生动的例子，恩格尔的书就如何让学习更加看得见提供了建议。她鼓励家长把孩子看作主动的思考者，并提出，通过问开放式问题、让孩子去探索，孩子们将为一个复杂多变的世界做好更充分的准备。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-d-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:34",
+              "question:paper-mock-fujian-fuzhou-2025-m1:35"
+            ],
+            "selectedSentenceId": "sentence-reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6",
+                "start": 113,
+                "end": 317,
+                "quote": "She encourages parents to see children as active thinkers and suggests that by asking open-ended questions and letting them explore, children will be better prepared for a complex and ever-changing world."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 36,
+                "end": 96,
+                "quote": "她鼓励家长把孩子看作主动的思考者，并提出，通过问开放式问题、让孩子去探索，孩子们将为一个复杂多变的世界做好更充分的准备。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:32",
+              "question:paper-mock-fujian-fuzhou-2025-m1:34"
+            ],
+            "selectedSentenceId": "sentence-reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+                "start": 365,
+                "end": 500,
+                "quote": "Hurried parents often lack the ability to allow that time, fearing that their children might be late for their next scheduled activity."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 131,
+                "end": 165,
+                "quote": "匆忙的家长往往没法给出这样的时间，生怕孩子赶不上下一项安排好的活动。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+                "start": 28,
+                "end": 160,
+                "quote": "As Engel writes, “when children are allowed to dive into a topic thoroughly, they...connect unrelated facts and generate new ideas.”"
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+                "start": 0,
+                "end": 27,
+                "quote": "Yet explorations take time."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 18,
+                "end": 62,
+                "quote": "“当孩子被允许深入钻研一个话题时，他们……会把互不相关的事实联系起来，并产生新的想法。”"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 0,
+                "end": 10,
+                "quote": "然而，探索需要时间。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4",
+                "start": 0,
+                "end": 144,
+                "quote": "“It becomes clear that the educational system in the U. S. does not concern itself with children’s intellectual lives,” warns Engel in the book."
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4",
+                "start": 145,
+                "end": 233,
+                "quote": "Instead, she hopes to reimagine schools as “idea factories” built on inspiring curiosity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 0,
+                "end": 35,
+                "quote": "“显而易见，美国的教育体系并不关心孩子的智识生活，”恩格尔在书中警告说"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 36,
+                "end": 67,
+                "quote": "相反，她希望把学校重新设想为建立在激发好奇心之上的“创意工厂”"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6",
+                "start": 0,
+                "end": 112,
+                "quote": "With scientific insight and vivid examples, Engel’s book offers tips for how to make the learning more apparent."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 0,
+                "end": 35,
+                "quote": "凭借科学的见解和生动的例子，恩格尔的书就如何让学习更加看得见提供了建议"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+                "start": 161,
+                "end": 206,
+                "quote": "The real mental work takes place as they play"
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6",
+                "start": 113,
+                "end": 170,
+                "quote": "She encourages parents to see children as active thinkers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 62,
+                "end": 76,
+                "quote": "真正的思维活动发生在玩耍之中"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 36,
+                "end": 52,
+                "quote": "她鼓励家长把孩子看作主动的思考者"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "书评先点出教育要关注孩子怎样学会学习，介绍这本书；接着写孩子天生好奇，但好奇要变成真正的学习需要充分探索的时间，而真正的思考发生在玩耍中；再写作者批评美国教育、设想“创意工厂”，并举吸管链的例子；最后评价全书以科学见解和生动实例给家长提供建议。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:1",
+            "summary": "在重视思考与创新的时代，教育要关注孩子怎样学会学习；这本书带读者看孩子怎样在日常中探索和学习。",
+            "function": "提出话题，引出书评对象。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:2",
+            "summary": "孩子生来好奇，会问各种问题，在大人引导下发现事物间的因果关系。",
+            "function": "说明孩子学习的起点是好奇心。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+            "summary": "探索需要时间，充分钻研才能联系事实、产生新想法，真正的思考发生在玩耍中，而匆忙的家长常常给不出这段时间。",
+            "function": "说明好奇心变成真正学习的条件，并指出现实中的阻碍。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4",
+            "summary": "Engel 批评美国教育体系不关心孩子的思维生活，希望把学校变成激发好奇的“创意工厂”。",
+            "function": "转到学校教育，表明作者的批评和设想。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:5",
+            "summary": "书中一位老师让学生搭 3.8 英里的吸管链，目的是让孩子理解马里亚纳海沟有多深。",
+            "function": "举例说明在玩中学的做法。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6",
+            "summary": "这本书用科学见解和生动实例给出建议，鼓励家长把孩子看作主动的思考者，用开放式提问和放手探索培养他们。",
+            "function": "总评全书，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-fujian-fuzhou-2025-m1:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出孩子爱玩的好奇心靠什么才能变成真正的学习。",
+      "stemTranslationZh": "孩子爱玩的好奇心怎样才会变成真正的学习？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看 Yet 后怎么说",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过给孩子限定时间。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Yet explorations take time.",
+            "sourceHighlight": "take time",
+            "optionText": "By giving kids a time limit.",
+            "optionHighlight": "a time limit",
+            "explanation": "原文说探索需要时间（explorations take time），还批评匆忙的家长不肯给这段时间；给孩子限时恰恰相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+              "quote": "Yet explorations take time.",
+              "anchor": "探索需要时间"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过安排额外的活动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Hurried parents often lack the ability to allow that time, fearing that their children might be late for their next scheduled activity.",
+            "sourceHighlight": "their next scheduled activity",
+            "optionText": "By planning out extra activities.",
+            "optionHighlight": "planning out extra activities",
+            "explanation": "排满活动是匆忙家长的做法，他们怕孩子赶不上下一项安排好的活动（next scheduled activity），因而不给探索的时间；这在原文里是阻碍，不是办法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+              "quote": "Hurried parents often lack the ability to allow that time, fearing that their children might be late for their next scheduled activity.",
+              "anchor": "赶下一项活动"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过记住零散的事实。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "facts",
+            "optionText": "facts",
+            "matchType": "exact",
+            "relationNote": "“事实”（facts）出自 Engel 的话，原文是把互不相关的事实联系起来（connect unrelated facts），选项改成记住零散的事实，把动脑联系换成了死记；选项的“随意的”（casual）还和[[block:paper-mock-fujian-fuzhou-2025-m1:reading-d:2|discover the causal relationships]]里的“因果的”（causal）形近。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+              "quote": "As Engel writes, “when children are allowed to dive into a topic thoroughly, they...connect unrelated facts and generate new ideas.”",
+              "anchor": "联系互不相关的事实"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过让孩子充分探索。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+              "quote": "As Engel writes, “when children are allowed to dive into a topic thoroughly, they...connect unrelated facts and generate new ideas.”",
+              "anchor": "允许孩子深入钻研"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+              "quote": "Yet explorations take time.",
+              "anchor": "探索需要时间"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "playful curiosity",
+          "sourceRole": "stem",
+          "targetText": "Children are born with playful curiosity.",
+          "relationType": "locationCue",
+          "answerText": "when children are allowed to dive into a topic thoroughly",
+          "bridgeZh": "Yet 后才说好奇心怎样变成真正的学习",
+          "note": "题干 playful curiosity 原词出现在这句。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:2"
+        },
+        {
+          "sourceText": "By allowing kids to fully explore.",
+          "sourceRole": "correctOption",
+          "targetText": "when children are allowed to dive into a topic thoroughly",
+          "relationType": "paraphrase",
+          "note": "选项的“允许孩子充分探索”（allowing kids to fully explore）就是原文的允许孩子深入钻研一个话题（allowed to dive into a topic thoroughly）；这样孩子才会联系事实、产生新想法，好奇心才成了真正的学习，选 D。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:33": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从 Engel 评价美国教育体系的原话里判断她的态度。",
+      "stemTranslationZh": "Engel 对美国教育体系持什么态度？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "批评的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4",
+              "quote": "“It becomes clear that the educational system in the U. S. does not concern itself with children’s intellectual lives,” warns Engel in the book.",
+              "anchor": "Engel 警告教育体系不关心孩子"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4",
+              "quote": "Instead, she hopes to reimagine schools as “idea factories” built on inspiring curiosity",
+              "anchor": "重新设想学校"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "不明确的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "“It becomes clear that the educational system in the U. S. does not concern itself with children’s intellectual lives,” warns Engel in the book.",
+            "sourceHighlight": "warns",
+            "optionText": "Unclear.",
+            "optionHighlight": "Unclear",
+            "explanation": "Engel 用警告的口吻（warns）直说美国教育体系不关心孩子的思维生活，态度很明确，谈不上不清楚。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4",
+              "quote": "“It becomes clear that the educational system in the U. S. does not concern itself with children’s intellectual lives,” warns Engel in the book.",
+              "anchor": "Engel 的警告"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "不关心的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "does not concern itself",
+            "optionText": "Unconcerned",
+            "matchType": "wordFamily",
+            "relationNote": "“不关心”（Unconcerned）借了原文“不关心”（does not concern itself）这个说法；原文是 Engel 指责教育体系不关心孩子的思维生活，冷漠的是体系，不是 Engel，她反而想重新设计学校。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4",
+              "quote": "“It becomes clear that the educational system in the U. S. does not concern itself with children’s intellectual lives,” warns Engel in the book.",
+              "anchor": "教育体系不关心"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "宽容的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Instead, she hopes to reimagine schools",
+            "sourceHighlight": "reimagine schools",
+            "optionText": "Tolerant.",
+            "optionHighlight": "Tolerant",
+            "explanation": "Engel 不但指出问题，还要把学校重新设想成“创意工厂”（reimagine schools），想改变现状，并不容忍它。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4",
+              "quote": "Instead, she hopes to reimagine schools as “idea factories” built on inspiring curiosity",
+              "anchor": "重新设想学校"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "educational system",
+          "sourceRole": "stem",
+          "targetText": "“It becomes clear that the educational system in the U. S. does not concern itself with children’s intellectual lives,” warns Engel in the book.",
+          "relationType": "locationCue",
+          "answerText": "does not concern itself with children’s intellectual lives,” warns Engel",
+          "note": "题干 educational system 原词出现在这句。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4"
+        },
+        {
+          "sourceText": "Critical.",
+          "sourceRole": "correctOption",
+          "targetText": "“It becomes clear that the educational system in the U. S. does not concern itself with children’s intellectual lives,” warns Engel in the book.",
+          "relationType": "paraphrase",
+          "note": "选项的“批评”（Critical）是从两处看出来的：Engel 说美国教育体系不关心孩子的思维生活（does not concern itself with），用的是警告（warns）；接着又说要把学校重新设想成“创意工厂”。指出问题又要求改变，态度是批评，选 A。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:4"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从书评对全书的总评里找出这本书的特别之处。",
+      "stemTranslationZh": "Engel 的书有什么特别之处？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它呈现了一个复杂的世界。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "world",
+            "optionText": "world",
+            "matchType": "exact",
+            "relationNote": "“世界”（world）出自[[block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6|a complex and ever-changing world]]，那是孩子将来要面对的复杂多变的世界；书讲的是怎样让孩子为它做好准备，并不是去描绘这个世界。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6",
+              "quote": "She encourages parents to see children as active thinkers and suggests that by asking open-ended questions and letting them explore, children will be better prepared for a complex and ever-changing world.",
+              "anchor": "复杂多变的世界"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它提倡安排好的活动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Hurried parents often lack the ability to allow that time, fearing that their children might be late for their next scheduled activity.",
+            "sourceHighlight": "scheduled activity",
+            "optionText": "It promotes scheduled activities.",
+            "optionHighlight": "promotes scheduled activities",
+            "explanation": "安排好的活动（scheduled activity）是匆忙家长赶场的日程，书里把它当作挤掉探索时间的原因；选项说书提倡这些活动，方向反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+              "quote": "Hurried parents often lack the ability to allow that time, fearing that their children might be late for their next scheduled activity.",
+              "anchor": "赶下一项活动"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它把科学和实践结合起来。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6",
+              "quote": "With scientific insight and vivid examples, Engel’s book offers tips for how to make the learning more apparent.",
+              "anchor": "科学见解加生动实例"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它以开放式问题为特色。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "She encourages parents to see children as active thinkers and suggests that by asking open-ended questions and letting them explore, children will be better prepared for a complex and ever-changing world.",
+            "sourceHighlight": "by asking open-ended questions",
+            "optionText": "It features open-ended questions.",
+            "optionHighlight": "open-ended questions",
+            "explanation": "太窄：开放式提问只是书里建议家长做的一件事（by asking open-ended questions），和放手让孩子探索并列；书评说这本书的特点在于科学见解加生动实例。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6",
+              "quote": "She encourages parents to see children as active thinkers and suggests that by asking open-ended questions and letting them explore, children will be better prepared for a complex and ever-changing world.",
+              "anchor": "建议问开放式问题"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Engel’s book",
+          "sourceRole": "stem",
+          "targetText": "With scientific insight and vivid examples, Engel’s book offers tips for how to make the learning more apparent.",
+          "relationType": "locationCue",
+          "answerText": "With scientific insight and vivid examples, Engel’s book offers tips",
+          "note": "题干 Engel’s book 原词出现在这句。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6"
+        },
+        {
+          "sourceText": "It combines science and practice.",
+          "sourceRole": "correctOption",
+          "targetText": "With scientific insight and vivid examples, Engel’s book offers tips for how to make the learning more apparent.",
+          "relationType": "paraphrase",
+          "note": "“科学”落在科学见解（scientific insight）；“实践”落在生动实例（vivid examples），如搭椅子拿饼干、吸管链，以及给家长的具体建议（offers tips）。一本书里两样都有，就是科学和实践相结合，选 C。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:35": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "找出能概括全文“在玩中探索、学会思考”这一中心的标题。",
+      "stemTranslationZh": "这篇文章最好的标题是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-fujian-fuzhou-2025-m1:reading-d:1]] 讲怎样学会学习，[[block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3]] 说思考发生在玩中，[[block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6]] 落到孩子是主动思考者；标题要盖住玩和思考",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "乐趣激发孩子的好奇心",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Winning would be fun",
+            "optionText": "Fun",
+            "matchType": "exact",
+            "relationNote": "“乐趣”（Fun）借自[[block:paper-mock-fujian-fuzhou-2025-m1:reading-d:5|Winning would be fun]]，老师紧接着说真正的收获在认知上（cognitive benefits）；全文讲的是好奇心怎样变成真正的思考，孩子生来就好奇，只说激发好奇停在了起点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:5",
+              "quote": "“Winning would be fun, but the cognitive（认知的）benefits would be far-reaching,”",
+              "anchor": "赢了会很有趣"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "玩耍培养更会思考的人",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+              "quote": "The real mental work takes place as they play",
+              "anchor": "真正的思考发生在玩中"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6",
+              "quote": "She encourages parents to see children as active thinkers",
+              "anchor": "孩子是主动的思考者"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "学习滋养年轻的头脑",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "emphasizing what constitutes real learning",
+            "sourceHighlight": "real learning",
+            "optionText": "Learning Feeds Young Minds",
+            "optionHighlight": "Learning",
+            "explanation": "太宽：“学习滋养年轻头脑”拿去当任何一篇谈教育的文章的标题都行，丢了本文的核心：在玩耍和充分探索中学会思考。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:1",
+              "quote": "emphasizing what constitutes real learning",
+              "anchor": "什么是真正的学习"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "匆忙的家长把孩子教得很好",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Hurried parents often lack the ability to allow that time, fearing that their children might be late for their next scheduled activity.",
+            "sourceHighlight": "lack the ability to allow that time",
+            "optionText": "Hurried Parents Teach Kids Well",
+            "optionHighlight": "Teach Kids Well",
+            "explanation": "原文说匆忙的家长给不了孩子探索的时间（lack the ability to allow that time），是被批评的一方；选项说他们教得好，方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3",
+              "quote": "Hurried parents often lack the ability to allow that time, fearing that their children might be late for their next scheduled activity.",
+              "anchor": "匆忙的家长给不了时间"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Play Develops Better Thinkers",
+          "sourceRole": "correctOption",
+          "targetText": "The real mental work takes place as they play",
+          "relationType": "paraphrase",
+          "note": "全文几处说的都是“玩”和“会思考”的关系：[[block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3|The real mental work takes place as they play]]说真正的动脑发生在玩的时候，[[block:paper-mock-fujian-fuzhou-2025-m1:reading-d:5]]的吸管链比赛也是在玩中学，[[block:paper-mock-fujian-fuzhou-2025-m1:reading-d:6]]落到把孩子看作主动的思考者（active thinkers）。标题的“玩耍”（Play）和“更会思考的人”（Better Thinkers）正好把这两头连起来，选 B。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-d:3"
+        }
+      ]
+    }
+  }
+}

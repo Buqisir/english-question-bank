@@ -1,0 +1,1105 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-fujian-fuzhou-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-fujian-fuzhou-2025-m1:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-fujian-fuzhou-2025-m1:grammar-fill": {
+      "overview": "短文介绍中国宣纸：其名最早见于唐代张彦远的著作，泾县手工宣纸曾被列为贡品；制作工艺要求极高，善于表现墨色，经久耐用，是珍贵的中国文化遗产。",
+      "fullTranslationZh": "“宣纸”一词最早出现在唐代学者张彦远所著的《历代名画记》中，他在书中把宣纸描述为书画的理想载体。产自中国东部安徽省泾县的手工宣纸，当时因品质上乘而被列为献给朝廷的贡品。\n在唐宋时期，宣纸的受欢迎程度和品质都达到了顶峰。制作宣纸的传统工艺要求极高。青檀树皮是一种原产于中国南方的植物，要历经三年、经过108道工序，才能变成上好的宣纸。\n墨的流动决定着中国艺术作品的呈现，而宣纸凭借能让墨色得到充分发挥的出色能力胜过其他纸张。在造纸过程中，树皮与稻草的不同配比能造出不同的“画布”，各自最适合写意水墨画或书法中的艺术表现。宣纸的独特品质在中国书画界受到高度重视。\n宣纸非常耐得住时间带来的损坏。正是这种耐久性，使许多中国古代珍贵作品得以保存下来。悠久的历史、独特的工艺和上乘的品质，使宣纸成为中国珍贵的文化遗产。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sls-1",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+          "sourceText": "The term Xuan paper first appeared in On Famous Paintings through the Ages, a book written by Tang Dynasty scholar Zhang Yanyuan, __56__ he described Xuan paper as an ideal carrier for calligraphy and painting.",
+          "displayText": "The term Xuan paper first appeared in On Famous Paintings through the Ages, a book written by Tang Dynasty scholar Zhang Yanyuan, where he described Xuan paper as an ideal carrier for calligraphy and painting.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:56"
+          ],
+          "translationZh": "“宣纸”一词最早出现在唐代学者张彦远所著的《历代名画记》中，他在书中把宣纸描述为书画的理想载体。",
+          "analysisZh": "主干是“宣纸一词最早出现在某本书里”（The term Xuan paper first appeared in …）。书名后的 a book written by … 是同位语，说明这是张彦远写的书，其中 written by 作后置定语；逗号后 where 引导的非限制性定语从句回指这本书，交代他在书中说了什么。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 34,
+              "quote": "The term Xuan paper first appeared"
+            },
+            {
+              "start": 76,
+              "end": 128,
+              "quote": "a book written by Tang Dynasty scholar Zhang Yanyuan"
+            },
+            {
+              "start": 130,
+              "end": 148,
+              "quote": "where he described"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sls-2",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+          "sourceText": "Different proportions（比例）of bark to straw during the paper-making process can create different canvases（帆布）best suited __62__ artistic expression in freehand ink paintings or calligraphy.",
+          "displayText": "Different proportions（比例）of bark to straw during the paper-making process can create different canvases（帆布）best suited for/to artistic expression in freehand ink paintings or calligraphy.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:62"
+          ],
+          "translationZh": "在造纸过程中，树皮与稻草的不同配比能造出不同的“画布”，各自最适合写意水墨画或书法中的艺术表现。",
+          "analysisZh": "主干是“不同的配比能造出不同的画布”（Different proportions … can create different canvases）。主语后的 of bark to straw 说明是树皮与稻草之比，during the paper-making process 交代时间；宾语后的 best suited for/to … 是形容词短语作后置定语，说明这些画布各自适合什么艺术表现。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "Different proportions"
+            },
+            {
+              "start": 74,
+              "end": 103,
+              "quote": "can create different canvases"
+            },
+            {
+              "start": 107,
+              "end": 145,
+              "quote": "best suited for/to artistic expression"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 84,
+              "quote": "“宣纸”一词最早出现在唐代学者张彦远所著的《历代名画记》中，他在书中把宣纸描述为书画的理想载体。产自中国东部安徽省泾县的手工宣纸，当时因品质上乘而被列为献给朝廷的贡品。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2"
+              ],
+              "start": 85,
+              "end": 166,
+              "quote": "在唐宋时期，宣纸的受欢迎程度和品质都达到了顶峰。制作宣纸的传统工艺要求极高。青檀树皮是一种原产于中国南方的植物，要历经三年、经过108道工序，才能变成上好的宣纸。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3"
+              ],
+              "start": 167,
+              "end": 279,
+              "quote": "墨的流动决定着中国艺术作品的呈现，而宣纸凭借能让墨色得到充分发挥的出色能力胜过其他纸张。在造纸过程中，树皮与稻草的不同配比能造出不同的“画布”，各自最适合写意水墨画或书法中的艺术表现。宣纸的独特品质在中国书画界受到高度重视。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4"
+              ],
+              "start": 280,
+              "end": 354,
+              "quote": "宣纸非常耐得住时间带来的损坏。正是这种耐久性，使许多中国古代珍贵作品得以保存下来。悠久的历史、独特的工艺和上乘的品质，使宣纸成为中国珍贵的文化遗产。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+            "text": "The term Xuan paper first appeared in On Famous Paintings through the Ages, a book written by Tang Dynasty scholar Zhang Yanyuan, where he described Xuan paper as an ideal carrier for calligraphy and painting. Handmade Xuan paper from Jingxian county, East China’s Anhui province, was listed as a gift to the imperial court then for its supreme quality."
+          },
+          {
+            "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+            "text": "During the Tang and Song Dynasties Xuan paper reached its peak of popularity and quality. The traditional craft（工艺）of making Xuan paper is extremely demanding. Sandalwood bark, a plant native to southern China, goes through 108 procedures over the course of three years before it can transform into fine Xuan paper."
+          },
+          {
+            "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+            "text": "The flow of ink determines the output of Chinese art, and Xuan paper outshines others with its excellent ability to give full play to ink. Different proportions（比例）of bark to straw during the paper-making process can create different canvases（帆布）best suited for/to artistic expression in freehand ink paintings or calligraphy. The unique quality of Xuan paper is highly valued in the world of Chinese calligraphy and painting."
+          },
+          {
+            "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+            "text": "Xuan paper is very resistant to damage brought by time. It is this durability that has made the preservation of many valuable works from ancient China possible. The long history, unique craftsmanship, and high quality of Xuan paper have made it a treasured cultural heritage of China."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 76,
+                "end": 128,
+                "quote": "a book written by Tang Dynasty scholar Zhang Yanyuan"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 137,
+                "end": 180,
+                "quote": "he described Xuan paper as an ideal carrier"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 15,
+                "end": 28,
+                "quote": "张彦远所著的《历代名画记》"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 30,
+                "end": 47,
+                "quote": "他在书中把宣纸描述为书画的理想载体"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:56"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 130,
+                "end": 135,
+                "quote": "where"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 31,
+                "end": 34,
+                "quote": "在书中"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 211,
+                "end": 230,
+                "quote": "Handmade Xuan paper"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 309,
+                "end": 332,
+                "quote": "the imperial court then"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 60,
+                "end": 64,
+                "quote": "手工宣纸"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 65,
+                "end": 67,
+                "quote": "当时"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:57"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 281,
+                "end": 291,
+                "quote": "was listed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 73,
+                "end": 76,
+                "quote": "被列为"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 54,
+                "end": 65,
+                "quote": "its peak of"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 83,
+                "end": 94,
+                "quote": "and quality"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 18,
+                "end": 23,
+                "quote": "达到了顶峰"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 15,
+                "end": 17,
+                "quote": "品质"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:58"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 66,
+                "end": 76,
+                "quote": "popularity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 9,
+                "end": 14,
+                "quote": "受欢迎程度"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 96,
+                "end": 117,
+                "quote": "The traditional craft"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 142,
+                "end": 154,
+                "quote": "is extremely"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 29,
+                "end": 33,
+                "quote": "传统工艺"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:59"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 149,
+                "end": 158,
+                "quote": "demanding"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 33,
+                "end": 37,
+                "quote": "要求极高"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 172,
+                "end": 187,
+                "quote": "Sandalwood bark"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 289,
+                "end": 312,
+                "quote": "before it can transform"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 38,
+                "end": 42,
+                "quote": "青檀树皮"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 71,
+                "end": 75,
+                "quote": "才能变成"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:60"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 211,
+                "end": 215,
+                "quote": "goes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:2",
+                "start": 62,
+                "end": 64,
+                "quote": "经过"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 95,
+                "end": 112,
+                "quote": "excellent ability"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 127,
+                "end": 143,
+                "quote": "full play to ink"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 33,
+                "end": 37,
+                "quote": "出色能力"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:61"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 113,
+                "end": 120,
+                "quote": "to give"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 28,
+                "end": 32,
+                "quote": "充分发挥"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 252,
+                "end": 263,
+                "quote": "best suited"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 271,
+                "end": 290,
+                "quote": "artistic expression"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 87,
+                "end": 91,
+                "quote": "艺术表现"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:62"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 258,
+                "end": 264,
+                "quote": "for/to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 74,
+                "end": 77,
+                "quote": "最适合"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 383,
+                "end": 438,
+                "quote": "valued in the world of Chinese calligraphy and painting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 105,
+                "end": 111,
+                "quote": "受到高度重视"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:63"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 363,
+                "end": 369,
+                "quote": "highly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 107,
+                "end": 109,
+                "quote": "高度"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 56,
+                "end": 77,
+                "quote": "It is this durability"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 85,
+                "end": 110,
+                "quote": "has made the preservation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 15,
+                "end": 22,
+                "quote": "正是这种耐久性"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 23,
+                "end": 40,
+                "quote": "使许多中国古代珍贵作品得以保存下来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:64"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 78,
+                "end": 82,
+                "quote": "that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 15,
+                "end": 22,
+                "quote": "正是这种耐久性"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 267,
+                "end": 293,
+                "quote": "cultural heritage of China"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 69,
+                "end": 73,
+                "quote": "文化遗产"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:65"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 247,
+                "end": 256,
+                "quote": "treasured"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:4",
+                "start": 66,
+                "end": 69,
+                "quote": "珍贵的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:56"
+            ],
+            "selectedSentenceId": "sls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 0,
+                "end": 34,
+                "quote": "The term Xuan paper first appeared"
+              },
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 76,
+                "end": 128,
+                "quote": "a book written by Tang Dynasty scholar Zhang Yanyuan"
+              },
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 130,
+                "end": 148,
+                "quote": "where he described"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:1",
+                "start": 0,
+                "end": 48,
+                "quote": "“宣纸”一词最早出现在唐代学者张彦远所著的《历代名画记》中，他在书中把宣纸描述为书画的理想载体。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-sls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:62"
+            ],
+            "selectedSentenceId": "sls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 139,
+                "end": 160,
+                "quote": "Different proportions"
+              },
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 213,
+                "end": 242,
+                "quote": "can create different canvases"
+              },
+              {
+                "textId": "done-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 246,
+                "end": 284,
+                "quote": "best suited for/to artistic expression"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-fujian-fuzhou-2025-m1:grammar-fill:3",
+                "start": 51,
+                "end": 92,
+                "quote": "树皮与稻草的不同配比能造出不同的“画布”，各自最适合写意水墨画或书法中的艺术表现。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-fujian-fuzhou-2025-m1:56": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "where",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-adverbial",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导非限制性定语从句，修饰前面的那本书（a book），即《历代名画记》。从句（he described Xuan paper as an ideal carrier）主谓宾齐全，缺的是“在这本书里”这一地点状语，所以用关系副词（where）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "a book written by Tang Dynasty scholar Zhang Yanyuan",
+          "signalSide": "passage",
+          "relation": "先行词是这本书（a book），从句说的是在书里做的事。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "he described Xuan paper as an ideal carrier",
+          "signalSide": "passage",
+          "relation": "从句主谓宾俱全，只缺表示“在其中”的地点状语。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:57": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "list",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was listed",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-context-cue",
+        "features": []
+      },
+      "reason": "空格作句子谓语，主语是手工宣纸（Handmade Xuan paper），中间隔着产地说明。宣纸是“被列为”贡品，用被动语态；句中的当时（then）说明是过去的事，主语为单数，所以填（was listed）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Handmade Xuan paper",
+          "signalSide": "passage",
+          "relation": "主语是单数的宣纸，它是被列为贡品的对象。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "the imperial court then",
+          "signalSide": "passage",
+          "relation": "当时（then）指向唐代，谓语用一般过去时。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:58": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "popular",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
+      "answer": "popularity",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作介词（of）的宾语，又与品质（quality）并列，需要名词；形容词（popular）的名词形式是（popularity）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "its peak of",
+          "signalSide": "passage",
+          "relation": "介词（of）后面要接名词作宾语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "and quality",
+          "signalSide": "passage",
+          "relation": "与名词品质（quality）并列，词性一致。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:59": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "demand",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "demanding",
+      "role": "predicative",
+      "similarityProfile": {
+        "route": "predicative-participle-property",
+        "features": []
+      },
+      "reason": "空格在系动词（is）后作表语，受副词（extremely）修饰，说明传统工艺本身的特点。工艺“对人要求高”，是它主动带给人的性质，所以用现在分词形式的（demanding）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The traditional craft",
+          "signalSide": "passage",
+          "relation": "主语是工艺，空格说明这门工艺本身的性质。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "is extremely",
+          "signalSide": "passage",
+          "relation": "系动词后由程度副词修饰，空格要形容词性的表语。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:60": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "go",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "goes",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "空格作句子谓语，主语是青檀树皮（Sandalwood bark），中间插入了它的同位说明（a plant native to southern China）。这里讲的是宣纸制作的固定工序，用一般现在时，主语为单数，所以填（goes）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Sandalwood bark",
+          "signalSide": "passage",
+          "relation": "主语是单数的树皮，插入的同位说明不影响主谓一致。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "before it can transform",
+          "signalSide": "passage",
+          "relation": "后面的从句也用现在时（can transform），整句讲的是一贯的工序。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:61": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "give",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to give",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-abstract-content",
+        "features": []
+      },
+      "reason": "空格修饰抽象名词能力（ability），说明是什么样的能力，可还原为（ability that it has to give full play to ink）。能力（ability）后接不定式作后置定语，所以填（to give）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "excellent ability",
+          "signalSide": "passage",
+          "relation": "被修饰的是抽象名词能力（ability），说明能力的内容。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "full play to ink",
+          "signalSide": "passage",
+          "relation": "充分发挥（give full play to）说的就是这种能力。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:62": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for/to",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把艺术表现（artistic expression）接到形容词适合的（suited）上，说明这些“画布”适合什么用途；表示“适合于”，用介词（for）或（to）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "best suited",
+          "signalSide": "passage",
+          "relation": "适合的（suited）后接介词，再接适合的用途。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "artistic expression",
+          "signalSide": "passage",
+          "relation": "介词的宾语是艺术表现，即画布适合的用途。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:63": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "high",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "highly",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "空格修饰被动谓语（is … valued），说明受重视的程度，需要副词；表示“高度地、非常”用（highly），不用表示具体高度的（high）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "valued",
+          "signalSide": "passage",
+          "relation": "被修饰的是谓语动词受重视（valued），要用副词。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:64": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.cleft",
+      "answer": "that",
+      "role": null,
+      "similarityProfile": {
+        "route": "cleft-that",
+        "features": []
+      },
+      "reason": "去掉强调框架（It is … that）后，剩下的（this durability has made the preservation … possible）仍是完整句子，说明这是强调句，强调的是主语这种耐久性（this durability），所以填（that）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "It is this durability",
+          "signalSide": "passage",
+          "relation": "强调句框架 It is … that … 中，被强调部分是这种耐久性。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "has made the preservation",
+          "signalSide": "passage",
+          "relation": "空格后直接接谓语，去掉框架后句子仍完整。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:65": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "treasure",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "treasured",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "preposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格修饰后面的名词文化遗产（cultural heritage），作前置定语；遗产是被人们珍视的，与动词珍视（treasure）是被动关系，所以用过去分词（treasured）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "cultural heritage",
+          "signalSide": "passage",
+          "relation": "被修饰的是文化遗产，它是被珍视的对象。"
+        }
+      ]
+    }
+  }
+}

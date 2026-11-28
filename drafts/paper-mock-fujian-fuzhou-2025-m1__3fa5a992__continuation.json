@@ -1,0 +1,198 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Gradually, Emily’s confidence grew with Mr. Jenkins’ help. She began drawing her own colored diagrams for new problems, and the steps no longer looked like a mess. When a problem seemed too hard, she no longer cried. Instead, she took a deep breath and broke it into smaller pieces, just as Mr. Jenkins had taught her. In class, she even raised her hand to answer a question for the first time that year. Then came the final exam. Looking at the empty answer sheet, Emily remembered his words about the blank canvas. She worked through each problem one step at a time and handed in her paper, tired but calm.\n\nParagraph 2: Emily’s heart raced when the results day arrived. As the teacher handed back the papers, she held her breath and slowly turned hers over. A red B was written at the top, her best math grade ever. She read it twice to make sure it was real. That afternoon, she rushed into her session with Mr. Jenkins and laid the paper on his desk. He smiled and said, “I told you, Emily. Masterpieces take time.” Emily laughed, her eyes shining. That night, she opened her sketchbook and painted a picture of colorful shapes and numbers. At the bottom she wrote, “For Mr. Jenkins, who showed me where to look.”",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "Emily 擅长画画却一直学不好数学，在 Mr. Jenkins 的引导下刚开始有一点进步；Mr. Jenkins 是退休教师，用画画式的讲法和不断的鼓励陪她坚持。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第三人称、一般过去时，跟着 Emily 的感受往下讲；句子中等长短，动作和心理写得多，人物的话很少，全文只有三处短的直接引语。续写照样用第三人称过去时、以叙述为主，只在关键处留一两句短的直接引语。",
+          "evidence": [
+            "Encouraged by his firm belief, Emily pushed on."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在 Emily 靠练习中的小进步重新有了希望，但真正的考验还没到：她的数学能不能真的好起来，信心经不经得起一次正式考试的结果。",
+          "evidence": [
+            "Small victories in practice problems gave her some hope."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "Emily Harper",
+          "role": "十年级学生，有绘画天赋，数学一直吃力",
+          "lines": [
+            {
+              "label": "性格",
+              "text": "有艺术天赋，但遇到挫折容易灰心落泪。",
+              "evidence": "A particularly difficult quiz left her in tears"
+            },
+            {
+              "label": "想要",
+              "text": "摆脱数学差的处境，跟上同学。",
+              "evidence": "The pressure to keep up with her classmates grew"
+            },
+            {
+              "label": "此刻",
+              "text": "开始看懂解题步骤之间的联系，逐渐找回希望。",
+              "evidence": "She began to see the connections between the steps"
+            }
+          ]
+        },
+        {
+          "name": "Mr. Jenkins",
+          "role": "退休的本地教师，Emily 的数学辅导老师",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "用颜色和图形把抽象的数字讲得看得见。",
+              "evidence": "He used colors and shapes"
+            },
+            {
+              "label": "性格",
+              "text": "耐心，相信进步需要时间。",
+              "evidence": "Masterpieces aren’t created overnight."
+            },
+            {
+              "label": "表现",
+              "text": "再小的进步也为她庆祝。",
+              "evidence": "celebrating her successes, no matter how minor"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "He used colors and shapes",
+          "use": "第 1 段：Emily 自己动手画彩色图来解新题，说明她把老师的方法真正学到了手，信心有了来处。"
+        },
+        {
+          "sourceQuote": "every artist starts with a blank canvas",
+          "use": "第 1 段：期末考试面对空白答卷时，她想起这句话，稳住情绪一步步作答。"
+        },
+        {
+          "sourceQuote": "It has patterns and beauty if you know where to look.",
+          "use": "第 2 段：结尾她画了一幅图形和数字的画送给老师，写下 who showed me where to look，回应两人第一次见面时的话。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "Emily 学会自己用图形拆题、敢在课上发言，平静地考完期末；出分那天拿到自己最好的数学成绩，把好消息带给 Mr. Jenkins，并画了一幅画答谢他。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "以“Emily 在 Mr. Jenkins 帮助下渐渐有了信心”开头，写出信心怎样体现出来；段末要有一场考试已经考完，第二段的“出分那天”才有着落；成绩不能在这一段揭晓。",
+          "draft": "Emily 自己画彩色图解题，遇到难题不再哭，而是拆成小步；课上第一次举手；期末考试时想起“空白画布”的话，一步步答完，疲惫但平静地交卷。",
+          "bridgeQuote": "when the results day arrived",
+          "bridge": "第一段结束时，哪一场考试必须已经考完，第二段的“出分那天”才接得上？"
+        },
+        {
+          "paragraph": 2,
+          "must": "以“出分那天 Emily 心跳加速”开头，写出成绩揭晓和她的反应，收住原文“数学能否进步、信心能否站稳”的问题；成绩好到什么程度原文没有规定。",
+          "draft": "她屏住呼吸翻开试卷，看到一个 B，是她数学最好的一次；当天赶去辅导课把卷子给 Mr. Jenkins 看，他笑着说杰作需要时间；当晚她画了一幅彩色图形和数字的画，写上谢语送给他。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Gradually, Emily’s confidence grew with Mr. Jenkins’ help. She began drawing her own colored diagrams for new problems, and the steps no longer looked like a mess. When a problem seemed too hard, she no longer cried. Instead, she took a deep breath and broke it into smaller pieces, just as Mr. Jenkins had taught her. In class, she even raised her hand to answer a question for the first time that year. Then came the final exam. Looking at the empty answer sheet, Emily remembered his words about the blank canvas. She worked through each problem one step at a time and handed in her paper, tired but calm.\n\nParagraph 2: Emily’s heart raced when the results day arrived. As the teacher handed back the papers, she held her breath and slowly turned hers over. A red B was written at the top, her best math grade ever. She read it twice to make sure it was real. That afternoon, she rushed into her session with Mr. Jenkins and laid the paper on his desk. He smiled and said, “I told you, Emily. Masterpieces take time.” Emily laughed, her eyes shining. That night, she opened her sketchbook and painted a picture of colorful shapes and numbers. At the bottom she wrote, “For Mr. Jenkins, who showed me where to look.”",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "把“信心增长”写成看得见的做法，再把故事推进到考完期末、成绩未出。",
+          "items": [
+            {
+              "quote": "She began drawing her own colored diagrams for new problems",
+              "explain": "信心不是直接喊出来的：她自己用起 Mr. Jenkins 的颜色和图形，说明方法真学会了，回收原文 He used colors and shapes。"
+            },
+            {
+              "quote": "When a problem seemed too hard, she no longer cried.",
+              "explain": "和原文测验后哭的情节对照，一句话写出前后变化，比 she became confident 有说服力。"
+            },
+            {
+              "quote": "Emily remembered his words about the blank canvas",
+              "explain": "用原文的伏笔稳住考场情绪，只点到“空白画布”，不整句照抄原话。"
+            },
+            {
+              "quote": "handed in her paper, tired but calm",
+              "explain": "只写交卷时的状态，不提前公布成绩，把悬念留给第二段段首的 results day。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "揭晓成绩，让 Emily 把好消息带回给 Mr. Jenkins，用一个具体动作收住全文。",
+          "items": [
+            {
+              "quote": "she held her breath and slowly turned hers over",
+              "explain": "用屏住呼吸、慢慢翻卷两个动作接住段首句的心跳加速，紧张写在动作里。"
+            },
+            {
+              "quote": "A red B was written at the top, her best math grade ever.",
+              "explain": "只是一个 B，不写满分逆袭：进步真实可信，也和原文 progress was slow 的节奏一致。"
+            },
+            {
+              "quote": "“I told you, Emily. Masterpieces take time.”",
+              "explain": "原文人物的话很少，这里只给 Mr. Jenkins 一句短话，呼应他说过的杰作不是一夜完成的，人物说话前后一致。"
+            },
+            {
+              "quote": "“For Mr. Jenkins, who showed me where to look.”",
+              "explain": "回收两人初见时的 if you know where to look，用她最擅长的画画答谢老师，结尾落在一个具体动作上，不喊口号。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "broke it into smaller pieces",
+          "function": "写她用学到的方法拆开难题，让“有信心”有具体做法支撑。"
+        },
+        {
+          "expression": "tired but calm",
+          "function": "两个形容词并列写考后状态，短而准确，既交代辛苦又写出心态变化。"
+        },
+        {
+          "expression": "held her breath",
+          "function": "写等待结果时的紧张，用动作代替 very nervous。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "在第一段就写出考试成绩，甚至考了满分",
+          "why": "第二段段首才到出分那天，成绩应在第二段揭晓；原文又说 progress was slow，一下子满分不可信。"
+        },
+        {
+          "pitfall": "让新同学或别的老师来帮 Emily 解决问题",
+          "why": "原文推动她进步的一直是 Mr. Jenkins，新人物会抢走原文人物的戏，像天降的帮助。"
+        },
+        {
+          "pitfall": "结尾写成“只要努力就能成功”之类的口号",
+          "why": "原文的线索是颜色图形、空白画布和“知道往哪里看”，结尾落在这些具体的事和动作上，比一句放到哪篇都成立的道理有力。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Gradually, Emily’s confidence grew with Mr. Jenkins’ help. Before long, she was sketching her own colored diagrams for every new problem, and equations that once looked like a mess began to fall into neat patterns. When a problem stumped her, she no longer reached for a tissue. Instead, she took a deep breath and broke it into smaller steps, just as Mr. Jenkins had shown her. One morning in math class, she even raised her hand, and her answer was right. Then the final exam came. Staring at the empty answer sheet, Emily felt her old fear creep back, but she remembered the blank canvas. One line at a time, she filled the page, checked every step and handed it in, tired but strangely calm.\n\nParagraph 2: Emily’s heart raced when the results day arrived. As the papers were passed back, she gripped the edge of her desk and slowly turned hers over. A red B sat at the top of the page, the best math grade she had ever earned. She blinked at it twice, half afraid it would disappear. That afternoon, she burst into her session with Mr. Jenkins and laid the paper on the table without a word. He studied it, then broke into the same warm smile he had worn on their first day. “Didn’t I tell you? It just took time,” he said. Emily laughed, and the knot in her stomach finally loosened. That night, she opened her sketchbook and painted a page of bright shapes and numbers. Underneath, she wrote, “For Mr. Jenkins, who showed me where to look.”",
+      "beyondStandard": [
+        {
+          "quote": "equations that once looked like a mess began to fall into neat patterns",
+          "explain": "fall into patterns 呼应 Mr. Jenkins 说数学 has patterns，比标准版 the steps no longer looked like a mess 更具体，也把老师的话落到了实处。"
+        },
+        {
+          "quote": "she no longer reached for a tissue",
+          "explain": "用“不再伸手拿纸巾”暗示不再哭，比 she no longer cried 含蓄，更像原作者的叙述口吻。"
+        },
+        {
+          "quote": "the same warm smile he had worn on their first day",
+          "explain": "回扣两人第一次见面时他笑了的细节，人物前后一致，师生关系也写得更暖。"
+        }
+      ]
+    }
+  }
+}

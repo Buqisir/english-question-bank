@@ -1,0 +1,769 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-fujian-fuzhou-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-fujian-fuzhou-2025-m1:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-fujian-fuzhou-2025-m1:reading-a": {
+      "overview": "文章先说好的艺术家网站应像美术馆一样简洁、突出作品，再介绍四位艺术家：Sophie Kahn、Jason Arkles、Benjamin Hardman 和 Andrea Lawl Manning 的创作方向及各自网站的设计特点。",
+      "fullTranslationZh": "好的艺术家网站应当展示你的作品。想想美术馆是怎样设计的——功能明确、简洁朴素，墙上留出大片空白。这样做是为了不喧宾夺主，让作品成为焦点。人们来你的网站，不是为了看一个很有艺术感的网站。别想把网站本身做成一件艺术品——那样做很少有好结果。\n索菲·卡恩\n索菲·卡恩是一位关注人体的艺术家，她运用数字技术和雕塑技法进行创作。她用三维激光成像把构想变成现实，这些作品既有印刷版，也有视频版。\n这个网站的设计很经典，访客通过简便的导航栏就能进一步了解这位艺术家和她的展览。\n杰森·阿克尔斯\n杰森是一位雕塑家，他的技艺突出19世纪的审美趣味。虽然他的趣味偏向历史，他却喜欢用现代、前卫的方式来运用这种趣味。\n网站首页美观简洁，主要有两部分：作品，以及通往重要页面的链接。\n本杰明·哈德曼\n本杰明是一位摄影师，他拍下了许多严酷环境中令人惊叹的画面。在他的作品里，你能看到美丽的风景和生活在野外的动物。\n这个网站设计简约，处处为潜在客户着想。凭借独特的视觉设计，它能把客户带到他们想去的地方。\n安德烈娅·劳尔·曼宁\n安德烈娅是一位用颜料创作独特多彩雕塑的艺术家。也就是说，作品用的是干了的颜料，各种形态能造出非常惊人的东西！\n网站上的图片可以点击，全屏欣赏作品。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:4",
+          "sourceText": "This website’s design is classic, allowing visitors to learn more about the artist and exhibitions through an easy navigation（导航）bar.",
+          "displayText": "This website’s design is classic, allowing visitors to learn more about the artist and exhibitions through an easy navigation（导航）bar.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:22"
+          ],
+          "translationZh": "这个网站的设计很经典，访客通过简便的导航栏就能进一步了解这位艺术家和她的展览。",
+          "analysisZh": "主干是 This website’s design is classic（网站设计很经典）。逗号后的 allowing visitors to learn more about … 是现在分词短语，补充说明这种设计带来的结果：让访客进一步了解艺术家和展览；through an easy navigation bar 说明靠什么做到，就是简便的导航栏。第 22 题的“好用的菜单”正出自这里。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 32,
+              "quote": "This website’s design is classic"
+            },
+            {
+              "start": 34,
+              "end": 65,
+              "quote": "allowing visitors to learn more"
+            },
+            {
+              "start": 99,
+              "end": 132,
+              "quote": "through an easy navigation（导航）bar"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:6",
+          "sourceText": "Although his tastes are historical, he loves to apply that in a modernistic and forward-moving manner.",
+          "displayText": "Although his tastes are historical, he loves to apply that in a modernistic and forward-moving manner.",
+          "relatedQuestionIds": [],
+          "translationZh": "虽然他的趣味偏向历史，他却喜欢用现代、前卫的方式来运用这种趣味。",
+          "analysisZh": "主句是 he loves to apply that（他喜欢运用这种趣味），that 指前面的 historical tastes。Although 引出让步：趣味是历史的；主句后的 in a modernistic and forward-moving manner 说明运用的方式是现代、前卫的。一句话里“古”和“新”形成对照，重点在主句。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 34,
+              "quote": "Although his tastes are historical"
+            },
+            {
+              "start": 36,
+              "end": 58,
+              "quote": "he loves to apply that"
+            },
+            {
+              "start": 59,
+              "end": 101,
+              "quote": "in a modernistic and forward-moving manner"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:1"
+              ],
+              "start": 0,
+              "end": 118,
+              "quote": "好的艺术家网站应当展示你的作品。想想美术馆是怎样设计的——功能明确、简洁朴素，墙上留出大片空白。这样做是为了不喧宾夺主，让作品成为焦点。人们来你的网站，不是为了看一个很有艺术感的网站。别想把网站本身做成一件艺术品——那样做很少有好结果。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:2"
+              ],
+              "start": 119,
+              "end": 124,
+              "quote": "索菲·卡恩"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:3"
+              ],
+              "start": 125,
+              "end": 191,
+              "quote": "索菲·卡恩是一位关注人体的艺术家，她运用数字技术和雕塑技法进行创作。她用三维激光成像把构想变成现实，这些作品既有印刷版，也有视频版。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:4"
+              ],
+              "start": 192,
+              "end": 231,
+              "quote": "这个网站的设计很经典，访客通过简便的导航栏就能进一步了解这位艺术家和她的展览。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:5"
+              ],
+              "start": 232,
+              "end": 239,
+              "quote": "杰森·阿克尔斯"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:6"
+              ],
+              "start": 240,
+              "end": 297,
+              "quote": "杰森是一位雕塑家，他的技艺突出19世纪的审美趣味。虽然他的趣味偏向历史，他却喜欢用现代、前卫的方式来运用这种趣味。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:7"
+              ],
+              "start": 298,
+              "end": 329,
+              "quote": "网站首页美观简洁，主要有两部分：作品，以及通往重要页面的链接。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:8"
+              ],
+              "start": 330,
+              "end": 337,
+              "quote": "本杰明·哈德曼"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:9"
+              ],
+              "start": 338,
+              "end": 393,
+              "quote": "本杰明是一位摄影师，他拍下了许多严酷环境中令人惊叹的画面。在他的作品里，你能看到美丽的风景和生活在野外的动物。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:10"
+              ],
+              "start": 394,
+              "end": 438,
+              "quote": "这个网站设计简约，处处为潜在客户着想。凭借独特的视觉设计，它能把客户带到他们想去的地方。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:11"
+              ],
+              "start": 439,
+              "end": 449,
+              "quote": "安德烈娅·劳尔·曼宁"
+            },
+            {
+              "paragraphId": "zh-reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:12"
+              ],
+              "start": 450,
+              "end": 504,
+              "quote": "安德烈娅是一位用颜料创作独特多彩雕塑的艺术家。也就是说，作品用的是干了的颜料，各种形态能造出非常惊人的东西！"
+            },
+            {
+              "paragraphId": "zh-reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:13"
+              ],
+              "start": 505,
+              "end": 523,
+              "quote": "网站上的图片可以点击，全屏欣赏作品。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-a-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:22"
+            ],
+            "selectedSentenceId": "sentence-reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:4",
+                "start": 0,
+                "end": 133,
+                "quote": "This website’s design is classic, allowing visitors to learn more about the artist and exhibitions through an easy navigation（导航）bar."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p4",
+                "start": 0,
+                "end": 39,
+                "quote": "这个网站的设计很经典，访客通过简便的导航栏就能进一步了解这位艺术家和她的展览。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:6",
+                "start": 78,
+                "end": 180,
+                "quote": "Although his tastes are historical, he loves to apply that in a modernistic and forward-moving manner."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p6",
+                "start": 25,
+                "end": 57,
+                "quote": "虽然他的趣味偏向历史，他却喜欢用现代、前卫的方式来运用这种趣味。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:1",
+                "start": 0,
+                "end": 47,
+                "quote": "A good artist website should showcase your art."
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:1",
+                "start": 157,
+                "end": 213,
+                "quote": "They do this to get out of the way and showcase the art."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p1",
+                "start": 0,
+                "end": 15,
+                "quote": "好的艺术家网站应当展示你的作品"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p1",
+                "start": 48,
+                "end": 67,
+                "quote": "这样做是为了不喧宾夺主，让作品成为焦点"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:4",
+                "start": 0,
+                "end": 133,
+                "quote": "This website’s design is classic, allowing visitors to learn more about the artist and exhibitions through an easy navigation（导航）bar."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p4",
+                "start": 11,
+                "end": 38,
+                "quote": "访客通过简便的导航栏就能进一步了解这位艺术家和她的展览"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:9",
+                "start": 85,
+                "end": 176,
+                "quote": "You can find images of beautiful landscapes and animals that live in the wild in his works."
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:9",
+                "start": 0,
+                "end": 84,
+                "quote": "Benjamu n is a photographer that catches some amazing images of severe environments."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 36,
+                "end": 54,
+                "quote": "你能看到美丽的风景和生活在野外的动物"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 10,
+                "end": 28,
+                "quote": "他拍下了许多严酷环境中令人惊叹的画面"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先提出好的艺术家网站要像美术馆一样简洁、把作品放在中心，再依次介绍四位艺术家，每位先写创作方向，再写网站设计。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:1",
+            "summary": "好的艺术家网站应当突出作品，像美术馆那样简洁留白，不要把网站本身做成艺术品。",
+            "function": "提出全文的评判标准，统领下文四个例子。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:2",
+            "summary": "第一位艺术家 Sophie Kahn 的名字。",
+            "function": "小标题，引出第一个网站介绍。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:3",
+            "summary": "Sophie Kahn 用数字和雕塑技术表现人体，作品有印刷版和视频版。",
+            "function": "介绍这位艺术家的创作方向。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:4",
+            "summary": "她的网站设计经典，靠简便的导航栏让访客了解艺术家和展览。",
+            "function": "介绍网站设计特点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:5",
+            "summary": "第二位艺术家 Jason Arkles 的名字。",
+            "function": "小标题，引出第二个网站介绍。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:6",
+            "summary": "Jason 是追求 19 世纪趣味的雕塑家，又喜欢用现代方式表现。",
+            "function": "介绍这位艺术家的创作方向。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:7",
+            "summary": "他的网站首页美观简洁，只有作品和重要页面链接两部分。",
+            "function": "介绍网站设计特点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:8",
+            "summary": "第三位艺术家 Benjamin Hardman 的名字。",
+            "function": "小标题，引出第三个网站介绍。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:9",
+            "summary": "Benjamin 是摄影师，拍摄严酷环境中的风景和野生动物。",
+            "function": "介绍这位艺术家的创作方向。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:10",
+            "summary": "他的网站简约，以独特的视觉设计为潜在客户引路。",
+            "function": "介绍网站设计特点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:11",
+            "summary": "第四位艺术家 Andrea Lawl Manning 的名字。",
+            "function": "小标题，引出第四个网站介绍。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:12",
+            "summary": "Andrea 用干颜料创作独特多彩的雕塑。",
+            "function": "介绍这位艺术家的创作方向。"
+          },
+          {
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:13",
+            "summary": "她的网站图片可点击、可全屏看作品。",
+            "function": "介绍网站设计特点。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-fujian-fuzhou-2025-m1:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从开头对好网站的要求里找出它的重点是什么。",
+      "stemTranslationZh": "好的艺术家网站主要侧重于什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "艺术家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "A good artist website should showcase your art.",
+            "sourceEntity": "your art",
+            "optionText": "Artists.",
+            "optionEntity": "Artists",
+            "explanation": "“艺术家网站”里有艺术家（artist）这个词，选项顺着它把重点换成了艺术家本人；原文要网站展示的是作品（your art）。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "艺术作品。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:1",
+              "quote": "A good artist website should showcase your art.",
+              "anchor": "好网站应展示作品"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:1",
+              "quote": "They do this to get out of the way and showcase the art.",
+              "anchor": "让开位置突出作品"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "网站的外观。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "People didn’t come to your website to look at an artistic-looking website.",
+            "sourceHighlight": "didn’t come to your website to look at an artistic-looking website",
+            "optionText": "Their looks.",
+            "optionHighlight": "looks",
+            "explanation": "原文说人们不是来看网站本身多有艺术感的（didn’t come … to look at an artistic-looking website），还劝别把网站做成艺术品；选项把重点放在外观上，正好反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:1",
+              "quote": "People didn’t come to your website to look at an artistic-looking website.",
+              "anchor": "人们不是来看网站外观的"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "网站的首页。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "homepage",
+            "optionText": "homepages",
+            "matchType": "wordFamily",
+            "relationNote": "首页（homepage）只在 [[block:paper-mock-fujian-fuzhou-2025-m1:reading-a:7]] 介绍 Jason 的网站时出现，说他的首页简洁好看；开头讲好网站的重点时说的是展示作品，没提首页。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:7",
+              "quote": "The homepage is beautiful and simple, with two main elements: the-art and links to important pages.",
+              "anchor": "Jason 网站的首页"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "focus on",
+          "sourceRole": "stem",
+          "targetText": "A good artist website should showcase your art.",
+          "relationType": "locationCue",
+          "targetCue": "showcase",
+          "sourceZh": "侧重于",
+          "targetCueZh": "展示",
+          "answerText": "showcase your art",
+          "note": "题干 focus on 对应原文 showcase：网站侧重什么，就是它要展示什么。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:1"
+        },
+        {
+          "sourceText": "Artworks.",
+          "sourceRole": "correctOption",
+          "targetText": "showcase your art",
+          "relationType": "paraphrase",
+          "note": "选项的“作品”（Artworks）就是原文要展示的作品（your art）；后文又拿美术馆作比，留白是为了让作品成为焦点（showcase the art），选 B。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:1"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "先找到 Sophie Kahn 这一节，再从介绍她网站的那句里找特点。",
+      "stemTranslationZh": "Sophie Kahn 的网站有什么特点？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一段看她网站的设计",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它提供好用的菜单。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:4",
+              "quote": "This website’s design is classic, allowing visitors to learn more about the artist and exhibitions through an easy navigation（导航）bar.",
+              "anchor": "Sophie 网站的导航栏"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它提供可点击的图片。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "clickable pictures",
+            "optionText": "clickable pictures",
+            "matchType": "exact",
+            "relationNote": "可点击的图片（clickable pictures）原样出自 [[block:paper-mock-fujian-fuzhou-2025-m1:reading-a:13]]，那是 Andrea Lawl Manning 的网站，不是 Sophie Kahn 的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:13",
+              "quote": "The website features clickable pictures to see the art in full- screen mode.",
+              "anchor": "Andrea 网站的可点击图片"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它体现了历史趣味。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "his tastes are historical",
+            "optionText": "historical taste",
+            "matchType": "wordFamily",
+            "relationNote": "“历史趣味”来自 [[block:paper-mock-fujian-fuzhou-2025-m1:reading-a:6|Although his tastes are historical]]（his tastes are historical），说的是雕塑家 Jason 作品的审美，人不对，说的也不是网站。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:6",
+              "quote": "Although his tastes are historical, he loves to apply that in a modernistic and forward-moving manner.",
+              "anchor": "Jason 的历史趣味"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它采用花哨的设计。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "This website’s design is classic",
+            "sourceHighlight": "classic",
+            "optionText": "It follows a fancy design.",
+            "optionHighlight": "fancy",
+            "explanation": "原文说她的网站设计经典（classic），开头还劝别把网站本身做成艺术品；选项说设计花哨（fancy），和原文相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:4",
+              "quote": "This website’s design is classic, allowing visitors to learn more about the artist and exhibitions through an easy navigation（导航）bar.",
+              "anchor": "网站设计经典"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Sophie Kahn",
+          "sourceRole": "stem",
+          "targetText": "Sophie Kahn is an artist that focuses on the human body by using digital and sculpting techniques.",
+          "relationType": "locationCue",
+          "answerText": "an easy navigation（导航）bar",
+          "bridgeZh": "This website 指 Sophie Kahn 的网站",
+          "note": "题干 Sophie Kahn 原词出现在原文，先找到写她的这一节。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:3"
+        },
+        {
+          "sourceText": "a user- friendly menu",
+          "sourceRole": "correctOption",
+          "targetText": "This website’s design is classic, allowing visitors to learn more about the artist and exhibitions through an easy navigation（导航）bar.",
+          "relationType": "paraphrase",
+          "note": "选项的“好用的菜单”（user- friendly menu）就是原文的“简便的导航栏”（easy navigation bar）：导航栏就是网站的菜单，访客靠它就能找到艺术家和展览的介绍，选 A。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:4"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:23": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把“喜欢自然的人”这一条件拿去对四位艺术家的作品题材，推断谁的网站最合他们的口味。",
+      "stemTranslationZh": "谁的网站可能会吸引对自然感兴趣的人？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Sophie Kahn 的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Sophie Kahn is an artist that focuses on the human body by using digital and sculpting techniques.",
+            "sourceEntity": "the human body",
+            "optionText": "Sophie Kahn’s.",
+            "optionEntity": "Sophie Kahn",
+            "explanation": "Sophie Kahn 的作品关注的是人体（the human body），用激光和数字技术做成，原文没写自然题材。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:3",
+              "quote": "Sophie Kahn is an artist that focuses on the human body by using digital and sculpting techniques.",
+              "anchor": "Sophie 关注人体"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Jason Arkles 的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Jason is a sculptor with skills that emphasize the taste of the 19th century.",
+            "sourceEntity": "the taste of the 19th century",
+            "optionText": "Jason Arkles’.",
+            "optionEntity": "Jason Arkles",
+            "explanation": "Jason 是雕塑家，作品讲究 19 世纪的审美（the taste of the 19th century），原文只写到他的风格，没写自然题材。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:6",
+              "quote": "Jason is a sculptor with skills that emphasize the taste of the 19th century.",
+              "anchor": "Jason 的 19 世纪趣味"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Benjamin Hardman 的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:9",
+              "quote": "You can find images of beautiful landscapes and animals that live in the wild in his works.",
+              "anchor": "Benjamin 拍风景和野生动物"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:9",
+              "quote": "Benjamu n is a photographer that catches some amazing images of severe environments.",
+              "anchor": "Benjamin 拍严酷环境"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Andrea Lawl Manning 的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Andrea is an artist that uses paint to create unique and colorful sculptures.",
+            "sourceEntity": "colorful sculptures",
+            "optionText": "Andrea Lawl Manning’s.",
+            "optionEntity": "Andrea Lawl Manning",
+            "explanation": "Andrea 用颜料做彩色雕塑（colorful sculptures），网站的特点是能全屏看图，都和自然无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:12",
+              "quote": "Andrea is an artist that uses paint to create unique and colorful sculptures.",
+              "anchor": "Andrea 的颜料雕塑"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "nature",
+          "sourceRole": "stem",
+          "targetText": "You can find images of beautiful landscapes and animals that live in the wild in his works.",
+          "relationType": "locationCue",
+          "targetCue": "the wild",
+          "sourceZh": "自然",
+          "targetCueZh": "野外",
+          "answerText": "images of beautiful landscapes and animals that live in the wild",
+          "note": "题干 nature 对应原文的风景和野外动物（the wild），只落在 Benjamin 这一节。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:9"
+        },
+        {
+          "sourceText": "Benjamin Hardman’s.",
+          "sourceRole": "correctOption",
+          "targetText": "You can find images of beautiful landscapes and animals that live in the wild in his works.",
+          "relationType": "paraphrase",
+          "note": "原文没直接说谁的网站吸引自然爱好者，只说 Benjamin 的作品里有美丽风景和野生动物（landscapes and animals … in the wild）；喜欢自然的人爱看的正是这些，由此推出他的网站最可能吸引他们，选 C。",
+          "targetParagraphId": "block:paper-mock-fujian-fuzhou-2025-m1:reading-a:9"
+        }
+      ]
+    }
+  }
+}

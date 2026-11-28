@@ -1,0 +1,1009 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-fujian-fuzhou-2025-m1",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-fujian-fuzhou-2025-m1:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-fujian-fuzhou-2025-m1:seven-choices": {
+      "overview": "文章谈怎样养成健康的新习惯。作者先指出很多人方法用错了，比如只定大目标不迈小步，再给出两条有研究支持的建议：把新习惯挂在已有习惯上，清除妨碍好习惯的“摩擦”。",
+      "fullTranslationZh": "我们都是习惯的产物。我们往往每天在同一时间起床、刷牙、喝早咖啡、去上班，日复一日遵循同样的模式。但为什么养成健康的新习惯这么难呢？\n研究习惯养成的行为科学家说，我们很多人尝试养成健康习惯的方式是错误的。\n例如，我们定下减肥的大目标，却没有采取恰当的步骤。下面是两条有研究支持的、养成健康新习惯的建议。\n养成新习惯更好的办法是把它和一个已有的习惯绑在一起。对我们很多人来说，早晨的例行活动是最牢固的，所以那里是培养新习惯的好地方。刷牙的时候，你可以单脚站立来练习平衡。我们很多人在一天结束时也有固定的模式。你是不是下班后常常陷进沙发、打开电视？那可能是每天做一个瑜伽动作的好时机。\n当我们清除障碍时，我们很可能就会养成新习惯。研究心理学家温迪·伍德把妨碍好习惯的那些力量称为“摩擦力”。在一项研究中，研究人员调整了电梯门的关闭时间，员工得等将近半分钟门才关上。这点延迟刚好足够。因此，许多人认定走楼梯比等电梯更省事。这说明我们对环境中细小的摩擦有多么敏感。仅仅让电梯慢下来，就让人们走起了楼梯，而且即使电梯恢复了正常的关门时间，他们仍坚持走楼梯。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:seven:wood-friction",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+          "sourceText": "Wendy Wood, a research psychologist, calls the forces that get in the way of good habits “friction”.",
+          "displayText": "Wendy Wood, a research psychologist, calls the forces that get in the way of good habits “friction”.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:39"
+          ],
+          "translationZh": "研究心理学家温迪·伍德把妨碍好习惯的那些力量称为“摩擦力”。",
+          "analysisZh": "主干是 Wendy Wood calls the forces “friction”，用 call sth + 名词 的结构，意思是“把……称为……”。a research psychologist 是插在主语后的同位语，交代伍德的身份；that get in the way of good habits 是定语从句，修饰 the forces，get in the way of 意为“妨碍”。合起来，“摩擦力”指的就是妨碍好习惯的那些力量，正好接住前一句说的 the barriers。",
+          "underlineRanges": [
+            {
+              "start": 37,
+              "end": 53,
+              "quote": "calls the forces"
+            },
+            {
+              "start": 54,
+              "end": 88,
+              "quote": "that get in the way of good habits"
+            },
+            {
+              "start": 89,
+              "end": 99,
+              "quote": "“friction”"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:seven:lift-stairs",
+          "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+          "sourceText": "Just slowing down the lift got people to take the stairs, and they stuck with it even after the lift went back to normal timing.",
+          "displayText": "Just slowing down the lift got people to take the stairs, and they stuck with it even after the lift went back to normal timing.",
+          "relatedQuestionIds": [
+            "question:paper-mock-fujian-fuzhou-2025-m1:40"
+          ],
+          "translationZh": "仅仅让电梯慢下来，就让人们走起了楼梯，而且即使电梯恢复了正常的关门时间，他们仍坚持走楼梯。",
+          "analysisZh": "这是 and 连接的两个分句。前一句的主语是动名词短语 Just slowing down the lift，谓语用 get sb to do 结构（got people to take the stairs），意思是“让人们去走楼梯”。后一句主干是 they stuck with it，it 指走楼梯这件事；even after 引导时间状语从句，强调电梯恢复正常以后人们仍然坚持。整句说明一点小小的延迟就改变了人们的习惯。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 26,
+              "quote": "Just slowing down the lift"
+            },
+            {
+              "start": 27,
+              "end": 56,
+              "quote": "got people to take the stairs"
+            },
+            {
+              "start": 81,
+              "end": 127,
+              "quote": "even after the lift went back to normal timing"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "全文按“提出问题 → 指出错法 → 给出两条建议”推进：先说人是习惯的产物，却难养成新习惯；再说很多人方法不对并举例；最后分两段讲两条建议，各用生活例子或实验说明。",
+        "units": [
+          {
+            "unitId": "unit-question",
+            "paragraphIds": [
+              "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:1",
+              "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:2"
+            ],
+            "summary": "人每天按固定模式生活，可新习惯却难养成；行为科学家认为很多人方法用错了。"
+          },
+          {
+            "unitId": "unit-wrong-way",
+            "paragraphIds": [
+              "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:3"
+            ],
+            "summary": "举出只定减肥大目标、不采取恰当步骤的错误做法，并引出两条建议。"
+          },
+          {
+            "unitId": "unit-tip-one",
+            "paragraphIds": [
+              "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:4"
+            ],
+            "summary": "建议一：把新习惯和已有习惯绑在一起，如刷牙时单脚站立、下班看电视时做瑜伽动作。"
+          },
+          {
+            "unitId": "unit-tip-two",
+            "paragraphIds": [
+              "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5"
+            ],
+            "summary": "建议二：清除妨碍好习惯的“摩擦力”；电梯门延迟实验说明人对小阻力非常敏感。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 36,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "C",
+          "shared": [
+            "why"
+          ],
+          "text": "选项也是 why 问句，能接在第 36 题空前 \"following the same patterns every day\" 之后发问。但下一段回答的是 \"create healthy habits the wrong way\"，讲怎样养成新习惯，并没有人放弃好习惯（\"stop doing\"），问和答对不上。",
+          "quotes": [
+            "following the same patterns every day",
+            "create healthy habits the wrong way",
+            "stop doing"
+          ]
+        },
+        "F": {
+          "target": 39,
+          "secondary": 40,
+          "kind": "shadow",
+          "shadowOf": "D",
+          "shared": [
+            "form"
+          ],
+          "text": "选项的 friction 和 good habits 在第 39 题空后 \"the way of good habits “friction”\" 里都出现了。但空在段首，\"It\" 没有可指的对象；“摩擦力”这个说法要到空后这句才由 Wendy Wood 提出，不能先用。放进第 40 题也接不上：那里 It 虽可指实验，但空后 \"therefore\" 推出人们改走楼梯，要的是延迟本身。",
+          "quotes": [
+            "the way of good habits “friction”",
+            "It",
+            "therefore"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-1",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 65,
+              "quote": "我们都是习惯的产物。我们往往每天在同一时间起床、刷牙、喝早咖啡、去上班，日复一日遵循同样的模式。但为什么养成健康的新习惯这么难呢？"
+            },
+            {
+              "paragraphId": "tr-2",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:2"
+              ],
+              "start": 66,
+              "end": 101,
+              "quote": "研究习惯养成的行为科学家说，我们很多人尝试养成健康习惯的方式是错误的。"
+            },
+            {
+              "paragraphId": "tr-3",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:3"
+              ],
+              "start": 102,
+              "end": 150,
+              "quote": "例如，我们定下减肥的大目标，却没有采取恰当的步骤。下面是两条有研究支持的、养成健康新习惯的建议。"
+            },
+            {
+              "paragraphId": "tr-4",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:4"
+              ],
+              "start": 151,
+              "end": 289,
+              "quote": "养成新习惯更好的办法是把它和一个已有的习惯绑在一起。对我们很多人来说，早晨的例行活动是最牢固的，所以那里是培养新习惯的好地方。刷牙的时候，你可以单脚站立来练习平衡。我们很多人在一天结束时也有固定的模式。你是不是下班后常常陷进沙发、打开电视？那可能是每天做一个瑜伽动作的好时机。"
+            },
+            {
+              "paragraphId": "tr-5",
+              "sourceParagraphIds": [
+                "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5"
+              ],
+              "start": 290,
+              "end": 472,
+              "quote": "当我们清除障碍时，我们很可能就会养成新习惯。研究心理学家温迪·伍德把妨碍好习惯的那些力量称为“摩擦力”。在一项研究中，研究人员调整了电梯门的关闭时间，员工得等将近半分钟门才关上。这点延迟刚好足够。因此，许多人认定走楼梯比等电梯更省事。这说明我们对环境中细小的摩擦有多么敏感。仅仅让电梯慢下来，就让人们走起了楼梯，而且即使电梯恢复了正常的关门时间，他们仍坚持走楼梯。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:1",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:1",
+            "text": "We are all creatures of habit. We tend to wake up at the same time each day, brush our teeth, have morning coffee and travel to work, following the same patterns every day. But why is it so hard to form new healthy habits?"
+          },
+          {
+            "textId": "completed:block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:3",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:3",
+            "text": "For example, we set big goals to lose weight without taking proper steps. Here are two tips, backed by research, for forming new healthy habits."
+          },
+          {
+            "textId": "completed:block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:4",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:4",
+            "text": "The better way to form a new habit is to tie it to an existing habit. For many of us, our morning routine is the strongest, so that’s a great place to build a new habit. While brushing your teeth, you might stand on one foot to practice balance. Many of us fall into end-of-the-day patterns as well. Do you tend to sink into the sofa after work and turn on the TV? That might be a good time to do a single daily yoga pose."
+          },
+          {
+            "textId": "completed:block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+            "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+            "text": "We probably form new habits when we clear away the barriers. Wendy Wood, a research psychologist, calls the forces that get in the way of good habits “friction”. In one study, researchers changed the timing of lift doors so that workers had to wait nearly half a minute for the doors to close. It was just enough of a delay. Many people are therefore convinced that taking the stairs was easier than waiting for the lift. It shows how sensitive we are to small friction in our environment. Just slowing down the lift got people to take the stairs, and they stuck with it even after the lift went back to normal timing."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:2",
+                "start": 57,
+                "end": 110,
+                "quote": "many of us try to create healthy habits the wrong way"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-2",
+                "start": 14,
+                "end": 34,
+                "quote": "我们很多人尝试养成健康习惯的方式是错误的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:2",
+                "start": 68,
+                "end": 110,
+                "quote": "try to create healthy habits the wrong way"
+              },
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:3",
+                "start": 7,
+                "end": 77,
+                "quote": "Here are two tips, backed by research, for forming new healthy habits."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-2",
+                "start": 19,
+                "end": 34,
+                "quote": "尝试养成健康习惯的方式是错误的"
+              },
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-3",
+                "start": 25,
+                "end": 48,
+                "quote": "下面是两条有研究支持的、养成健康新习惯的建议。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:4",
+                "start": 23,
+                "end": 105,
+                "quote": "our morning routine is the strongest, so that’s a great place to build a new habit"
+              },
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:4",
+                "start": 107,
+                "end": 182,
+                "quote": "While brushing your teeth, you might stand on one foot to practice balance."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-4",
+                "start": 35,
+                "end": 62,
+                "quote": "早晨的例行活动是最牢固的，所以那里是培养新习惯的好地方"
+              },
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-4",
+                "start": 63,
+                "end": 82,
+                "quote": "刷牙的时候，你可以单脚站立来练习平衡。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+                "start": 44,
+                "end": 106,
+                "quote": "calls the forces that get in the way of good habits “friction”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-5",
+                "start": 33,
+                "end": 51,
+                "quote": "把妨碍好习惯的那些力量称为“摩擦力”"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+                "start": 175,
+                "end": 238,
+                "quote": "workers had to wait nearly half a minute for the doors to close"
+              },
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+                "start": 247,
+                "end": 343,
+                "quote": "Many people are therefore convinced that taking the stairs was easier than waiting for the lift."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-5",
+                "start": 75,
+                "end": 88,
+                "quote": "员工得等将近半分钟门才关上"
+              },
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-5",
+                "start": 98,
+                "end": 117,
+                "quote": "因此，许多人认定走楼梯比等电梯更省事。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:36"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:1",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:1",
+                "start": 173,
+                "end": 222,
+                "quote": "But why is it so hard to form new healthy habits?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-1",
+                "start": 48,
+                "end": 65,
+                "quote": "但为什么养成健康的新习惯这么难呢？"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:37"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:3",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:3",
+                "start": 0,
+                "end": 73,
+                "quote": "For example, we set big goals to lose weight without taking proper steps."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-3",
+                "start": 0,
+                "end": 25,
+                "quote": "例如，我们定下减肥的大目标，却没有采取恰当的步骤。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:38"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:4",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:4",
+                "start": 0,
+                "end": 69,
+                "quote": "The better way to form a new habit is to tie it to an existing habit."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-4",
+                "start": 0,
+                "end": 26,
+                "quote": "养成新习惯更好的办法是把它和一个已有的习惯绑在一起。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:39"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+                "start": 0,
+                "end": 60,
+                "quote": "We probably form new habits when we clear away the barriers."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-5",
+                "start": 0,
+                "end": 22,
+                "quote": "当我们清除障碍时，我们很可能就会养成新习惯。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:40"
+            ],
+            "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+                "start": 294,
+                "end": 324,
+                "quote": "It was just enough of a delay."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-5",
+                "start": 89,
+                "end": 98,
+                "quote": "这点延迟刚好足够。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:seven:wood-friction",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:39"
+            ],
+            "selectedSentenceId": "sentence:seven:wood-friction",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+                "start": 7,
+                "end": 107,
+                "quote": "Wendy Wood, a research psychologist, calls the forces that get in the way of good habits “friction”."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-5",
+                "start": 22,
+                "end": 52,
+                "quote": "研究心理学家温迪·伍德把妨碍好习惯的那些力量称为“摩擦力”。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:seven:lift-stairs",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-fujian-fuzhou-2025-m1:40"
+            ],
+            "selectedSentenceId": "sentence:seven:lift-stairs",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+                "start": 412,
+                "end": 540,
+                "quote": "Just slowing down the lift got people to take the stairs, and they stuck with it even after the lift went back to normal timing."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-fujian-fuzhou-2025-m1:seven-choices",
+                "paragraphId": "tr-5",
+                "start": 137,
+                "end": 182,
+                "quote": "仅仅让电梯慢下来，就让人们走起了楼梯，而且即使电梯恢复了正常的关门时间，他们仍坚持走楼梯。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-fujian-fuzhou-2025-m1:36": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:36",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "creatures of habit",
+        "following the same patterns",
+        "create healthy habits",
+        "the wrong way"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:1",
+        "beforeQuote": "following the same patterns every day.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "following the same patterns every day",
+          "relation": "But 把空前人人照老习惯过日子的状态，转到新习惯为什么难养成的问题上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "form new healthy habits",
+          "signalSide": "option",
+          "targetText": "create healthy habits the wrong way",
+          "relation": "选项问的养成新习惯，正是下一段 create healthy habits 讨论的对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "create healthy habits the wrong way",
+          "signalSide": "context-after",
+          "targetText": "why is it so hard",
+          "relation": "下一段说方法用错了，回答了选项“为什么这么难”的提问。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "creatures of habit",
+          "signalSide": "context-before",
+          "targetText": "new healthy habits",
+          "relation": "空前先说人离不开旧习惯，选项再对比出新习惯难养成。"
+        }
+      ],
+      "lock": [
+        "But",
+        "create healthy habits the wrong way"
+      ],
+      "find": {
+        "text": "下一段说人们 \"create healthy habits the wrong way\"，是在解释新习惯为什么难养成；C 问的正是这个，\"But\" 又把空前的老习惯转到新习惯上。",
+        "quotes": [
+          "create healthy habits the wrong way",
+          "But"
+        ]
+      },
+      "explain": "空前讲我们天天被老习惯牵着走，这句用一个问题把话题从已有的习惯转到养新习惯的难处；下一段科学家的说法就是对这个问题的回答，全文由此展开。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "creatures of habit / following the same patterns",
+            "optionSide": "But why is it so hard",
+            "relation": "空前是旧习惯根深蒂固，选项用 But 转问新习惯为何难养成。"
+          },
+          {
+            "contextSide": "create healthy habits the wrong way",
+            "optionSide": "form new healthy habits",
+            "relation": "下一段的回答与选项的提问对象一致，都是养成健康习惯。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "空前讲我们天天被老习惯牵着走，这句用一个问题把话题从已有的习惯转到养新习惯的难处；下一段科学家的说法就是对这个问题的回答，全文由此展开。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "选项也是 why 问句，能接在第 36 题空前 \"following the same patterns every day\" 之后发问。但下一段回答的是 \"create healthy habits the wrong way\"，讲怎样养成新习惯，并没有人放弃好习惯（\"stop doing\"），问和答对不上。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:37": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:37",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "create healthy habits",
+        "the wrong way",
+        "two tips",
+        "forming new healthy habits"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:3",
+        "beforeQuote": "",
+        "afterQuote": "Here are two tips, backed by research, for forming new healthy habits."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "For example",
+          "signalSide": "option",
+          "targetText": "the wrong way",
+          "relation": "For example 引出例子，例子要证明上一段 the wrong way 这个说法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "the wrong way",
+          "signalSide": "context-before",
+          "targetText": "set big goals to lose weight without taking proper steps",
+          "relation": "上一段只说方法错了，选项举出具体的错误做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "without taking proper steps",
+          "signalSide": "option",
+          "targetText": "the wrong way",
+          "relation": "只定目标不迈步，就是上一段所说的错误方式。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Here are two tips",
+          "signalSide": "context-after",
+          "targetText": "the wrong way",
+          "relation": "举完错法，空后转入正确做法的建议。"
+        }
+      ],
+      "lock": [
+        "For example",
+        "the wrong way"
+      ],
+      "find": {
+        "text": "上一段说很多人用 \"the wrong way\" 养习惯，\"For example\" 要接一个错误做法；G 只定大目标却 \"without taking proper steps\"，正是错法。",
+        "quotes": [
+          "the wrong way",
+          "For example",
+          "without taking proper steps"
+        ]
+      },
+      "explain": "这句把上一段抽象的“方法错了”落到一个具体做法上：只喊减肥目标，不安排步骤。错法摆出来以后，空后再给两条建议，读者就能对照着看什么是对的。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 的 \"The better way\" 能和上一段 \"the wrong way\" 相对，但空后才说 \"Here are two tips\"，好办法要在建议里展开，不该抢在前面。",
+          "quotes": [
+            "The better way",
+            "the wrong way",
+            "Here are two tips"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "try to create healthy habits the wrong way",
+            "optionSide": "For example, we set big goals to lose weight without taking proper steps",
+            "relation": "选项给上一段的“错误方式”举了一个具体例子。"
+          },
+          {
+            "contextSide": "Here are two tips",
+            "optionSide": "without taking proper steps",
+            "relation": "缺少恰当步骤是问题，空后的建议就是补上正确步骤。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "这句把上一段抽象的“方法错了”落到一个具体做法上：只喊减肥目标，不安排步骤。错法摆出来以后，空后再给两条建议，读者就能对照着看什么是对的。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 的 \"The better way\" 能和上一段 \"the wrong way\" 相对，但空后才说 \"Here are two tips\"，好办法要在建议里展开，不该抢在前面。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:38": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "morning routine",
+        "build a new habit",
+        "brushing your teeth",
+        "end-of-the-day patterns",
+        "a single daily yoga pose"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "For many of us, our morning routine is the strongest, so that’s a great place to build a new habit. While brushing your teeth, you might stand on one foot to practice balance."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "tie it to an existing habit",
+          "signalSide": "option",
+          "targetText": "morning routine / brushing your teeth",
+          "relation": "选项提出把新习惯挂在已有习惯上，空后的晨间例行活动就是已有习惯。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "morning routine",
+          "signalSide": "context-after",
+          "targetText": "an existing habit",
+          "relation": "morning routine 是选项 an existing habit 的具体例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "build a new habit",
+          "signalSide": "context-after",
+          "targetText": "form a new habit",
+          "relation": "空后的 build a new habit 复现选项的 form a new habit。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "While brushing your teeth",
+          "signalSide": "context-after",
+          "targetText": "tie it to an existing habit",
+          "relation": "边刷牙边练平衡，就是把新动作绑在老习惯上。"
+        }
+      ],
+      "lock": [
+        "an existing habit",
+        "morning routine",
+        "build a new habit"
+      ],
+      "find": {
+        "text": "空后说 \"morning routine\" 是 \"a great place to build a new habit\"，又举刷牙时单脚站立；E 的 \"tie it to an existing habit\" 正好概括这种做法。",
+        "quotes": [
+          "morning routine",
+          "a great place to build a new habit",
+          "tie it to an existing habit"
+        ]
+      },
+      "explain": "这是两条建议里的第一条，先亮出办法，后面用刷牙时练平衡、下班窝沙发时做一个瑜伽动作两个例子，一早一晚，说明新习惯怎样挂到老习惯上。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 也是一条养习惯的办法，但空后讲的是 \"morning routine\" 这类已有习惯，没有要清除的 \"barriers\"。",
+          "quotes": [
+            "morning routine",
+            "barriers"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "morning routine / end-of-the-day patterns",
+            "optionSide": "an existing habit",
+            "relation": "早晚的固定活动都是已有习惯，是选项所说的挂靠点。"
+          },
+          {
+            "contextSide": "build a new habit / stand on one foot / a single daily yoga pose",
+            "optionSide": "form a new habit",
+            "relation": "单脚站、做瑜伽动作是要养成的新习惯。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "这是两条建议里的第一条，先亮出办法，后面用刷牙时练平衡、下班窝沙发时做一个瑜伽动作两个例子，一早一晚，说明新习惯怎样挂到老习惯上。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 也是一条养习惯的办法，但空后讲的是 \"morning routine\" 这类已有习惯，没有要清除的 \"barriers\"。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:39": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "get in the way of good habits",
+        "friction",
+        "small friction in our environment",
+        "slowing down the lift"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+        "beforeQuote": "",
+        "afterQuote": "Wendy Wood, a research psychologist, calls the forces that get in the way of good habits “friction”."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "clear away the barriers",
+          "signalSide": "option",
+          "targetText": "the forces that get in the way of good habits",
+          "relation": "选项提出清除障碍，空后马上解释这些障碍是什么。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "get in the way of good habits",
+          "signalSide": "context-after",
+          "targetText": "the barriers",
+          "relation": "妨碍好习惯的力量，就是选项里的 barriers。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "friction",
+          "signalSide": "context-after",
+          "targetText": "the barriers",
+          "relation": "空后给障碍起了个名字叫“摩擦力”，后文都围绕它展开。"
+        }
+      ],
+      "lock": [
+        "clear away the barriers",
+        "get in the way of good habits"
+      ],
+      "find": {
+        "text": "空后把 \"get in the way of good habits\" 的力量叫作“摩擦力”，前面得先提到障碍；D 的 \"clear away the barriers\" 正好引出它。",
+        "quotes": [
+          "get in the way of good habits",
+          "clear away the barriers"
+        ]
+      },
+      "explain": "这是第二条建议的总起句。后面先给障碍起名“摩擦力”，再用电梯门关得慢、员工改走楼梯的实验说明：一点点阻力就能改变人的选择。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "the forces that get in the way of good habits / friction",
+            "optionSide": "the barriers",
+            "relation": "空后的“妨碍好习惯的力量”和选项的“障碍”说的是同一件事。"
+          },
+          {
+            "contextSide": "small friction in our environment",
+            "optionSide": "clear away the barriers",
+            "relation": "段尾说人对小摩擦很敏感，所以清除障碍才有效。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "这是第二条建议的总起句。后面先给障碍起名“摩擦力”，再用电梯门关得慢、员工改走楼梯的实验说明：一点点阻力就能改变人的选择。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "选项的 friction 和 good habits 在第 39 题空后 \"the way of good habits “friction”\" 里都出现了。但空在段首，\"It\" 没有可指的对象；“摩擦力”这个说法要到空后这句才由 Wendy Wood 提出，不能先用。放进第 40 题也接不上：那里 It 虽可指实验，但空后 \"therefore\" 推出人们改走楼梯，要的是延迟本身。"
+        }
+      ]
+    },
+    "question:paper-mock-fujian-fuzhou-2025-m1:40": {
+      "blankId": "blank:paper-mock-fujian-fuzhou-2025-m1:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "changed the timing of lift doors",
+        "wait nearly half a minute",
+        "taking the stairs was easier",
+        "waiting for the lift"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-fujian-fuzhou-2025-m1:seven-choices:5",
+        "beforeQuote": "In one study, researchers changed the timing of lift doors so that workers had to wait nearly half a minute for the doors to close.",
+        "afterQuote": "Many people are therefore convinced that taking the stairs was easier than waiting for the lift."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "therefore",
+          "signalSide": "context-after",
+          "targetText": "It was just enough of a delay.",
+          "relation": "therefore 说人们因此改走楼梯，原因要在空里：延迟刚好够让人嫌麻烦。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "wait nearly half a minute",
+          "relation": "It 指空前员工等电梯门关上的那段时间。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "nearly half a minute",
+          "signalSide": "context-before",
+          "targetText": "a delay",
+          "relation": "将近半分钟的等待，就是选项说的 a delay。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a delay",
+          "signalSide": "option",
+          "targetText": "waiting for the lift",
+          "relation": "a delay 和空后的 waiting for the lift 是同一段等待。"
+        }
+      ],
+      "lock": [
+        "nearly half a minute",
+        "a delay",
+        "therefore"
+      ],
+      "find": {
+        "text": "空前员工要等 \"nearly half a minute\"，A 用 \"It\" 和 \"a delay\" 指这段等待；空后 \"therefore\" 说的改走楼梯，正是这点延迟造成的。",
+        "quotes": [
+          "nearly half a minute",
+          "It",
+          "a delay",
+          "therefore"
+        ]
+      },
+      "explain": "空前交代实验怎么改电梯门，空后说人们改走楼梯；这句夹在中间点明半分钟“刚好够”，说明改动很小却足以让人嫌麻烦，后面 small friction 的结论才站得住。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "wait nearly half a minute for the doors to close",
+            "optionSide": "It was just enough of a delay",
+            "relation": "选项用 It 和 a delay 概括空前的等待。"
+          },
+          {
+            "contextSide": "Many people are therefore convinced that taking the stairs was easier",
+            "optionSide": "just enough",
+            "relation": "延迟刚好够，才有空后 therefore 引出的结果。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "空前交代实验怎么改电梯门，空后说人们改走楼梯；这句夹在中间点明半分钟“刚好够”，说明改动很小却足以让人嫌麻烦，后面 small friction 的结论才站得住。"
+      },
+      "keyDistractors": []
+    }
+  }
+}
