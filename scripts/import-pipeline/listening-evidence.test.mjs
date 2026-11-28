@@ -310,6 +310,20 @@ test('only cross-window timestamps tolerate a gap of up to 0.15 seconds', t => {
   })
   assert.throws(() => validateListeningReview(root, agent, subject, transcript), /widened range contains other speech/u)
 })
+test('a second source in the supplemental window cannot explain sauce using the same anchor', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t, 'usable', {
+    extraWords: [{ word: 'sauce', start: 3.14, end: 3.28 }],
+  })
+  const relative = 'listening-review-evidence/repeated-source.json'
+  const words = [{ word: 'source', start: 2.8, end: 3 }, { word: 'source', start: 3.14, end: 3.28 }]
+  const bytes = Buffer.from(JSON.stringify({ segments: [{ words }] }))
+  writeFileSync(path.join(root, relative), bytes)
+  agent.evidence.push({ ...agent.evidence[0], path: relative, sha256: sha256(bytes), byteLength: bytes.length })
+  Object.assign(agent.groups[0].boundaryJudgment.end.words[0], {
+    text: 'source', startSeconds: 3.14, endSeconds: 3.28, evidencePath: relative,
+  })
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /widened range contains other speech/u)
+})
 test('the unresolved next opening You takes precedence over a judged thank you', t => {
   const { root, agent, subject, transcript } = agentNavigation(t, 'usable', {
     sourceText: 'M: Thank you.', nextText: 'W: You look tired.', unresolvedNext: true,
@@ -346,8 +360,9 @@ test('a supplement cited by a usable group cannot cover another occurrence', t =
     extraWords: [{ word: 'Another', start: 4.25, end: 4.5 }],
   })
   const raw = agent.evidence[0], relative = 'listening-review-evidence/supplement.json'
-  writeFileSync(path.join(root, relative), readFileSync(path.join(root, raw.path)))
-  agent.evidence.push({ ...raw, path: relative })
+  const bytes = Buffer.from(JSON.stringify({ segments: [{ words: [{ word: 'SOURCE!', start: 3, end: 3.2 }] }] }))
+  writeFileSync(path.join(root, relative), bytes)
+  agent.evidence.push({ ...raw, path: relative, sha256: sha256(bytes), byteLength: bytes.length })
   agent.groups[0].boundaryJudgment.end.words[0].evidencePath = relative
   const next = agent.groups[1]
   Object.assign(next, { decision: 'usable', playback: { startSeconds: 4, endSeconds: 5 },

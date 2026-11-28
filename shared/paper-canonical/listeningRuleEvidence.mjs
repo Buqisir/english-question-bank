@@ -52,6 +52,25 @@ function samePronunciation(span, path, original) {
   return span.startSeconds <= original.runEndSeconds + tolerance && span.endSeconds >= original.runStartSeconds - tolerance
 }
 
+// Compare all timed runs, including the ones the boundary judgment did not cite.
+function nearestCrossWindowRun(original, { words, speech }) {
+  const token = edgeWordText(original.expressionText)
+  let nearest, bestGap = Infinity, bestOffset = Infinity
+  function consider(text, startSeconds, endSeconds) {
+    const gap = Math.max(0, startSeconds - original.runEndSeconds, original.runStartSeconds - endSeconds)
+    if (gap > CROSS_WINDOW_WORD_JITTER_SECONDS + 1e-9 || edgeWordText(text) !== token) return
+    const offset = Math.abs(startSeconds - original.runStartSeconds) + Math.abs(endSeconds - original.runEndSeconds)
+    if (gap < bestGap || (gap === bestGap && offset < bestOffset)) {
+      nearest = { startSeconds, endSeconds }
+      bestGap = gap
+      bestOffset = offset
+    }
+  }
+  for (const word of words) consider(word.expressionText, word.runStartSeconds, word.runEndSeconds)
+  for (const span of speech) consider(span.text, span.startSeconds, span.endSeconds)
+  return nearest
+}
+
 function assertUsableAdjustment(machine, adjusted, asrByPath, windows, { source, previous, next: following, observedEdges, machinePaths }, fail) {
   if (!Array.isArray(adjusted.occurrences) || machine.occurrences.length !== adjusted.occurrences.length) {
     fail(`${machine.segmentId}: usable adjustment must preserve occurrence count`)
@@ -99,19 +118,33 @@ function assertUsableAdjustment(machine, adjusted, asrByPath, windows, { source,
         const pair = side === 'end' ? words.slice(Math.max(0, index - 1), index + 1) : words.slice(index, index + 2)
         return pair.map(original => ({ ...original, path }))
       }))
+      const nearestByAnchor = new Map()
+      const matchesAnchor = (span, path, original) => {
+        if (!samePronunciation(span, path, original)) return false
+        if (path === original.path) return true
+        if (!nearestByAnchor.has(original)) nearestByAnchor.set(original, new Map())
+        const windows = nearestByAnchor.get(original)
+        if (!windows.has(path)) windows.set(path, nearestCrossWindowRun(original, asrByPath.get(path)))
+        const nearest = windows.get(path)
+        return nearest?.startSeconds === span.startSeconds && nearest.endSeconds === span.endSeconds
+      }
       const judged = observedEdges[side].filter(word => ownWords.includes(edgeWordText(word.text))
-        && originals.some(original => edgeWordText(original.expressionText) === edgeWordText(word.text) && samePronunciation(word, word.path, original)))
+        && originals.some(original => edgeWordText(original.expressionText) === edgeWordText(word.text) && matchesAnchor(word, word.path, original)))
       for (const [path, { words, speech }] of asrByPath) {
         const conflicts = (span, text) => {
           const token = edgeWordText(text)
           if (!overlaps(span)) return false
           if (token === 'text' || token === neighbor) return true
-          if (token === echo && ownWords.includes(token) && anchors.some(word => samePronunciation(span, path, word))) return false
+          if (token === echo && ownWords.includes(token) && anchors.some(word => matchesAnchor(span, path, word))) return false
           if (judged.some(word => word.path === path && edgeWordText(word.text) === token
             && word.startSeconds <= span.startSeconds && word.endSeconds >= span.endSeconds)) return false
           // A cropped window can report a different word within the same spoken syllables.
           // Only independent, timed source words can account for that part of the extension.
           if (!/^[a-z]+$/u.test(token)) return true
+          // A competing same-word run cannot be rescued by another window's judgment.
+          if (originals.some(original => original.path !== path && edgeWordText(original.expressionText) === token
+            && samePronunciation(span, path, original)) && !originals.some(original =>
+              edgeWordText(original.expressionText) === token && matchesAnchor(span, path, original))) return true
           const corroborating = judged.filter(word => word.path !== path)
           if (span.startSeconds === span.endSeconds) return !corroborating.some(word =>
             word.startSeconds <= span.startSeconds && word.endSeconds >= span.endSeconds)
