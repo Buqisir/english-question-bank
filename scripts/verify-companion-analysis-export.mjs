@@ -199,6 +199,38 @@ assert.ok(html.includes('text-align-last: start'))
 
 const sevenGroupId = 'group-2025-i-seven-choices'
 const [sevenQuestionId, nextSevenQuestionId] = source.paperAsset.content.groups[sevenGroupId].questionIds
+{
+  const { contextChainRows, renderSevenChoicesGroup } = await import('../server/exports/companion-analysis/sevenChoices.mjs')
+  const previousSentence = 'Make time for Jean·Luc by keeping an hour free every afternoon before you leave for work.'
+  const paragraphs = [
+    { paragraphId: 'p1', text: `· ${previousSentence}` },
+    { paragraphId: 'p2', text: '· __38__ Start here. End here __39__.' },
+    { paragraphId: 'p3', text: '· Next Steps' },
+  ]
+  assert.deepEqual([
+    contextChainRows({ lock: ['Jean·Luc'] }, paragraphs, 38).before,
+    contextChainRows({ lock: ['Next Steps'] }, paragraphs, 39).after,
+  ], [
+    { label: '上段末尾', text: previousSentence },
+    { label: '小标题', text: 'Next Steps' },
+  ])
+  const shortParagraph = 'Talk to your doctor before you start.'
+  assert.deepEqual(contextChainRows({ lock: ['Talk to your doctor'] }, [
+    { paragraphId: 'p1', text: `· ${shortParagraph}` },
+    { paragraphId: 'p2', text: '__38__ Begin slowly.' },
+  ], 38).before, { label: '上段末尾', text: shortParagraph })
+
+  const group = source.paperAsset.content.groups[sevenGroupId]
+  const renderExtra = text => renderSevenChoicesGroup({
+    group, paperAsset: source.paperAsset, answers: [], openingHeadings: '',
+    analysis: {
+      questions: { [sevenQuestionId]: { find: { text: '找法' }, explain: '讲解' } },
+      groups: { [sevenGroupId]: { extraOptions: { C: { target: 36, secondary: 39, text } } } },
+    },
+  })
+  assert.match(renderExtra('说明。'), /说明。也可能误填第 39 空。/u)
+  assert.match(renderExtra('也可能误填第39题。'), /也可能误填第39题。<\/p>/u)
+}
 const listeningGroupId = 'listening-fixture'
 const listeningQuestionId = 'question:listening:1'
 const listeningIds = [1, 3, 4].map(number => `question:listening:${number}`)
