@@ -430,6 +430,33 @@ check('subject exceeding 8 MiB is unknown, without truncation', () => {
   assert.equal(result.result, 'unknown')
   assert.equal(result.reasonCode, 'SUBJECT_TOO_LARGE')
 })
+check('large Review media retains one copy and preserves equality and change detection', () => {
+  const large = clone(f)
+  const bytes = Buffer.alloc(1_600_000, 17)
+  large.projection.consumption.mediaArtifacts = Array.from({ length: 2 }, (_, i) => ({
+    mediaId: `image:${i + 1}`,
+    displayVariant: { sha256: hash(bytes), encodedBytes: bytes.toString('base64') },
+  }))
+  const payload = buildProductPreviewPayload(large.revision, large.projection)
+  large.preview.payload_json = JSON.stringify(payload)
+  large.preview.payload_digest = digestJson(payload)
+  const stored = buildStoredReviewSubject(large)
+  assert.equal(stored.ok, true, stored.reasonCode)
+  assert.deepEqual(stored.subject.components.consumer.consumption.mediaArtifacts, payload.consumption.mediaArtifacts)
+  assert.equal(stored.subject.components.media.artifacts.sha256, digestJson(payload.consumption.mediaArtifacts))
+  assert.deepEqual(baseline.subject.components.media.artifacts, f.projection.consumption.mediaArtifacts)
+  const target = () => buildTargetReviewSubject({ ...large, inventory: large.storedFiles })
+  assert.equal(compareReviewSubjects({ baseline: stored, target: target(), targetBuildId }).result, 'equal')
+  const modified = clone(stored)
+  modified.subject.components.media.artifacts.sha256 = hash('invalid media digest')
+  modified.subjectDigest = digestJson(modified.subject)
+  assert.equal(compareReviewSubjects({ baseline: modified, target: target(), targetBuildId }).reasonCode, 'BASELINE_UNTRUSTED')
+  bytes[0]++
+  large.projection.consumption.mediaArtifacts[1].displayVariant = {
+    sha256: hash(bytes), encodedBytes: bytes.toString('base64'),
+  }
+  assert.equal(compareReviewSubjects({ baseline: stored, target: target(), targetBuildId }).result, 'different')
+})
 check('unsafe and nonstandard paths are rejected', () => {
   for (const path of ['/tmp/file', '../file', 'a/../b', 'a//b', './a', 'a\\b', 'C:/file', 'a\u0000b']) {
     assert.equal(validReviewRelativePath(path), false, path)

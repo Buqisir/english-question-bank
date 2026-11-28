@@ -272,11 +272,17 @@ function makeSubject(revision, components, origin, provenance) {
     subjectVersion: REVIEW_SUBJECT_VERSION, revisionId: revision.id,
     sourceRendererBuildId: revision.rendererBuildId, bundleDigest: revision.bundleDigest, components,
   }
-  const subjectJson = stableStringify(subject)
-  if (Buffer.byteLength(subjectJson) > REVIEW_SUBJECT_MAX_BYTES) fail('SUBJECT_TOO_LARGE')
+  let subjectBytes = Buffer.byteLength(stableStringify(subject))
+  if (subjectBytes > REVIEW_SUBJECT_MAX_BYTES && components.media.artifacts.length) {
+    // Keep the historical representation for subjects that already fit.
+    // The complete artifacts remain committed by the consumer component.
+    components.media.artifacts = { sha256: digestJson(components.media.artifacts) }
+    subjectBytes = Buffer.byteLength(stableStringify(subject))
+  }
+  if (subjectBytes > REVIEW_SUBJECT_MAX_BYTES) fail('SUBJECT_TOO_LARGE')
   return { ok: true, origin, subject, subjectDigest: digestJson(subject),
     componentDigests: Object.fromEntries(REVIEW_COMPONENTS.map(key => [key, digestJson(components[key])])),
-    provenance, metrics: { subjectBytes: Buffer.byteLength(subjectJson),
+    provenance, metrics: { subjectBytes,
       fileCount: components.inventory.length,
       fileBytes: components.inventory.reduce((sum, file) => sum + file.byteLength, 0) } }
 }
@@ -391,9 +397,13 @@ export function validateReviewSubject(subject) {
       || !record(subject.components)
       || !same(Object.keys(subject.components).sort(), [...REVIEW_COMPONENTS].sort())
       || Buffer.byteLength(stableStringify(subject)) > REVIEW_SUBJECT_MAX_BYTES) fail('BASELINE_UNTRUSTED')
-    const { identity: id, consumer, inventory: files } = subject.components
+    const { identity: id, consumer, media, inventory: files } = subject.components
     if (!same(identity(id, id.importProfile, id.reviewKind), id)) fail('BASELINE_UNTRUSTED')
     assertReviewPreviewPayload(consumer)
+    if (!Array.isArray(media?.artifacts)
+      && !same(media?.artifacts, { sha256: digestJson(consumer.consumption.mediaArtifacts) })) {
+      fail('BASELINE_UNTRUSTED', '/media/artifacts')
+    }
     inventory(files)
     return { ok: true, subject, subjectDigest: digestJson(subject) }
   })
