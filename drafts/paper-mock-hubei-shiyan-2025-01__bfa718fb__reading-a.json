@@ -1,0 +1,665 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hubei-shiyan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-shiyan-2025-01:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-shiyan-2025-01:reading-a": {
+      "overview": "文章介绍纽约州北部四座历史名镇：因运河成为交通中心的奥罗拉、以棒球名人堂闻名的库珀斯敦、以19世纪建筑见长的斯卡尼阿特勒斯，以及被视为美国女权运动发源地的塞尼卡福尔斯。",
+      "fullTranslationZh": "下面带你看看纽约州北部的几座历史名镇，每一座都满载往昔的故事，那种独特的地方气息会让你久久难忘。\n奥罗拉\n这座历史悠久的村庄位于卡尤加湖东岸，最初是卡尤加人的居住地。欧裔美国人于1789年开始在此定居，到1837年，奥罗拉正式建制为村。卡尤加—塞尼卡运河开通后，这里成了运河交通的中心，运河方便了羊毛、谷物、水果和生猪运往更广阔的市场。\n库珀斯敦\n这座小镇由威廉·库珀法官于1786年创建，并以库珀的名字命名。他的儿子、著名小说家詹姆斯·费尼莫尔·库珀在《皮袜子故事集》中让这一带名垂不朽，书中把奥齐戈湖称作“闪光镜”。库珀斯敦或许最为人熟知的，是作为国家棒球名人堂和博物馆的所在地，该馆建于1939年。这家机构颂扬棒球的历史，表彰最伟大的球员，使这座村镇成为美国国球爱好者最喜爱的地方。\n斯卡尼阿特勒斯\n“斯卡尼阿特勒斯”这个名字源自易洛魁语中意为“长湖”的词，体现了这座小镇的原住民渊源。欧裔美国人于18世纪后期开始在此定居，该村于1833年正式建制。斯卡尼阿特勒斯以保存完好的19世纪建筑闻名，许多建筑可追溯到19世纪30年代。建于1985年的市中心历史街区集中展示了这些建筑瑰宝。\n塞尼卡福尔斯\n这座小镇常被认为是美国妇女权利运动的发源地。1848年7月，这里在卫斯理教堂举办了第一届妇女权利大会，伊丽莎白·卡迪·斯坦顿和卢克丽霞·莫特等活动家在会上发表了《情感宣言》，倡导男女平等。你可以参观妇女权利国家历史公园，园内有卫斯理教堂以及伊丽莎白·卡迪·斯坦顿等关键人物的故居。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-a-1",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+          "sourceText": "It became a centre for canal traffic following the opening of the Cayuga-Seneca Canal, which facilitated the transport of wool, grain, fruit, and pigs to broader markets.",
+          "displayText": "It became a centre for canal traffic following the opening of the Cayuga-Seneca Canal, which facilitated the transport of wool, grain, fruit, and pigs to broader markets.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:21"
+          ],
+          "translationZh": "卡尤加—塞尼卡运河开通后，这里成了运河交通的中心，运河方便了羊毛、谷物、水果和生猪运往更广阔的市场。",
+          "analysisZh": "主干是 It became a centre for canal traffic（它成了运河交通中心），It 指奥罗拉。following the opening of the Cayuga-Seneca Canal 是介词短语，意思是“在运河开通之后”，交代变成交通中心的时间和前提。逗号后的 which 引导非限制性定语从句，修饰 the Cayuga-Seneca Canal，说明运河让羊毛、谷物、水果和生猪运往更大的市场。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 36,
+              "quote": "It became a centre for canal traffic"
+            },
+            {
+              "start": 37,
+              "end": 85,
+              "quote": "following the opening of the Cayuga-Seneca Canal"
+            },
+            {
+              "start": 87,
+              "end": 104,
+              "quote": "which facilitated"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-a-2",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:1",
+          "sourceText": "Here’s a look at some historic towns in Upstate New York, each filled with stories of the past and a sense of place you won’t soon forget.",
+          "displayText": "Here’s a look at some historic towns in Upstate New York, each filled with stories of the past and a sense of place you won’t soon forget.",
+          "relatedQuestionIds": [],
+          "translationZh": "下面带你看看纽约州北部的几座历史名镇，每一座都满载往昔的故事，那种独特的地方气息会让你久久难忘。",
+          "analysisZh": "主干是 Here’s a look at some historic towns（这里带你看看几座历史名镇）。逗号后的 each filled with … 是独立主格结构，each 指每一座小镇，filled with 意为“充满”，后面并列两样东西：stories of the past 和 a sense of place。末尾 you won’t soon forget 是省略了关系词的定语从句，修饰 a sense of place。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 36,
+              "quote": "Here’s a look at some historic towns"
+            },
+            {
+              "start": 58,
+              "end": 74,
+              "quote": "each filled with"
+            },
+            {
+              "start": 116,
+              "end": 137,
+              "quote": "you won’t soon forget"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-a:1"
+              ],
+              "start": 0,
+              "end": 48,
+              "quote": "下面带你看看纽约州北部的几座历史名镇，每一座都满载往昔的故事，那种独特的地方气息会让你久久难忘。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-a:2"
+              ],
+              "start": 49,
+              "end": 52,
+              "quote": "奥罗拉"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-a:3"
+              ],
+              "start": 53,
+              "end": 168,
+              "quote": "这座历史悠久的村庄位于卡尤加湖东岸，最初是卡尤加人的居住地。欧裔美国人于1789年开始在此定居，到1837年，奥罗拉正式建制为村。卡尤加—塞尼卡运河开通后，这里成了运河交通的中心，运河方便了羊毛、谷物、水果和生猪运往更广阔的市场。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-a:4"
+              ],
+              "start": 169,
+              "end": 173,
+              "quote": "库珀斯敦"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-a:5"
+              ],
+              "start": 174,
+              "end": 344,
+              "quote": "这座小镇由威廉·库珀法官于1786年创建，并以库珀的名字命名。他的儿子、著名小说家詹姆斯·费尼莫尔·库珀在《皮袜子故事集》中让这一带名垂不朽，书中把奥齐戈湖称作“闪光镜”。库珀斯敦或许最为人熟知的，是作为国家棒球名人堂和博物馆的所在地，该馆建于1939年。这家机构颂扬棒球的历史，表彰最伟大的球员，使这座村镇成为美国国球爱好者最喜爱的地方。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-a:6"
+              ],
+              "start": 345,
+              "end": 352,
+              "quote": "斯卡尼阿特勒斯"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-a:7"
+              ],
+              "start": 353,
+              "end": 494,
+              "quote": "“斯卡尼阿特勒斯”这个名字源自易洛魁语中意为“长湖”的词，体现了这座小镇的原住民渊源。欧裔美国人于18世纪后期开始在此定居，该村于1833年正式建制。斯卡尼阿特勒斯以保存完好的19世纪建筑闻名，许多建筑可追溯到19世纪30年代。建于1985年的市中心历史街区集中展示了这些建筑瑰宝。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-a:8"
+              ],
+              "start": 495,
+              "end": 501,
+              "quote": "塞尼卡福尔斯"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-a:9"
+              ],
+              "start": 502,
+              "end": 642,
+              "quote": "这座小镇常被认为是美国妇女权利运动的发源地。1848年7月，这里在卫斯理教堂举办了第一届妇女权利大会，伊丽莎白·卡迪·斯坦顿和卢克丽霞·莫特等活动家在会上发表了《情感宣言》，倡导男女平等。你可以参观妇女权利国家历史公园，园内有卫斯理教堂以及伊丽莎白·卡迪·斯坦顿等关键人物的故居。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-a-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+                "start": 208,
+                "end": 378,
+                "quote": "It became a centre for canal traffic following the opening of the Cayuga-Seneca Canal, which facilitated the transport of wool, grain, fruit, and pigs to broader markets."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p3",
+                "start": 65,
+                "end": 115,
+                "quote": "卡尤加—塞尼卡运河开通后，这里成了运河交通的中心，运河方便了羊毛、谷物、水果和生猪运往更广阔的市场。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-a-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:1",
+                "start": 0,
+                "end": 138,
+                "quote": "Here’s a look at some historic towns in Upstate New York, each filled with stories of the past and a sense of place you won’t soon forget."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p1",
+                "start": 0,
+                "end": 48,
+                "quote": "下面带你看看纽约州北部的几座历史名镇，每一座都满载往昔的故事，那种独特的地方气息会让你久久难忘。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-a-q21-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+                "start": 208,
+                "end": 293,
+                "quote": "It became a centre for canal traffic following the opening of the Cayuga-Seneca Canal"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p3",
+                "start": 65,
+                "end": 89,
+                "quote": "卡尤加—塞尼卡运河开通后，这里成了运河交通的中心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-a-q22-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:5",
+                "start": 237,
+                "end": 331,
+                "quote": "Cooperstown is perhaps best known as the home of the National Baseball Hall of Fame and Museum"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p5",
+                "start": 86,
+                "end": 117,
+                "quote": "库珀斯敦或许最为人熟知的，是作为国家棒球名人堂和博物馆的所在地"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-a-q23-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:7",
+                "start": 241,
+                "end": 311,
+                "quote": "Skaneateles is known for its well- preserved 19th-century architecture"
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:7",
+                "start": 359,
+                "end": 452,
+                "quote": "The downtown Historic District, established in 1985, showcases these architectural treasures."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p7",
+                "start": 75,
+                "end": 96,
+                "quote": "斯卡尼阿特勒斯以保存完好的19世纪建筑闻名"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-a-p7",
+                "start": 114,
+                "end": 140,
+                "quote": "建于1985年的市中心历史街区集中展示了这些建筑瑰宝"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开篇总说要介绍纽约州北部几座历史名镇，接着用四个小标题分节，依次介绍奥罗拉、库珀斯敦、斯卡尼阿特勒斯和塞尼卡福尔斯，每节写一座镇的来历和最出名的地方。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:1",
+            "summary": "总说要带读者看看纽约州北部几座充满故事的历史名镇。",
+            "function": "引出全文，交代介绍对象"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:2",
+            "summary": "奥罗拉（Aurora）",
+            "function": "标出下一段介绍的村庄"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+            "summary": "奥罗拉位于卡尤加湖东岸，运河开通后成为运河交通中心。",
+            "function": "介绍奥罗拉的来历和交通地位"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:4",
+            "summary": "库珀斯敦（Cooperstown）",
+            "function": "标出下一段介绍的小镇"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:5",
+            "summary": "库珀斯敦得名于创建者库珀，最出名的是国家棒球名人堂和博物馆。",
+            "function": "介绍库珀斯敦的来历和名气"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:6",
+            "summary": "斯卡尼阿特勒斯（Skaneateles）",
+            "function": "标出下一段介绍的小镇"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:7",
+            "summary": "斯卡尼阿特勒斯得名于原住民语言，以保存完好的19世纪建筑闻名。",
+            "function": "介绍斯卡尼阿特勒斯的来历和建筑特色"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:8",
+            "summary": "塞尼卡福尔斯（Seneca Falls）",
+            "function": "标出下一段介绍的小镇"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:9",
+            "summary": "塞尼卡福尔斯是美国女权运动的发源地，可参观相关历史公园。",
+            "function": "介绍塞尼卡福尔斯的历史地位和可看之处"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-shiyan-2025-01:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出促成奥罗拉成为交通中心的原因。",
+      "stemTranslationZh": "是什么促使奥罗拉成为交通中心？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 following 后的原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "市场的需求。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "markets",
+            "optionText": "markets",
+            "matchType": "exact",
+            "relationNote": "markets 在 which 从句里，指运河把货物运往的更大市场，是通航带来的好处，不是奥罗拉成为交通中心的原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+              "quote": "which facilitated the transport of wool, grain, fruit, and pigs to broader markets",
+              "anchor": "运河把货物运往更大的市场"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一条运河的开通。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+              "quote": "It became a centre for canal traffic following the opening of the Cayuga-Seneca Canal",
+              "anchor": "运河开通后成为运河交通中心"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "村庄的地理位置。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "located",
+            "optionText": "location",
+            "matchType": "wordFamily",
+            "relationNote": "原文用 located 只交代村子在卡尤加湖东岸；成为交通中心写在运河开通之后，没有归功于位置。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+              "quote": "This historic village located on the eastern shore of Cayuga Lake",
+              "anchor": "村子位于卡尤加湖东岸"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "美国人的定居。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "settlement",
+            "optionText": "settlement",
+            "matchType": "exact",
+            "relationNote": "settlement 讲的是1789年欧裔美国人来此定居，属于建村前后的早期历史，和后来成为交通中心没有因果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+              "quote": "European-American settlement began in 1789",
+              "anchor": "1789年开始有人定居"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "traffic center",
+          "sourceRole": "stem",
+          "targetText": "It became a centre for canal traffic following the opening of the Cayuga-Seneca Canal, which facilitated the transport of wool, grain, fruit, and pigs to broader markets.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+          "relationType": "locationCue",
+          "targetCue": "centre for canal traffic",
+          "sourceZh": "交通中心",
+          "targetCueZh": "运河交通中心",
+          "answerText": "following the opening of the Cayuga-Seneca Canal",
+          "note": "题干 traffic center 对应原文 centre for canal traffic。"
+        },
+        {
+          "sourceText": "The opening of a canal.",
+          "sourceRole": "correctOption",
+          "targetText": "following the opening of the Cayuga-Seneca Canal",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:3",
+          "relationType": "paraphrase",
+          "note": "选项的“运河开通”沿用原文的 the opening of the Cayuga-Seneca Canal；奥罗拉正是在运河开通之后（following）成了运河交通中心，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出库珀斯敦最出名的东西。",
+      "stemTranslationZh": "库珀斯敦以什么闻名？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一座著名的棒球博物馆。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:5",
+              "quote": "Cooperstown is perhaps best known as the home of the National Baseball Hall of Fame and Museum",
+              "anchor": "最出名的是棒球名人堂和博物馆"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一年一度的“闪光镜”活动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Glimmerglass",
+            "optionText": "Glimmerglass",
+            "matchType": "exact",
+            "relationNote": "Glimmerglass 是小说家在书里给奥齐戈湖起的名字（referring to Otsego Lake as），原文没提每年办什么活动。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:5",
+              "quote": "referring to Otsego Lake as the “Glimmerglass”",
+              "anchor": "把奥齐戈湖称作“闪光镜”"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "詹姆斯·费尼莫尔·库珀小说的大量收藏。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A large collection of James Fenimore Cooper’s novels",
+            "explanation": "原文只说这位小说家在《皮袜子故事集》里写了这一带，没说镇上收藏了他的大量作品；小镇出名靠的是棒球名人堂。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "詹姆斯·费尼莫尔·库珀的出生地。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "birthplace",
+            "optionText": "birthplace",
+            "matchType": "exact",
+            "relationNote": "birthplace 出自 [[block:paper-mock-hubei-shiyan-2025-01:reading-a:9|often recognized as the birthplace]]，说的是女权运动发源地；库珀斯敦只是作家父亲建立的镇，原文没说作家生在这里。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:9",
+              "quote": "This town is often recognized as the birthplace of the Women’s Rights movement in America.",
+              "anchor": "塞尼卡福尔斯是女权运动发源地"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Cooperstown",
+          "sourceRole": "stem",
+          "targetText": "Cooperstown is perhaps best known as the home of the National Baseball Hall of Fame and Museum, established in 1939.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:5",
+          "relationType": "locationCue",
+          "answerText": "the home of the National Baseball Hall of Fame and Museum",
+          "note": "题干 Cooperstown 原词出现在原文。"
+        },
+        {
+          "sourceText": "A famous baseball museum.",
+          "sourceRole": "correctOption",
+          "targetText": "the home of the National Baseball Hall of Fame and Museum",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:5",
+          "relationType": "paraphrase",
+          "note": "选项的“著名的棒球博物馆”就是原文的国家棒球名人堂和博物馆（National Baseball Hall of Fame and Museum），题干的 known for 对应原文 best known as，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:23": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "situation-match",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把建筑师的兴趣对到四座小镇各自出名的地方，找出以建筑见长的那一座。",
+      "stemTranslationZh": "下列哪个地方可能最吸引建筑师？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "奥罗拉。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Skaneateles is known for its well- preserved 19th-century architecture",
+            "sourceEntity": "Skaneateles",
+            "optionText": "Aurora.",
+            "optionEntity": "Aurora",
+            "explanation": "奥罗拉一节讲的是运河开通后它成了运河交通中心，写的是运输和贸易的历史，没写它的建筑。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "库珀斯敦。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Skaneateles is known for its well- preserved 19th-century architecture",
+            "sourceEntity": "Skaneateles",
+            "optionText": "Cooperstown.",
+            "optionEntity": "Cooperstown",
+            "explanation": "库珀斯敦出名靠棒球名人堂和博物馆，原文说它最受棒球迷（fans of America’s pastime）喜爱，吸引的是球迷而不是建筑师。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "斯卡尼阿特勒斯。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:7",
+              "quote": "Skaneateles is known for its well- preserved 19th-century architecture",
+              "anchor": "以保存完好的19世纪建筑闻名"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:7",
+              "quote": "The downtown Historic District, established in 1985, showcases these architectural treasures.",
+              "anchor": "历史街区展示建筑瑰宝"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "塞尼卡福尔斯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Skaneateles is known for its well- preserved 19th-century architecture",
+            "sourceEntity": "Skaneateles",
+            "optionText": "Seneca Falls.",
+            "optionEntity": "Seneca Falls",
+            "explanation": "塞尼卡福尔斯被看作女权运动发源地，那里的历史公园纪念的是这段运动史，原文没讲它的建筑有什么特色。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "architects",
+          "sourceRole": "stem",
+          "targetText": "Skaneateles is known for its well- preserved 19th-century architecture, with many buildings dating back to the 1830s.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:7",
+          "relationType": "locationCue",
+          "targetCue": "architecture",
+          "sourceZh": "建筑师",
+          "targetCueZh": "建筑",
+          "answerText": "Skaneateles is known for its well- preserved 19th-century architecture",
+          "note": "题干 architects（建筑师）对应原文同根的 architecture（建筑）。"
+        },
+        {
+          "sourceText": "Skaneateles.",
+          "sourceRole": "correctOption",
+          "targetText": "Skaneateles is known for its well- preserved 19th-century architecture",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "原文没直接说谁会喜欢这里，只说斯卡尼阿特勒斯以保存完好的19世纪建筑闻名（well- preserved 19th-century architecture），历史街区还专门展示这些建筑瑰宝；建筑师关注的正是建筑，由此推出这里最吸引他们，选 C。"
+        }
+      ]
+    }
+  }
+}

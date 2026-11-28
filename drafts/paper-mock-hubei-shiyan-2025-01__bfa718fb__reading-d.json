@@ -1,0 +1,759 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hubei-shiyan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-shiyan-2025-01:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-shiyan-2025-01:reading-d": {
+      "overview": "一项新研究发现，老年人白天过度嗜睡、缺乏热情，患上运动认知风险综合征（MCR）的比例明显更高，而 MCR 会使患痴呆的风险翻倍；文章介绍了研究方法和发现，以及专家对诊断和防摔的建议。",
+      "fullTranslationZh": "如果你上了年纪后发现自己在日常活动中常犯困，那么你或许不该只把它当作一点小麻烦——一项新研究发现，这种疲倦可能表明你患上某种可能导致痴呆的病症的风险更高。\n研究显示，在白天过度嗜睡且缺乏热情的参与者中，35.5%的人患上了运动认知风险综合征（MCR），而没有这些问题的人中这一比例为6.7%。\nMCR 的特征是行走速度缓慢、抱怨记忆出问题，出现在尚未患痴呆或行动障碍的老年人身上。患有这种综合征的人患痴呆的风险会增加一倍以上，这种综合征最早于2013年被描述。\n研究结果基于445名平均年龄76岁的成年人。参与者先在跑步机上行走，以记录他们最初的步态，随后从2011年到2018年每年接受一次评估。研究者还每年收集参与者对评估前两周睡眠质量和睡眠时长的回忆。\n在平均约三年的随访期内，有36名参与者患上了 MCR。与睡眠“好”的人相比，睡眠“差”的人患 MCR 的风险只略高一点。\n“这些研究发现或许能让医生和患者更愿意询问睡眠模式，在做早期诊断时也更仔细地观察行走速度，”佛罗里达州神经退行性疾病研究所研究主任理查德·艾萨克森博士说。\n“如果你已经有了行动问题，预防跌倒会有所帮助，”艾萨克森说，“这包括接受物理治疗和职业治疗评估，以及在家里做些改造，比如在淋浴间安装扶手、清除杂物、使用夜灯。”\n“MCR 综合征是新近才确认的，所以专家们还有很多东西要研究，才能详细解释它的病因以及它如何影响身体，”艾萨克森说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-d-1",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:1",
+          "sourceText": "If you find yourself sleepy during your daily activities in your older age, you may need to consider it more than an inconvenience – since the fatigue may indicate you’re at higher risk for developing a condition that can lead to dementia（痴呆）, a new study has found.",
+          "displayText": "If you find yourself sleepy during your daily activities in your older age, you may need to consider it more than an inconvenience – since the fatigue may indicate you’re at higher risk for developing a condition that can lead to dementia（痴呆）, a new study has found.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:32"
+          ],
+          "translationZh": "如果你上了年纪后发现自己在日常活动中常犯困，那么你或许不该只把它当作一点小麻烦——一项新研究发现，这种疲倦可能表明你患上某种可能导致痴呆的病症的风险更高。",
+          "analysisZh": "主句是 you may need to consider it more than an inconvenience（你可能需要把它看作不只是一点小麻烦），it 指前面说的犯困。开头 If 引导条件状语从句，find yourself sleepy 意为“发现自己犯困”。破折号后 since 引出理由：the fatigue may indicate 后面是省略了 that 的宾语从句 you’re at higher risk for developing a condition，其中 that can lead to dementia 是定语从句，修饰 a condition；句末 a new study has found 交代这个理由出自新研究。",
+          "underlineRanges": [
+            {
+              "start": 76,
+              "end": 130,
+              "quote": "you may need to consider it more than an inconvenience"
+            },
+            {
+              "start": 133,
+              "end": 163,
+              "quote": "since the fatigue may indicate"
+            },
+            {
+              "start": 201,
+              "end": 238,
+              "quote": "a condition that can lead to dementia"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-d-2",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:3",
+          "sourceText": "MCR is marked by slow walking speed and complaints of memory problems among older people who don’t already have dementia or a mobility disability.",
+          "displayText": "MCR is marked by slow walking speed and complaints of memory problems among older people who don’t already have dementia or a mobility disability.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:33"
+          ],
+          "translationZh": "MCR 的特征是行走速度缓慢、抱怨记忆出问题，出现在尚未患痴呆或行动障碍的老年人身上。",
+          "analysisZh": "主干是 MCR is marked by …（MCR 的特征是……），be marked by 意为“以……为特征”，后面并列两个特征：slow walking speed 和 complaints of memory problems。among older people 说明这些特征出现在哪类人身上，who 引导的定语从句修饰 older people，把范围限定为尚未患痴呆或行动障碍的老人。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 16,
+              "quote": "MCR is marked by"
+            },
+            {
+              "start": 17,
+              "end": 69,
+              "quote": "slow walking speed and complaints of memory problems"
+            },
+            {
+              "start": 89,
+              "end": 145,
+              "quote": "who don’t already have dementia or a mobility disability"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-d:1"
+              ],
+              "start": 0,
+              "end": 77,
+              "quote": "如果你上了年纪后发现自己在日常活动中常犯困，那么你或许不该只把它当作一点小麻烦——一项新研究发现，这种疲倦可能表明你患上某种可能导致痴呆的病症的风险更高。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-d:2"
+              ],
+              "start": 78,
+              "end": 146,
+              "quote": "研究显示，在白天过度嗜睡且缺乏热情的参与者中，35.5%的人患上了运动认知风险综合征（MCR），而没有这些问题的人中这一比例为6.7%。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-d:3"
+              ],
+              "start": 147,
+              "end": 230,
+              "quote": "MCR 的特征是行走速度缓慢、抱怨记忆出问题，出现在尚未患痴呆或行动障碍的老年人身上。患有这种综合征的人患痴呆的风险会增加一倍以上，这种综合征最早于2013年被描述。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-d:4"
+              ],
+              "start": 231,
+              "end": 329,
+              "quote": "研究结果基于445名平均年龄76岁的成年人。参与者先在跑步机上行走，以记录他们最初的步态，随后从2011年到2018年每年接受一次评估。研究者还每年收集参与者对评估前两周睡眠质量和睡眠时长的回忆。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-d:5"
+              ],
+              "start": 330,
+              "end": 390,
+              "quote": "在平均约三年的随访期内，有36名参与者患上了 MCR。与睡眠“好”的人相比，睡眠“差”的人患 MCR 的风险只略高一点。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-d:6"
+              ],
+              "start": 391,
+              "end": 468,
+              "quote": "“这些研究发现或许能让医生和患者更愿意询问睡眠模式，在做早期诊断时也更仔细地观察行走速度，”佛罗里达州神经退行性疾病研究所研究主任理查德·艾萨克森博士说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-d:7"
+              ],
+              "start": 469,
+              "end": 549,
+              "quote": "“如果你已经有了行动问题，预防跌倒会有所帮助，”艾萨克森说，“这包括接受物理治疗和职业治疗评估，以及在家里做些改造，比如在淋浴间安装扶手、清除杂物、使用夜灯。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-d:8"
+              ],
+              "start": 550,
+              "end": 608,
+              "quote": "“MCR 综合征是新近才确认的，所以专家们还有很多东西要研究，才能详细解释它的病因以及它如何影响身体，”艾萨克森说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-d-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:32"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:1",
+                "start": 0,
+                "end": 266,
+                "quote": "If you find yourself sleepy during your daily activities in your older age, you may need to consider it more than an inconvenience – since the fatigue may indicate you’re at higher risk for developing a condition that can lead to dementia（痴呆）, a new study has found."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p1",
+                "start": 0,
+                "end": 77,
+                "quote": "如果你上了年纪后发现自己在日常活动中常犯困，那么你或许不该只把它当作一点小麻烦——一项新研究发现，这种疲倦可能表明你患上某种可能导致痴呆的病症的风险更高。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-d-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:3",
+                "start": 0,
+                "end": 146,
+                "quote": "MCR is marked by slow walking speed and complaints of memory problems among older people who don’t already have dementia or a mobility disability."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p3",
+                "start": 0,
+                "end": 43,
+                "quote": "MCR 的特征是行走速度缓慢、抱怨记忆出问题，出现在尚未患痴呆或行动障碍的老年人身上。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-d-q32-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:1",
+                "start": 0,
+                "end": 56,
+                "quote": "If you find yourself sleepy during your daily activities"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p1",
+                "start": 0,
+                "end": 21,
+                "quote": "如果你上了年纪后发现自己在日常活动中常犯困"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-d-q33-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:3",
+                "start": 0,
+                "end": 35,
+                "quote": "MCR is marked by slow walking speed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p3",
+                "start": 0,
+                "end": 14,
+                "quote": "MCR 的特征是行走速度缓慢"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-d-q34-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:4",
+                "start": 194,
+                "end": 305,
+                "quote": "The study authors also collected yearly data on participants’ recollections of their sleep quality and quantity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p4",
+                "start": 68,
+                "end": 97,
+                "quote": "研究者还每年收集参与者对评估前两周睡眠质量和睡眠时长的回忆"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-d-q35-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:7",
+                "start": 49,
+                "end": 73,
+                "quote": "fall prevention can help"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-d-p7",
+                "start": 13,
+                "end": 22,
+                "quote": "预防跌倒会有所帮助"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开篇抛出研究结论：老年人白天犯困可能预示患病风险；接着用数据对比说明嗜睡者更易患 MCR，再解释 MCR 是什么、研究如何开展、随访结果怎样；最后引用专家的话，谈研究对诊断的意义、防摔建议和这一病症仍待研究之处。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:1",
+            "summary": "老年人日常犯困不只是小麻烦，新研究发现它可能预示患上致痴呆病症的风险更高。",
+            "function": "提出研究结论，引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:2",
+            "summary": "白天过度嗜睡、缺乏热情的参与者中35.5%患上 MCR，没有这些问题的人中只有6.7%。",
+            "function": "用数据支撑结论"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:3",
+            "summary": "MCR 的特征是走路慢、自述记忆有问题，患者得痴呆的风险会翻倍以上。",
+            "function": "解释 MCR 是什么"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:4",
+            "summary": "研究对象是445名平均76岁的成年人，研究者记录步态、每年评估，并每年收集他们对睡眠的回忆。",
+            "function": "交代研究对象和方法"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:5",
+            "summary": "随访约三年，36人患上 MCR；睡眠差的人风险只比睡得好的人略高。",
+            "function": "补充研究结果"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:6",
+            "summary": "专家认为研究有助于医患在早期诊断时关注睡眠和走路速度。",
+            "function": "说明研究的意义"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:7",
+            "summary": "专家建议已有行动问题的老人预防跌倒，如做治疗评估、改造家居。",
+            "function": "给出防摔建议"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:8",
+            "summary": "专家指出 MCR 是新确认的病症，病因和影响仍待研究。",
+            "function": "收尾，指出尚待研究之处"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-shiyan-2025-01:32": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据同句前半的犯困，推出画线词 fatigue 的意思。",
+      "stemTranslationZh": "第一段中画线词“fatigue”最可能是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "看 since 前面说的状态",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "虚弱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Weakness",
+            "explanation": "放进去成了“这种虚弱可能预示风险更高”，可前文只说犯困（sleepy），没说身体没力气，the 指回的不是虚弱。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "快乐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "you may need to consider it more than an inconvenience",
+            "sourceHighlight": "inconvenience",
+            "optionText": "Happiness.",
+            "optionHighlight": "Happiness",
+            "explanation": "放进去成了“这种快乐可能预示患痴呆的风险更高”，可前文把它看作麻烦（inconvenience），后文说的是患病风险，都是坏事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:1",
+              "quote": "you may need to consider it more than an inconvenience",
+              "anchor": "不只是一点小麻烦"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "舒适。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "you may need to consider it more than an inconvenience",
+            "sourceHighlight": "more than an inconvenience",
+            "optionText": "Comfort.",
+            "optionHighlight": "Comfort",
+            "explanation": "放进去成了“这种舒适可能预示风险更高”；原文说它不只是一点麻烦（more than an inconvenience），是让人难受的事，和舒适正相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:1",
+              "quote": "you may need to consider it more than an inconvenience",
+              "anchor": "不只是一点小麻烦"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "疲倦。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:1",
+              "quote": "If you find yourself sleepy during your daily activities",
+              "anchor": "日常活动中犯困"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "fatigue",
+          "sourceRole": "stem",
+          "targetText": "If you find yourself sleepy during your daily activities in your older age, you may need to consider it more than an inconvenience – since the fatigue may indicate you’re at higher risk for developing a condition that can lead to dementia（痴呆）, a new study has found.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:1",
+          "relationType": "locationCue",
+          "answerText": "find yourself sleepy during your daily activities",
+          "note": "题干 fatigue 原词出现在原文这一句。"
+        },
+        {
+          "sourceText": "Tiredness.",
+          "sourceRole": "correctOption",
+          "targetText": "find yourself sleepy during your daily activities",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "the fatigue 用 the 回指前半句的犯困（sleepy），所以 fatigue 必须是困乏一类的身体状态。放回去：老人在日常活动中犯困，这种疲倦可能预示患病风险更高，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:33": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出原文给 MCR 下定义时说的特征，再看哪个选项概括得对。",
+      "stemTranslationZh": "MCR 的特征可能是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "动作迟缓。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:3",
+              "quote": "MCR is marked by slow walking speed",
+              "anchor": "以走路慢为特征"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "抱怨更多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "complaints",
+            "optionText": "complaints",
+            "matchType": "exact",
+            "relationNote": "complaints 后面跟着 of memory problems，说的是老人反映记性不好；选项只剩“更多抱怨”，丢了抱怨的内容，也没说比谁多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:3",
+              "quote": "complaints of memory problems",
+              "anchor": "抱怨记忆出问题"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "过度嗜睡。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "sleepiness",
+            "optionText": "sleepiness",
+            "matchType": "exact",
+            "relationNote": "sleepiness 出自 [[block:paper-mock-hubei-shiyan-2025-01:reading-d:2|experienced excessive daytime sleepiness]]，说的是部分参与者原有的白天嗜睡，这些人更容易得 MCR，是风险信号，不是 MCR 本身的特征。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:2",
+              "quote": "Among participants who experienced excessive daytime sleepiness and a lack of enthusiasm",
+              "anchor": "白天过度嗜睡的参与者"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "认知能力快速下降。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "cognitive",
+            "optionText": "cognitive",
+            "matchType": "exact",
+            "relationNote": "cognitive 借自病名 motoric cognitive risk syndrome，名字说的是认知方面的“风险”；原文只说患者得痴呆的风险翻倍以上，没说认知已在快速下降。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:2",
+              "quote": "motoric cognitive risk syndrome",
+              "anchor": "病名里的 cognitive"
+            },
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:3",
+              "quote": "The risk of developing dementia more than doubles in those with this syndrome",
+              "anchor": "患痴呆的风险翻倍以上"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "feature",
+          "sourceRole": "stem",
+          "targetText": "MCR is marked by slow walking speed and complaints of memory problems among older people who don’t already have dementia or a mobility disability.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:3",
+          "relationType": "locationCue",
+          "targetCue": "is marked by",
+          "sourceZh": "特征",
+          "targetCueZh": "以……为特征",
+          "answerText": "slow walking speed",
+          "note": "题干 feature（特征）对应原文 is marked by（以……为特征）。"
+        },
+        {
+          "sourceText": "Slow movement.",
+          "sourceRole": "correctOption",
+          "targetText": "slow walking speed",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的“动作迟缓”（slow movement）概括了原文的走路速度慢（slow walking speed），走路属于身体动作，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:34": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出研究获取睡眠数据的方式，并从“回忆”推出具体做法。",
+      "stemTranslationZh": "这项研究是如何收集参与者睡眠数据的？",
+      "locateBy": "stem",
+      "locateFindZh": "想想回忆出来的情况怎样收集",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过写睡眠日记。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By writing sleep diaries",
+            "explanation": "日记要每天当场记，原文收集的是参与者事后对评估前两周睡眠的回忆，没提写睡眠日记。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过做跑步机测试。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Participants walked on treadmills（跑步机） so their initial gaits could be recorded",
+            "sourceEntity": "their initial gaits",
+            "optionText": "By doing treadmill tests.",
+            "optionEntity": "treadmill tests",
+            "explanation": "跑步机是用来记录参与者起初的步态（gaits）的，测的是走路，不是睡眠。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:4",
+              "quote": "Participants walked on treadmills（跑步机） so their initial gaits could be recorded",
+              "anchor": "跑步机用来记录步态"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过每年进行访谈。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:4",
+              "quote": "The study authors also collected yearly data on participants’ recollections of their sleep quality and quantity",
+              "anchor": "每年收集本人对睡眠的回忆"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过在家监测睡眠。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "at-home",
+            "optionText": "at home",
+            "matchType": "wordFamily",
+            "relationNote": "at home 借自 [[block:paper-mock-hubei-shiyan-2025-01:reading-d:7|at-home adaptations such as installing bars]]，那里说的是在家装扶手、清杂物来防摔；研究睡眠靠的是本人回忆，没有在家监测。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:7",
+              "quote": "at-home adaptations such as installing bars in the shower",
+              "anchor": "居家改造防摔"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "collect data",
+          "sourceRole": "stem",
+          "targetText": "The study authors also collected yearly data on participants’ recollections of their sleep quality and quantity in the two weeks leading up to the assessments.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:4",
+          "relationType": "locationCue",
+          "targetCue": "collected yearly data",
+          "sourceZh": "收集数据",
+          "targetCueZh": "每年收集数据",
+          "answerText": "collected yearly data on participants’ recollections of their sleep quality and quantity",
+          "note": "题干 collect data 对应原文 collected yearly data。"
+        },
+        {
+          "sourceText": "By conducting annual interviews.",
+          "sourceRole": "correctOption",
+          "targetText": "collected yearly data on participants’ recollections of their sleep quality and quantity",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "原文没写 interview（访谈），只说每年（yearly）收集参与者对自己睡眠的回忆（recollections）；回忆只能由本人讲出来，可见是每年询问他们本人，也就是选项的“每年进行访谈”，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出专家给已有行动问题的老人的建议。",
+      "stemTranslationZh": "有行动问题的老年人应该怎么做？",
+      "locateBy": "stem",
+      "locateFindZh": "看 if 条件后的主句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "照常生活。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Live normally",
+            "explanation": "原文没让他们一切照旧，而是要做理疗评估、在浴室装扶手、清掉杂物、用夜灯，处处要做改变。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "减少活动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Reduce activity",
+            "explanation": "原文的办法是让活动更安全，如装扶手、清杂物、开夜灯，没让老人少活动。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "保持清醒。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Stay awake",
+            "explanation": "犯困只在 [[block:paper-mock-hubei-shiyan-2025-01:reading-d:1]] 用来提示患病风险，原文没劝人保持清醒；提到的夜灯（night-lights）是为了夜里看清路、防止摔倒。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "避免摔倒。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:7",
+              "quote": "fall prevention can help",
+              "anchor": "预防跌倒有帮助"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mobility issues",
+          "sourceRole": "stem",
+          "targetText": "“If you’re already experiencing mobility issues, fall prevention can help,” Isaacson said, “that can include physical and occupational therapy evaluation, and at-home adaptations such as installing bars in the shower, removing clutter（杂物） and using night-lights.”",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:7",
+          "relationType": "locationCue",
+          "answerText": "fall prevention can help",
+          "note": "题干 mobility issues 原词出现在原文。"
+        },
+        {
+          "sourceText": "Avoid falls.",
+          "sourceRole": "correctOption",
+          "targetText": "fall prevention can help",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-d:7",
+          "relationType": "paraphrase",
+          "note": "选项的“避免摔倒”（avoid falls）就是原文的预防跌倒（fall prevention），选 D。"
+        }
+      ]
+    }
+  }
+}

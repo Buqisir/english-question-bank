@@ -1,0 +1,1859 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-hubei-shiyan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-shiyan-2025-01:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-shiyan-2025-01:cloze": {
+      "overview": "作者在亚利桑那长大，一直自信家乡风景天下最美。受邀游览贵州后，作者被当地美景和布依族的染织艺术打动，想起母亲珍爱的霍皮族手工艺品，在离乡十年后于贵州片刻间感到回到了家。",
+      "fullTranslationZh": "我在亚利桑那州北部长大，不朽的大峡谷和塞多纳铁红色的高原就在我家后院，所以我非常自信地宣称，这个西南部的州拥有地球上最美的风景。到那时为止，还没有哪处外国风景能与之相比。\n也就是说，直到我受“中国讲述者合作之旅”之邀去探访贵州省。就算有人用诗一般的笔触细致地描述贵州有多美，也无法恰如其分地呈现它。什么都替代不了亲眼所见。我将在这里尝试描述一番。\n在贵州兴义市游览期间，我看到了布依族的艺术品。他们用当地植物制成的染料，做出蓝色、绿色鲜艳夺目的衣服。当地老人仍用木制织机织布，并把这一传统传给孙辈。这里的历史是可以触摸的，人们伸手就能触到它，甚至能呼吸到它。我母亲喜欢用霍皮人亲手精心制作的画、首饰和陶器装饰我们的家。那些图案古老，蕴含着智慧。地球是我们的家园，我们赞美它的种种奇观。在兴义欣赏展出的艺术品时，我又找到了同样的感觉。\n我离开亚利桑那已经整整十年，在中国开创自己的事业。我设法为自己建立了家庭、事业和生计，还做了各种出于热爱、关于我所喜爱的艺术品的项目。我觉得自己仿佛拥有了所需的一切。在贵州的那一刻，我感到回到了家。",
+      "mainLine": {
+        "theme": {
+          "text": "贵州的美景和手工艺让远离家乡的作者片刻间找回了家的感觉（in Guizhou, I felt home）。",
+          "quote": "in Guizhou, I felt home"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+            "text": "作者自信家乡亚利桑那的风景天下最美，外国风景都比不上。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+            "text": "受邀探访贵州，作者觉得其美言语难述，只能亲眼去看。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+            "text": "作者在兴义看到布依族的艺术品。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+            "text": "布依族的染织传统让作者想起母亲珍爱的霍皮族手工艺。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+            "text": "离乡十年在中国打拼的作者，在贵州片刻间感到回了家。"
+          }
+        ],
+        "emotion": "自信→惊叹→亲切→如归"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+          "sourceText": "Having grown up in northern Arizona with the immortal Grand Canyon and the iron red plateaus of Sedona in my backyard, I am comfortably __41__ in my claim that the southwestern state is home to the most beautiful landscapes on the planet.",
+          "displayText": "Having grown up in northern Arizona with the immortal Grand Canyon and the iron red plateaus of Sedona in my backyard, I am comfortably confident in my claim that the southwestern state is home to the most beautiful landscapes on the planet.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:41"
+          ],
+          "translationZh": "我在亚利桑那州北部长大，不朽的大峡谷和塞多纳铁红色的高原就在我家后院，所以我非常自信地宣称，这个西南部的州拥有地球上最美的风景。",
+          "analysisZh": "主干是 I am comfortably confident in my claim（我对自己的说法很有把握）。句首 Having grown up … 是现在分词完成式作状语，交代作者为什么这么自信：从小就在大峡谷边长大，with … in my backyard 补充长大的环境。句末 that 引导同位语从句，说明 claim 的内容：这个州拥有地球上最美的风景。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 15,
+              "quote": "Having grown up"
+            },
+            {
+              "start": 119,
+              "end": 157,
+              "quote": "I am comfortably confident in my claim"
+            },
+            {
+              "start": 158,
+              "end": 196,
+              "quote": "that the southwestern state is home to"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+          "sourceText": "Had someone described how beautiful Guizhou can be in poetic __44__, they would not have done it __45__.",
+          "displayText": "Had someone described how beautiful Guizhou can be in poetic detail, they would not have done it fairly.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:44",
+            "question:paper-mock-hubei-shiyan-2025-01:45"
+          ],
+          "translationZh": "就算有人用诗一般的笔触细致地描述贵州有多美，也无法恰如其分地呈现它。",
+          "analysisZh": "这是省略 if 的虚拟条件句：Had someone described … 等于 If someone had described …，与过去事实相反。主句 they would not have done it fairly 用 would have done 呼应，done it 指描述贵州之美这件事。how beautiful Guizhou can be 是 described 的宾语从句，in poetic detail 说明描述的方式。整句意思是再好的文字也写不出贵州的美。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "Had someone described"
+            },
+            {
+              "start": 22,
+              "end": 50,
+              "quote": "how beautiful Guizhou can be"
+            },
+            {
+              "start": 69,
+              "end": 103,
+              "quote": "they would not have done it fairly"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:cloze:1"
+              ],
+              "start": 0,
+              "end": 85,
+              "quote": "我在亚利桑那州北部长大，不朽的大峡谷和塞多纳铁红色的高原就在我家后院，所以我非常自信地宣称，这个西南部的州拥有地球上最美的风景。到那时为止，还没有哪处外国风景能与之相比。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:cloze:2"
+              ],
+              "start": 86,
+              "end": 173,
+              "quote": "也就是说，直到我受“中国讲述者合作之旅”之邀去探访贵州省。就算有人用诗一般的笔触细致地描述贵州有多美，也无法恰如其分地呈现它。什么都替代不了亲眼所见。我将在这里尝试描述一番。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "block:paper-mock-hubei-shiyan-2025-01:cloze:4"
+              ],
+              "start": 174,
+              "end": 366,
+              "quote": "在贵州兴义市游览期间，我看到了布依族的艺术品。他们用当地植物制成的染料，做出蓝色、绿色鲜艳夺目的衣服。当地老人仍用木制织机织布，并把这一传统传给孙辈。这里的历史是可以触摸的，人们伸手就能触到它，甚至能呼吸到它。我母亲喜欢用霍皮人亲手精心制作的画、首饰和陶器装饰我们的家。那些图案古老，蕴含着智慧。地球是我们的家园，我们赞美它的种种奇观。在兴义欣赏展出的艺术品时，我又找到了同样的感觉。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:cloze:5"
+              ],
+              "start": 367,
+              "end": 466,
+              "quote": "我离开亚利桑那已经整整十年，在中国开创自己的事业。我设法为自己建立了家庭、事业和生计，还做了各种出于热爱、关于我所喜爱的艺术品的项目。我觉得自己仿佛拥有了所需的一切。在贵州的那一刻，我感到回到了家。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+            "text": "Having grown up in northern Arizona with the immortal Grand Canyon and the iron red plateaus of Sedona in my backyard, I am comfortably confident in my claim that the southwestern state is home to the most beautiful landscapes on the planet. Thus far, no foreign landscapes had come close."
+          },
+          {
+            "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+            "text": "That is, until I was invited to explore Guizhou Province by the China Storyteller Partnerships Tour. Had someone described how beautiful Guizhou can be in poetic detail, they would not have done it fairly. There is no substitute for seeing with one’s own eyes. I will attempt to do so here."
+          },
+          {
+            "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+            "text": "dyes produced from local plants to make clothing of striking blues and greens. Local elders still practice weaving with wooden machines and pass that tradition on to their grandchildren. The history here is touchable, and one could reach out and touch it, and even breathe it. My mother loved to decorate our home with paintings, jewelry and pottery, carefully made by the hands of the Hopi. The designs were ancient, and carried wisdom within them. The Earth is our home, and we celebrate its wonders. I caught that same feeling while appreciating the art on display in Xingyi."
+          },
+          {
+            "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+            "text": "I’ve lived away from Arizona for 10 long years, creating my own career in China. I’ve managed to build myself a family, a career, a livelihood, and various passion projects about the artworks I fancy. I feel as though I have everything that I need. For a moment, in Guizhou, I felt home."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 143,
+                "end": 154,
+                "quote": "in my claim"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 43,
+                "end": 45,
+                "quote": "宣称"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:41"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 136,
+                "end": 145,
+                "quote": "confident"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 40,
+                "end": 42,
+                "quote": "自信"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 249,
+                "end": 270,
+                "quote": "no foreign landscapes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 75,
+                "end": 79,
+                "quote": "外国风景"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:42"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 278,
+                "end": 288,
+                "quote": "come close"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 80,
+                "end": 84,
+                "quote": "与之相比"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 39,
+                "end": 55,
+                "quote": "Guizhou Province"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 25,
+                "end": 28,
+                "quote": "贵州省"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:43"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 32,
+                "end": 39,
+                "quote": "explore"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 23,
+                "end": 25,
+                "quote": "探访"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 112,
+                "end": 121,
+                "quote": "described"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 43,
+                "end": 45,
+                "quote": "描述"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:44"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 162,
+                "end": 168,
+                "quote": "detail"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 40,
+                "end": 43,
+                "quote": "细致地"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 228,
+                "end": 254,
+                "quote": "seeing with one’s own eyes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 70,
+                "end": 74,
+                "quote": "亲眼所见"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:45"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 198,
+                "end": 204,
+                "quote": "fairly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 54,
+                "end": 59,
+                "quote": "恰如其分地"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 205,
+                "end": 216,
+                "quote": "There is no"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 63,
+                "end": 74,
+                "quote": "什么都替代不了亲眼所见"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:46"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 218,
+                "end": 228,
+                "quote": "substitute"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 66,
+                "end": 68,
+                "quote": "替代"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 0,
+                "end": 31,
+                "quote": "dyes produced from local plants"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 26,
+                "end": 35,
+                "quote": "当地植物制成的染料"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:47"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 52,
+                "end": 60,
+                "quote": "striking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 43,
+                "end": 47,
+                "quote": "鲜艳夺目"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 96,
+                "end": 133,
+                "quote": "practice weaving with wooden machines"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 56,
+                "end": 63,
+                "quote": "用木制织机织布"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:48"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 150,
+                "end": 159,
+                "quote": "tradition"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 68,
+                "end": 70,
+                "quote": "传统"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 224,
+                "end": 246,
+                "quote": "reach out and touch it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 89,
+                "end": 96,
+                "quote": "伸手就能触到它"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:49"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 207,
+                "end": 216,
+                "quote": "touchable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 81,
+                "end": 86,
+                "quote": "可以触摸的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 295,
+                "end": 339,
+                "quote": "our home with paintings, jewelry and pottery"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 121,
+                "end": 128,
+                "quote": "画、首饰和陶器"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:50"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 296,
+                "end": 304,
+                "quote": "decorate"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 128,
+                "end": 130,
+                "quote": "装饰"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 440,
+                "end": 449,
+                "quote": "The Earth"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 148,
+                "end": 150,
+                "quote": "地球"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:51"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 494,
+                "end": 501,
+                "quote": "wonders"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 165,
+                "end": 167,
+                "quote": "奇观"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 532,
+                "end": 550,
+                "quote": "the art on display"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 173,
+                "end": 179,
+                "quote": "展出的艺术品"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:52"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:4",
+                "start": 536,
+                "end": 548,
+                "quote": "appreciating"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:3",
+                "start": 171,
+                "end": 173,
+                "quote": "欣赏"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 55,
+                "end": 68,
+                "quote": "my own career"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 19,
+                "end": 24,
+                "quote": "自己的事业"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:53"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 48,
+                "end": 56,
+                "quote": "creating"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 17,
+                "end": 19,
+                "quote": "开创"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 176,
+                "end": 196,
+                "quote": "the artworks I fancy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 55,
+                "end": 63,
+                "quote": "我所喜爱的艺术品"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:54"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 156,
+                "end": 163,
+                "quote": "passion"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 48,
+                "end": 52,
+                "quote": "出于热爱"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 198,
+                "end": 204,
+                "quote": "I feel"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 67,
+                "end": 70,
+                "quote": "我觉得"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:55"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 208,
+                "end": 217,
+                "quote": "as though"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:5",
+                "start": 72,
+                "end": 74,
+                "quote": "仿佛"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:41"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 0,
+                "end": 15,
+                "quote": "Having grown up"
+              },
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 119,
+                "end": 157,
+                "quote": "I am comfortably confident in my claim"
+              },
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 158,
+                "end": 196,
+                "quote": "that the southwestern state is home to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:1",
+                "start": 35,
+                "end": 45,
+                "quote": "所以我非常自信地宣称"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:44",
+              "question:paper-mock-hubei-shiyan-2025-01:45"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 101,
+                "end": 122,
+                "quote": "Had someone described"
+              },
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 123,
+                "end": 151,
+                "quote": "how beautiful Guizhou can be"
+              },
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 170,
+                "end": 204,
+                "quote": "they would not have done it fairly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:cloze:2",
+                "start": 29,
+                "end": 62,
+                "quote": "就算有人用诗一般的笔触细致地描述贵州有多美，也无法恰如其分地呈现它"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-hubei-shiyan-2025-01:41": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:41",
+      "blankNo": 41,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者从小与大峡谷为邻，对“家乡风景天下最美”这一说法很有把握，要一个肯定的态度。",
+      "find": {
+        "check": "collocation",
+        "text": "空后说的是对自己这一说法（in my claim）有把握，“心安理得地”（comfortably）也说明毫无疑虑。",
+        "quotes": [
+          "in my claim",
+          "comfortably"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "有把握的",
+        "reason": "作者从小与大峡谷为邻，对“家乡风景天下最美”这一说法很有把握，要一个肯定的态度。形容词看搭配：空后说的是对自己这一说法（in my claim）有把握，“心安理得地”（comfortably）也说明毫无疑虑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "favorable",
+          "meaning": "表示赞许的；作者是对自己的说法（in my claim）打包票，不是对谁表示赞许。",
+          "quote": "in my claim"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "honored",
+          "meaning": "感到荣幸的；作者是在下判断说家乡有最美的风景（the most beautiful landscapes），不是说自己受了礼遇。",
+          "quote": "the most beautiful landscapes"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "prejudiced",
+          "meaning": "有偏见的；作者心安理得地（comfortably）坚持这一说法，不会自称带着偏见。",
+          "quote": "comfortably"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in my claim",
+          "signalSide": "context-after",
+          "targetText": "confident in my claim",
+          "relation": "对自己的说法有把握。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "comfortably",
+          "signalSide": "context-before",
+          "relation": "心安理得地坚持，说明态度是肯定的。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:42": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:42",
+      "blankNo": 42,
+      "pos": "phrase",
+      "role": "main",
+      "context": "前一句说家乡风景天下最美，这里要说外国风景至今都比不上它，为后文转折作铺垫。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "承接最美的风景（the most beautiful landscapes），外国风景（no foreign landscapes）还没有一处能接近它。",
+        "quotes": [
+          "the most beautiful landscapes",
+          "no foreign landscapes"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "接近",
+        "meaning": "比得上家乡风景",
+        "reason": "前一句说家乡风景天下最美，这里要说外国风景至今都比不上它，为后文转折作铺垫。词组看语境义：承接最美的风景（the most beautiful landscapes），外国风景（no foreign landscapes）还没有一处能接近它。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "come across",
+          "meaning": "偶然遇到；主语是外国风景（no foreign landscapes），风景不会去遇到什么。",
+          "quote": "no foreign landscapes"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "come true",
+          "meaning": "实现；实现的是愿望，这里比的是外国风景（no foreign landscapes）美不美。",
+          "quote": "no foreign landscapes"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "come out",
+          "meaning": "出现；风景本来就在，这里说的是它们与最美的风景（the most beautiful landscapes）相比如何。",
+          "quote": "the most beautiful landscapes"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "no foreign landscapes",
+          "signalSide": "context-before",
+          "targetText": "no foreign landscapes had come close",
+          "relation": "外国风景作主语，说它们都没能接近家乡的美。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "close",
+          "signalSide": "option",
+          "targetText": "come close",
+          "relation": "靠近（close）表示与比较对象相差无几。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the most beautiful landscapes",
+          "signalSide": "context-before",
+          "relation": "比较的对象是前一句说的最美风景。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:43": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者受旅行活动邀请去贵州，要一个“游览探访某地”的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "邀请方是一个旅行活动（Tour），宾语是贵州省（Guizhou Province），要一个游览考察的动作。",
+        "quotes": [
+          "Tour",
+          "Guizhou Province"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "探索",
+        "meaning": "游览考察",
+        "reason": "作者受旅行活动邀请去贵州，要一个“游览探访某地”的动作。动词看搭配：邀请方是一个旅行活动（Tour），宾语是贵州省（Guizhou Province），要一个游览考察的动作。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "introduce",
+          "meaning": "介绍；作者这时还没去过，后文说要亲眼去看（seeing with one’s own eyes），谈不上向人介绍贵州。",
+          "quote": "seeing with one’s own eyes"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "discover",
+          "meaning": "发现；贵州省（Guizhou Province）本来就为人所知，作者受邀是去游览，谈不上发现它。",
+          "quote": "Guizhou Province"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "appear",
+          "meaning": "出现；不及物，后面不能直接接贵州省（Guizhou Province）作宾语。",
+          "quote": "Guizhou Province"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Guizhou Province",
+          "signalSide": "context-after",
+          "targetText": "explore Guizhou Province",
+          "relation": "去一个省份游览探访，动词要能带地点作宾语。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "Tour",
+          "signalSide": "context-after",
+          "relation": "邀请方是旅行活动，动作与游览有关。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:44": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "detail",
+      "context": "要说用诗意的笔触把贵州之美描述得十分细致，空格说的是描述的方式。",
+      "find": {
+        "check": "collocation",
+        "text": "前有介词（in）和诗意的（poetic），承接有人描述（described）贵州之美，说的是描写得细致。",
+        "quotes": [
+          "described",
+          "poetic"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "细节",
+        "reason": "要说用诗意的笔触把贵州之美描述得十分细致，空格说的是描述的方式。名词看搭配：前有介词（in）和诗意的（poetic），承接有人描述（described）贵州之美，说的是描写得细致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "peace",
+          "meaning": "平静；描述（described）美景谈不上平静与否，这里说的是描写得多细致。",
+          "quote": "described"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "person",
+          "meaning": "人；说成“用诗意的人”讲不通，空格要说的是用诗意的笔触（poetic）描述的方式。",
+          "quote": "poetic"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "advance",
+          "meaning": "预先；说成“诗意地提前”讲不通，空格要说的是用诗意的笔触（poetic）描述得多细致。",
+          "quote": "poetic"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in poetic",
+          "signalSide": "context-before",
+          "targetText": "in poetic detail",
+          "relation": "介词（in）加诗意的（poetic），说明描述的方式。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "described",
+          "signalSide": "context-before",
+          "relation": "空格说明描述的方式。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:45": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:45",
+      "blankNo": 45,
+      "pos": "adverb",
+      "role": "main",
+      "context": "再细致的描述也写不出贵州真实的美，空格要“恰如其分”的意思，空前再用否定（not）。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "下一句说什么都替代不了亲眼看（seeing with one’s own eyes），可见描述再好也不能如实呈现。",
+        "quotes": [
+          "seeing with one’s own eyes"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "公正地",
+        "meaning": "恰如其分地",
+        "reason": "再细致的描述也写不出贵州真实的美，空格要“恰如其分”的意思，空前再用否定（not）。副词看语境义：下一句说什么都替代不了亲眼看（seeing with one’s own eyes），可见描述再好也不能如实呈现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "conventionally",
+          "meaning": "按惯例地；后文拿描述和亲眼看（seeing with one’s own eyes）相比，问题不在写得守不守常规。",
+          "quote": "seeing with one’s own eyes"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "awfully",
+          "meaning": "糟糕地；用诗意的（poetic）笔触细细描写，不会写得糟，作者是说仍写不出全部的美。",
+          "quote": "poetic"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "obviously",
+          "meaning": "明显地；作者要说描述写不出贵州的美，后文拿亲眼看（seeing with one’s own eyes）对比，与明显与否无关。",
+          "quote": "seeing with one’s own eyes"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "would not have done it",
+          "signalSide": "context-before",
+          "targetText": "would not have done it fairly",
+          "relation": "修饰“做这件事”，说即使描述也做不到恰如其分。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "There is no",
+          "signalSide": "context-after",
+          "relation": "后句说什么都替代不了亲眼看，印证描述有局限。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:46": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "main",
+      "context": "承接前句言语难述，要说什么都替代不了亲眼所见，这是作者决定亲自来写的理由。",
+      "find": {
+        "check": "collocation",
+        "text": "空前说“没有”（There is no），空后接亲眼看（for seeing with one’s own eyes），说的是什么也代替不了亲眼看。",
+        "quotes": [
+          "There is no",
+          "for seeing with one’s own eyes"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "替代品",
+        "reason": "承接前句言语难述，要说什么都替代不了亲眼所见，这是作者决定亲自来写的理由。名词看搭配：空前说“没有”（There is no），空后接亲眼看（for seeing with one’s own eyes），说的是什么也代替不了亲眼看。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "determination",
+          "meaning": "决心；前句说描述做不到（would not have done it），这里比的是描述和亲眼看，与决心无关。",
+          "quote": "would not have done it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "experience",
+          "meaning": "经历；这里要的是能代替亲眼看（seeing with one’s own eyes）的东西，经历没有代替之意。",
+          "quote": "seeing with one’s own eyes"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "satisfaction",
+          "meaning": "满足；作者接着说要亲自来写（I will attempt to do so here），这里说的是什么能代替亲眼看。",
+          "quote": "I will attempt to do so here"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for seeing with one’s own eyes",
+          "signalSide": "context-after",
+          "targetText": "no substitute for seeing with one’s own eyes",
+          "relation": "空后的介词（for）引出被代替的事，即亲眼看。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "There is no",
+          "signalSide": "context-before",
+          "relation": "说没有任何东西能做到这一点。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:47": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "修饰布依族衣服的蓝色和绿色，要一个夸赞颜色鲜明的正面词。",
+      "find": {
+        "check": "affect",
+        "text": "作者在赞叹布依族的艺术品（artworks），这里写用当地植物染料（dyes produced from local plants）染出的蓝绿色，应当醒目好看。",
+        "quotes": [
+          "artworks",
+          "dyes produced from local plants"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "引人注目的",
+        "meaning": "鲜艳夺目的",
+        "reason": "修饰布依族衣服的蓝色和绿色，要一个夸赞颜色鲜明的正面词。形容词看情感：作者在赞叹布依族的艺术品（artworks），这里写用当地植物染料（dyes produced from local plants）染出的蓝绿色，应当醒目好看。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "featureless",
+          "meaning": "毫无特色的；作者在赞叹布依族的艺术品（artworks），不会说染出的颜色平淡无奇。",
+          "quote": "artworks"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "comfortable",
+          "meaning": "舒适的；舒适说的是穿着感受，不能用来修饰颜色（blues and greens）。",
+          "quote": "blues and greens"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "convenient",
+          "meaning": "方便的；方便指用起来省事，不能用来修饰蓝色和绿色（blues and greens）。",
+          "quote": "blues and greens"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "blues and greens",
+          "signalSide": "context-after",
+          "targetText": "striking blues and greens",
+          "relation": "空格修饰衣服的颜色。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "artworks",
+          "signalSide": "context-before",
+          "relation": "作者在欣赏艺术品，评价是正面的。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:48": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "main",
+      "context": "用一个名词概括前面老人用木织机织布这件事，而且它能一代代传给孙辈。",
+      "find": {
+        "check": "echo",
+        "text": "这一（that）回指老人们仍在坚持的织布（practice weaving with wooden machines），能传给孙辈（to their grandchildren）的是传统。",
+        "quotes": [
+          "practice weaving with wooden machines",
+          "to their grandchildren"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "传统",
+        "meaning": "木机织布的手艺",
+        "reason": "用一个名词概括前面老人用木织机织布这件事，而且它能一代代传给孙辈。名词看复现：这一（that）回指老人们仍在坚持的织布（practice weaving with wooden machines），能传给孙辈（to their grandchildren）的是传统。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "effort",
+          "meaning": "努力；老人传给孙辈（to their grandchildren）的是织布手艺本身，不是一份努力。",
+          "quote": "to their grandchildren"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "burden",
+          "meaning": "负担；作者在赞叹老人仍在织布（practice weaving），把这门手艺说成负担与语气相反。",
+          "quote": "practice weaving"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "advantage",
+          "meaning": "优势；织布（practice weaving with wooden machines）是一门手艺，传下去的是手艺，不是某种优势。",
+          "quote": "practice weaving with wooden machines"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "practice weaving with wooden machines",
+          "signalSide": "context-before",
+          "relation": "这一（that）后的名词概括前面的织布手艺。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "pass that",
+          "signalSide": "context-before",
+          "targetText": "pass that tradition on to their grandchildren",
+          "relation": "把（pass）这样东西传给孙辈，传的正是空格所指。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:49": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:49",
+      "blankNo": 49,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "说这里的历史就在眼前，真切可感，后半句把这层意思说得更具体。",
+      "find": {
+        "check": "echo",
+        "text": "后半句说伸手就能触到它（reach out and touch it），甚至能呼吸到它，与空格意思复现。",
+        "quotes": [
+          "reach out and touch it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "可触摸的",
+        "meaning": "真切可感的",
+        "reason": "说这里的历史就在眼前，真切可感，后半句把这层意思说得更具体。形容词看复现：后半句说伸手就能触到它（reach out and touch it），甚至能呼吸到它，与空格意思复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fashionable",
+          "meaning": "时髦的；后文说历史伸手就能摸到（reach out and touch it），讲的是真切可感，不是时髦。",
+          "quote": "reach out and touch it"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "capable",
+          "meaning": "有能力的；能力说的是人，后文是人伸手去摸历史（reach out and touch it），历史本身不会有能力。",
+          "quote": "reach out and touch it"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "global",
+          "meaning": "全球的；作者写的是兴义当地的历史，后文说伸手就能摸到（reach out and touch it）。",
+          "quote": "reach out and touch it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "reach out and touch it",
+          "signalSide": "context-after",
+          "relation": "伸手就能摸到，复现“可触摸”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "The history here is",
+          "signalSide": "context-before",
+          "targetText": "The history here is touchable",
+          "relation": "空格作表语，说明这里的历史是怎样的。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:50": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "detail",
+      "context": "母亲用霍皮人手工做的画、首饰和陶器布置家，要一个“装饰”的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是我们的家，后接所用的东西（our home with paintings, jewelry and pottery），说的是用这些物品把家装点起来。",
+        "quotes": [
+          "our home with paintings, jewelry and pottery"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "装饰",
+        "reason": "母亲用霍皮人手工做的画、首饰和陶器布置家，要一个“装饰”的动作。动词看搭配：宾语是我们的家，后接所用的东西（our home with paintings, jewelry and pottery），说的是用这些物品把家装点起来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "signal",
+          "meaning": "发信号示意；画、首饰和陶器（paintings, jewelry and pottery）是摆在家里的装饰，不是示意用的信号。",
+          "quote": "paintings, jewelry and pottery"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sign",
+          "meaning": "签名；母亲不是在家（our home）上签字，而是把手工艺品摆进家里。",
+          "quote": "our home"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "identify",
+          "meaning": "识别；母亲是把画和陶器（paintings, jewelry and pottery）摆进家中，不是靠它们辨认家。",
+          "quote": "paintings, jewelry and pottery"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "our home with paintings, jewelry and pottery",
+          "signalSide": "context-after",
+          "targetText": "decorate our home with paintings, jewelry and pottery",
+          "relation": "用这些物品装饰家。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:51": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "detail",
+      "context": "地球是我们的家园，人们赞美的是它神奇美好的地方，要一个正面名词。",
+      "find": {
+        "check": "collocation",
+        "text": "它的（its）指地球（The Earth），赞美（celebrate）的是大地本身神奇美好的一面。",
+        "quotes": [
+          "The Earth",
+          "celebrate"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "奇观",
+        "meaning": "大地的神奇美好",
+        "reason": "地球是我们的家园，人们赞美的是它神奇美好的地方，要一个正面名词。名词看搭配：它的（its）指地球（The Earth），赞美（celebrate）的是大地本身神奇美好的一面。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sights",
+          "meaning": "景点；指供游客观光的地方，这里赞美的是作为家园的整个地球（The Earth is our home）。",
+          "quote": "The Earth is our home"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "achievements",
+          "meaning": "成就；成就是人取得的，地球（The Earth）本身谈不上取得成就。",
+          "quote": "The Earth"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "contributions",
+          "meaning": "贡献；贡献是人做出的，这里赞美（celebrate）的是地球本身的美好。",
+          "quote": "celebrate"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "celebrate",
+          "signalSide": "context-before",
+          "targetText": "celebrate its wonders",
+          "relation": "赞美的对象是地球的奇妙之处。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "The Earth is our home",
+          "signalSide": "context-before",
+          "relation": "它的（its）指地球。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:52": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者在兴义观看展出的艺术品时，生出了与母亲那时同样的感觉。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是展出的艺术品（the art on display），看展品时找到同样的感觉（that same feeling），对应欣赏。",
+        "quotes": [
+          "the art on display",
+          "that same feeling"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "欣赏",
+        "reason": "作者在兴义观看展出的艺术品时，生出了与母亲那时同样的感觉。动词看搭配：宾语是展出的艺术品（the art on display），看展品时找到同样的感觉（that same feeling），对应欣赏。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tearing",
+          "meaning": "撕扯；展出的艺术品（the art on display）只能观看，撕扯展品与作者的赞叹相反。",
+          "quote": "the art on display"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "pointing",
+          "meaning": "指向；要和介词连用才能带宾语，而且指着展品（the art on display）也生不出同样的感觉。",
+          "quote": "the art on display"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "working",
+          "meaning": "工作；作者是参观者，面对的是展出的艺术品（the art on display），不是在干活。",
+          "quote": "the art on display"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the art on display",
+          "signalSide": "context-after",
+          "targetText": "appreciating the art on display",
+          "relation": "空格的宾语是展出的艺术品。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "that same feeling",
+          "signalSide": "context-before",
+          "relation": "同样的感觉指对手工艺的珍爱。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:53": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者离乡十年，在中国做的是一番自己的事业，要一个积极的“开创”动作。",
+      "find": {
+        "check": "echo",
+        "text": "下一句说作者已建起家庭和事业（build myself a family, a career），与开创自己的事业（my own career）呼应。",
+        "quotes": [
+          "build myself a family, a career",
+          "my own career"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "创造",
+        "meaning": "开创",
+        "reason": "作者离乡十年，在中国做的是一番自己的事业，要一个积极的“开创”动作。动词看复现：下一句说作者已建起家庭和事业（build myself a family, a career），与开创自己的事业（my own career）呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "deciding",
+          "meaning": "决定；决定自己的事业（my own career）只是作出选择，下一句说作者已把事业建了起来。",
+          "quote": "my own career"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "satisfying",
+          "meaning": "使满意；事业（my own career）不是被满足的对象，作者说的是建起了事业。",
+          "quote": "my own career"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "abandoning",
+          "meaning": "放弃；下一句说作者成功建起了事业（managed to build myself a family, a career），并没有放弃。",
+          "quote": "managed to build myself a family, a career"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my own career",
+          "signalSide": "context-after",
+          "targetText": "creating my own career",
+          "relation": "空格的宾语是自己的事业。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "build myself a family, a career",
+          "signalSide": "context-after",
+          "relation": "后句的建起（build）与空格意思呼应。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:54": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "detail",
+      "context": "修饰项目（projects），说的是作者出于爱好、围绕自己喜欢的艺术品做的项目。",
+      "find": {
+        "check": "collocation",
+        "text": "项目的内容是我喜爱的艺术品（the artworks I fancy），说明这些项目出于热爱。",
+        "quotes": [
+          "the artworks I fancy"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "热爱",
+        "meaning": "出于爱好的",
+        "reason": "修饰项目（projects），说的是作者出于爱好、围绕自己喜欢的艺术品做的项目。名词看搭配：项目的内容是我喜爱的艺术品（the artworks I fancy），说明这些项目出于热爱。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "organization",
+          "meaning": "组织；项目围绕作者喜爱的艺术品（the artworks I fancy），强调的是兴趣，不是组织机构。",
+          "quote": "the artworks I fancy"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "efficiency",
+          "meaning": "效率；这些项目源于对艺术品的喜爱（the artworks I fancy），与效率高低无关。",
+          "quote": "the artworks I fancy"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "instruction",
+          "meaning": "指导；项目围绕作者喜欢的艺术品（the artworks I fancy），说的是兴趣，不是教学指导。",
+          "quote": "the artworks I fancy"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "projects",
+          "signalSide": "context-after",
+          "targetText": "passion projects",
+          "relation": "名词修饰项目（projects），说明项目的性质。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "the artworks I fancy",
+          "signalSide": "context-after",
+          "relation": "项目围绕自己喜爱的艺术品，说明出于热爱。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:55": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:55",
+      "blankNo": 55,
+      "pos": "other",
+      "role": "detail",
+      "context": "接在“我觉得”后，说作者感觉自己好像已经拥有所需的一切。",
+      "find": {
+        "check": "logic",
+        "posLabel": "连词",
+        "text": "前一句列出已有的家庭、事业、生计（a family, a career, a livelihood），“我觉得”（I feel）后引出的是一种“好像”的感受。",
+        "quotes": [
+          "a family, a career, a livelihood",
+          "I feel"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "仿佛",
+        "reason": "接在“我觉得”后，说作者感觉自己好像已经拥有所需的一切。连词看逻辑：前一句列出已有的家庭、事业、生计（a family, a career, a livelihood），“我觉得”（I feel）后引出的是一种“好像”的感受。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "what if",
+          "meaning": "要是……会怎样；用来提出疑问，放在“我觉得”（I feel）后讲不通，作者是在陈述拥有一切的感受。",
+          "quote": "I feel"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "as long as",
+          "meaning": "只要；作者已经有了家庭、事业（a family, a career），这里是说感受，不是加条件。",
+          "quote": "a family, a career"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "in case",
+          "meaning": "以防；作者不是在防备什么，“我觉得”（I feel）后说的是自己拥有所需一切的感受。",
+          "quote": "I feel"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I feel",
+          "signalSide": "context-before",
+          "targetText": "I feel as though",
+          "relation": "“我觉得”后接一种感受。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "I have everything that I need",
+          "signalSide": "context-after",
+          "relation": "从句说的是一种感受到的状态。"
+        }
+      ]
+    }
+  }
+}

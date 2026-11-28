@@ -1,0 +1,130 @@
+{
+  "taskType": "application",
+  "modelAnswer": "An Exciting Environmental Knowledge Contest\n\nLast Friday, an environmental knowledge contest was held in our school hall. Organized by the Student Union, it attracted ten teams from Senior One and Senior Two.\n\nThe contest had three rounds. The first two were quick questions on waste sorting and saving water. The final round was the most exciting: each team had one minute to suggest ways to cut plastic use. Class 5, Senior Two won with practical ideas like bringing our own cups.\n\nPersonally, I used to think protecting the environment was a job for adults, but the contest showed me it starts with small habits. Starting this week, I will carry my own cup, and I hope more of us will do the same.",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "校刊《英语角》专栏的活动报道，沿用题面给出的标题，正文分段叙述",
+        "personTense": "报道比赛用第三人称、一般过去时；写感想时换成第一人称，用一般现在时",
+        "readerTone": "读者是看校刊的全校师生，报道部分客观生动，感想部分真诚",
+        "goal": "让没到场的同学知道比赛怎么办的、精彩在哪，并从我的感想里得到触动"
+      },
+      "taskRequires": [
+        "介绍上周环保知识竞赛的情况",
+        "写出自己对这次竞赛的感想"
+      ],
+      "thisEssayChooses": "标准版先交代时间、地点、组织者和参赛队，再按三轮赛制写过程，挑最后一轮减塑提案写细；感想写自己认识的变化：环保从日常小习惯做起，并用从本周起自带水杯收尾。"
+    },
+    "standard": {
+      "essay": "An Exciting Environmental Knowledge Contest\n\nLast Friday, an environmental knowledge contest was held in our school hall. Organized by the Student Union, it attracted ten teams from Senior One and Senior Two.\n\nThe contest had three rounds. The first two were quick questions on waste sorting and saving water. The final round was the most exciting: each team had one minute to suggest ways to cut plastic use. Class 5, Senior Two won with practical ideas like bringing our own cups.\n\nPersonally, I used to think protecting the environment was a job for adults, but the contest showed me it starts with small habits. Starting this week, I will carry my own cup, and I hope more of us will do the same.",
+      "pointMap": [
+        {
+          "point": "知识竞赛情况介绍",
+          "quote": "Last Friday, an environmental knowledge contest was held in our school hall."
+        },
+        {
+          "point": "知识竞赛情况介绍",
+          "quote": "The final round was the most exciting: each team had one minute to suggest ways to cut plastic use."
+        },
+        {
+          "point": "你的感想",
+          "quote": "I used to think protecting the environment was a job for adults, but the contest showed me it starts with small habits."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "开门见山交代比赛的时间、地点、组织者和规模，读者一读就知道这是一篇活动报道。",
+          "items": [
+            {
+              "quote": "Last Friday, an environmental knowledge contest was held in our school hall.",
+              "explain": "开头这句就答清何时、何地、什么活动。用被动语态 was held，把读者的注意力放在比赛本身，而不是谁办的。"
+            },
+            {
+              "quote": "Organized by the Student Union, it attracted ten teams from Senior One and Senior Two.",
+              "explain": "过去分词短语交代组织者，主句交代参赛规模，一句话装下两条信息，比拆成两个简单句紧凑。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "第一个要点的主体：按三轮赛制讲过程，再把最精彩的一轮写细。",
+          "items": [
+            {
+              "quote": "The contest had three rounds.",
+              "explain": "先用一个短句搭好框架，后面按轮次展开，读者跟得上。"
+            },
+            {
+              "quote": "The final round was the most exciting:",
+              "explain": "先评价、再用冒号给出具体内容，把标题里的 Exciting 落到一件看得见的事上，而不是空说比赛很精彩。"
+            },
+            {
+              "quote": "won with practical ideas like bringing our own cups",
+              "explain": "报道要交代结果。with 引出获奖的原因，自带水杯这个细节又为最后一段的行动埋下伏笔。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成第二个要点：写感想，从认识的变化落到具体行动。",
+          "items": [
+            {
+              "quote": "I used to think protecting the environment was a job for adults, but the contest showed me it starts with small habits.",
+              "explain": "used to think 和 the contest showed me 前后对照，写出比赛给我的改变，比只说“我受益匪浅”具体。"
+            },
+            {
+              "quote": "Starting this week, I will carry my own cup",
+              "explain": "感想落在一件马上就能做的事上，又接住上一段获奖队的点子，读者知道自己也可以怎么做。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "be held in ...",
+          "function": "报道开头交代活动在哪里举行，被动语态突出活动本身。"
+        },
+        {
+          "expression": "The final round was the most exciting: ...",
+          "function": "先给评价，再用冒号引出最精彩的环节，让“精彩”有具体内容。"
+        },
+        {
+          "expression": "I used to think ..., but ... showed me ...",
+          "function": "写感想时交代比赛前后认识的变化，让感想有来处，而不是一句空泛的“很有意义”。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "An Exciting Environmental Knowledge Contest\n\nLast Friday, our school hall was packed for an environmental knowledge contest. Organized by the Student Union, the event brought together ten teams from Senior One and Senior Two, all eager to prove themselves.\n\nThe contest was divided into three rounds. The first two tested basic knowledge, from sorting rubbish to saving water. It was the final round that kept everyone on the edge of their seats: each team had one minute to propose ways to cut plastic waste on campus. Class 5, Senior Two took first prize with simple but practical ideas, such as bringing our own cups.\n\nPersonally, I found the contest eye-opening. Protecting the environment, I now realize, is not a distant duty for adults but something that begins with our small daily choices. I have started carrying my own cup, and I hope this report will encourage more of you to join me.",
+      "pointMap": [
+        {
+          "point": "知识竞赛情况介绍",
+          "quote": "Last Friday, our school hall was packed for an environmental knowledge contest."
+        },
+        {
+          "point": "知识竞赛情况介绍",
+          "quote": "It was the final round that kept everyone on the edge of their seats: each team had one minute to propose ways to cut plastic waste on campus."
+        },
+        {
+          "point": "你的感想",
+          "quote": "Protecting the environment, I now realize, is not a distant duty for adults but something that begins with our small daily choices."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "our school hall was packed for an environmental knowledge contest",
+          "explain": "标准版说比赛 was held，这里用 was packed 写出礼堂坐满了人，报道一开头就有现场感。"
+        },
+        {
+          "quote": "It was the final round that kept everyone on the edge of their seats",
+          "explain": "强调句把最后一轮推到前面，on the edge of their seats 是描写紧张气氛的地道说法，比 the most exciting 多了观众的反应。"
+        },
+        {
+          "quote": "I hope this report will encourage more of you to join me",
+          "explain": "直接对读校刊的同学说话，提到 this report，点明这篇文字发在专栏里给大家看，比标准版的 more of us 更贴近报道和读者的关系。"
+        }
+      ]
+    }
+  }
+}

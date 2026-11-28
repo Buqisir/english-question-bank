@@ -1,0 +1,1017 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-hubei-shiyan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-shiyan-2025-01:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-shiyan-2025-01:seven-choices": {
+      "overview": "文章论述行动是成功的关键：多数人只谈梦想不肯付出，好结果不会自己到来。迈克12岁时打电话向公司经理求零件，由此获得工作、开启事业，说明成功者都敢于行动。",
+      "fullTranslationZh": "采取行动是决定你能否成功的最重要因素之一。无论你在生活中想要什么，是想发财、创办一家价值数百万美元的企业、环游世界，还是拥有一栋豪宅，你都需要采取行动。采取行动是唯一能把你和你想要的结果连在一起的东西。\n遗憾的是，大多数人并不采取行动。他们梦想着自己想要的东西，谈论着自己的目标，但说到底，如果他们不付出劳动、不倾注努力，他们的梦想和目标就永远不会实现。没有什么会自动来到你身边。钱不会从天上掉下来，你也不会第二天一觉醒来，就发现梦想中的车已经停在自家车库里。\n12岁时，迈克充满好奇，想做一个频率计数器，可他没有零件。然而，他不知怎么想到，这个行业里也许有人有他想要的零件。接下来，迈克想到公司经理汤姆也许能帮他弄到零件。他在电话簿里查到汤姆的号码，然后打了过去。让迈克意外的是，汤姆接了电话，于是年少的迈克和汤姆交谈，向他要这些零件。聊了大约20分钟后，汤姆答应把零件给迈克。他还给迈克提供了一份在他公司组装频率计数器的暑期工作。\n迈克就是这样进入这家公司、开启职业生涯、学到计算机知识的，后来的事就众所周知了。\n12岁的迈克当时也许并不明白发生了什么；他只知道自己想要零件来做频率计数器。而且，和世界上所有其他成功人士一样，他在采取行动时无所畏惧。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "seven-ls-1",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+          "sourceText": "They dream about what they want and they talk about their goals, but at the end of the day, if they do not put in the work and pour in the effort, their dreams and their goals will never come true.",
+          "displayText": "They dream about what they want and they talk about their goals, but at the end of the day, if they do not put in the work and pour in the effort, their dreams and their goals will never come true.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:36"
+          ],
+          "translationZh": "他们梦想着自己想要的东西，谈论着自己的目标，但说到底，如果他们不付出劳动、不倾注努力，他们的梦想和目标就永远不会实现。",
+          "analysisZh": "主干是 but 连接的两层：前面 They dream … and they talk … 是两个并列分句，说这些人只想只说；but 后面才是结论 their dreams and their goals will never come true。中间的 at the end of the day 是插入语，意思是“说到底”；if 条件句里 put in the work 和 pour in the effort 并列，交代梦想落空的条件。句首 They 回指空里的 most people。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 31,
+              "quote": "They dream about what they want"
+            },
+            {
+              "start": 65,
+              "end": 90,
+              "quote": "but at the end of the day"
+            },
+            {
+              "start": 147,
+              "end": 196,
+              "quote": "their dreams and their goals will never come true"
+            }
+          ]
+        },
+        {
+          "sentenceId": "seven-ls-2",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+          "sourceText": "What happened next was that Mike thought Tom, a company manager, might be able to help in getting the parts.",
+          "displayText": "What happened next was that Mike thought Tom, a company manager, might be able to help in getting the parts.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:38"
+          ],
+          "translationZh": "接下来，迈克想到公司经理汤姆也许能帮他弄到零件。",
+          "analysisZh": "先找主干：What happened next 是 What 引导的主语从句，谓语是系动词 was，后面 that 引导表语从句，说明“接下来发生的事”是什么。表语从句里 Mike thought 后面省略了宾语从句的 that；宾语从句主语是 Tom，a company manager 是插在中间的同位语，谓语是 might be able to help。这句把空里那个模糊的念头落实到具体的人。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "What happened next"
+            },
+            {
+              "start": 19,
+              "end": 27,
+              "quote": "was that"
+            },
+            {
+              "start": 65,
+              "end": 86,
+              "quote": "might be able to help"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先立论：要成功就得行动；再从反面说多数人只想不做，好处不会自己上门；接着讲迈克12岁时为要零件主动给公司经理打电话，因此进了公司、开启事业；最后点明他敢于行动，回到开头的论点。",
+        "units": [
+          {
+            "unitId": "unit-seven-1",
+            "paragraphIds": [
+              "block:paper-mock-hubei-shiyan-2025-01:seven-choices:1"
+            ],
+            "summary": "立论：不论想要什么，采取行动是通往结果的唯一途径。"
+          },
+          {
+            "unitId": "unit-seven-2",
+            "paragraphIds": [
+              "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2"
+            ],
+            "summary": "反面：多数人只谈梦想不付出，梦想不会自己实现。"
+          },
+          {
+            "unitId": "unit-seven-3",
+            "paragraphIds": [
+              "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+              "block:paper-mock-hubei-shiyan-2025-01:seven-choices:4"
+            ],
+            "summary": "例证：迈克缺零件，查号码给汤姆打电话求助，拿到零件和暑期工，由此进公司起步。"
+          },
+          {
+            "unitId": "unit-seven-4",
+            "paragraphIds": [
+              "block:paper-mock-hubei-shiyan-2025-01:seven-choices:5"
+            ],
+            "summary": "收束：小迈克只想要零件，却和成功者一样敢于行动。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 37,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "C",
+          "shared": [
+            "take action"
+          ],
+          "text": "选项的 \"take action\" 重复开头的论点，\"you\" 也像能接第 37 题空后的 \"you wake up\"。但空后 \"It is not like money is going to fall from the sky\" 是在否定坐等收获，前面要一句“不会自己来”；选项却许诺行动就有结果，方向接反了。",
+          "quotes": [
+            "take action",
+            "you",
+            "you wake up",
+            "It is not like money is going to fall from the sky"
+          ]
+        },
+        "F": {
+          "target": 36,
+          "secondary": 37,
+          "kind": "shadow",
+          "shadowOf": "C",
+          "shared": [
+            "action"
+          ],
+          "text": "选项的 \"actions\" 接上一段的 \"take action\"，复数 \"they\" 似乎能让第 36 题空后的 \"They\" 回指。但 They 要 \"dream about what they want\"，只能指人。放第 37 题，它讲行动费 \"energy and time\"，也接不上空后对天上掉钱的否定。",
+          "quotes": [
+            "actions",
+            "take action",
+            "they",
+            "They",
+            "dream about what they want",
+            "energy and time"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "text:seven:source",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "text:seven:translation-zh",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-seven-1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 101,
+              "quote": "采取行动是决定你能否成功的最重要因素之一。无论你在生活中想要什么，是想发财、创办一家价值数百万美元的企业、环游世界，还是拥有一栋豪宅，你都需要采取行动。采取行动是唯一能把你和你想要的结果连在一起的东西。"
+            },
+            {
+              "paragraphId": "tr-seven-2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2"
+              ],
+              "start": 102,
+              "end": 230,
+              "quote": "遗憾的是，大多数人并不采取行动。他们梦想着自己想要的东西，谈论着自己的目标，但说到底，如果他们不付出劳动、不倾注努力，他们的梦想和目标就永远不会实现。没有什么会自动来到你身边。钱不会从天上掉下来，你也不会第二天一觉醒来，就发现梦想中的车已经停在自家车库里。"
+            },
+            {
+              "paragraphId": "tr-seven-3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3"
+              ],
+              "start": 231,
+              "end": 417,
+              "quote": "12岁时，迈克充满好奇，想做一个频率计数器，可他没有零件。然而，他不知怎么想到，这个行业里也许有人有他想要的零件。接下来，迈克想到公司经理汤姆也许能帮他弄到零件。他在电话簿里查到汤姆的号码，然后打了过去。让迈克意外的是，汤姆接了电话，于是年少的迈克和汤姆交谈，向他要这些零件。聊了大约20分钟后，汤姆答应把零件给迈克。他还给迈克提供了一份在他公司组装频率计数器的暑期工作。"
+            },
+            {
+              "paragraphId": "tr-seven-4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:seven-choices:4"
+              ],
+              "start": 418,
+              "end": 458,
+              "quote": "迈克就是这样进入这家公司、开启职业生涯、学到计算机知识的，后来的事就众所周知了。"
+            },
+            {
+              "paragraphId": "tr-seven-5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:seven-choices:5"
+              ],
+              "start": 459,
+              "end": 527,
+              "quote": "12岁的迈克当时也许并不明白发生了什么；他只知道自己想要零件来做频率计数器。而且，和世界上所有其他成功人士一样，他在采取行动时无所畏惧。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "text:seven:completed-2",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+            "text": "Unfortunately, most people do not take action. They dream about what they want and they talk about their goals, but at the end of the day, if they do not put in the work and pour in the effort, their dreams and their goals will never come true. Nothing will come to you automatically. It is not like money is going to fall from the sky or you wake up the next day and find that you have your dream car sitting in your garage."
+          },
+          {
+            "textId": "text:seven:completed-3",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+            "text": "At the age of 12, Mike was curious and wanted to build a frequency counter（频率计数器）, but he did not have the parts. However, he somehow got the idea that someone in the industry may have the parts that he desired. What happened next was that Mike thought Tom, a company manager, might be able to help in getting the parts. He checked out the telephone book for Tom’s number, and then called that number. To Mike’s surprise, Tom answered the phone and then the young Mike talked to Tom and requested the parts from him. After about 20 minutes of chatting, Tom agreed to give Mike the parts. He also offered him a summer job at his company, for assembling the frequency counters."
+          },
+          {
+            "textId": "text:seven:completed-5",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:5",
+            "text": "The 12 years old Mike might not know what was happening back then; all he knew was that he wanted the parts to build the frequency counter. And like all other successful people around the world, he was fearless in taking action."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "seven-evidence-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+                "start": 7,
+                "end": 38,
+                "quote": "They dream about what they want"
+              },
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+                "start": 99,
+                "end": 129,
+                "quote": "if they do not put in the work"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-2",
+                "start": 16,
+                "end": 28,
+                "quote": "他们梦想着自己想要的东西"
+              },
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-2",
+                "start": 43,
+                "end": 52,
+                "quote": "如果他们不付出劳动"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:36"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:36",
+            "sourceRanges": [
+              {
+                "textId": "text:seven:completed-2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+                "start": 0,
+                "end": 46,
+                "quote": "Unfortunately, most people do not take action."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-2",
+                "start": 0,
+                "end": 16,
+                "quote": "遗憾的是，大多数人并不采取行动。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+                "start": 212,
+                "end": 262,
+                "quote": "It is not like money is going to fall from the sky"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-2",
+                "start": 88,
+                "end": 97,
+                "quote": "钱不会从天上掉下来"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:37"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:37",
+            "sourceRanges": [
+              {
+                "textId": "text:seven:completed-2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+                "start": 245,
+                "end": 284,
+                "quote": "Nothing will come to you automatically."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-2",
+                "start": 75,
+                "end": 88,
+                "quote": "没有什么会自动来到你身边。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+                "start": 87,
+                "end": 112,
+                "quote": "he did not have the parts"
+              },
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+                "start": 149,
+                "end": 228,
+                "quote": "Mike thought Tom, a company manager, might be able to help in getting the parts"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-3",
+                "start": 22,
+                "end": 28,
+                "quote": "可他没有零件"
+              },
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-3",
+                "start": 61,
+                "end": 80,
+                "quote": "迈克想到公司经理汤姆也许能帮他弄到零件"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:38"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:38",
+            "sourceRanges": [
+              {
+                "textId": "text:seven:completed-3",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+                "start": 114,
+                "end": 211,
+                "quote": "However, he somehow got the idea that someone in the industry may have the parts that he desired."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-3",
+                "start": 29,
+                "end": 57,
+                "quote": "然而，他不知怎么想到，这个行业里也许有人有他想要的零件。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+                "start": 396,
+                "end": 424,
+                "quote": "requested the parts from him"
+              },
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+                "start": 433,
+                "end": 465,
+                "quote": "He also offered him a summer job"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-3",
+                "start": 130,
+                "end": 137,
+                "quote": "向他要这些零件"
+              },
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-3",
+                "start": 159,
+                "end": 169,
+                "quote": "他还给迈克提供了一份"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:39"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:39",
+            "sourceRanges": [
+              {
+                "textId": "text:seven:completed-3",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+                "start": 517,
+                "end": 587,
+                "quote": "After about 20 minutes of chatting, Tom agreed to give Mike the parts."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-3",
+                "start": 138,
+                "end": 159,
+                "quote": "聊了大约20分钟后，汤姆答应把零件给迈克。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:5",
+                "start": 67,
+                "end": 138,
+                "quote": "all he knew was that he wanted the parts to build the frequency counter"
+              },
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:1",
+                "start": 0,
+                "end": 84,
+                "quote": "Taking action is one of the most important factors that will determine your success."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-5",
+                "start": 20,
+                "end": 37,
+                "quote": "他只知道自己想要零件来做频率计数器"
+              },
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-1",
+                "start": 0,
+                "end": 21,
+                "quote": "采取行动是决定你能否成功的最重要因素之一。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:40"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:40",
+            "sourceRanges": [
+              {
+                "textId": "text:seven:completed-5",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:5",
+                "start": 140,
+                "end": 228,
+                "quote": "And like all other successful people around the world, he was fearless in taking action."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-5",
+                "start": 38,
+                "end": 68,
+                "quote": "而且，和世界上所有其他成功人士一样，他在采取行动时无所畏惧。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:36"
+            ],
+            "selectedSentenceId": "seven-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+                "start": 7,
+                "end": 204,
+                "quote": "They dream about what they want and they talk about their goals, but at the end of the day, if they do not put in the work and pour in the effort, their dreams and their goals will never come true."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-2",
+                "start": 16,
+                "end": 75,
+                "quote": "他们梦想着自己想要的东西，谈论着自己的目标，但说到底，如果他们不付出劳动、不倾注努力，他们的梦想和目标就永远不会实现。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:38"
+            ],
+            "selectedSentenceId": "seven-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "text:seven:source",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+                "start": 121,
+                "end": 229,
+                "quote": "What happened next was that Mike thought Tom, a company manager, might be able to help in getting the parts."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "text:seven:translation-zh",
+                "paragraphId": "tr-seven-3",
+                "start": 57,
+                "end": 81,
+                "quote": "接下来，迈克想到公司经理汤姆也许能帮他弄到零件。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-shiyan-2025-01:36": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:36",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "They dream about what they want",
+        "talk about their goals",
+        "do not put in the work",
+        "you need to take action"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+        "beforeQuote": "",
+        "afterQuote": "They dream about what they want and they talk about their goals, but at the end of the day, if they do not put in the work and pour in the effort, their dreams and their goals will never come true."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "They",
+          "signalSide": "context-after",
+          "targetText": "most people",
+          "relation": "空后 They 需要先出现一群人，回指选项里的 most people。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "most people",
+          "signalSide": "option",
+          "targetText": "They",
+          "relation": "most people 给空后的 They 提供所指对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "do not take action",
+          "signalSide": "option",
+          "targetText": "do not put in the work",
+          "relation": "选项说不行动，空后用不付出劳动把“不行动”说具体。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "do not put in the work",
+          "signalSide": "context-after",
+          "targetText": "do not take action",
+          "relation": "空后的不付出劳动正是选项“不行动”的具体表现。"
+        }
+      ],
+      "lock": [
+        "most people",
+        "They"
+      ],
+      "find": {
+        "text": "先看空后 \"They dream about what they want\"：They 得先有一群人。C 的 \"most people\" 正好是这群人，\"do not take action\" 又被空后 \"do not put in the work\" 坐实。",
+        "quotes": [
+          "They dream about what they want",
+          "most people",
+          "do not take action",
+          "do not put in the work"
+        ]
+      },
+      "explain": "上一段立论：想成功就得行动。这句用 Unfortunately 拉回现实，推出反面人群；本段随后讲这些人只说不做、梦想落空，和上一段形成正反对照。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "They dream about what they want",
+            "optionSide": "most people",
+            "relation": "空后 They 回指 most people，说明空里要先引出“人”。"
+          },
+          {
+            "contextSide": "do not put in the work / pour in the effort",
+            "optionSide": "do not take action",
+            "relation": "不付出劳动、不倾注努力，就是选项说的不行动。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "上一段立论：想成功就得行动。这句用 Unfortunately 拉回现实，推出反面人群；本段随后讲这些人只说不做、梦想落空，和上一段形成正反对照。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "选项的 \"actions\" 接上一段的 \"take action\"，复数 \"they\" 似乎能让第 36 题空后的 \"They\" 回指。但 They 要 \"dream about what they want\"，只能指人。放第 37 题，它讲行动费 \"energy and time\"，也接不上空后对天上掉钱的否定。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:37": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "will never come true",
+        "money is going to fall from the sky",
+        "wake up the next day",
+        "dream car sitting in your garage"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:2",
+        "beforeQuote": "their dreams and their goals will never come true.",
+        "afterQuote": "It is not like money is going to fall from the sky or you wake up the next day and find that you have your dream car sitting in your garage."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "automatically",
+          "signalSide": "option",
+          "targetText": "fall from the sky / wake up the next day and find",
+          "relation": "automatically 概括空后两个“东西自己送上门”的画面。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "fall from the sky",
+          "signalSide": "context-after",
+          "targetText": "automatically",
+          "relation": "钱从天上掉下来，是“自动到来”的具体例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "wake up the next day and find",
+          "signalSide": "context-after",
+          "targetText": "automatically",
+          "relation": "一觉醒来车就在车库，同样是不费力就得到。"
+        }
+      ],
+      "lock": [
+        "automatically",
+        "fall from the sky"
+      ],
+      "find": {
+        "text": "看空后 \"fall from the sky\"、\"wake up the next day and find\"，都是东西自己送上门的画面，只有 A 的 \"automatically\" 能被它们说具体。",
+        "quotes": [
+          "fall from the sky",
+          "wake up the next day and find",
+          "automatically"
+        ]
+      },
+      "explain": "空前说不付出，梦想就落空；这句把道理收成一句短话，空后再用天上掉钱、醒来车已在车库两个反例，说明光等是等不来的。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "money is going to fall from the sky",
+            "optionSide": "Nothing will come to you automatically",
+            "relation": "空后用“钱不会从天上掉下来”具体说明“没有什么会自动到来”。"
+          },
+          {
+            "contextSide": "will never come true",
+            "optionSide": "Nothing will come",
+            "relation": "空前说梦想不会实现，选项接着说什么都不会自己来。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "空前说不付出，梦想就落空；这句把道理收成一句短话，空后再用天上掉钱、醒来车已在车库两个反例，说明光等是等不来的。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "选项的 \"take action\" 重复开头的论点，\"you\" 也像能接第 37 题空后的 \"you wake up\"。但空后 \"It is not like money is going to fall from the sky\" 是在否定坐等收获，前面要一句“不会自己来”；选项却许诺行动就有结果，方向接反了。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:38": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "did not have the parts",
+        "wanted to build a frequency counter",
+        "Tom, a company manager",
+        "help in getting the parts"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+        "beforeQuote": "At the age of 12, Mike was curious and wanted to build a frequency counter（频率计数器）, but he did not have the parts.",
+        "afterQuote": "What happened next was that Mike thought Tom, a company manager, might be able to help in getting the parts."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "option",
+          "targetText": "he did not have the parts",
+          "relation": "However 从“没有零件”的困境转到找零件的念头。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "did not have the parts",
+          "signalSide": "context-before",
+          "targetText": "However",
+          "relation": "空前的困境是 However 转折的起点。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "someone in the industry",
+          "signalSide": "option",
+          "targetText": "Tom, a company manager",
+          "relation": "选项泛说行内有人，空后具体到公司经理 Tom。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Tom, a company manager",
+          "signalSide": "context-after",
+          "targetText": "someone in the industry",
+          "relation": "空后点出的 Tom 就是选项里那个“行内的人”。"
+        }
+      ],
+      "lock": [
+        "However",
+        "someone in the industry",
+        "Tom, a company manager"
+      ],
+      "find": {
+        "text": "空前 \"he did not have the parts\" 是难处，G 用 \"However\" 转出办法；它说的 \"someone in the industry\"，空后落实为 \"Tom, a company manager\"。",
+        "quotes": [
+          "he did not have the parts",
+          "However",
+          "someone in the industry",
+          "Tom, a company manager"
+        ]
+      },
+      "explain": "没零件是难题，这句先冒出一个模糊念头：行内总有人有；空后才把念头落到具体的 Tom 身上，接着查号码、打电话，想法一步步变成行动。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 说 \"Tom agreed to give Mike the parts\"，放这里太早：空后 Mike 才想到 Tom \"might be able to help\"，还没联系上他。",
+          "quotes": [
+            "Tom agreed to give Mike the parts",
+            "might be able to help"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "he did not have the parts",
+            "optionSide": "However",
+            "relation": "空前是困境，However 转向解决的念头。"
+          },
+          {
+            "contextSide": "Tom, a company manager",
+            "optionSide": "someone in the industry",
+            "relation": "空后的公司经理 Tom 把“行内有人”具体化。"
+          },
+          {
+            "contextSide": "help in getting the parts",
+            "optionSide": "the parts that he desired",
+            "relation": "两边说的都是 Mike 想要的那些零件。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "没零件是难题，这句先冒出一个模糊念头：行内总有人有；空后才把念头落到具体的 Tom 身上，接着查号码、打电话，想法一步步变成行动。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 说 \"Tom agreed to give Mike the parts\"，放这里太早：空后 Mike 才想到 Tom \"might be able to help\"，还没联系上他。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:39": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion",
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "requested the parts from him",
+        "Tom answered the phone",
+        "also offered him a summer job",
+        "assembling the frequency counters"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:3",
+        "beforeQuote": "To Mike’s surprise, Tom answered the phone and then the young Mike talked to Tom and requested the parts from him.",
+        "afterQuote": "He also offered him a summer job at his company, for assembling the frequency counters."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "context-after",
+          "targetText": "agreed to give Mike the parts",
+          "relation": "also 表示在给零件之外再加一样，前面得先有 Tom 答应的事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "agreed to give Mike the parts",
+          "signalSide": "option",
+          "targetText": "also offered him a summer job",
+          "relation": "答应给零件是第一份帮助，空后 also 再加暑期工。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "requested the parts",
+          "signalSide": "context-before",
+          "targetText": "agreed to give Mike the parts",
+          "relation": "空前提出请求，选项给出请求的结果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "He",
+          "signalSide": "context-after",
+          "targetText": "Tom",
+          "relation": "空后 He 指选项里刚答应给零件的 Tom。"
+        }
+      ],
+      "lock": [
+        "requested the parts",
+        "agreed to give Mike the parts",
+        "also"
+      ],
+      "find": {
+        "text": "空后 \"He also offered him a summer job\"：also 说明 Tom 此前已答应过一件事。D 的 \"agreed to give Mike the parts\" 正回应空前 \"requested the parts\"。",
+        "quotes": [
+          "He also offered him a summer job",
+          "agreed to give Mike the parts",
+          "requested the parts"
+        ]
+      },
+      "explain": "空前 Mike 开口要零件，这句交代请求的结果；空后再添一份暑期工，Tom 的帮助一层叠一层，为下一段 Mike 进公司埋下伏笔。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "requested the parts from him",
+            "optionSide": "agreed to give Mike the parts",
+            "relation": "一问一答：要零件，答应给零件。"
+          },
+          {
+            "contextSide": "He also offered him a summer job",
+            "optionSide": "Tom agreed",
+            "relation": "He 指 Tom，also 在答应给零件之外再加一份工作。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "空前 Mike 开口要零件，这句交代请求的结果；空后再添一份暑期工，Tom 的帮助一层叠一层，为下一段 Mike 进公司埋下伏笔。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:40": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:40",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "all he knew",
+        "he wanted the parts",
+        "The 12 years old Mike",
+        "might not know what was happening"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:seven-choices:5",
+        "beforeQuote": "The 12 years old Mike might not know what was happening back then; all he knew was that he wanted the parts to build the frequency counter.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "taking action",
+          "signalSide": "option",
+          "targetText": "Taking action is one of the most important factors",
+          "relation": "选项的 taking action 回到开头立的论点。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Taking action",
+          "signalSide": "context-before",
+          "targetText": "fearless in taking action",
+          "relation": "全文开头的 Taking action 是例子最后要落回的论点。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "he",
+          "signalSide": "option",
+          "targetText": "The 12 years old Mike",
+          "relation": "选项的 he 接空前的小 Mike。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "he wanted the parts",
+          "signalSide": "context-before",
+          "targetText": "fearless in taking action",
+          "relation": "空前只说他想要零件，选项补出他为此敢于行动。"
+        }
+      ],
+      "lock": [
+        "he wanted the parts",
+        "fearless in taking action",
+        "successful people"
+      ],
+      "find": {
+        "text": "全文最后一空要把故事收回论点。空前 \"he wanted the parts\" 只说他想要什么，E 的 \"fearless in taking action\" 点明他敢开口求人，\"successful people\" 呼应全文开头的成功。",
+        "quotes": [
+          "he wanted the parts",
+          "fearless in taking action",
+          "successful people"
+        ]
+      },
+      "explain": "空前承认小 Mike 不懂什么大道理，这句用 And 补上他身上真正起作用的东西：敢做。Mike 的例子由此归入成功者一类，落回开头“行动决定成功”的观点。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Taking action is one of the most important factors that will determine your success",
+            "optionSide": "successful people / fearless in taking action",
+            "relation": "结尾的成功者与行动，回扣开头的论点。"
+          },
+          {
+            "contextSide": "all he knew was that he wanted the parts",
+            "optionSide": "he was fearless in taking action",
+            "relation": "只想要零件的孩子，却敢于为此行动。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "空前承认小 Mike 不懂什么大道理，这句用 And 补上他身上真正起作用的东西：敢做。Mike 的例子由此归入成功者一类，落回开头“行动决定成功”的观点。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

@@ -1,0 +1,842 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hubei-shiyan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-shiyan-2025-01:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-shiyan-2025-01:reading-c": {
+      "overview": "慕尼黑工业大学研究了慕尼黑103个公共广场，发现草坪、树木等条件不同，广场上的物种数量差别很大；研究者建议规划者按当地条件和不同物种的需要设计公共空间，以提高生物多样性。",
+      "fullTranslationZh": "动物和植物同样在公共广场上生活、繁衍。这为提高生物多样性、增进人类福祉创造了机会。慕尼黑工业大学（TUM）的研究人员在慕尼黑的103个地点研究了各种因素如何影响动植物。他们主张仔细考察当地条件，在设计公共空间时采用更注重自然的方法。\n慕尼黑工业大学陆地生态学教授沃尔夫冈·魏瑟和他的团队一起，考察了慕尼黑103个公共广场的面积、有无草坪、植物和树木生长情况、人造光源以及周边绿地等因素。这些广场从几乎完全封闭的到公园般的都有。\n以慕尼黑为例，他们的研究结果表明，不同空间里能生存的动物和其他生物差别有多大。在高度封闭的玛丽恩广场，研究人员只统计到20个物种，其中鸟类和苔藓各只有一种，此外还有一些昆虫和蝙蝠。与此同时，在有草坪、灌木和树木的普弗朗滕广场，他们发现了156个生物类群，其中包括21种不同的鸟类。约翰尼斯广场虽然封闭程度相对较高，但因为有树木、树篱和一些草地，那里有118个物种。\n不出所料，更多的植物对许多动物物种有益。这是城市规划模型已经考虑到的一个因素。然而，研究还表明，草坪、树木和灌木在吸引物种的多样性和数量上差别很大。到目前为止，公共空间的设计都以人为中心，很少考虑动物和其他物种。\n研究人员得出结论：如果规划者不在每个地点套用同一种模式，而是考虑当地条件和不同物种的需要，提高生物多样性的机会就会增加。比如，为了吸引更多种类的蜜蜂，他们不仅应该种植产蜜的花，还应该提供空地，作为蜜蜂的栖息地和筑巢材料的来源。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-c-1",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:5",
+          "sourceText": "The researchers concluded that the chances for greater biodiversity are increased if, instead of applying the same patterns to every location, planners take into account the local conditions and the needs of different species.",
+          "displayText": "The researchers concluded that the chances for greater biodiversity are increased if, instead of applying the same patterns to every location, planners take into account the local conditions and the needs of different species.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:28",
+            "question:paper-mock-hubei-shiyan-2025-01:31"
+          ],
+          "translationZh": "研究人员得出结论：如果规划者不在每个地点套用同一种模式，而是考虑当地条件和不同物种的需要，提高生物多样性的机会就会增加。",
+          "analysisZh": "主干是 The researchers concluded that …，that 引导宾语从句，从句主干是 the chances for greater biodiversity are increased（提高生物多样性的机会会增加）。if 引导条件状语从句，主语是 planners，谓语是 take into account（考虑），宾语是 the local conditions and the needs of different species。instead of applying the same patterns to every location 插在 if 和主语之间，意为“而不是处处套用同一模式”，和 take into account 形成对照。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 30,
+              "quote": "The researchers concluded that"
+            },
+            {
+              "start": 31,
+              "end": 81,
+              "quote": "the chances for greater biodiversity are increased"
+            },
+            {
+              "start": 86,
+              "end": 141,
+              "quote": "instead of applying the same patterns to every location"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-c-2",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+          "sourceText": "However, the study also shows that lawns, trees and bushes vary widely in terms of the diversity and numbers of the species they attract.",
+          "displayText": "However, the study also shows that lawns, trees and bushes vary widely in terms of the diversity and numbers of the species they attract.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:30"
+          ],
+          "translationZh": "然而，研究还表明，草坪、树木和灌木在吸引物种的多样性和数量上差别很大。",
+          "analysisZh": "主干是 the study also shows that …，that 引导宾语从句：主语是 lawns, trees and bushes，谓语是 vary widely（差别很大）。in terms of 意为“在……方面”，后接 the diversity and numbers of the species；they attract 是省略关系词的定语从句，修饰 the species，they 指草坪、树木和灌木。However 承接前面“植物多对动物有益”，转而说明不同绿化效果并不一样。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 34,
+              "quote": "the study also shows that"
+            },
+            {
+              "start": 59,
+              "end": 70,
+              "quote": "vary widely"
+            },
+            {
+              "start": 112,
+              "end": 136,
+              "quote": "the species they attract"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-c:1"
+              ],
+              "start": 0,
+              "end": 116,
+              "quote": "动物和植物同样在公共广场上生活、繁衍。这为提高生物多样性、增进人类福祉创造了机会。慕尼黑工业大学（TUM）的研究人员在慕尼黑的103个地点研究了各种因素如何影响动植物。他们主张仔细考察当地条件，在设计公共空间时采用更注重自然的方法。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-c:2"
+              ],
+              "start": 117,
+              "end": 213,
+              "quote": "慕尼黑工业大学陆地生态学教授沃尔夫冈·魏瑟和他的团队一起，考察了慕尼黑103个公共广场的面积、有无草坪、植物和树木生长情况、人造光源以及周边绿地等因素。这些广场从几乎完全封闭的到公园般的都有。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-c:3"
+              ],
+              "start": 214,
+              "end": 396,
+              "quote": "以慕尼黑为例，他们的研究结果表明，不同空间里能生存的动物和其他生物差别有多大。在高度封闭的玛丽恩广场，研究人员只统计到20个物种，其中鸟类和苔藓各只有一种，此外还有一些昆虫和蝙蝠。与此同时，在有草坪、灌木和树木的普弗朗滕广场，他们发现了156个生物类群，其中包括21种不同的鸟类。约翰尼斯广场虽然封闭程度相对较高，但因为有树木、树篱和一些草地，那里有118个物种。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-c:4"
+              ],
+              "start": 397,
+              "end": 503,
+              "quote": "不出所料，更多的植物对许多动物物种有益。这是城市规划模型已经考虑到的一个因素。然而，研究还表明，草坪、树木和灌木在吸引物种的多样性和数量上差别很大。到目前为止，公共空间的设计都以人为中心，很少考虑动物和其他物种。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-c:5"
+              ],
+              "start": 504,
+              "end": 617,
+              "quote": "研究人员得出结论：如果规划者不在每个地点套用同一种模式，而是考虑当地条件和不同物种的需要，提高生物多样性的机会就会增加。比如，为了吸引更多种类的蜜蜂，他们不仅应该种植产蜜的花，还应该提供空地，作为蜜蜂的栖息地和筑巢材料的来源。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-c-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:28",
+              "question:paper-mock-hubei-shiyan-2025-01:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:5",
+                "start": 0,
+                "end": 226,
+                "quote": "The researchers concluded that the chances for greater biodiversity are increased if, instead of applying the same patterns to every location, planners take into account the local conditions and the needs of different species."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p5",
+                "start": 0,
+                "end": 60,
+                "quote": "研究人员得出结论：如果规划者不在每个地点套用同一种模式，而是考虑当地条件和不同物种的需要，提高生物多样性的机会就会增加。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-c-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:30"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+                "start": 138,
+                "end": 275,
+                "quote": "However, the study also shows that lawns, trees and bushes vary widely in terms of the diversity and numbers of the species they attract."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p4",
+                "start": 39,
+                "end": 74,
+                "quote": "然而，研究还表明，草坪、树木和灌木在吸引物种的多样性和数量上差别很大。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-c-q28-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+                "start": 248,
+                "end": 290,
+                "quote": "how various factors affect flora and fauna"
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:2",
+                "start": 83,
+                "end": 216,
+                "quote": "looked at such factors as size, the occurrence of lawn, plant and tree growth, artificial light sources and green in the surroundings"
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+                "start": 297,
+                "end": 350,
+                "quote": "They advocate a close examination of local conditions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p1",
+                "start": 69,
+                "end": 83,
+                "quote": "研究了各种因素如何影响动植物"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p2",
+                "start": 29,
+                "end": 75,
+                "quote": "考察了慕尼黑103个公共广场的面积、有无草坪、植物和树木生长情况、人造光源以及周边绿地等因素"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p1",
+                "start": 84,
+                "end": 96,
+                "quote": "他们主张仔细考察当地条件"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-c-q29-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+                "start": 147,
+                "end": 221,
+                "quote": "At the heavily sealed Marienplatz, the researchers counted only 20 species"
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+                "start": 306,
+                "end": 384,
+                "quote": "at Pfrontener Platz, a space with lawns, bushes and trees, they found 156 taxa"
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+                "start": 425,
+                "end": 564,
+                "quote": "At Johannisplatz, 118 species are present, as it has trees, hedges and some grassy areas despite being sealed to a relatively large extent."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p3",
+                "start": 39,
+                "end": 64,
+                "quote": "在高度封闭的玛丽恩广场，研究人员只统计到20个物种"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p3",
+                "start": 95,
+                "end": 126,
+                "quote": "在有草坪、灌木和树木的普弗朗滕广场，他们发现了156个生物类群"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p3",
+                "start": 140,
+                "end": 181,
+                "quote": "约翰尼斯广场虽然封闭程度相对较高，但因为有树木、树篱和一些草地，那里有118个物种"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-c-q30-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+                "start": 138,
+                "end": 275,
+                "quote": "However, the study also shows that lawns, trees and bushes vary widely in terms of the diversity and numbers of the species they attract."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p4",
+                "start": 48,
+                "end": 73,
+                "quote": "草坪、树木和灌木在吸引物种的多样性和数量上差别很大"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-c-q31-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+                "start": 59,
+                "end": 151,
+                "quote": "This creates opportunities for greater biodiversity and well-being for the human population."
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+                "start": 276,
+                "end": 387,
+                "quote": "So far, public spaces are designed with humans in mind, with little consideration to animals and other species."
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:5",
+                "start": 143,
+                "end": 225,
+                "quote": "planners take into account the local conditions and the needs of different species"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p1",
+                "start": 19,
+                "end": 40,
+                "quote": "这为提高生物多样性、增进人类福祉创造了机会"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p4",
+                "start": 74,
+                "end": 105,
+                "quote": "到目前为止，公共空间的设计都以人为中心，很少考虑动物和其他物种"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-c-p5",
+                "start": 30,
+                "end": 44,
+                "quote": "考虑当地条件和不同物种的需要"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开篇提出公共广场也是动植物的家园，介绍慕尼黑工业大学的研究及其主张；接着交代研究考察的因素，用三个广场的数据说明差别，再指出不同绿化吸引的物种不同、现有设计只顾人；最后给出因地制宜规划的结论，并以蜜蜂为例。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+            "summary": "公共广场上也有动植物，慕尼黑工业大学在103个地点研究各种因素如何影响动植物，并主张更注重自然的设计。",
+            "function": "提出话题，介绍研究及其主张"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:2",
+            "summary": "研究团队考察了面积、草坪、树木、人造光源和周边绿地等因素，广场从几乎全封闭到公园般不等。",
+            "function": "交代研究考察的因素和对象"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+            "summary": "封闭的玛丽恩广场只有20种生物，开阔的普弗朗滕广场有156个类群，约翰尼斯广场有118种。",
+            "function": "用数据说明不同广场的物种差别很大"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+            "summary": "植物多对动物有益，但不同绿化吸引的物种差别很大，而现有公共空间只为人设计。",
+            "function": "分析结果，指出现有设计的不足"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:5",
+            "summary": "研究者认为规划应因地制宜、照顾不同物种的需要，并以吸引蜜蜂为例。",
+            "function": "得出结论并举例说明建议"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-shiyan-2025-01:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "说出慕尼黑工业大学这项研究关注的核心问题。",
+      "stemTranslationZh": "慕尼黑工业大学的这项研究关注什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 how 从句研究的是什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "动植物的最佳栖居地点。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "locations",
+            "optionText": "locations",
+            "matchType": "exact",
+            "relationNote": "locations 出自 [[block:paper-mock-hubei-shiyan-2025-01:reading-c:1|have studied at 103 locations]]，只是研究去过的103个地点；研究比的是各种因素怎样影响动植物，没评哪里最适合它们。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+              "quote": "Researchers at the Technical University of Munich (TUM) have studied at 103 locations in Munich",
+              "anchor": "在103个地点做研究"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "广场设计中要考虑的因素。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "factors",
+            "optionText": "Factors",
+            "matchType": "exact",
+            "relationNote": "factors 在原文指研究考察的面积、草坪、灯光等条件，研究看的是它们对动植物的影响；设计该考虑什么，是据结果提的建议。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:2",
+              "quote": "looked at such factors as size, the occurrence of lawn, plant and tree growth, artificial light sources and green in the surroundings",
+              "anchor": "研究考察的各项因素"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "当地条件对生物多样性的影响。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+              "quote": "how various factors affect flora and fauna",
+              "anchor": "各种因素如何影响动植物"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:2",
+              "quote": "looked at such factors as size, the occurrence of lawn, plant and tree growth, artificial light sources and green in the surroundings",
+              "anchor": "考察的因素都是本地条件"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+              "quote": "They advocate a close examination of local conditions",
+              "anchor": "主张考察当地条件"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "人与动植物相处的最佳方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The best way for humans and flora and fauna to get along",
+            "explanation": "原文只说广场上的生物多样性对人的福祉有好处（well-being for the human population），研究没去找人与动植物相处的最佳方式。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "TUM",
+          "sourceRole": "stem",
+          "targetText": "Researchers at the Technical University of Munich (TUM) have studied at 103 locations in Munich how various factors affect flora and fauna（动植物）.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+          "relationType": "locationCue",
+          "answerText": "how various factors affect flora and fauna",
+          "note": "题干 TUM 原词出现在原文，这一句交代研究做了什么。"
+        },
+        {
+          "sourceText": "The impact of local conditions on biodiversity.",
+          "sourceRole": "correctOption",
+          "targetText": "how various factors affect flora and fauna",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "选项三处都对得上：impact 对应 affect（影响），biodiversity 对应 flora and fauna（动植物）；local conditions 就是 [[block:paper-mock-hubei-shiyan-2025-01:reading-c:2]] 列出的面积、草坪、树木、灯光和周边绿地这些各广场的本地条件，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:29": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "比较几个封闭程度不同的广场上的物种数量，看这些数字说明了什么。",
+      "stemTranslationZh": "从第三段我们可以知道什么？",
+      "locateBy": "passage",
+      "locateFindZh": "比较 [[block:paper-mock-hubei-shiyan-2025-01:reading-c:3]] 三个广场：封闭程度和物种数各是多少",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "动物在封闭的公园里大量增加。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "At the heavily sealed Marienplatz, the researchers counted only 20 species, with just one bird and moss species as well as insects and bat species.",
+            "sourceHighlight": "only 20 species",
+            "optionText": "Animals expand in sealed parks.",
+            "optionHighlight": "expand in sealed parks",
+            "explanation": "高度封闭的玛丽恩广场只数到20个物种（only 20 species），是三处里最少的，谈不上动物在封闭处增多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+              "quote": "At the heavily sealed Marienplatz, the researchers counted only 20 species",
+              "anchor": "封闭的广场只有20种"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "开放的公园支持更丰富的生物多样性。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+              "quote": "At the heavily sealed Marienplatz, the researchers counted only 20 species",
+              "anchor": "封闭广场只有20种"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+              "quote": "at Pfrontener Platz, a space with lawns, bushes and trees, they found 156 taxa",
+              "anchor": "开阔广场有156个类群"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+              "quote": "At Johannisplatz, 118 species are present, as it has trees, hedges and some grassy areas despite being sealed to a relatively large extent.",
+              "anchor": "有绿化的广场有118种"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "开放的公园不适合鸟类栖息。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Meanwhile, at Pfrontener Platz, a space with lawns, bushes and trees, they found 156 taxa, including 21 different kinds of birds.",
+            "sourceHighlight": "21 different kinds of birds",
+            "optionText": "Open parks are not fit for birds to stay.",
+            "optionHighlight": "not fit for birds",
+            "explanation": "开阔的普弗朗滕广场有21种鸟（21 different kinds of birds），封闭的玛丽恩广场只有一种，开阔处恰恰更适合鸟。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+              "quote": "including 21 different kinds of birds",
+              "anchor": "有21种鸟"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "封闭的公园和开放的公园一样好。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "At the heavily sealed Marienplatz, the researchers counted only 20 species, with just one bird and moss species as well as insects and bat species.",
+            "sourceHighlight": "only 20 species",
+            "optionText": "Closed parks are as good as open ones.",
+            "optionHighlight": "as good as",
+            "explanation": "封闭的玛丽恩广场20种，开阔的普弗朗滕广场156个类群，相差七倍多，两者远不是一样好。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+              "quote": "the researchers counted only 20 species",
+              "anchor": "只有20种"
+            },
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+              "quote": "they found 156 taxa",
+              "anchor": "156个类群"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Open parks support more biodiversity.",
+          "sourceRole": "correctOption",
+          "targetText": "at Pfrontener Platz, a space with lawns, bushes and trees, they found 156 taxa",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项是把三个广场的封闭程度和物种数比出来的：高度封闭的玛丽恩广场只有20种，有草坪、灌木和树的普弗朗滕广场有156个类群，较封闭却有树和草地的约翰尼斯广场有118种。绿化越多、越开阔，物种越多，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出研究对草坪、树木、灌木这类绿化的发现。",
+      "stemTranslationZh": "关于城市绿化，这项研究说了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 However 引出的新发现",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它在吸引物种方面各不相同。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+              "quote": "However, the study also shows that lawns, trees and bushes vary widely in terms of the diversity and numbers of the species they attract.",
+              "anchor": "绿化吸引的物种差别很大"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它将取代人造光源。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "artificial light",
+            "optionText": "artificial light",
+            "matchType": "exact",
+            "relationNote": "artificial light 出自 [[block:paper-mock-hubei-shiyan-2025-01:reading-c:2]] 研究考察的因素清单，只是被考察的一项条件；原文没说绿化会取代人造光源。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:2",
+              "quote": "artificial light sources",
+              "anchor": "人造光源是考察因素之一"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它与物种毫无关系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Unsurprisingly, more plants are beneficial to many animal species.",
+            "sourceHighlight": "beneficial to many animal species",
+            "optionText": "It has nothing to do with species.",
+            "optionHighlight": "nothing to do with species",
+            "explanation": "原文说植物多对许多动物物种有益，不同绿化吸引的物种也不同，绿化和物种关系密切，选项说成毫无关系。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+              "quote": "Unsurprisingly, more plants are beneficial to many animal species.",
+              "anchor": "植物多对动物有益"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它在城市建筑中规划得很好。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "planning",
+            "optionText": "planned",
+            "matchType": "wordFamily",
+            "relationNote": "planned 和原文 planning 同根，但原文紧接着说公共空间至今只为人设计、很少顾及动物，谈不上规划得好，也没提建筑。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+              "quote": "This is a factor that urban planning models already take into account.",
+              "anchor": "规划已考虑植物有益"
+            },
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+              "quote": "So far, public spaces are designed with humans in mind, with little consideration to animals and other species.",
+              "anchor": "设计很少顾及动物"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "urban greenery",
+          "sourceRole": "stem",
+          "targetText": "However, the study also shows that lawns, trees and bushes vary widely in terms of the diversity and numbers of the species they attract.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+          "relationType": "locationCue",
+          "targetCue": "lawns, trees and bushes",
+          "sourceZh": "城市绿化",
+          "targetCueZh": "草坪、树木和灌木",
+          "answerText": "vary widely in terms of the diversity and numbers of the species they attract",
+          "note": "题干 urban greenery 对应原文 lawns, trees and bushes，草坪、树木和灌木都是城市绿化。"
+        },
+        {
+          "sourceText": "It varies in attracting species.",
+          "sourceRole": "correctOption",
+          "targetText": "vary widely in terms of the diversity and numbers of the species they attract",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 vary（不同），attracting species 对应 the species they attract（吸引的物种）：不同绿化吸引的物种在种类和数量上差别很大，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "比较四个标题，看哪个既盖住文章的话题，又盖住研究得出的设计建议。",
+      "stemTranslationZh": "最适合本文的标题是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-hubei-shiyan-2025-01:reading-c:1]] 广场上的动植物和人读起，再看 [[block:paper-mock-hubei-shiyan-2025-01:reading-c:5]] 给规划者的建议",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "推进城市发展：考虑本地物种的需要",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "They advocate a close examination of local conditions and a more nature-focused approach to the design of public spaces.",
+            "sourceHighlight": "the design of public spaces",
+            "optionText": "Enhancing Urban Development: Considering Local Species’ Needs",
+            "optionHighlight": "Enhancing Urban Development",
+            "explanation": "文章谈的是广场这类公共空间的设计，“推进城市发展”说得比文章大；后半只提物种需要，又把人的福祉丢了。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "人与动物共存：把自然融入城市设计",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "They advocate a close examination of local conditions and a more nature-focused approach to the design of public spaces.",
+            "sourceHighlight": "a more nature-focused approach",
+            "optionText": "Human-animal Coexistence: Integrating Nature into City Designing",
+            "optionHighlight": "Integrating Nature into City Designing",
+            "explanation": "“把自然融入城市设计”只对上 [[block:paper-mock-hubei-shiyan-2025-01:reading-c:1|a more nature-focused approach]] 一句主张；全文主体是各广场物种多少，人和动物怎样共处没有展开。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "城市生态系统：城市空间里动植物面临的挑战",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Challenges for Plants and Animals in Urban Spaces",
+            "explanation": "文章写的是广场条件怎样影响物种多少、规划该怎样改，没去列举动植物在城市里面临的困难。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "城市中的生物多样性：为人和动物设计城市空间",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:1",
+              "quote": "This creates opportunities for greater biodiversity and well-being for the human population.",
+              "anchor": "生物多样性对人有益"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:4",
+              "quote": "So far, public spaces are designed with humans in mind, with little consideration to animals and other species.",
+              "anchor": "现有设计只顾人"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:5",
+              "quote": "planners take into account the local conditions and the needs of different species",
+              "anchor": "规划要照顾物种需要"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Biodiversity in the City: Designing Urban Spaces for Humans and Animals",
+          "sourceRole": "correctOption",
+          "targetText": "planners take into account the local conditions and the needs of different species",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-hubei-shiyan-2025-01:reading-c:1]] 先说广场上的动植物带来生物多样性、也对人有益，[[block:paper-mock-hubei-shiyan-2025-01:reading-c:3]] 用三个广场比出物种差别，[[block:paper-mock-hubei-shiyan-2025-01:reading-c:4]] 指出公共空间至今只为人设计，[[block:paper-mock-hubei-shiyan-2025-01:reading-c:5]] 建议照顾当地条件和物种需要。标题前半“城市中的生物多样性”点出话题，后半“为人和动物设计城市空间”点出结论，选 D。"
+        }
+      ]
+    }
+  }
+}

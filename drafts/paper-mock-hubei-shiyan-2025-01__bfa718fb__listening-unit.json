@@ -1,0 +1,1051 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-hubei-shiyan-2025-01",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "Excuse me, I suppose you have the book Ship of Theseus here, right? I’ve looked everywhere, but just couldn’t find it. Let me check. Sorry, that book has been borrowed out already.",
+      "translationZh": "打扰一下，我想你们这儿有《忒修斯之船》这本书吧？我到处都找过了，就是找不到。我查一下。抱歉，那本书已经被借走了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "有人向工作人员打听一本到处都找不到的书，对方帮忙查询后作答。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "打扰一下，我想你们这儿有《忒修斯之船》这本书吧？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "我到处都找过了，就是找不到。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我查一下。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "抱歉，那本书已经被借走了。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "Where are you going this summer vacation? I’ve heard about a nice place called the Swiss Chalet. It’s $10 a day. If I stay for a week, it will give 10% off.",
+      "translationZh": "这个暑假你打算去哪儿？我听说有个不错的地方，叫瑞士小屋。一天 10 美元。如果我住一周，可以打九折。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "两人谈论暑假去哪儿，一方介绍一家叫瑞士小屋的住处的价格和优惠。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "这个暑假你打算去哪儿？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "我听说有个不错的地方，叫瑞士小屋。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "一天 10 美元。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "如果我住一周，可以打九折。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "Hello, Mr. Smith. I’m afraid Dr. Brown won’t be able to see you today. He’s still waiting for a flight out of New York. He said he would meet you tomorrow afternoon. Is it okay? Sounds good. Thank you for calling.",
+      "translationZh": "您好，史密斯先生。恐怕布朗医生今天没法见您了。他还在等飞离纽约的航班。他说明天下午和您见面。可以吗？听起来不错。谢谢你打电话来。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "女士打电话给史密斯先生，转告布朗医生被困纽约的情况并商量见面时间。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "您好，史密斯先生。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "恐怕布朗医生今天没法见您了。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "他还在等飞离纽约的航班。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "他说明天下午和您见面。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "可以吗？"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "听起来不错。"
+        },
+        {
+          "id": "listening-text-3:7",
+          "zh": "谢谢你打电话来。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "Tom, you haven’t done your homework today. I know, but I have to finish this letter first. Mom, could you help me post the letter when I finish it? Okay.",
+      "translationZh": "汤姆，你今天还没写作业呢。我知道，但我得先把这封信写完。妈妈，等我写完了，你能帮我把信寄出去吗？好的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "妈妈提醒汤姆还没写作业，汤姆说要先写完一封信，并请妈妈帮忙。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "汤姆，你今天还没写作业呢。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "我知道，但我得先把这封信写完。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "妈妈，等我写完了，你能帮我把信寄出去吗？"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "好的。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "Your sister is quite different from you in character. Many people share your opinion. You are always active in dealing with problems while your sister is different.",
+      "translationZh": "你的姐妹和你性格很不一样。很多人都这么认为。你遇到问题总是很积极，而你的姐妹就不一样了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "两人谈论女士和她的姐妹，比较她们两人在性格上的差别。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "你的姐妹和你性格很不一样。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "很多人都这么认为。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "你遇到问题总是很积极，而你的姐妹就不一样了。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "I am happy I started carrying the credit card that the bank gave us. Why is that, Kate? Did you use it to buy something? I surely did. On the way home, I stopped at a store to buy some beef for dinner because I didn’t have any cash with me. And they permitted you to pay with the card? Yes. They didn’t even ask me to give them ID. You have to be careful. If you lose them and someone finds them, the bank will charge you for what you buy. How much has the bank allowed us to spend with the card? $1,500. The banks encourage us to use the card, but they will also require us to pay them back. You are right, Henry. I’ll remember that. But the card surely makes it easy to spend money.",
+      "translationZh": "我很高兴开始随身带着银行给我们的那张信用卡了。为什么呢，凯特？你用它买东西了吗？当然用了。回家路上，我在一家商店停下来买了些牛肉做晚饭，因为我身上没带现金。他们允许你用卡付钱？是的。他们甚至都没让我出示身份证。你可得小心。要是你把它们弄丢了，又被别人捡到，别人买的东西银行会向你收钱。银行允许我们用这张卡花多少钱？1500 美元。银行鼓励我们用卡，但也会要求我们还钱。你说得对，亨利。我会记住的。不过这张卡确实让花钱变得很容易。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "凯特和亨利谈论银行发的信用卡，凯特讲了用卡购物的经过，亨利提醒她注意。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "我很高兴开始随身带着银行给我们的那张信用卡了。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "为什么呢，凯特？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "你用它买东西了吗？"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "当然用了。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "回家路上，我在一家商店停下来买了些牛肉做晚饭，因为我身上没带现金。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "他们允许你用卡付钱？"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "是的。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "他们甚至都没让我出示身份证。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "你可得小心。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "要是你把它们弄丢了，又被别人捡到，别人买的东西银行会向你收钱。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "银行允许我们用这张卡花多少钱？"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "1500 美元。"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "银行鼓励我们用卡，但也会要求我们还钱。"
+        },
+        {
+          "id": "listening-text-6:14",
+          "zh": "你说得对，亨利。"
+        },
+        {
+          "id": "listening-text-6:15",
+          "zh": "我会记住的。"
+        },
+        {
+          "id": "listening-text-6:16",
+          "zh": "不过这张卡确实让花钱变得很容易。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "Do your grandkids love the songs you wrote? No, not at all. Oh, why? You know, when I was young, I’d listen to a lot of jazz. That formed my taste of music. These days young people are crazy about rap, which is something beyond my understanding of singing. Frankly, I can’t make heads or tails of it. I know what you mean. Still, there are people of different ages who remain faithful to jazz. Now, let’s have our telephone operator to put through our audience who are listening to this program right now. Let’s see what questions they’ve got for you.",
+      "translationZh": "您的孙辈喜欢您写的歌吗？不，一点也不喜欢。哦，为什么？你知道，我年轻时常听很多爵士乐。那养成了我的音乐品味。如今年轻人迷上了说唱，那超出了我对唱歌的理解。坦白说，我完全听不懂它。我明白您的意思。不过，仍有不同年龄的人一直钟爱爵士乐。现在，请我们的接线员接通正在收听本节目的听众。看看他们有什么问题要问您。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "音乐领域的概况及其发展"
+      },
+      "summaryZh": "女士和一位写歌的男士聊他的歌、他的音乐品味和年轻人爱听的音乐，随后转入听众提问。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "您的孙辈喜欢您写的歌吗？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "不，一点也不喜欢。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "哦，为什么？"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "你知道，我年轻时常听很多爵士乐。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "那养成了我的音乐品味。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "如今年轻人迷上了说唱，那超出了我对唱歌的理解。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "坦白说，我完全听不懂它。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "我明白您的意思。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "不过，仍有不同年龄的人一直钟爱爵士乐。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "现在，请我们的接线员接通正在收听本节目的听众。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "看看他们有什么问题要问您。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12"
+      ],
+      "transcript": "So we will meet at the forest park at 10 o'clock tomorrow morning, right? Why not make it half an hour earlier? We should set off early. The traffic won’t be too busy then. All right. By the way, it’s not easy to find a place to park there. I’ll take a bus, and I suggest you do the same. Don’t worry. I plan to cycle there. Besides, I don’t have a car anymore. I sold it. Why? Are you going to buy a new one? No, I’m not getting another car. My doctor said that I should exercise more, so now I usually walk between my workplace and home. I think you made a good decision. There are too many cars in this town. The air is heavily polluted.",
+      "translationZh": "那我们明天上午 10 点在森林公园见，对吧？何不提前半小时呢？我们应该早点出发。那时路上不会太堵。好的。顺便说一下，那儿不好找停车位。我会坐公交车去，建议你也这样。别担心。我打算骑车去。而且我已经没有车了。我把它卖了。为什么？你要买辆新的吗？不，我不再买车了。医生说我应该多运动，所以我现在通常步行上下班。我觉得你的决定很好。这个镇上车太多了。空气污染很严重。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "两人约定第二天去森林公园的时间和交通方式，男士还说起自己卖车的事。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "那我们明天上午 10 点在森林公园见，对吧？"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "何不提前半小时呢？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "我们应该早点出发。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "那时路上不会太堵。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "顺便说一下，那儿不好找停车位。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "我会坐公交车去，建议你也这样。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "别担心。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "我打算骑车去。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "而且我已经没有车了。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "我把它卖了。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "为什么？"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "你要买辆新的吗？"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "不，我不再买车了。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "医生说我应该多运动，所以我现在通常步行上下班。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "我觉得你的决定很好。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "这个镇上车太多了。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "空气污染很严重。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:13",
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "Hi, can I help you with anything? Yeah, can I look at this ring? Sure, let me get it out for you. What’s your size? I believe my size is six. Here you are. Do you have any necklace that matches this ring? Actually, we have a few to choose from. They are over here. There’s no price tag on this necklace. Oh, I’m sorry. I’ll check the price for you. It is $199. This necklace is a little short. Do you have one that is longer? Yes, why don’t you try this one on? This one is much better. Can I try on the ring with this necklace? Sure, here you are. If you don’t mind me asking, how much do they cost? The ring is $1500, but the prices of this kind of necklace range from $600 to $3000, which mainly depend on its quality. Of course, its size and length also count. I see. That’s why it looks so nice. You always get what you pay for. Let me think about it. Sure, take your time. Thank you for all the help. No problem.",
+      "translationZh": "您好，有什么可以帮您的吗？嗯，我能看看这枚戒指吗？当然，我给您拿出来。您戴多大号？我想我是 6 号。给您。有和这枚戒指搭配的项链吗？其实我们有几款可以选。就在这边。这条项链上没有价签。哦，抱歉。我帮您查一下价格。是 199 美元。这条项链有点短。有长一点的吗？有，您试试这条怎么样？这条好多了。我能把戒指和这条项链一起试戴一下吗？当然，给您。冒昧问一下，它们多少钱？戒指 1500 美元，而这种项链的价格从 600 美元到 3000 美元不等，主要看质量。当然，尺寸和长度也有影响。我明白了。难怪它看起来这么漂亮。一分钱一分货。我考虑一下。好的，您慢慢考虑。谢谢您的帮助。不客气。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "一位女士挑选戒指和项链，试戴之后打听它们的价格。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "您好，有什么可以帮您的吗？"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "嗯，我能看看这枚戒指吗？"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "当然，我给您拿出来。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "您戴多大号？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "我想我是 6 号。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "给您。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "有和这枚戒指搭配的项链吗？"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "其实我们有几款可以选。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "就在这边。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "这条项链上没有价签。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "哦，抱歉。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "我帮您查一下价格。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "是 199 美元。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "这条项链有点短。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "有长一点的吗？"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "有，您试试这条怎么样？"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "这条好多了。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "我能把戒指和这条项链一起试戴一下吗？"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "当然，给您。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "冒昧问一下，它们多少钱？"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "戒指 1500 美元，而这种项链的价格从 600 美元到 3000 美元不等，主要看质量。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "当然，尺寸和长度也有影响。"
+        },
+        {
+          "id": "listening-text-9:23",
+          "zh": "我明白了。"
+        },
+        {
+          "id": "listening-text-9:24",
+          "zh": "难怪它看起来这么漂亮。"
+        },
+        {
+          "id": "listening-text-9:25",
+          "zh": "一分钱一分货。"
+        },
+        {
+          "id": "listening-text-9:26",
+          "zh": "我考虑一下。"
+        },
+        {
+          "id": "listening-text-9:27",
+          "zh": "好的，您慢慢考虑。"
+        },
+        {
+          "id": "listening-text-9:28",
+          "zh": "谢谢您的帮助。"
+        },
+        {
+          "id": "listening-text-9:29",
+          "zh": "不客气。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Most of us know that physical activity leads to better health. That is nothing new. But for the first time in 10 years, the United States government has changed its guidelines on how much exercise people need to stay healthy. For children, the new federal guidelines state that children as young as 3 years old need to be physically active. Earlier guidelines used to begin at age six. Dr. Giroir says that the most important time for children to begin exercising is between the ages of 3 and 5. He notes that boys and girls in this age group need at least 3 hours of activity every day. Doctors say it is important to start young. For adults, the suggested length of time for exercise remains the same, which is 150 minutes per week of moderate physical activity. It could be doing housework, it could be gardening, it could be dancing – any kind of activity that gets your heart rate up and gets you exercising moderately. The advice for older adults remains mostly unchanged from earlier federal guidelines. Those over age 65 should include activities that help balance. Better balance means fewer falls and less chance of injury.",
+      "translationZh": "我们大多数人都知道，身体活动能让人更健康。这不是什么新鲜事。但美国政府十年来第一次修改了关于人们需要多少运动才能保持健康的指南。对儿童来说，新的联邦指南规定，3 岁的孩子就需要进行身体活动。以前的指南是从 6 岁开始的。吉罗尔博士说，孩子开始锻炼最重要的时期是 3 到 5 岁。他指出，这个年龄段的男孩女孩每天至少需要 3 小时的活动。医生们说，从小开始很重要。对成年人来说，建议的锻炼时长保持不变，即每周 150 分钟的中等强度身体活动。可以是做家务，可以是园艺，也可以是跳舞——任何能让你心率上升、让你适度运动的活动都行。对老年人的建议与以前的联邦指南相比基本没变。65 岁以上的人应该包括有助于保持平衡的活动。平衡更好意味着更少摔倒，受伤的可能也更小。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "讲话者介绍美国政府关于人们需要多少运动的规定，分儿童、成人和老人来说明。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "我们大多数人都知道，身体活动能让人更健康。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "这不是什么新鲜事。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "但美国政府十年来第一次修改了关于人们需要多少运动才能保持健康的指南。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "对儿童来说，新的联邦指南规定，3 岁的孩子就需要进行身体活动。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "以前的指南是从 6 岁开始的。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "吉罗尔博士说，孩子开始锻炼最重要的时期是 3 到 5 岁。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "他指出，这个年龄段的男孩女孩每天至少需要 3 小时的活动。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "医生们说，从小开始很重要。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "对成年人来说，建议的锻炼时长保持不变，即每周 150 分钟的中等强度身体活动。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "可以是做家务，可以是园艺，也可以是跳舞——任何能让你心率上升、让你适度运动的活动都行。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "对老年人的建议与以前的联邦指南相比基本没变。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "65 岁以上的人应该包括有助于保持平衡的活动。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "平衡更好意味着更少摔倒，受伤的可能也更小。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "对话最可能发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在书店。",
+        "B": "在酒店。",
+        "C": "在图书馆。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Sorry, that book has been borrowed out already."
+      },
+      "reasonZh": "工作人员说那本书已经被借走了（has been borrowed out），书能借出去，说明是在图书馆，选 C。"
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "在瑞士小屋住一周要花多少钱？",
+      "optionTranslationsZh": {
+        "A": "10 美元。",
+        "B": "63 美元。",
+        "C": "70 美元。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "If I stay for a week, it will give 10% off."
+      },
+      "reasonZh": "每天 10 美元（$10 a day），住一周是 10 × 7 = 70 美元，再打九折（10% off），70 × 90% = 63 美元，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "10 美元是一天的价格（$10 a day），这里要算的是住满一周、打完折的总价。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "70 美元是一周的原价，漏掉了住满一周才有的九折优惠（10% off）。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士为什么给男士打电话？",
+      "optionTranslationsZh": {
+        "A": "为了取消航班。",
+        "B": "为了道歉。",
+        "C": "为了推迟会面。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "He said he would meet you tomorrow afternoon."
+      },
+      "reasonZh": "女士先说布朗医生今天见不了史密斯先生（won’t be able to see you today），又转告改到明天下午见（meet you tomorrow afternoon），这就是推迟会面，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "航班（flight）是布朗医生还在等的、飞离纽约的那班，没有人要取消它。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "女士说的“恐怕”（I’m afraid）只是委婉地带出坏消息，打这通电话是为了把见面改到明天。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士接下来最可能做什么？",
+      "optionTranslationsZh": {
+        "A": "寄信。",
+        "B": "写信。",
+        "C": "写作业。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Mom, could you help me post the letter when I finish it?"
+      },
+      "reasonZh": "汤姆请妈妈等他写完后帮忙寄信（post the letter），妈妈答应了（Okay），所以她接下来要去寄信，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "写信的是汤姆，他说要先把这封信写完（finish this letter first），妈妈只是帮他寄。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "作业是汤姆的，妈妈提醒的是他今天还没写作业（you haven’t done your homework）。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "男士认为女士的姐妹怎么样？",
+      "optionTranslationsZh": {
+        "A": "她不积极。",
+        "B": "她长得像女士。",
+        "C": "她性格特别。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You are always active in dealing with problems while your sister is different."
+      },
+      "reasonZh": "男士说女士遇到问题总是很积极（always active），而她的姐妹不一样（your sister is different），可见他认为那位姐妹不积极，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "性格（character）出现在男士说两人性格很不一样（quite different from you in character）处，说的是两人不同，没说她性格特别。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士在商店买了什么？",
+      "optionTranslationsZh": {
+        "A": "一些牛肉。",
+        "B": "一些卡。",
+        "C": "一些蔬菜。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "On the way home, I stopped at a store to buy some beef for dinner because I didn’t have any cash with me."
+      },
+      "reasonZh": "凯特说回家路上在商店买了些牛肉做晚饭（buy some beef for dinner），选项沿用原词，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "卡（card）是银行发给他们、凯特拿来付款的信用卡，不是她在店里买的东西。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士给了女士什么建议？",
+      "optionTranslationsZh": {
+        "A": "她身上必须带够钱。",
+        "B": "她不该想买什么就买什么。",
+        "C": "她必须看管好自己的信用卡和身份证。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "If you lose them and someone finds them, the bank will charge you for what you buy."
+      },
+      "reasonZh": "凯特说店里连身份证都没让她出示，亨利随即提醒她要小心（You have to be careful），并说丢了被人捡到，别人买的东西银行会向她收钱，所以要看管好卡和证件，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的 buy 是说丢卡后别人买的东西要她付钱（charge you for what you buy），亨利没劝她少买东西。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士喜欢哪种音乐？",
+      "optionTranslationsZh": {
+        "A": "说唱。",
+        "B": "爵士乐。",
+        "C": "摇滚乐。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "You know, when I was young, I’d listen to a lot of jazz."
+      },
+      "reasonZh": "男士说年轻时常听爵士乐（a lot of jazz），这养成了他的音乐品味（formed my taste of music），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "说唱（rap）是如今年轻人着迷的音乐，男士说自己完全听不懂（can’t make heads or tails of it）。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士是做什么的？",
+      "optionTranslationsZh": {
+        "A": "词曲作者。",
+        "B": "电话接线员。",
+        "C": "电台女主持人。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Now, let’s have our telephone operator to put through our audience who are listening to this program right now."
+      },
+      "reasonZh": "女士请接线员接通正在收听本节目的听众（listening to this program），可见她在主持一档电台节目，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "写歌的是男士，女士问的是他的孙辈喜不喜欢他写的歌（the songs you wrote）。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "接线员（telephone operator）是女士请来接通听众电话的另一个人，不是她本人。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "说话人将在什么时间在森林公园见面？",
+      "optionTranslationsZh": {
+        "A": "上午 9:30。",
+        "B": "上午 10:00。",
+        "C": "上午 10:30。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Why not make it half an hour earlier?"
+      },
+      "reasonZh": "原定明天上午 10 点见（10 o'clock tomorrow morning），一方提议提前半小时（half an hour earlier），对方同意（All right），10:00 − 30 分钟 = 9:30，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "10 点是原先约的时间，提前半小时的提议已被接受（All right），不再是 10 点见。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士将怎样去森林公园？",
+      "optionTranslationsZh": {
+        "A": "坐公交车。",
+        "B": "骑自行车。",
+        "C": "步行。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I plan to cycle there."
+      },
+      "reasonZh": "男士说他打算骑车去（cycle there），也就是骑自行车，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "坐公交车是女士自己的打算（I’ll take a bus），她建议男士也坐，男士回答的是要骑车。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "步行是男士平时上下班的方式（walk between my workplace and home），去森林公园他要骑车。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士为什么把车卖了？",
+      "optionTranslationsZh": {
+        "A": "为了多锻炼。",
+        "B": "为了买辆新车。",
+        "C": "为了保护环境。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "My doctor said that I should exercise more, so now I usually walk between my workplace and home."
+      },
+      "reasonZh": "男士说医生让他多运动（I should exercise more），所以他现在步行上下班，不再开车，卖车是为了多锻炼，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "买新车是女士的猜测（Are you going to buy a new one?），男士明确说不再买车（I’m not getting another car）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "空气污染严重（heavily polluted）是女士听完后的感叹，男士自己给的理由是医生让他多运动。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "说话人之间最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "母亲和儿子。",
+        "B": "父亲和女儿。",
+        "C": "店员和顾客。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Hi, can I help you with anything?"
+      },
+      "reasonZh": "一方问能帮什么忙（can I help you with anything），又拿戒指给对方试、帮着查价格（check the price for you），这是店员在接待顾客，选 C。"
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "那条更长的项链可能要多少钱？",
+      "optionTranslationsZh": {
+        "A": "500 美元。",
+        "B": "2,500 美元。",
+        "C": "3,500 美元。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The ring is $1500, but the prices of this kind of necklace range from $600 to $3000, which mainly depend on its quality."
+      },
+      "reasonZh": "店员说这种项链的价格在 600 到 3000 美元之间（range from $600 to $3000），三个选项里只有 2,500 美元落在这个范围内，选 B。"
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "哪个因素可能决定项链的价格？",
+      "optionTranslationsZh": {
+        "A": "长度。",
+        "B": "颜色。",
+        "C": "款式。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Of course, its size and length also count."
+      },
+      "reasonZh": "店员说项链价格主要看质量，尺寸和长度也有影响（size and length also count），选项沿用长度（length），选 A。"
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士决定买什么？",
+      "optionTranslationsZh": {
+        "A": "那条更长的项链和戒指。",
+        "B": "项链和戒指都不买。",
+        "C": "那条较短的项链和戒指。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Let me think about it."
+      },
+      "reasonZh": "女士试戴、问完价后说要再考虑一下（Let me think about it），项链和戒指她都还没决定买，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "更长的项链和戒指是她一起试戴过的（try on the ring with this necklace），试完问了价，她只说要再考虑。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "较短的那条她嫌有点短（a little short），已经换成长的试戴，也没有决定买。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "按照以前的指南，儿童应该从几岁开始锻炼？",
+      "optionTranslationsZh": {
+        "A": "3 岁。",
+        "B": "5 岁。",
+        "C": "6 岁。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Earlier guidelines used to begin at age six."
+      },
+      "reasonZh": "讲话者说以前的指南是从 6 岁开始的（begin at age six），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "3 岁是新指南规定的起始年龄（as young as 3 years old），不是以前的规定。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "5 岁出自 3 到 5 岁是孩子开始锻炼最重要的时期（between the ages of 3 and 5），不是以前指南的起始年龄。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "建议成年人每周锻炼多长时间？",
+      "optionTranslationsZh": {
+        "A": "3 小时。",
+        "B": "2.5 小时。",
+        "C": "2 小时。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "For adults, the suggested length of time for exercise remains the same, which is 150 minutes per week of moderate physical activity."
+      },
+      "reasonZh": "成年人建议每周 150 分钟（150 minutes per week），150 ÷ 60 = 2.5 小时，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "3 小时是 3 到 5 岁儿童每天至少要有的活动量（at least 3 hours of activity every day），不是成年人每周的时长。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "2 小时只有 120 分钟，比成年人每周建议的 150 分钟少了半小时。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "老年人应该包括哪类活动？",
+      "optionTranslationsZh": {
+        "A": "能让他们接触大自然的活动。",
+        "B": "花时间少的活动。",
+        "C": "有助于保持平衡的活动。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Those over age 65 should include activities that help balance."
+      },
+      "reasonZh": "讲话者说 65 岁以上的人应包括有助于平衡的活动（activities that help balance），选项沿用原词，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的 time 是在说成年人建议的锻炼时长（the suggested length of time），对老年人只要求加入练平衡的活动，没提省时间。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "讲话者主要谈论什么？",
+      "optionTranslationsZh": {
+        "A": "新的运动指南。",
+        "B": "空闲时间做的活动。",
+        "C": "锻炼的好处。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "But for the first time in 10 years, the United States government has changed its guidelines on how much exercise people need to stay healthy."
+      },
+      "reasonZh": "讲话者先点出美国政府十年来首次修改运动指南（changed its guidelines），接着分儿童、成人、老人介绍新规定，全篇都围绕新的运动指南，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的 activities 指各年龄段要做的身体活动，time 指锻炼时长，并没有谈空闲时间做什么。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "运动有益健康（leads to better health）只是开头的铺垫，讲话者马上说这不是新鲜事（That is nothing new），重点在指南的变化。"
+        }
+      ]
+    }
+  }
+}

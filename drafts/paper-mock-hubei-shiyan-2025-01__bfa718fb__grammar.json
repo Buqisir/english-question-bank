@@ -1,0 +1,1065 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-hubei-shiyan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-shiyan-2025-01:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-shiyan-2025-01:grammar-fill": {
+      "overview": "文章介绍孔子学院创办 20 周年主题研讨会在北京举行、41 位人士获表彰，并说明随着中国国力提升，汉语正走向世界，成为跨文化交流的“金钥匙”，也为年轻人带来更多合作机会。",
+      "fullTranslationZh": "2024 年是孔子学院在全球创办 20 周年。为庆祝这一里程碑，孔子学院创办 20 周年主题研讨会上周六在北京举行。来自 34 个国家的 41 位外国政要、汉学家、中小学校长和孔子学院院长被授予“孔院之光”奖和感谢奖章，以表彰他们为孔子学院的建设和发展作出的杰出贡献。\n语言是了解一个国家最好的钥匙。随着中国综合国力和国际地位不断提升，中国与世界的交流日益紧密，汉语正在走向世界，逐渐成为人们跨越文化和国籍进行交流的“金钥匙”。\n会上，代表们围绕“互联、融合、传承、创新”这一主题，发现自己与全球文明倡议紧密相连，该倡议主张尊重世界文明多样性，弘扬全人类共同价值，重视文明的传承和创新。\n汉语已不仅仅是中国人的母语，它也是一种世界语言。为了回答如何把汉语作为一门语言来了解世界、更多地了解中国文化这一问题，年轻人可能会在高科技、媒体和电影领域获得更多合作机会。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+          "sourceText": "At the conference, sporting the theme of “Interconnection, Integration, Inheritance, Innovation,” delegates （代表） found __61__ (they) closely connected to the Global Civilization Initiative (GCI), __62__ advocates respect for the diversity of civilizations, the common values of humanity, the importance of inheritance and innovation of civilizations.",
+          "displayText": "At the conference, sporting the theme of “Interconnection, Integration, Inheritance, Innovation,” delegates （代表） found themselves closely connected to the Global Civilization Initiative (GCI), which advocates respect for the diversity of civilizations, the common values of humanity, the importance of inheritance and innovation of civilizations.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:61",
+            "question:paper-mock-hubei-shiyan-2025-01:62"
+          ],
+          "translationZh": "会上，代表们围绕“互联、融合、传承、创新”这一主题，发现自己与全球文明倡议紧密相连，该倡议主张尊重世界文明多样性，弘扬全人类共同价值，重视文明的传承和创新。",
+          "analysisZh": "主干是 delegates found themselves closely connected to the Global Civilization Initiative（代表们发现自己与全球文明倡议紧密相连），其中 closely connected to … 说明宾语 themselves 所处的状态。句首 At the conference 交代场合，sporting the theme of … 是现在分词短语，说明会议围绕的主题。逗号后的 which 引导非限制性定语从句，补充说明这项倡议主张什么，respect for 后面列出几项并列内容。",
+          "underlineRanges": [
+            {
+              "start": 98,
+              "end": 107,
+              "quote": "delegates"
+            },
+            {
+              "start": 113,
+              "end": 150,
+              "quote": "found themselves closely connected to"
+            },
+            {
+              "start": 191,
+              "end": 220,
+              "quote": ", which advocates respect for"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+          "sourceText": "As China’s comprehensive national strength and international status continue to improve, China’s exchanges with the world are becoming __59__ (increasing) close, and Chinese is spreading around the world, gradually becoming a “golden key” for people to communicate beyond cultures __60__ nationalities.",
+          "displayText": "As China’s comprehensive national strength and international status continue to improve, China’s exchanges with the world are becoming increasingly close, and Chinese is spreading around the world, gradually becoming a “golden key” for people to communicate beyond cultures and nationalities.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:59",
+            "question:paper-mock-hubei-shiyan-2025-01:60"
+          ],
+          "translationZh": "随着中国综合国力和国际地位不断提升，中国与世界的交流日益紧密，汉语正在走向世界，逐渐成为人们跨越文化和国籍进行交流的“金钥匙”。",
+          "analysisZh": "句首 As 引导时间状语从句，意思是“随着……”。主句由 and 连接两个分句：China’s exchanges … are becoming increasingly close 和 Chinese is spreading around the world。gradually becoming a “golden key” 是现在分词短语，说明汉语传播带来的结果；for people to communicate … 是不定式复合结构，修饰 golden key，说明这把钥匙的用途。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 87,
+              "quote": "As China’s comprehensive national strength and international status continue to improve"
+            },
+            {
+              "start": 122,
+              "end": 153,
+              "quote": "are becoming increasingly close"
+            },
+            {
+              "start": 198,
+              "end": 231,
+              "quote": "gradually becoming a “golden key”"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 134,
+              "quote": "2024 年是孔子学院在全球创办 20 周年。为庆祝这一里程碑，孔子学院创办 20 周年主题研讨会上周六在北京举行。来自 34 个国家的 41 位外国政要、汉学家、中小学校长和孔子学院院长被授予“孔院之光”奖和感谢奖章，以表彰他们为孔子学院的建设和发展作出的杰出贡献。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2"
+              ],
+              "start": 135,
+              "end": 214,
+              "quote": "语言是了解一个国家最好的钥匙。随着中国综合国力和国际地位不断提升，中国与世界的交流日益紧密，汉语正在走向世界，逐渐成为人们跨越文化和国籍进行交流的“金钥匙”。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3"
+              ],
+              "start": 215,
+              "end": 293,
+              "quote": "会上，代表们围绕“互联、融合、传承、创新”这一主题，发现自己与全球文明倡议紧密相连，该倡议主张尊重世界文明多样性，弘扬全人类共同价值，重视文明的传承和创新。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4"
+              ],
+              "start": 294,
+              "end": 380,
+              "quote": "汉语已不仅仅是中国人的母语，它也是一种世界语言。为了回答如何把汉语作为一门语言来了解世界、更多地了解中国文化这一问题，年轻人可能会在高科技、媒体和电影领域获得更多合作机会。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+            "text": "The year 2024 marks the 20th anniversary of the Confucius Institute (CI) worldwide. Celebrating the milestone, the Thematic Seminar on the 20th Anniversary of the Confucius Institute was held in Beijing last Saturday. The Brilliance of CI（孔院之光） and medals of appreciation were awarded to 41 foreign dignitaries, sinologists, school principals, and directors of Confucius Institutes from 34 countries to honor their outstanding contributions to the construction and development of Confucius Institutes."
+          },
+          {
+            "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+            "text": "Language is the best key to understanding a country. As China’s comprehensive national strength and international status continue to improve, China’s exchanges with the world are becoming increasingly close, and Chinese is spreading around the world, gradually becoming a “golden key” for people to communicate beyond cultures and nationalities."
+          },
+          {
+            "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+            "text": "At the conference, sporting the theme of “Interconnection, Integration, Inheritance, Innovation,” delegates （代表） found themselves closely connected to the Global Civilization Initiative (GCI), which advocates respect for the diversity of civilizations, the common values of humanity, the importance of inheritance and innovation of civilizations."
+          },
+          {
+            "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+            "text": "Chinese has grown beyond the Chinese people’s mother tongue; it is also a world language. To answer the question how to use Chinese as a language to learn about the world and know more about Chinese culture, young people may have more opportunities for cooperation in high-technology, media and film."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 111,
+                "end": 182,
+                "quote": "the Thematic Seminar on the 20th Anniversary of the Confucius Institute"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 208,
+                "end": 221,
+                "quote": "last Saturday"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 32,
+                "end": 49,
+                "quote": "孔子学院创办 20 周年主题研讨会"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 49,
+                "end": 52,
+                "quote": "上周六"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:56"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 183,
+                "end": 191,
+                "quote": "was held"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 55,
+                "end": 57,
+                "quote": "举行"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 414,
+                "end": 431,
+                "quote": "their outstanding"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 113,
+                "end": 115,
+                "quote": "他们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:57"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 427,
+                "end": 440,
+                "quote": "contributions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:1",
+                "start": 131,
+                "end": 133,
+                "quote": "贡献"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 12,
+                "end": 27,
+                "quote": "the best key to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 9,
+                "end": 14,
+                "quote": "最好的钥匙"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:58"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 28,
+                "end": 41,
+                "quote": "understanding"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 3,
+                "end": 5,
+                "quote": "了解"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 214,
+                "end": 219,
+                "quote": "close"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 43,
+                "end": 45,
+                "quote": "紧密"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:59"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 188,
+                "end": 200,
+                "quote": "increasingly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 41,
+                "end": 43,
+                "quote": "日益"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 324,
+                "end": 339,
+                "quote": "beyond cultures"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 61,
+                "end": 65,
+                "quote": "跨越文化"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:60"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 327,
+                "end": 330,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 61,
+                "end": 68,
+                "quote": "跨越文化和国籍"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 98,
+                "end": 107,
+                "quote": "delegates"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 3,
+                "end": 6,
+                "quote": "代表们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:61"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 119,
+                "end": 129,
+                "quote": "themselves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 28,
+                "end": 30,
+                "quote": "自己"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 154,
+                "end": 188,
+                "quote": "the Global Civilization Initiative"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 203,
+                "end": 220,
+                "quote": "advocates respect"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 31,
+                "end": 37,
+                "quote": "全球文明倡议"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 45,
+                "end": 49,
+                "quote": "主张尊重"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:62"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 193,
+                "end": 198,
+                "quote": "which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 42,
+                "end": 45,
+                "quote": "该倡议"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 79,
+                "end": 93,
+                "quote": "world language"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 19,
+                "end": 23,
+                "quote": "世界语言"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:63"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 72,
+                "end": 73,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 17,
+                "end": 19,
+                "quote": "一种"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 125,
+                "end": 150,
+                "quote": "use Chinese as a language"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 182,
+                "end": 217,
+                "quote": "and know more about Chinese culture"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 30,
+                "end": 39,
+                "quote": "把汉语作为一门语言"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 45,
+                "end": 54,
+                "quote": "更多地了解中国文化"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:64"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 146,
+                "end": 154,
+                "quote": "to learn"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 39,
+                "end": 44,
+                "quote": "来了解世界"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 246,
+                "end": 259,
+                "quote": "opportunities"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 79,
+                "end": 85,
+                "quote": "更多合作机会"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:65"
+            ],
+            "blankId": "blank:paper-mock-hubei-shiyan-2025-01:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 249,
+                "end": 252,
+                "quote": "for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:4",
+                "start": 81,
+                "end": 85,
+                "quote": "合作机会"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:61",
+              "question:paper-mock-hubei-shiyan-2025-01:62"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 98,
+                "end": 107,
+                "quote": "delegates"
+              },
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 113,
+                "end": 150,
+                "quote": "found themselves closely connected to"
+              },
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 191,
+                "end": 220,
+                "quote": ", which advocates respect for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:3",
+                "start": 26,
+                "end": 41,
+                "quote": "发现自己与全球文明倡议紧密相连"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:59",
+              "question:paper-mock-hubei-shiyan-2025-01:60"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 53,
+                "end": 140,
+                "quote": "As China’s comprehensive national strength and international status continue to improve"
+              },
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 175,
+                "end": 206,
+                "quote": "are becoming increasingly close"
+              },
+              {
+                "textId": "done-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 251,
+                "end": 284,
+                "quote": "gradually becoming a “golden key”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-hubei-shiyan-2025-01:grammar-fill:2",
+                "start": 33,
+                "end": 45,
+                "quote": "中国与世界的交流日益紧密"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-hubei-shiyan-2025-01:56": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "hold",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was held",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-explicit-time",
+        "features": []
+      },
+      "reason": "空格作句子的谓语，主语是研讨会（the Thematic Seminar … of the Confucius Institute），研讨会是被举办的，要用被动语态。时间是上周六（last Saturday），用一般过去时，主语为单数，所以填（was held）。句首的（Celebrating the milestone）是状语，不是谓语。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "the Thematic Seminar on the 20th Anniversary of the Confucius Institute",
+          "signalSide": "passage",
+          "relation": "主语是研讨会，它是被举办的，谓语用被动。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "last Saturday",
+          "signalSide": "passage",
+          "relation": "上周六是过去的时间，谓语用一般过去时。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:57": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "contribute",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "contributions",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作不定式（to honor）的宾语，前面有物主代词和形容词（their outstanding）修饰，要用名词，动词（contribute）变为名词（contribution）。表彰的是 41 位人士各自的贡献，用复数（contributions）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "their outstanding",
+          "signalSide": "passage",
+          "relation": "物主代词加形容词之后要接名词。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "to honor",
+          "signalSide": "passage",
+          "relation": "空格作表彰的宾语。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "41 foreign dignitaries",
+          "signalSide": "passage",
+          "relation": "受表彰的是多位人士，贡献用复数。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:58": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "understand",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "understanding",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-preposition",
+        "features": []
+      },
+      "reason": "空格作介词（to）的宾语。这里的（to）属于“……的钥匙”（the best key to），是介词而不是不定式符号，所以动词要用动名词（understanding），后面再带宾语（a country）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "the best key to",
+          "signalSide": "passage",
+          "relation": "“……的钥匙”（key to）中的（to）是介词，后接动名词。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:59": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "increasing",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "increasingly",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-adjective",
+        "features": []
+      },
+      "reason": "空格修饰形容词（close），说明交流变得怎样地紧密，修饰形容词要用副词，所以（increasing）变为（increasingly），意思是越来越紧密。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "close",
+          "signalSide": "passage",
+          "relation": "被修饰的是形容词“紧密的”（close），要用副词。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "are becoming",
+          "signalSide": "passage",
+          "relation": "系动词“变得”（are becoming）后的表语是“紧密的”，空格只修饰它。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:60": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接两个并列名词（cultures 和 nationalities），二者都是介词（beyond）的宾语，意思是跨越文化和国籍，表示并列，用（and）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "beyond cultures",
+          "signalSide": "passage",
+          "relation": "文化与国籍并列，同作“跨越”（beyond）的宾语。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:61": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "they",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "themselves",
+      "role": null,
+      "similarityProfile": {
+        "route": "reflexive-pronoun",
+        "features": []
+      },
+      "reason": "空格作谓语（found）的宾语，后面的（closely connected to …）说明它的状态。这个宾语指的就是主语代表们（delegates），与主语同指，要用反身代词，所以（they）变为（themselves）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "delegates",
+          "signalSide": "passage",
+          "relation": "宾语指的就是主语代表们，用反身代词。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "found",
+          "signalSide": "passage",
+          "relation": "空格作“发现”（found）的宾语。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:62": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导定语从句，修饰前面的全球文明倡议（the Global Civilization Initiative），并在从句里作谓语（advocates）的主语。先行词指物，前面有逗号，是非限制性定语从句，不能用（that），所以填（which）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the Global Civilization Initiative",
+          "signalSide": "passage",
+          "relation": "先行词是倡议，指物。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "advocates respect",
+          "signalSide": "passage",
+          "relation": "从句缺主语，关系词作“主张”（advocates）的主语。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:63": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-identity-category",
+        "features": [
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "空格限定单数可数名词（world language），说汉语也是“一种”世界语言，是在归类，要用不定冠词。（world）以辅音音素开头，所以用（a）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "world language",
+          "signalSide": "passage",
+          "relation": "单数可数名词前需要冠词，这里表示类别。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "it is also",
+          "signalSide": "passage",
+          "relation": "“它”（it）指汉语，说它属于世界语言这一类。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:64": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "learn",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to learn",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-purpose",
+        "features": []
+      },
+      "reason": "空格说明“使用汉语”（use Chinese as a language）的目的：了解世界，作目的状语，要用不定式（to learn）。后面并列的（and know more about Chinese culture）省去了（to），正好与它对称。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "use Chinese as a language",
+          "signalSide": "passage",
+          "relation": "使用汉语是为了做某事，表示目的用不定式。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "and know more about Chinese culture",
+          "signalSide": "passage",
+          "relation": "并列的“了解”（know）是省去（to）的不定式，与空格形式一致。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:65": {
+      "blankId": "blank:paper-mock-hubei-shiyan-2025-01:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格把合作（cooperation）接到名词机会（opportunities）上，说明是做什么的机会，“……的机会”用介词（for）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "opportunities",
+          "signalSide": "passage",
+          "relation": "“机会”后用介词（for）引出机会的内容。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "cooperation",
+          "signalSide": "passage",
+          "relation": "合作是机会的内容。"
+        }
+      ]
+    }
+  }
+}

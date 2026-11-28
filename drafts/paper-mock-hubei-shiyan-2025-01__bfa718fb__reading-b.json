@@ -1,0 +1,814 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hubei-shiyan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-shiyan-2025-01:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-shiyan-2025-01:reading-b": {
+      "overview": "文章介绍在底特律车展亮相的飞行摩托 XTurismo：它没有轮子，靠转子悬停并保持平稳，外观灵感来自《星球大战》；文章还交代了它的售价、小型版计划，以及技术和法规上的难题。",
+      "fullTranslationZh": "你想象过未来的交通会是什么样子吗？会是在空中吗？\n一款名为 XTurismo 的独特交通工具于9月初亮相底特律车展。它看上去像你在高速公路上见到的普通摩托车——造型优美，外形符合空气动力学。\n不过，让人对它产生兴趣的是它没有的东西——一对轮子。而且它会飞。它没有轮子，而是装有类似直升机的起落架，还有六个与地面平行的螺旋桨。两个转子在车身前部，另外两个在后部。从原理上说，这可能是世界上第一辆飞行摩托车。在视频中，你可以看到这辆车悬停在离地约五英尺的高度。转子的布置使车身能在空中保持稳定，不会向一侧倾斜或下沉。\n尽管外形很“接地气”，它看上去仍像是从科幻电影里走出来的。这也是有原因的。这款车背后公司的创始人兼首席执行官热爱《星球大战》系列电影。XTurismo 没有好莱坞电影里的同类那么快，但它自豪地证明了这项技术行得通，而且是能实现的。“我想把电影里的东西变成现实，”这位创始人说，“这是一辆属于黑暗面的陆地飞车。”制造会飞的东西对这家公司来说并不新鲜。这家总部位于特拉华州的公司是一家空中出行公司，生产无人机和其他无人驾驶飞行器。\nXTurismo 已在日本销售，公司计划在2023年把这一未来愿景带到美国。这个“宝贝”估价多少？高达77.7万美元。不过，公司还公布了一项雄心大得多的计划：到2025年造出更小、更高效的版本。这款小型版计划用电驱动，售价约5万美元。\n“我们还没有攻克相关技术，造不出能让飞行器飞得更高更快的更高效的引擎。此外，各国的法规和限制也不尽相同，”这位创始人说。\n不过，即使续航只有40分钟，XTurismo 也足以激发工程师们去设想在你家附近街区上空飞行的可能。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-b-1",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+          "sourceText": "But what stirred interest in the vehicle is what it doesn’t have, which is a pair of wheels.",
+          "displayText": "But what stirred interest in the vehicle is what it doesn’t have, which is a pair of wheels.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:24"
+          ],
+          "translationZh": "不过，让人对它产生兴趣的是它没有的东西——一对轮子。",
+          "analysisZh": "主干是“主语 + is + 表语”：主语 what stirred interest in the vehicle（引起人们兴趣的东西）和表语 what it doesn’t have（它没有的东西）都是 what 引导的名词性从句。逗号后的 which is a pair of wheels 是非限制性定语从句，补充说明它没有的正是一对轮子。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 40,
+              "quote": "what stirred interest in the vehicle"
+            },
+            {
+              "start": 41,
+              "end": 64,
+              "quote": "is what it doesn’t have"
+            },
+            {
+              "start": 66,
+              "end": 91,
+              "quote": "which is a pair of wheels"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-b-2",
+          "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+          "sourceText": "The placement of the rotors allows the bike to stabilize midair and stop it from tipping or dipping on one side.",
+          "displayText": "The placement of the rotors allows the bike to stabilize midair and stop it from tipping or dipping on one side.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-shiyan-2025-01:25"
+          ],
+          "translationZh": "转子的布置使车身能在空中保持稳定，不会向一侧倾斜或下沉。",
+          "analysisZh": "主干是 The placement … allows the bike to stabilize midair and stop it …，主语中心词是 placement（布置），不是 rotors。allow sth to do 意为“使……能够”，to 后面并列两个动作：stabilize midair（在空中稳住）和 stop it from tipping or dipping（阻止它倾斜下沉），stop … from doing 意为“阻止……做”，it 指这辆车。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 34,
+              "quote": "The placement of the rotors allows"
+            },
+            {
+              "start": 47,
+              "end": 63,
+              "quote": "stabilize midair"
+            },
+            {
+              "start": 68,
+              "end": 99,
+              "quote": "stop it from tipping or dipping"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-b:1"
+              ],
+              "start": 0,
+              "end": 24,
+              "quote": "你想象过未来的交通会是什么样子吗？会是在空中吗？"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-b:2"
+              ],
+              "start": 25,
+              "end": 95,
+              "quote": "一款名为 XTurismo 的独特交通工具于9月初亮相底特律车展。它看上去像你在高速公路上见到的普通摩托车——造型优美，外形符合空气动力学。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-b:3"
+              ],
+              "start": 96,
+              "end": 256,
+              "quote": "不过，让人对它产生兴趣的是它没有的东西——一对轮子。而且它会飞。它没有轮子，而是装有类似直升机的起落架，还有六个与地面平行的螺旋桨。两个转子在车身前部，另外两个在后部。从原理上说，这可能是世界上第一辆飞行摩托车。在视频中，你可以看到这辆车悬停在离地约五英尺的高度。转子的布置使车身能在空中保持稳定，不会向一侧倾斜或下沉。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-b:4"
+              ],
+              "start": 257,
+              "end": 470,
+              "quote": "尽管外形很“接地气”，它看上去仍像是从科幻电影里走出来的。这也是有原因的。这款车背后公司的创始人兼首席执行官热爱《星球大战》系列电影。XTurismo 没有好莱坞电影里的同类那么快，但它自豪地证明了这项技术行得通，而且是能实现的。“我想把电影里的东西变成现实，”这位创始人说，“这是一辆属于黑暗面的陆地飞车。”制造会飞的东西对这家公司来说并不新鲜。这家总部位于特拉华州的公司是一家空中出行公司，生产无人机和其他无人驾驶飞行器。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-b:5",
+                "block:paper-mock-hubei-shiyan-2025-01:reading-b:6"
+              ],
+              "start": 471,
+              "end": 588,
+              "quote": "XTurismo 已在日本销售，公司计划在2023年把这一未来愿景带到美国。这个“宝贝”估价多少？高达77.7万美元。不过，公司还公布了一项雄心大得多的计划：到2025年造出更小、更高效的版本。这款小型版计划用电驱动，售价约5万美元。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-b:7"
+              ],
+              "start": 589,
+              "end": 649,
+              "quote": "“我们还没有攻克相关技术，造不出能让飞行器飞得更高更快的更高效的引擎。此外，各国的法规和限制也不尽相同，”这位创始人说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-shiyan-2025-01:reading-b:8"
+              ],
+              "start": 650,
+              "end": 700,
+              "quote": "不过，即使续航只有40分钟，XTurismo 也足以激发工程师们去设想在你家附近街区上空飞行的可能。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-b-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+                "start": 0,
+                "end": 92,
+                "quote": "But what stirred interest in the vehicle is what it doesn’t have, which is a pair of wheels."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p3",
+                "start": 0,
+                "end": 26,
+                "quote": "不过，让人对它产生兴趣的是它没有的东西——一对轮子。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-b-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:25"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hubei-shiyan-2025-01:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+                "start": 417,
+                "end": 529,
+                "quote": "The placement of the rotors allows the bike to stabilize midair and stop it from tipping or dipping on one side."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p3",
+                "start": 132,
+                "end": 160,
+                "quote": "转子的布置使车身能在空中保持稳定，不会向一侧倾斜或下沉。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-b-q24-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+                "start": 44,
+                "end": 91,
+                "quote": "what it doesn’t have, which is a pair of wheels"
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+                "start": 116,
+                "end": 208,
+                "quote": "it has landing gear similar to a helicopter and it has six propellers parallel to the ground"
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+                "start": 354,
+                "end": 415,
+                "quote": "you can see the bike hovering at a height of around five feet"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p3",
+                "start": 13,
+                "end": 25,
+                "quote": "它没有的东西——一对轮子"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p3",
+                "start": 40,
+                "end": 65,
+                "quote": "装有类似直升机的起落架，还有六个与地面平行的螺旋桨"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p3",
+                "start": 116,
+                "end": 131,
+                "quote": "这辆车悬停在离地约五英尺的高度"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-b-q25-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+                "start": 417,
+                "end": 529,
+                "quote": "The placement of the rotors allows the bike to stabilize midair and stop it from tipping or dipping on one side."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p3",
+                "start": 132,
+                "end": 159,
+                "quote": "转子的布置使车身能在空中保持稳定，不会向一侧倾斜或下沉"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-b-q26-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:7",
+                "start": 0,
+                "end": 124,
+                "quote": "“We haven’t unlocked the technology to make more efficient engines for flying vehicles that can take them higher and faster."
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:7",
+                "start": 125,
+                "end": 201,
+                "quote": "Moreover, regulations and restrictions also vary from one country to another"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p6",
+                "start": 1,
+                "end": 34,
+                "quote": "我们还没有攻克相关技术，造不出能让飞行器飞得更高更快的更高效的引擎"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p6",
+                "start": 35,
+                "end": 51,
+                "quote": "此外，各国的法规和限制也不尽相同"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-hubei-shiyan-2025-01:reading-b-q27-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-shiyan-2025-01:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:2",
+                "start": 0,
+                "end": 97,
+                "quote": "A unique vehicle called XTurismo made its appearance at the Detroit Auto Show in early September."
+              },
+              {
+                "textId": "source-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+                "start": 281,
+                "end": 339,
+                "quote": "In principle, this might be the world’s first flying bike."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p2",
+                "start": 0,
+                "end": 32,
+                "quote": "一款名为 XTurismo 的独特交通工具于9月初亮相底特律车展"
+              },
+              {
+                "textId": "translation-group:paper-mock-hubei-shiyan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hubei-shiyan-2025-01:reading-b-p3",
+                "start": 84,
+                "end": 105,
+                "quote": "从原理上说，这可能是世界上第一辆飞行摩托车"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开篇用两个问句引出未来交通的话题，接着介绍在底特律车展亮相的飞行摩托 XTurismo：先写它没有轮子、能飞的设计，再写创始人受《星球大战》启发和公司背景，然后交代销售计划、价格和小型版设想，又借创始人之口说出技术与法规的难处，最后说它仍能激励工程师。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:1",
+            "summary": "用两个问句问读者想象中的未来交通是否在空中。",
+            "function": "引入话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:2",
+            "summary": "XTurismo 9月初亮相底特律车展，外形像一辆造型优美的普通摩托。",
+            "function": "引出介绍对象"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+            "summary": "它没有轮子却能飞，靠起落架、螺旋桨和转子悬停，并在空中保持平稳。",
+            "function": "介绍它独特的设计和飞行特点"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:4",
+            "summary": "它的科幻外观源于创始人对《星球大战》的喜爱，造车公司本身就生产无人机。",
+            "function": "交代设计灵感和公司背景"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:5",
+            "summary": "XTurismo 已在日本销售，计划2023年进入美国，估价77.7万美元；公司还计划2025年推出电动小型版。",
+            "function": "交代销售计划、价格和后续版本"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:7",
+            "summary": "创始人坦言引擎技术尚未突破，各国法规也不相同。",
+            "function": "指出它发展面临的难处"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:8",
+            "summary": "尽管续航只有40分钟，它仍足以激励工程师。",
+            "function": "收尾，肯定它的意义"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-shiyan-2025-01:24": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完这一段的各句，概括它写的是这辆车的哪些方面。",
+      "stemTranslationZh": "第三段主要讲什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-hubei-shiyan-2025-01:reading-b:3]] 的 what it doesn’t have 读起，看各句写的是部件还是飞起来的样子",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "这辆车的相关数据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "In the video, you can see the bike hovering at a height of around five feet.",
+            "sourceHighlight": "around five feet",
+            "optionText": "The related data of the vehicle.",
+            "optionHighlight": "related data",
+            "explanation": "段里只有 six propellers、five feet 几个数，用来描述部件和悬停高度；“相关数据”盖不住整段讲的外形和飞法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+              "quote": "In the video, you can see the bike hovering at a height of around five feet.",
+              "anchor": "悬停高度约五英尺"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "这辆车的缺点。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The disadvantages of the vehicle",
+            "explanation": "这一段写它没轮子、能悬停、在空中稳得住，全是亮点；技术和法规上的难处要到 [[block:paper-mock-hubei-shiyan-2025-01:reading-b:7]] 才由创始人说出。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "这辆车背后的设计原理。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The design theories behind the vehicle",
+            "explanation": "段里的 In principle 意为“理论上说”，只用来说它可能是首辆飞行摩托；整段描述部件和飞行表现，没讲设计依据什么原理。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "这辆车独特的设计和飞行特点。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+              "quote": "what it doesn’t have, which is a pair of wheels",
+              "anchor": "没有轮子"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+              "quote": "it has landing gear similar to a helicopter and it has six propellers parallel to the ground",
+              "anchor": "起落架和螺旋桨"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+              "quote": "you can see the bike hovering at a height of around five feet",
+              "anchor": "悬停约五英尺"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The unique design and flight feature of the vehicle.",
+          "sourceRole": "correctOption",
+          "targetText": "it has landing gear similar to a helicopter and it has six propellers parallel to the ground",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "这一段先写它没有轮子、会飞，再写类似直升机的起落架、平行于地面的螺旋桨和前后转子，这些是独特设计；接着写它悬停约五英尺、靠转子在空中稳住，这是飞行特点。选项的“独特设计和飞行特点”正好包住这两部分，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出转子在这辆车上起什么作用。",
+      "stemTranslationZh": "转子的作用是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "充当轮子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "wheels",
+            "optionText": "wheels",
+            "matchType": "exact",
+            "relationNote": "wheels 出自 [[block:paper-mock-hubei-shiyan-2025-01:reading-b:3|what it doesn’t have, which is a pair of wheels]]，原文说它恰恰没有轮子，着地靠起落架；转子管的是空中平稳，不是代替轮子。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+              "quote": "But what stirred interest in the vehicle is what it doesn’t have, which is a pair of wheels.",
+              "anchor": "它没有轮子"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "让车在空中保持平衡。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+              "quote": "The placement of the rotors allows the bike to stabilize midair and stop it from tipping or dipping on one side.",
+              "anchor": "转子让车在空中保持稳定"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "保持一定的速度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To maintain a certain speed",
+            "explanation": "原文写转子时只说它让车在空中稳住，没提速度；提到速度的只有 [[block:paper-mock-hubei-shiyan-2025-01:reading-b:4|isn’t as fast as its counterparts]]，说它不如电影里的快。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "辅助着陆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "landing",
+            "optionText": "landing",
+            "matchType": "exact",
+            "relationNote": "landing 出现在 landing gear（起落架）里：着陆靠的是像直升机那样的起落架，转子负责的是在空中保持稳定。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+              "quote": "it has landing gear similar to a helicopter",
+              "anchor": "装有类似直升机的起落架"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "rotors",
+          "sourceRole": "stem",
+          "targetText": "The placement of the rotors allows the bike to stabilize midair and stop it from tipping or dipping on one side.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "stabilize midair and stop it from tipping or dipping on one side",
+          "note": "题干 rotors 原词出现在原文，这一句讲的正是转子的作用。"
+        },
+        {
+          "sourceText": "To keep the vehicle’s balance in the air.",
+          "sourceRole": "correctOption",
+          "targetText": "stabilize midair and stop it from tipping or dipping on one side",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“保持平衡”就是原文的使车稳住（stabilize）、不向一侧倾斜下沉（stop it from tipping or dipping），“在空中”对应 midair，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把公司经历、速度、在美售价和发展前景四个说法带回原文核对，选出能从文中推出的一项。",
+      "stemTranslationZh": "关于 XTurismo 可以推断出什么？",
+      "locateBy": "options",
+      "locateFindZh": "四项分别回原文查公司旧产品、速度、售价和创始人的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它是这家公司的第一款飞行器。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Creating something that flies isn’t new to the company.",
+            "sourceHighlight": "isn’t new",
+            "optionText": "It is the first flying device in the company.",
+            "optionHighlight": "the first flying device",
+            "explanation": "first 借自“世界首辆飞行摩托”；对公司来说，造会飞的东西并不新鲜（isn’t new），它早就在造无人机。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:4",
+              "quote": "Creating something that flies isn’t new to the company.",
+              "anchor": "造会飞的东西对公司并不新鲜"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它能飞得比好莱坞电影里的那辆更快。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "XTurismo isn’t as fast as its counterparts in Hollywood, but it proudly shows that the technology could work.",
+            "sourceHighlight": "isn’t as fast as",
+            "optionText": "It can fly faster than the one in Hollywood movies.",
+            "optionHighlight": "fly faster than",
+            "explanation": "原文说它没有好莱坞电影里的同类快（isn’t as fast as），选项反说成比电影里的快。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:4",
+              "quote": "XTurismo isn’t as fast as its counterparts in Hollywood",
+              "anchor": "不如好莱坞电影里的同类快"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它在美国的定价高达77.7万美元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "The estimated price for this baby?",
+            "sourceHighlight": "estimated",
+            "optionText": "It is priced at an astronomical $777,000 in the United States.",
+            "optionHighlight": "is priced at",
+            "explanation": "原文说它目前只在日本卖，进美国还只是计划（plans on bringing），77.7万美元也只是估价（estimated price）；选项写成已在美国定好的售价。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:5",
+              "quote": "XTurismo is already being sold in Japan but the company plans on bringing this vision of the future to the",
+              "anchor": "已在日本销售，计划进入美国"
+            },
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:6",
+              "quote": "The estimated price for this baby?",
+              "anchor": "估价"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "技术和法规因素阻碍了它的进一步发展。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:7",
+              "quote": "“We haven’t unlocked the technology to make more efficient engines for flying vehicles that can take them higher and faster.",
+              "anchor": "引擎技术尚未突破"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:7",
+              "quote": "Moreover, regulations and restrictions also vary from one country to another",
+              "anchor": "各国法规不同"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Technical and regulatory factors overshadow its further advances.",
+          "sourceRole": "correctOption",
+          "targetText": "regulations and restrictions also vary from one country to another",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:7",
+          "relationType": "paraphrase",
+          "note": "选项把创始人的两句话合在一起：先是 [[block:paper-mock-hubei-shiyan-2025-01:reading-b:7|We haven’t unlocked the technology]]，说更高效的引擎技术还没突破；接着是 [[block:paper-mock-hubei-shiyan-2025-01:reading-b:7|regulations and restrictions also vary]]，说各国法规不一。他把这两样当难处讲，可见技术和法规拖住了它进一步发展，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-shiyan-2025-01:27": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看全文各段都围绕什么写，选出既点明对象、又不只盖住一段的概括。",
+      "stemTranslationZh": "这篇文章的主题是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-hubei-shiyan-2025-01:reading-b:2]] 车展上亮相的 XTurismo 读起，看后面各段是否都在写它",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一家空中出行公司。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "air-mobility company",
+            "optionText": "air-mobility company",
+            "matchType": "exact",
+            "relationNote": "air-mobility company 出自 [[block:paper-mock-hubei-shiyan-2025-01:reading-b:4|The Delaware-based company is an air-mobility company]]，只是交代造车公司的背景；全文写的是这辆车，不是公司。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:4",
+              "quote": "The Delaware-based company is an air-mobility company that makes drones and other unmanned vehicles.",
+              "anchor": "公司是空中出行公司"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "XTurismo 的一款小型版本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "The company, however, shared much more ambitious plans in creating a smaller and more efficient version of the craft by 2025.",
+            "sourceHighlight": "a smaller and more efficient version",
+            "optionText": "A smaller version of the XTurismo.",
+            "optionHighlight": "A smaller version",
+            "explanation": "小型版只在 [[block:paper-mock-hubei-shiyan-2025-01:reading-b:6|shared much more ambitious plans]] 一句里出现，是公司2025年的计划，拿它当主题只盖住这一处。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:6",
+              "quote": "The company, however, shared much more ambitious plans in creating a smaller and more efficient version of the craft by 2025.",
+              "anchor": "2025年造小型版的计划"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "底特律车展上的一辆飞行摩托。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:2",
+              "quote": "A unique vehicle called XTurismo made its appearance at the Detroit Auto Show in early September.",
+              "anchor": "亮相底特律车展"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:3",
+              "quote": "In principle, this might be the world’s first flying bike.",
+              "anchor": "可能是首辆飞行摩托"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "《星球大战》电影里的一辆基础款陆地飞车。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "land speeder",
+            "optionText": "land speeder",
+            "matchType": "exact",
+            "relationNote": "land speeder 出自创始人的话，他把 XTurismo 比作星战里的陆地飞车；电影只是灵感来源，文章没去介绍电影里的飞车。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:4",
+              "quote": "“It’s a land speeder for the Dark Side.”",
+              "anchor": "创始人称它是黑暗面的陆地飞车"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A flying bike at the Detroit Auto Show.",
+          "sourceRole": "correctOption",
+          "targetText": "A unique vehicle called XTurismo made its appearance at the Detroit Auto Show in early September.",
+          "targetParagraphId": "block:paper-mock-hubei-shiyan-2025-01:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "各段都围着这辆车写：[[block:paper-mock-hubei-shiyan-2025-01:reading-b:2]] 写它亮相底特律车展，[[block:paper-mock-hubei-shiyan-2025-01:reading-b:3]] 写它没轮子、能飞，[[block:paper-mock-hubei-shiyan-2025-01:reading-b:4]] 写星战灵感，[[block:paper-mock-hubei-shiyan-2025-01:reading-b:5]] 写售价和新版计划，[[block:paper-mock-hubei-shiyan-2025-01:reading-b:7]] 写难处，[[block:paper-mock-hubei-shiyan-2025-01:reading-b:8]] 说它能激励工程师。选项的“底特律车展上的飞行摩托”点出了对象和出场场合，选 C。"
+        }
+      ]
+    }
+  }
+}

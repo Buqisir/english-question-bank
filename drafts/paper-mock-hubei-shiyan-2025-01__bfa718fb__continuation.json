@@ -1,0 +1,204 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: When they arrived at the breeder’s house, Logan’s eyes lit up as he saw a litter of adorable Boston terrier puppies. They tumbled over each other in a basket, tails wagging. One of them, with a white patch on its face, waddled straight to Logan and licked his fingers. It looked just like Puppers. Logan turned to his mother, not daring to hope. Melanie knelt down beside him and explained that it was his father’s wish. Before he died, Joe had asked her to bring Logan a real puppy. Logan picked up the little dog and held it close. He was happy, but his eyes filled with tears, because the person who had planned this gift was not there to see it. He named the puppy Indy.\n\nParagraph 2: Indy brought joy and comfort to Logan during his time of sorrow. Every morning the puppy woke him up by licking his face, and every afternoon it waited at the door for him to come home from school. On the nights when Logan missed his father most, Indy would curl up beside him, warm and quiet, as if it understood. Slowly, Logan began to smile again. One evening, he put Puppers on the shelf above his bed, next to a photo of Dad. “Thanks, Dad,” he whispered, stroking Indy’s soft ears. Indy wagged its tail and fell asleep in his arms.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "Logan 从小爱狗，一直盼着有只真小狗；父亲 Joe 对狗过敏，却把儿子的心愿记到最后；母亲 Melanie 替丈夫兑现了承诺。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第三人称、一般过去时，叙述者在外面讲 Logan 一家的事。句子中等长短，描写不多，全文没有一句带引号的直接引语，人物的话都用转述。续写照样用第三人称过去时，以转述为主，只在转折处留一两句短的直接引语。",
+          "evidence": [
+            "He often talked to his father about it",
+            "she told Logan that they had to drive to Midland, Michigan"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在母亲带 Logan 去取“特别的东西”，他还不知道是什么。续写要揭开这就是父亲生前安排的小狗，并写出刚失去父亲的 Logan 怎样在小狗陪伴下慢慢走出悲伤。",
+          "evidence": [
+            "Logan had no idea what it was, but he was excited to find out."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "Logan",
+          "role": "爱狗的男孩，父亲刚去世一周",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "一直想要一只能一起玩、能抱在怀里的真小狗。",
+              "evidence": "Logan still longed for a real puppy, one that he could play with and cuddle"
+            },
+            {
+              "label": "表现",
+              "text": "多年把玩具狗 Puppers 当伙伴，走到哪带到哪，晚上抱着睡。",
+              "evidence": "Puppers was his constant companion"
+            },
+            {
+              "label": "此刻",
+              "text": "不知道要去取什么，只是很兴奋；失去父亲的悲伤还在。"
+            }
+          ]
+        },
+        {
+          "name": "Joe",
+          "role": "Logan 的父亲，已因病去世",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "哪怕自己看不到，也要让儿子拥有一只小狗。",
+              "evidence": "even if he couldn’t be there to see it"
+            },
+            {
+              "label": "表现",
+              "text": "早就留意到儿子喜欢波士顿狗，记在心里。",
+              "evidence": "made a mental note"
+            }
+          ]
+        },
+        {
+          "name": "Melanie",
+          "role": "Logan 的母亲，Joe 的妻子",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "信守对丈夫的承诺，丈夫去世一周就带儿子出发。",
+              "evidence": "Melanie kept her promise"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "a soft toy Boston terrier for his birthday, and he named it Puppers",
+          "use": "第 1 段让一只小狗长得像 Puppers，Logan 一眼就认定它；第 2 段他把 Puppers 放到父亲照片旁，玩具伙伴让位给真小狗。"
+        },
+        {
+          "sourceQuote": "Joe asked Melanie, his wife, to make a promise",
+          "use": "第 1 段由母亲转述父亲生前的嘱托，小狗从一个惊喜变成父亲留下的礼物。"
+        },
+        {
+          "sourceQuote": "sleeping with him every night",
+          "use": "第 2 段换成真小狗夜里陪他：在 Logan 最想父亲的夜里，Indy 蜷在他身边。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "Logan 在一窝小狗里认出一只像 Puppers 的，得知这是父亲生前托母亲安排的礼物，含泪给它取名 Indy；此后 Indy 日夜陪着他，他慢慢重新笑起来，把 Puppers 放到父亲照片旁。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "从看到一窝小狗写起；第 1 段结束时 Logan 已经有了自己的小狗，名字叫 Indy，因为第 2 段首句直接用这个名字。",
+          "draft": "一只像 Puppers 的小狗走向 Logan；母亲转述父亲生前的嘱托；Logan 又高兴又难过，抱起小狗，给它取名 Indy。",
+          "bridgeQuote": "Indy brought joy and comfort to Logan",
+          "bridge": "Logan 为什么正处在悲伤里，Indy 又是谁，第 1 段结束前交代清楚了吗？"
+        },
+        {
+          "paragraph": 2,
+          "must": "写 Indy 怎样在 Logan 失去父亲的日子里带来快乐和安慰。",
+          "draft": "Indy 每天早上舔醒他、下午在门口等他放学，在他最想父亲的夜里陪着他；Logan 重新笑起来，把 Puppers 放到父亲照片旁，轻声谢谢父亲。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: When they arrived at the breeder’s house, Logan’s eyes lit up as he saw a litter of adorable Boston terrier puppies. They tumbled over each other in a basket, tails wagging. One of them, with a white patch on its face, waddled straight to Logan and licked his fingers. It looked just like Puppers. Logan turned to his mother, not daring to hope. Melanie knelt down beside him and explained that it was his father’s wish. Before he died, Joe had asked her to bring Logan a real puppy. Logan picked up the little dog and held it close. He was happy, but his eyes filled with tears, because the person who had planned this gift was not there to see it. He named the puppy Indy.\n\nParagraph 2: Indy brought joy and comfort to Logan during his time of sorrow. Every morning the puppy woke him up by licking his face, and every afternoon it waited at the door for him to come home from school. On the nights when Logan missed his father most, Indy would curl up beside him, warm and quiet, as if it understood. Slowly, Logan began to smile again. One evening, he put Puppers on the shelf above his bed, next to a photo of Dad. “Thanks, Dad,” he whispered, stroking Indy’s soft ears. Indy wagged its tail and fell asleep in his arms.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "揭开“特别的东西”就是父亲安排的小狗，并让小狗在段末有了名字 Indy。",
+          "items": [
+            {
+              "quote": "It looked just like Puppers.",
+              "explain": "回收原文的玩具狗 Puppers，Logan 为什么偏偏选这一只，不用解释读者就懂；一个短句也让这一刻停一下。"
+            },
+            {
+              "quote": "Melanie knelt down beside him and explained that it was his father’s wish.",
+              "explain": "用转述交代礼物的来历，和原文人物说话多用转述的写法一致；小狗由此和父亲连在一起。"
+            },
+            {
+              "quote": "He was happy, but his eyes filled with tears, because the person who had planned this gift was not there to see it.",
+              "explain": "情绪有来由：高兴是因为小狗，流泪是因为父亲不在。用看得见的眼泪写出来，而不是只说他很难过。"
+            },
+            {
+              "quote": "He named the puppy Indy.",
+              "explain": "段末让小狗有了名字，第 2 段首句的 Indy 才接得上。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "把首句的 joy 和 comfort 写成具体的日常，结尾落在 Puppers 和父亲照片上。",
+          "items": [
+            {
+              "quote": "Every morning the puppy woke him up by licking his face, and every afternoon it waited at the door for him to come home from school.",
+              "explain": "两个日常画面写出 joy：小狗把 Logan 的一天从早到晚填满。"
+            },
+            {
+              "quote": "On the nights when Logan missed his father most, Indy would curl up beside him",
+              "explain": "comfort 落在最难熬的夜里，接住原文 Puppers 每晚陪他睡的细节，现在陪他的是真小狗。"
+            },
+            {
+              "quote": "he put Puppers on the shelf above his bed, next to a photo of Dad",
+              "explain": "结尾落在一个动作上：玩具狗放到父亲照片旁，真小狗的心愿实现了，父亲也被记着，不用再讲道理。"
+            },
+            {
+              "quote": "“Thanks, Dad,” he whispered",
+              "explain": "全文唯一一句直接引语，放在结尾，短而真，和原文少用引语的写法相称。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "not daring to hope",
+          "function": "写 Logan 在母亲开口前不敢相信梦想会成真，把惊喜前的那一刻拉长。"
+        },
+        {
+          "expression": "his eyes filled with tears",
+          "function": "用看得见的眼泪写出又喜又悲，比直接说 sad 更有画面。"
+        },
+        {
+          "expression": "curl up beside him",
+          "function": "写小狗安静贴着人的动作，是第 2 段 comfort 的具体样子。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第 1 段只写挑小狗的热闹，不交代小狗是父亲生前安排的",
+          "why": "原文用两段写 Joe 的病和嘱托，第 2 段首句又说 his time of sorrow；礼物不和父亲连起来，悲伤和安慰都没有着落。"
+        },
+        {
+          "pitfall": "第 1 段没给小狗起名，或起了别的名字",
+          "why": "第 2 段首句直接用 Indy，第 1 段结束时小狗必须已经叫 Indy。"
+        },
+        {
+          "pitfall": "第 2 段让 Logan 一下子忘掉悲伤，或用“爱是最好的礼物”这类口号收尾",
+          "why": "父亲刚去世一周，安慰要一点点来；结尾落在 Puppers、照片这类原文里有来历的东西上更真。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: When they arrived at the breeder’s house, Logan’s eyes lit up as he saw a litter of adorable Boston terrier puppies. Five tiny bodies tumbled over one another in a cardboard box, their tails beating like little drums. Logan dropped to his knees. One puppy, smaller than the rest, with a white stripe down its nose, wobbled over and nibbled his shoelace. Logan caught his breath. It had the same face as Puppers, the soft toy waiting at home on his pillow. “Can I really keep one?” he asked, hardly daring to believe it. Melanie nodded, her voice shaking as she told him that this had been his father’s idea. Even when Joe was very ill, he had made her promise to bring Logan here. Logan lifted the puppy and pressed his cheek against its warm fur. For a long moment he could not speak. Then he whispered a name: Indy.\n\nParagraph 2: Indy brought joy and comfort to Logan during his time of sorrow. The house had been painfully quiet since the funeral, but now it was filled with the click of tiny paws and the squeak of a chewed-up ball. Indy followed Logan everywhere, from the kitchen to the backyard, and pounced on his socks whenever he sat still too long. On the nights when grief crept back, Logan would lie awake staring at the ceiling, and Indy would wriggle under his arm and rest its chin on his chest until his breathing slowed. Little by little, the boy began to laugh again. One Sunday, Logan placed Puppers on the windowsill beside his father’s photo. “You were Dad’s last gift,” he told Indy, scratching behind the puppy’s ears. Indy answered with a sleepy yawn and curled up in his lap, exactly where a real puppy belonged.",
+      "beyondStandard": [
+        {
+          "quote": "their tails beating like little drums",
+          "explain": "标准版只说 tails wagging，这里用比喻写出尾巴拍得欢，现场有了声音。"
+        },
+        {
+          "quote": "It had the same face as Puppers, the soft toy waiting at home on his pillow.",
+          "explain": "不光说像 Puppers，还补出它在家里枕头上等着，接上原文 Puppers 每晚陪他睡的细节。"
+        },
+        {
+          "quote": "“You were Dad’s last gift,” he told Indy",
+          "explain": "比标准版的 Thanks, Dad 更直接点出小狗和父亲的关系，仍只用一句短话，不说教。"
+        }
+      ]
+    }
+  }
+}
