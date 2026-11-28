@@ -1,0 +1,1033 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-liaoning-shenyang-2025-04-northeast-joint",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: I ran into Mandy just now. She needs to borrow this cake mixer.\nM: And what do you want me to do?\nW: It would be great if you could drop it off on your way to work. (1)",
+      "translationZh": "女：我刚才碰到曼迪了。她要借这台蛋糕搅拌机。\n男：那你想让我做什么？\n女：要是你能在上班路上顺便把它送过去就太好了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "曼迪要借蛋糕搅拌机，女士请男士上班路上顺便把搅拌机送过去。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我刚才碰到曼迪了。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "她要借这台蛋糕搅拌机。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "那你想让我做什么？"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "要是你能在上班路上顺便把它送过去就太好了。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: This is Joe. May I help you?\nW: Hello, something is wrong with the refrigerator I bought yesterday.\nM: Did you read the instructions?\nW: Of course. I plugged it in, but it just didn’t work. Could you please send someone to take a look? (2)",
+      "translationZh": "男：我是乔。有什么可以帮您？\n女：你好，我昨天买的冰箱出毛病了。\n男：您看过说明书了吗？\n女：当然看过。我插上了电，可它就是不工作。能请你派个人来看看吗？",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士昨天买的冰箱插上电不工作，她打电话请商家派人上门查看。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "我是乔。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "你好，我昨天买的冰箱出毛病了。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "您看过说明书了吗？"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "当然看过。"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "我插上了电，可它就是不工作。"
+        },
+        {
+          "id": "listening-text-2:7",
+          "zh": "能请你派个人来看看吗？"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: Hi, Jim. Is the hotel ready for this afternoon’s awards dinner? (3)\nM: Actually, the room’s been set up, but we’re a few tables short.\nW: Oh, I’ve already taken care of that. The furniture will be delivered in an hour.\nM: Great!",
+      "translationZh": "女：嗨，吉姆。今天下午颁奖晚宴的酒店准备好了吗？\n男：其实房间已经布置好了，不过还差几张桌子。\n女：哦，这事我已经处理了。家具一小时后送到。\n男：太好了！",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "两人确认下午颁奖晚宴的酒店场地，房间已布置好，缺的桌子一小时内送到。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "嗨，吉姆。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "今天下午颁奖晚宴的酒店准备好了吗？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "其实房间已经布置好了，不过还差几张桌子。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "哦，这事我已经处理了。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "家具一小时后送到。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "太好了！"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: What do you think of the test?\nM: It had challenges, but generally everything was covered in the textbook.\nW: You sound confident. I spent all of last week reviewing the book and felt like I wasted my time. (4)",
+      "translationZh": "女：你觉得这次考试怎么样？\n男：有些难度，不过总的来说内容都在课本里。\n女：你听起来很有信心。我上周整整一周都在复习课本，感觉白白浪费了时间。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "两人谈刚结束的考试，男士觉得内容都在课本里，女士觉得自己白复习了一周。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "你觉得这次考试怎么样？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "有些难度，不过总的来说内容都在课本里。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "你听起来很有信心。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "我上周整整一周都在复习课本，感觉白白浪费了时间。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: I’m sad to say that our club has run out of funds for this year.\nW: We can organize more fundraising projects. Why don’t we put up a concert? (5) We’ll need many volunteers, though.\nM: Good idea. You can count me in to help out.",
+      "translationZh": "男：很遗憾，我们俱乐部今年的经费已经用完了。\n女：我们可以多组织些筹款活动。何不办一场音乐会呢？不过我们会需要很多志愿者。\n男：好主意。算我一个，我来帮忙。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "合作"
+      },
+      "summaryZh": "俱乐部今年经费用完，女士提议办音乐会筹款，男士愿意帮忙。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "很遗憾，我们俱乐部今年的经费已经用完了。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "我们可以多组织些筹款活动。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "何不办一场音乐会呢？"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "不过我们会需要很多志愿者。"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "好主意。"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "算我一个，我来帮忙。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: This is Marcy Ardmore from Sladen Motors. Some automotive parts we ordered from your factory haven’t arrived yet.\nM: I’m sorry to hear that. We sent your order over a week ago, but the shipping company has been experiencing delays due to the bad weather (6), and the tracking emails they sent us don’t contain enough detail to determine when the parts will arrive.\nW: I see. Do you have contact information for the shipping company? I’d like to see what I can find out.\nM: Yes, I can give you their phone number. But I’ll also call them. (7) Hopefully, the more concerns they get, the more seriously they’ll take the issue.",
+      "translationZh": "女：我是斯莱登汽车公司的马西·阿德莫尔。我们从你们工厂订的一些汽车零件还没到。\n男：听到这个消息我很抱歉。我们一周多以前就把你们的货发出了，但运输公司因为天气恶劣一直在延误，而且他们发给我们的物流跟踪邮件信息不够详细，无法确定零件什么时候到。\n女：我明白了。你有运输公司的联系方式吗？我想自己去了解一下情况。\n男：有，我可以把他们的电话号码给你。不过我也会给他们打电话。但愿他们接到的投诉越多，就会越重视这个问题。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "女士订的汽车零件未到，男士解释运输因天气延误，并答应也给运输公司打电话。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "我是斯莱登汽车公司的马西·阿德莫尔。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "我们从你们工厂订的一些汽车零件还没到。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "听到这个消息我很抱歉。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "我们一周多以前就把你们的货发出了，但运输公司因为天气恶劣一直在延误，而且他们发给我们的物流跟踪邮件信息不够详细，无法确定零件什么时候到。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "我明白了。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "你有运输公司的联系方式吗？"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "我想自己去了解一下情况。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "有，我可以把他们的电话号码给你。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "不过我也会给他们打电话。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "但愿他们接到的投诉越多，就会越重视这个问题。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "W: Are you OK? You look a bit down.\nM: Well, my mother criticized me because I am bored with sleeping at night.(8) You know, only the night time is my own time. I find the quiet night is perfect for me to read books or think deeply about the past .\nW: That’s not good. You’re damaging your health.\nM: You’re right. I also find my health is declining.\nW: Sorry to hear that. Have you tried using one of the health and fitness trackers to track your sleep?\nM: How would a sleep tracker help?\nW: It monitors the quality of your sleep. Some trackers even measure air temperature, the amount of light and noise, and monitor how you breathe.(9) And you’ll get to know your sleep habits, so you can see what helps you sleep.",
+      "translationZh": "女：你还好吗？你看起来有点沮丧。\n男：唉，我妈妈批评我，因为我厌倦了晚上睡觉。你知道，只有夜里才是我自己的时间。我觉得安静的夜晚最适合读书，或者深入回想过去。\n女：那可不好。你在损害自己的健康。\n男：你说得对。我也发现自己的健康在变差。\n女：听到这个我很难过。你试过用健康健身追踪器来追踪睡眠吗？\n男：睡眠追踪器能有什么帮助？\n女：它能监测你的睡眠质量。有些追踪器甚至能测量气温、光线和噪音的大小，还能监测你的呼吸。你还会了解自己的睡眠习惯，这样就能看出什么有助于你入睡。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "男士厌倦夜里睡觉、健康下降，女士建议他用睡眠追踪器了解自己的睡眠。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "你还好吗？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "你看起来有点沮丧。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "唉，我妈妈批评我，因为我厌倦了晚上睡觉。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "你知道，只有夜里才是我自己的时间。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "我觉得安静的夜晚最适合读书，或者深入回想过去。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "那可不好。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "你在损害自己的健康。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "你说得对。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "我也发现自己的健康在变差。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "听到这个我很难过。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "你试过用健康健身追踪器来追踪睡眠吗？"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "睡眠追踪器能有什么帮助？"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "它能监测你的睡眠质量。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "有些追踪器甚至能测量气温、光线和噪音的大小，还能监测你的呼吸。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "你还会了解自己的睡眠习惯，这样就能看出什么有助于你入睡。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12"
+      ],
+      "transcript": "M: What is the rental cost for the house?\nW: The monthly rent is $980, and it includes maintenance fees for the garden.\nM: It’s not that cheap but sounds not bad. (10) And you said the current renters are due to leave on the evening of the 20th, right?\nW: Yes, but the cleaners will need 2 days to make sure that the house is clean and tidy. Then the house will be available. (11)\nM: What date would it be possible to visit it?\nW: The day after the renters leave the house. (12)\nM: OK. Would one o’clock be all right?\nW: I’m afraid that I have a meeting at 12:30. I have available appointments at 10:15 and 3:00.\nM: In that case, can we schedule the appointment for 10:15?\nW: No problem, I’ll book it into my schedule.",
+      "translationZh": "男：这房子的租金是多少？\n女：月租 980 美元，包含花园的维护费。\n男：不算那么便宜，不过听起来还不错。你说现在的租户 20 号晚上搬走，对吧？\n女：对，不过保洁要花 2 天把房子打扫得干净整洁。之后房子才能入住。\n男：哪天可以去看房？\n女：租户搬走的第二天。\n男：好的。一点钟可以吗？\n女：恐怕不行，我 12:30 有个会。我 10:15 和 3:00 有空。\n男：那样的话，我们能把时间约在 10:15 吗？\n女：没问题，我把它记到日程里。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士询问租房，得知房租、可入住日期，并约在租户搬走次日上午十点一刻看房。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "这房子的租金是多少？"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "月租 980 美元，包含花园的维护费。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "不算那么便宜，不过听起来还不错。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "你说现在的租户 20 号晚上搬走，对吧？"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "对，不过保洁要花 2 天把房子打扫得干净整洁。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "之后房子才能入住。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "哪天可以去看房？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "租户搬走的第二天。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "一点钟可以吗？"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "恐怕不行，我 12:30 有个会。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "我 10:15 和 3:00 有空。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "那样的话，我们能把时间约在 10:15 吗？"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "没问题，我把它记到日程里。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:13",
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "W: Hello Luke, tell me about your research. What inspired you?\nM: I once noticed people queuing outside a shoe store to buy a new style of trainers. Then I came across an article in a magazine about the incredible number of shoes that are produced. That piece made me want to find out more. (13)\nW: So then you went to the event called Trainer Exchange?\nM: Yeah. It’s for people to buy and sell trainers. At this event, everyone had to hand over ten pounds just to get in!(14)\nW: And you interviewed someone, didn’t you?\nM: That’s right – I started with a couple called Meg and Tyler. They had a stand, piled high with hundreds of pairs of trainers, all styles and colors. But what drew me to them was the fact that they were a couple in their thirties, and almost everyone else is teenagers. (15)\nW: And I know so many shoes are thrown away. Why is that?\nM: There are lots of reasons. Shoes can look worn or a new style comes out. But above all, it’s that there are so many cheap styles that start to fall apart in no time.(16)",
+      "translationZh": "女：你好，卢克，跟我说说你的研究吧。是什么启发了你？\n男：我有一次看到人们在一家鞋店外排队，要买一款新式运动鞋。后来我在一本杂志上偶然看到一篇文章，讲的是鞋子的产量多得惊人。那篇文章让我想深入了解。\n女：于是你就去了那个叫“运动鞋交易会”的活动？\n男：对。那是让人们买卖运动鞋的活动。在那里，每个人都得交十英镑才能进场！\n女：你还采访了一些人，是吧？\n男：没错，我先采访了一对叫梅格和泰勒的夫妻。他们有个摊位，上面堆着几百双运动鞋，各种款式、各种颜色。但吸引我的是，他们是一对三十多岁的夫妻，而几乎其他所有人都是青少年。\n女：我知道有很多鞋被扔掉了。这是为什么？\n男：原因有很多。鞋子可能看起来旧了，或者出了新款。但最主要的是，有太多廉价款式的鞋很快就会散架。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "社会热点问题"
+      },
+      "summaryZh": "卢克讲他受一篇文章启发研究鞋子，去了运动鞋交易会采访，并说明大量鞋被扔掉的原因。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "你好，卢克，跟我说说你的研究吧。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "是什么启发了你？"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "我有一次看到人们在一家鞋店外排队，要买一款新式运动鞋。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "后来我在一本杂志上偶然看到一篇文章，讲的是鞋子的产量多得惊人。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "那篇文章让我想深入了解。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "于是你就去了那个叫“运动鞋交易会”的活动？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "对。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "那是让人们买卖运动鞋的活动。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "在那里，每个人都得交十英镑才能进场！"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "你还采访了一些人，是吧？"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "没错，我先采访了一对叫梅格和泰勒的夫妻。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "他们有个摊位，上面堆着几百双运动鞋，各种款式、各种颜色。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "但吸引我的是，他们是一对三十多岁的夫妻，而几乎其他所有人都是青少年。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "我知道有很多鞋被扔掉了。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "这是为什么？"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "原因有很多。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "鞋子可能看起来旧了，或者出了新款。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "但最主要的是，有太多廉价款式的鞋很快就会散架。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "M: Good morning. Well, as you know, the community gardens at Hadley Park aren’t in the best shape, and although the local government has a budget to deal with some of the problems, we do need volunteers for other tasks. Um, first of all, don’t worry about any litter you see lying about – one of the local schools has offered to help out with that as part of their own environmental project. (17) The priority for you will be to give us a hand with the new wooden fencing – it needs constructing along parts of the bicycle track. (18) You’ve probably also noticed that the pathways that come from the bicycle track are quite narrow, but the government will widen them later in the year. (19) The other thing we’re doing is getting rid of some of the foreign species that are growing in the gardens and putting back some native plants and trees. So, you’ll be doing some digging for us and getting those into the ground. So, wear strong, waterproof boots; it’s quite muddy at the moment, and your own gloves would also be advisable. (20) Tools will be available and we’ll also provide food and drink.",
+      "translationZh": "男：早上好。嗯，大家都知道，哈德利公园的社区花园状况不太好，虽然地方政府有预算处理其中一些问题，但其他工作确实需要志愿者。嗯，首先，看到到处乱扔的垃圾不用担心，当地一所学校已经主动提出帮忙处理，作为他们自己环保项目的一部分。你们的首要任务是帮我们建新的木栅栏，它需要沿着自行车道的部分路段修建。你们可能也注意到了，从自行车道延伸出来的小路很窄，不过政府会在今年晚些时候把它们拓宽。我们要做的另一件事是清除花园里生长的一些外来物种，再种回一些本地的植物和树木。所以你们要帮我们挖土，把这些植物种进地里。所以请穿结实的防水靴，现在地上很泥泞，最好也带上你们自己的手套。工具会提供，我们也会提供食物和饮料。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "志愿服务"
+      },
+      "summaryZh": "说话人向志愿者介绍哈德利公园社区花园的修整任务、分工和需要自备的物品。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "早上好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "嗯，大家都知道，哈德利公园的社区花园状况不太好，虽然地方政府有预算处理其中一些问题，但其他工作确实需要志愿者。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "嗯，首先，看到到处乱扔的垃圾不用担心，当地一所学校已经主动提出帮忙处理，作为他们自己环保项目的一部分。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "你们的首要任务是帮我们建新的木栅栏，它需要沿着自行车道的部分路段修建。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "你们可能也注意到了，从自行车道延伸出来的小路很窄，不过政府会在今年晚些时候把它们拓宽。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "我们要做的另一件事是清除花园里生长的一些外来物种，再种回一些本地的植物和树木。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "所以你们要帮我们挖土，把这些植物种进地里。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "所以请穿结实的防水靴，现在地上很泥泞，最好也带上你们自己的手套。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "工具会提供，我们也会提供食物和饮料。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士想让男士做什么？",
+      "optionTranslationsZh": {
+        "A": "把蛋糕搅拌机拿回来。",
+        "B": "把蛋糕搅拌机送给曼迪。",
+        "C": "上班路上买一台蛋糕搅拌机。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It would be great if you could drop it off on your way to work."
+      },
+      "reasonZh": "女士先说曼迪要借这台搅拌机（needs to borrow this cake mixer），再请男士上班路上顺便送过去（drop it off），就是送给曼迪，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "搅拌机是曼迪要借走的（needs to borrow），女士要男士送出去，不是拿回来。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "上班路上（on your way to work）是让男士顺路送搅拌机，女士没让他去买一台。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "女士为什么和男士通话？",
+      "optionTranslationsZh": {
+        "A": "为了要说明书。",
+        "B": "为了换冰箱。",
+        "C": "为了让人检查她的冰箱。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Could you please send someone to take a look?"
+      },
+      "reasonZh": "“让人检查冰箱”就是女士请对方派人来看看（send someone to take a look），因为冰箱插上电也不工作，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "说明书是男士问她看没看过（Did you read the instructions?），她答当然看过，并不是来要说明书。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "女士只说冰箱出了毛病（something is wrong with the refrigerator），要的是派人来看，没提换一台。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "说话人在做什么？",
+      "optionTranslationsZh": {
+        "A": "挑选家具。",
+        "B": "为一场晚宴做准备。",
+        "C": "预订酒店。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Is the hotel ready for this afternoon’s awards dinner?"
+      },
+      "reasonZh": "女士问下午颁奖晚宴（awards dinner）的场地是否就绪，男士说房间布置好了、还差几张桌子，两人都在为晚宴做准备，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "家具（furniture）是女士已经安排好、一小时后送到的桌子，两人没有在挑选。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "酒店是已定的晚宴场地，女士问的是它准备好没有（Is the hotel ready），不是在订酒店。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人之间是什么关系？",
+      "optionTranslationsZh": {
+        "A": "同学。",
+        "B": "师生。",
+        "C": "母子。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I spent all of last week reviewing the book and felt like I wasted my time."
+      },
+      "reasonZh": "两人互问刚考完的试（What do you think of the test?），女士又说自己上周一直在复习课本，可见两人是一起参加考试的同学，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士自己也花了整整一周复习课本（reviewing the book），说明她也是考生，不是老师。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "去听音乐会。",
+        "B": "寻找志愿者。",
+        "C": "为俱乐部筹钱。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "We can organize more fundraising projects."
+      },
+      "reasonZh": "男士说俱乐部今年经费用完了（run out of funds），女士接着提议多办筹款活动（fundraising projects），两人谈的是为俱乐部筹钱，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "音乐会是女士提出的筹款办法（put up a concert），是要办一场，不是去听。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "志愿者是办音乐会要用的人手（need many volunteers），只是筹款计划里的一个细节。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士的订单出了什么问题？",
+      "optionTranslationsZh": {
+        "A": "订单被修改了。",
+        "B": "订单被取消了。",
+        "C": "订单被延误了。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "We sent your order over a week ago, but the shipping company has been experiencing delays due to the bad weather (6), and the tracking emails they sent us don’t contain enough detail to determine when the parts will arrive."
+      },
+      "reasonZh": "男士说货一周多前就发出了，但运输公司因天气恶劣一直延误（experiencing delays），所以零件还没到，选 C。"
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "去工厂。",
+        "B": "发一些邮件。",
+        "C": "给运输公司打电话。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "But I’ll also call them."
+      },
+      "reasonZh": "男士说除了把电话号码给女士，自己也会给他们打电话（call them），them 指女士问到的运输公司，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "工厂（factory）是女士开头说向男士的工厂订了零件，男士没说要去工厂。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "邮件（tracking emails）是运输公司发来的物流跟踪邮件，男士嫌它们信息不够，不是他要发邮件。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士最近怎么了？",
+      "optionTranslationsZh": {
+        "A": "他厌倦了睡觉。",
+        "B": "他睡眠质量差。",
+        "C": "他难以睡好。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Well, my mother criticized me because I am bored with sleeping at night."
+      },
+      "reasonZh": "“厌倦了睡觉”就是男士说的晚上睡觉让他烦（bored with sleeping at night），他觉得只有夜里才是自己的时间，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "睡眠质量（quality of your sleep）是女士介绍追踪器能监测的内容，男士没说自己睡得不好。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "男士不是想睡睡不好，而是不愿睡，他觉得安静的夜晚正适合读书（perfect for me to read books）。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "有些睡眠追踪器提供什么功能？",
+      "optionTranslationsZh": {
+        "A": "改变旧的睡眠习惯。",
+        "B": "监测睡眠环境。",
+        "C": "测量睡觉者的体温。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Some trackers even measure air temperature, the amount of light and noise, and monitor how you breathe."
+      },
+      "reasonZh": "“监测睡眠环境”概括了女士说的测量气温、光线和噪音（air temperature, the amount of light and noise），这些都是睡觉时周围的环境，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士说的是让你了解睡眠习惯（get to know your sleep habits），从而看出什么有助于睡眠，没说追踪器会改变习惯。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "追踪器测的是空气的温度（air temperature），不是睡觉的人的体温。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士认为房租怎么样？",
+      "optionTranslationsZh": {
+        "A": "合理。",
+        "B": "低。",
+        "C": "高。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It’s not that cheap but sounds not bad."
+      },
+      "reasonZh": "男士说房租不算那么便宜，但听起来还不错（not that cheap but sounds not bad），也就是价格还算合理，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "男士明说不算那么便宜（not that cheap），所以不是低。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "他接着说听起来还不错（sounds not bad），并不嫌贵。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "房子什么时候可以入住？",
+      "optionTranslationsZh": {
+        "A": "20 号。",
+        "B": "21 号。",
+        "C": "23 号。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Yes, but the cleaners will need 2 days to make sure that the house is clean and tidy."
+      },
+      "reasonZh": "租户 20 号晚上才搬走（evening of the 20th），保洁要 2 天（need 2 days），21、22 日打扫，23 日房子才能入住，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "20 号是租户晚上搬走的日子（leave on the evening of the 20th），之后还要打扫两天。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "21 号是租户搬走的第二天（The day after the renters leave the house），这天男士去看房，打扫还没结束。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士 21 号要做什么？",
+      "optionTranslationsZh": {
+        "A": "看房。",
+        "B": "参加会议。",
+        "C": "找保洁。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The day after the renters leave the house."
+      },
+      "reasonZh": "男士问哪天能看房（visit it），女士答租户搬走的第二天；租户 20 号晚上搬走，第二天就是 21 号，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "开会的是女士（I have a meeting at 12:30），男士因此把看房时间改约到 10:15。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "保洁（cleaners）是女士那边负责打扫房子的人，男士不需要去找。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "是什么启发卢克做这项研究？",
+      "optionTranslationsZh": {
+        "A": "一篇文章。",
+        "B": "一次买卖经历。",
+        "C": "新款鞋子。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "That piece made me want to find out more."
+      },
+      "reasonZh": "卢克说他读到一篇讲鞋子产量惊人的杂志文章（an article in a magazine），正是这篇文章（That piece）让他想深入了解，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "排队买鞋（queuing outside a shoe store）是他看到别人在买，不是他自己的买卖经历。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "新款鞋（a new style of trainers）是人们排队要买的东西，只是他先前见到的场景，让他想研究的是那篇文章。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "卢克是怎么进入运动鞋交易会的？",
+      "optionTranslationsZh": {
+        "A": "通过卖鞋。",
+        "B": "通过交入场费。",
+        "C": "通过充当采访者。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "At this event, everyone had to hand over ten pounds just to get in!"
+      },
+      "reasonZh": "“交入场费”就是卢克说的每个人都得交十英镑才能进场（hand over ten pounds just to get in），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "买卖运动鞋（buy and sell trainers）是这个活动本身的用途，卢克进场靠的是交钱。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "采访（interviewed）是卢克进场以后做的事，进场本身每人都得交钱。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "是什么让卢克注意到梅格和泰勒？",
+      "optionTranslationsZh": {
+        "A": "他们的年龄。",
+        "B": "他们的嗓音。",
+        "C": "他们的穿着风格。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "But what drew me to them was the fact that they were a couple in their thirties, and almost everyone else is teenagers."
+      },
+      "reasonZh": "卢克说吸引他的是这对夫妻三十多岁（in their thirties），而其他人几乎都是青少年，说的是年龄，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "各种款式（all styles and colors）说的是他们摊位上堆着的运动鞋，不是两人的穿着。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "大量鞋子被扔掉的主要原因是什么？",
+      "optionTranslationsZh": {
+        "A": "鞋子脏了。",
+        "B": "鞋子质量差。",
+        "C": "鞋子太多了。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "But above all, it’s that there are so many cheap styles that start to fall apart in no time."
+      },
+      "reasonZh": "“质量差”就是卢克说的廉价款式很快就散架（fall apart in no time），他用最主要的是（above all）点明这是主因，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "看起来旧了（look worn）是卢克列出的次要原因之一，说的是穿旧，不是脏。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "很多鞋被扔掉（so many shoes are thrown away）是女士说的现象，问的是它的原因。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "谁会帮忙处理公园里的垃圾？",
+      "optionTranslationsZh": {
+        "A": "当地一所学校。",
+        "B": "政府官员。",
+        "C": "社区工作人员。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Um, first of all, don’t worry about any litter you see lying about – one of the local schools has offered to help out with that as part of their own environmental project."
+      },
+      "reasonZh": "说到垃圾时，说话人说当地一所学校已主动提出帮忙（one of the local schools has offered to help out），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "地方政府（local government）有预算处理一些问题，后来又说要拓宽小路，没说由它管垃圾。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "社区（community gardens）是公园里社区花园的名称，不是指社区工作人员。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "听众首先要帮忙做什么？",
+      "optionTranslationsZh": {
+        "A": "建新栅栏。",
+        "B": "清扫自行车道。",
+        "C": "更换一些植物。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The priority for you will be to give us a hand with the new wooden fencing – it needs constructing along parts of the bicycle track."
+      },
+      "reasonZh": "说话人先说垃圾不用管，接着说大家的首要任务（The priority for you）是帮着建新的木栅栏（new wooden fencing），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "自行车道（bicycle track）是栅栏要修建的位置，没说要清扫它。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "种回本地植物（putting back some native plants）是说话人随后说的另一件事（The other thing），不是首要任务。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "今年晚些时候会发生什么？",
+      "optionTranslationsZh": {
+        "A": "一些小路会得到改善。",
+        "B": "会新建一座花园。",
+        "C": "会种更多外来物种。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You’ve probably also noticed that the pathways that come from the bicycle track are quite narrow, but the government will widen them later in the year."
+      },
+      "reasonZh": "“小路得到改善”就是政府今年晚些时候要把很窄的小路拓宽（widen them later in the year），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "修建（constructing）说的是沿自行车道建栅栏，花园（gardens）是现有的社区花园，没说要新建。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "外来物种（foreign species）是要清除的（getting rid of），要种回去的是本地植物。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "听众需要带什么？",
+      "optionTranslationsZh": {
+        "A": "工具。",
+        "B": "食物。",
+        "C": "手套。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "So, wear strong, waterproof boots; it’s quite muddy at the moment, and your own gloves would also be advisable."
+      },
+      "reasonZh": "说话人建议穿防水靴，最好也带上自己的手套（your own gloves），三项里只有手套要自备，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "工具由组织方提供（Tools will be available），不用自带。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "食物和饮料也由组织方提供（we’ll also provide food and drink）。"
+        }
+      ]
+    }
+  }
+}

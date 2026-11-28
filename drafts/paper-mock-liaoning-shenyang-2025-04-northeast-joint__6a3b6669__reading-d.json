@@ -1,0 +1,722 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-liaoning-shenyang-2025-04-northeast-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d": {
+      "overview": "文章从人们出事就怀疑别人故意作对的倾向说起，介绍思维模型“汉隆剃刀”：能用疏忽解释的事，不当作恶意。它让人少些评判、多些同理心，遇到别人添麻烦时应先沟通。",
+      "fullTranslationZh": "如果你曾觉得全世界都在和你作对，你并不孤单。我们都有一种倾向：一旦出了什么差错，就认定问题出在有人在设计陷害我们。如果同事没能按期完成任务，那他们一定是想抢在你前面升职。如果咖啡店的无线网络用不了，那店员一定是谎称有网，好把你吸引进店。\n但事实是，我们往往急于得出的这些简单解释几乎都站不住脚。也许你的同事以为今天是星期二，而不是星期三。也许无线网络只是出了故障。这时就轮到汉隆剃刀登场了——这是一种有用的思维模型：凡是完全能用疏忽来解释的事，绝不把它看作是故意伤害。\n在日常生活中运用汉隆剃刀这一有助于快速决策和明智理解的实用工具，能让我们少些评判，并提高推理能力。同时，汉隆剃刀让我们更有同理心，教我们不要把别人的行为往最坏的意图上想，这一点在人际关系、商业事务和个人幸福方面价值最为突出。\n我们都过着复杂的生活，事情总在不断出错。出错时，一种常见的反应是责怪离自己最近的人，并认定对方心怀恶意。当身边有人把事情搞砸时，我们忘了自己也曾多少次犯过同样的错。相反，我们把这个肇事者看作令人极其恼火的根源。\n在这种情况下揣测对方的意图，很可能会让问题更糟。我们谁也无法真正知道别人想要什么。能力不足或疏忽远比想要伤害人更可能是真正的原因。当某种情况让我们生气或心烦时，不妨想一想这些情绪是否合理。通常，应对别人给我们制造麻烦的最好方式是设法与他们沟通，而不是对他们置之不理。这样，我们就能避免同样的情况再次发生。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-d-1",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+          "sourceText": "This is where Hanlon’s Razor comes in – a useful mental model that never considers what can be fully explained by neglect (疏忽) as doing harm on purpose.",
+          "displayText": "This is where Hanlon’s Razor comes in – a useful mental model that never considers what can be fully explained by neglect (疏忽) as doing harm on purpose.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:33"
+          ],
+          "translationZh": "这时就轮到汉隆剃刀登场了——这是一种有用的思维模型：凡是完全能用疏忽来解释的事，绝不把它看作是故意伤害。",
+          "analysisZh": "主干是 This is where Hanlon’s Razor comes in（这就是汉隆剃刀发挥作用的地方），where 引导表语从句。破折号后的 a useful mental model 是同位语，解释汉隆剃刀是什么；that 引导定语从句修饰 model，从句里用 consider A as B（把 A 看作 B）的结构，A 是 what 从句 what can be fully explained by neglect，B 是 doing harm on purpose，前面的 never 否定整个判断。拆开就是：能用疏忽解释的事，绝不当成故意害人。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 37,
+              "quote": "Hanlon’s Razor comes in"
+            },
+            {
+              "start": 67,
+              "end": 82,
+              "quote": "never considers"
+            },
+            {
+              "start": 127,
+              "end": 151,
+              "quote": "as doing harm on purpose"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-d-2",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:3",
+          "sourceText": "Meanwhile, Hanlon’s Razor allows us to have more empathy (同理心) and teaches us not to assume the worst intention in the actions of others, the value of which is most pronounced in relationships, business matters, and personal happiness.",
+          "displayText": "Meanwhile, Hanlon’s Razor allows us to have more empathy (同理心) and teaches us not to assume the worst intention in the actions of others, the value of which is most pronounced in relationships, business matters, and personal happiness.",
+          "relatedQuestionIds": [],
+          "translationZh": "同时，汉隆剃刀让我们更有同理心，教我们不要把别人的行为往最坏的意图上想，这一点在人际关系、商业事务和个人幸福方面价值最为突出。",
+          "analysisZh": "主语 Hanlon’s Razor 带两个并列谓语：allows us to have more empathy（让我们更有同理心）和 teaches us not to assume ...（教我们不要揣测……），teach sb. not to do 是否定式不定式。逗号后的 the value of which ... 是“名词 + of which”引导的非限制性定语从句，which 指前面说的这种做法，说明它的价值在人际关系、商业和个人幸福中最突出。",
+          "underlineRanges": [
+            {
+              "start": 26,
+              "end": 56,
+              "quote": "allows us to have more empathy"
+            },
+            {
+              "start": 67,
+              "end": 111,
+              "quote": "teaches us not to assume the worst intention"
+            },
+            {
+              "start": 138,
+              "end": 156,
+              "quote": "the value of which"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:1"
+              ],
+              "start": 0,
+              "end": 118,
+              "quote": "如果你曾觉得全世界都在和你作对，你并不孤单。我们都有一种倾向：一旦出了什么差错，就认定问题出在有人在设计陷害我们。如果同事没能按期完成任务，那他们一定是想抢在你前面升职。如果咖啡店的无线网络用不了，那店员一定是谎称有网，好把你吸引进店。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2"
+              ],
+              "start": 119,
+              "end": 234,
+              "quote": "但事实是，我们往往急于得出的这些简单解释几乎都站不住脚。也许你的同事以为今天是星期二，而不是星期三。也许无线网络只是出了故障。这时就轮到汉隆剃刀登场了——这是一种有用的思维模型：凡是完全能用疏忽来解释的事，绝不把它看作是故意伤害。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:3"
+              ],
+              "start": 235,
+              "end": 347,
+              "quote": "在日常生活中运用汉隆剃刀这一有助于快速决策和明智理解的实用工具，能让我们少些评判，并提高推理能力。同时，汉隆剃刀让我们更有同理心，教我们不要把别人的行为往最坏的意图上想，这一点在人际关系、商业事务和个人幸福方面价值最为突出。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:4"
+              ],
+              "start": 348,
+              "end": 453,
+              "quote": "我们都过着复杂的生活，事情总在不断出错。出错时，一种常见的反应是责怪离自己最近的人，并认定对方心怀恶意。当身边有人把事情搞砸时，我们忘了自己也曾多少次犯过同样的错。相反，我们把这个肇事者看作令人极其恼火的根源。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:5"
+              ],
+              "start": 454,
+              "end": 606,
+              "quote": "在这种情况下揣测对方的意图，很可能会让问题更糟。我们谁也无法真正知道别人想要什么。能力不足或疏忽远比想要伤害人更可能是真正的原因。当某种情况让我们生气或心烦时，不妨想一想这些情绪是否合理。通常，应对别人给我们制造麻烦的最好方式是设法与他们沟通，而不是对他们置之不理。这样，我们就能避免同样的情况再次发生。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-d-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:33"
+            ],
+            "selectedSentenceId": "sentence-reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+                "start": 186,
+                "end": 338,
+                "quote": "This is where Hanlon’s Razor comes in – a useful mental model that never considers what can be fully explained by neglect (疏忽) as doing harm on purpose."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 63,
+                "end": 115,
+                "quote": "这时就轮到汉隆剃刀登场了——这是一种有用的思维模型：凡是完全能用疏忽来解释的事，绝不把它看作是故意伤害。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:3",
+                "start": 172,
+                "end": 407,
+                "quote": "Meanwhile, Hanlon’s Razor allows us to have more empathy (同理心) and teaches us not to assume the worst intention in the actions of others, the value of which is most pronounced in relationships, business matters, and personal happiness."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 49,
+                "end": 112,
+                "quote": "同时，汉隆剃刀让我们更有同理心，教我们不要把别人的行为往最坏的意图上想，这一点在人际关系、商业事务和个人幸福方面价值最为突出。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:1",
+                "start": 67,
+                "end": 182,
+                "quote": "We all have a tendency to assume that when anything goes wrong, the fault lies within some great tricks against us."
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+                "start": 0,
+                "end": 90,
+                "quote": "But the fact is that these simple explanations, which we tend to jump to, are barely true."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 31,
+                "end": 56,
+                "quote": "一旦出了什么差错，就认定问题出在有人在设计陷害我们"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 0,
+                "end": 28,
+                "quote": "但事实是，我们往往急于得出的这些简单解释几乎都站不住脚。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+                "start": 226,
+                "end": 337,
+                "quote": "a useful mental model that never considers what can be fully explained by neglect (疏忽) as doing harm on purpose"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 89,
+                "end": 114,
+                "quote": "凡是完全能用疏忽来解释的事，绝不把它看作是故意伤害"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:4",
+                "start": 170,
+                "end": 257,
+                "quote": "When someone messes up around us, we forget how many times we, too, have done the same."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 52,
+                "end": 82,
+                "quote": "当身边有人把事情搞砸时，我们忘了自己也曾多少次犯过同样的错。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:5",
+                "start": 329,
+                "end": 454,
+                "quote": "Often, the best way to react to other people causing us problems is by seeking to communicate with them, not to dismiss them."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 94,
+                "end": 133,
+                "quote": "通常，应对别人给我们制造麻烦的最好方式是设法与他们沟通，而不是对他们置之不理。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章按“现象 → 概念 → 好处 → 再析现象 → 建议”展开：先写人们出错就怪别人的倾向，引出汉隆剃刀，再说它的作用，最后分析揣测恶意的害处并建议沟通。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:1",
+            "summary": "我们常觉得世界与自己作对，一出问题就认定有人故意使坏，并举同事误期、咖啡店断网两个例子。",
+            "function": "用常见现象引出话题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+            "summary": "这些简单解释几乎不成立，事情多半只是失误，由此引出汉隆剃刀：能用疏忽解释的，不当作故意伤害。",
+            "function": "提出核心概念。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:3",
+            "summary": "运用汉隆剃刀能让人少评判、多推理、更有同理心，在人际、商业和幸福方面尤其有价值。",
+            "function": "说明这一思维模型的好处。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:4",
+            "summary": "出错时人们常怪罪最近的人，忘了自己也犯过同样的错，把对方当成恼火的根源。",
+            "function": "再析怪罪他人的常见反应。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:5",
+            "summary": "揣测恶意会让问题更糟，疏忽比恶意更可能是原因，最好与对方沟通而不是置之不理。",
+            "function": "给出建议，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出事情出错时我们通常的反应。",
+      "stemTranslationZh": "事情出错时我们通常会怎么做？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "接受真实存在的恶意。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "these simple explanations, which we tend to jump to, are barely true",
+            "sourceHighlight": "barely true",
+            "optionText": "Accept true ill intention.",
+            "optionHighlight": "true ill intention",
+            "explanation": "原文说我们急于认定的“有人故意使坏”几乎都不成立（barely true），选项却说那是真实存在的恶意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+              "quote": "these simple explanations, which we tend to jump to, are barely true",
+              "anchor": "几乎不成立"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "改变当前的处境。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Change current situations.",
+            "explanation": "原文写的是出错时我们第一反应是找人怪罪，没说我们会动手去改变处境。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "寻求可靠的帮助。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Seek reliable assistance.",
+            "explanation": "例子里的同事和店员是被我们怀疑使坏的人，不是我们去求助的人，原文没提寻求帮助。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "把责任错怪到别人头上。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:1",
+              "quote": "We all have a tendency to assume that when anything goes wrong, the fault lies within some great tricks against us.",
+              "anchor": "认定有人使坏"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+              "quote": "But the fact is that these simple explanations, which we tend to jump to, are barely true.",
+              "anchor": "这些解释几乎不成立"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "when things fail",
+          "sourceRole": "stem",
+          "targetText": "We all have a tendency to assume that when anything goes wrong, the fault lies within some great tricks against us.",
+          "relationType": "locationCue",
+          "targetCue": "when anything goes wrong",
+          "sourceZh": "事情出错时",
+          "targetCueZh": "一出差错时",
+          "answerText": "the fault lies within some great tricks against us",
+          "note": "题干的“事情出错时”（when things fail）对应原文的 when anything goes wrong。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:1"
+        },
+        {
+          "sourceText": "Misplace blame on others",
+          "sourceRole": "correctOption",
+          "targetText": "the fault lies within some great tricks against us",
+          "relationType": "paraphrase",
+          "note": "选项把两处合起来：“怪到别人头上”来自[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:1|the fault lies within some great tricks]]，认定有人在暗算我们（tricks against us）；“怪错了”来自[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2|are barely true]]，这些解释几乎不成立（barely true），选 D。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:1"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂破折号后对汉隆剃刀的解释，找出它的含义。",
+      "stemTranslationZh": "关于汉隆剃刀，我们能了解到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句破折号后的解释",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它是解决同事问题的一种方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Maybe your co-worker thought today was Tuesday, not Wednesday.",
+            "sourceEntity": "your co-worker",
+            "optionText": "It is a way to tackle colleagues’ problems.",
+            "optionEntity": "colleagues’ problems",
+            "explanation": "同事记错日子只是引出这种思维方式的例子；汉隆剃刀管的是怎样看待别人的过错，不是帮同事解决问题。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+              "quote": "Maybe your co-worker thought today was Tuesday, not Wednesday.",
+              "anchor": "同事的例子"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它是一种恢复无线网络连接的装置。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "WiFi",
+            "optionText": "WiFi",
+            "matchType": "exact",
+            "relationNote": "WiFi 来自[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2|Maybe the WiFi just went wrong]]，只是说明断网可能只是故障；汉隆剃刀是一种思维模型（mental model），不是修网络的装置。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+              "quote": "Maybe the WiFi just went wrong.",
+              "anchor": "断网的例子"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它避免把疏忽当作故意伤害。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2",
+              "quote": "a useful mental model that never considers what can be fully explained by neglect (疏忽) as doing harm on purpose",
+              "anchor": "不把疏忽当作故意伤害"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它能认定该为犯错负责的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "makes us less judgmental",
+            "sourceHighlight": "less judgmental",
+            "optionText": "It identifies who is to blame for making errors.",
+            "optionHighlight": "identifies who is to blame",
+            "explanation": "原文说运用它会让我们少些评判（less judgmental），不急着找人问罪，选项却说它用来认定该怪谁。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:3",
+              "quote": "makes us less judgmental",
+              "anchor": "少些评判"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Hanlon’s Razor",
+          "sourceRole": "stem",
+          "targetText": "This is where Hanlon’s Razor comes in – a useful mental model that never considers what can be fully explained by neglect (疏忽) as doing harm on purpose.",
+          "relationType": "locationCue",
+          "answerText": "never considers what can be fully explained by neglect (疏忽) as doing harm on purpose",
+          "note": "题干 Hanlon’s Razor 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2"
+        },
+        {
+          "sourceText": "It avoids taking neglect as intentional harm",
+          "sourceRole": "correctOption",
+          "targetText": "never considers what can be fully explained by neglect (疏忽) as doing harm on purpose",
+          "relationType": "paraphrase",
+          "note": "选项的“避免当作”（avoids taking … as）对应原文的“从不看作”（never considers … as），“故意伤害”（intentional harm）就是“存心害人”（doing harm on purpose），“疏忽”（neglect）原样沿用，选 C。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:2"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:34": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借助前一句的语境判断 the perpetrator 指什么人。",
+      "stemTranslationZh": "第四段中画线的“the perpetrator”指的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句看是谁惹了麻烦",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "读心的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The mind reader.",
+            "explanation": "放进去就成了“我们把读心的人看成令人恼火的根源”，可上文没人在猜别人心思；[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:5|None of us can ever know]]反倒说谁也不知道别人想什么。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "活动策划者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The event planner.",
+            "explanation": "放进去就成了“我们把活动策划者看成令人恼火的根源”，而[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:4]]里没人在筹划活动，惹恼我们的是把事搞砸的人。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "犯错的人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:4",
+              "quote": "When someone messes up around us, we forget how many times we, too, have done the same.",
+              "anchor": "身边有人搞砸了事"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "解决问题的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "When someone messes up around us",
+            "sourceHighlight": "messes up",
+            "optionText": "The problem solver",
+            "optionHighlight": "problem solver",
+            "explanation": "放进去就成了“我们把解决问题的人看成令人恼火的根源”，而前一句说的是有人把事情搞砸（messes up），是制造问题而不是解决问题。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:4",
+              "quote": "When someone messes up around us",
+              "anchor": "有人搞砸"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the perpetrator",
+          "sourceRole": "stem",
+          "targetText": "Instead,we regard the perpetrator as a source of intense annoyance.",
+          "relationType": "locationCue",
+          "answerText": "someone messes up around us",
+          "bridgeZh": "the perpetrator 指前面把事情搞砸的那个人",
+          "note": "题干 the perpetrator 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:4"
+        },
+        {
+          "sourceText": "The error maker",
+          "sourceRole": "correctOption",
+          "targetText": "someone messes up around us",
+          "relationType": "paraphrase",
+          "note": "选项的“犯错的人”（error maker）就是前一句“把事情搞砸的人”（someone messes up）。我们把这个人看成恼火的根源，所以它必须是惹出麻烦的人。放回去：我们把出错的那个人看成令人极其恼火的根源，选 C。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:4"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者建议在别人添麻烦时采取的做法。",
+      "stemTranslationZh": "当别人引发问题时，文章建议怎么做？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 not 前的做法",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "帮他们一把。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Lend them a hand.",
+            "explanation": "原文建议的是与对方沟通，没说要替对方做事或帮忙。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "对他们视而不见。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "not to dismiss them",
+            "sourceHighlight": "not to dismiss them",
+            "optionText": "Turn a blind eye to them.",
+            "optionHighlight": "Turn a blind eye",
+            "explanation": "视而不见（turn a blind eye）正是原文用 not 否定的“不理睬他们”（dismiss them）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:5",
+              "quote": "not to dismiss them",
+              "anchor": "不要置之不理"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "让他们当众难堪。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Put them on the spot.",
+            "explanation": "让对方当场下不来台是追责的做法，原文却提醒先想想怒气是否合理（justified），再去和对方沟通。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "与他们交换意见。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:5",
+              "quote": "Often, the best way to react to other people causing us problems is by seeking to communicate with them, not to dismiss them.",
+              "anchor": "设法与他们沟通"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "others cause a problem",
+          "sourceRole": "stem",
+          "targetText": "Often, the best way to react to other people causing us problems is by seeking to communicate with them, not to dismiss them.",
+          "relationType": "locationCue",
+          "targetCue": "other people causing us problems",
+          "sourceZh": "别人引发问题",
+          "targetCueZh": "别人给我们添麻烦",
+          "answerText": "seeking to communicate with them",
+          "note": "题干的“别人引发问题”（others cause a problem）对应原文的 other people causing us problems。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:5"
+        },
+        {
+          "sourceText": "Exchange ideas with them",
+          "sourceRole": "correctOption",
+          "targetText": "seeking to communicate with them",
+          "relationType": "paraphrase",
+          "note": "选项的“交换意见”（exchange ideas）就是原文的“沟通”（communicate with them），选 D。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-d:5"
+        }
+      ]
+    }
+  }
+}

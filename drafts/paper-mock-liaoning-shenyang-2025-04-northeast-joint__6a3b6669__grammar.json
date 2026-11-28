@@ -1,0 +1,971 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-liaoning-shenyang-2025-04-northeast-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill": {
+      "overview": "2025年2月下旬起，北京新开的迷你剧场“你好，西藏”以沉浸式演出《拉萨，拉萨》展示西藏非遗，借传统与创意结合打破地域隔阂，并与多家文化交流组织合作，让世界更了解西藏。",
+      "fullTranslationZh": "自2025年2月下旬以来，北京新开的迷你剧场“你好，西藏”一直把西藏丰富的传统文化带到中国首都的中心。\n剧场已成功推出首场公演——沉浸式演出《拉萨，拉萨》，这是一场西藏非物质文化遗产的展示，将持续约三个月。这部剧让观众全程屏息凝神，它融合了藏戏、民间音乐和敬茶仪式歌曲，充满活力。高原独特的音乐和舞者服装的鲜艳色彩，让坐在剧场里的人们仿佛沐浴在西藏的阳光中。\n这家迷你剧场是一项倡议的一部分，该倡议旨在推广西藏文化，并把这座城市的精髓——它的风景、传统和人民——介绍给全国各地的城市观众。“这是宣传多元文化的一种新方式，”剧场发言人说，“通过把传统文化与创意表达结合起来，我们打破了地域隔阂，把高原文化传播到了内地城市。”\n剧场已经与多家文化交流组织建立了密切的合作关系，力求把影响扩展到全世界。“我们的使命不仅是进一步发展西藏文化，还要让世界更好地了解西藏。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-grammar-1",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+          "sourceText": "The play, keeping its audience on the edge of their seats, __59__ (feature) a dynamic mix of traditional Xizang opera, folk music, and ceremonial tea-serving songs.",
+          "displayText": "The play, keeping its audience on the edge of their seats, features a dynamic mix of traditional Xizang opera, folk music, and ceremonial tea-serving songs.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:59"
+          ],
+          "translationZh": "这部剧让观众全程屏息凝神，它融合了藏戏、民间音乐和敬茶仪式歌曲，充满活力。",
+          "analysisZh": "主干是“这部剧融合了一种充满活力的组合”（The play features a dynamic mix）。两个逗号之间的 keeping its audience on the edge of their seats 是插入的分词短语，补充这部剧给观众的感受，不影响主谓一致。of 后面并列的三项（traditional Xizang opera, folk music, and ceremonial tea-serving songs）说明组合由什么构成。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 8,
+              "quote": "The play"
+            },
+            {
+              "start": 59,
+              "end": 81,
+              "quote": "features a dynamic mix"
+            },
+            {
+              "start": 10,
+              "end": 57,
+              "quote": "keeping its audience on the edge of their seats"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-grammar-2",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+          "sourceText": "The mini theater is part of an initiative __61__ (promote) Xizang culture and introduce the essence of the city – its landscapes, traditions and people—__62__ urban audience across China.",
+          "displayText": "The mini theater is part of an initiative to promote Xizang culture and introduce the essence of the city – its landscapes, traditions and people—to urban audience across China.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:61",
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:62"
+          ],
+          "translationZh": "这家迷你剧场是一项倡议的一部分，该倡议旨在推广西藏文化，并把这座城市的精髓——它的风景、传统和人民——介绍给全国各地的城市观众。",
+          "analysisZh": "主干是“这家迷你剧场是一项倡议的一部分”（The mini theater is part of an initiative）。后面的不定式修饰 initiative，由 and 连接两个动作：推广西藏文化（to promote Xizang culture）和把城市精髓介绍给观众（introduce … to urban audience），introduce 前省去了 to。破折号之间的 its landscapes, traditions and people 解释 the essence of the city，读时先跳过它，才能看出 introduce 与 to 搭配。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 41,
+              "quote": "The mini theater is part of an initiative"
+            },
+            {
+              "start": 42,
+              "end": 67,
+              "quote": "to promote Xizang culture"
+            },
+            {
+              "start": 146,
+              "end": 163,
+              "quote": "to urban audience"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 51,
+              "quote": "自2025年2月下旬以来，北京新开的迷你剧场“你好，西藏”一直把西藏丰富的传统文化带到中国首都的中心。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2"
+              ],
+              "start": 52,
+              "end": 179,
+              "quote": "剧场已成功推出首场公演——沉浸式演出《拉萨，拉萨》，这是一场西藏非物质文化遗产的展示，将持续约三个月。这部剧让观众全程屏息凝神，它融合了藏戏、民间音乐和敬茶仪式歌曲，充满活力。高原独特的音乐和舞者服装的鲜艳色彩，让坐在剧场里的人们仿佛沐浴在西藏的阳光中。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3"
+              ],
+              "start": 180,
+              "end": 311,
+              "quote": "这家迷你剧场是一项倡议的一部分，该倡议旨在推广西藏文化，并把这座城市的精髓——它的风景、传统和人民——介绍给全国各地的城市观众。“这是宣传多元文化的一种新方式，”剧场发言人说，“通过把传统文化与创意表达结合起来，我们打破了地域隔阂，把高原文化传播到了内地城市。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4"
+              ],
+              "start": 312,
+              "end": 381,
+              "quote": "剧场已经与多家文化交流组织建立了密切的合作关系，力求把影响扩展到全世界。“我们的使命不仅是进一步发展西藏文化，还要让世界更好地了解西藏。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:1",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:1",
+            "text": "A newly opened mini theater “Hello, Xizang” in Beijing has brought/has been bringing the rich traditions of Xizang to the heart of China’s capital city since late February, 2025."
+          },
+          {
+            "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+            "text": "The theater has successfully made its first public show with an immersive (沉浸的) performance “Lhasa, Lhasa”, a showcase of Xizang intangible cultural heritage (非物质文化遗产), which will last for about three months. The play, keeping its audience on the edge of their seats, features a dynamic mix of traditional Xizang opera, folk music, and ceremonial tea-serving songs. The unique music of the highland and the bright colors of the dancers’ costumes make people seated at the theater feel as if they were bathed in the sunlight of Xizang."
+          },
+          {
+            "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+            "text": "The mini theater is part of an initiative to promote Xizang culture and introduce the essence of the city – its landscapes, traditions and people—to urban audience across China. “It is a novel approach to advertising diverse cultures”, said a spokesperson for the theater. “By combining traditional culture with creative expression, we have broken down geographical barriers and spread the highland culture to inner cities.”"
+          },
+          {
+            "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+            "text": "The theater has already established close partnerships with several cultural exchange organizations, aiming to expand its reach to the world. “Our mission is not just to further develop Xizang culture, but also to let the world have a better understanding of Xizang.”"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:1",
+                "start": 137,
+                "end": 162,
+                "quote": "since late February, 2025"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:1",
+                "start": 0,
+                "end": 12,
+                "quote": "自2025年2月下旬以来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:56"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:1",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:1",
+                "start": 55,
+                "end": 84,
+                "quote": "has brought/has been bringing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:1",
+                "start": 41,
+                "end": 43,
+                "quote": "带到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 36,
+                "end": 62,
+                "quote": "made its first public show"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 5,
+                "end": 11,
+                "quote": "推出首场公演"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:57"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 16,
+                "end": 28,
+                "quote": "successfully"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 3,
+                "end": 5,
+                "quote": "成功"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 122,
+                "end": 169,
+                "quote": "showcase of Xizang intangible cultural heritage"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 40,
+                "end": 42,
+                "quote": "展示"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:58"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 108,
+                "end": 109,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 28,
+                "end": 30,
+                "quote": "一场"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 221,
+                "end": 229,
+                "quote": "The play"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 51,
+                "end": 54,
+                "quote": "这部剧"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:59"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 268,
+                "end": 276,
+                "quote": "features"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 65,
+                "end": 68,
+                "quote": "融合了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 471,
+                "end": 477,
+                "quote": "people"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 113,
+                "end": 115,
+                "quote": "人们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:60"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 458,
+                "end": 464,
+                "quote": "seated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 107,
+                "end": 113,
+                "quote": "坐在剧场里的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 28,
+                "end": 41,
+                "quote": "an initiative"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 7,
+                "end": 11,
+                "quote": "一项倡议"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:61"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 42,
+                "end": 52,
+                "quote": "to promote"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 19,
+                "end": 23,
+                "quote": "旨在推广"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 78,
+                "end": 111,
+                "quote": "introduce the essence of the city"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 29,
+                "end": 37,
+                "quote": "把这座城市的精髓"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:62"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 146,
+                "end": 148,
+                "quote": "to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 51,
+                "end": 54,
+                "quote": "介绍给"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 346,
+                "end": 384,
+                "quote": "have broken down geographical barriers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 108,
+                "end": 115,
+                "quote": "打破了地域隔阂"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:63"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 375,
+                "end": 378,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 108,
+                "end": 123,
+                "quote": "打破了地域隔阂，把高原文化传播"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "start": 60,
+                "end": 67,
+                "quote": "several"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "start": 5,
+                "end": 7,
+                "quote": "多家"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:64"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "start": 86,
+                "end": 99,
+                "quote": "organizations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "start": 5,
+                "end": 13,
+                "quote": "多家文化交流组织"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "start": 191,
+                "end": 213,
+                "quote": "develop Xizang culture"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "start": 48,
+                "end": 54,
+                "quote": "发展西藏文化"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:65"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "start": 170,
+                "end": 177,
+                "quote": "further"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:4",
+                "start": 45,
+                "end": 48,
+                "quote": "进一步"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-grammar-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:59"
+            ],
+            "selectedSentenceId": "ls-grammar-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 209,
+                "end": 365,
+                "quote": "The play, keeping its audience on the edge of their seats, features a dynamic mix of traditional Xizang opera, folk music, and ceremonial tea-serving songs."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:2",
+                "start": 64,
+                "end": 82,
+                "quote": "它融合了藏戏、民间音乐和敬茶仪式歌曲"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-grammar-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:61",
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:62"
+            ],
+            "selectedSentenceId": "ls-grammar-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 0,
+                "end": 177,
+                "quote": "The mini theater is part of an initiative to promote Xizang culture and introduce the essence of the city – its landscapes, traditions and people—to urban audience across China."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:grammar-fill:3",
+                "start": 51,
+                "end": 63,
+                "quote": "介绍给全国各地的城市观众"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:56": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "bring",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "has brought/has been bringing",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-perfect-explicit-marker",
+        "features": []
+      },
+      "reason": "空格作主语“迷你剧场”（A newly opened mini theater）的谓语，主语后插入了名称和地点（“Hello, Xizang” in Beijing）。时间状语“自2025年2月下旬以来”（since late February, 2025）表示从过去持续到现在，主语是单数，用现在完成时（has brought），强调动作一直在进行也可用现在完成进行时（has been bringing）。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "since late February, 2025",
+          "signalSide": "passage",
+          "relation": "“自……以来”表示从过去延续到现在，谓语用现在完成时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "A newly opened mini theater",
+          "signalSide": "passage",
+          "relation": "主语是单数的“剧场”，助动词用 has。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:57": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "successful",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "successfully",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "空格夹在助动词（has）和过去分词（made）之间，修饰谓语“推出首场公演”（made its first public show），说明推出得怎么样。修饰动词要用副词，把形容词“成功的”（successful）变成副词（successfully）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "made its first public show",
+          "signalSide": "passage",
+          "relation": "空格修饰谓语动词 made，要用副词。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:58": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-identity-category",
+        "features": [
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "空格限定单数可数名词“展示”（showcase），这个名词短语作《拉萨，拉萨》（“Lhasa, Lhasa”）的同位语，说明这台演出是一场什么样的展示，属于泛指的一类，用不定冠词。名词（showcase）以辅音音素开头，填（a）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "showcase of Xizang intangible cultural heritage",
+          "signalSide": "passage",
+          "relation": "空格限定单数可数名词 showcase，说明演出属于哪一类。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "“Lhasa, Lhasa”",
+          "signalSide": "passage",
+          "relation": "空格所在的短语是对这台演出的补充说明。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:59": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "feature",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "features",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "空格作主语“这部剧”（The play）的谓语，主语和空格之间隔着分词短语（keeping its audience on the edge of their seats），这个短语不是谓语。这里介绍这部剧的特色，属于一般现在的描述，主语是单数，用（features）；下一句的谓语（make）也用一般现在时，可以印证。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The play",
+          "signalSide": "passage",
+          "relation": "主语是单数的“这部剧”，谓语用第三人称单数。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "make people",
+          "signalSide": "passage",
+          "relation": "下一句描述演出效果同样用一般现在时。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:60": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "seat",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "seated",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "句子的谓语已是“使”（make），空格不能再作谓语，它修饰名词“人们”（people），说明是哪些人，可改写成（people who are seated at the theater）。（seat）意为“使就座”，人们是被安排坐下的，用过去分词（seated）作后置定语。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "people",
+          "signalSide": "passage",
+          "relation": "空格修饰 people，说明是坐在剧场里的人。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "at the theater",
+          "signalSide": "passage",
+          "relation": "“坐在剧场里”，seat 与人是被动关系。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:61": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "promote",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to promote",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-abstract-content",
+        "features": []
+      },
+      "reason": "空格修饰名词“倡议”（an initiative），说明这项倡议要做什么，可改写成（an initiative that aims to promote Xizang culture）。倡议的内容是将要做的事，用不定式（to promote）作后置定语；后面并列的“介绍”（introduce）前省去了不定式符号（to），可以印证。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "an initiative",
+          "signalSide": "passage",
+          "relation": "空格修饰 initiative，说明倡议的内容。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "and introduce",
+          "signalSide": "passage",
+          "relation": "并列的 introduce 承前省略 to，与空格同为不定式。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:62": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "to",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把“城市观众”（urban audience）接到动词“介绍”（introduce）上，说明介绍给谁。宾语（the essence of the city）后插入了破折号里的说明，动词与空格隔得较远；“把某物介绍给某人”用介词（to）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "introduce the essence of the city",
+          "signalSide": "passage",
+          "relation": "“把……介绍给……”，空格接介绍的对象。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:63": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接两个并列的谓语部分（broken down geographical barriers 和 spread the highland culture），它们共用助动词（have），这里的“传播”（spread）是过去分词。先打破隔阂、再传播文化，是顺承关系，用并列连词（and）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "have broken down geographical barriers",
+          "signalSide": "passage",
+          "relation": "前半部分是现在完成时的谓语，后面的 spread 与 broken 并列。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:64": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "organization",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "organizations",
+      "role": null,
+      "similarityProfile": {
+        "route": "quantity-determiner",
+        "features": []
+      },
+      "reason": "空格作介词（with）的宾语中心词，前面有限定词“几个”（several），可数名词要用复数（organizations）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "several",
+          "signalSide": "passage",
+          "relation": "“几个”后接可数名词复数。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:65": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "far",
+      "facetKey": "grammar-fill.given.adjective.comparison",
+      "answer": "further",
+      "role": null,
+      "similarityProfile": {
+        "route": "comparative",
+        "features": [
+          "semantic-comparison"
+        ]
+      },
+      "reason": "空格放在不定式符号（to）和动词（develop）之间，修饰“发展西藏文化”（develop Xizang culture）。这里说的是在已有基础上“进一步”发展，用“远”（far）的比较级（further），表示程度上的推进。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "develop Xizang culture",
+          "signalSide": "passage",
+          "relation": "空格修饰动词 develop，表示进一步发展。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,968 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-liaoning-shenyang-2025-04-northeast-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices": {
+      "overview": "文章是一份数字清理指南：先说明数字空间和物理空间一样需要及时清理，再分评估数字版图、精简收件箱、有意识地使用社交媒体、反思数字消费习惯四步给出做法。",
+      "fullTranslationZh": "在数字信息饱和的时代，进行一次数字清理比以往任何时候都更加迫切。和物理空间一样，我们的数字空间也需要及时清理。下面这份指南旨在为你提供一些切实有效的策略。\n\n评估你的数字版图\n\n这包括评估你在网络上留下的方方面面，从电子邮箱的收件箱到社交媒体账户。了解你的数字足迹，找出需要处理的地方。这一评估为有针对性、高效率的清理打好基础。此外，它还能确保不留下任何没有检查过的地方。\n\n精简你的收件箱\n\n电子邮箱的收件箱往往是数字杂乱的滋生地。创建文件夹来整理重要邮件，并清除过时的信息。这样做不仅能减少视觉上的杂乱，还能提高你处理重要往来信件的效率。这样你就能享受毫无压力的邮件体验了。\n\n有意识地使用社交媒体\n\n全面检查你的社交媒体账户，取消关注那些你不再感兴趣的账户。考虑为社交媒体的使用设定界限，比如限制查看动态的时间。这种做法能让你与社交媒体建立更健康的关系，既享受它带来的好处，又不受其负面影响。\n\n反思你的数字消费习惯\n\n在清理数字空间的同时，花点时间反思一下自己的习惯。想一想你的线上活动对心理健康有什么影响。是否有某些特定的数字习惯给你带来压力或让你分心？利用这番反思做出明智的决定，调整你的数字习惯，过上更健康、更平衡的数字生活。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "seven-sentence:inbox-benefits",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:6",
+          "sourceText": "It not only reduces visual mess but also enhances your efficiency in managing critical communications.",
+          "displayText": "It not only reduces visual mess but also enhances your efficiency in managing critical communications.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:38"
+          ],
+          "translationZh": "这样做不仅能减少视觉上的杂乱，还能提高你处理重要往来信件的效率。",
+          "analysisZh": "主语 It 指前面建文件夹、清旧信息的做法，谓语是 not only reduces … but also enhances 并列的两个动词，分别说两项好处：减少视觉杂乱、提高效率。in managing critical communications 说明在哪方面提高效率。两项好处说完，下一句才用 Then 推出最终结果，这正是第 38 题的依据。",
+          "underlineRanges": [
+            {
+              "start": 3,
+              "end": 19,
+              "quote": "not only reduces"
+            },
+            {
+              "start": 32,
+              "end": 49,
+              "quote": "but also enhances"
+            }
+          ]
+        },
+        {
+          "sentenceId": "seven-sentence:healthier-relationship",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:8",
+          "sourceText": "This approach develops a healthier relationship with social media, allowing you to enjoy its benefits without negative influence.",
+          "displayText": "This approach develops a healthier relationship with social media, allowing you to enjoy its benefits without negative influence.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:39"
+          ],
+          "translationZh": "这种做法能让你与社交媒体建立更健康的关系，既享受它带来的好处，又不受其负面影响。",
+          "analysisZh": "主干是 This approach develops a healthier relationship，This approach 回指前两句取消关注、限定使用时间的做法。逗号后 allowing you to enjoy its benefits 是现在分词短语，说明这种做法带来的结果；without negative influence 补充条件：只取好处，不受坏影响。整句点出本节要的是有节制地使用，和小标题的 mindfully 相呼应。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 47,
+              "quote": "This approach develops a healthier relationship"
+            },
+            {
+              "start": 67,
+              "end": 101,
+              "quote": "allowing you to enjoy its benefits"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "总分结构：首段点出数字清理的必要并引出指南，随后四个小标题各讲一步，从摸清现状、清理邮箱、管住社交媒体，到最后反思习惯、调整生活方式，层层推进。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "paragraphIds": [
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:1"
+            ],
+            "summary": "数字信息饱和，清理迫在眉睫；用物理空间作比说明数字空间也要清理，引出下面的指南。"
+          },
+          {
+            "unitId": "unit-assess",
+            "heading": "Assess your digital landscape",
+            "paragraphIds": [
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:2",
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:3",
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:4"
+            ],
+            "summary": "第一步评估：全面查看网上的各个方面，找出问题，为有针对性的清理打基础，并确保不留遗漏。"
+          },
+          {
+            "unitId": "unit-inbox",
+            "heading": "Simplify your inbox",
+            "paragraphIds": [
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:5",
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:6"
+            ],
+            "summary": "第二步整理收件箱：建文件夹、清旧信息，减少杂乱、提高效率，用邮件不再有压力。"
+          },
+          {
+            "unitId": "unit-social",
+            "heading": "Use social media mindfully.",
+            "paragraphIds": [
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:7",
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:8"
+            ],
+            "summary": "第三步管住社交媒体：取消无用关注、限定使用时间，与社交媒体建立健康关系。"
+          },
+          {
+            "unitId": "unit-reflect",
+            "heading": "Reflect on digital consumption habits",
+            "paragraphIds": [
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:9",
+              "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:10"
+            ],
+            "summary": "第四步反思习惯：想想上网对心理健康的影响，找出带来压力和分心的习惯，加以调整。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 36,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "our digital"
+          ],
+          "text": "选项开头 \"Our digital devices\" 贴着第 36 题空前的数字话题，像在交代背景。但空前已经在说 \"the need for a digital clean\"，空后 \"The following guide\" 要介绍清理办法；B 只说设备离不开，没说为什么要清理，前后都接不上。",
+          "quotes": [
+            "Our digital devices",
+            "the need for a digital clean",
+            "The following guide"
+          ]
+        },
+        "C": {
+          "target": 39,
+          "secondary": null,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项的 review 和 accounts 复现第 39 题下段第一句，又是祈使句，像个小标题。但下段接着讲 \"setting boundaries for your social media usage\"，落在 \"a healthier relationship with social media\"，讲的是怎样用社交媒体，一句没提隐私设置，概括不了整段。",
+          "quotes": [
+            "review",
+            "accounts",
+            "setting boundaries for your social media usage",
+            "a healthier relationship with social media"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "seven-source",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "seven-translation",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "seven-translation-paragraph:t1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 77,
+              "quote": "在数字信息饱和的时代，进行一次数字清理比以往任何时候都更加迫切。和物理空间一样，我们的数字空间也需要及时清理。下面这份指南旨在为你提供一些切实有效的策略。"
+            },
+            {
+              "paragraphId": "seven-translation-paragraph:t2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:2"
+              ],
+              "start": 79,
+              "end": 87,
+              "quote": "评估你的数字版图"
+            },
+            {
+              "paragraphId": "seven-translation-paragraph:t3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:3",
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:4"
+              ],
+              "start": 89,
+              "end": 186,
+              "quote": "这包括评估你在网络上留下的方方面面，从电子邮箱的收件箱到社交媒体账户。了解你的数字足迹，找出需要处理的地方。这一评估为有针对性、高效率的清理打好基础。此外，它还能确保不留下任何没有检查过的地方。"
+            },
+            {
+              "paragraphId": "seven-translation-paragraph:t4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:5"
+              ],
+              "start": 188,
+              "end": 195,
+              "quote": "精简你的收件箱"
+            },
+            {
+              "paragraphId": "seven-translation-paragraph:t5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:6"
+              ],
+              "start": 197,
+              "end": 289,
+              "quote": "电子邮箱的收件箱往往是数字杂乱的滋生地。创建文件夹来整理重要邮件，并清除过时的信息。这样做不仅能减少视觉上的杂乱，还能提高你处理重要往来信件的效率。这样你就能享受毫无压力的邮件体验了。"
+            },
+            {
+              "paragraphId": "seven-translation-paragraph:t6",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:7"
+              ],
+              "start": 291,
+              "end": 301,
+              "quote": "有意识地使用社交媒体"
+            },
+            {
+              "paragraphId": "seven-translation-paragraph:t7",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:8"
+              ],
+              "start": 303,
+              "end": 399,
+              "quote": "全面检查你的社交媒体账户，取消关注那些你不再感兴趣的账户。考虑为社交媒体的使用设定界限，比如限制查看动态的时间。这种做法能让你与社交媒体建立更健康的关系，既享受它带来的好处，又不受其负面影响。"
+            },
+            {
+              "paragraphId": "seven-translation-paragraph:t8",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:9"
+              ],
+              "start": 401,
+              "end": 411,
+              "quote": "反思你的数字消费习惯"
+            },
+            {
+              "paragraphId": "seven-translation-paragraph:t9",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:10"
+              ],
+              "start": 413,
+              "end": 520,
+              "quote": "在清理数字空间的同时，花点时间反思一下自己的习惯。想一想你的线上活动对心理健康有什么影响。是否有某些特定的数字习惯给你带来压力或让你分心？利用这番反思做出明智的决定，调整你的数字习惯，过上更健康、更平衡的数字生活。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "seven-completed:1",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:1",
+            "text": "In the age of digital saturation (饱和), the need for a digital clean has become more pressing than ever. Like physical space, our digital space also requires a timely clean. The following guide aims to provide you with some practical and effective strategies."
+          },
+          {
+            "textId": "seven-completed:4",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:4",
+            "text": "accounts. Understand your digital footprint and identify areas that require attention. This assessment sets the stage for a targeted and efficient clean. Besides, it ensures that nothing is left unexamined."
+          },
+          {
+            "textId": "seven-completed:6",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:6",
+            "text": "The email inbox is often a breeding ground (滋生地) for digital mess. Create folders to organize important emails and cancel outdated messages. It not only reduces visual mess but also enhances your efficiency in managing critical communications. Then you can enjoy a stress-free email experience."
+          },
+          {
+            "textId": "seven-completed:7",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:7",
+            "text": "Use social media mindfully."
+          },
+          {
+            "textId": "seven-completed:10",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:10",
+            "text": "As you clean your digital space, take a moment to reflect on your habits. Consider the impact of your online activities on your mental well-being. Are there specific digital habits that contribute to stress or distraction? Use this reflection to make informed decisions about adjusting your digital habits for a healthier and more balanced digital lifestyle."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "seven-evidence:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:1",
+                "start": 39,
+                "end": 102,
+                "quote": "the need for a digital clean has become more pressing than ever"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t1",
+                "start": 11,
+                "end": 31,
+                "quote": "进行一次数字清理比以往任何时候都更加迫切"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:4",
+                "start": 94,
+                "end": 146,
+                "quote": "Besides, it ensures that nothing is left unexamined."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t3",
+                "start": 75,
+                "end": 97,
+                "quote": "此外，它还能确保不留下任何没有检查过的地方。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:6",
+                "start": 141,
+                "end": 243,
+                "quote": "It not only reduces visual mess but also enhances your efficiency in managing critical communications."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t5",
+                "start": 42,
+                "end": 74,
+                "quote": "这样做不仅能减少视觉上的杂乱，还能提高你处理重要往来信件的效率。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:8",
+                "start": 105,
+                "end": 205,
+                "quote": "Consider setting boundaries for your social media usage, such as limiting time for checking updates."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t7",
+                "start": 29,
+                "end": 56,
+                "quote": "考虑为社交媒体的使用设定界限，比如限制查看动态的时间。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-evidence:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:10",
+                "start": 81,
+                "end": 156,
+                "quote": "Are there specific digital habits that contribute to stress or distraction?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t9",
+                "start": 45,
+                "end": 69,
+                "quote": "是否有某些特定的数字习惯给你带来压力或让你分心？"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:36"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:36",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed:1",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:1",
+                "start": 104,
+                "end": 172,
+                "quote": "Like physical space, our digital space also requires a timely clean."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t1",
+                "start": 32,
+                "end": 55,
+                "quote": "和物理空间一样，我们的数字空间也需要及时清理。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:37"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:37",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed:4",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:4",
+                "start": 87,
+                "end": 153,
+                "quote": "This assessment sets the stage for a targeted and efficient clean."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t3",
+                "start": 54,
+                "end": 75,
+                "quote": "这一评估为有针对性、高效率的清理打好基础。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:38"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:38",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed:6",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:6",
+                "start": 244,
+                "end": 294,
+                "quote": "Then you can enjoy a stress-free email experience."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t5",
+                "start": 74,
+                "end": 92,
+                "quote": "这样你就能享受毫无压力的邮件体验了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:39"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:39",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed:7",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:7",
+                "start": 0,
+                "end": 27,
+                "quote": "Use social media mindfully."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t6",
+                "start": 0,
+                "end": 10,
+                "quote": "有意识地使用社交媒体"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-insertion:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:40"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:40",
+            "sourceRanges": [
+              {
+                "textId": "seven-completed:10",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:10",
+                "start": 74,
+                "end": 146,
+                "quote": "Consider the impact of your online activities on your mental well-being."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t9",
+                "start": 25,
+                "end": 45,
+                "quote": "想一想你的线上活动对心理健康有什么影响。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-structure:inbox-benefits",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:38"
+            ],
+            "selectedSentenceId": "seven-sentence:inbox-benefits",
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:6",
+                "start": 141,
+                "end": 243,
+                "quote": "It not only reduces visual mess but also enhances your efficiency in managing critical communications."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t5",
+                "start": 42,
+                "end": 74,
+                "quote": "这样做不仅能减少视觉上的杂乱，还能提高你处理重要往来信件的效率。"
+              }
+            ]
+          },
+          {
+            "annotationId": "seven-structure:healthier-relationship",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:39"
+            ],
+            "selectedSentenceId": "seven-sentence:healthier-relationship",
+            "sourceRanges": [
+              {
+                "textId": "seven-source",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:8",
+                "start": 206,
+                "end": 335,
+                "quote": "This approach develops a healthier relationship with social media, allowing you to enjoy its benefits without negative influence."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "seven-translation",
+                "paragraphId": "seven-translation-paragraph:t7",
+                "start": 56,
+                "end": 96,
+                "quote": "这种做法能让你与社交媒体建立更健康的关系，既享受它带来的好处，又不受其负面影响。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:36": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "digital saturation",
+        "the need for a digital clean",
+        "more pressing than ever",
+        "practical and effective strategies"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:1",
+        "beforeQuote": "In the age of digital saturation (饱和), the need for a digital clean has become more pressing than ever.",
+        "afterQuote": "The following guide aims to provide you with some practical and effective strategies."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "digital clean",
+          "signalSide": "context-before",
+          "targetText": "a timely clean",
+          "relation": "空前提出数字清理很迫切，选项用 a timely clean 接住同一个 clean。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a timely clean",
+          "signalSide": "option",
+          "targetText": "the need for a digital clean",
+          "relation": "a timely clean 复现空前的 clean，并用 timely 呼应 more pressing。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "our digital space",
+          "signalSide": "option",
+          "targetText": "digital saturation",
+          "relation": "数字空间正是空前说已经饱和的地方。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "strategies",
+          "signalSide": "context-after",
+          "targetText": "requires a timely clean",
+          "relation": "空后要介绍的策略就是怎样完成这次清理。"
+        }
+      ],
+      "lock": [
+        "digital clean",
+        "a timely clean"
+      ],
+      "find": {
+        "text": "空前 \"digital clean\" 说清理很迫切，七个选项里只有 F 的 \"a timely clean\" 接着谈清理，还用 Like physical space 打比方说明为什么要清。",
+        "quotes": [
+          "digital clean",
+          "a timely clean",
+          "Like physical space"
+        ]
+      },
+      "explain": "空前只说清理很迫切，这句拿实物空间作比，说明数字空间同样要及时收拾；有了这个道理，空后 The following guide 才顺势转到具体办法。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "the need for a digital clean / more pressing than ever",
+            "optionSide": "also requires a timely clean",
+            "relation": "空前说清理迫切，选项说数字空间同样需要及时清理，两边说的是同一件事。"
+          },
+          {
+            "contextSide": "practical and effective strategies",
+            "optionSide": "our digital space",
+            "relation": "先说明数字空间要清理，后面的策略才有对象。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前只说清理很迫切，这句拿实物空间作比，说明数字空间同样要及时收拾；有了这个道理，空后 The following guide 才顺势转到具体办法。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "选项开头 \"Our digital devices\" 贴着第 36 题空前的数字话题，像在交代背景。但空前已经在说 \"the need for a digital clean\"，空后 \"The following guide\" 要介绍清理办法；B 只说设备离不开，没说为什么要清理，前后都接不上。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:37": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "evaluating the various aspects",
+        "digital footprint",
+        "identify areas that require attention",
+        "nothing is left unexamined"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:4",
+        "headingAnchor": "Assess your digital landscape",
+        "beforeQuote": "Understand your digital footprint and identify areas that require attention.",
+        "afterQuote": "Besides, it ensures that nothing is left unexamined."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Besides",
+          "signalSide": "context-after",
+          "targetText": "sets the stage for a targeted and efficient clean",
+          "relation": "Besides 表示再补一点，说明空里已经先说了评估的一个好处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "it",
+          "signalSide": "context-after",
+          "targetText": "This assessment",
+          "relation": "空后 it ensures 的 it 指的就是选项里的 This assessment。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This assessment",
+          "signalSide": "option",
+          "targetText": "Understand your digital footprint and identify areas that require attention",
+          "relation": "This assessment 把空前摸清足迹、找出问题的动作概括成“这次评估”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "identify areas that require attention",
+          "signalSide": "context-before",
+          "targetText": "targeted",
+          "relation": "先找出要处理的地方，清理才能 targeted（有针对性）。"
+        }
+      ],
+      "lock": [
+        "This assessment",
+        "Besides, it"
+      ],
+      "find": {
+        "text": "先看空后 \"Besides, it\"：Besides 要前面先有一个好处，it 要有单数的先行词；E 的 \"This assessment\" 概括空前的评估动作，又说出第一个好处。",
+        "quotes": [
+          "Besides, it",
+          "This assessment"
+        ]
+      },
+      "explain": "空前教人摸清数字足迹、找出问题，这句转而说这样做的用处：后面的清理能对准问题、省时省力；空后再用“不留死角”补上第二个用处，整段从做法讲到好处。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Understand your digital footprint and identify areas that require attention",
+            "optionSide": "This assessment",
+            "relation": "选项把空前的两个动作概括为一次评估。"
+          },
+          {
+            "contextSide": "Besides, it ensures that nothing is left unexamined",
+            "optionSide": "sets the stage for a targeted and efficient clean",
+            "relation": "选项给出第一个好处，空后用 Besides 补第二个好处。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "空前教人摸清数字足迹、找出问题，这句转而说这样做的用处：后面的清理能对准问题、省时省力；空后再用“不留死角”补上第二个用处，整段从做法讲到好处。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:38": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:38",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "The email inbox",
+        "organize important emails",
+        "reduces visual mess",
+        "enhances your efficiency"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:6",
+        "headingAnchor": "Simplify your inbox",
+        "beforeQuote": "Create folders to organize important emails and cancel outdated messages. It not only reduces visual mess but also enhances your efficiency in managing critical communications.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Then",
+          "signalSide": "option",
+          "targetText": "It not only reduces visual mess but also enhances your efficiency",
+          "relation": "Then 承接前面的两项好处，引出整理邮箱的最终结果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "email experience",
+          "signalSide": "option",
+          "targetText": "organize important emails",
+          "relation": "选项的 email 扣住本段一直在讲的邮件。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "reduces visual mess",
+          "signalSide": "context-before",
+          "targetText": "stress-free",
+          "relation": "杂乱少了、效率高了，用邮件才不再有压力。"
+        }
+      ],
+      "lock": [
+        "emails",
+        "reduces visual mess",
+        "Then"
+      ],
+      "find": {
+        "text": "空在段尾，看空前：整理 \"emails\" 后说了 \"reduces visual mess\" 等两点好处，D 用 \"Then\" 推出结果，邮件话题也对得上。",
+        "quotes": [
+          "emails",
+          "reduces visual mess",
+          "Then"
+        ]
+      },
+      "explain": "本段先说收件箱容易乱，再给建文件夹、清旧信息的办法，接着列两点好处；这句在段尾把好处落到读者的感受上：用邮件不再心烦，给这一节收尾。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "reduces visual mess / enhances your efficiency",
+            "optionSide": "Then you can enjoy a stress-free email experience",
+            "relation": "两项好处叠加，自然得出用邮件没有压力的结果。"
+          },
+          {
+            "contextSide": "organize important emails",
+            "optionSide": "email experience",
+            "relation": "同在说邮件，话题一致。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "本段先说收件箱容易乱，再给建文件夹、清旧信息的办法，接着列两点好处；这句在段尾把好处落到读者的感受上：用邮件不再心烦，给这一节收尾。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:39": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "social media accounts",
+        "setting boundaries",
+        "limiting time for checking updates",
+        "a healthier relationship with social media"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:7",
+        "beforeQuote": "",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "social media usage",
+          "signalSide": "context-after",
+          "targetText": "Use social media",
+          "relation": "下段讲社交媒体怎么用，选项的 Use social media 是同一话题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "setting boundaries",
+          "signalSide": "context-after",
+          "targetText": "mindfully",
+          "relation": "给使用设界限、限时间，就是有意识、有节制地用。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "mindfully",
+          "signalSide": "option",
+          "targetText": "setting boundaries / limiting time for checking updates",
+          "relation": "mindfully 概括下段设界限、限时间的具体做法。"
+        }
+      ],
+      "lock": [
+        "social media usage",
+        "mindfully"
+      ],
+      "find": {
+        "text": "先跳过，做完后面几段再回来。下段 \"setting boundaries for your social media usage\" 讲节制使用，A 的 \"mindfully\" 正概括这一点。",
+        "quotes": [
+          "setting boundaries for your social media usage",
+          "mindfully"
+        ]
+      },
+      "explain": "前面两个小标题都是祈使句，各管一类清理对象；这句同样用祈使句，把下面一段的取消关注、限定时间、建立健康关系统一成“有意识地用”，开启社交媒体这一节。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Have a thorough review of your social media accounts",
+            "optionSide": "Use social media",
+            "relation": "本节对象是社交媒体。"
+          },
+          {
+            "contextSide": "setting boundaries / a healthier relationship with social media",
+            "optionSide": "mindfully",
+            "relation": "设限、健康关系都是有意识地使用的具体表现。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "前面两个小标题都是祈使句，各管一类清理对象；这句同样用祈使句，把下面一段的取消关注、限定时间、建立健康关系统一成“有意识地用”，开启社交媒体这一节。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "选项的 review 和 accounts 复现第 39 题下段第一句，又是祈使句，像个小标题。但下段接着讲 \"setting boundaries for your social media usage\"，落在 \"a healthier relationship with social media\"，讲的是怎样用社交媒体，一句没提隐私设置，概括不了整段。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:40": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "reflect on your habits",
+        "specific digital habits",
+        "stress or distraction",
+        "a healthier and more balanced digital lifestyle"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:seven-choices:10",
+        "headingAnchor": "Reflect on digital consumption habits",
+        "beforeQuote": "As you clean your digital space, take a moment to reflect on your habits.",
+        "afterQuote": "Are there specific digital habits that contribute to stress or distraction?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "mental well-being",
+          "signalSide": "option",
+          "targetText": "stress or distraction",
+          "relation": "选项说心理健康，空后问的压力、分心正是心理健康受到的影响。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "stress or distraction",
+          "signalSide": "context-after",
+          "targetText": "the impact of your online activities on your mental well-being",
+          "relation": "空后用具体问题追问影响，承接选项的 impact。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "reflect on your habits",
+          "signalSide": "context-before",
+          "targetText": "Consider the impact",
+          "relation": "空前叫人反思习惯，选项给出反思的角度：想想影响。"
+        }
+      ],
+      "lock": [
+        "mental well-being",
+        "stress or distraction"
+      ],
+      "find": {
+        "text": "先看空后 \"stress or distraction\"：问习惯带来什么不良影响，G 的 \"mental well-being\" 正好先把影响落到心理上，空前 \"reflect on your habits\" 也有了具体方向。",
+        "quotes": [
+          "stress or distraction",
+          "mental well-being",
+          "reflect on your habits"
+        ]
+      },
+      "explain": "空前只叫人反思习惯，没说从哪儿想；这句给出第一个角度：看看上网对心情的影响，空后再用问句把影响具体到压力和分心，最后落到调整习惯。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "stress or distraction",
+            "optionSide": "mental well-being",
+            "relation": "压力和分心都属于心理状态。"
+          },
+          {
+            "contextSide": "reflect on your habits",
+            "optionSide": "Consider the impact of your online activities",
+            "relation": "反思习惯具体化为考虑上网活动的影响。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "空前只叫人反思习惯，没说从哪儿想；这句给出第一个角度：看看上网对心情的影响，空后再用问句把影响具体到压力和分心，最后落到调整习惯。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

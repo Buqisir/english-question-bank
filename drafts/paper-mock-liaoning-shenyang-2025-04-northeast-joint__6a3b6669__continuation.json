@@ -1,0 +1,210 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Thankfully, the main power was switched off and the ambulance arrived soon. Two doctors rushed out with a stretcher. One checked the boy’s breathing. He was still alive! They lifted him carefully into the ambulance, and it sped off down the narrow street. The gentleman, wet from head to toe, leaned on his bamboo stick and let out a long breath. My mother and I picked up the small bottles of milk one by one. “We’ll keep them for him,” she said softly. That night I could hardly sleep, wondering whether the boy would make it.\n\nParagraph 2: Early the next morning, I learned about the updates from the hospital. A nurse told me that the boy had woken up and was out of danger. Apart from some burns on his arm, he was fine. My mother smiled with relief. That afternoon, we went to see him with the milk bottles. The boy was sitting up in bed, pale but smiling. He told us that he delivered milk every day to help his family. When I handed him the bottles, his eyes lit up. “Not one is broken!” he said. Before we left, he asked us to thank the man with the bamboo stick and everyone who had shouted for help. On our way home, we passed the supermarket. Workers were fixing the broken wire under the bright sun.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "“我”和妈妈在超市门口躲雨，目睹一个约 15 岁的男孩触电倒地；“我”打电话求救，一位四十出头的男子用包了绝缘材料的竹竿挑开电线，人群在旁边议论、着急。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”回忆，一般过去时。句子以中短句为主，动作写得快而具体；人物的话只有人群里的两句短直接引语，其余都是叙述。续写也用“我”的眼睛看现场，以叙述为主，最多在关键处留一两句短对话。",
+          "evidence": [
+            "“The boy could be a milkman,” a lady in the crowd said"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在“我”一边盼着断电、救护车快来，一边为男孩祈祷。男孩能不能活下来，是续写要解决的问题。",
+          "evidence": [
+            "I desperately wished for an immediate power shutdown"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "目击者，打电话求救的人",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "遇事不慌，先断电、再叫救护车，分得清轻重",
+              "evidence": "I quickly called the power company and asked them to cut the main power"
+            },
+            {
+              "label": "此刻",
+              "text": "帮不上更多，只能干着急、为男孩祈祷",
+              "evidence": "I kept praying for him."
+            }
+          ]
+        },
+        {
+          "name": "男孩",
+          "role": "约 15 岁，触电倒在街上，可能是送奶的",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "触电倒地，生命垂危",
+              "evidence": "fighting for his life"
+            },
+            {
+              "label": "表现",
+              "text": "身边散落着小奶瓶，人群据此猜他是送奶工",
+              "evidence": "pointing to the small bottles of milk on the floor"
+            }
+          ]
+        },
+        {
+          "name": "中年男子",
+          "role": "四十出头，用竹竿挑开电线的人",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "冷静、有办法，先做好绝缘才动手",
+              "evidence": "swiftly wrapped one end with insulation (绝缘) material"
+            }
+          ]
+        },
+        {
+          "name": "妈妈",
+          "role": "和“我”一起在超市门口躲雨",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "和邻居一起大声呼救",
+              "evidence": "my mother and the neighbors shouted for help loudly"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "the small bottles of milk on the floor",
+          "use": "第 1 段让妈妈和“我”把散落的奶瓶捡起来替男孩收着；第 2 段带着奶瓶去医院还给他，奶瓶成了串起两段的线。"
+        },
+        {
+          "sourceQuote": "a long bamboo stick",
+          "use": "第 1 段写救人的男子拄着竹竿松一口气；第 2 段男孩托“我们”感谢“拿竹竿的那个人”，回收这位没留名字的救命人。"
+        },
+        {
+          "sourceQuote": "a broken electric wire from the supermarket",
+          "use": "第 2 段结尾回家路过超市，看见工人在修那根断掉的电线，危险的源头得到处理，故事收在一个具体画面上。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "救护车把男孩送走，“我”和妈妈替他收好奶瓶、整夜担心；第二天得知他脱险，带着奶瓶去看他，替他转达对救命人的感谢。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "接着断电、救护车到达往下写：男孩被救护车接走。第二段首句说第二天早上才从医院得到消息，所以第一段结束时“我”还不知道男孩是否脱险，不能提前写他醒来或康复。",
+          "draft": "医生确认男孩还有呼吸，把他抬上救护车开走；救人的男子拄着竹竿松了口气；妈妈和“我”捡起奶瓶替他收着；当晚“我”担心得睡不着。",
+          "bridgeQuote": "I learned about the updates from the hospital",
+          "bridge": "男孩被送走以后到底怎么样了？"
+        },
+        {
+          "paragraph": 2,
+          "must": "写“我”从医院得到的消息，交代男孩的情况，收住他能不能活下来这个问题。",
+          "draft": "护士说男孩已醒、脱离危险，只有手臂烧伤；下午“我”和妈妈带着奶瓶去看他，他说自己每天送奶补贴家用，看到奶瓶完好很高兴，托我们感谢拿竹竿的人和呼救的人；回家路过超市，工人正在修断掉的电线。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Thankfully, the main power was switched off and the ambulance arrived soon. Two doctors rushed out with a stretcher. One checked the boy’s breathing. He was still alive! They lifted him carefully into the ambulance, and it sped off down the narrow street. The gentleman, wet from head to toe, leaned on his bamboo stick and let out a long breath. My mother and I picked up the small bottles of milk one by one. “We’ll keep them for him,” she said softly. That night I could hardly sleep, wondering whether the boy would make it.\n\nParagraph 2: Early the next morning, I learned about the updates from the hospital. A nurse told me that the boy had woken up and was out of danger. Apart from some burns on his arm, he was fine. My mother smiled with relief. That afternoon, we went to see him with the milk bottles. The boy was sitting up in bed, pale but smiling. He told us that he delivered milk every day to help his family. When I handed him the bottles, his eyes lit up. “Not one is broken!” he said. Before we left, he asked us to thank the man with the bamboo stick and everyone who had shouted for help. On our way home, we passed the supermarket. Workers were fixing the broken wire under the bright sun.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "把男孩从街上交到医生手里，并留下“他能不能挺过来”的悬念",
+          "items": [
+            {
+              "quote": "One checked the boy’s breathing. He was still alive!",
+              "explain": "先用医生的一个动作回答读者最急的问题：还活着。这只说明暂时有救，没有写他脱险，把确切结果留给第二段的医院消息。"
+            },
+            {
+              "quote": "The gentleman, wet from head to toe, leaned on his bamboo stick and let out a long breath.",
+              "explain": "不用新人物，回到原文冒险救人的男子身上。“浑身湿透、拄着竹竿、长出一口气”三个动作写出他刚才有多紧张，比直接说他很累更具体。"
+            },
+            {
+              "quote": "My mother and I picked up the small bottles of milk one by one.",
+              "explain": "原文里人群靠地上的奶瓶猜男孩是送奶的，这里让“我们”把奶瓶捡起来，为第二段去医院埋下由头。"
+            },
+            {
+              "quote": "That night I could hardly sleep, wondering whether the boy would make it.",
+              "explain": "用睡不着这个具体表现写担心，同时把“他能活下来吗”的问题带到第二天早上，正好接上第二段首句。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "用医院的消息收住悬念，再用奶瓶和电线把原文的线索一一收回",
+          "items": [
+            {
+              "quote": "A nurse told me that the boy had woken up and was out of danger.",
+              "explain": "紧跟段首句交代“消息”的内容，用转述而不是长对话，和原文以叙述为主的写法一致。"
+            },
+            {
+              "quote": "He told us that he delivered milk every day to help his family.",
+              "explain": "证实了原文人群“他可能是送奶的”的猜测，让男孩冒雨出门有了原因，人物更真实。这是本文的选择，不是题目规定。"
+            },
+            {
+              "quote": "he asked us to thank the man with the bamboo stick and everyone who had shouted for help",
+              "explain": "男孩的感谢落到原文真正出了力的人身上：拿竹竿的男子和呼救的人，不另造英雄。"
+            },
+            {
+              "quote": "Workers were fixing the broken wire under the bright sun.",
+              "explain": "结尾回到事故的源头：那根断掉的电线正在修。雨停、电线修好，用一个画面收住全文，不喊口号。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "let out a long breath",
+          "function": "写紧张过后松一口气，用在救人者身上，比 he felt relaxed 更能让读者看到人物。"
+        },
+        {
+          "expression": "could hardly sleep, wondering whether …",
+          "function": "用失眠写担心，wondering 引出担心的内容，也把悬念带到下一段。"
+        },
+        {
+          "expression": "his eyes lit up",
+          "function": "写男孩看到奶瓶时的高兴，用一个面部变化代替 he was very happy。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就写男孩醒过来、出院或者当面道谢",
+          "why": "第二段首句说第二天早上才从医院得到消息，第一段把结果写完，第二段就没有消息可得了。"
+        },
+        {
+          "pitfall": "让男孩的父母、记者等新人物出场来推动情节或拔高主题",
+          "why": "原文的人物是“我”、妈妈、男孩和拿竹竿的男子；新人物会抢走原文人物的戏，结局也容易变成天降的表扬。"
+        },
+        {
+          "pitfall": "满篇对话，或结尾写“这件事让我明白了人间有真情”之类的感悟",
+          "why": "原文只有两句很短的直接引语，续写也应以叙述为主；空泛的道理放在哪个故事后面都成立，不如落在奶瓶、电线这样的具体事物上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Thankfully, the main power was switched off and the ambulance arrived soon. Two doctors jumped out, splashed through the water and knelt beside the boy. One pressed two fingers to his neck, then looked up. “He’s breathing,” he said. A wave of relief swept through the crowd. The doctors slid the boy onto a stretcher, careful of his burnt arm, and carried him into the ambulance. Siren wailing, it raced off down the narrow street. Only then did I realize that I was still holding my phone so tightly that my fingers hurt. The gentleman, soaked to the skin, leaned on his bamboo stick and closed his eyes for a moment. Meanwhile, my mother gathered the small milk bottles scattered on the wet ground and wiped each one with her sleeve. “He’ll want these back,” she whispered. All night long, I tossed and turned, the boy’s pale face flashing before my eyes.\n\nParagraph 2: Early the next morning, I learned about the updates from the hospital. When I called, a nurse told me that the boy had come round at midnight and was out of danger. Apart from a few burns, he would be fine. I hung up and hugged my mother, who had clearly not slept either. That afternoon, we visited him with the milk bottles. Propped up on his pillow, the boy managed a shy smile. He explained that he delivered milk every morning to help his family pay the bills. When my mother placed the bottles on his table, he counted them twice. “All of them are here,” he murmured, his voice shaking. Before we left, he begged us to thank the man with the bamboo stick. On our way home, we passed the supermarket, where workers were fixing the broken wire under a clear blue sky.",
+      "beyondStandard": [
+        {
+          "quote": "One pressed two fingers to his neck, then looked up. “He’s breathing,” he said.",
+          "explain": "标准版只说医生检查呼吸；这里写出按颈动脉、抬头这两个动作，再用一句三个词的短引语宣布结果，现场感更强，对话量仍和原文一样少。"
+        },
+        {
+          "quote": "Only then did I realize that I was still holding my phone so tightly that my fingers hurt.",
+          "explain": "回扣原文“我”打电话求救的动作：手机一直攥在手里，攥得手指发疼。用身体感觉写出“我”刚才有多紧张，比直接说 I was nervous 地道。"
+        },
+        {
+          "quote": "When my mother placed the bottles on his table, he counted them twice.",
+          "explain": "“数了两遍”这个小动作写出男孩对这份工作的在意，比标准版的 his eyes lit up 多了一层人物性格。"
+        }
+      ]
+    }
+  }
+}

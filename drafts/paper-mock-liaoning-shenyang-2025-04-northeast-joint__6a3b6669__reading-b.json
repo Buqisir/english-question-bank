@@ -1,0 +1,752 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-liaoning-shenyang-2025-04-northeast-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b": {
+      "overview": "葡萄牙会计师、母亲斯内哈在教孩子理财时发现缺少合适的工具和资源，于是创办儿童财商教育项目 Fin Free Kid。项目资源全面、效果显著，广受好评，并计划进一步扩展。",
+      "fullTranslationZh": "每个伟大的想法都始于一丝顿悟的火花——对葡萄牙的会计师、一位母亲斯内哈·纳尔萨里亚来说，这火花来自她自己的家。\n财商素养不再是成年人专属的技能，它正成为儿童教育的基本组成部分。但事实证明，教孩子金融概念比斯内哈·纳尔萨里亚预想的要难。没有吸引人的工具，没有可靠的资源，也没有清晰的方法把这些基本技能介绍给小孩子。知识与应用之间的这种脱节深深触动了她，Fin Free Kid 的想法就在那时诞生了。\nFin Free Kid 是一个创新项目，它通过有吸引力的图书、学习卡片、手工套装、海报和沉浸式课程，让孩子掌握基本的理财技能。它提供全面的学习资源，涵盖财商素养的各个方面。这些资源不只是为了教学——更是为了让孩子能够独立思考、做出明智的决定，并养成受益终生的习惯。\n该项目注重质量和客户满意度，凭借出色的服务和对小学习者的深刻影响赢得了广泛赞誉。家长们反映，孩子使用 Fin Free Kid 的产品后，态度和行为有了明显转变。许多孩子养成了存钱的习惯，学会了更谨慎地花钱。《经济时报》的一篇专题报道称 Fin Free Kid 是“儿童财商教育的先驱，填补了一个关键学习领域的空白”。\n随着人气不断上升，又赢得了葡萄牙各地家长的信任，Fin Free Kid 计划为年龄更大的孩子推出进阶资源，并扩大与学校的合作，把财商素养融入课程。“我们的使命是确保每个孩子都拥有应对复杂金融世界的工具和知识，”斯内哈·纳尔萨里亚说，“到目前为止我们在孩子身上看到的变化只是一个开始。我们正携手培养一代又一代具备财商素养的人。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2",
+          "sourceText": "This disconnection between knowledge and application struck her deeply and that was when the idea for Fin Free Kid was born.",
+          "displayText": "This disconnection between knowledge and application struck her deeply and that was when the idea for Fin Free Kid was born.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:24"
+          ],
+          "translationZh": "知识与应用之间的这种脱节深深触动了她，Fin Free Kid 的想法就在那时诞生了。",
+          "analysisZh": "这是 and 连接的两个分句。前一分句主干是 This disconnection struck her（这种脱节触动了她），between knowledge and application 修饰 disconnection，说明是懂知识却用不上；This 回指前一句的三个 no。后一分句 that was when ... 是“那就是……的时候”，when 引导表语从句，说明想法就在这一刻诞生。两句连起来是“遇到困难 → 被触动 → 产生想法”的因果链。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "This disconnection"
+            },
+            {
+              "start": 53,
+              "end": 70,
+              "quote": "struck her deeply"
+            },
+            {
+              "start": 75,
+              "end": 88,
+              "quote": "that was when"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3",
+          "sourceText": "The resources aren’t just about teaching – they’re about empowering kids to think independently, make informed decisions, and develop habits that will serve them for life.",
+          "displayText": "The resources aren’t just about teaching – they’re about empowering kids to think independently, make informed decisions, and develop habits that will serve them for life.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:25"
+          ],
+          "translationZh": "这些资源不只是为了教学——更是为了让孩子能够独立思考、做出明智的决定，并养成受益终生的习惯。",
+          "analysisZh": "句子用 aren’t just about ... – they’re about ...（不只是……而是……）形成递进，重点在破折号后面。empower sb. to do 表示使某人能够做某事，后面并列三个动作：think independently、make informed decisions、develop habits；that will serve them for life 是定语从句，修饰 habits。三个动作合起来，说明孩子得到的不是单一知识，而是多方面的能力。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 40,
+              "quote": "aren’t just about teaching"
+            },
+            {
+              "start": 57,
+              "end": 75,
+              "quote": "empowering kids to"
+            },
+            {
+              "start": 141,
+              "end": 170,
+              "quote": "that will serve them for life"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:1"
+              ],
+              "start": 0,
+              "end": 55,
+              "quote": "每个伟大的想法都始于一丝顿悟的火花——对葡萄牙的会计师、一位母亲斯内哈·纳尔萨里亚来说，这火花来自她自己的家。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2"
+              ],
+              "start": 56,
+              "end": 199,
+              "quote": "财商素养不再是成年人专属的技能，它正成为儿童教育的基本组成部分。但事实证明，教孩子金融概念比斯内哈·纳尔萨里亚预想的要难。没有吸引人的工具，没有可靠的资源，也没有清晰的方法把这些基本技能介绍给小孩子。知识与应用之间的这种脱节深深触动了她，Fin Free Kid 的想法就在那时诞生了。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3"
+              ],
+              "start": 200,
+              "end": 333,
+              "quote": "Fin Free Kid 是一个创新项目，它通过有吸引力的图书、学习卡片、手工套装、海报和沉浸式课程，让孩子掌握基本的理财技能。它提供全面的学习资源，涵盖财商素养的各个方面。这些资源不只是为了教学——更是为了让孩子能够独立思考、做出明智的决定，并养成受益终生的习惯。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:4"
+              ],
+              "start": 334,
+              "end": 494,
+              "quote": "该项目注重质量和客户满意度，凭借出色的服务和对小学习者的深刻影响赢得了广泛赞誉。家长们反映，孩子使用 Fin Free Kid 的产品后，态度和行为有了明显转变。许多孩子养成了存钱的习惯，学会了更谨慎地花钱。《经济时报》的一篇专题报道称 Fin Free Kid 是“儿童财商教育的先驱，填补了一个关键学习领域的空白”。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5"
+              ],
+              "start": 495,
+              "end": 659,
+              "quote": "随着人气不断上升，又赢得了葡萄牙各地家长的信任，Fin Free Kid 计划为年龄更大的孩子推出进阶资源，并扩大与学校的合作，把财商素养融入课程。“我们的使命是确保每个孩子都拥有应对复杂金融世界的工具和知识，”斯内哈·纳尔萨里亚说，“到目前为止我们在孩子身上看到的变化只是一个开始。我们正携手培养一代又一代具备财商素养的人。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-b-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:24"
+            ],
+            "selectedSentenceId": "sentence-reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2",
+                "start": 350,
+                "end": 474,
+                "quote": "This disconnection between knowledge and application struck her deeply and that was when the idea for Fin Free Kid was born."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 100,
+                "end": 143,
+                "quote": "知识与应用之间的这种脱节深深触动了她，Fin Free Kid 的想法就在那时诞生了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:25"
+            ],
+            "selectedSentenceId": "sentence-reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3",
+                "start": 285,
+                "end": 456,
+                "quote": "The resources aren’t just about teaching – they’re about empowering kids to think independently, make informed decisions, and develop habits that will serve them for life."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 87,
+                "end": 133,
+                "quote": "这些资源不只是为了教学——更是为了让孩子能够独立思考、做出明智的决定，并养成受益终生的习惯。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2",
+                "start": 227,
+                "end": 349,
+                "quote": "There were no engaging tools, no reliable resources, and no clear way to introduce these essential skills to a young mind."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 61,
+                "end": 100,
+                "quote": "没有吸引人的工具，没有可靠的资源，也没有清晰的方法把这些基本技能介绍给小孩子。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3",
+                "start": 189,
+                "end": 284,
+                "quote": "It offers comprehensive learning resources which cover different aspects of financial literacy."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3",
+                "start": 328,
+                "end": 455,
+                "quote": "they’re about empowering kids to think independently, make informed decisions, and develop habits that will serve them for life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 64,
+                "end": 87,
+                "quote": "它提供全面的学习资源，涵盖财商素养的各个方面。"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 104,
+                "end": 132,
+                "quote": "让孩子能够独立思考、做出明智的决定，并养成受益终生的习惯"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:4",
+                "start": 403,
+                "end": 553,
+                "quote": "A feature in The Economic Times described Fin Free Kid as “a pioneer in financial education for kids, bridging the gap in a crucial area of learning.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 104,
+                "end": 160,
+                "quote": "《经济时报》的一篇专题报道称 Fin Free Kid 是“儿童财商教育的先驱，填补了一个关键学习领域的空白”。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5",
+                "start": 0,
+                "end": 68,
+                "quote": "With its growing popularity and the trust of parents across Portugal"
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5",
+                "start": 377,
+                "end": 442,
+                "quote": "The changes we’ve seen in children so far are just the beginning."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 0,
+                "end": 23,
+                "quote": "随着人气不断上升，又赢得了葡萄牙各地家长的信任"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 118,
+                "end": 142,
+                "quote": "到目前为止我们在孩子身上看到的变化只是一个开始。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章按“创办缘起 → 项目内容 → 成效与评价 → 未来计划”展开，介绍斯内哈创办儿童财商教育项目 Fin Free Kid 的经过。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:1",
+            "summary": "斯内哈是葡萄牙的会计师和母亲，她的灵感来自自己家里。",
+            "function": "引出人物和话题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2",
+            "summary": "她教孩子金融概念时发现缺少工具、资源和方法，于是萌生创办 Fin Free Kid 的想法。",
+            "function": "交代项目诞生的原因。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3",
+            "summary": "项目用多种材料和课程提供全面的财商资源，培养孩子独立思考、明智决策和良好习惯。",
+            "function": "介绍项目内容和孩子的收获。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:4",
+            "summary": "项目广受好评，孩子的态度和行为明显改变，媒体称其为儿童财商教育的先驱。",
+            "function": "用家长反馈和媒体评价说明成效。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5",
+            "summary": "项目计划为大孩子推出进阶资源、扩大与学校合作，创始人表示这只是开始。",
+            "function": "展望未来，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出促使斯内哈创办 Fin Free Kid 的原因。",
+      "stemTranslationZh": "是什么促使斯内哈创办了 Fin Free Kid？",
+      "locateBy": "stem",
+      "locateFindZh": "This 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "对过度消费的日益担忧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Rising concern about overspending.",
+            "explanation": "原文没说她担心孩子乱花钱；[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:4|make more thoughtful spending choices]]写的是孩子用了产品后的变化，是结果而不是起因。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "缺少获得财商教育的途径。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2",
+              "quote": "There were no engaging tools, no reliable resources, and no clear way to introduce these essential skills to a young mind.",
+              "anchor": "缺工具、缺资源、缺方法"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她作为专业会计师的成功。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "an accountant",
+            "optionText": "accountant",
+            "matchType": "exact",
+            "relationNote": "选项借用[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:1]]的 accountant，可原文只用它交代她的职业身份，没说她事业多成功；触动她的是教孩子时遇到的困难。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:1",
+              "quote": "an accountant and a mom in Portugal",
+              "anchor": "会计师身份"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "孩子们渴望学习金融概念。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "financial concepts",
+            "optionText": "financial concepts",
+            "matchType": "exact",
+            "relationNote": "financial concepts 原样取自[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2]]，但原文说的是她教孩子这些概念比预想的难，没说孩子迫切想学。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2",
+              "quote": "But teaching financial concepts to a child turned out to be harder than Snehha Naarsaria had expected.",
+              "anchor": "教孩子金融概念很难"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "creating",
+          "sourceRole": "stem",
+          "targetText": "This disconnection between knowledge and application struck her deeply and that was when the idea for Fin Free Kid was born.",
+          "relationType": "locationCue",
+          "targetCue": "was born",
+          "sourceZh": "创办",
+          "targetCueZh": "诞生",
+          "answerText": "There were no engaging tools, no reliable resources, and no clear way to introduce these essential skills to a young mind",
+          "bridgeZh": "This disconnection 指她懂财务却没法教给孩子",
+          "note": "题干的“创办”（creating）对应原文的“（想法）诞生”（was born）。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2"
+        },
+        {
+          "sourceText": "Lack of access to financial education",
+          "sourceRole": "correctOption",
+          "targetText": "There were no engaging tools, no reliable resources, and no clear way to introduce these essential skills to a young mind.",
+          "relationType": "paraphrase",
+          "note": "选项是概括：原文连说三个“没有”，没有工具、没有资源、没有方法（no engaging tools, no reliable resources），合起来就是孩子缺少接受财商教育的途径（lack of access），选 B。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:2"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "概括孩子从 Fin Free Kid 的资源中获得了哪方面的提升。",
+      "stemTranslationZh": "孩子们能在哪方面从 Fin Free Kid 中受益？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读资源带给孩子什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "学术理论。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Academic theories.",
+            "explanation": "原文说这些资源不只是教知识（aren’t just about teaching），重在实际理财能力，没提学术理论。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "综合能力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3",
+              "quote": "It offers comprehensive learning resources which cover different aspects of financial literacy.",
+              "anchor": "涵盖各个方面"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3",
+              "quote": "they’re about empowering kids to think independently, make informed decisions, and develop habits that will serve them for life",
+              "anchor": "多种能力"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "阅读技巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "appealing books, flashcards, DIY kits, posters",
+            "sourceEntity": "appealing books",
+            "optionText": "Reading techniques.",
+            "optionEntity": "Reading techniques",
+            "explanation": "图书（books）只是和卡片、海报并列的教学材料，用来教理财，原文没说要提高孩子的阅读技巧。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3",
+              "quote": "appealing books, flashcards, DIY kits, posters",
+              "anchor": "教学材料"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "沟通能力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Communication ability.",
+            "explanation": "原文列出的是独立思考、做决定和养成习惯，都是孩子自己的理财本领，没有一处涉及与人沟通。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "children benefit",
+          "sourceRole": "stem",
+          "targetText": "Fin Free Kid is an innovative initiative that equips children with essential money management skills through appealing books, flashcards, DIY kits, posters, and an immersive (沉浸式的) course.",
+          "relationType": "locationCue",
+          "targetCue": "equips children with",
+          "sourceZh": "孩子受益",
+          "targetCueZh": "让孩子掌握",
+          "answerText": "think independently, make informed decisions, and develop habits that will serve them for life",
+          "bridgeZh": "后文接着说这些资源让孩子学会了哪些本领",
+          "note": "题干的“孩子受益”（children benefit）对应原文“让孩子掌握技能”（equips children with）。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3"
+        },
+        {
+          "sourceText": "Integrative competence",
+          "sourceRole": "correctOption",
+          "targetText": "It offers comprehensive learning resources which cover different aspects of financial literacy.",
+          "relationType": "paraphrase",
+          "note": "选项是概括：先说资源涵盖财商的各个方面（cover different aspects），接着说孩子学会独立思考、明智决策、养成好习惯，几种本领合在一起就是“综合能力”（integrative competence），选 B。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:26": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "quotation"
+      },
+      "questionFocus": "判断作者引用《经济时报》报道的用意。",
+      "stemTranslationZh": "文中为什么提到《经济时报》的一篇专题报道？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了批评传统的财商教育。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "described Fin Free Kid as “a pioneer in financial education for kids",
+            "sourceEntity": "Fin Free Kid",
+            "optionText": "To criticize conventional financial education.",
+            "optionEntity": "conventional financial education",
+            "explanation": "报道评价的对象是 Fin Free Kid，而且是称赞；“填补空白”（bridging the gap）只说明这方面以前缺位，并没有批评传统教育。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:4",
+              "quote": "described Fin Free Kid as “a pioneer in financial education for kids",
+              "anchor": "报道评价 Fin Free Kid"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了说明财商教育的方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "appealing books, flashcards, DIY kits, posters, and an immersive (沉浸式的) course",
+            "sourceEntity": "appealing books, flashcards, DIY kits, posters",
+            "optionText": "To illustrate the means of financial education.",
+            "optionEntity": "the means of financial education",
+            "explanation": "教育方式（图书、卡片、手工套装等）在[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3]]已经列过，报道这句只评价项目的地位，没讲用什么方法教。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:3",
+              "quote": "appealing books, flashcards, DIY kits, posters, and an immersive (沉浸式的) course",
+              "anchor": "教育方式"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了把 Fin Free Kid 和其他项目作比较。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To compare Fin Free Kid with other programs.",
+            "explanation": "报道只称它为“先驱”（a pioneer），全文没出现任何别的财商项目，谈不上比较。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了突出 Fin Free Kid 的开创性作用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:4",
+              "quote": "A feature in The Economic Times described Fin Free Kid as “a pioneer in financial education for kids, bridging the gap in a crucial area of learning.”",
+              "anchor": "儿童财商教育的先驱"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The Economic Times",
+          "sourceRole": "stem",
+          "targetText": "A feature in The Economic Times described Fin Free Kid as “a pioneer in financial education for kids, bridging the gap in a crucial area of learning.”",
+          "relationType": "locationCue",
+          "answerText": "a pioneer in financial education for kids",
+          "note": "题干 The Economic Times 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:4"
+        },
+        {
+          "sourceText": "To highlight Fin Free Kid’s groundbreaking role",
+          "sourceRole": "correctOption",
+          "targetText": "a pioneer in financial education for kids",
+          "relationType": "paraphrase",
+          "note": "选项的“开创性作用”（groundbreaking role）就是报道里的“先驱”（a pioneer）。[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:4]]先说项目广受赞誉，再引用权威媒体的这句评价，让“它在儿童财商教育中开了先河”显得更可信，选 D。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:4"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读懂末段的现状、计划和创始人的话，推断项目的处境与前景。",
+      "stemTranslationZh": "关于 Fin Free Kid，最后一段暗示了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "先看[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5]]开头交代的现状，再看后面的计划和斯内哈的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它复杂而多样。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "complexities",
+            "optionText": "complicated",
+            "matchType": "wordFamily",
+            "relationNote": "complicated 与[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5]]的 complexities 同源，但原文说的是金融世界复杂，是孩子将来要应对的，不是说项目本身复杂。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5",
+              "quote": "the complexities of the financial world",
+              "anchor": "金融世界的复杂"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它将与家长合作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "expand its partnerships with schools",
+            "sourceEntity": "schools",
+            "optionText": "It will cooperate with parents.",
+            "optionEntity": "parents",
+            "explanation": "原文计划扩大的是与学校的合作（partnerships with schools）；家长在这段里只是信任它（the trust of parents）的一方。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5",
+              "quote": "expand its partnerships with schools",
+              "anchor": "与学校合作"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它很成功，并且前景光明。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5",
+              "quote": "With its growing popularity and the trust of parents across Portugal",
+              "anchor": "人气上升、家长信任"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5",
+              "quote": "The changes we’ve seen in children so far are just the beginning.",
+              "anchor": "只是开始"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它将专注于成人课程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "introduce advanced resources for older children",
+            "sourceEntity": "older children",
+            "optionText": "It will focus on adults' courses.",
+            "optionEntity": "adults' courses",
+            "explanation": "新资源是给年龄更大的孩子（older children）准备的，服务对象仍是孩子，不是成年人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5",
+              "quote": "introduce advanced resources for older children",
+              "anchor": "面向大孩子"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It’s successful and promising",
+          "sourceRole": "correctOption",
+          "targetText": "With its growing popularity and the trust of parents across Portugal",
+          "relationType": "paraphrase",
+          "note": "选项把两处合起来：“成功”落在[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5|With its growing popularity]]，人气上升、赢得家长信任（growing popularity, the trust of parents）；“前景好”落在随后的扩展计划和斯内哈说的“只是开始”（just the beginning），选 C。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-b:5"
+        }
+      ]
+    }
+  }
+}

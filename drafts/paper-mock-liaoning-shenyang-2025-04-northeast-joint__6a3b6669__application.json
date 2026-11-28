@@ -1,0 +1,140 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Jeff,\n\nI know you are confused about your career planning. Many of us feel the same, so here are my thoughts.\n\nAI is changing jobs in two ways. On the one hand, it is replacing routine work like data entry. On the other hand, it is creating new positions such as AI trainers. Besides, jobs that need creativity and human warmth, like teaching and nursing, are hard for machines to take over.\n\nSo how can you stay competitive? First, develop the skills AI lacks, such as creative thinking and teamwork. Second, learn to use AI tools instead of fearing them. For example, you could take an online programming course this summer.\n\nAI is a tool, not a rival. Take one small step now, and your path will become clearer!\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给英国朋友 Jeff 的邮件，沿用题面给出的称呼、首句和落款",
+        "personTense": "第一人称给建议，分析现状用一般现在时和现在进行时",
+        "readerTone": "写给迷茫的同龄朋友，语气亲切、坦诚，先安慰再出主意",
+        "goal": "帮 Jeff 看清 AI 对职业的影响，并给出能马上去做的竞争力建议"
+      },
+      "taskRequires": [
+        "分析 AI 对职业的影响",
+        "提出增强竞争力的建议"
+      ],
+      "thisEssayChooses": "影响一分为二：AI 取代数据录入这类重复性工作，同时带来 AI 训练师等新岗位，需要创造力和温度的教学、护理难以被替代；建议培养 AI 欠缺的创造性思维和团队合作，学会用 AI 工具，并以暑期上一门线上编程课作具体起点。"
+    },
+    "standard": {
+      "essay": "Dear Jeff,\n\nI know you are confused about your career planning. Many of us feel the same, so here are my thoughts.\n\nAI is changing jobs in two ways. On the one hand, it is replacing routine work like data entry. On the other hand, it is creating new positions such as AI trainers. Besides, jobs that need creativity and human warmth, like teaching and nursing, are hard for machines to take over.\n\nSo how can you stay competitive? First, develop the skills AI lacks, such as creative thinking and teamwork. Second, learn to use AI tools instead of fearing them. For example, you could take an online programming course this summer.\n\nAI is a tool, not a rival. Take one small step now, and your path will become clearer!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "分析 AI 对职业的影响",
+          "quote": "AI is changing jobs in two ways."
+        },
+        {
+          "point": "提出增强竞争力的建议",
+          "quote": "First, develop the skills AI lacks, such as creative thinking and teamwork."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接住给定首句，先安慰朋友，再说明要谈自己的看法",
+          "items": [
+            {
+              "quote": "Many of us feel the same",
+              "explain": "首句点出 Jeff 迷茫，这一句告诉他迷茫很正常，朋友之间先接住情绪，后面的建议才听得进去。"
+            },
+            {
+              "quote": "so here are my thoughts",
+              "explain": "一句话交代写信目的：要谈观点。读者马上知道下面是分析和建议，不是泛泛安慰。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点一：从两个方向分析 AI 对职业的影响",
+          "items": [
+            {
+              "quote": "AI is changing jobs in two ways.",
+              "explain": "主题句先给出“两个方面”的框架，读者一看就知道下面会分两头讲，比直接罗列更有条理。"
+            },
+            {
+              "quote": "On the one hand, it is replacing routine work like data entry. On the other hand, it is creating new positions such as AI trainers.",
+              "explain": "On the one hand … On the other hand 把“取代”和“创造”放在一起比，各配一个具体岗位，影响不再是空话，也不会只讲坏的一面。"
+            },
+            {
+              "quote": "jobs that need creativity and human warmth, like teaching and nursing, are hard for machines to take over",
+              "explain": "补上第三层：哪些工作不容易被取代。它和下一段“培养 AI 欠缺的能力”的建议直接挂钩。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成要点二：给出增强竞争力的具体建议",
+          "items": [
+            {
+              "quote": "So how can you stay competitive?",
+              "explain": "用问句承上启下：上一段说了影响，这里把话题转到 Jeff 最关心的“我该怎么办”。"
+            },
+            {
+              "quote": "develop the skills AI lacks",
+              "explain": "建议从上一段的分析推出来：AI 缺什么，人就练什么，理由和建议之间不跳步。"
+            },
+            {
+              "quote": "For example, you could take an online programming course this summer.",
+              "explain": "把建议落到一件马上能做的事上，有时间、有形式，Jeff 读完就知道第一步怎么走。could 让建议听起来是商量，不是命令。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "收住全文，换个角度看 AI，并鼓励朋友行动",
+          "items": [
+            {
+              "quote": "AI is a tool, not a rival.",
+              "explain": "短句把全文观点收成一句：别怕 AI，把它当工具。和上一段“学会用 AI 工具”呼应。"
+            },
+            {
+              "quote": "Take one small step now, and your path will become clearer!",
+              "explain": "祈使句加 and 表结果，鼓励 Jeff 现在就动手，结尾落在行动上，而不是空泛的祝福。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "On the one hand, … On the other hand, …",
+          "function": "把 AI 的影响分成取代和创造两面来讲，分析显得客观、有条理。"
+        },
+        {
+          "expression": "stay competitive",
+          "function": "直接对应题目“增强竞争力”，用来引出建议部分。"
+        },
+        {
+          "expression": "take over",
+          "function": "说机器接手人的工作，比 replace 更口语，适合朋友间的邮件。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Jeff,\n\nI know you are confused about your career planning. Honestly, you are not alone. Half my classmates have been asking the same question, so here are my two cents.\n\nThere is no denying that AI is reshaping the job market. Tasks that follow fixed rules, such as data entry or basic translation, are increasingly handled by machines. Yet every new technology opens new doors: AI trainers and data analysts hardly existed ten years ago. What's more, careers built on empathy and judgment, like teaching and medical care, remain firmly in human hands.\n\nTo stand out, I'd suggest two things. First, sharpen the abilities machines struggle with: creativity, critical thinking and communication. Second, treat AI as an assistant rather than a threat. Why not join a coding club or use AI to plan a small project? Hands-on experience will make you far more confident.\n\nThe future belongs to those who keep learning. Keep me posted on your plans!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "分析 AI 对职业的影响",
+          "quote": "There is no denying that AI is reshaping the job market."
+        },
+        {
+          "point": "提出增强竞争力的建议",
+          "quote": "First, sharpen the abilities machines struggle with: creativity, critical thinking and communication."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "Half my classmates have been asking the same question, so here are my two cents.",
+          "explain": "用身边同学的情况说明迷茫很普遍，比标准版的 Many of us 更具体；my two cents 是朋友间谦虚地说“我的一点看法”，更贴近同龄人的口吻。"
+        },
+        {
+          "quote": "Yet every new technology opens new doors: AI trainers and data analysts hardly existed ten years ago.",
+          "explain": "先说规律（新技术总会带来新机会），再用“十年前几乎没有”的岗位作证据，比标准版只举一个新岗位多了一层理由。"
+        },
+        {
+          "quote": "Why not join a coding club or use AI to plan a small project?",
+          "explain": "Why not 提建议比 you could 更亲切；用 AI 做个小项目把“把 AI 当助手”变成能动手的事，建议更可行。"
+        }
+      ]
+    }
+  }
+}

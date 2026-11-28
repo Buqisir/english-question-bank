@@ -1,0 +1,1829 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-liaoning-shenyang-2025-04-northeast-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze": {
+      "overview": "作者小时候被男孩嘲笑“打架像女孩”，自信受挫；成年后确诊癌症，经历多年手术和治疗，常想起那句话却从不绝望；最终领悟这句话的新含义，正因像女孩一样战斗才挺了过来。",
+      "fullTranslationZh": "“你只是个女孩，打起架来也像个女孩！”那个男孩说完这句话，笑着跑开了。就像石头砸向一块玻璃，这句话毁掉了我的信念——我曾相信男同学能做到的事我都能做到，我跌入了谷底。\n这些年来，我把那些话埋在记忆深处，生活用任务、目标和成就取代了它们。日子悄然流逝，我的生活成了一部每天重放、令人愉快的电影，可后来却出乎意料地失控了，因为我听到了这样一个消息：“你得了癌症。”\n一年令人疲惫不堪的手术和并发症让我的幸福结局成了泡影。随后是一段段平静的日子，其间不时被治疗打断。在我半个世纪的抗争中，我曾多次回想起那些糟糕的话。但凭着信念，我从不让它们使我陷入绝望。生活中的每一次挑战都成了一个机会，让我去探索新的道路，并提醒自己我有多坚强、多坚定。\n在我的一次抗争之后，有人问我：“你是怎么坚持下去、不退缩的？”刹那间，我被带回到年少时的那一幕，那些伤人的话突然在我心中有了新的含义。我转身面对朋友，嘴角浮现出一丝微笑。“我能挺过来，是因为我像女孩一样战斗。”",
+      "mainLine": {
+        "theme": {
+          "text": "曾经伤人的嘲笑被她重新理解为力量：像女孩一样战斗让她挺了过来（I FIGHT LIKE A GIRL）。",
+          "quote": "I FIGHT LIKE A GIRL"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+            "text": "男孩嘲笑她“打架像女孩”，击垮了她的自信，她跌入谷底。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+            "text": "她用忙碌掩埋那句话，生活却突然失控，她被确诊癌症。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+            "text": "手术治疗反复，她常想起那句话，却从不绝望，把挑战当机会。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+            "text": "朋友问她为何不退缩，她领悟那句话的新含义并以此作答。"
+          }
+        ],
+        "emotion": "受挫→平静→坚韧→释然"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-cloze-1",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+          "sourceText": "Like a rock to a piece of glass, it __42__ my belief that I could do anything that my male classmates could do, and I hit rock bottom.",
+          "displayText": "Like a rock to a piece of glass, it ruined my belief that I could do anything that my male classmates could do, and I hit rock bottom.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:42"
+          ],
+          "translationZh": "就像石头砸向一块玻璃，那句话毁掉了我的信念——我曾相信男同学能做到的事我都能做到，我跌入了谷底。",
+          "analysisZh": "主干是“它毁掉了我的信念”（it ruined my belief），开头的 Like a rock to a piece of glass 是比喻，说这句话像石头砸玻璃。that 引导同位语从句，说明信念的内容：男同学能做的我都能做；从句里的 anything 后面又带一个定语从句（that my male classmates could do）。最后 and 并列出结果：我跌入谷底。",
+          "underlineRanges": [
+            {
+              "start": 33,
+              "end": 52,
+              "quote": "it ruined my belief"
+            },
+            {
+              "start": 53,
+              "end": 77,
+              "quote": "that I could do anything"
+            },
+            {
+              "start": 112,
+              "end": 133,
+              "quote": "and I hit rock bottom"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-cloze-2",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+          "sourceText": "Days melted away, and my life became a welcome movie that replayed daily but then __44__ ran out of control as I was met with the __45__: “You have cancer.”",
+          "displayText": "Days melted away, and my life became a welcome movie that replayed daily but then unexpectedly ran out of control as I was met with the news: “You have cancer.”",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:44",
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:45"
+          ],
+          "translationZh": "日子悄然流逝，我的生活成了一部每天重放、令人愉快的电影，可后来却出乎意料地失控了，因为我听到了这样一个消息：“你得了癌症。”",
+          "analysisZh": "and 连接两个分句：日子流逝，我的生活成了一部电影。that 引导定语从句修饰 movie，从句里有两个并列谓语，replayed daily 和 but then unexpectedly ran out of control，用 but then 转折。as 引导原因状语从句，说明失控的原因是被告知一个消息，冒号后的引语就是消息的内容。",
+          "underlineRanges": [
+            {
+              "start": 22,
+              "end": 52,
+              "quote": "my life became a welcome movie"
+            },
+            {
+              "start": 73,
+              "end": 113,
+              "quote": "but then unexpectedly ran out of control"
+            },
+            {
+              "start": 114,
+              "end": 140,
+              "quote": "as I was met with the news"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1"
+              ],
+              "start": 0,
+              "end": 83,
+              "quote": "“你只是个女孩，打起架来也像个女孩！”那个男孩说完这句话，笑着跑开了。就像石头砸向一块玻璃，这句话毁掉了我的信念——我曾相信男同学能做到的事我都能做到，我跌入了谷底。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2"
+              ],
+              "start": 84,
+              "end": 180,
+              "quote": "这些年来，我把那些话埋在记忆深处，生活用任务、目标和成就取代了它们。日子悄然流逝，我的生活成了一部每天重放、令人愉快的电影，可后来却出乎意料地失控了，因为我听到了这样一个消息：“你得了癌症。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3"
+              ],
+              "start": 181,
+              "end": 316,
+              "quote": "一年令人疲惫不堪的手术和并发症让我的幸福结局成了泡影。随后是一段段平静的日子，其间不时被治疗打断。在我半个世纪的抗争中，我曾多次回想起那些糟糕的话。但凭着信念，我从不让它们使我陷入绝望。生活中的每一次挑战都成了一个机会，让我去探索新的道路，并提醒自己我有多坚强、多坚定。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4"
+              ],
+              "start": 317,
+              "end": 422,
+              "quote": "在我的一次抗争之后，有人问我：“你是怎么坚持下去、不退缩的？”刹那间，我被带回到年少时的那一幕，那些伤人的话突然在我心中有了新的含义。我转身面对朋友，嘴角浮现出一丝微笑。“我能挺过来，是因为我像女孩一样战斗。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+            "text": "“You’re just a girl and you fight like a girl!” The boy laughed as he ran away after delivering that statement. Like a rock to a piece of glass, it ruined my belief that I could do anything that my male classmates could do, and I hit rock bottom."
+          },
+          {
+            "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+            "text": "Through the years, I buried those words in the depth of my memory as life replaced them with tasks, goals and achievements. Days melted away, and my life became a welcome movie that replayed daily but then unexpectedly ran out of control as I was met with the news: “You have cancer.”"
+          },
+          {
+            "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+            "text": "A(n) wearing year of surgeries and complications (并发症) made my happy ending impossible. Then came periods of calm mixed with interruptions of treatment. Many times in my life, I have recalled those awful words through my half-a-century battles. But through my faith, I never allowed them to leave me hopeless. Every challenge in life becomes an opportunity to explore new paths and to remind myself how strong and determined I am."
+          },
+          {
+            "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+            "text": "After one of my battles, someone asked me, “How do you keep going and not back off?” Instantly, I was taken back to that scene of my youth and those hurtful words suddenly held new meaning in my heart. A smile formed upon my lips as I turned to face my friend. “I survive because I FIGHT LIKE A GIRL.”"
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 92,
+                "end": 106,
+                "quote": "that statement"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 19,
+                "end": 28,
+                "quote": "那个男孩说完这句话"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:41"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 85,
+                "end": 95,
+                "quote": "delivering"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 23,
+                "end": 25,
+                "quote": "说完"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 108,
+                "end": 139,
+                "quote": "Like a rock to a piece of glass"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 35,
+                "end": 45,
+                "quote": "就像石头砸向一块玻璃"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:42"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 148,
+                "end": 154,
+                "quote": "ruined"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 49,
+                "end": 52,
+                "quote": "毁掉了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 81,
+                "end": 120,
+                "quote": "them with tasks, goals and achievements"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 5,
+                "end": 16,
+                "quote": "我把那些话埋在记忆深处"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:43"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 74,
+                "end": 82,
+                "quote": "replaced"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 28,
+                "end": 31,
+                "quote": "取代了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 180,
+                "end": 194,
+                "quote": "replayed daily"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 62,
+                "end": 66,
+                "quote": "可后来却"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:44"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 206,
+                "end": 218,
+                "quote": "unexpectedly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 66,
+                "end": 71,
+                "quote": "出乎意料地"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 261,
+                "end": 276,
+                "quote": "You have cancer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 89,
+                "end": 94,
+                "quote": "你得了癌症"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:45"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 260,
+                "end": 264,
+                "quote": "news"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 85,
+                "end": 87,
+                "quote": "消息"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 20,
+                "end": 47,
+                "quote": "surgeries and complications"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 15,
+                "end": 26,
+                "quote": "让我的幸福结局成了泡影"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:46"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 5,
+                "end": 12,
+                "quote": "wearing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 2,
+                "end": 9,
+                "quote": "令人疲惫不堪的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 20,
+                "end": 47,
+                "quote": "surgeries and complications"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 0,
+                "end": 15,
+                "quote": "一年令人疲惫不堪的手术和并发症"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:47"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 142,
+                "end": 151,
+                "quote": "treatment"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 44,
+                "end": 46,
+                "quote": "治疗"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 186,
+                "end": 203,
+                "quote": "those awful words"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 67,
+                "end": 73,
+                "quote": "那些糟糕的话"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:48"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 183,
+                "end": 191,
+                "quote": "recalled"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 64,
+                "end": 67,
+                "quote": "回想起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 239,
+                "end": 259,
+                "quote": "But through my faith"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 74,
+                "end": 79,
+                "quote": "但凭着信念"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:49"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 300,
+                "end": 308,
+                "quote": "hopeless"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 88,
+                "end": 92,
+                "quote": "陷入绝望"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 359,
+                "end": 368,
+                "quote": "new paths"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 97,
+                "end": 109,
+                "quote": "每一次挑战都成了一个机会"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:50"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 360,
+                "end": 367,
+                "quote": "explore"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 113,
+                "end": 115,
+                "quote": "探索"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 215,
+                "end": 237,
+                "quote": "half-a-century battles"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:3",
+                "start": 50,
+                "end": 58,
+                "quote": "我半个世纪的抗争"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:51"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 16,
+                "end": 23,
+                "quote": "battles"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 5,
+                "end": 7,
+                "quote": "抗争"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 65,
+                "end": 72,
+                "quote": "and not"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 20,
+                "end": 24,
+                "quote": "坚持下去"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:52"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 74,
+                "end": 82,
+                "quote": "back off"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 26,
+                "end": 28,
+                "quote": "退缩"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 141,
+                "end": 160,
+                "quote": "those hurtful words"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 40,
+                "end": 43,
+                "quote": "年少时"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:53"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 121,
+                "end": 126,
+                "quote": "scene"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 44,
+                "end": 47,
+                "quote": "那一幕"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 177,
+                "end": 188,
+                "quote": "new meaning"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 62,
+                "end": 66,
+                "quote": "新的含义"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:54"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 172,
+                "end": 176,
+                "quote": "held"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 60,
+                "end": 62,
+                "quote": "有了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 43,
+                "end": 64,
+                "quote": "How do you keep going"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 16,
+                "end": 24,
+                "quote": "你是怎么坚持下去"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:55"
+            ],
+            "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 264,
+                "end": 271,
+                "quote": "survive"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:4",
+                "start": 88,
+                "end": 91,
+                "quote": "挺过来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:42"
+            ],
+            "selectedSentenceId": "ls-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 112,
+                "end": 246,
+                "quote": "Like a rock to a piece of glass, it ruined my belief that I could do anything that my male classmates could do, and I hit rock bottom."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:1",
+                "start": 46,
+                "end": 56,
+                "quote": "这句话毁掉了我的信念"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:44",
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:45"
+            ],
+            "selectedSentenceId": "ls-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 124,
+                "end": 284,
+                "quote": "Days melted away, and my life became a welcome movie that replayed daily but then unexpectedly ran out of control as I was met with the news: “You have cancer.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:cloze:2",
+                "start": 62,
+                "end": 74,
+                "quote": "可后来却出乎意料地失控了"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "受挫→平静→坚韧→释然"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:41": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "detail",
+      "context": "男孩喊完那句嘲笑的话就笑着跑开，这里要一个“说出”话语的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是那句话（that statement），指的就是开头他喊出的嘲笑（You’re just a girl），能和“话”搭配的是说出。",
+        "quotes": [
+          "that statement",
+          "You’re just a girl"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "发表",
+        "meaning": "说出（那句话）",
+        "reason": "男孩喊完那句嘲笑的话就笑着跑开，这里要一个“说出”话语的动作。动词看搭配：宾语是那句话（that statement），指的就是开头他喊出的嘲笑（You’re just a girl），能和“话”搭配的是说出。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "publishing",
+          "meaning": "出版；男孩是当面喊出这句话（that statement），不是把它印成书刊出版。",
+          "quote": "that statement"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "withdrawing",
+          "meaning": "收回；男孩说完就笑着跑开（laughed as he ran away），并没有收回这句话。",
+          "quote": "laughed as he ran away"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recording",
+          "meaning": "录下；男孩是笑着当面说出这句话（The boy laughed），没有录音这回事。",
+          "quote": "The boy laughed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that statement",
+          "signalSide": "context-after",
+          "targetText": "delivering that statement",
+          "relation": "空格的宾语是“那句话”，动作是把话说出口。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:42": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "main",
+      "context": "那句话像石头砸玻璃一样砸碎她的自信，这是她跌入低谷的原因。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是像石头砸向玻璃的那句话（Like a rock to a piece of glass），宾语是信念（my belief），结果是跌入谷底（hit rock bottom），只能是毁掉。",
+        "quotes": [
+          "Like a rock to a piece of glass",
+          "my belief",
+          "hit rock bottom"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "毁坏",
+        "reason": "那句话像石头砸玻璃一样砸碎她的自信，这是她跌入低谷的原因。动词看搭配：主语是像石头砸向玻璃的那句话（Like a rock to a piece of glass），宾语是信念（my belief），结果是跌入谷底（hit rock bottom），只能是毁掉。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "corrected",
+          "meaning": "纠正；石头砸玻璃（Like a rock to a piece of glass）是砸碎，随后她跌入谷底，不是想法被纠正。",
+          "quote": "Like a rock to a piece of glass"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "shaped",
+          "meaning": "塑造；她随后跌入谷底（hit rock bottom），那句话是砸碎她的信念，不是塑造信念。",
+          "quote": "hit rock bottom"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "supported",
+          "meaning": "支持；嘲笑的话让她跌入谷底（hit rock bottom），不可能是在支持她的信念。",
+          "quote": "hit rock bottom"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my belief",
+          "signalSide": "context-after",
+          "targetText": "ruined my belief",
+          "relation": "空格的宾语是“我的信念”，前面的比喻说明它被砸碎。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "hit rock bottom",
+          "signalSide": "context-after",
+          "relation": "她随后跌入谷底，说明那句话带来的是破坏。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:43": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "detail",
+      "context": "她把伤人的话埋进记忆，靠忙碌的生活把它们挤走，要“用别的东西顶替”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "后面是“它们”和用任务、目标和成就（them with tasks, goals and achievements），前面说把那些话埋了起来（buried those words），即用这些事取代它们。",
+        "quotes": [
+          "them with tasks, goals and achievements",
+          "buried those words"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "取代",
+        "meaning": "用忙碌冲淡（那些话）",
+        "reason": "她把伤人的话埋进记忆，靠忙碌的生活把它们挤走，要“用别的东西顶替”的意思。动词看搭配：后面是“它们”和用任务、目标和成就（them with tasks, goals and achievements），前面说把那些话埋了起来（buried those words），即用这些事取代它们。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "equipped",
+          "meaning": "装备；“给那些话配上任务”与她把话埋进记忆深处（buried those words）的意思相反。",
+          "quote": "buried those words"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "interpreted",
+          "meaning": "解释；她是把那些话埋进记忆深处（buried those words）不去想，并没有重新解释它们。",
+          "quote": "buried those words"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "presented",
+          "meaning": "呈现；把那些话展示出来，与她把它们埋进记忆深处（buried those words）正好相反。",
+          "quote": "buried those words"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "them with tasks, goals and achievements",
+          "signalSide": "context-after",
+          "targetText": "replaced them with tasks, goals and achievements",
+          "relation": "用任务、目标和成就代替那些话，把它们挤出脑海。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "buried those words",
+          "signalSide": "context-before",
+          "relation": "她把那些话埋起来，说明它们被别的事顶替了。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:44": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:44",
+      "blankNo": 44,
+      "pos": "adverb",
+      "role": "main",
+      "context": "平静愉快的日子突然被打断，这是故事的转折点，要一个“没料到”的意思。",
+      "find": {
+        "check": "direction",
+        "text": "前面生活像每天重放的电影（replayed daily），但随后（but then）一下子失控（ran out of control），来的是癌症诊断，这是突然的变化。",
+        "quotes": [
+          "replayed daily",
+          "but then",
+          "ran out of control"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "出乎意料地",
+        "reason": "平静愉快的日子突然被打断，这是故事的转折点，要一个“没料到”的意思。副词看走向：前面生活像每天重放的电影（replayed daily），但随后（but then）一下子失控（ran out of control），来的是癌症诊断，这是突然的变化。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unnecessarily",
+          "meaning": "不必要地；失控是确诊癌症（You have cancer）带来的，谈不上必要不必要。",
+          "quote": "You have cancer"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "frequently",
+          "meaning": "频繁地；生活原本每天照常重放（replayed daily），失控是随后的一次突变，不是经常发生。",
+          "quote": "replayed daily"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "randomly",
+          "meaning": "随意地；失控是一个具体的诊断（You have cancer）引起的，不是随随便便地发生。",
+          "quote": "You have cancer"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "ran out of control",
+          "signalSide": "context-after",
+          "targetText": "unexpectedly ran out of control",
+          "relation": "空格修饰“失控”，说明失控发生得出人意料。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but then",
+          "signalSide": "context-before",
+          "relation": "“但随后”把每天重放的平静日子转向突发的变故。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:45": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:45",
+      "blankNo": 45,
+      "pos": "noun",
+      "role": "main",
+      "context": "冒号后是医生的诊断，这里要用一个名词把这句话概括出来。",
+      "find": {
+        "check": "echo",
+        "text": "冒号后的“你得了癌症”（You have cancer）就是空格所指的内容，是一条已经确认的消息，与被告知（was met with）相接。",
+        "quotes": [
+          "You have cancer",
+          "was met with"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "消息",
+        "meaning": "癌症确诊的消息",
+        "reason": "冒号后是医生的诊断，这里要用一个名词把这句话概括出来。名词看复现：冒号后的“你得了癌症”（You have cancer）就是空格所指的内容，是一条已经确认的消息，与被告知（was met with）相接。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "prediction",
+          "meaning": "预测；“你得了癌症”（You have cancer）是已经确诊的事实，不是对将来的预测。",
+          "quote": "You have cancer"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "promise",
+          "meaning": "承诺；“你得了癌症”（You have cancer）是一句诊断，不是谁许下的承诺。",
+          "quote": "You have cancer"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "risk",
+          "meaning": "风险；“你得了癌症”（You have cancer）说的是已经患病，不是可能患病的风险。",
+          "quote": "You have cancer"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "You have cancer",
+          "signalSide": "context-after",
+          "relation": "冒号后的诊断就是这条消息的内容。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "was met with",
+          "signalSide": "context-before",
+          "targetText": "was met with the news",
+          "relation": "“被告知某个消息”，空格作这一短语的宾语。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:46": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:46",
+      "blankNo": 46,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "一年的手术和并发症让幸福结局落空，要一个负面的、让人吃不消的形容。",
+      "find": {
+        "check": "affect",
+        "text": "修饰的是一年的手术和并发症（surgeries and complications），结果是幸福结局成了泡影（made my happy ending impossible），只能是负面的“使人疲惫的”。",
+        "quotes": [
+          "surgeries and complications",
+          "made my happy ending impossible"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "使人疲惫的",
+        "reason": "一年的手术和并发症让幸福结局落空，要一个负面的、让人吃不消的形容。形容词看情感：修饰的是一年的手术和并发症（surgeries and complications），结果是幸福结局成了泡影（made my happy ending impossible），只能是负面的“使人疲惫的”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "motivating",
+          "meaning": "激励人的；手术和并发症让幸福结局成了泡影（made my happy ending impossible），这一年没有在激励她。",
+          "quote": "made my happy ending impossible"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "amazing",
+          "meaning": "令人惊叹的；这是褒义词，与幸福结局落空（made my happy ending impossible）的负面情境相反。",
+          "quote": "made my happy ending impossible"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "inspiring",
+          "meaning": "鼓舞人心的；这一年手术不断（surgeries and complications），幸福结局也落空了，谈不上鼓舞人心。",
+          "quote": "surgeries and complications"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "year of surgeries and complications",
+          "signalSide": "context-after",
+          "relation": "空格修饰这一年的手术和并发症。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "made my happy ending impossible",
+          "signalSide": "context-after",
+          "relation": "幸福结局落空，说明这一年让人身心俱疲。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:47": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:47",
+      "blankNo": 47,
+      "pos": "noun",
+      "role": "detail",
+      "context": "病情平稳的日子不时被打断，打断它的应是与抗癌有关的事情。",
+      "find": {
+        "check": "topic",
+        "text": "前文是癌症、手术和并发症（surgeries and complications），平静期（periods of calm）里不时插进来的应是治疗。",
+        "quotes": [
+          "surgeries and complications",
+          "periods of calm"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "治疗",
+        "reason": "病情平稳的日子不时被打断，打断它的应是与抗癌有关的事情。名词看话题：前文是癌症、手术和并发症（surgeries and complications），平静期（periods of calm）里不时插进来的应是治疗。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "curiosity",
+          "meaning": "好奇心；前文讲的是手术和并发症（surgeries and complications），打断平静的不会是好奇心。",
+          "quote": "surgeries and complications"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "satisfaction",
+          "meaning": "满足；打断平静期（periods of calm）的应是病痛和折腾，满足感不会被说成打断。",
+          "quote": "periods of calm"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "argument",
+          "meaning": "争吵；这一段写的是抗癌经历（surgeries and complications），没有与人争吵的事。",
+          "quote": "surgeries and complications"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "semantic-field",
+          "signalText": "surgeries and complications",
+          "signalSide": "context-before",
+          "relation": "手术、并发症都属于治病的话题。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "interruptions of",
+          "signalSide": "context-before",
+          "targetText": "interruptions of treatment",
+          "relation": "空格说明是什么打断了平静期。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field"
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:48": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "main",
+      "context": "多年抗病中，那句被埋起来的话一次次回到她心里，要“想起”的意思。",
+      "find": {
+        "check": "echo",
+        "text": "宾语是那些糟糕的话（those awful words），前文说它们被埋进记忆（buried those words），这里在长年抗争中又浮上心头，是回想起。",
+        "quotes": [
+          "those awful words",
+          "buried those words"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "回想起",
+        "reason": "多年抗病中，那句被埋起来的话一次次回到她心里，要“想起”的意思。动词看复现：宾语是那些糟糕的话（those awful words），前文说它们被埋进记忆（buried those words），这里在长年抗争中又浮上心头，是回想起。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ignored",
+          "meaning": "忽视；后文说她从不让这些话使她（never allowed them to leave me）绝望，可见话常在心上，没被忽视。",
+          "quote": "never allowed them to leave me"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "possessed",
+          "meaning": "拥有；宾语是那些糟糕的话（those awful words），话只能被想起或忘掉，说“拥有一句话”不搭。",
+          "quote": "those awful words"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "removed",
+          "meaning": "去除；后文还说不让这些话使她（never allowed them to leave me）绝望，话仍在，没有被去除。",
+          "quote": "never allowed them to leave me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "those awful words",
+          "signalSide": "context-after",
+          "targetText": "recalled those awful words",
+          "relation": "空格的宾语是“那些糟糕的话”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "buried those words",
+          "signalSide": "context-before",
+          "relation": "曾被埋进记忆的话，此时又被想起。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:49": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:49",
+      "blankNo": 49,
+      "pos": "adjective",
+      "role": "main",
+      "context": "凭着信念，她不让那句话把自己打垮，被否定掉的应是最坏的负面状态。",
+      "find": {
+        "check": "affect",
+        "text": "但凭着信念（But through my faith）转折，从不允许（never allowed）否定，后句说挑战都是机会（an opportunity），被否定的只能是绝望。",
+        "quotes": [
+          "But through my faith",
+          "never allowed",
+          "an opportunity"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "绝望的",
+        "reason": "凭着信念，她不让那句话把自己打垮，被否定掉的应是最坏的负面状态。形容词看情感：但凭着信念（But through my faith）转折，从不允许（never allowed）否定，后句说挑战都是机会（an opportunity），被否定的只能是绝望。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fearless",
+          "meaning": "无畏的；她靠信念（through my faith）抵挡那些话，被否定的应是坏结果，不会是无畏。",
+          "quote": "through my faith"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "faultless",
+          "meaning": "完美无缺的；全句讲那些话会不会打垮她（through my faith），与有没有过错无关。",
+          "quote": "through my faith"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "heartless",
+          "meaning": "无情的；后句说挑战提醒她有多坚强（how strong and determined I am），话题是会不会被击垮，不是有没有同情心。",
+          "quote": "how strong and determined I am"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "leave me",
+          "signalSide": "context-before",
+          "targetText": "leave me hopeless",
+          "relation": "“使我处于某种状态”，空格作宾补，说明那些话可能带来的状态。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "never allowed",
+          "signalSide": "context-before",
+          "relation": "从不允许，否定的是负面结果。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:50": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "detail",
+      "context": "挑战成了机会，这里要一个对新道路采取积极行动的动词。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是新的道路（new paths），这是机会（an opportunity）的具体内容，能搭配的是去探索新路。",
+        "quotes": [
+          "new paths",
+          "an opportunity"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "探索",
+        "reason": "挑战成了机会，这里要一个对新道路采取积极行动的动词。动词看搭配：宾语是新的道路（new paths），这是机会（an opportunity）的具体内容，能搭配的是去探索新路。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "block",
+          "meaning": "阻挡；挑战成了机会（an opportunity），机会是去走新路，不是把新路堵住。",
+          "quote": "an opportunity"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "mark",
+          "meaning": "标记；后面说提醒自己有多坚强（how strong and determined I am），只给新路做标记显不出坚强。",
+          "quote": "how strong and determined I am"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "clear",
+          "meaning": "清理；新路（new paths）是她还没走过的路，挑战带来的机会是去尝试它们，不是去清理。",
+          "quote": "new paths"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "new paths",
+          "signalSide": "context-after",
+          "targetText": "explore new paths",
+          "relation": "空格的宾语是“新的道路”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "an opportunity",
+          "signalSide": "context-before",
+          "targetText": "an opportunity to explore new paths",
+          "relation": "不定式说明这是一个什么样的机会。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:51": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "detail",
+      "context": "朋友在她经历一次抗病之后发问，要一个指她抗癌经历的名词。",
+      "find": {
+        "check": "echo",
+        "text": "前段说她半个世纪的抗争（half-a-century battles），这里“我的……之一”（one of my）指其中的一次。",
+        "quotes": [
+          "half-a-century battles",
+          "one of my"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "战斗",
+        "meaning": "与病魔的一次抗争",
+        "reason": "朋友在她经历一次抗病之后发问，要一个指她抗癌经历的名词。名词看复现：前段说她半个世纪的抗争（half-a-century battles），这里“我的……之一”（one of my）指其中的一次。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "training",
+          "meaning": "训练；前文写的是手术和并发症（surgeries and complications），不是体能训练。",
+          "quote": "surgeries and complications"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "accidents",
+          "meaning": "事故；她经历的是癌症和手术（surgeries and complications），不是意外事故。",
+          "quote": "surgeries and complications"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "conflicts",
+          "meaning": "冲突；前文一直把抗病说成抗争（half-a-century battles），没有和人起冲突的事。",
+          "quote": "half-a-century battles"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "half-a-century battles",
+          "signalSide": "context-before",
+          "relation": "前段的“抗争”在这里原词复现。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "one of my",
+          "signalSide": "context-before",
+          "targetText": "one of my battles",
+          "relation": "“我的……之一”，空格要用复数名词。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:52": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:52",
+      "blankNo": 52,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "与“坚持下去”相对，朋友问她怎么能不放弃，要一个“退缩”的意思。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "“而不”（and not）把空格与坚持下去（keep going）对照，结尾她答自己是像女孩一样战斗（I FIGHT LIKE A GIRL），问的是怎样不退缩。",
+        "quotes": [
+          "and not",
+          "keep going",
+          "I FIGHT LIKE A GIRL"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "退缩",
+        "reason": "与“坚持下去”相对，朋友问她怎么能不放弃，要一个“退缩”的意思。词组看语境义：“而不”（and not）把空格与坚持下去（keep going）对照，结尾她答自己是像女孩一样战斗（I FIGHT LIKE A GIRL），问的是怎样不退缩。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "get through",
+          "meaning": "熬过；“不熬过”与坚持下去（keep going）不是一对相反的动作，朋友问的是她怎么不放弃。",
+          "quote": "keep going"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "break out",
+          "meaning": "爆发；“不爆发”与坚持下去（keep going）构不成对照，接不上这一问。",
+          "quote": "keep going"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "move up",
+          "meaning": "晋升；“不晋升”与坚持下去（keep going）不相干，这里问的是她为何不放弃。",
+          "quote": "keep going"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "keep going",
+          "signalSide": "context-before",
+          "targetText": "keep going and not back off",
+          "relation": "空格与“坚持下去”并列，意思相反。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "off",
+          "signalSide": "option",
+          "targetText": "back off",
+          "relation": "小品词 off 表示离开、后撤，back off 即退缩。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:53": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "她一下子被带回童年被嘲笑的那一刻，要一个指那件往事的名词。",
+      "find": {
+        "check": "echo",
+        "text": "后面是那些伤人的话（those hurtful words），她回到的正是首段男孩嘲笑她的那一幕（The boy laughed）。",
+        "quotes": [
+          "those hurtful words",
+          "The boy laughed"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "场景",
+        "meaning": "童年被嘲笑的那一幕",
+        "reason": "她一下子被带回童年被嘲笑的那一刻，要一个指那件往事的名词。名词看复现：后面是那些伤人的话（those hurtful words），她回到的正是首段男孩嘲笑她的那一幕（The boy laughed）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "dream",
+          "meaning": "梦想；后面紧接那些伤人的话（those hurtful words），她回想的是被嘲笑的真实一幕，不是梦想。",
+          "quote": "those hurtful words"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "honor",
+          "meaning": "荣誉；首段男孩嘲笑她（The boy laughed）是伤心往事，谈不上荣誉。",
+          "quote": "The boy laughed"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "field",
+          "meaning": "领域；她回想的是首段男孩笑着跑开（The boy laughed）那件事，不是一块场地或一个领域。",
+          "quote": "The boy laughed"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "The boy laughed",
+          "signalSide": "context-before",
+          "relation": "首段男孩嘲笑她的情景，就是这里回到的那一幕。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "of my youth",
+          "signalSide": "context-after",
+          "targetText": "that scene of my youth",
+          "relation": "“我年少时的”修饰空格，指童年某个时刻。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:54": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "main",
+      "context": "那些伤人的话突然在她心里有了新的含义，这是全文领悟的转折点。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是新的含义（new meaning），能和它搭成“具有新含义”的只有这个动词；接着她笑了（A smile formed upon my lips），可见是正面的新理解。",
+        "quotes": [
+          "new meaning",
+          "A smile formed upon my lips"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "具有",
+        "reason": "那些伤人的话突然在她心里有了新的含义，这是全文领悟的转折点。动词看搭配：宾语是新的含义（new meaning），能和它搭成“具有新含义”的只有这个动词；接着她笑了（A smile formed upon my lips），可见是正面的新理解。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "invented",
+          "meaning": "发明；她最后笑着说出的仍是那句话（I FIGHT LIKE A GIRL），话没变，只是意义变了，不是她发明的。",
+          "quote": "I FIGHT LIKE A GIRL"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "changed",
+          "meaning": "改变；放进去是话“改变了新含义”（new meaning），宾语接不上，原文要说的是话有了新含义。",
+          "quote": "new meaning"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "lost",
+          "meaning": "失去；接着她笑了（A smile formed upon my lips），说明这些话有了新含义，不是失去含义。",
+          "quote": "A smile formed upon my lips"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "new meaning",
+          "signalSide": "context-after",
+          "targetText": "held new meaning",
+          "relation": "空格的宾语是“新的含义”，表示具有某种意义。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "A smile formed upon my lips",
+          "signalSide": "context-after",
+          "relation": "她随后露出笑容，说明这层新含义是正面的。"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:55": {
+      "blankId": "blank:paper-mock-liaoning-shenyang-2025-04-northeast-joint:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "她回答朋友为何能坚持下去，这是全文点题：靠像女孩一样战斗挺了过来。",
+      "find": {
+        "check": "echo",
+        "text": "回答的是朋友问的怎么坚持下去（How do you keep going），原因是像女孩一样战斗（FIGHT LIKE A GIRL），所以说自己挺了过来。",
+        "quotes": [
+          "How do you keep going",
+          "FIGHT LIKE A GIRL"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "幸存",
+        "meaning": "挺过病痛活下来",
+        "reason": "她回答朋友为何能坚持下去，这是全文点题：靠像女孩一样战斗挺了过来。动词看复现：回答的是朋友问的怎么坚持下去（How do you keep going），原因是像女孩一样战斗（FIGHT LIKE A GIRL），所以说自己挺了过来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "quit",
+          "meaning": "放弃；朋友问的是她怎么坚持不退缩（How do you keep going），她的回答不会是放弃。",
+          "quote": "How do you keep going"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "suffer",
+          "meaning": "受苦；她是笑着回答（A smile formed upon my lips），说的是自己挺了过来，不是在诉苦。",
+          "quote": "A smile formed upon my lips"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "apologize",
+          "meaning": "道歉；朋友问的是她怎么坚持下去（How do you keep going），回答里道歉无从说起。",
+          "quote": "How do you keep going"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "How do you keep going",
+          "signalSide": "context-before",
+          "relation": "空格回答朋友“怎么坚持下去”的问题。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "because I FIGHT LIKE A GIRL",
+          "signalSide": "context-after",
+          "relation": "“因为我像女孩一样战斗”，说明她能挺过来的原因。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,657 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-liaoning-shenyang-2025-04-northeast-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a": {
+      "overview": "一则大学科技成果转化创新大赛的招募通知，介绍比赛时间与申请截止日期、理想申请者的条件、分组指导和制定商业化计划的比赛流程，以及提交简历和短文的报名方式。",
+      "fullTranslationZh": "科技成果转化创新大赛\n你想把创新研究转化为现实中的解决方案，同时培养为将来从事创新和商业工作做准备的实用技能吗？我们很高兴邀请你参加科技成果转化创新大赛。这项比赛旨在让你亲身体验评估老师们的前沿研究能否投入商业化。\n时间：2025年1月24日—5月2日\n申请截止日期：2024年12月30日\n理想申请者\n• 你是在读的工科本科生。\n• 你善于团队合作。\n• 你此前表现出对创业（企业家精神）的兴趣。\n• 你希望加入一个推动创新技术商业化的项目。\n运作方式\n• 具有创业思维（在申请材料中有所体现）的入选学生将受邀参赛。\n• 所有受邀/入选的学生将获得500美元参赛补贴。\n• 学生将被分到各个团队，老师们的项目也将分配给每个团队。\n• 各团队将接受老师和业内专家的指导，学习市场调研、知识产权、财务建模和市场战略等技能。\n• 各团队将根据所学，为分配给自己的、由老师提交的项目制定商业化计划。\n• 各团队将在由业界领袖评审的决赛中角逐荣誉和奖项。\n如何参加\n请在2024年12月30日前提交申请材料，包括一页简历和一篇250词、介绍你创业兴趣的短文，我们会再提供团队分配和项目选择的详细信息。请将材料发送至 innoventrepr@cornell.edu，邮件主题注明“Innovation Pilot Program Student Submission”（创新试点项目学生申请）。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:2",
+          "sourceText": "We’re excited to invite you to participate in a Technology Commercialization Innovation Competition, designed to give you hands-on experience in assessing teachers’ cutting-edge research for commercialization.",
+          "displayText": "We’re excited to invite you to participate in a Technology Commercialization Innovation Competition, designed to give you hands-on experience in assessing teachers’ cutting-edge research for commercialization.",
+          "relatedQuestionIds": [],
+          "translationZh": "我们很高兴邀请你参加科技成果转化创新大赛，这项比赛旨在让你亲身体验评估老师们的前沿研究能否投入商业化。",
+          "analysisZh": "主干是 We’re excited to invite you to participate in a ... Competition（我们很高兴邀请你参加比赛），invite sb. to do 说明邀请做什么。逗号后的 designed to give you ... 是过去分词短语，修饰前面的比赛，说明它的设计目的；其中 give you hands-on experience in doing 表示让你亲身体验做某事，assessing ... for commercialization 指评估研究成果能否商业化。读懂这句，就知道比赛要做的是评估老师的研究，而不是学生自己搞研究。",
+          "underlineRanges": [
+            {
+              "start": 17,
+              "end": 45,
+              "quote": "invite you to participate in"
+            },
+            {
+              "start": 101,
+              "end": 141,
+              "quote": "designed to give you hands-on experience"
+            },
+            {
+              "start": 145,
+              "end": 186,
+              "quote": "assessing teachers’ cutting-edge research"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:1"
+              ],
+              "start": 0,
+              "end": 10,
+              "quote": "科技成果转化创新大赛"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:2"
+              ],
+              "start": 11,
+              "end": 107,
+              "quote": "你想把创新研究转化为现实中的解决方案，同时培养为将来从事创新和商业工作做准备的实用技能吗？我们很高兴邀请你参加科技成果转化创新大赛。这项比赛旨在让你亲身体验评估老师们的前沿研究能否投入商业化。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:3"
+              ],
+              "start": 108,
+              "end": 126,
+              "quote": "时间：2025年1月24日—5月2日"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:4"
+              ],
+              "start": 127,
+              "end": 145,
+              "quote": "申请截止日期：2024年12月30日"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:5"
+              ],
+              "start": 146,
+              "end": 151,
+              "quote": "理想申请者"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:6"
+              ],
+              "start": 152,
+              "end": 165,
+              "quote": "• 你是在读的工科本科生。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:7"
+              ],
+              "start": 166,
+              "end": 176,
+              "quote": "• 你善于团队合作。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:8"
+              ],
+              "start": 177,
+              "end": 199,
+              "quote": "• 你此前表现出对创业（企业家精神）的兴趣。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:9"
+              ],
+              "start": 200,
+              "end": 222,
+              "quote": "• 你希望加入一个推动创新技术商业化的项目。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:10"
+              ],
+              "start": 223,
+              "end": 227,
+              "quote": "运作方式"
+            },
+            {
+              "paragraphId": "zh-reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:11"
+              ],
+              "start": 228,
+              "end": 259,
+              "quote": "• 具有创业思维（在申请材料中有所体现）的入选学生将受邀参赛。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:12"
+              ],
+              "start": 260,
+              "end": 285,
+              "quote": "• 所有受邀/入选的学生将获得500美元参赛补贴。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:13"
+              ],
+              "start": 286,
+              "end": 315,
+              "quote": "• 学生将被分到各个团队，老师们的项目也将分配给每个团队。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:14"
+              ],
+              "start": 316,
+              "end": 360,
+              "quote": "• 各团队将接受老师和业内专家的指导，学习市场调研、知识产权、财务建模和市场战略等技能。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:15"
+              ],
+              "start": 361,
+              "end": 396,
+              "quote": "• 各团队将根据所学，为分配给自己的、由老师提交的项目制定商业化计划。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p16",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:16"
+              ],
+              "start": 397,
+              "end": 423,
+              "quote": "• 各团队将在由业界领袖评审的决赛中角逐荣誉和奖项。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p17",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:17"
+              ],
+              "start": 424,
+              "end": 428,
+              "quote": "如何参加"
+            },
+            {
+              "paragraphId": "zh-reading-a-p18",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:18"
+              ],
+              "start": 429,
+              "end": 593,
+              "quote": "请在2024年12月30日前提交申请材料，包括一页简历和一篇250词、介绍你创业兴趣的短文，我们会再提供团队分配和项目选择的详细信息。请将材料发送至 innoventrepr@cornell.edu，邮件主题注明“Innovation Pilot Program Student Submission”（创新试点项目学生申请）。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-a-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:2",
+                "start": 162,
+                "end": 371,
+                "quote": "We’re excited to invite you to participate in a Technology Commercialization Innovation Competition, designed to give you hands-on experience in assessing teachers’ cutting-edge research for commercialization."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p2",
+                "start": 45,
+                "end": 96,
+                "quote": "我们很高兴邀请你参加科技成果转化创新大赛。这项比赛旨在让你亲身体验评估老师们的前沿研究能否投入商业化。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-evidence-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:7",
+                "start": 2,
+                "end": 24,
+                "quote": "You are a team player."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p7",
+                "start": 2,
+                "end": 10,
+                "quote": "你善于团队合作。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-evidence-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:15",
+                "start": 2,
+                "end": 116,
+                "quote": "Teams will develop a commercialization plan for their assigned teacher-submitted projects based on their learning."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p15",
+                "start": 2,
+                "end": 35,
+                "quote": "各团队将根据所学，为分配给自己的、由老师提交的项目制定商业化计划。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-evidence-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:6",
+                "start": 2,
+                "end": 46,
+                "quote": "You are a current engineering undergraduate."
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:18",
+                "start": 202,
+                "end": 251,
+                "quote": "Send your submissions to innoventrepr@cornell.edu"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p6",
+                "start": 2,
+                "end": 13,
+                "quote": "你是在读的工科本科生。"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p18",
+                "start": 67,
+                "end": 99,
+                "quote": "请将材料发送至 innoventrepr@cornell.edu"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "通知先用问句引出比赛目的，再列出时间和截止日期，然后分“理想申请者”“运作方式”“如何参加”三部分说明申请条件、比赛流程和报名方式。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:1",
+            "summary": "比赛名称：科技成果转化创新大赛。",
+            "function": "点明通知的主题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:2",
+            "summary": "用问句吸引读者，邀请学生参赛，说明比赛让学生亲身评估老师研究的商业化前景。",
+            "function": "引出活动并交代目的。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:3",
+            "summary": "比赛时间为2025年1月24日至5月2日。",
+            "function": "交代活动时间。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:4",
+            "summary": "申请截止日期为2024年12月30日。",
+            "function": "提醒报名期限。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:5",
+            "summary": "理想申请者的四条条件：在读工科本科生、善于团队合作、此前对创业有兴趣、愿意参与技术商业化项目。",
+            "function": "说明谁适合申请。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:10",
+            "summary": "比赛如何运作：择优邀请、发放补贴、分组并分配老师的项目、专家指导、制定商业化计划、决赛评奖。",
+            "function": "说明比赛流程。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:17",
+            "summary": "如何参加：截止日期前提交一页简历和250词短文，发送到指定邮箱。",
+            "function": "交代报名方式，其中的大学邮箱是判断出处的线索。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在“理想申请者”列出的条件中找出对申请者的要求。",
+      "stemTranslationZh": "对申请者有什么期望？",
+      "locateBy": "stem",
+      "locateFindZh": "往下逐条看列出的条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "团队合作精神。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:7",
+              "quote": "You are a team player.",
+              "anchor": "善于团队合作"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "工程学学位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "engineering",
+            "optionText": "Engineering",
+            "matchType": "exact",
+            "relationNote": "选项借用了[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:6]]的 engineering，但原文说的是在读的工科本科生（current engineering undergraduate），还没毕业，谈不上已有工程学位。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:6",
+              "quote": "You are a current engineering undergraduate.",
+              "anchor": "在读工科本科生"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "以往的经验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "previously",
+            "optionText": "Previous",
+            "matchType": "wordFamily",
+            "relationNote": "Previous 和[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:8]]的 previously 同源，可原文只要求此前对创业表现出兴趣（shown an interest），没要求有相关经验。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:8",
+              "quote": "You have previously shown an interest in entrepreneurship (企业家精神).",
+              "anchor": "此前表现出兴趣"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "商业证书。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Commercial certificates.",
+            "explanation": "通知里反复出现的是商业化（commercialization）项目，从没要求证书；[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:18]]要交的只是一页简历和一篇短文。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "expected of the applicants",
+          "sourceRole": "stem",
+          "targetText": "Ideal Applicant",
+          "relationType": "locationCue",
+          "targetCue": "Ideal Applicant",
+          "sourceZh": "对申请者的期望",
+          "targetCueZh": "理想的申请者",
+          "answerText": "You are a team player.",
+          "bridgeZh": "小标题下的几条就是对申请者的具体要求",
+          "note": "题干的“对申请者的期望”对应小标题 Ideal Applicant（理想申请者）。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:5"
+        },
+        {
+          "sourceText": "Teamwork spirit",
+          "sourceRole": "correctOption",
+          "targetText": "You are a team player.",
+          "relationType": "paraphrase",
+          "note": "选项的“团队合作精神”（teamwork spirit）就是条目里的“善于团队合作的人”（a team player），选 A。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:7"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项说的参赛者行动逐一放回比赛流程中核对。",
+      "stemTranslationZh": "参赛者在比赛中要做什么？",
+      "locateBy": "options",
+      "locateFindZh": "把选项的动作放回[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:10]]下各条，看谁来做、怎样分工",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "根据研究提交项目。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "their assigned teacher-submitted projects",
+            "sourceEntity": "teacher-submitted",
+            "optionText": "Submit projects based on research.",
+            "optionEntity": "Submit projects",
+            "explanation": "项目是老师提交（teacher-submitted）后分给各队的，参赛学生负责为它做计划，不是自己提交项目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:15",
+              "quote": "their assigned teacher-submitted projects",
+              "anchor": "老师提交的项目"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "自愿选择自己的团队。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Students will be assigned to teams",
+            "sourceHighlight": "assigned to teams",
+            "optionText": "Choose their teams willingly.",
+            "optionHighlight": "Choose their teams",
+            "explanation": "原文说学生是被分配到各队（assigned to teams），由主办方安排，选项却说学生自己挑团队。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:13",
+              "quote": "Students will be assigned to teams",
+              "anchor": "学生被分到各队"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "制定商业化计划。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:15",
+              "quote": "Teams will develop a commercialization plan for their assigned teacher-submitted projects based on their learning.",
+              "anchor": "制定商业化计划"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "独立完成项目。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Teams will be instructed by teachers and industry experts",
+            "sourceHighlight": "instructed by teachers and industry experts",
+            "optionText": "Finish projects independently.",
+            "optionHighlight": "independently",
+            "explanation": "学生是分组做项目，还有老师和业内专家指导（instructed by teachers and industry experts），并不是独自完成。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:14",
+              "quote": "Teams will be instructed by teachers and industry experts",
+              "anchor": "老师和专家指导"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Work out a commercialization plan",
+          "sourceRole": "correctOption",
+          "targetText": "develop a commercialization plan",
+          "relationType": "paraphrase",
+          "note": "选项的“制定”（work out）对应原文的“拟定”（develop），“商业化计划”（commercialization plan）原样沿用，选 C。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:15"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:23": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "source",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据通知的内容、对象和联系方式推断文章出处。",
+      "stemTranslationZh": "这篇文章最可能选自哪里？",
+      "locateBy": "passage",
+      "locateFindZh": "先看[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:6]]招的是什么人，再看[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:18]]报名邮箱的后缀",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一本科学期刊。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A science journal.",
+            "explanation": "科学期刊刊登研究成果，本文没有任何研究内容，只有比赛时间、申请条件和报名方式。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一篇学术文章。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "An academic article.",
+            "explanation": "文中虽提到老师的前沿研究（cutting-edge research），但只是比赛要评估的对象，全文没有提出和论证观点。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一本大学教材。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A college textbook.",
+            "explanation": "教材讲知识，本文却有申请截止日期（Application Deadline）和报名邮箱，是一则限期招募通知。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一个大学网站。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:6",
+              "quote": "You are a current engineering undergraduate.",
+              "anchor": "招募在读本科生"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:18",
+              "quote": "Send your submissions to innoventrepr@cornell.edu",
+              "anchor": "大学邮箱"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A university website",
+          "sourceRole": "correctOption",
+          "targetText": "innoventrepr@cornell.edu",
+          "relationType": "paraphrase",
+          "note": "原文没写出处，要靠推断：通知招募的是在读工科本科生（engineering undergraduate），评估的是老师的研究，报名邮箱又是康奈尔大学的 cornell.edu，可见这是大学面向本校学生发布的网上招募通知，选 D。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-a:18"
+        }
+      ]
+    }
+  }
+}

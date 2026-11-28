@@ -1,0 +1,750 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-liaoning-shenyang-2025-04-northeast-joint",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c": {
+      "overview": "一项涵盖33项研究的综述发现，增加每日步数与抑郁风险降低相关，步数越多益处越大，但约一万步后趋于平稳；研究建议把设定每日步数目标作为预防抑郁的公共卫生策略。",
+      "fullTranslationZh": "一项针对西班牙研究数据的全球性新综述发现，增加每日步数，哪怕只是少量增加，也与抑郁症状的减轻相关。卡斯蒂利亚-拉曼查大学的希门尼斯-洛佩斯带领的研究人员指出，已有确凿证据表明，任何形式的运动都是天然的抗抑郁剂。但像走路这样简单的事情又如何呢？为了弄清楚，他们查看了高质量研究中有关每日步数及其与心理健康关联的数据。\n这项新综述涵盖了33项研究，涉及全球96,000多名成年人，其中包括用健身追踪设备计算每日步数的人。研究人员发现，以每天5,000步为基准，每天哪怕多走1,000步的人，患抑郁症的几率也会下降9%。这些益处很快叠加起来。与每天步行5,000步及以下的人相比，每天步行7,000步的人患抑郁症的几率低31%。希门尼斯-洛佩斯及其同事写道：“此外，每天步数超过7,500步与抑郁发生率降低43%相关。”而且这些趋势适用于“所有年龄组，女性和男性”。\n数据显示，心理健康益处似乎在每天约10,000步时趋于平稳。正如身体健康研究所观察到的那样，在每天约10,000步以内，步数增加会使患抑郁症的几率下降。然而，研究人员发现，超过这个点之后再增加步数，可能与抑郁症状的显著减轻并无关联。\n此外，新发现把步行与许多其他形式的体育活动——举重训练、瑜伽甚至太极——并列为有助于预防抑郁的方式。\n研究指出：“设定每日步数目标可以成为一项有益且具包容性的预防抑郁的公共卫生策略。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1",
+          "sourceText": "A new global review of data from the Spanish study found that increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms (症状).",
+          "displayText": "A new global review of data from the Spanish study found that increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms (症状).",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:28",
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:31"
+          ],
+          "translationZh": "一项针对西班牙研究数据的全球性新综述发现，增加每日步数，哪怕只是少量增加，也与抑郁症状的减轻相关。",
+          "analysisZh": "主干是 A new global review found that ...（一项新综述发现……），of data from the Spanish study 修饰 review。that 引导宾语从句，从句主语是动名词短语 increasing the number of daily steps，谓语是 was associated with（与……相关）；插入的 even at low levels 强调哪怕增加得不多也有效。整句交代了全文的核心发现：多走路和抑郁症状减轻有关。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 19,
+              "quote": "A new global review"
+            },
+            {
+              "start": 62,
+              "end": 98,
+              "quote": "increasing the number of daily steps"
+            },
+            {
+              "start": 120,
+              "end": 174,
+              "quote": "was associated with a reduction in depressive symptoms"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3",
+          "sourceText": "However, the researchers revealed that increasing the number of steps beyond this point may not have been associated with a significant reduction in depressive symptoms.",
+          "displayText": "However, the researchers revealed that increasing the number of steps beyond this point may not have been associated with a significant reduction in depressive symptoms.",
+          "relatedQuestionIds": [
+            "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:30"
+          ],
+          "translationZh": "然而，研究人员发现，超过这个点之后再增加步数，可能与抑郁症状的显著减轻并无关联。",
+          "analysisZh": "主干是 the researchers revealed that ...（研究人员发现……）。宾语从句的主语是 increasing the number of steps beyond this point，beyond this point 指超过约一万步这个点；谓语 may not have been associated with 用 may 表示推测、用 not 否定，说明再多走未必还能显著减轻症状。句首 However 与前一句“一万步以内几率下降”形成转折。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 7,
+              "quote": "However"
+            },
+            {
+              "start": 70,
+              "end": 87,
+              "quote": "beyond this point"
+            },
+            {
+              "start": 88,
+              "end": 121,
+              "quote": "may not have been associated with"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1"
+              ],
+              "start": 0,
+              "end": 157,
+              "quote": "一项针对西班牙研究数据的全球性新综述发现，增加每日步数，哪怕只是少量增加，也与抑郁症状的减轻相关。卡斯蒂利亚-拉曼查大学的希门尼斯-洛佩斯带领的研究人员指出，已有确凿证据表明，任何形式的运动都是天然的抗抑郁剂。但像走路这样简单的事情又如何呢？为了弄清楚，他们查看了高质量研究中有关每日步数及其与心理健康关联的数据。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2"
+              ],
+              "start": 158,
+              "end": 380,
+              "quote": "这项新综述涵盖了33项研究，涉及全球96,000多名成年人，其中包括用健身追踪设备计算每日步数的人。研究人员发现，以每天5,000步为基准，每天哪怕多走1,000步的人，患抑郁症的几率也会下降9%。这些益处很快叠加起来。与每天步行5,000步及以下的人相比，每天步行7,000步的人患抑郁症的几率低31%。希门尼斯-洛佩斯及其同事写道：“此外，每天步数超过7,500步与抑郁发生率降低43%相关。”而且这些趋势适用于“所有年龄组，女性和男性”。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3"
+              ],
+              "start": 381,
+              "end": 497,
+              "quote": "数据显示，心理健康益处似乎在每天约10,000步时趋于平稳。正如身体健康研究所观察到的那样，在每天约10,000步以内，步数增加会使患抑郁症的几率下降。然而，研究人员发现，超过这个点之后再增加步数，可能与抑郁症状的显著减轻并无关联。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:4"
+              ],
+              "start": 498,
+              "end": 548,
+              "quote": "此外，新发现把步行与许多其他形式的体育活动——举重训练、瑜伽甚至太极——并列为有助于预防抑郁的方式。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:5"
+              ],
+              "start": 549,
+              "end": 590,
+              "quote": "研究指出：“设定每日步数目标可以成为一项有益且具包容性的预防抑郁的公共卫生策略。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-c-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:28",
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:31"
+            ],
+            "selectedSentenceId": "sentence-reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1",
+                "start": 0,
+                "end": 180,
+                "quote": "A new global review of data from the Spanish study found that increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms (症状)."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 0,
+                "end": 49,
+                "quote": "一项针对西班牙研究数据的全球性新综述发现，增加每日步数，哪怕只是少量增加，也与抑郁症状的减轻相关。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:30"
+            ],
+            "selectedSentenceId": "sentence-reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3",
+                "start": 252,
+                "end": 421,
+                "quote": "However, the researchers revealed that increasing the number of steps beyond this point may not have been associated with a significant reduction in depressive symptoms."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 76,
+                "end": 116,
+                "quote": "然而，研究人员发现，超过这个点之后再增加步数，可能与抑郁症状的显著减轻并无关联。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1",
+                "start": 62,
+                "end": 174,
+                "quote": "increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 21,
+                "end": 48,
+                "quote": "增加每日步数，哪怕只是少量增加，也与抑郁症状的减轻相关"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2",
+                "start": 166,
+                "end": 217,
+                "quote": "Compared to a baseline of 5,000 steps taken per day"
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2",
+                "start": 378,
+                "end": 431,
+                "quote": "Compared to folks walking 5,000 steps per day or less"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 57,
+                "end": 69,
+                "quote": "以每天5,000步为基准"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 110,
+                "end": 128,
+                "quote": "与每天步行5,000步及以下的人相比"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3",
+                "start": 0,
+                "end": 109,
+                "quote": "There did seem to be a leveling out of mental health benefits at about 10,000 steps per day, the data showed."
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3",
+                "start": 291,
+                "end": 420,
+                "quote": "increasing the number of steps beyond this point may not have been associated with a significant reduction in depressive symptoms"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 5,
+                "end": 29,
+                "quote": "心理健康益处似乎在每天约10,000步时趋于平稳"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 86,
+                "end": 115,
+                "quote": "超过这个点之后再增加步数，可能与抑郁症状的显著减轻并无关联"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1",
+                "start": 62,
+                "end": 174,
+                "quote": "increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms"
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:5",
+                "start": 1,
+                "end": 133,
+                "quote": "Setting goals for the number of daily steps can be a rewarding and inclusive public health strategy for the prevention of depression"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 21,
+                "end": 48,
+                "quote": "增加每日步数，哪怕只是少量增加，也与抑郁症状的减轻相关"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 6,
+                "end": 39,
+                "quote": "设定每日步数目标可以成为一项有益且具包容性的预防抑郁的公共卫生策略"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先提出“走路能否缓解抑郁”的问题和总体发现，再用数据说明步数增加带来的益处及其上限，接着把步行列入预防抑郁的运动方式，最后引用研究建议收尾。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1",
+            "summary": "新综述发现增加每日步数与抑郁症状减轻相关，并交代研究的起因和方法。",
+            "function": "提出话题和核心发现。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2",
+            "summary": "以每天5000步为基准，比较不同步数人群患抑郁的几率，步数越多几率越低，且适用于各类人群。",
+            "function": "用数据对比支撑核心发现。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3",
+            "summary": "心理健康益处在每天约一万步时趋于平稳，再多走未必有显著效果。",
+            "function": "补充益处的上限。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:4",
+            "summary": "新发现把步行与举重、瑜伽、太极等并列为预防抑郁的方式。",
+            "function": "说明研究的意义。"
+          },
+          {
+            "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:5",
+            "summary": "研究建议把设定每日步数目标作为预防抑郁的公共卫生策略。",
+            "function": "提出建议，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:28": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据首段对研究发现的介绍，推断这项研究说明了什么。",
+      "stemTranslationZh": "从第一段可以推断出关于这项西班牙研究的什么信息？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它以抑郁症患者为研究中心。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "more than 96,000 adults worldwide",
+            "sourceEntity": "adults",
+            "optionText": "It centers on depression patients.",
+            "optionEntity": "depression patients",
+            "explanation": "研究对象是全球九万六千多名成年人（adults），看的是他们患抑郁的几率，并非专门研究抑郁症患者。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2",
+              "quote": "more than 96,000 adults worldwide",
+              "anchor": "研究对象是成年人"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它证实了走路的好处。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1",
+              "quote": "increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms",
+              "anchor": "多走路与抑郁症状减轻相关"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它与之前的研究结果相矛盾。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "there’s already solid evidence that exercise of any kind is a natural antidepressant",
+            "sourceHighlight": "already solid evidence",
+            "optionText": "It contradicts former study results.",
+            "optionHighlight": "contradicts",
+            "explanation": "已有确凿证据表明运动能抗抑郁（solid evidence），新研究发现走路也有效，是在原有结论上补充，而不是推翻。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1",
+              "quote": "there’s already solid evidence that exercise of any kind is a natural antidepressant",
+              "anchor": "已有证据"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它调查了关于锻炼的证据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "evidence that exercise of any kind is a natural antidepressant",
+            "optionText": "evidence of taking exercise",
+            "matchType": "exact",
+            "relationNote": "evidence 和 exercise 都取自研究者提到的已有结论，那只是背景；这项研究本身查的是每日步数（daily step counts）和心理健康的关系。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1",
+              "quote": "there’s already solid evidence that exercise of any kind is a natural antidepressant",
+              "anchor": "已有结论是背景"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the Spanish study",
+          "sourceRole": "stem",
+          "targetText": "A new global review of data from the Spanish study found that increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms (症状).",
+          "relationType": "locationCue",
+          "answerText": "increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms",
+          "note": "题干 the Spanish study 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1"
+        },
+        {
+          "sourceText": "It confirms the advantages of walking",
+          "sourceRole": "correctOption",
+          "targetText": "increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms",
+          "relationType": "paraphrase",
+          "note": "原文说多走路、哪怕只多一点，都和抑郁症状减轻有关（a reduction in depressive symptoms），这就是走路的好处；选项“证实了走路的好处”（confirms the advantages of walking）是由此推出的，选 B。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:29": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "comparison"
+      },
+      "questionFocus": "判断第二段用什么方式呈现研究数据。",
+      "stemTranslationZh": "第二段是如何展开的？",
+      "locateBy": "options",
+      "locateFindZh": "到[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2]]找每种写法的标志：例子、时间、原因还是对比",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过举例。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By giving examples.",
+            "explanation": "[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2]]列的是研究规模和各组几率数据，没有讲某个人或某件事的具体例子。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "按照时间顺序。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By following a timeline.",
+            "explanation": "段中的数字是每天的步数和百分比，不是年份或先后步骤，看不出时间线。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过分析原因。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By analyzing causes.",
+            "explanation": "研究只报告步数与抑郁几率相关（associated with），没有解释走路为什么能减少抑郁。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过进行对比。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2",
+              "quote": "Compared to a baseline of 5,000 steps taken per day",
+              "anchor": "以5000步为基准对比"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2",
+              "quote": "Compared to folks walking 5,000 steps per day or less",
+              "anchor": "再次对比"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "By making a comparison",
+          "sourceRole": "correctOption",
+          "targetText": "Compared to a baseline of 5,000 steps taken per day",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2]]两次用“与……相比”（Compared to），都以每天5000步为基准，比出多走1000步、走7000步、超过7500步时抑郁几率分别降低9%、31%、43%，让“走得越多风险越低”一目了然，选 D。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出每天步数超过一万步后心理健康益处的变化。",
+      "stemTranslationZh": "每天步行超过10,000步后可能会怎样？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "患其他疾病的风险大幅下降。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Risks of other diseases drop sharply.",
+            "explanation": "全文只讨论步数和抑郁的关系，没提其他疾病的风险。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "益处不再显著增加。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3",
+              "quote": "There did seem to be a leveling out of mental health benefits at about 10,000 steps per day, the data showed.",
+              "anchor": "益处趋于平稳"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3",
+              "quote": "increasing the number of steps beyond this point may not have been associated with a significant reduction in depressive symptoms",
+              "anchor": "不再显著减轻"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "身体健康状况大幅改善。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "physical health",
+            "optionText": "Physical health",
+            "matchType": "exact",
+            "relationNote": "physical health 出自“正如身体健康研究所观察到的”这个类比，说的是以往研究的类似规律，没说超过一万步后身体大为改善。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3",
+              "quote": "As has been observed in studies on physical health",
+              "anchor": "类比以往研究"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "抑郁症状完全消失。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "may not have been associated with a significant reduction in depressive symptoms",
+            "sourceHighlight": "may not have been associated with a significant reduction",
+            "optionText": "Depression symptoms disappear totally.",
+            "optionHighlight": "disappear totally",
+            "explanation": "原文说超过这个点后再多走，抑郁症状可能不会再明显减轻，更谈不上完全消失。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3",
+              "quote": "may not have been associated with a significant reduction in depressive symptoms",
+              "anchor": "不再显著减轻"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "10,000 steps",
+          "sourceRole": "stem",
+          "targetText": "There did seem to be a leveling out of mental health benefits at about 10,000 steps per day, the data showed.",
+          "relationType": "locationCue",
+          "answerText": "a leveling out of mental health benefits",
+          "note": "题干 10,000 steps 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3"
+        },
+        {
+          "sourceText": "Benefits stop increasing significantly",
+          "sourceRole": "correctOption",
+          "targetText": "a leveling out of mental health benefits",
+          "relationType": "paraphrase",
+          "note": "选项的“益处不再增加”就是原文的“心理健康益处趋于平稳”（a leveling out of benefits）；“不再显著”对应 However 句的“抑郁症状不会再显著减轻”（not … a significant reduction），选 B。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3"
+        }
+      ]
+    },
+    "question:paper-mock-liaoning-shenyang-2025-04-northeast-joint:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括全文围绕的核心关系，选出最佳标题。",
+      "stemTranslationZh": "这篇文章最好的标题是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1]]的研究发现入手，再看后面几段的数据和建议都围绕什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "运动方式：减少疾病。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "weight training, yoga and even tai chi",
+            "sourceHighlight": "weight training, yoga and even tai chi",
+            "optionText": "Exercise Modes: Reduction in Disease.",
+            "optionHighlight": "Exercise Modes",
+            "explanation": "全文只研究走路这一种运动、抑郁这一种病；[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:4]]提到举重、瑜伽、太极，只是把走路与它们并列，标题把范围放得太大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:4",
+              "quote": "weight training, yoga and even tai chi",
+              "anchor": "其他运动只是并列"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "步数：抵抗抑郁。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1",
+              "quote": "increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms",
+              "anchor": "核心发现"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:5",
+              "quote": "Setting goals for the number of daily steps can be a rewarding and inclusive public health strategy for the prevention of depression",
+              "anchor": "建议用步数目标预防抑郁"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "健身追踪器：记录每日步数。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "fitness-tracker devices",
+            "optionText": "Fitness Tracker",
+            "matchType": "exact",
+            "relationNote": "Fitness Tracker 取自[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2]]的 fitness-tracker devices，那只是交代部分研究对象用什么计步，全文并不讲这种设备。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2",
+              "quote": "including those who used fitness-tracker devices to calculate their daily steps",
+              "anchor": "计步工具"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "情绪调节器：焕新健康状态。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Mood Controller: Refreshing Health State.",
+            "explanation": "原文没有“情绪调节器”的说法，这个标题也没点出步数和抑郁这两个贯穿全文的核心。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Step Counts: Resistance to Depression",
+          "sourceRole": "correctOption",
+          "targetText": "increasing the number of daily steps, even at low levels, was associated with a reduction in depressive symptoms",
+          "relationType": "paraphrase",
+          "note": "几段写的都是每日步数和抑郁的关系：[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1]]给出多走路与抑郁症状减轻相关的发现，[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:2]]和[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:3]]用数据说明步数增加的益处及其上限，[[block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:5]]建议设定步数目标预防抑郁。选项的“步数”（Step Counts）和“抵抗抑郁”（Resistance to Depression）正好把这条主线包进去，选 B。",
+          "targetParagraphId": "block:paper-mock-liaoning-shenyang-2025-04-northeast-joint:reading-c:1"
+        }
+      ]
+    }
+  }
+}
