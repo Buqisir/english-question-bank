@@ -1,0 +1,799 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c": {
+      "overview": "科普文章讲银河系的演变：130亿年前四散运动的粒子因角动量守恒塌缩成扁平圆盘，旋臂是不断形成又瓦解的挤压波，约50亿年后银河系还将与仙女星系合并。",
+      "fullTranslationZh": "我们的地球位于银河系一条旋臂的内缘，但这并不是我们的永久住址。大多数恐龙灭绝时，我们的太阳系还在一条完全不同的旋臂上！我们的星系一直处在不断的演化之中。\n130亿年前，最终形成银河系的气体和尘埃粒子正朝各个方向快速运动。尽管各部分运动狂乱，整个星系却在绕着一根轴旋转。虽然单个粒子的运动杂乱无章，整个星系却把所有粒子收拢起来，绕着一根共同的轴转动。与此同时，频繁的碰撞使粒子减速，引力得以把它们向内拉。\n那么，银河系为什么是扁平的呢？答案在于角动量守恒。在恒星这类密度大的天体中，内部压力和引力会造就一个球体。但在年轻星系这种低密度、高动量的系统里，旋转运动占主导。为了保持动量守恒，粒子不能直接向内坠落，而是被迫绕转，经过数十亿年逐渐塌缩成一个单一的旋转圆盘。\n银河系的旋臂并不是固定不变的结构，而是动态的挤压波。这些波穿过星系盘时挤压气体，催生出勾勒出旋臂轮廓的一群群明亮的年轻星团。随后，星系的自转把这些波卷成宏伟的旋涡。我们的太阳系绕转得比波的图样快，眼下正深入我们所在的本地旋臂——穿越一条旋臂要花上数百万年。\n最新观测甚至表明，旋涡星系可以同时容纳两道或更多以不同速度传播的交叉波。其结果是，旋臂会存在数千万年乃至数亿年，然后瓦解、再重新形成。45亿年前地球形成时，银河系的旋臂可能和今天完全不同。而大约50亿年后，银河系将开始与仙女星系合并，打破角动量守恒，从而形成蛋形，开启银河系历史的新时代。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+          "sourceText": "To conserve momentum, particles could not fall directly inward but were forced to orbit, gradually collapsing into a single, spinning disc over billions of years.",
+          "displayText": "To conserve momentum, particles could not fall directly inward but were forced to orbit, gradually collapsing into a single, spinning disc over billions of years.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:29"
+          ],
+          "translationZh": "为了保持动量守恒，粒子不能直接向内坠落，而是被迫绕转，经过数十亿年逐渐塌缩成一个单一的旋转圆盘。",
+          "analysisZh": "主干是 particles could not fall directly inward but were forced to orbit：主语 particles 带两个由 not … but … 连接的并列谓语，意思是“不能直接向内坠落，而是被迫绕转”。句首 To conserve momentum 是不定式作目的状语；gradually collapsing into … 是现在分词短语作结果状语，说明绕转的结果是慢慢塌缩成一个旋转圆盘；over billions of years 交代所用的时间。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "To conserve momentum"
+            },
+            {
+              "start": 32,
+              "end": 87,
+              "quote": "could not fall directly inward but were forced to orbit"
+            },
+            {
+              "start": 89,
+              "end": 138,
+              "quote": "gradually collapsing into a single, spinning disc"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4",
+          "sourceText": "As these waves travel through the galaxy’s disc, they squeeze gas, starting the birth of bright young star groups that outline the arms.",
+          "displayText": "As these waves travel through the galaxy’s disc, they squeeze gas, starting the birth of bright young star groups that outline the arms.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:30"
+          ],
+          "translationZh": "这些波穿过星系盘时挤压气体，催生出勾勒出旋臂轮廓的一群群明亮的年轻星团。",
+          "analysisZh": "主干是 they squeeze gas（它们挤压气体），they 指前面的 these waves。As 引导时间状语从句，意为“当这些波穿过星系盘时”。starting the birth of … 是现在分词短语作结果状语：挤压气体的结果是催生年轻星团。that outline the arms 是定语从句，修饰 star groups，说明正是这些星团勾勒出旋臂。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "As these waves travel"
+            },
+            {
+              "start": 49,
+              "end": 65,
+              "quote": "they squeeze gas"
+            },
+            {
+              "start": 67,
+              "end": 88,
+              "quote": "starting the birth of"
+            },
+            {
+              "start": 114,
+              "end": 135,
+              "quote": "that outline the arms"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:1"
+              ],
+              "start": 0,
+              "end": 76,
+              "quote": "我们的地球位于银河系一条旋臂的内缘，但这并不是我们的永久住址。大多数恐龙灭绝时，我们的太阳系还在一条完全不同的旋臂上！我们的星系一直处在不断的演化之中。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2"
+              ],
+              "start": 77,
+              "end": 201,
+              "quote": "130亿年前，最终形成银河系的气体和尘埃粒子正朝各个方向快速运动。尽管各部分运动狂乱，整个星系却在绕着一根轴旋转。虽然单个粒子的运动杂乱无章，整个星系却把所有粒子收拢起来，绕着一根共同的轴转动。与此同时，频繁的碰撞使粒子减速，引力得以把它们向内拉。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3"
+              ],
+              "start": 202,
+              "end": 331,
+              "quote": "那么，银河系为什么是扁平的呢？答案在于角动量守恒。在恒星这类密度大的天体中，内部压力和引力会造就一个球体。但在年轻星系这种低密度、高动量的系统里，旋转运动占主导。为了保持动量守恒，粒子不能直接向内坠落，而是被迫绕转，经过数十亿年逐渐塌缩成一个单一的旋转圆盘。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4"
+              ],
+              "start": 332,
+              "end": 460,
+              "quote": "银河系的旋臂并不是固定不变的结构，而是动态的挤压波。这些波穿过星系盘时挤压气体，催生出勾勒出旋臂轮廓的一群群明亮的年轻星团。随后，星系的自转把这些波卷成宏伟的旋涡。我们的太阳系绕转得比波的图样快，眼下正深入我们所在的本地旋臂——穿越一条旋臂要花上数百万年。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5"
+              ],
+              "start": 461,
+              "end": 605,
+              "quote": "最新观测甚至表明，旋涡星系可以同时容纳两道或更多以不同速度传播的交叉波。其结果是，旋臂会存在数千万年乃至数亿年，然后瓦解、再重新形成。45亿年前地球形成时，银河系的旋臂可能和今天完全不同。而大约50亿年后，银河系将开始与仙女星系合并，打破角动量守恒，从而形成蛋形，开启银河系历史的新时代。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-reading-c-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+                "start": 96,
+                "end": 134,
+                "quote": "were moving quickly in every direction"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 22,
+                "end": 32,
+                "quote": "正朝各个方向快速运动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-c-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+                "start": 31,
+                "end": 92,
+                "quote": "The answer lies in the conservation of angular momentum (动量)."
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+                "start": 271,
+                "end": 358,
+                "quote": "To conserve momentum, particles could not fall directly inward but were forced to orbit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 15,
+                "end": 25,
+                "quote": "答案在于角动量守恒。"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 81,
+                "end": 107,
+                "quote": "为了保持动量守恒，粒子不能直接向内坠落，而是被迫绕转"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-c-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4",
+                "start": 150,
+                "end": 218,
+                "quote": "starting the birth of bright young star groups that outline the arms"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 40,
+                "end": 61,
+                "quote": "催生出勾勒出旋臂轮廓的一群群明亮的年轻星团"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-c-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:1",
+                "start": 207,
+                "end": 258,
+                "quote": "Our galaxy(星系) is in a state of constant evolution."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 59,
+                "end": 76,
+                "quote": "我们的星系一直处在不断的演化之中。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:29"
+            ],
+            "selectedSentenceId": "sentence-reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+                "start": 271,
+                "end": 433,
+                "quote": "To conserve momentum, particles could not fall directly inward but were forced to orbit, gradually collapsing into a single, spinning disc over billions of years."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 81,
+                "end": 129,
+                "quote": "为了保持动量守恒，粒子不能直接向内坠落，而是被迫绕转，经过数十亿年逐渐塌缩成一个单一的旋转圆盘。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:30"
+            ],
+            "selectedSentenceId": "sentence-reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4",
+                "start": 83,
+                "end": 219,
+                "quote": "As these waves travel through the galaxy’s disc, they squeeze gas, starting the birth of bright young star groups that outline the arms."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 26,
+                "end": 62,
+                "quote": "这些波穿过星系盘时挤压气体，催生出勾勒出旋臂轮廓的一群群明亮的年轻星团。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用太阳系换过旋臂引出银河系一直在演化，再按时间写粒子聚拢、塌缩成盘的过程，接着解释旋臂的成因和兴衰，最后展望与仙女星系合并后的新阶段。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:1",
+            "summary": "地球在银河系中的位置并不固定，恐龙灭绝时太阳系还在另一条旋臂上，可见星系一直在演化。",
+            "function": "用身边的例子引出话题：银河系在不断演化"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+            "summary": "130亿年前粒子四散运动，整体却绕轴旋转，碰撞使粒子减速，引力把它们往里拉。",
+            "function": "写银河系形成之初的状态"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+            "summary": "银河系之所以扁平，是因为角动量守恒迫使粒子绕转，最终塌缩成旋转圆盘。",
+            "function": "设问并解释银河系呈扁平圆盘的原因"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4",
+            "summary": "旋臂是挤压波，挤压气体催生年轻星团，又被自转卷成旋涡；太阳系正深入本地旋臂。",
+            "function": "解释旋臂的本质和形成过程"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5",
+            "summary": "旋臂会瓦解再重组，过去的形状与今天不同；约50亿年后银河系将与仙女星系合并成蛋形。",
+            "function": "写旋臂的变化并展望银河系的未来"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到形成银河系的粒子最初怎样运动，再和选项的说法对应。",
+      "stemTranslationZh": "形成银河系的粒子最初处于什么状态？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "四处乱飞。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+              "quote": "Thirteen billion years ago, the gas and dust particles(分子) that eventually became our Milky Way were moving quickly in every direction.",
+              "anchor": "粒子朝各个方向快速运动"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+              "quote": "While their individual motions were chaotic",
+              "anchor": "单个粒子运动杂乱"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "因引力而运动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Meanwhile, frequent crashes slowed the particles, allowing gravity to pull them inward.",
+            "sourceEntity": "gravity",
+            "optionText": "Moving because of gravity.",
+            "optionEntity": "gravity",
+            "explanation": "引力把粒子往里拉（gravity to pull them inward）发生在碰撞让粒子减速之后，是后来的变化，不是最初的状态。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+              "quote": "allowing gravity to pull them inward",
+              "anchor": "碰撞减速后引力才把粒子往里拉"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "绕着一根轴快速旋转。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Despite the wild motion of its parts, the galaxy as a whole was spinning about an axis(轴).",
+            "sourceEntity": "the galaxy as a whole",
+            "optionText": "Spinning around an axis rapidly.",
+            "optionEntity": "Spinning around an axis",
+            "explanation": "绕轴旋转的是整个星系（the galaxy as a whole），单个粒子的运动是杂乱的（chaotic）；选项把整体的旋转安到了粒子身上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+              "quote": "the galaxy as a whole was spinning about an axis",
+              "anchor": "整体绕轴旋转"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过碰撞获得动量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Meanwhile, frequent crashes slowed the particles, allowing gravity to pull them inward.",
+            "sourceHighlight": "slowed",
+            "optionText": "Crashing to gain momentum.",
+            "optionHighlight": "gain momentum",
+            "explanation": "原文说频繁碰撞让粒子慢了下来（slowed），选项却说碰撞让粒子获得动量；碰撞也是后来的事，不是最初的状态。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+              "quote": "frequent crashes slowed the particles",
+              "anchor": "碰撞使粒子减速"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "formed the Milky Way",
+          "sourceRole": "stem",
+          "targetText": "Thirteen billion years ago, the gas and dust particles(分子) that eventually became our Milky Way were moving quickly in every direction.",
+          "relationType": "locationCue",
+          "targetCue": "eventually became our Milky Way",
+          "sourceZh": "形成银河系",
+          "targetCueZh": "最终变成银河系",
+          "answerText": "moving quickly in every direction",
+          "note": "题干 formed the Milky Way 对应原文 eventually became our Milky Way，initial 对应句首的“130亿年前”。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2"
+        },
+        {
+          "sourceText": "Flying around randomly",
+          "sourceRole": "correctOption",
+          "targetText": "moving quickly in every direction",
+          "relationType": "paraphrase",
+          "note": "选项的“四处乱飞”（Flying around randomly）就是原文的“朝各个方向快速运动”（moving quickly in every direction）；后文说各部分运动狂乱（wild motion）、单个粒子杂乱无章（chaotic），也说明这种运动毫无章法。选 A。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者给出的银河系呈扁平圆盘状的主要原因。",
+      "stemTranslationZh": "文中给出的银河系呈扁平圆盘状的主要原因是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看 The answer 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "银河系密度高。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "But in a low-density, high-momentum system like a young galaxy, the spinning motion dominates.",
+            "sourceHighlight": "low-density",
+            "optionText": "The high density of the Milky Way.",
+            "optionHighlight": "high density",
+            "explanation": "原文说年轻星系是低密度（low-density）系统；密度大的是恒星这类天体，它们形成的是球体。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+              "quote": "But in a low-density, high-momentum system like a young galaxy, the spinning motion dominates.",
+              "anchor": "年轻星系密度低"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "需要保持角动量。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+              "quote": "The answer lies in the conservation of angular momentum (动量).",
+              "anchor": "答案是角动量守恒"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+              "quote": "To conserve momentum, particles could not fall directly inward but were forced to orbit, gradually collapsing into a single, spinning disc over billions of years.",
+              "anchor": "为守恒而绕转成盘"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "气体和尘埃粒子的频繁碰撞。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "frequent crashes",
+            "optionText": "frequent crashes",
+            "matchType": "exact",
+            "relationNote": "frequent crashes 照搬自[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2|Meanwhile, frequent crashes slowed]]，碰撞只是让粒子减速、被引力往里拉，作者没把它当作变扁的原因；他给的原因是角动量守恒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+              "quote": "Meanwhile, frequent crashes slowed the particles, allowing gravity to pull them inward.",
+              "anchor": "碰撞使粒子减速"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "内部压力和引力占主导。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In dense (密度大的) objects like stars, internal pressure and gravity create a sphere.",
+            "sourceEntity": "dense (密度大的) objects like stars",
+            "optionText": "The dominance of internal pressure and gravity.",
+            "optionEntity": "internal pressure and gravity",
+            "explanation": "内部压力和引力起作用的是恒星这类高密度天体，造出的是球体（sphere）；年轻星系里占主导的是旋转运动（the spinning motion dominates）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+              "quote": "In dense (密度大的) objects like stars, internal pressure and gravity create a sphere.",
+              "anchor": "恒星里压力和引力造出球体"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "flat",
+          "sourceRole": "stem",
+          "targetText": "So, why is the Milky Way flat?",
+          "relationType": "locationCue",
+          "answerText": "the conservation of angular momentum",
+          "bridgeZh": "作者先设问，The answer 后面就是他给的原因",
+          "note": "题干 flat 原词出现在作者的设问里。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3"
+        },
+        {
+          "sourceText": "The need to maintain angular momentum",
+          "sourceRole": "correctOption",
+          "targetText": "the conservation of angular momentum",
+          "relationType": "paraphrase",
+          "note": "选项的“保持角动量”（maintain angular momentum）就是原文的“角动量守恒”（conservation of angular momentum）；[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3|To conserve momentum, particles could]]接着说明粒子为了守恒只能绕转，最后塌缩成圆盘。选 B。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:30": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "由旋臂是挤压波、挤压气体催生星团这一过程，推断旋臂的特点。",
+      "stemTranslationZh": "关于银河系的旋臂，可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看这些波带来什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们是永久存在的结构。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "The result would be that spiral arms last for tens or hundreds of millions of years before breaking apart and re-forming.",
+            "sourceHighlight": "breaking apart and re-forming",
+            "optionText": "They are permanent features.",
+            "optionHighlight": "permanent",
+            "explanation": "原文说旋臂不是固定结构（not rigid structures），存在数千万到数亿年后就会瓦解再重组（breaking apart and re-forming），并非永久不变。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5",
+              "quote": "spiral arms last for tens or hundreds of millions of years before breaking apart and re-forming",
+              "anchor": "旋臂会瓦解重组"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有新的恒星在那里诞生。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4",
+              "quote": "As these waves travel through the galaxy’s disc, they squeeze gas, starting the birth of bright young star groups that outline the arms.",
+              "anchor": "挤压波催生年轻星团"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们直接由自转造成。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "The galaxy’s spin then winds these waves into grand spirals.",
+            "optionText": "caused by the spin",
+            "matchType": "exact",
+            "relationNote": "spin 出自[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4|The galaxy’s spin then winds]]，自转只是把已有的挤压波卷成旋涡（winds these waves），旋臂本身是挤压波，选项说成直接由自转造成。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4",
+              "quote": "The galaxy’s spin then winds these waves into grand spirals.",
+              "anchor": "自转把波卷成旋涡"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们比太阳系移动得快。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Our solar system, orbiting faster than the wave pattern, is currently diving deeper into our local arm",
+            "sourceHighlight": "orbiting faster than the wave pattern",
+            "optionText": "They move faster than our solar system.",
+            "optionHighlight": "move faster than our solar system",
+            "explanation": "原文说太阳系绕转得比波的图样快（orbiting faster than the wave pattern），所以才会深入旋臂；选项把快慢说反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4",
+              "quote": "orbiting faster than the wave pattern",
+              "anchor": "太阳系更快"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "spiral arms",
+          "sourceRole": "stem",
+          "targetText": "The Milky Way’s spiral arms are not rigid structures, but dynamic squeezing waves.",
+          "relationType": "locationCue",
+          "answerText": "starting the birth of bright young star groups that outline the arms",
+          "bridgeZh": "these waves 指旋臂这种挤压波",
+          "note": "题干 spiral arms 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4"
+        },
+        {
+          "sourceText": "They have new stars born there",
+          "sourceRole": "correctOption",
+          "targetText": "starting the birth of bright young star groups that outline the arms",
+          "relationType": "paraphrase",
+          "note": "原文没直接说旋臂里有新星诞生，只说挤压波挤压气体，催生出勾勒旋臂的明亮年轻星团（the birth of bright young star groups）；星团勾出了旋臂，可见新星就诞生在旋臂上。选 B。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:31": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看各段分别写银河系哪一阶段的变化，选出能盖住全文的主题。",
+      "stemTranslationZh": "这篇文章主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:1]] 说地球的位置不固定起，看各段按时间写了银河系的哪些变化",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "银河系的演变。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:1",
+              "quote": "Our galaxy(星系) is in a state of constant evolution.",
+              "anchor": "星系一直在演化"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2",
+              "quote": "Thirteen billion years ago, the gas and dust particles(分子) that eventually became our Milky Way were moving quickly in every direction.",
+              "anchor": "130亿年前的状态"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5",
+              "quote": "And in about 5 billion years, the Milky Way will start to combine with the Andromeda galaxy",
+              "anchor": "50亿年后的变化"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "星系之间的碰撞。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "the Milky Way will start to combine with the Andromeda galaxy",
+            "sourceHighlight": "combine with the Andromeda galaxy",
+            "optionText": "The crash between galaxies.",
+            "optionHighlight": "crash between galaxies",
+            "explanation": "太窄：和仙女星系合并只是[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5|And in about 5 billion years]]对未来的展望，盖不住前面粒子塌缩成盘、旋臂形成这些内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5",
+              "quote": "the Milky Way will start to combine with the Andromeda galaxy",
+              "anchor": "与仙女星系合并"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "太阳系的形成。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Our solar system, orbiting faster than the wave pattern, is currently diving deeper into our local arm",
+            "sourceEntity": "Our solar system",
+            "optionText": "The formation of the solar system.",
+            "optionEntity": "the solar system",
+            "explanation": "太阳系只用来说明我们在旋臂里的位置在变；全文写形成过程的是银河系（[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2]]、[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3]]），没讲太阳系怎样形成。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4",
+              "quote": "Our solar system, orbiting faster than the wave pattern, is currently diving deeper into our local arm",
+              "anchor": "太阳系在旋臂中的位置"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "旋涡星系的特征。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Recent observations even suggest spiral galaxies can host two or more crossing waves travelling at different speeds.",
+            "sourceHighlight": "spiral galaxies",
+            "optionText": "The characteristics of spiral galaxies.",
+            "optionHighlight": "spiral galaxies",
+            "explanation": "太宽：spiral galaxies 泛指所有旋涡星系，全文写的是我们的银河系怎样一步步变化，也不是在罗列特征。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5",
+              "quote": "Recent observations even suggest spiral galaxies can host two or more crossing waves travelling at different speeds.",
+              "anchor": "只有一句提到旋涡星系"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The evolution of the Milky Way",
+          "sourceRole": "correctOption",
+          "targetText": "Our galaxy(星系) is in a state of constant evolution.",
+          "relationType": "paraphrase",
+          "note": "几段都在写银河系怎么变：[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:1]]说太阳系换过旋臂、星系一直在演化（constant evolution），[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:2]]和[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3]]写130亿年前的粒子怎样塌缩成圆盘，[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4]]和[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:5]]写旋臂的形成、瓦解与重组，并展望和仙女星系合并。选项的“银河系的演变”把这些都包了进去，选 A。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:1"
+        }
+      ]
+    }
+  }
+}

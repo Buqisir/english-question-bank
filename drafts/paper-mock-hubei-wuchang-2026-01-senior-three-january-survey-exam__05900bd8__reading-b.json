@@ -1,0 +1,1005 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b": {
+      "overview": "“我”上门讨饭，男主人认定“我”懒惰，只让“我”第二天去搬砖；“我”假意答应仍讨不到吃的，最后顺着他“人人都能像我”的说法反问，驳得他无言以对。",
+      "fullTranslationZh": "那天晚上，有一户人家拒绝了我，这家让我格外难忘。透过门廊的窗户，我看见一个男人正在吃一大块肉饼。我站在敞开的门口，他一边和我说话，一边照吃不误。\n他头也不抬，厉声说道：“我不信你想干活。”我根本没提干活的事。我想谈的是“吃的”。其实我并不想干活。我想当晚就搭上西行的陆路列车。\n“就算有机会，你也不会干活的。”他盛气凌人地说。\n我瞥了一眼他那面容和善的妻子，心里明白，要不是这只“看门恶犬”，我早就能吃上一块肉饼了。于是我暗自叹了口气，顺着他的话演下去。\n“我当然想干活。”我唬弄他说。\n“好吧，”他说，“明天上午到_______街和_______街的拐角来（地址我已经忘了），在那栋烧毁的楼旁边搬砖。”\n“好的，先生，我一定到。”\n他又吃起了肉饼。我等着。过了几分钟，他抬起头，脸上一副“我还以为你走了”的神情，质问道：\n“还有什么事？”\n“我……我在等点吃的。”我轻声说。\n“我就知道！我要是现在给你吃的，就再也别想见到你了。看看我。我不欠任何人的。我从没向谁讨过吃的。我的饭都是自己挣来的。你游手好闲，懒惰成性，我从你脸上就看得出来。我一直勤勤恳恳、老老实实。我有今天全靠自己。只要你肯干活、为人诚实，你也能做到。”\n“像你一样？”我问。\n“对，像我一样。”\n“我们所有人都能？”\n“对，你们所有人。”\n“可要是我们都变得像你一样，”我说，“就没人替你搬砖了。”\n他妻子眼里闪过一丝笑意。至于他，则大惊失色——可他究竟是被“没人替他搬砖”这种可怕的可能吓坏了，还是被我的无礼吓坏了，我永远也不会知道了。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+          "sourceText": "I glanced at his gentle-faced wife, and knew that but for this Cerberus I’d have a slice of that meat pie.",
+          "displayText": "I glanced at his gentle-faced wife, and knew that but for this Cerberus I’d have a slice of that meat pie.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:24",
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:25"
+          ],
+          "translationZh": "我瞥了一眼他那面容和善的妻子，心里明白，要不是这只“看门恶犬”，我早就能吃上一块肉饼了。",
+          "analysisZh": "主干是 I glanced at … and knew that …：主语 I 带两个并列谓语，glanced at（瞥了一眼）和 knew（心里明白）。that 引出 knew 的宾语从句。从句里 but for this Cerberus 意为“要不是这只看门恶犬”，用介词短语表示虚拟条件，所以后面用 I’d（= I would）have，说的是与事实相反的结果：其实他吃不到肉饼。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "I glanced at"
+            },
+            {
+              "start": 36,
+              "end": 49,
+              "quote": "and knew that"
+            },
+            {
+              "start": 50,
+              "end": 80,
+              "quote": "but for this Cerberus I’d have"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17",
+          "sourceText": "As for him, he was horrified – but whether at the awful possibility that nobody would toss bricks for him or at my rudeness, I shall never know.",
+          "displayText": "As for him, he was horrified – but whether at the awful possibility that nobody would toss bricks for him or at my rudeness, I shall never know.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:26"
+          ],
+          "translationZh": "至于他，则大惊失色——可他究竟是被“没人替他搬砖”这种可怕的可能吓坏了，还是被我的无礼吓坏了，我永远也不会知道了。",
+          "analysisZh": "破折号前的主干是 he was horrified（他大惊失色），As for him 引出话题“至于他”。破折号后另起一层，主干是 I shall never know（我永远不会知道），know 的宾语是提到前面的 whether at … or at …：whether … or … 连接两个并列的介词短语，前面省去了 he was horrified，意思是“他是被……吓坏，还是被……吓坏”。that nobody would toss bricks for him 是同位语从句，说明 possibility 的内容。",
+          "underlineRanges": [
+            {
+              "start": 12,
+              "end": 28,
+              "quote": "he was horrified"
+            },
+            {
+              "start": 35,
+              "end": 45,
+              "quote": "whether at"
+            },
+            {
+              "start": 106,
+              "end": 111,
+              "quote": "or at"
+            },
+            {
+              "start": 125,
+              "end": 143,
+              "quote": "I shall never know"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:1"
+              ],
+              "start": 0,
+              "end": 72,
+              "quote": "那天晚上，有一户人家拒绝了我，这家让我格外难忘。透过门廊的窗户，我看见一个男人正在吃一大块肉饼。我站在敞开的门口，他一边和我说话，一边照吃不误。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2"
+              ],
+              "start": 73,
+              "end": 138,
+              "quote": "他头也不抬，厉声说道：“我不信你想干活。”我根本没提干活的事。我想谈的是“吃的”。其实我并不想干活。我想当晚就搭上西行的陆路列车。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:3"
+              ],
+              "start": 139,
+              "end": 163,
+              "quote": "“就算有机会，你也不会干活的。”他盛气凌人地说。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4"
+              ],
+              "start": 164,
+              "end": 227,
+              "quote": "我瞥了一眼他那面容和善的妻子，心里明白，要不是这只“看门恶犬”，我早就能吃上一块肉饼了。于是我暗自叹了口气，顺着他的话演下去。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:5"
+              ],
+              "start": 228,
+              "end": 243,
+              "quote": "“我当然想干活。”我唬弄他说。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:6"
+              ],
+              "start": 244,
+              "end": 302,
+              "quote": "“好吧，”他说，“明天上午到_______街和_______街的拐角来（地址我已经忘了），在那栋烧毁的楼旁边搬砖。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:7"
+              ],
+              "start": 303,
+              "end": 316,
+              "quote": "“好的，先生，我一定到。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:8"
+              ],
+              "start": 317,
+              "end": 361,
+              "quote": "他又吃起了肉饼。我等着。过了几分钟，他抬起头，脸上一副“我还以为你走了”的神情，质问道："
+            },
+            {
+              "paragraphId": "zh-reading-b-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:9"
+              ],
+              "start": 362,
+              "end": 370,
+              "quote": "“还有什么事？”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:10"
+              ],
+              "start": 371,
+              "end": 388,
+              "quote": "“我……我在等点吃的。”我轻声说。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:11"
+              ],
+              "start": 389,
+              "end": 511,
+              "quote": "“我就知道！我要是现在给你吃的，就再也别想见到你了。看看我。我不欠任何人的。我从没向谁讨过吃的。我的饭都是自己挣来的。你游手好闲，懒惰成性，我从你脸上就看得出来。我一直勤勤恳恳、老老实实。我有今天全靠自己。只要你肯干活、为人诚实，你也能做到。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:12"
+              ],
+              "start": 512,
+              "end": 522,
+              "quote": "“像你一样？”我问。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:13"
+              ],
+              "start": 523,
+              "end": 532,
+              "quote": "“对，像我一样。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p14",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:14"
+              ],
+              "start": 533,
+              "end": 543,
+              "quote": "“我们所有人都能？”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p15",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:15"
+              ],
+              "start": 544,
+              "end": 554,
+              "quote": "“对，你们所有人。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p16",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:16"
+              ],
+              "start": 555,
+              "end": 584,
+              "quote": "“可要是我们都变得像你一样，”我说，“就没人替你搬砖了。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p17",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17"
+              ],
+              "start": 585,
+              "end": 654,
+              "quote": "他妻子眼里闪过一丝笑意。至于他，则大惊失色——可他究竟是被“没人替他搬砖”这种可怕的可能吓坏了，还是被我的无礼吓坏了，我永远也不会知道了。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-reading-b-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+                "start": 50,
+                "end": 105,
+                "quote": "but for this Cerberus I’d have a slice of that meat pie"
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2",
+                "start": 20,
+                "end": 34,
+                "quote": "he snapped out"
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:3",
+                "start": 41,
+                "end": 51,
+                "quote": "he bullied"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 20,
+                "end": 43,
+                "quote": "要不是这只“看门恶犬”，我早就能吃上一块肉饼了"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 6,
+                "end": 10,
+                "quote": "厉声说道"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 16,
+                "end": 23,
+                "quote": "他盛气凌人地说"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-b-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+                "start": 72,
+                "end": 149,
+                "quote": "I’d have a slice of that meat pie. So I sighed to myself and played his game."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:10",
+                "start": 4,
+                "end": 37,
+                "quote": "I am waiting for something to eat"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 32,
+                "end": 63,
+                "quote": "我早就能吃上一块肉饼了。于是我暗自叹了口气，顺着他的话演下去。"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p10",
+                "start": 4,
+                "end": 10,
+                "quote": "我在等点吃的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-b-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17",
+                "start": 0,
+                "end": 49,
+                "quote": "There was a flicker of a smile in his wife’s eye."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p17",
+                "start": 0,
+                "end": 12,
+                "quote": "他妻子眼里闪过一丝笑意。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-b-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:16",
+                "start": 42,
+                "end": 82,
+                "quote": "there’d be nobody to toss bricks for you"
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:11",
+                "start": 276,
+                "end": 328,
+                "quote": "And you can do the same, if you work and are honest."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:15",
+                "start": 1,
+                "end": 17,
+                "quote": "Yes, all of you."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p16",
+                "start": 19,
+                "end": 27,
+                "quote": "就没人替你搬砖了"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p11",
+                "start": 103,
+                "end": 121,
+                "quote": "只要你肯干活、为人诚实，你也能做到。"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p15",
+                "start": 1,
+                "end": 9,
+                "quote": "对，你们所有人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:24",
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:25"
+            ],
+            "selectedSentenceId": "sentence-reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+                "start": 0,
+                "end": 106,
+                "quote": "I glanced at his gentle-faced wife, and knew that but for this Cerberus I’d have a slice of that meat pie."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 0,
+                "end": 44,
+                "quote": "我瞥了一眼他那面容和善的妻子，心里明白，要不是这只“看门恶犬”，我早就能吃上一块肉饼了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:26"
+            ],
+            "selectedSentenceId": "sentence-reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17",
+                "start": 50,
+                "end": 194,
+                "quote": "As for him, he was horrified – but whether at the awful possibility that nobody would toss bricks for him or at my rudeness, I shall never know."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p17",
+                "start": 12,
+                "end": 69,
+                "quote": "至于他，则大惊失色——可他究竟是被“没人替他搬砖”这种可怕的可能吓坏了，还是被我的无礼吓坏了，我永远也不会知道了。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "按事情经过展开：讨饭被拒，被指懒惰后假意答应干活，等吃的又遭训斥，最后用对方的逻辑反驳，以夫妻二人不同的反应收尾。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:1",
+            "summary": "“我”在一户人家讨饭被拒，看到男主人边吃肉饼边和“我”说话。",
+            "function": "交代时间、地点和人物，引出故事"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2",
+            "summary": "男人认定“我”不想干活，其实“我”只想要吃的，并打算当晚搭车西行。",
+            "function": "点出双方的误会和“我”的真实想法"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:3",
+            "summary": "男人断言“我”有机会也不会干活。",
+            "function": "继续写男人的偏见和盛气凌人"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+            "summary": "“我”明白是男人挡着肉饼，便叹口气顺着他的话说。",
+            "function": "交代“我”改口的原因"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:5",
+            "summary": "“我”假意说自己当然想干活。",
+            "function": "写“我”的应付之词"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:6",
+            "summary": "男人让“我”第二天上午去某处搬砖。",
+            "function": "男人给出干活的安排"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:7",
+            "summary": "“我”答应一定到。",
+            "function": "“我”继续假意应承"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:8",
+            "summary": "男人继续吃饼，见“我”没走便质问。",
+            "function": "推进情节，制造冲突"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:9",
+            "summary": "男人问“我”还有什么事。",
+            "function": "男人的质问"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:10",
+            "summary": "“我”轻声说在等吃的。",
+            "function": "“我”说出真实来意"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:11",
+            "summary": "男人拒绝给吃的，夸自己勤劳诚实，称“我”只要肯干也能像他一样。",
+            "function": "亮出男人的逻辑，为后文反驳作铺垫"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:12",
+            "summary": "“我”反问是否像他一样。",
+            "function": "“我”开始顺着他的话追问"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:13",
+            "summary": "男人肯定地说像他一样。",
+            "function": "男人确认自己的说法"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:14",
+            "summary": "“我”追问是否所有人都能。",
+            "function": "“我”把他的话推向所有人"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:15",
+            "summary": "男人说所有人都能。",
+            "function": "男人落入“我”的追问"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:16",
+            "summary": "“我”指出要是人人都像他，就没人替他搬砖了。",
+            "function": "用男人的逻辑反驳他，故事高潮"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17",
+            "summary": "妻子眼含笑意，男人大惊失色，原因“我”不得而知。",
+            "function": "写二人的反应，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:24": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "reference",
+        "subtype": "reference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据 Cerberus 所在句的条件和前文男人的言行，判断这个比喻指的是谁。",
+      "stemTranslationZh": "第4段中画线词“Cerberus”指的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 but for 引出的条件",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "西行的陆路列车。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the westbound overland train",
+            "optionText": "The westbound overland train",
+            "matchType": "exact",
+            "relationNote": "这列火车照搬自[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2|I wanted to take the westbound]]，是“我”当晚想搭的车；放进去成了“要不是这列火车，我早就吃上肉饼了”，火车和肉饼扯不上关系。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2",
+              "quote": "I wanted to take the westbound overland train that night.",
+              "anchor": "“我”想搭的火车"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "叙述者饥饿的肚子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The narrator’s hungry stomach",
+            "explanation": "放进去成了“要不是我饿着的肚子，我早就吃上肉饼了”，饿正是他想吃的原因，不会挡着他吃；原文也没写到肚子。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "凶巴巴守着肉饼的那个男人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+              "quote": "knew that but for this Cerberus I’d have a slice of that meat pie",
+              "anchor": "要不是他就能吃到肉饼"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2",
+              "quote": "Without looking up, he snapped out",
+              "anchor": "男人厉声呵斥"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:3",
+              "quote": "“You wouldn’t work if you had a chance,” he bullied.",
+              "anchor": "男人盛气凌人"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "静静听着谈话的那位女士。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I glanced at his gentle-faced wife",
+            "sourceEntity": "his gentle-faced wife",
+            "optionText": "The woman listening to the talk quietly.",
+            "optionEntity": "The woman",
+            "explanation": "同句先写“我”瞥了一眼面善的妻子（gentle-faced wife），她是可能给“我”肉饼的人；放进去成了“要不是这位妻子，我早就吃上肉饼了”，和她面善正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+              "quote": "I glanced at his gentle-faced wife",
+              "anchor": "面善的妻子"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Cerberus",
+          "sourceRole": "stem",
+          "targetText": "I glanced at his gentle-faced wife, and knew that but for this Cerberus I’d have a slice of that meat pie.",
+          "relationType": "locationCue",
+          "answerText": "I’d have a slice of that meat pie",
+          "note": "题干 Cerberus 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4"
+        },
+        {
+          "sourceText": "The man guarding the pie fiercely",
+          "sourceRole": "correctOption",
+          "targetText": "but for this Cerberus I’d have a slice of that meat pie",
+          "relationType": "paraphrase",
+          "note": "要不是这个 Cerberus，“我”就能吃上肉饼（I’d have a slice），所以它必须是挡着肉饼的人，又和面善的妻子相对；前面厉声呵斥（snapped out）、盛气凌人（bullied）的正是那个男人。放回去：要不是这个凶巴巴守着肉饼的男人，“我”早就吃上肉饼了。Cerberus 本是希腊神话里看守冥府的恶犬。选 C。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出“我”嘴上说愿意干活背后的真实目的。",
+      "stemTranslationZh": "叙述者最后为什么声称自己愿意干活？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一段找他改口的原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了开始一场游戏。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "played his game",
+            "optionText": "start a game",
+            "matchType": "exact",
+            "relationNote": "game 出自[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4|So I sighed to myself]]的 played his game，意思是顺着男人的话演下去，这是“我”说愿意干活这个做法本身，不是目的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+              "quote": "So I sighed to myself and played his game.",
+              "anchor": "顺着他的话说"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了重获尊重。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To regain respect",
+            "explanation": "原文没写“我”在乎男人怎么看自己；“我”从头到尾惦记的都是吃的（food）。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了挣一张火车票。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the westbound overland train",
+            "optionText": "train ticket",
+            "matchType": "exact",
+            "relationNote": "train 出自[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2|I wanted to take the westbound]]，“我”当晚就要搭车走，原文还明说并不想干活（I didn’t want to work），没打算靠搬砖挣车票。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2",
+              "quote": "In fact, I didn’t want to work.",
+              "anchor": "其实不想干活"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了弄点吃的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+              "quote": "knew that but for this Cerberus I’d have a slice of that meat pie. So I sighed to myself and played his game.",
+              "anchor": "为了肉饼才顺着他说"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:2",
+              "quote": "I wanted to talk about “food”.",
+              "anchor": "“我”想谈吃的"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:10",
+              "quote": "“I… I am waiting for something to eat,” I said gently.",
+              "anchor": "“我”在等吃的"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "willing to work",
+          "sourceRole": "stem",
+          "targetText": "“Of course I want work,” I bluffed(唬弄).",
+          "relationType": "locationCue",
+          "targetCue": "want work",
+          "sourceZh": "愿意干活",
+          "targetCueZh": "想干活",
+          "answerText": "I’d have a slice of that meat pie",
+          "bridgeZh": "bluffed 表明是假话，他改口前心里的盘算才是真目的",
+          "note": "题干 willing to work 对应原文 want work。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:5"
+        },
+        {
+          "sourceText": "To get some food",
+          "sourceRole": "correctOption",
+          "targetText": "I’d have a slice of that meat pie",
+          "relationType": "paraphrase",
+          "note": "选项的“弄点吃的”（get some food）对应原文的“吃上一块肉饼”（a slice of that meat pie）；“我”一开始就只想谈吃的（food），答应干活后又直说在等吃的（waiting for something to eat）。选 D。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:26": {
+      "skill": {
+        "primary": "attitude",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从妻子眼里的神情，推出她听到“我”最后那句话时的反应。",
+      "stemTranslationZh": "那位女士对叙述者的话作何反应？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "被冒犯的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "There was a flicker of a smile in his wife’s eye.",
+            "sourceHighlight": "a flicker of a smile",
+            "optionText": "Offended.",
+            "optionHighlight": "Offended",
+            "explanation": "她眼里闪过的是笑意（smile），不是受冒犯后的不快；原文猜可能嫌“我”无礼（rudeness）的是她丈夫。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17",
+              "quote": "There was a flicker of a smile in his wife’s eye.",
+              "anchor": "妻子眼含笑意"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "受到惊吓的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "As for him, he was horrified",
+            "sourceEntity": "him",
+            "optionText": "Frightened.",
+            "optionEntity": "Frightened",
+            "explanation": "大惊失色（horrified）的是她丈夫（As for him），选项把丈夫的反应安到了妻子身上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17",
+              "quote": "As for him, he was horrified",
+              "anchor": "丈夫大惊失色"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "尴尬的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Embarrassed",
+            "explanation": "原文没写她难堪；写到她反应的只有眼里一闪而过的笑意。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "觉得好笑的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17",
+              "quote": "There was a flicker of a smile in his wife’s eye.",
+              "anchor": "妻子眼含笑意"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the woman",
+          "sourceRole": "stem",
+          "targetText": "There was a flicker of a smile in his wife’s eye.",
+          "relationType": "locationCue",
+          "targetCue": "wife’s",
+          "sourceZh": "那位女士",
+          "targetCueZh": "他妻子的",
+          "answerText": "a flicker of a smile",
+          "note": "题干 the woman 对应原文 his wife’s，这句紧跟在“我”最后那句话之后。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17"
+        },
+        {
+          "sourceText": "Amused",
+          "sourceRole": "correctOption",
+          "targetText": "a flicker of a smile",
+          "relationType": "paraphrase",
+          "note": "原文只说她眼里闪过一丝笑意（a flicker of a smile），由此推出她被“我”那句反问逗乐了，对应“觉得好笑”（Amused）。选 D。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:27": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "对照男人的说法和“我”最后的反问，看“我”靠什么驳倒了他。",
+      "stemTranslationZh": "叙述者最终是怎样赢得这场争论的？",
+      "locateBy": "options",
+      "locateFindZh": "四种做法逐个回结尾对话，看“我”靠哪句话驳倒他",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "靠保持沉默。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "“But if we all became like you,” I said",
+            "sourceHighlight": "I said",
+            "optionText": "By staying silent.",
+            "optionHighlight": "staying silent",
+            "explanation": "“我”默默等吃的（I waited）没换来肉饼；赢下争论靠的是开口反问（I said），不是沉默。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:16",
+              "quote": "“But if we all became like you,” I said",
+              "anchor": "“我”开口反驳"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "靠承诺努力干活。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“All right, sir, I’ll be there.”",
+            "sourceEntity": "I’ll be there",
+            "optionText": "By promising to work hard.",
+            "optionEntity": "promising to work hard",
+            "explanation": "答应明天去搬砖（I’ll be there）是前面为讨吃的假意应付，男人照样不给吃的；那时争论还没开始。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:7",
+              "quote": "“All right, sir, I’ll be there.”",
+              "anchor": "假意答应"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "靠向男人的妻子求助。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "his gentle-faced wife",
+            "optionText": "the man’s wife",
+            "matchType": "exact",
+            "relationNote": "wife 出自[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4|I glanced at his gentle-faced wife]]，“我”只是瞥了她一眼，从没向她求助；她眼里的笑意（a flicker of a smile）是听完反驳之后的反应。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:4",
+              "quote": "I glanced at his gentle-faced wife",
+              "anchor": "只瞥了一眼"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "靠用男人自己的逻辑反驳他。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:16",
+              "quote": "“But if we all became like you,” I said, “there’d be nobody to toss bricks for you.”",
+              "anchor": "“我”的反问"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:11",
+              "quote": "And you can do the same, if you work and are honest.",
+              "anchor": "男人说人人都能像他"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:15",
+              "quote": "Yes, all of you.",
+              "anchor": "男人说所有人都能"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "By using the man’s own logic against him",
+          "sourceRole": "correctOption",
+          "targetText": "there’d be nobody to toss bricks for you",
+          "relationType": "paraphrase",
+          "note": "“我”用的正是男人自己的话：他先说“我”也能像他一样（[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:11|And you can do the same]]），又确认你们所有人都能（[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:15|Yes, all of you]]）；“我”顺着推下去：人人都像他，就没人替他搬砖了（nobody to toss bricks for you）。拿他的逻辑反过来驳他，选 D。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:16"
+        }
+      ]
+    }
+  }
+}

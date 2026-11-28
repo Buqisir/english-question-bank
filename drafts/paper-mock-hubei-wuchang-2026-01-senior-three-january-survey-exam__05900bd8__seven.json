@@ -1,0 +1,931 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices": {
+      "overview": "文章谈久坐的危害：人类并非为久坐而进化，现代人每天坐得过多，久坐会带来心脏病、腰膝疼痛、发胖等严重后果；文末建议增加活动，哪怕零碎地动一动也比不动强。",
+      "fullTranslationZh": "我们都听说过久坐对身体有害。人类并不是为久坐而进化的。换句话说，我们天生就不适合坐这么久。久坐会削弱锻炼的效果，还会让臀部不舒服；它也许算不上“新型吸烟”，但过度久坐会缩短寿命。\n\n无论是骨骼或关节健康、肌肉量还是精力水平，我们所认为的衰老在很大程度上都受坐多久的影响。我们花大量时间坐着。普通美国人每天坐着的时间可能长达九个半小时。研究表明女性坐得比男性少，但大多数研究都认为，我们所有人都比前几代人坐得多。\n\n后果可能很严重。长时间坐着会增加患心脏病或中风的风险。而且坐得越久，风险越高，尤其是坐上10个小时以上时。此外，只坐30分钟，腿部的大块肌肉就可能停止发力，肌肉因此变弱，并引起背部或膝盖疼痛。坐着也消耗不了多少能量。久而久之，久坐的生活方式会影响你控制血糖和分解脂肪的能力，可能导致体重增加和2型糖尿病。如今的美国上班族每天消耗的热量比50年前少了大约100卡路里。\n\n降低风险的一个办法是在现有的日常安排中每天增加15到30分钟的身体活动，或者更进一步，把每周的标准运动推荐量翻倍。如果两样都做不到，就试着在一天中分散加入一些短时活动：每只脚做10到15次绷脚和勾脚，再做坐姿踮脚和原地踏步。或者来一份快速的“运动小点心”。做点什么总比什么都不做强。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-aging",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+          "sourceText": "Whether it’s bone or joint health, muscle mass or energy level, much of what we perceive as aging is heavily influenced by how much we sit.",
+          "displayText": "Whether it’s bone or joint health, muscle mass or energy level, much of what we perceive as aging is heavily influenced by how much we sit.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:37"
+          ],
+          "translationZh": "无论是骨骼或关节健康、肌肉量还是精力水平，我们所认为的衰老在很大程度上都受坐多久的影响。",
+          "analysisZh": "主干是 much of what we perceive as aging is heavily influenced by how much we sit（我们所认为的衰老，很大一部分受坐多久的影响），谓语是被动结构 is influenced by。主语 much of 后面接 what 引导的名词性从句，perceive A as B 意为“把 A 看作 B”。by 后的 how much we sit 也是名词性从句，作介词宾语。句首 Whether it’s … 是让步状语，列了三项：bone or joint health、muscle mass、energy level，意为“无论是……还是……”。句末落在“坐多少”上，空里的 C 就顺着它说我们坐得多。",
+          "underlineRanges": [
+            {
+              "start": 64,
+              "end": 97,
+              "quote": "much of what we perceive as aging"
+            },
+            {
+              "start": 98,
+              "end": 122,
+              "quote": "is heavily influenced by"
+            },
+            {
+              "start": 123,
+              "end": 138,
+              "quote": "how much we sit"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-sedentary",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+          "sourceText": "Over time, a sedentary(久坐的) lifestyle can affect your ability to control blood sugar and break down fat, potentially leading to weight gain and Type 2 diabetes.",
+          "displayText": "Over time, a sedentary(久坐的) lifestyle can affect your ability to control blood sugar and break down fat, potentially leading to weight gain and Type 2 diabetes.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:39"
+          ],
+          "translationZh": "久而久之，久坐的生活方式会影响你控制血糖和分解脂肪的能力，可能导致体重增加和2型糖尿病。",
+          "analysisZh": "主干是 a sedentary lifestyle can affect your ability（久坐的生活方式会影响你的能力）。ability 后接不定式 to control blood sugar and break down fat，and 连接 control 和 break down 两个并列动词，第二个省略了 to，说明是哪两种能力。逗号后的 potentially leading to … 是现在分词短语作结果状语，逻辑主语是前面整件事，lead to 后并列 weight gain 和 Type 2 diabetes 两个结果。句中“分解脂肪”和末句的耗能少，都在接空里 F 说的“不怎么耗能”。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 61,
+              "quote": "a sedentary(久坐的) lifestyle can affect your ability"
+            },
+            {
+              "start": 62,
+              "end": 103,
+              "quote": "to control blood sugar and break down fat"
+            },
+            {
+              "start": 105,
+              "end": 127,
+              "quote": "potentially leading to"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "全文按“提出问题 → 说明现状 → 列举后果 → 给出对策”推进：先说人类不是为久坐进化的，再用数据说明我们坐得太多，接着列出久坐的各种危害，最后给出由多到少的几档活动建议，以“做一点总比不做强”收尾。",
+        "units": [
+          {
+            "unitId": "unit-problem",
+            "paragraphIds": [
+              "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1"
+            ],
+            "summary": "从“久坐有害”的常见说法入手，指出人类并非为久坐而进化，过度久坐会缩短寿命。"
+          },
+          {
+            "unitId": "unit-amount",
+            "paragraphIds": [
+              "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2"
+            ],
+            "summary": "衰老在很大程度上受坐多久影响，而现代人坐得很多，普通美国人每天可能坐九个半小时。"
+          },
+          {
+            "unitId": "unit-harm",
+            "paragraphIds": [
+              "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3"
+            ],
+            "summary": "久坐后果严重：增加心脏病和中风风险，导致腰膝疼痛，耗能少又会引起发胖和糖尿病。"
+          },
+          {
+            "unitId": "unit-advice",
+            "paragraphIds": [
+              "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4"
+            ],
+            "summary": "给出降低风险的办法：增加日常活动量，做不到就分散做些小动作，动一点总比不动强。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 38,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "D",
+          "shared": [
+            "The"
+          ],
+          "text": "选项像一句段首总起句，第 38 题空后 \"Prolonged sitting raises the risk\" 又容易被读成在讲病因。但这一段只讲久坐一个起因，接着列的心脏病、中风、腰膝疼痛都是它造成的结果，\"the longer you sit, the higher risks it raises\" 也是在说结果随坐的时间加重，原文没有罗列“多种原因”。",
+          "quotes": [
+            "Prolonged sitting raises the risk",
+            "the longer you sit, the higher risks it raises"
+          ]
+        },
+        "G": {
+          "target": 40,
+          "secondary": 39,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "sit"
+          ],
+          "text": "选项借了最后一段反复出现的 \"exercise\"，像第 40 题的运动建议。但空前 \"If you can’t manage either\" 已经退到零碎的小动作，结尾该劝人“动一点也好”，G 反而要人坐得越多练得越多。放进第 39 题也接不上：它仿 \"the longer you sit\" 的句式，可空后讲的是耗能少、发胖，不是该练多少。",
+          "quotes": [
+            "exercise",
+            "If you can’t manage either",
+            "the longer you sit"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 89,
+              "quote": "我们都听说过久坐对身体有害。人类并不是为久坐而进化的。换句话说，我们天生就不适合坐这么久。久坐会削弱锻炼的效果，还会让臀部不舒服；它也许算不上“新型吸烟”，但过度久坐会缩短寿命。"
+            },
+            {
+              "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2"
+              ],
+              "start": 91,
+              "end": 205,
+              "quote": "无论是骨骼或关节健康、肌肉量还是精力水平，我们所认为的衰老在很大程度上都受坐多久的影响。我们花大量时间坐着。普通美国人每天坐着的时间可能长达九个半小时。研究表明女性坐得比男性少，但大多数研究都认为，我们所有人都比前几代人坐得多。"
+            },
+            {
+              "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3"
+              ],
+              "start": 207,
+              "end": 390,
+              "quote": "后果可能很严重。长时间坐着会增加患心脏病或中风的风险。而且坐得越久，风险越高，尤其是坐上10个小时以上时。此外，只坐30分钟，腿部的大块肌肉就可能停止发力，肌肉因此变弱，并引起背部或膝盖疼痛。坐着也消耗不了多少能量。久而久之，久坐的生活方式会影响你控制血糖和分解脂肪的能力，可能导致体重增加和2型糖尿病。如今的美国上班族每天消耗的热量比50年前少了大约100卡路里。"
+            },
+            {
+              "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4"
+              ],
+              "start": 392,
+              "end": 533,
+              "quote": "降低风险的一个办法是在现有的日常安排中每天增加15到30分钟的身体活动，或者更进一步，把每周的标准运动推荐量翻倍。如果两样都做不到，就试着在一天中分散加入一些短时活动：每只脚做10到15次绷脚和勾脚，再做坐姿踮脚和原地踏步。或者来一份快速的“运动小点心”。做点什么总比什么都不做强。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1",
+            "text": "We’ve all heard that sitting too long is bad for you. We’re not evolved to do it. In other words, we’re not designed to sit so much. Sitting can reduce our exercise gains and cause butt(臀部) discomfort, and while it might not be “the new smoking”, excessive sitting can shorten your life."
+          },
+          {
+            "textId": "completed:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+            "text": "Whether it’s bone or joint health, muscle mass or energy level, much of what we perceive as aging is heavily influenced by how much we sit. We spend a lot of time sitting. Average Americans sit per day may be as long as nine and a half hours. Studies suggest women sit less than men do, but most agree we all sit more than previous generations did."
+          },
+          {
+            "textId": "completed:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+            "text": "The consequences can be serious. Prolonged sitting raises the risk of developing heart disease or stroke. And the longer you sit, the higher risks it raises, especially if you are sitting for more than 10 hours. Furthermore, your large leg muscles can stop activating after just 30 minutes of sitting, weakening and causing back or knee pain. Sitting also doesn’t burn much energy. Over time, a sedentary(久坐的) lifestyle can affect your ability to control blood sugar and break down fat, potentially leading to weight gain and Type 2 diabetes. American workers today burn about 100 fewer calories per day than they did 50 years ago."
+          },
+          {
+            "textId": "completed:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+            "text": "One way to lower the risk is to add 15 to 30 minutes of physical activity per day to your existing routine or go further, doubling the standard weekly exercise recommendations. If you can’t manage either, try adding small periods, spread throughout the day. Perform 10 to 15 repetitions of pointing and bending each foot, seated toe raises and marching in place. Or try a quick exercise snack. Better do something than nothing."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1",
+                "start": 61,
+                "end": 111,
+                "quote": "In other words, we’re not designed to sit so much."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1",
+                "start": 27,
+                "end": 45,
+                "quote": "换句话说，我们天生就不适合坐这么久。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:36"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1",
+                "start": 54,
+                "end": 81,
+                "quote": "We’re not evolved to do it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1",
+                "start": 14,
+                "end": 27,
+                "quote": "人类并不是为久坐而进化的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+                "start": 147,
+                "end": 217,
+                "quote": "Average Americans sit per day may be as long as nine and a half hours."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+                "start": 54,
+                "end": 76,
+                "quote": "普通美国人每天坐着的时间可能长达九个半小时。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:37"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+                "start": 140,
+                "end": 171,
+                "quote": "We spend a lot of time sitting."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+                "start": 44,
+                "end": 54,
+                "quote": "我们花大量时间坐着。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 7,
+                "end": 79,
+                "quote": "Prolonged sitting raises the risk of developing heart disease or stroke."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 8,
+                "end": 27,
+                "quote": "长时间坐着会增加患心脏病或中风的风险。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:38"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 0,
+                "end": 32,
+                "quote": "The consequences can be serious."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 0,
+                "end": 8,
+                "quote": "后果可能很严重。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 485,
+                "end": 573,
+                "quote": "American workers today burn about 100 fewer calories per day than they did 50 years ago."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 152,
+                "end": 183,
+                "quote": "如今的美国上班族每天消耗的热量比50年前少了大约100卡路里。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:39"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 343,
+                "end": 381,
+                "quote": "Sitting also doesn’t burn much energy."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 96,
+                "end": 108,
+                "quote": "坐着也消耗不了多少能量。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+                "start": 177,
+                "end": 257,
+                "quote": "If you can’t manage either, try adding small periods, spread throughout the day."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+                "start": 57,
+                "end": 83,
+                "quote": "如果两样都做不到，就试着在一天中分散加入一些短时活动"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:40"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+                "start": 394,
+                "end": 427,
+                "quote": "Better do something than nothing."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+                "start": 128,
+                "end": 141,
+                "quote": "做点什么总比什么都不做强。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-aging",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:37"
+            ],
+            "selectedSentenceId": "sentence-aging",
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+                "start": 0,
+                "end": 139,
+                "quote": "Whether it’s bone or joint health, muscle mass or energy level, much of what we perceive as aging is heavily influenced by how much we sit."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+                "start": 0,
+                "end": 44,
+                "quote": "无论是骨骼或关节健康、肌肉量还是精力水平，我们所认为的衰老在很大程度上都受坐多久的影响。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-sedentary",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:39"
+            ],
+            "selectedSentenceId": "sentence-sedentary",
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 324,
+                "end": 484,
+                "quote": "Over time, a sedentary(久坐的) lifestyle can affect your ability to control blood sugar and break down fat, potentially leading to weight gain and Type 2 diabetes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices",
+                "paragraphId": "zh:block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+                "start": 108,
+                "end": 152,
+                "quote": "久而久之，久坐的生活方式会影响你控制血糖和分解脂肪的能力，可能导致体重增加和2型糖尿病。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:36": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion",
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "sitting too long is bad for you",
+        "In other words",
+        "not designed",
+        "sit so much"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:1",
+        "beforeQuote": "We’ve all heard that sitting too long is bad for you.",
+        "afterQuote": "In other words, we’re not designed to sit so much."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "In other words",
+          "signalSide": "context-after",
+          "targetText": "We’re not evolved to do it.",
+          "relation": "In other words 表示换个说法再说一遍，空里必须是和后句意思相同的话。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "not evolved",
+          "signalSide": "option",
+          "targetText": "not designed",
+          "relation": "not evolved（不是进化成这样的）和空后 not designed（天生不是为此设计的）是同一个意思。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "do it",
+          "signalSide": "option",
+          "targetText": "sitting too long",
+          "relation": "do it 指空前的 sitting too long，也就是空后的 sit so much。"
+        }
+      ],
+      "lock": [
+        "In other words",
+        "not designed",
+        "not evolved"
+      ],
+      "find": {
+        "text": "先看空后 \"In other words\"：后句是把空里的话换个说法。\"not designed\" 对上 B 的 \"not evolved\"，B 里的 it 指空前的 \"sitting too long\"。",
+        "quotes": [
+          "In other words",
+          "not designed",
+          "not evolved",
+          "sitting too long"
+        ]
+      },
+      "explain": "空前是大家都听过的说法：久坐有害。这句往深处推一步，说出根子在人身上：人类不是为久坐进化的。空后先换说法重说一遍，再列运动效果打折、缩短寿命等具体害处。",
+      "distractors": [
+        {
+          "label": "C",
+          "text": "C 也在说坐得多，但 \"In other words\" 要求后句复述空里的意思，\"not designed\" 讲身体天生不适合，C 只讲坐的时间长。",
+          "quotes": [
+            "In other words",
+            "not designed"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "In other words, we’re not designed to sit so much",
+            "optionSide": "We’re not evolved to do it",
+            "relation": "空后用 not designed 复述选项的 not evolved，两句说的是同一件事。"
+          },
+          {
+            "contextSide": "sitting too long",
+            "optionSide": "do it",
+            "relation": "选项的 do it 回指空前的久坐。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "空前是大家都听过的说法：久坐有害。这句往深处推一步，说出根子在人身上：人类不是为久坐进化的。空后先换说法重说一遍，再列运动效果打折、缩短寿命等具体害处。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 也在说坐得多，但 \"In other words\" 要求后句复述空里的意思，\"not designed\" 讲身体天生不适合，C 只讲坐的时间长。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:37": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "how much we sit",
+        "nine and a half hours",
+        "sit per day",
+        "we all sit more than previous generations did"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:2",
+        "beforeQuote": "much of what we perceive as aging is heavily influenced by how much we sit.",
+        "afterQuote": "Average Americans sit per day may be as long as nine and a half hours."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a lot of time",
+          "signalSide": "option",
+          "targetText": "nine and a half hours",
+          "relation": "选项先说坐的时间多，空后用每天九个半小时这个数字把“多”说具体。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "nine and a half hours",
+          "signalSide": "context-after",
+          "targetText": "a lot of time",
+          "relation": "空后的具体时长是在给 a lot of time 举数据。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "how much we sit",
+          "signalSide": "context-before",
+          "targetText": "We spend a lot of time sitting.",
+          "relation": "空前落在“坐多少”上，选项接着回答：我们坐得很多。"
+        }
+      ],
+      "lock": [
+        "a lot of time",
+        "nine and a half hours"
+      ],
+      "find": {
+        "text": "先看空后 \"nine and a half hours\"：这是一个具体时长，前面要有一句谈坐多久的话。七个选项里只有 C 的 \"a lot of time\" 能被这个数字证实。",
+        "quotes": [
+          "nine and a half hours",
+          "a lot of time"
+        ]
+      },
+      "explain": "空前说衰老在很大程度上取决于 how much we sit，这句顺势把话题转到我们实际坐了多少；空后先给美国人每天的时长，再拿几代人作比较，证明“坐得多”不是夸张。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "nine and a half hours / we all sit more than previous generations did",
+            "optionSide": "a lot of time sitting",
+            "relation": "空后的时长和代际比较都在支撑选项说的坐得多。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "空前说衰老在很大程度上取决于 how much we sit，这句顺势把话题转到我们实际坐了多少；空后先给美国人每天的时长，再拿几代人作比较，证明“坐得多”不是夸张。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:38": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "raises the risk",
+        "heart disease or stroke",
+        "the higher risks it raises",
+        "back or knee pain",
+        "weight gain and Type 2 diabetes"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+        "beforeQuote": "",
+        "afterQuote": "Prolonged sitting raises the risk of developing heart disease or stroke."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "consequences",
+          "signalSide": "option",
+          "targetText": "raises the risk / back or knee pain / weight gain",
+          "relation": "consequences 概括后面列出的心脏病、腰膝疼痛、体重增加等久坐带来的结果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "serious",
+          "signalSide": "option",
+          "targetText": "heart disease or stroke",
+          "relation": "心脏病、中风这类病说明后果确实严重。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "raises the risk of developing heart disease or stroke",
+          "signalSide": "context-after",
+          "targetText": "consequences",
+          "relation": "空后第一句就是第一条后果，空里需要一句先把“后果”提出来。"
+        }
+      ],
+      "lock": [
+        "consequences",
+        "raises the risk"
+      ],
+      "find": {
+        "text": "空在段首，先看空后 \"raises the risk of developing heart disease or stroke\"：这是久坐造成的病，全段都在列这类结果。D 的 \"consequences\" 把它们先点出来，\"serious\" 对上心脏病、中风。",
+        "quotes": [
+          "raises the risk of developing heart disease or stroke",
+          "consequences",
+          "serious"
+        ]
+      },
+      "explain": "上一段讲我们坐得比前几代人都多，这句转向“坐多了会怎样”，先下结论“后果严重”；后面依次落到心脏病和中风、腰膝疼痛、血糖和体重，全段都是这句的展开。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "heart disease or stroke / back or knee pain / weight gain and Type 2 diabetes",
+            "optionSide": "The consequences can be serious",
+            "relation": "后文逐条列出的病痛就是选项说的严重后果。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "上一段讲我们坐得比前几代人都多，这句转向“坐多了会怎样”，先下结论“后果严重”；后面依次落到心脏病和中风、腰膝疼痛、血糖和体重，全段都是这句的展开。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "选项像一句段首总起句，第 38 题空后 \"Prolonged sitting raises the risk\" 又容易被读成在讲病因。但这一段只讲久坐一个起因，接着列的心脏病、中风、腰膝疼痛都是它造成的结果，\"the longer you sit, the higher risks it raises\" 也是在说结果随坐的时间加重，原文没有罗列“多种原因”。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:39": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Furthermore",
+        "break down fat",
+        "weight gain",
+        "burn about 100 fewer calories"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:3",
+        "beforeQuote": "Furthermore, your large leg muscles can stop activating after just 30 minutes of sitting, weakening and causing back or knee pain.",
+        "afterQuote": "Over time, a sedentary(久坐的) lifestyle can affect your ability to control blood sugar and break down fat, potentially leading to weight gain and Type 2 diabetes. American workers today burn about 100 fewer calories per day than they did 50 years ago."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "option",
+          "targetText": "Furthermore, your large leg muscles can stop activating",
+          "relation": "also 表示在空前腿部肌肉的问题之外再加一条害处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "burn much energy",
+          "signalSide": "option",
+          "targetText": "burn about 100 fewer calories",
+          "relation": "选项说坐着不怎么耗能，空后末句用少消耗的卡路里证明这一点。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "burn about 100 fewer calories",
+          "signalSide": "context-after",
+          "targetText": "burn much energy",
+          "relation": "空后和选项用同一个动词 burn，讲的都是能量消耗。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "break down fat",
+          "signalSide": "context-after",
+          "targetText": "doesn’t burn much energy",
+          "relation": "耗能少，脂肪就难分解，接着才有体重增加。"
+        }
+      ],
+      "lock": [
+        "also",
+        "burn much energy",
+        "burn about 100 fewer calories"
+      ],
+      "find": {
+        "text": "先看空后：末句 \"burn about 100 fewer calories\" 讲耗能少，前面 \"break down fat\" 也和能量有关。F 的 \"burn much energy\" 正好对上，\"also\" 在腿部问题之后再加一条。",
+        "quotes": [
+          "burn about 100 fewer calories",
+          "break down fat",
+          "burn much energy",
+          "also"
+        ]
+      },
+      "explain": "空前讲久坐让腿部肌肉停止发力、引起腰膝疼痛，这句换到另一类害处：坐着几乎不耗能。空后顺着“耗能少”说长期会影响血糖和脂肪分解、导致发胖，再用美国上班族少消耗的热量作证。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 像在给空前的腰膝疼痛作小结，但空后 \"break down fat\"、\"burn about 100 fewer calories\" 讲的是耗能少这个新问题，D 没提能量。",
+          "quotes": [
+            "break down fat",
+            "burn about 100 fewer calories"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "break down fat / burn about 100 fewer calories",
+            "optionSide": "doesn’t burn much energy",
+            "relation": "空后的脂肪分解和热量消耗都承接选项的耗能少。"
+          },
+          {
+            "contextSide": "Furthermore, your large leg muscles can stop activating",
+            "optionSide": "also",
+            "relation": "also 接在 Furthermore 列出的害处之后，继续追加。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前讲久坐让腿部肌肉停止发力、引起腰膝疼痛，这句换到另一类害处：坐着几乎不耗能。空后顺着“耗能少”说长期会影响血糖和脂肪分解、导致发胖，再用美国上班族少消耗的热量作证。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 像在给空前的腰膝疼痛作小结，但空后 \"break down fat\"、\"burn about 100 fewer calories\" 讲的是耗能少这个新问题，D 没提能量。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:40": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:40",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "can’t manage either",
+        "small periods",
+        "spread throughout the day",
+        "a quick exercise snack"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:seven-choices:4",
+        "beforeQuote": "If you can’t manage either, try adding small periods, spread throughout the day. Perform 10 to 15 repetitions of pointing and bending each foot, seated toe raises and marching in place. Or try a quick exercise snack.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "something",
+          "signalSide": "option",
+          "targetText": "small periods / a quick exercise snack",
+          "relation": "something 指空前那些零碎的小动作，哪怕量少也算“做了点什么”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "than nothing",
+          "signalSide": "option",
+          "targetText": "can’t manage either",
+          "relation": "做不到前两种方案的人容易干脆不动，than nothing 正是劝他们别放弃。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "can’t manage either",
+          "signalSide": "context-before",
+          "targetText": "Better do something than nothing.",
+          "relation": "空前给做不到的人退一步的办法，选项把这层意思收成一句劝告。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a quick exercise snack",
+          "signalSide": "context-before",
+          "targetText": "something",
+          "relation": "“运动小点心”就是选项说的那一点点运动。"
+        }
+      ],
+      "lock": [
+        "can’t manage either",
+        "small periods",
+        "something than nothing"
+      ],
+      "find": {
+        "text": "空在全文末尾，看空前：\"If you can’t manage either\" 之后退到 \"small periods\" 和 \"a quick exercise snack\"。E 的 \"something than nothing\" 正是对这条退路的总结。",
+        "quotes": [
+          "If you can’t manage either",
+          "small periods",
+          "a quick exercise snack",
+          "something than nothing"
+        ]
+      },
+      "explain": "最后一段先给两档运动量，再给做不到的人一些随时能做的小动作。这句收尾：哪怕只动一点，也比完全不动强，把全文对久坐的提醒落到人人做得到的一步上。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "small periods / seated toe raises / a quick exercise snack",
+            "optionSide": "do something",
+            "relation": "空前的零碎动作就是选项说的“做点什么”。"
+          },
+          {
+            "contextSide": "can’t manage either",
+            "optionSide": "than nothing",
+            "relation": "选项劝做不到的人别什么都不做。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "最后一段先给两档运动量，再给做不到的人一些随时能做的小动作。这句收尾：哪怕只动一点，也比完全不动强，把全文对久坐的提醒落到人人做得到的一步上。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "选项借了最后一段反复出现的 \"exercise\"，像第 40 题的运动建议。但空前 \"If you can’t manage either\" 已经退到零碎的小动作，结尾该劝人“动一点也好”，G 反而要人坐得越多练得越多。放进第 39 题也接不上：它仿 \"the longer you sit\" 的句式，可空后讲的是耗能少、发胖，不是该练多少。"
+        }
+      ]
+    }
+  }
+}

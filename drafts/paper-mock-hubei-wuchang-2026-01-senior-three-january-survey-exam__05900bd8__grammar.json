@@ -1,0 +1,1026 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill": {
+      "overview": "香格里拉尼汝村牧民卓玛央宗曾因交通闭塞难以离开家乡，直到五十多岁才第一次出远门；村子成为生态村后迎来变化，她86岁时实现了朝拜神山的心愿。",
+      "fullTranslationZh": "卓玛央宗大半辈子都生活在香格里拉市尼汝村。几十年前，尼汝这个隐秘的世外桃源因交通和通信不便而与世隔绝。对卓玛这样的牧民来说，那时离开家乡真是不可想象的事。\n直到1994年，五十多岁的卓玛央宗才第一次走出尼汝，去北京看望儿子。她先步行两天到香格里拉县城，再坐三天汽车到昆明，在那里登上飞机飞往北京。\n尼汝的转变始于2013年，那一年它被认定为世界第一生态村，并被列入联合国教科文组织世界遗产名录。游客纷纷涌入村子，带来了繁荣，交通也得到改善。有了新获得的自由，卓玛去了北京、西藏、海南、四川等地。\n86岁时，卓玛在第三次西藏之行中实现了朝拜神山冈仁波齐的梦想。家人陪她一起朝圣，参观了布达拉宫、大昭寺等具有象征意义的地方。在曲古寺，卓玛向神山献上一条纯白的哈达，这条礼仪性的围巾代表着她深深的敬意。\n在神山附近休息时，卓玛回顾自己的人生旅程，为生活的改善、交通的便利和多年夙愿的实现而心怀感激。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "grammar-ls-1",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+          "sourceText": "It wasn’t until 1994, when Zhuma Yangzong was in her fifties, __58__ she ventured beyond Niru for the first time __59__ (visit) her son in Beijing.",
+          "displayText": "It wasn’t until 1994, when Zhuma Yangzong was in her fifties, that she ventured beyond Niru for the first time to visit her son in Beijing.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:58",
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:59"
+          ],
+          "translationZh": "直到1994年，五十多岁的卓玛央宗才第一次走出尼汝，去北京看望儿子。",
+          "analysisZh": "这是 It wasn’t until … that … 强调句，被强调的是时间状语 until 1994。插在中间的 when Zhuma Yangzong was in her fifties 是非限制性定语从句，补充说明 1994 年时她五十多岁。that 后面是句子主干 she ventured beyond Niru（她走出尼汝），for the first time 表示第一次，to visit her son in Beijing 说明出门的目的。还原成不强调的说法是 She didn’t venture beyond Niru until 1994.",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "It wasn’t until 1994"
+            },
+            {
+              "start": 62,
+              "end": 91,
+              "quote": "that she ventured beyond Niru"
+            },
+            {
+              "start": 111,
+              "end": 138,
+              "quote": "to visit her son in Beijing"
+            }
+          ]
+        },
+        {
+          "sentenceId": "grammar-ls-2",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+          "sourceText": "At Chuku Monastery, Zhuma offered a pure white khata, a ceremonial scarf __64__ (represent) her great respect, to the sacred mountain.",
+          "displayText": "At Chuku Monastery, Zhuma offered a pure white khata, a ceremonial scarf representing her great respect, to the sacred mountain.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:64"
+          ],
+          "translationZh": "在曲古寺，卓玛向神山献上一条纯白的哈达，这条礼仪性的围巾代表着她深深的敬意。",
+          "analysisZh": "主干是 Zhuma offered a pure white khata to the sacred mountain（卓玛向神山献上一条纯白的哈达），用的是 offer sth to sb 的结构。夹在宾语和 to the sacred mountain 之间的 a ceremonial scarf representing her great respect 是 khata 的同位语，解释哈达是什么；其中现在分词短语 representing her great respect 作后置定语，修饰 scarf。读的时候先把两个逗号之间的同位语拿开，就能看出 offered … to … 的主干。",
+          "underlineRanges": [
+            {
+              "start": 20,
+              "end": 52,
+              "quote": "Zhuma offered a pure white khata"
+            },
+            {
+              "start": 54,
+              "end": 103,
+              "quote": "a ceremonial scarf representing her great respect"
+            },
+            {
+              "start": 105,
+              "end": 127,
+              "quote": "to the sacred mountain"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 77,
+              "quote": "卓玛央宗大半辈子都生活在香格里拉市尼汝村。几十年前，尼汝这个隐秘的世外桃源因交通和通信不便而与世隔绝。对卓玛这样的牧民来说，那时离开家乡真是不可想象的事。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2"
+              ],
+              "start": 78,
+              "end": 148,
+              "quote": "直到1994年，五十多岁的卓玛央宗才第一次走出尼汝，去北京看望儿子。她先步行两天到香格里拉县城，再坐三天汽车到昆明，在那里登上飞机飞往北京。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3"
+              ],
+              "start": 149,
+              "end": 247,
+              "quote": "尼汝的转变始于2013年，那一年它被认定为世界第一生态村，并被列入联合国教科文组织世界遗产名录。游客纷纷涌入村子，带来了繁荣，交通也得到改善。有了新获得的自由，卓玛去了北京、西藏、海南、四川等地。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4"
+              ],
+              "start": 248,
+              "end": 348,
+              "quote": "86岁时，卓玛在第三次西藏之行中实现了朝拜神山冈仁波齐的梦想。家人陪她一起朝圣，参观了布达拉宫、大昭寺等具有象征意义的地方。在曲古寺，卓玛向神山献上一条纯白的哈达，这条礼仪性的围巾代表着她深深的敬意。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:5"
+              ],
+              "start": 349,
+              "end": 396,
+              "quote": "在神山附近休息时，卓玛回顾自己的人生旅程，为生活的改善、交通的便利和多年夙愿的实现而心怀感激。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-grammar-fill-1",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+            "text": "Zhuma Yangzong has spent most of her life in Niru Village, Shangri-La City. Decades ago, Niru, a hidden paradise, remained isolated due to poor transportation and communication. Leaving her homeland was truly unimaginable for herders (牧民) like Zhuma then."
+          },
+          {
+            "textId": "done-grammar-fill-2",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+            "text": "It wasn’t until 1994, when Zhuma Yangzong was in her fifties, that she ventured beyond Niru for the first time to visit her son in Beijing. She walked two days to Shangri-La County town, and then took a three-day bus ride to Kunming, where she boarded a plane and flew to Beijing."
+          },
+          {
+            "textId": "done-grammar-fill-3",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+            "text": "Niru’s transformation began in 2013 when it was recognized as the world’s No.1 eco-village and listed as UNESCO World Heritage Site. Tourists flocked to the village, brought prosperity and improved transportation. With her new-found freedom, Zhuma traveled to Beijing, Tibet, Hainan, Sichuan, and other regions."
+          },
+          {
+            "textId": "done-grammar-fill-4",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+            "text": "At 86, Zhuma fulfilled her dream of visiting the sacred(神圣的) Mount Kailash during her third journey to Tibet. Her family joined her in a pilgrimage, visiting symbolic sites like the Potala Palace and Jokhang Temple. At Chuku Monastery, Zhuma offered a pure white khata, a ceremonial scarf representing her great respect, to the sacred mountain."
+          },
+          {
+            "textId": "done-grammar-fill-5",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:5",
+            "text": "As she rested near the sacred mountain, Zhuma reflected on her journey, giving thanks for her improved life, better transportation, and the realization of her long-cherished dream."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+                "start": 111,
+                "end": 119,
+                "quote": "paradise"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+                "start": 33,
+                "end": 37,
+                "quote": "世外桃源"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:56"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:56",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-1",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+                "start": 97,
+                "end": 103,
+                "quote": "hidden"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+                "start": 30,
+                "end": 33,
+                "quote": "隐秘的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+                "start": 224,
+                "end": 236,
+                "quote": "unimaginable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+                "start": 70,
+                "end": 75,
+                "quote": "不可想象的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:57"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:57",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-1",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+                "start": 203,
+                "end": 208,
+                "quote": "truly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:1",
+                "start": 68,
+                "end": 70,
+                "quote": "真是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 0,
+                "end": 20,
+                "quote": "It wasn’t until 1994"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 0,
+                "end": 7,
+                "quote": "直到1994年"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:58"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:58",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 62,
+                "end": 66,
+                "quote": "that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 17,
+                "end": 18,
+                "quote": "才"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 73,
+                "end": 93,
+                "quote": "ventured beyond Niru"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 21,
+                "end": 25,
+                "quote": "走出尼汝"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:59"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:59",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 111,
+                "end": 119,
+                "quote": "to visit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 26,
+                "end": 33,
+                "quote": "去北京看望儿子"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 233,
+                "end": 240,
+                "quote": "Kunming"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 55,
+                "end": 57,
+                "quote": "昆明"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:60"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:60",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 234,
+                "end": 239,
+                "quote": "where"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 58,
+                "end": 61,
+                "quote": "在那里"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+                "start": 28,
+                "end": 35,
+                "quote": "in 2013"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+                "start": 7,
+                "end": 12,
+                "quote": "2013年"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:61"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:61",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-3",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+                "start": 44,
+                "end": 58,
+                "quote": "was recognized"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+                "start": 17,
+                "end": 21,
+                "quote": "被认定为"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+                "start": 170,
+                "end": 177,
+                "quote": "brought"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+                "start": 57,
+                "end": 60,
+                "quote": "带来了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:62"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:62",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-3",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+                "start": 174,
+                "end": 184,
+                "quote": "prosperity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:3",
+                "start": 60,
+                "end": 62,
+                "quote": "繁荣"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 174,
+                "end": 179,
+                "quote": "sites"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 59,
+                "end": 61,
+                "quote": "地方"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:63"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:63",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-4",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 158,
+                "end": 166,
+                "quote": "symbolic"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 52,
+                "end": 59,
+                "quote": "具有象征意义的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 277,
+                "end": 295,
+                "quote": "a ceremonial scarf"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 84,
+                "end": 90,
+                "quote": "礼仪性的围巾"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:64"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:64",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-4",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 289,
+                "end": 301,
+                "quote": "representing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 90,
+                "end": 93,
+                "quote": "代表着"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:5",
+                "start": 72,
+                "end": 85,
+                "quote": "giving thanks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:5",
+                "start": 42,
+                "end": 46,
+                "quote": "心怀感激"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:65"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:65",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-5",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:5",
+                "start": 86,
+                "end": 89,
+                "quote": "for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:5",
+                "start": 21,
+                "end": 22,
+                "quote": "为"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:58",
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:59"
+            ],
+            "selectedSentenceId": "grammar-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 0,
+                "end": 20,
+                "quote": "It wasn’t until 1994"
+              },
+              {
+                "textId": "done-grammar-fill-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 62,
+                "end": 138,
+                "quote": "that she ventured beyond Niru for the first time to visit her son in Beijing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:2",
+                "start": 0,
+                "end": 33,
+                "quote": "直到1994年，五十多岁的卓玛央宗才第一次走出尼汝，去北京看望儿子"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:64"
+            ],
+            "selectedSentenceId": "grammar-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-grammar-fill-4",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 236,
+                "end": 268,
+                "quote": "Zhuma offered a pure white khata"
+              },
+              {
+                "textId": "done-grammar-fill-4",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 270,
+                "end": 319,
+                "quote": "a ceremonial scarf representing her great respect"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 67,
+                "end": 81,
+                "quote": "卓玛向神山献上一条纯白的哈达"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:grammar-fill:4",
+                "start": 82,
+                "end": 99,
+                "quote": "这条礼仪性的围巾代表着她深深的敬意"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:56": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "hide",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "hidden",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "preposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格修饰名词「世外桃源」（paradise），作前置定语。尼汝是被藏起来、不为人知的地方，与动词 hide 是被动关系，用过去分词（hidden）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "paradise",
+          "signalSide": "passage",
+          "relation": "空格修饰的名词是世外桃源，用分词作定语说明它的特点。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "remained isolated",
+          "signalSide": "passage",
+          "relation": "后面说尼汝与世隔绝，印证它是被藏起来、不为人知的地方。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:57": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "true",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "truly",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-adjective",
+        "features": []
+      },
+      "reason": "空格修饰表语形容词「不可想象的」（unimaginable），要用副词。true 去掉 e 再加 -ly，写作（truly）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "unimaginable",
+          "signalSide": "passage",
+          "relation": "空格修饰形容词，形容词前要用副词。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:58": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.cleft",
+      "answer": "that",
+      "role": null,
+      "similarityProfile": {
+        "route": "cleft-that",
+        "features": []
+      },
+      "reason": "空格连接强调句 It wasn’t until … that …（直到……才……）的两部分，被强调的是时间状语（until 1994），中间的 when 从句只是插入的补充，所以填（that）。去掉强调框架，句子还原为 She didn’t venture beyond Niru until 1994，结构完整，可作验证。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "It wasn’t until 1994",
+          "signalSide": "passage",
+          "relation": "强调句框架 It wasn’t until … that …，被强调部分后接 that。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "she ventured beyond Niru",
+          "signalSide": "passage",
+          "relation": "空格后是完整的句子主干，强调句去掉框架后仍成立。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:59": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "visit",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to visit",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-purpose",
+        "features": []
+      },
+      "reason": "句子已有谓语「走出」（ventured），空格说明她第一次走出尼汝的目的，作目的状语，用不定式（to visit）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "ventured beyond Niru",
+          "signalSide": "passage",
+          "relation": "谓语已经齐全，空格只能是非谓语，说明走出去的目的。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:60": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "where",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-adverbial",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导非限制性定语从句，修饰地点「昆明」（Kunming）。从句 she boarded a plane and flew to Beijing 主谓宾齐全，缺的是地点状语，所以用关系副词（where）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "Kunming",
+          "signalSide": "passage",
+          "relation": "先行词是地点昆明，逗号后的从句对它补充说明。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "she boarded a plane",
+          "signalSide": "passage",
+          "relation": "从句不缺主语和宾语，缺的是“在那里”这一地点状语。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:61": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "recognize",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was recognized",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-explicit-time",
+        "features": []
+      },
+      "reason": "空格作 when 从句的谓语，主语 it 指尼汝村。村子是被认定为世界第一生态村，用被动语态；时间是 2013 年，用一般过去时，主语是单数，填（was recognized）。后面并列的 listed 前省略了 was，也是过去时的被动。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "in 2013",
+          "signalSide": "passage",
+          "relation": "明确的过去时间，从句用一般过去时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "when it",
+          "signalSide": "passage",
+          "relation": "主语是指尼汝村的 it，与认定是被动关系，单数用 was。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "and listed as",
+          "signalSide": "passage",
+          "relation": "并列的 listed 与空格同为过去时被动，共用 was。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:62": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "prosperous",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
+      "answer": "prosperity",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作谓语「带来」（brought）的宾语，与 improved transportation 并列，要用名词。形容词 prosperous 的名词是（prosperity）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "brought",
+          "signalSide": "passage",
+          "relation": "空格作带来的宾语，宾语位置要用名词。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "and improved transportation",
+          "signalSide": "passage",
+          "relation": "并列的另一个宾语也是名词短语，印证这里要名词。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:63": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "symbol",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "symbolic",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格修饰名词「地方」（sites），要用形容词。名词 symbol 的形容词是（symbolic），意为有象征意义的。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "sites",
+          "signalSide": "passage",
+          "relation": "空格修饰名词，名词前要用形容词。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:64": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "represent",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "representing",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "active-relation"
+        ]
+      },
+      "reason": "句子的谓语是「献上」（offered），空格引出的短语修饰名词「礼仪性的围巾」（a ceremonial scarf），作后置定语。围巾主动代表敬意，用现在分词（representing），相当于 which represents her great respect。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "a ceremonial scarf",
+          "signalSide": "passage",
+          "relation": "空格引出的短语修饰这条围巾，说明它代表什么。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "Zhuma offered",
+          "signalSide": "passage",
+          "relation": "句子已有谓语献上，空格只能用非谓语。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:65": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把感谢的内容「改善了的生活、更好的交通和夙愿的实现」接到「表示感谢」（giving thanks）上，说明为什么感谢，用介词（for）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "giving thanks",
+          "signalSide": "passage",
+          "relation": "表示为某事而感谢，后接介词 for。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "her improved life, better transportation, and the realization",
+          "signalSide": "passage",
+          "relation": "介词后接三个并列的名词短语，都是感谢的内容。"
+        }
+      ]
+    }
+  }
+}

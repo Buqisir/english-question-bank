@@ -1,0 +1,1862 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze": {
+      "overview": "健谈的导游乘游轮去格陵兰，结识话少而用心的因纽特文化学者蒂娜，第一次学会倾听并开始少说话；回到工作后虽仍话多，与人相处的方式却已改变。",
+      "fullTranslationZh": "作为一名健谈的导游，我一直不太会倾听。我走到哪儿都记笔记——博物馆、讲座、旅游团——收集各种事实，留着以后和别人分享。所以当我乘游轮去格陵兰时，我照旧带着收集故事的热情，完全没想到会在那里上一堂关于沉默的课。\n在努克，我认识了因纽特文化学者蒂娜。她说话有目的、有温度，字字用心，却说得不多。通过蒂娜，我了解到因纽特文化不只是容忍沉默——而是拥抱沉默。她回忆起一大家子人连着几个小时坐在一起，一言不发地享受彼此的陪伴；也回忆起那些夏天，人们静静地听鸟鸣和溪水声，并不觉得需要开口评论什么。\n在那之前，我一直不停地记录各种事实，和遇到的每个人聊天，真是名副其实的话匣子。我问了蒂娜没完没了的问题，这似乎消磨了她的耐心。我第一次真正地倾听——不只是听话语，还听话语之间的沉默。在游轮上接下来的日子里，我开始婉拒别人聊天的邀请。有时，微笑和点头就能作为有效的回应。\n后来，在带自己的旅游团时，我有时仍会一个人主导谈话。但这时我会停下来问自己：“蒂娜会怎么做？”虽然我话还是太多，但格陵兰之行确实改变了我与世界相处的方式，这要归功于蒂娜和她教我珍视的那份宽厚的沉默，也要归功于我新发现的倾听的价值。",
+      "mainLine": {
+        "theme": {
+          "text": "爱说话的人学会倾听、珍视沉默，才懂得倾听的价值（the new-found value of listening）。",
+          "quote": "the new-found value of listening"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+            "text": "健谈的导游不善倾听，满怀收集故事的热情去格陵兰。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+            "text": "蒂娜话少而用心，让作者看到因纽特文化拥抱沉默。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+            "text": "作者察觉自己说个不停，第一次真正倾听，开始少说话。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+            "text": "作者仍爱说话，但格陵兰之行改变了自己与世界相处的方式。"
+          }
+        ],
+        "emotion": "热衷说话→受到触动→自我反省→珍视沉默"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "cloze-ls-1",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+          "sourceText": "So when I cruised(游轮) to Greenland, I arrived with my usual __42__ for collecting stories, completely unprepared for the lesson I would receive on __43__.",
+          "displayText": "So when I cruised(游轮) to Greenland, I arrived with my usual passion for collecting stories, completely unprepared for the lesson I would receive on silence.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:42",
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:43"
+          ],
+          "translationZh": "所以当我乘游轮去格陵兰时，我照旧带着收集故事的热情，完全没想到会在那里上一堂关于沉默的课。",
+          "analysisZh": "主干是 I arrived（我到了）。when 从句交代时间；with my usual passion for collecting stories 说明作者带着怎样的劲头来；completely unprepared for the lesson 是形容词短语作状语，补充说明主语“我”当时的状态：对那堂课毫无准备。I would receive 是省略了 that 的定语从句，修饰 lesson；句末的 on silence 说明 lesson 的内容（关于沉默的课），被定语从句隔开，落在句末。",
+          "underlineRanges": [
+            {
+              "start": 36,
+              "end": 45,
+              "quote": "I arrived"
+            },
+            {
+              "start": 92,
+              "end": 128,
+              "quote": "completely unprepared for the lesson"
+            },
+            {
+              "start": 145,
+              "end": 155,
+              "quote": "on silence"
+            }
+          ]
+        },
+        {
+          "sentenceId": "cloze-ls-2",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+          "sourceText": "She recalled her large family sitting together for hours, wordlessly enjoying each other’s __46__, or summers spent listening to birds and creeks without feeling the need to __47__.",
+          "displayText": "She recalled her large family sitting together for hours, wordlessly enjoying each other’s presence, or summers spent listening to birds and creeks without feeling the need to comment.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:46",
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:47"
+          ],
+          "translationZh": "她回忆起一大家子人连着几个小时坐在一起，一言不发地享受彼此的陪伴；也回忆起那些夏天，人们静静地听鸟鸣和溪水声，并不觉得需要开口评论什么。",
+          "analysisZh": "主干是 She recalled（她回忆起），后面是由 or 连接的两个并列宾语：her large family sitting together for hours 和 summers spent listening to birds and creeks。第一个宾语里，sitting together 说明一家人在做什么，wordlessly enjoying each other’s presence 补充他们坐着时的状态；第二个宾语里，过去分词 spent 修饰 summers，借 spend time doing 的结构说明那些夏天是怎样度过的，without feeling the need to comment 说明听的时候不必开口。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "She recalled"
+            },
+            {
+              "start": 13,
+              "end": 56,
+              "quote": "her large family sitting together for hours"
+            },
+            {
+              "start": 104,
+              "end": 147,
+              "quote": "summers spent listening to birds and creeks"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1"
+              ],
+              "start": 0,
+              "end": 104,
+              "quote": "作为一名健谈的导游，我一直不太会倾听。我走到哪儿都记笔记——博物馆、讲座、旅游团——收集各种事实，留着以后和别人分享。所以当我乘游轮去格陵兰时，我照旧带着收集故事的热情，完全没想到会在那里上一堂关于沉默的课。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2"
+              ],
+              "start": 105,
+              "end": 243,
+              "quote": "在努克，我认识了因纽特文化学者蒂娜。她说话有目的、有温度，字字用心，却说得不多。通过蒂娜，我了解到因纽特文化不只是容忍沉默——而是拥抱沉默。她回忆起一大家子人连着几个小时坐在一起，一言不发地享受彼此的陪伴；也回忆起那些夏天，人们静静地听鸟鸣和溪水声，并不觉得需要开口评论什么。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3"
+              ],
+              "start": 244,
+              "end": 378,
+              "quote": "在那之前，我一直不停地记录各种事实，和遇到的每个人聊天，真是名副其实的话匣子。我问了蒂娜没完没了的问题，这似乎消磨了她的耐心。我第一次真正地倾听——不只是听话语，还听话语之间的沉默。在游轮上接下来的日子里，我开始婉拒别人聊天的邀请。有时，微笑和点头就能作为有效的回应。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4"
+              ],
+              "start": 379,
+              "end": 494,
+              "quote": "后来，在带自己的旅游团时，我有时仍会一个人主导谈话。但这时我会停下来问自己：“蒂娜会怎么做？”虽然我话还是太多，但格陵兰之行确实改变了我与世界相处的方式，这要归功于蒂娜和她教我珍视的那份宽厚的沉默，也要归功于我新发现的倾听的价值。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-cloze-1",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+            "text": "As a talkative tour guide, I’ve always struggled with listening. I take notes everywhere – museums, lectures, tours – collecting facts to share later. So when I cruised(游轮) to Greenland, I arrived with my usual passion for collecting stories, completely unprepared for the lesson I would receive on silence."
+          },
+          {
+            "textId": "done-cloze-2",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+            "text": "In Nuuk, I met Tina, an Inuit culturalist. She spoke with purpose and compassion, intentionally but not frequently. Through Tina, I learned that Inuit culture doesn’t just tolerate silence – it embraces it. She recalled her large family sitting together for hours, wordlessly enjoying each other’s presence, or summers spent listening to birds and creeks without feeling the need to comment."
+          },
+          {
+            "textId": "done-cloze-3",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+            "text": "Until then, I had been constantly documenting facts and talking to everyone I met, living up to my reputation as a chatterbox. I asked Tina endless questions, which seemed to wear her patience. For the first time, I truly listened – not just to words, but to the silence in between. In the following days on the cruise, I began to decline invitations to converse. Sometimes a smile and nod would work as a(n) effective response."
+          },
+          {
+            "textId": "done-cloze-4",
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+            "text": "Later, while leading my own tours, I still sometimes dominate conversations. But this is when I will stop and ask myself, “What would Tina do?” Though I still talk too much, the Greenland experience did shift how I engage with the world, thanks to Tina and the generous silence she taught me to treasure, and the new-found value of listening."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 5,
+                "end": 25,
+                "quote": "talkative tour guide"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 4,
+                "end": 9,
+                "quote": "健谈的导游"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:41"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:41",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-1",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 138,
+                "end": 143,
+                "quote": "share"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 56,
+                "end": 58,
+                "quote": "分享"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 118,
+                "end": 134,
+                "quote": "collecting facts"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 42,
+                "end": 48,
+                "quote": "收集各种事实"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:42"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:42",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-1",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 211,
+                "end": 218,
+                "quote": "passion"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 82,
+                "end": 84,
+                "quote": "热情"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 185,
+                "end": 199,
+                "quote": "it embraces it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 65,
+                "end": 69,
+                "quote": "拥抱沉默"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:43"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:43",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-1",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 299,
+                "end": 306,
+                "quote": "silence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 99,
+                "end": 101,
+                "quote": "沉默"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 82,
+                "end": 103,
+                "quote": "intentionally but not"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 29,
+                "end": 35,
+                "quote": "字字用心，却"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:44"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:44",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 104,
+                "end": 114,
+                "quote": "frequently"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 35,
+                "end": 39,
+                "quote": "说得不多"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 185,
+                "end": 199,
+                "quote": "it embraces it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 65,
+                "end": 69,
+                "quote": "拥抱沉默"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:45"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:45",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 172,
+                "end": 180,
+                "quote": "tolerate"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 57,
+                "end": 59,
+                "quote": "容忍"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 231,
+                "end": 257,
+                "quote": "sitting together for hours"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 79,
+                "end": 89,
+                "quote": "连着几个小时坐在一起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:46"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:46",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 298,
+                "end": 306,
+                "quote": "presence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 100,
+                "end": 102,
+                "quote": "陪伴"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 259,
+                "end": 269,
+                "quote": "wordlessly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 90,
+                "end": 94,
+                "quote": "一言不发"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:47"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:47",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 383,
+                "end": 390,
+                "quote": "comment"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 133,
+                "end": 135,
+                "quote": "评论"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 67,
+                "end": 88,
+                "quote": "take notes everywhere"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 20,
+                "end": 28,
+                "quote": "走到哪儿都记笔记"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:48"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:48",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-3",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 34,
+                "end": 45,
+                "quote": "documenting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 11,
+                "end": 13,
+                "quote": "记录"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 85,
+                "end": 114,
+                "quote": "my reputation as a chatterbox"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 35,
+                "end": 38,
+                "quote": "话匣子"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:49"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:49",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-3",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 83,
+                "end": 95,
+                "quote": "living up to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 30,
+                "end": 34,
+                "quote": "名副其实"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 129,
+                "end": 146,
+                "quote": "endless questions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 44,
+                "end": 51,
+                "quote": "没完没了的问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:50"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:50",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-3",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 175,
+                "end": 179,
+                "quote": "wear"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 55,
+                "end": 57,
+                "quote": "消磨"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 205,
+                "end": 221,
+                "quote": "I truly listened"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 67,
+                "end": 72,
+                "quote": "真正地倾听"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:51"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:51",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-3",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 331,
+                "end": 338,
+                "quote": "decline"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 106,
+                "end": 108,
+                "quote": "婉拒"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 380,
+                "end": 393,
+                "quote": "would work as"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 125,
+                "end": 128,
+                "quote": "能作为"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:52"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:52",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-3",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 409,
+                "end": 418,
+                "quote": "effective"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 128,
+                "end": 131,
+                "quote": "有效的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 149,
+                "end": 170,
+                "quote": "I still talk too much"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 49,
+                "end": 55,
+                "quote": "我话还是太多"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:53"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:53",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-4",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 53,
+                "end": 61,
+                "quote": "dominate"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 21,
+                "end": 23,
+                "quote": "主导"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 205,
+                "end": 221,
+                "quote": "I truly listened"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:3",
+                "start": 67,
+                "end": 72,
+                "quote": "真正地倾听"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:54"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:54",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-4",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 203,
+                "end": 208,
+                "quote": "shift"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 64,
+                "end": 66,
+                "quote": "改变"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 279,
+                "end": 300,
+                "quote": "taught me to treasure"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 86,
+                "end": 90,
+                "quote": "教我珍视"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:55"
+            ],
+            "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:55",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-4",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 261,
+                "end": 269,
+                "quote": "generous"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:4",
+                "start": 93,
+                "end": 96,
+                "quote": "宽厚的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:42",
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:43"
+            ],
+            "selectedSentenceId": "cloze-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-1",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 187,
+                "end": 241,
+                "quote": "I arrived with my usual passion for collecting stories"
+              },
+              {
+                "textId": "done-cloze-1",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 243,
+                "end": 306,
+                "quote": "completely unprepared for the lesson I would receive on silence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 72,
+                "end": 84,
+                "quote": "我照旧带着收集故事的热情"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:1",
+                "start": 85,
+                "end": 103,
+                "quote": "完全没想到会在那里上一堂关于沉默的课"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:46",
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:47"
+            ],
+            "selectedSentenceId": "cloze-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-cloze-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 207,
+                "end": 263,
+                "quote": "She recalled her large family sitting together for hours"
+              },
+              {
+                "textId": "done-cloze-2",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 308,
+                "end": 354,
+                "quote": "or summers spent listening to birds and creeks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 70,
+                "end": 89,
+                "quote": "她回忆起一大家子人连着几个小时坐在一起"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:cloze:2",
+                "start": 103,
+                "end": 111,
+                "quote": "也回忆起那些夏天"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "热衷说话→受到触动→自我反省→珍视沉默"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:41": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "detail",
+      "context": "健谈的导游收集事实是为了以后讲出去，要一个把内容说给别人听的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是收集来的事实（collecting facts），收集者是健谈的导游（talkative tour guide），留着以后讲给人听。",
+        "quotes": [
+          "collecting facts",
+          "talkative tour guide"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "分享",
+        "meaning": "讲给别人听",
+        "reason": "健谈的导游收集事实是为了以后讲出去，要一个把内容说给别人听的动作。动词看搭配：宾语是收集来的事实（collecting facts），收集者是健谈的导游（talkative tour guide），留着以后讲给人听。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "create",
+          "meaning": "创造；事实（facts）是在博物馆、讲座里记下的现成内容，不是导游自己创造的。",
+          "quote": "facts"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "publish",
+          "meaning": "出版，发表；作者是健谈的导游（talkative tour guide），记下事实是为了讲给人听，不是拿去发表。",
+          "quote": "talkative tour guide"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "memorize",
+          "meaning": "记住；作者已经到处记笔记（take notes everywhere），用不着硬背，记下的事实要拿去讲。",
+          "quote": "take notes everywhere"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "collecting facts",
+          "signalSide": "context-before",
+          "targetText": "collecting facts to share later",
+          "relation": "收集事实是为了以后把它们分享给别人。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "talkative tour guide",
+          "signalSide": "context-before",
+          "relation": "健谈的导游习惯把听来的东西讲给游客听。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:42": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者照旧满心想收集故事，这股一贯的劲头与后面的毫无准备形成对照。",
+      "find": {
+        "check": "echo",
+        "text": "前一句说作者到处记笔记、收集事实（collecting facts），这里照旧（usual）带着对收集故事的同一份热衷。",
+        "quotes": [
+          "collecting facts",
+          "usual"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "热情",
+        "meaning": "对收集故事的热衷",
+        "reason": "作者照旧满心想收集故事，这股一贯的劲头与后面的毫无准备形成对照。名词看复现：前一句说作者到处记笔记、收集事实（collecting facts），这里照旧（usual）带着对收集故事的同一份热衷。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "methods",
+          "meaning": "方法；句子对照的是作者一心收集故事和毫无准备（completely unprepared），说的是心态，不是做法。",
+          "quote": "completely unprepared"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "qualification",
+          "meaning": "资格；导游收集故事（collecting stories）用不着什么资格，这里说的是作者一贯的兴致。",
+          "quote": "collecting stories"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "arrangement",
+          "meaning": "安排；作者对要上的一课毫无准备（completely unprepared），带去的只是兴致，谈不上安排。",
+          "quote": "completely unprepared"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for collecting stories",
+          "signalSide": "context-after",
+          "targetText": "passion for collecting stories",
+          "relation": "表示对收集故事的热情（passion for）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "collecting facts",
+          "signalSide": "context-before",
+          "relation": "前一句收集事实的习惯，就是这里一贯的热情。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:43": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "main",
+      "context": "这是格陵兰之行要给作者上的那一课的内容，引出全文的话题。",
+      "find": {
+        "check": "echo",
+        "text": "后文反复写到沉默：因纽特文化拥抱它（it embraces it），蒂娜教作者珍视它（she taught me to treasure）。",
+        "quotes": [
+          "it embraces it",
+          "she taught me to treasure"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "沉默",
+        "reason": "这是格陵兰之行要给作者上的那一课的内容，引出全文的话题。名词看复现：后文反复写到沉默：因纽特文化拥抱它（it embraces it），蒂娜教作者珍视它（she taught me to treasure）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sightseeing",
+          "meaning": "观光；作者本就是带团的导游，后文学到的是蒂娜教作者珍视的东西（she taught me to treasure），不是游览。",
+          "quote": "she taught me to treasure"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "gratitude",
+          "meaning": "感激；后文写一家人不说话地相处，听鸟鸣时不急于开口（without feeling the need to），不是感恩。",
+          "quote": "without feeling the need to"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "heritage",
+          "meaning": "遗产；蒂娜虽是因纽特文化学者，作者学到的却是这种文化拥抱沉默（it embraces it），不是遗产本身。",
+          "quote": "it embraces it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the lesson I would receive on",
+          "signalSide": "context-before",
+          "targetText": "the lesson I would receive on silence",
+          "relation": "一堂关于沉默的课，介词（on）引出课的内容。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "silence she taught me to treasure",
+          "signalSide": "context-after",
+          "relation": "文末点出蒂娜教作者珍视的正是沉默。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:44": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:44",
+      "blankNo": 44,
+      "pos": "adverb",
+      "role": "main",
+      "context": "蒂娜说话有用意却话不多，转折后要否定的是说得多。",
+      "find": {
+        "check": "echo",
+        "text": "后文说她的文化拥抱沉默（it embraces it），家人能一连几小时不说话（wordlessly），可见她话不多。",
+        "quotes": [
+          "it embraces it",
+          "wordlessly"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "频繁地",
+        "meaning": "话多",
+        "reason": "蒂娜说话有用意却话不多，转折后要否定的是说得多。副词看复现：后文说她的文化拥抱沉默（it embraces it），家人能一连几小时不说话（wordlessly），可见她话不多。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "quickly",
+          "meaning": "快速地；全文对照的是作者话多（a chatterbox）和蒂娜话少，比的是说多少，不是语速。",
+          "quote": "a chatterbox"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "loudly",
+          "meaning": "大声地；后文强调这种文化拥抱沉默（it embraces it），说的是开口少，不是嗓门小。",
+          "quote": "it embraces it"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "carefully",
+          "meaning": "仔细地；与前面的有目的（with purpose）同向，被否定后就成了说话不用心，前后矛盾。",
+          "quote": "with purpose"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "intentionally but not",
+          "signalSide": "context-before",
+          "targetText": "intentionally but not frequently",
+          "relation": "有意地说，但不常说，但不（but not）引出被否定的一面。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but not",
+          "signalSide": "context-before",
+          "relation": "前面肯定她说话有用意，后面否定的是说得多。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:45": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "与后面的拥抱沉默是递进关系，要一个同一方向、程度较弱的接受态度。",
+      "find": {
+        "check": "affect",
+        "text": "不只是（doesn’t just）这样对待沉默，更是拥抱它（it embraces it），前面要一个较弱的接纳，即容忍。",
+        "quotes": [
+          "doesn’t just",
+          "it embraces it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "容忍",
+        "reason": "与后面的拥抱沉默是递进关系，要一个同一方向、程度较弱的接受态度。动词看情感：不只是（doesn’t just）这样对待沉默，更是拥抱它（it embraces it），前面要一个较弱的接纳，即容忍。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "avoid",
+          "meaning": "回避；回避沉默是排斥它，与后面的拥抱（it embraces it）方向相反，接不上递进。",
+          "quote": "it embraces it"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "reduce",
+          "meaning": "减少；减少沉默也是排斥它，不能用不只是（doesn’t just）引出更进一步的拥抱。",
+          "quote": "doesn’t just"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "resist",
+          "meaning": "抵制；抵制沉默与拥抱（it embraces it）态度相反，前后接不成递进。",
+          "quote": "it embraces it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "silence",
+          "signalSide": "context-after",
+          "targetText": "tolerate silence",
+          "relation": "宾语是沉默，容忍沉默是接受它的较低程度。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "it embraces it",
+          "signalSide": "context-after",
+          "relation": "后面的拥抱沉默是更进一步的接纳，前面方向相同、程度较弱。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:46": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "一家人静静坐上几小时，享受的是彼此陪在身边。",
+      "find": {
+        "check": "collocation",
+        "text": "一家人坐在一起好几个小时（sitting together for hours），一言不发（wordlessly）地享受的是彼此在场。",
+        "quotes": [
+          "sitting together for hours",
+          "wordlessly"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "在场",
+        "meaning": "彼此的陪伴",
+        "reason": "一家人静静坐上几小时，享受的是彼此陪在身边。名词看搭配：一家人坐在一起好几个小时（sitting together for hours），一言不发（wordlessly）地享受的是彼此在场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "appearance",
+          "meaning": "外貌；一家人坐在一起好几个小时（sitting together for hours），享受的是相聚，不是互看长相。",
+          "quote": "sitting together for hours"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "performance",
+          "meaning": "表演；大家一言不发（wordlessly）地坐着，没有人在表演。",
+          "quote": "wordlessly"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "ignorance",
+          "meaning": "无知；享受彼此的无知说不成，前面写的是一家人亲密地坐在一起（sitting together）。",
+          "quote": "sitting together"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "wordlessly enjoying",
+          "signalSide": "context-before",
+          "targetText": "wordlessly enjoying each other’s presence",
+          "relation": "默默享受彼此的陪伴（enjoying presence）。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "sitting together for hours",
+          "signalSide": "context-before",
+          "relation": "一家人坐在一起，享受的就是彼此在身边。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:47": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "main",
+      "context": "听鸟鸣溪流时不觉得非要开口，要一个说话类的动作，呼应这种文化对沉默的接纳。",
+      "find": {
+        "check": "echo",
+        "text": "前半句一家人一言不发（wordlessly），这半句静静地听（listening to birds and creeks），同样不需要开口。",
+        "quotes": [
+          "wordlessly",
+          "listening to birds and creeks"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "发表意见",
+        "meaning": "开口说话",
+        "reason": "听鸟鸣溪流时不觉得非要开口，要一个说话类的动作，呼应这种文化对沉默的接纳。动词看复现：前半句一家人一言不发（wordlessly），这半句静静地听（listening to birds and creeks），同样不需要开口。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "appreciate",
+          "meaning": "欣赏；静静地听鸟鸣溪流（listening to birds and creeks）本身就是欣赏，说不需要欣赏自相矛盾。",
+          "quote": "listening to birds and creeks"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "intervene",
+          "meaning": "干预；鸟鸣和溪流（birds and creeks）是自然的声响，谈不上去干预。",
+          "quote": "birds and creeks"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "leave",
+          "meaning": "离开；这半句与一言不发（wordlessly）的前半句并列，说的是不必开口，不是要不要走。",
+          "quote": "wordlessly"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "without feeling the need to",
+          "signalSide": "context-before",
+          "targetText": "without feeling the need to comment",
+          "relation": "不觉得有必要发表意见（need to comment）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "wordlessly",
+          "signalSide": "context-before",
+          "relation": "前半句的一言不发，与这里的不必开口说的是同一件事。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:48": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "main",
+      "context": "回到作者以往的习惯：一边不停地把事实记下来，一边找人说话。",
+      "find": {
+        "check": "echo",
+        "text": "开头说作者走到哪儿都记笔记（take notes everywhere）、收集事实（collecting facts），这里重提的就是把事实记下来。",
+        "quotes": [
+          "take notes everywhere",
+          "collecting facts"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "记录",
+        "reason": "回到作者以往的习惯：一边不停地把事实记下来，一边找人说话。动词看复现：开头说作者走到哪儿都记笔记（take notes everywhere）、收集事实（collecting facts），这里重提的就是把事实记下来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "viewing",
+          "meaning": "观看；事实（facts）不是拿来看的，开头说作者是到处记笔记（take notes everywhere）。",
+          "quote": "take notes everywhere"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "downloading",
+          "meaning": "下载；开头说作者在博物馆、讲座现场记笔记（take notes everywhere），不是从网上下载。",
+          "quote": "take notes everywhere"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "distributing",
+          "meaning": "分发；开头说作者是在收集事实（collecting facts），这里重提的是记，不是发给别人。",
+          "quote": "collecting facts"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "facts",
+          "signalSide": "context-after",
+          "targetText": "documenting facts",
+          "relation": "记录事实（documenting facts）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "take notes everywhere",
+          "signalSide": "context-before",
+          "relation": "开头的到处记笔记，就是这里的记录事实。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:49": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:49",
+      "blankNo": 49,
+      "pos": "phrase",
+      "role": "main",
+      "context": "不停记录、到处说话，正好坐实了作者话匣子的名声，要一个符合名声的意思。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "作者一直跟遇到的每个人说话（talking to everyone I met），正与话匣子（a chatterbox）这个名声相符。",
+        "quotes": [
+          "talking to everyone I met",
+          "a chatterbox"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "符合，不辜负",
+        "meaning": "坐实话匣子之名",
+        "reason": "不停记录、到处说话，正好坐实了作者话匣子的名声，要一个符合名声的意思。词组看语境义：作者一直跟遇到的每个人说话（talking to everyone I met），正与话匣子（a chatterbox）这个名声相符。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "making up for",
+          "meaning": "弥补；跟每个人说个不停（talking to everyone I met）只会让话匣子之名更响，不是在弥补什么。",
+          "quote": "talking to everyone I met"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "getting rid of",
+          "meaning": "摆脱；作者一直说个不停（constantly），加深了话匣子（a chatterbox）之名，谈不上摆脱。",
+          "quote": "constantly"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "looking down on",
+          "meaning": "看不起；在那之前（Until then）作者还没反省，对自己话多并无轻视。",
+          "quote": "Until then"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my reputation as a chatterbox",
+          "signalSide": "context-after",
+          "targetText": "living up to my reputation as a chatterbox",
+          "relation": "名副其实（live up to one’s reputation）。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "living",
+          "signalSide": "option",
+          "targetText": "living up to",
+          "relation": "与小品词（up to）合起来表示达到、配得上某种名声或期望。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:50": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "detail",
+      "context": "没完没了的提问让蒂娜的耐心一点点被磨掉。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是没完没了的问题（endless questions），宾语是她的耐心（her patience），只能是消磨。",
+        "quotes": [
+          "endless questions",
+          "her patience"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "磨损，消耗",
+        "meaning": "消磨她的耐心",
+        "reason": "没完没了的提问让蒂娜的耐心一点点被磨掉。动词看搭配：主语是没完没了的问题（endless questions），宾语是她的耐心（her patience），只能是消磨。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hold",
+          "meaning": "保持；没完没了的问题（endless questions）只会让人不耐烦，不会让她保持耐心。",
+          "quote": "endless questions"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "waste",
+          "meaning": "浪费；浪费常说时间或钱，这里说的是没完没了的问题（endless questions）一点点磨掉她的耐心。",
+          "quote": "endless questions"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "build",
+          "meaning": "培养；没完没了的提问（endless questions）只会消耗耐心，不会培养耐心。",
+          "quote": "endless questions"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her patience",
+          "signalSide": "context-after",
+          "targetText": "wear her patience",
+          "relation": "消磨她的耐心。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "endless questions",
+          "signalSide": "context-before",
+          "relation": "没完没了的问题是消磨耐心的原因。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:51": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "第一次真正学会倾听后，作者的做法变了：不再接下每次闲聊。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是聊天的邀请（invitations to converse）；作者刚第一次真正倾听（I truly listened），对邀请只会婉拒。",
+        "quotes": [
+          "invitations to converse",
+          "I truly listened"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "婉拒，谢绝",
+        "reason": "第一次真正学会倾听后，作者的做法变了：不再接下每次闲聊。动词看搭配：宾语是聊天的邀请（invitations to converse）；作者刚第一次真正倾听（I truly listened），对邀请只会婉拒。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "accept",
+          "meaning": "接受；接受聊天邀请是作者从前的样子（talking to everyone I met），与学会倾听后的转变相反。",
+          "quote": "talking to everyone I met"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "extend",
+          "meaning": "发出；主动邀人聊天仍是话多，后一句却说微笑点头（a smile and nod）就够了。",
+          "quote": "a smile and nod"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "withdraw",
+          "meaning": "撤回；邀请（invitations to converse）是别人发来的，作者撤回不了别人的邀请。",
+          "quote": "invitations to converse"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "invitations to converse",
+          "signalSide": "context-after",
+          "targetText": "decline invitations to converse",
+          "relation": "婉拒聊天的邀请（decline invitations）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I truly listened",
+          "signalSide": "context-before",
+          "relation": "真正学会倾听后，作者开始少说话。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:52": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:52",
+      "blankNo": 52,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "微笑点头也能起作用，要一个表示管用的褒义形容词。",
+      "find": {
+        "check": "collocation",
+        "text": "谓语能充当（would work as）说明微笑点头（a smile and nod）起了作用，是有效的回应。",
+        "quotes": [
+          "would work as",
+          "a smile and nod"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "有效的",
+        "reason": "微笑点头也能起作用，要一个表示管用的褒义形容词。形容词看搭配：谓语能充当（would work as）说明微笑点头（a smile and nod）起了作用，是有效的回应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "potential",
+          "meaning": "潜在的；微笑点头已经能充当回应（would work as），不是可能的回应。",
+          "quote": "would work as"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "formal",
+          "meaning": "正式的；微笑点头（a smile and nod）是随意的回应，谈不上正式。",
+          "quote": "a smile and nod"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "distinctive",
+          "meaning": "独特的；句子说的是微笑点头管用（would work as），不是说它与众不同。",
+          "quote": "would work as"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "response",
+          "signalSide": "context-after",
+          "targetText": "effective response",
+          "relation": "有效的回应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "would work as",
+          "signalSide": "context-before",
+          "relation": "能充当回应，说明它管用。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:53": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:53",
+      "blankNo": 53,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者回到工作中老毛病仍会犯：一个人把谈话占满。",
+      "find": {
+        "check": "echo",
+        "text": "下文作者承认自己仍然话太多（I still talk too much），所以要停下来问自己（stop and ask myself）。",
+        "quotes": [
+          "I still talk too much",
+          "stop and ask myself"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "支配，主导",
+        "meaning": "一个人包揽谈话",
+        "reason": "作者回到工作中老毛病仍会犯：一个人把谈话占满。动词看复现：下文作者承认自己仍然话太多（I still talk too much），所以要停下来问自己（stop and ask myself）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "recall",
+          "meaning": "回想；后句说作者会停下来问自己（stop and ask myself），说明前面是控制不住地说多了，不是回忆谈话。",
+          "quote": "stop and ask myself"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "interrupt",
+          "meaning": "打断；打断也是毛病，但后文说的是作者仍然话太多（I still talk too much），即谈话被作者占满。",
+          "quote": "I still talk too much"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "encourage",
+          "meaning": "鼓励；鼓励别人交谈是好事，用不着停下来问自己（What would Tina do?）。",
+          "quote": "What would Tina do?"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "conversations",
+          "signalSide": "context-after",
+          "targetText": "dominate conversations",
+          "relation": "主导谈话。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I still talk too much",
+          "signalSide": "context-after",
+          "relation": "仍然话太多，就是一个人主导谈话。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:54": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "main",
+      "context": "尽管仍然话多，格陵兰之行确实改变了作者与世界相处的方式，这是全文的落点。",
+      "find": {
+        "check": "collocation",
+        "text": "让步句承认仍然话多（Though I still talk too much），主句用强调助动词（did）说确有变化，宾语是相处的方式（how I engage with the world）。",
+        "quotes": [
+          "Though I still talk too much",
+          "how I engage with the world"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "改变",
+        "reason": "尽管仍然话多，格陵兰之行确实改变了作者与世界相处的方式，这是全文的落点。动词看搭配：让步句承认仍然话多（Though I still talk too much），主句用强调助动词（did）说确有变化，宾语是相处的方式（how I engage with the world）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "imply",
+          "meaning": "暗示；作者已开始真正倾听（I truly listened），变化是实在的，不止暗示。",
+          "quote": "I truly listened"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "address",
+          "meaning": "处理，解决；让步句说作者仍然话太多（I still talk too much），问题并没有解决，这里说的是方式变了。",
+          "quote": "I still talk too much"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "decide",
+          "meaning": "决定；让步句（Though I still talk too much）说明作者只是有所转变，说经历决定了一切太绝对。",
+          "quote": "Though I still talk too much"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "how I engage with the world",
+          "signalSide": "context-after",
+          "targetText": "shift how I engage with the world",
+          "relation": "改变我与世界相处的方式。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Though I still talk too much",
+          "signalSide": "context-before",
+          "relation": "让步句承认仍然话多，主句强调确实（did）有了改变。"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:55": {
+      "blankId": "blank:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:55",
+      "blankNo": 55,
+      "pos": "adjective",
+      "role": "main",
+      "context": "蒂娜教作者珍视的沉默是给别人留出空间的好沉默，要一个褒义词。",
+      "find": {
+        "check": "affect",
+        "text": "这种沉默值得珍视（taught me to treasure），又和倾听的价值（value of listening）并列，必须是褒义。",
+        "quotes": [
+          "taught me to treasure",
+          "value of listening"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "慷慨的，宽厚的",
+        "meaning": "给人留出空间的",
+        "reason": "蒂娜教作者珍视的沉默是给别人留出空间的好沉默，要一个褒义词。形容词看情感：这种沉默值得珍视（taught me to treasure），又和倾听的价值（value of listening）并列，必须是褒义。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "defensive",
+          "meaning": "防御性的；蒂娜的沉默是一家人坐在一起（sitting together for hours）时的安静，不是自我防卫。",
+          "quote": "sitting together for hours"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "dead",
+          "meaning": "死寂的；值得珍视（taught me to treasure）的沉默是褒义的，死气沉沉与此相反。",
+          "quote": "taught me to treasure"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "strategic",
+          "meaning": "有策略的；蒂娜一家的沉默是自然地享受相聚（wordlessly enjoying），不是出于算计。",
+          "quote": "wordlessly enjoying"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "silence she taught me to treasure",
+          "signalSide": "context-after",
+          "targetText": "generous silence",
+          "relation": "修饰沉默（silence），是值得珍视的那种。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "taught me to treasure",
+          "signalSide": "context-after",
+          "relation": "值得珍视，所以形容词是褒义的。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    }
+  }
+}

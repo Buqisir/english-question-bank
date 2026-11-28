@@ -1,0 +1,185 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: The next day before class, standing alone in the classroom, I panicked. The rented computers sat in neat rows, but my mind went blank. What if I forgot a step? What if someone asked a question I couldn’t answer? With shaking hands, I opened my notes and saw the simple steps from the night before. My mom’s words came back to me: “Can’t never could until he tried.” I took a deep breath. Seventeen people had chosen to trust me. When the students walked in, I smiled and welcomed them. Halfway through, an older man got lost, so I showed him one keystroke at a time until he could do it himself. The lesson went on just as I had practiced.\n\nParagraph 2: As the class ended, students’ positive words filled the room. The older man said that for the first time, computers didn’t scare him. Others thanked me for my clear explanations and asked if I would teach another course. My lack of experience had not mattered as much as I had feared. My husband helped me carry the computers back, and I told him everything on the way home. He squeezed my hand. A few weeks later, the money from my class paid for a repairman. When I poured cold milk for the kids again, I remembered how frightened I had been that morning, and I smiled.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写要动笔的是“我”：失业在家、第一次开电脑课的母亲。丈夫是支持她的家人，学员只做背景人物。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”讲述，一般过去时。多是中短句，按动作一步步推进；人物的话几乎都是转述，只有母亲那句话用了引号。续写也以“我”的动作和心理为主，直接引语最多留一两句。",
+          "evidence": [
+            "Then I remembered my mom’s words, “Can’t never could until he tried.”",
+            "I folded brochures, stuck on labels and stamps, and mailed them"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在开课前一夜“我”反复练习、祈祷热情能弥补经验不足。续写要回答：没有教学经验的“我”能不能把第一堂课上好；家里连修冰箱都请不起人的困境，也可以借这次尝试有所交代。",
+          "evidence": [
+            "I prayed my passion would make up for my lack of experience."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "失业的母亲，第一次开电脑课",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "多少挣点钱贴补家用，哪怕只够修冰箱",
+              "evidence": "I looked for ways to earn money, even a little, maybe to fix the fridge."
+            },
+            {
+              "label": "性格",
+              "text": "心里害怕，却肯硬着头皮去试",
+              "evidence": "So I decided to give it a try."
+            },
+            {
+              "label": "此刻",
+              "text": "准备得很细，只是担心自己没有经验",
+              "evidence": "I went over every keystroke, breaking complex steps into simple ones."
+            }
+          ]
+        },
+        {
+          "name": "丈夫",
+          "role": "同样失业、四处找工作的丈夫",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "话不多，但出力帮“我”把课办起来",
+              "evidence": "My husband helped me carry and set them up before leaving."
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "Can’t never could until he tried.",
+          "use": "第 1 段：慌乱时想起母亲这句话，“我”由此稳住，情绪转折有了来由。"
+        },
+        {
+          "sourceQuote": "breaking complex steps into simple ones",
+          "use": "第 1 段：学员跟不上时，“我”用前一夜拆好的简单步骤一键一键带他，准备派上用场。"
+        },
+        {
+          "sourceQuote": "maybe to fix the fridge",
+          "use": "第 2 段结尾：挣到的钱用来请人修冰箱，牛奶又凉了，收住开头家里的困境。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "“我”慌乱中翻开笔记、想起母亲的话而镇定下来，按练过的步骤上完课；课后学员称赞，“我”发现经验不足没那么要紧，后来用挣的钱修好了冰箱。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "从“我”独自在教室里的慌乱写起。第二段首句是下课时的称赞，所以第一段结束时学员必须已经到场，课已经开始并进行下去。",
+          "draft": "“我”看着成排的电脑脑子一片空白，翻开前一夜写好的简单步骤，想起母亲的话，深呼吸后迎接学员；一位年长学员跟不上，“我”一键一键带他学会，课按练过的样子进行下去。",
+          "bridgeQuote": "students’ positive words filled the room",
+          "bridge": "学员凭什么称赞，第一段要先写出这堂课是怎样上好的？"
+        },
+        {
+          "paragraph": 2,
+          "must": "从下课时学员的称赞写起，写出“我”对这堂课结果的反应。",
+          "draft": "年长学员说第一次不怕电脑了，其他人称赞讲得清楚、问还开不开课；“我”发现经验不足没那么要紧；丈夫帮忙搬回电脑，听“我”讲完握了握我的手；几周后用挣的钱请人修好冰箱，给孩子倒凉牛奶时“我”笑了。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: The next day before class, standing alone in the classroom, I panicked. The rented computers sat in neat rows, but my mind went blank. What if I forgot a step? What if someone asked a question I couldn’t answer? With shaking hands, I opened my notes and saw the simple steps from the night before. My mom’s words came back to me: “Can’t never could until he tried.” I took a deep breath. Seventeen people had chosen to trust me. When the students walked in, I smiled and welcomed them. Halfway through, an older man got lost, so I showed him one keystroke at a time until he could do it himself. The lesson went on just as I had practiced.\n\nParagraph 2: As the class ended, students’ positive words filled the room. The older man said that for the first time, computers didn’t scare him. Others thanked me for my clear explanations and asked if I would teach another course. My lack of experience had not mattered as much as I had feared. My husband helped me carry the computers back, and I told him everything on the way home. He squeezed my hand. A few weeks later, the money from my class paid for a repairman. When I poured cold milk for the kids again, I remembered how frightened I had been that morning, and I smiled.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "从慌乱到镇定，再把课上起来，给第二段的称赞铺好来源。",
+          "items": [
+            {
+              "quote": "What if I forgot a step? What if someone asked a question I couldn’t answer?",
+              "explain": "两个 What if 问句把“慌”写成具体的担心，正对着原文“没有教学经验”这一点，比只写 I was nervous 真实。"
+            },
+            {
+              "quote": "My mom’s words came back to me: “Can’t never could until he tried.”",
+              "explain": "转折由原文伏笔触发：当初让“我”决定一试的话，这时又让“我”稳住。全段只这一句直接引语，和原文的写法一致。"
+            },
+            {
+              "quote": "Halfway through, an older man got lost, so I showed him one keystroke at a time until he could do it himself.",
+              "explain": "把前一夜逐个按键、拆分步骤的准备用到课堂上，写出课上得好的一个具体证据，也给第二段的称赞留了出处。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写称赞和“我”的领悟，再落回家里的冰箱收尾。",
+          "items": [
+            {
+              "quote": "The older man said that for the first time, computers didn’t scare him.",
+              "explain": "首句只说满屋称赞，这句把称赞落到第一段那位学员身上，前后接上；用转述而不用引号，贴合原文。"
+            },
+            {
+              "quote": "My lack of experience had not mattered as much as I had feared.",
+              "explain": "直接回应原文 lack of experience 的担心，用过去完成时写回头看时的发现，点到为止，不讲大道理。"
+            },
+            {
+              "quote": "A few weeks later, the money from my class paid for a repairman.",
+              "explain": "开课的起因是想挣钱修冰箱，这句交代结果：困境有了实在的好转，不必拔高成“改变命运”。"
+            },
+            {
+              "quote": "When I poured cold milk for the kids again",
+              "explain": "结尾回到开头温热的牛奶，落在一个具体动作上，读者自然看出冰箱修好了、日子在变好。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "my mind went blank",
+          "function": "写紧张到脑子一片空白，比 nervous 具体，正合第一段开头的慌乱。"
+        },
+        {
+          "expression": "one keystroke at a time",
+          "function": "借原文的 keystroke，写一步一步耐心教人，贴合电脑课的场景。"
+        },
+        {
+          "expression": "had not mattered as much as I had feared",
+          "function": "写回头看时发现担心落空的感受，用来交代“我”的变化。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段只写慌乱和自我打气，课一直没开始",
+          "why": "第二段首句是 As the class ended，第一段结束时课必须已经上起来，否则学员的称赞没有来由。"
+        },
+        {
+          "pitfall": "靠新人物或意外救场，比如突然来了一位老教师替“我”上课",
+          "why": "原文给的伏笔是母亲的话和前一夜的准备，问题该由“我”自己解决；别人来救场会架空主人公“自己试一试”的主线。"
+        },
+        {
+          "pitfall": "结尾大段抒情或喊口号，例如 Never give up!",
+          "why": "原文语言平实，开头的困境是家里拮据、冰箱坏了；落在修冰箱这样的具体事上，比贴一句道理更能收住全文。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: The next day before class, standing alone in the classroom, I panicked. The seventeen rented computers hummed quietly in their rows, and every dark screen seemed to be waiting for me to fail. My throat went dry. What if I froze in front of a room full of strangers? I gripped my notes so tightly that the pages crumpled. Then my eyes fell on the simple steps I had worked out the night before, and I heard my mom’s voice again: “Can’t never could until he tried.” I smoothed out the pages, took a slow breath and stood by the door. As the students arrived, I shook hands with each of them as if I had done this for years. Halfway through the lesson, a gray-haired man got lost and his face turned red. I pulled up a chair beside him, slowed down and guided him one keystroke at a time until a neat letter appeared on his screen.\n\nParagraph 2: As the class ended, students’ positive words filled the room. “I finally get it,” the gray-haired man said, pointing proudly at his letter. Others thanked me for making hard things sound easy and asked when the next course would begin. Standing among them, I realized that my lack of experience had hardly mattered; the long night of practice and my passion had carried me through. When my husband came to help me return the computers, he took one look at my face and grinned. “It went well, didn’t it?” he asked. I only nodded, too happy to speak. A few weeks later, we could finally afford to call a repairman. The first morning the milk came out cold again, I poured a glass for each of the kids and began planning my next class.",
+      "beyondStandard": [
+        {
+          "quote": "every dark screen seemed to be waiting for me to fail",
+          "explain": "把慌乱写进眼前的电脑屏幕，用 seemed 表明这是“我”的感觉，比标准版 my mind went blank 更有画面。"
+        },
+        {
+          "quote": "I pulled up a chair beside him, slowed down and guided him one keystroke at a time",
+          "explain": "三个连续动作写出耐心，比标准版 showed him 具体，也更像一位真正在教课的老师。"
+        },
+        {
+          "quote": "A few weeks later, we could finally afford to call a repairman.",
+          "explain": "把原文 could not afford to call a repairman 反过来用，首尾呼应，困境的变化一看就懂。"
+        }
+      ]
+    }
+  }
+}

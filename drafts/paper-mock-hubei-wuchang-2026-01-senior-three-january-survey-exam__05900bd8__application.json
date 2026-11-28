@@ -1,0 +1,130 @@
+{
+  "taskType": "application",
+  "modelAnswer": "My views on Fragmented Learning in the Digital Age\nMany of us now learn from short videos online. In my view, fragmented learning is a useful supplement, but it can never replace systematic learning.\n\nFor one thing, it makes good use of spare time. On the bus, I can watch a short video on a physics idea or pick up some English expressions, and these small pieces add up. For another, such learning is often scattered and shallow. Short clips rarely show how ideas connect, and one video easily leads to an hour of scrolling.\n\nSo we should use it wisely. Set a clear goal before opening an app, and link what you learn to your textbooks. Only then will fragmented learning serve us.",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "投给校英文报的观点短文，用题面给出的标题，不写称呼和署名",
+        "personTense": "用第一人称表明看法，以一般现在时为主",
+        "readerTone": "读者是读校报的同学和老师，语气平实、讲理，像同龄人交流",
+        "goal": "亮明对碎片化学习的看法，讲清理由，让同学知道该怎样对待它"
+      },
+      "taskRequires": [
+        "表达对碎片化学习的观点",
+        "说明持这一观点的理由"
+      ],
+      "thisEssayChooses": "持辩证立场：碎片化学习是有用的补充，但不能代替系统学习。理由一正一反：能利用零碎时间积累；但内容零散、不成体系，还容易刷个不停。结尾给出“先定目标、再连回课本”的做法。"
+    },
+    "standard": {
+      "essay": "My views on Fragmented Learning in the Digital Age\nMany of us now learn from short videos online. In my view, fragmented learning is a useful supplement, but it can never replace systematic learning.\n\nFor one thing, it makes good use of spare time. On the bus, I can watch a short video on a physics idea or pick up some English expressions, and these small pieces add up. For another, such learning is often scattered and shallow. Short clips rarely show how ideas connect, and one video easily leads to an hour of scrolling.\n\nSo we should use it wisely. Set a clear goal before opening an app, and link what you learn to your textbooks. Only then will fragmented learning serve us.",
+      "pointMap": [
+        {
+          "point": "表达观点",
+          "quote": "In my view, fragmented learning is a useful supplement, but it can never replace systematic learning."
+        },
+        {
+          "point": "说明理由",
+          "quote": "For one thing, it makes good use of spare time."
+        },
+        {
+          "point": "说明理由",
+          "quote": "For another, such learning is often scattered and shallow."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "用身边的现象引出话题，一句话亮明观点。",
+          "items": [
+            {
+              "quote": "Many of us now learn from short videos online.",
+              "explain": "读者是同学，用大家天天在做的事开头，一句就把“碎片化学习”落到实处，不用铺长背景。"
+            },
+            {
+              "quote": "a useful supplement, but it can never replace systematic learning",
+              "explain": "but 前肯定、后限制，立场是“有用但有边界”。后面一正一反两条理由，都从这句展开。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "一正一反说明理由，正好撑起观点里的 but。",
+          "items": [
+            {
+              "quote": "For one thing, it makes good use of spare time.",
+              "explain": "先给好处。For one thing 和后面的 For another 把两条理由分开，读者一眼看出层次。"
+            },
+            {
+              "quote": "On the bus, I can watch a short video on a physics idea or pick up some English expressions",
+              "explain": "用高中生自己的场景举例，“利用零碎时间”就不再是空话，读者也容易认同。"
+            },
+            {
+              "quote": "Short clips rarely show how ideas connect, and one video easily leads to an hour of scrolling.",
+              "explain": "把“零散、肤浅”拆成两个看得见的问题：知识连不起来，刷视频停不下来。这两点也为结尾的做法埋下对象。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "给出做法收尾，读者知道下一步怎么做。",
+          "items": [
+            {
+              "quote": "Set a clear goal before opening an app, and link what you learn to your textbooks.",
+              "explain": "用祈使句直接给同学两步做法，分别对着第二段的两个问题：定目标防止刷个不停，连回课本解决零散。"
+            },
+            {
+              "quote": "Only then will fragmented learning serve us.",
+              "explain": "Only then 放句首引起部分倒装，强调“做到这两步才行”，又回到首段“补充”的定位。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "be a useful supplement, but can never replace …",
+          "function": "表达“有用但有限度”的辩证观点，适合这类“谈看法”的题。"
+        },
+        {
+          "expression": "For one thing, … For another, …",
+          "function": "把一正一反两条理由分开列出，层次清楚又不显得生硬。"
+        },
+        {
+          "expression": "make good use of spare time",
+          "function": "说清碎片化学习的好处在于利用零碎时间。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "My views on Fragmented Learning in the Digital Age\nScrolling through short videos has become part of daily life, and many call it learning. To me, fragmented learning is a good servant but a poor master: it works well as a supplement, yet it should never replace systematic study.\n\nIts value lies in flexibility. Waiting in line or riding the bus, I can review a chemistry formula or find out how native speakers use a phrase. Minutes that would otherwise be wasted add up to real knowledge.\n\nHowever, knowledge picked up in bits is often scattered and shallow. A clip may tell us what is true but seldom why, and the next recommended video can pull us away from our original purpose.\n\nSo my advice is simple: decide what to learn before opening an app, and then fit each new piece into what you have learned in class. That way, scattered pieces can finally form a whole.",
+      "pointMap": [
+        {
+          "point": "表达观点",
+          "quote": "To me, fragmented learning is a good servant but a poor master"
+        },
+        {
+          "point": "说明理由",
+          "quote": "Its value lies in flexibility."
+        },
+        {
+          "point": "说明理由",
+          "quote": "However, knowledge picked up in bits is often scattered and shallow."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "a good servant but a poor master",
+          "explain": "借英语里常说的“好仆人、坏主人”，把“可以用它，但别被它牵着走”说得形象，比标准版的 useful supplement 多了一层主次关系。"
+        },
+        {
+          "quote": "A clip may tell us what is true but seldom why",
+          "explain": "把“浅”讲到点子上：短视频给结论，很少讲原因。比标准版只说 shallow 更具体。"
+        },
+        {
+          "quote": "fit each new piece into what you have learned in class",
+          "explain": "fit … into 把碎片知识和课堂所学写成拼图的关系，和末句 form a whole 前后呼应，建议也更好操作。"
+        }
+      ]
+    }
+  }
+}

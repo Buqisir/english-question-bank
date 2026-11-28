@@ -1,0 +1,1045 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: I am considering dropping my piano lessons. It's difficult and I am not making any progress till now.\nW: If I were you, I would stick with it. It's definitely worth the time and effort.",
+      "translationZh": "男：我在考虑停掉钢琴课。钢琴太难了，到现在我也没什么进步。\n女：如果我是你，我会坚持下去。这绝对值得花时间和精力。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "乐于学习"
+      },
+      "summaryZh": "男士说学钢琴很难，一直没有进步，想停掉钢琴课，女士谈了自己的看法。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我在考虑停掉钢琴课。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "钢琴太难了，到现在我也没什么进步。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "如果我是你，我会坚持下去。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "这绝对值得花时间和精力。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Hello, Sir. can you give me a minute? Look, White Noise almost always helps me fall asleep. If you're in the same boat, this mini white noise machine could be a good investment.\nM: I don't really need it. Sorry, I'm in a hurry to get to a meeting. Bye.",
+      "translationZh": "女：您好，先生。能耽误您一分钟吗？您看，白噪音几乎总能帮我入睡。如果您也有同样的困扰，这台迷你白噪音机会是一笔划算的投入。\n男：我真的不需要。抱歉，我急着去开会。再见。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士在路上拦住一位男士，向他介绍一款迷你白噪音机，男士婉拒后匆匆离开。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "您好，先生。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "能耽误您一分钟吗？"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "您看，白噪音几乎总能帮我入睡。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "如果您也有同样的困扰，这台迷你白噪音机会是一笔划算的投入。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "我真的不需要。"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "抱歉，我急着去开会。"
+        },
+        {
+          "id": "listening-text-2:7",
+          "zh": "再见。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: Where's Kevin? His room is in a mess. Nothing is in order.\nM: He's washing his car in front of the house.\nW: Again? he takes good care of his car. Maybe he should move into the car.",
+      "translationZh": "女：凯文在哪儿？他的房间乱七八糟。什么东西都没放好。\n男：他正在屋前洗车呢。\n女：又洗？他可真爱护他的车。也许他该搬到车里去住。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "女士问凯文在哪儿，抱怨他的房间很乱，男士告诉她凯文正在屋前洗车。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "凯文在哪儿？"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "他的房间乱七八糟。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "什么东西都没放好。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "他正在屋前洗车呢。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "又洗？"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "他可真爱护他的车。"
+        },
+        {
+          "id": "listening-text-3:7",
+          "zh": "也许他该搬到车里去住。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Tom, I really like the abstract paintings and the art gallery. What do you think of them?\nM: I guess it's something I haven't acquired a taste for yet. I prefer the paintings having a physical reality.",
+      "translationZh": "女：汤姆，我真喜欢这些抽象画，也喜欢这家美术馆。你觉得这些画怎么样？\n男：我想这是我还没培养出兴趣的东西。我更喜欢画得写实的画。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "绘画领域的代表性作品和人物"
+      },
+      "summaryZh": "女士和汤姆在美术馆看抽象画，女士说很喜欢，并问汤姆对这些画的看法。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "汤姆，我真喜欢这些抽象画，也喜欢这家美术馆。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "你觉得这些画怎么样？"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "我想这是我还没培养出兴趣的东西。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "我更喜欢画得写实的画。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "M: Excuse me, I'm looking for a magazine about flower gardening. Could you recommend one?\nW: Sure, Country Gardens is a great option.\nM: Is it a monthly magazine?\nW: No, there's just one issue for each season.",
+      "translationZh": "男：打扰一下，我在找一本关于花卉园艺的杂志。您能推荐一本吗？\n女：当然，《乡村花园》是个很好的选择。\n男：它是月刊吗？\n女：不是，它每个季度只出一期。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士想找一本花卉园艺杂志，请女士推荐，并问起这本杂志多久出一期。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "打扰一下，我在找一本关于花卉园艺的杂志。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "您能推荐一本吗？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "当然，《乡村花园》是个很好的选择。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "它是月刊吗？"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "不是，它每个季度只出一期。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Susan, when did your flight arrive?\nW: On Sunday night.\nM: How did you get to the city providence? By taxi?\nW: No, a friend of mine drove Ford to pick me up, but I didn't stay at her home. I booked a hotel and spent two nights there.\nM: How is the city?\nW: Founded in 1636, it is one of the oldest cities in the United States. It is very picturesque with a lot of cultural offerings.",
+      "translationZh": "男：苏珊，你的航班是什么时候到的？\n女：星期天晚上。\n男：你是怎么到普罗维登斯市的？坐出租车吗？\n女：不是，我的一个朋友开着她的福特车来接我，但我没住在她家。我订了一家酒店，在那儿住了两晚。\n男：那座城市怎么样？\n女：它建于1636年，是美国最古老的城市之一。那里风景如画，文化活动也很丰富。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士询问苏珊这次出行的到达时间、交通和住宿情况，以及她对那座城市的印象。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "苏珊，你的航班是什么时候到的？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "星期天晚上。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "你是怎么到普罗维登斯市的？"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "坐出租车吗？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "不是，我的一个朋友开着她的福特车来接我，但我没住在她家。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "我订了一家酒店，在那儿住了两晚。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "那座城市怎么样？"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "它建于1636年，是美国最古老的城市之一。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "那里风景如画，文化活动也很丰富。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "W: Hello. I'm calling to know something about Willycon Science Fiction Competition for my kid.\nM: Well, kids who are interested in writing science fiction and fantasy will find this contest very appealing. Additionally, kids can also submit poems, which are also judged in the competition. How old is your kid?\nW: He is just 10 years old.\nM: Good. The contest is categorized in four levels: Adult, College, High school, Middle school, Elementary.\nW: Okay. What about the prize?\nM: Cash award and certificates are given to the winners, and the works will be published online.\nW: I see, thank you.",
+      "translationZh": "女：你好。我打电话是想为我的孩子了解一下威利康科幻竞赛的情况。\n男：嗯，对写科幻和奇幻作品感兴趣的孩子会觉得这个比赛很有吸引力。另外，孩子们也可以投诗歌，诗歌同样参加评比。您的孩子多大了？\n女：他才10岁。\n男：好的。比赛按级别分组：成人组、大学组、高中组、初中组和小学组。\n女：好的。奖品呢？\n男：获奖者会得到现金奖励和证书，作品还会在网上发表。\n女：我明白了，谢谢您。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "小说"
+      },
+      "summaryZh": "一位母亲打电话为孩子咨询一项科幻竞赛，工作人员介绍了参赛内容、组别和奖励。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "你好。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "我打电话是想为我的孩子了解一下威利康科幻竞赛的情况。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "嗯，对写科幻和奇幻作品感兴趣的孩子会觉得这个比赛很有吸引力。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "另外，孩子们也可以投诗歌，诗歌同样参加评比。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "您的孩子多大了？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "他才10岁。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "比赛按级别分组：成人组、大学组、高中组、初中组和小学组。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "奖品呢？"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "获奖者会得到现金奖励和证书，作品还会在网上发表。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "我明白了，谢谢您。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12"
+      ],
+      "transcript": "W: What are you doing, Jim?\nM: I'm reading some news in today's paper. It says nowadays many artists like creating art while tracking their runs and bike rides on their phones, turning their exercise into a masterpiece, and they like uploading their works on the internet.\nW: So how do they create art in this way?\nM: With their GPS as a paintbrush, they follow points on a map to make a single line across an area to create the art. They enter the points into a fitness tracking app called Strava in advance, and the app then traces their every move.\nW: What if they make a mistake?\nM: Then the whole artwork has to be started all over again.\nW: Well, this activity isn't suitable for me. I won't try it. I don't have a good sense of direction.\nM: But it's very popular among artists worldwide now. So far, more than 18,000 pieces of such art have been uploaded on the internet.\nW: Well, I think it's a great activity for artists. It's a mix of art and exercise.\nM: Right.",
+      "translationZh": "女：吉姆，你在干什么？\n男：我在看今天报纸上的一些新闻。上面说，现在很多艺术家喜欢一边用手机记录自己跑步和骑车的路线一边创作，把运动变成杰作，还喜欢把作品传到网上。\n女：那他们是怎么用这种方式创作的呢？\n男：他们把GPS当作画笔，沿着地图上的点在一片区域里画出一条连续的线，作品就成了。他们事先把这些点输入一款叫Strava的健身追踪应用，然后应用会记录他们的每一步移动。\n女：要是出了错怎么办？\n男：那整幅作品就得从头再来。\n女：嗯，这项活动不适合我。我不会去试的。我方向感不好。\n男：不过它现在在世界各地的艺术家中很流行。到目前为止，网上已经上传了一万八千多件这样的作品。\n女：嗯，我觉得这对艺术家来说是项很棒的活动。它把艺术和运动结合在了一起。\n男：没错。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "科学与技术",
+        "subtopic": "信息技术创新"
+      },
+      "summaryZh": "吉姆读报时向女士介绍艺术家借助手机记录运动路线来作画的潮流，两人谈了各自看法。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "吉姆，你在干什么？"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "我在看今天报纸上的一些新闻。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "上面说，现在很多艺术家喜欢一边用手机记录自己跑步和骑车的路线一边创作，把运动变成杰作，还喜欢把作品传到网上。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "那他们是怎么用这种方式创作的呢？"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "他们把GPS当作画笔，沿着地图上的点在一片区域里画出一条连续的线，作品就成了。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "他们事先把这些点输入一款叫Strava的健身追踪应用，然后应用会记录他们的每一步移动。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "要是出了错怎么办？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "那整幅作品就得从头再来。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "嗯，这项活动不适合我。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "我不会去试的。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "我方向感不好。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "不过它现在在世界各地的艺术家中很流行。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "到目前为止，网上已经上传了一万八千多件这样的作品。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "嗯，我觉得这对艺术家来说是项很棒的活动。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "它把艺术和运动结合在了一起。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "没错。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:13",
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "W: Good morning, Mr. Brown.\nM: Good morning, Susan. Do you have any classes this morning?\nW: Yes, but it won't begin until 10:20am. What about you?\nM: I have no class this morning.\nW: Great. Mr. Brown, could you give me some advice on how to give students feedback?\nM: Sure. Firstly, when giving feedback, be clear about what the students did well or what they need to improve. Secondly, focus on effort. Rather than only praising or criticizing the result. Focus on the effort to achieve it. Thirdly, if a student needs to improve in a particular area, offer suggestions for how to do so.\nW: What kind of language do you think we should use when giving feedback?\nM: Use positive language, of course. For example, instead of saying \"you're doing this wrong\" say, \"Let's try it this way\".\nW: Thank you. Mr. Brown, you've helped a lot.\nM: You're welcome.\nW: By the way, would you like to have dinner with me this weekend?\nM: Thanks. But I try to avoid eating restaurant food because I have a weak stomach.\nW: I'll cook. I'm good at Chinese food.\nM: How can I say no to that?",
+      "translationZh": "女：早上好，布朗先生。\n男：早上好，苏珊。你今天上午有课吗？\n女：有，不过要到上午10:20才开始。你呢？\n男：我今天上午没课。\n女：太好了。布朗先生，您能就怎样给学生反馈给我一些建议吗？\n男：当然可以。第一，给反馈的时候，要明确指出学生哪里做得好，或者哪里需要改进。第二，关注努力。不要只表扬或批评结果。要关注为取得结果所付出的努力。第三，如果学生需要在某一方面改进，就给出怎么改进的建议。\n女：您觉得给反馈时我们应该用什么样的语言？\n男：当然是用积极的语言。比如，不说“你这样做错了”，而说“我们试试这样做”。\n女：谢谢您。布朗先生，您帮了我很大的忙。\n男：不客气。\n女：对了，这个周末您愿意和我一起吃晚饭吗？\n男：谢谢。不过我胃不好，尽量不在餐馆吃饭。\n女：我来做饭。我很会做中国菜。\n男：这我怎么能拒绝呢？",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "苏珊和布朗先生早上碰面，谈到怎样给学生反馈，最后又说起周末一起吃晚饭。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "早上好，布朗先生。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "早上好，苏珊。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "你今天上午有课吗？"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "有，不过要到上午10:20才开始。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "你呢？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "我今天上午没课。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "太好了。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "布朗先生，您能就怎样给学生反馈给我一些建议吗？"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "当然可以。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "第一，给反馈的时候，要明确指出学生哪里做得好，或者哪里需要改进。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "第二，关注努力。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "不要只表扬或批评结果。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "要关注为取得结果所付出的努力。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "第三，如果学生需要在某一方面改进，就给出怎么改进的建议。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "您觉得给反馈时我们应该用什么样的语言？"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "当然是用积极的语言。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "比如，不说“你这样做错了”，而说“我们试试这样做”。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "谢谢您。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "布朗先生，您帮了我很大的忙。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "不客气。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "对了，这个周末您愿意和我一起吃晚饭吗？"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "谢谢。"
+        },
+        {
+          "id": "listening-text-9:23",
+          "zh": "不过我胃不好，尽量不在餐馆吃饭。"
+        },
+        {
+          "id": "listening-text-9:24",
+          "zh": "我来做饭。"
+        },
+        {
+          "id": "listening-text-9:25",
+          "zh": "我很会做中国菜。"
+        },
+        {
+          "id": "listening-text-9:26",
+          "zh": "这我怎么能拒绝呢？"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "In Chengdu, a Canadian has become fascinated by the art of Penjing, or Chinese bonsai. His name is Chad Sinclair. He's 46 years old. He came to China 21 years ago to learn about Chinese Penjing. He fell in love with Chengdu and decided to stay here. Since then, he has been seeking inspiration from mountains, rocks, plants and trees to design his own Penjing creations. From a young age, under the influence of his grandmother,\nSinclair developed a strong interest in Chinese culture, especially the art of Bonsai. In 1997 at the age of 19, Sinclair began to learn from Tak Yamaura, a world-class Japanese Bonsai master. But he had always wanted to visit China, where the art originated, in Chengdu’s parks, Sinclair learned a Sichuan-style Penjing as one of the five schools of Chinese Penjing. Sichuan-style Penjing is a national intangible cultural heritage with elegant shapes. He hopes to combine his own style with the Sichuan-style concept and introduce the Sichuan-style Penjing to the world. He took a lot of pictures and his friends who are outside of China reposted them. Today, Sinclair has become a somewhat famous Penjing artist in Sichuan. He has also been selected as the expo promotion ambassador for The International Horticultural Expo 2024 Chengdu.",
+      "translationZh": "在成都，一位加拿大人迷上了盆景艺术，也就是中国的盆栽。他叫查德·辛克莱。他今年46岁。他21年前来到中国学习中国盆景。他爱上了成都，决定留在这里。从那以后，他一直从山、石、草木中寻找灵感，设计自己的盆景作品。辛克莱从小受祖母的影响，对中国文化，尤其是盆景艺术产生了浓厚的兴趣。1997年，19岁的辛克莱开始跟随世界级日本盆景大师山浦拓学艺。但他一直想去盆景艺术的发源地中国看看。在成都的公园里，辛克莱学会了川派盆景，这是中国盆景五大流派之一。川派盆景造型典雅，是国家级非物质文化遗产。他希望把自己的风格和川派理念结合起来，把川派盆景介绍给全世界。他拍了很多照片，他在国外的朋友们转发了这些照片。如今，辛克莱已成为四川小有名气的盆景艺术家。他还被选为2024成都世界园艺博览会的推广大使。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "非物质文化遗产"
+      },
+      "summaryZh": "短文介绍在成都生活的加拿大人辛克莱学习和创作中国盆景的经历和心愿。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "在成都，一位加拿大人迷上了盆景艺术，也就是中国的盆栽。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "他叫查德·辛克莱。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "他今年46岁。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "他21年前来到中国学习中国盆景。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "他爱上了成都，决定留在这里。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "从那以后，他一直从山、石、草木中寻找灵感，设计自己的盆景作品。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "辛克莱从小受祖母的影响，"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "对中国文化，尤其是盆景艺术产生了浓厚的兴趣。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "1997年，19岁的辛克莱开始跟随世界级日本盆景大师山浦拓学艺。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "但他一直想去盆景艺术的发源地中国看看。在成都的公园里，辛克莱学会了川派盆景，这是中国盆景五大流派之一。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "川派盆景造型典雅，是国家级非物质文化遗产。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "他希望把自己的风格和川派理念结合起来，把川派盆景介绍给全世界。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "他拍了很多照片，他在国外的朋友们转发了这些照片。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "如今，辛克莱已成为四川小有名气的盆景艺术家。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "他还被选为2024成都世界园艺博览会的推广大使。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士建议男士做什么？",
+      "optionTranslationsZh": {
+        "A": "学一门新乐器。",
+        "B": "少花点时间练钢琴。",
+        "C": "继续上钢琴课。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "If I were you, I would stick with it."
+      },
+      "reasonZh": "“继续上钢琴课”就是女士说的坚持下去（stick with it），it 指男士想停掉的钢琴课，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士提到时间（the time and effort），是说钢琴课值得花这些时间和精力，不是劝他少花时间。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "女士可能是做什么工作的？",
+      "optionTranslationsZh": {
+        "A": "医生。",
+        "B": "推销员。",
+        "C": "工程师。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "If you're in the same boat, this mini white noise machine could be a good investment."
+      },
+      "reasonZh": "女士拦住赶路的男士，夸迷你白噪音机买了划算（a good investment），男士回绝说不需要（don't really need it），可见她在推销产品，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士说白噪音帮她入睡（helps me fall asleep），讲的是自己的使用体验，用来推销机器，不是在给人看病。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "关于凯文，女士暗示了什么？",
+      "optionTranslationsZh": {
+        "A": "他把房间收拾得很整齐。",
+        "B": "他打算住在车里。",
+        "C": "他洗车太勤了。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Maybe he should move into the car."
+      },
+      "reasonZh": "男士说凯文在洗车，女士先反问又洗（Again?），再调侃他干脆搬进车里住，意思是他洗车太勤了，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士一开口就说他的房间乱七八糟（His room is in a mess），房间并不整齐。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "搬进车里住是女士挖苦他太爱车的玩笑话，凯文并没有这样的打算。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "男士是什么意思？",
+      "optionTranslationsZh": {
+        "A": "他不擅长画画。",
+        "B": "他很有艺术品味。",
+        "C": "他不喜欢抽象画。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I guess it's something I haven't acquired a taste for yet."
+      },
+      "reasonZh": "女士问他对抽象画的看法，他说自己还没喜欢上这类画（haven't acquired a taste for），又说更喜欢写实的画（physical reality），委婉表示不喜欢抽象画，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "taste 出现在 acquired a taste for 里，说的是他还没对抽象画产生兴趣，不是夸自己品味好。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "这本杂志的出版周期是怎样的？",
+      "optionTranslationsZh": {
+        "A": "月刊。",
+        "B": "季刊。",
+        "C": "年刊。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "No, there's just one issue for each season."
+      },
+      "reasonZh": "女士说每个季度只出一期（one issue for each season），也就是季刊，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "月刊（a monthly magazine）是男士的猜测，女士用 No 否定了。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士是怎样到达目的地的？",
+      "optionTranslationsZh": {
+        "A": "坐小汽车。",
+        "B": "坐出租车。",
+        "C": "坐公共汽车。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "No, a friend of mine drove Ford to pick me up, but I didn't stay at her home."
+      },
+      "reasonZh": "苏珊说一个朋友开车来接她（drove Ford to pick me up），Ford 是汽车品牌，她坐的是朋友的车，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "坐出租车（By taxi?）是男士的猜测，苏珊开口就用 No 否定了。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士觉得这座城市怎么样？",
+      "optionTranslationsZh": {
+        "A": "很现代。",
+        "B": "历史悠久。",
+        "C": "不方便。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Founded in 1636, it is one of the oldest cities in the United States."
+      },
+      "reasonZh": "苏珊说这座城市建于1636年，是美国最古老的城市之一（one of the oldest cities），可见她认为它历史悠久，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "苏珊强调的是城市古老（one of the oldest cities），与现代正好相反。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "苏珊说城市风景如画、文化活动丰富（very picturesque … cultural offerings），评价都是正面的，没有抱怨交通或生活不便。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "这项比赛的重点是什么？",
+      "optionTranslationsZh": {
+        "A": "写作。",
+        "B": "阅读。",
+        "C": "表演。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Well, kids who are interested in writing science fiction and fantasy will find this contest very appealing."
+      },
+      "reasonZh": "男士说对写科幻和奇幻作品感兴趣（writing science fiction and fantasy）的孩子会喜欢这个比赛，还说也可以投诗歌（submit poems），比的是写作，选 A。"
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "获奖者会得到下列哪种奖品？",
+      "optionTranslationsZh": {
+        "A": "一些钱。",
+        "B": "科幻书籍。",
+        "C": "俱乐部会员卡。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Cash award and certificates are given to the winners, and the works will be published online."
+      },
+      "reasonZh": "“一些钱”就是男士说的现金奖励（Cash award），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "科幻（Science Fiction）是比赛的名称和征稿题材，奖品是现金和证书，不是科幻书。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "这段对话的主要话题是什么？",
+      "optionTranslationsZh": {
+        "A": "一种新的运动方式。",
+        "B": "一种结合艺术与技术的新形式。",
+        "C": "一款新的健身应用Strava。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "With their GPS as a paintbrush, they follow points on a map to make a single line across an area to create the art."
+      },
+      "reasonZh": "对话从吉姆读到的新闻谈起，讲艺术家把GPS当画笔（GPS as a paintbrush）、用手机应用记录路线来作画，说的是一种结合艺术与技术的新创作形式，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士最后说这是艺术和运动的结合（a mix of art and exercise），运动只是作画的手段，整段谈的是怎样借运动轨迹创作艺术。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "Strava 是艺术家用来记录路线的健身应用（a fitness tracking app called Strava），只是作画工具，不是对话的主题。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "如果在创作中出了错，艺术家必须怎么做？",
+      "optionTranslationsZh": {
+        "A": "求助于Strava。",
+        "B": "整个过程重新开始。",
+        "C": "上传未完成的作品。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Then the whole artwork has to be started all over again."
+      },
+      "reasonZh": "“整个过程重新开始”就是男士说的整幅作品要从头再来（started all over again），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "Strava 是艺术家事先输入路线点、用来记录行进轨迹的应用（enter the points … in advance），男士说出错后只能从头再来，没有靠它补救。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "把作品传到网上（uploading their works）是艺术家完成作品后的做法，不是出错时要做的事。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "是什么让女士不愿尝试这项活动？",
+      "optionTranslationsZh": {
+        "A": "方向感差。",
+        "B": "懒得运动。",
+        "C": "不擅长艺术创作。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I don't have a good sense of direction."
+      },
+      "reasonZh": "“方向感差”就是女士说的自己方向感不好（don't have a good sense of direction），她以此说明不想尝试，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "运动（exercise）是男士介绍这种创作时提到的，女士最后还称赞它把艺术和运动结合起来（a mix of art and exercise），并不排斥运动。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "创作艺术（creating art）出自男士转述的新闻，说的是艺术家们的做法，与女士自己的能力无关。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士为什么和男士交谈？",
+      "optionTranslationsZh": {
+        "A": "为了寻求建议。",
+        "B": "为了表达感谢。",
+        "C": "为了发出邀请。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Mr. Brown, could you give me some advice on how to give students feedback?"
+      },
+      "reasonZh": "女士寒暄后就请布朗先生就怎样给学生反馈提建议（give me some advice），这是她找他谈话的目的，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士道谢（Thank you）是在得到建议之后，是对他帮忙的回应。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "请吃晚饭是女士谈完反馈后顺带（By the way）提出的，不是她找男士谈话的主要目的。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "关于反馈，男士认为什么很重要？",
+      "optionTranslationsZh": {
+        "A": "忽略小错误。",
+        "B": "更关注结果。",
+        "C": "使用鼓励性的表达。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Use positive language, of course."
+      },
+      "reasonZh": "“使用鼓励性的表达”就是男士说的用积极的语言（positive language），他还举例把“你这样做错了”换成“我们试试这样做”，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "男士说不要只表扬或批评结果（Rather than only praising or criticizing the result），要关注努力，与“更关注结果”正相反。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "两人会在哪里一起吃饭？",
+      "optionTranslationsZh": {
+        "A": "在餐馆。",
+        "B": "在女士家里。",
+        "C": "在学校餐厅。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I'll cook."
+      },
+      "reasonZh": "男士说胃不好、尽量不在餐馆吃饭，女士就说她来做饭，男士也答应了，可见是到女士家吃，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男士说自己尽量不吃餐馆的饭（avoid eating restaurant food），女士因此改成自己下厨。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "两人是什么关系？",
+      "optionTranslationsZh": {
+        "A": "同事。",
+        "B": "夫妻。",
+        "C": "师生。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Mr. Brown, could you give me some advice on how to give students feedback?"
+      },
+      "reasonZh": "两人互问上午有没有课（any classes this morning），女士又请教怎样给学生反馈（give students feedback），可见两人都是老师，是同事，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "学生（students）是两人谈论的反馈对象；女士自己上午也有课要上（won't begin until 10:20am），她不是布朗先生的学生。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "辛克莱是在多大时来到中国的？",
+      "optionTranslationsZh": {
+        "A": "19岁时。",
+        "B": "21岁时。",
+        "C": "25岁时。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "He came to China 21 years ago to learn about Chinese Penjing."
+      },
+      "reasonZh": "辛克莱现在46岁（He's 46 years old），21年前来到中国，46 − 21 = 25，他来中国时25岁，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "19岁（at the age of 19）是他1997年开始跟日本盆景大师学艺的年龄，那时他还没来中国。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "21是他来中国距今的年数（21 years ago），不是他当时的年龄。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "是谁激发了辛克莱对中国文化的兴趣？",
+      "optionTranslationsZh": {
+        "A": "他的老师。",
+        "B": "他的家人。",
+        "C": "他的朋友们。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "From a young age, under the influence of his grandmother,"
+      },
+      "reasonZh": "这半句和下一句连起来是：辛克莱从小受祖母影响（under the influence of his grandmother），对中国文化产生了浓厚兴趣（developed a strong interest in Chinese culture）。祖母是家人，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "辛克莱19岁才跟随日本盆景大师学艺（learn from Tak Yamaura），那时兴趣早已在祖母影响下形成。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "朋友们（his friends）是后来在国外转发他盆景照片的人，与他当初产生兴趣无关。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "辛克莱是在哪里学习川派盆景的？",
+      "optionTranslationsZh": {
+        "A": "在公园里。",
+        "B": "在一所学校里。",
+        "C": "在网上。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "in Chengdu’s parks, Sinclair learned a Sichuan-style Penjing as one of the five schools of Chinese Penjing."
+      },
+      "reasonZh": "“在公园里”就是原文说的在成都的公园里（in Chengdu’s parks）学会了川派盆景，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "这句里的 schools 指流派（one of the five schools of Chinese Penjing），川派是中国盆景五大流派之一，不是学校。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "辛克莱的梦想是什么？",
+      "optionTranslationsZh": {
+        "A": "成为世界知名的艺术家。",
+        "B": "举办个人作品展。",
+        "C": "把川派盆景推广到全世界。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "He hopes to combine his own style with the Sichuan-style concept and introduce the Sichuan-style Penjing to the world."
+      },
+      "reasonZh": "“把川派盆景推广到全世界”就是他希望的把川派盆景介绍给世界（introduce the Sichuan-style Penjing to the world），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "盆景艺术家（Penjing artist）是他现在的身份，而且只是在四川小有名气（somewhat famous … in Sichuan），不是他的梦想。"
+        }
+      ]
+    }
+  }
+}

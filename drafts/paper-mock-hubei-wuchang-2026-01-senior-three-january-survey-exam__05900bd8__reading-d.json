@@ -1,0 +1,783 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d": {
+      "overview": "文章借一张照片和两道数学题，介绍卡尼曼提出的两种思维：快速直觉的系统1和缓慢费力的系统2，解释大脑为何偏爱省力的系统1，并说明怎样利用这一倾向。",
+      "fullTranslationZh": "一看到这幅图，人们很快就会认出这是一个悲伤的小男孩——这个判断不经刻意思考就形成了。丹尼尔·卡尼曼在其著作《思考，快与慢》（2011）中描述了大脑的认知过程，并把它分为两个不同的系统：系统1和系统2。这张照片就是系统1思维的一个例子，其特点是快速、直觉化，而且基本上是无意识的。\n现在，试着在30秒内不借助任何外部工具心算18×26。大多数人会放弃这项任务，这就是系统2思维的一个例子。这种模式缓慢、费力，需要有意识地付出努力；在这样艰苦的思考中，人的瞳孔甚至会放大。\n再来看另一道题：一只球拍和一个球一共1.10美元。球拍比球贵1.00美元。球的价格是多少？许多人本能地回答10美分，这是一个直觉化却错误的答案。正确答案是5美分。\n人们也许以为这道数学题会调动系统2，但实际上，系统1通常对任何情况都抢先作答。遇到球拍和球的问题时，系统1会立刻给出直觉答案。由于它带来了一种“已经做完”的感觉，系统2往往按兵不动。\n从根本上说，我们的认知机器倾向于省力。从生物学和进化的角度看，高强度的脑力活动会消耗大量葡萄糖。此外，一个人在全神贯注找食物时，可能会看不到正在逼近的狮子。因此，大脑常常求助于系统1提供的简单、自动的反应，而更勤快的系统2往往认同它的建议。\n对系统1的这种依赖总体上是有益的，它让人得以生存、处理海量信息，并让世界变得可以理解。你可以利用人们凭本能做决定的这种倾向，让别人去做事。一个简单直观的请求很可能激活系统1，比如用一张饥饿孩子令人心碎的照片来呼吁人们捐款。相反，需要仔细思考的事则要刻意放慢过程来唤醒系统2，比如投资养老计划；否则，自动系统就会胜出，它那快速、毫不费力的答案就会占上风。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-d-1",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6",
+          "sourceText": "Consequently, the brain frequently turns to the straightforward, automatic responses offered by System 1, with the more hard-working System 2 often agreeing to its suggestions.",
+          "displayText": "Consequently, the brain frequently turns to the straightforward, automatic responses offered by System 1, with the more hard-working System 2 often agreeing to its suggestions.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:34"
+          ],
+          "translationZh": "因此，大脑常常求助于系统1提供的简单、自动的反应，而更勤快的系统2往往认同它的建议。",
+          "analysisZh": "主干是 the brain frequently turns to the … responses（大脑常常求助于……反应）。Consequently 承接前面耗葡萄糖和看不见狮子两点，表示结果。offered by System 1 是过去分词短语作后置定语，修饰 responses，说明这些反应由系统1提供。with the more hard-working System 2 often agreeing to its suggestions 是“with + 名词 + 现在分词”结构，作伴随状语，说的是系统2同时也在附和；its 指系统1。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 43,
+              "quote": "the brain frequently turns to"
+            },
+            {
+              "start": 85,
+              "end": 104,
+              "quote": "offered by System 1"
+            },
+            {
+              "start": 106,
+              "end": 156,
+              "quote": "with the more hard-working System 2 often agreeing"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-d-2",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2",
+          "sourceText": "Upon observing the figure, one quickly sees it as a picture of a sorrowful young boy – a judgment formed without deliberate thought.",
+          "displayText": "Upon observing the figure, one quickly sees it as a picture of a sorrowful young boy – a judgment formed without deliberate thought.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:32"
+          ],
+          "translationZh": "一看到这幅图，人们很快就会认出这是一个悲伤的小男孩——这个判断不经刻意思考就形成了。",
+          "analysisZh": "主干是 one quickly sees it as a picture of …，see A as B 意为“把 A 看作 B”，it 指这幅图。Upon observing the figure 表示“一看到图就……”。破折号后的 a judgment formed without deliberate thought 是同位语，概括前面“看出是个悲伤男孩”这件事；其中 formed without deliberate thought 是过去分词短语作后置定语，修饰 judgment，意思是“不经刻意思考就形成的判断”。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 25,
+              "quote": "Upon observing the figure"
+            },
+            {
+              "start": 39,
+              "end": 62,
+              "quote": "sees it as a picture of"
+            },
+            {
+              "start": 87,
+              "end": 131,
+              "quote": "a judgment formed without deliberate thought"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2"
+              ],
+              "start": 0,
+              "end": 139,
+              "quote": "一看到这幅图，人们很快就会认出这是一个悲伤的小男孩——这个判断不经刻意思考就形成了。丹尼尔·卡尼曼在其著作《思考，快与慢》（2011）中描述了大脑的认知过程，并把它分为两个不同的系统：系统1和系统2。这张照片就是系统1思维的一个例子，其特点是快速、直觉化，而且基本上是无意识的。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:3"
+              ],
+              "start": 140,
+              "end": 234,
+              "quote": "现在，试着在30秒内不借助任何外部工具心算18×26。大多数人会放弃这项任务，这就是系统2思维的一个例子。这种模式缓慢、费力，需要有意识地付出努力；在这样艰苦的思考中，人的瞳孔甚至会放大。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:4"
+              ],
+              "start": 235,
+              "end": 316,
+              "quote": "再来看另一道题：一只球拍和一个球一共1.10美元。球拍比球贵1.00美元。球的价格是多少？许多人本能地回答10美分，这是一个直觉化却错误的答案。正确答案是5美分。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:5"
+              ],
+              "start": 317,
+              "end": 408,
+              "quote": "人们也许以为这道数学题会调动系统2，但实际上，系统1通常对任何情况都抢先作答。遇到球拍和球的问题时，系统1会立刻给出直觉答案。由于它带来了一种“已经做完”的感觉，系统2往往按兵不动。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6"
+              ],
+              "start": 409,
+              "end": 529,
+              "quote": "从根本上说，我们的认知机器倾向于省力。从生物学和进化的角度看，高强度的脑力活动会消耗大量葡萄糖。此外，一个人在全神贯注找食物时，可能会看不到正在逼近的狮子。因此，大脑常常求助于系统1提供的简单、自动的反应，而更勤快的系统2往往认同它的建议。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7"
+              ],
+              "start": 530,
+              "end": 706,
+              "quote": "对系统1的这种依赖总体上是有益的，它让人得以生存、处理海量信息，并让世界变得可以理解。你可以利用人们凭本能做决定的这种倾向，让别人去做事。一个简单直观的请求很可能激活系统1，比如用一张饥饿孩子令人心碎的照片来呼吁人们捐款。相反，需要仔细思考的事则要刻意放慢过程来唤醒系统2，比如投资养老计划；否则，自动系统就会胜出，它那快速、毫不费力的答案就会占上风。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-reading-d-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2",
+                "start": 293,
+                "end": 370,
+                "quote": "The photograph is an example of System 1 thinking, characterized by its rapid"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 100,
+                "end": 123,
+                "quote": "这张照片就是系统1思维的一个例子，其特点是快速"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-d-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:3",
+                "start": 162,
+                "end": 263,
+                "quote": "This mode is slow, demanding, and requires conscious effort; pupils even widen during such hard work."
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:5",
+                "start": 270,
+                "end": 301,
+                "quote": "System 2 often remains inactive"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 53,
+                "end": 94,
+                "quote": "这种模式缓慢、费力，需要有意识地付出努力；在这样艰苦的思考中，人的瞳孔甚至会放大。"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 81,
+                "end": 90,
+                "quote": "系统2往往按兵不动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-d-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6",
+                "start": 184,
+                "end": 379,
+                "quote": "while deeply focused on finding food, an individual might fail to see an approaching lion. Consequently, the brain frequently turns to the straightforward, automatic responses offered by System 1"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 51,
+                "end": 102,
+                "quote": "一个人在全神贯注找食物时，可能会看不到正在逼近的狮子。因此，大脑常常求助于系统1提供的简单、自动的反应"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-d-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+                "start": 139,
+                "end": 236,
+                "quote": "You can take advantage of this tendency to make instinctive decisions to get people to do things."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p7",
+                "start": 43,
+                "end": 69,
+                "quote": "你可以利用人们凭本能做决定的这种倾向，让别人去做事。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:34"
+            ],
+            "selectedSentenceId": "sentence-reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6",
+                "start": 275,
+                "end": 451,
+                "quote": "Consequently, the brain frequently turns to the straightforward, automatic responses offered by System 1, with the more hard-working System 2 often agreeing to its suggestions."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 78,
+                "end": 120,
+                "quote": "因此，大脑常常求助于系统1提供的简单、自动的反应，而更勤快的系统2往往认同它的建议。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:32"
+            ],
+            "selectedSentenceId": "sentence-reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2",
+                "start": 0,
+                "end": 132,
+                "quote": "Upon observing the figure, one quickly sees it as a picture of a sorrowful young boy – a judgment formed without deliberate thought."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 0,
+                "end": 42,
+                "quote": "一看到这幅图，人们很快就会认出这是一个悲伤的小男孩——这个判断不经刻意思考就形成了。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先用照片和两道数学题分别演示系统1和系统2，再指出系统1总是抢先作答，接着从省力和生存两方面解释大脑为何依赖系统1，最后讲怎样利用这一倾向。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2",
+            "summary": "看图一眼就判断男孩悲伤，作者借此引出卡尼曼的两个系统，指出这是快速、直觉的系统1。",
+            "function": "用照片引出话题并举例说明系统1"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:3",
+            "summary": "心算18×26让多数人放弃，这是缓慢、费力、需有意识努力的系统2。",
+            "function": "举例说明系统2的特点"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:4",
+            "summary": "球拍和球的题目，许多人凭直觉答10美分，正确答案是5美分。",
+            "function": "再举一例，为下文分析作铺垫"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:5",
+            "summary": "系统1总是抢先给出直觉答案，带来完成感，系统2往往不启动。",
+            "function": "解释球拍和球一题答错的原因"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6",
+            "summary": "大脑倾向省力：费力思考耗葡萄糖，专心觅食又可能看不见狮子，所以大脑依赖系统1的自动反应。",
+            "function": "从进化角度解释大脑为何依赖系统1"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+            "summary": "依赖系统1总体有益，人们可以利用这一倾向：简单请求激活系统1，需要深思的事则要放慢以唤醒系统2。",
+            "function": "讲这一发现的好处和实际运用"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:32": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "弄清作者拿悲伤男孩的照片来说明什么。",
+      "stemTranslationZh": "文中悲伤男孩的照片起什么作用？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "对直觉不可靠的提醒。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "An unreliable warning of intuition",
+            "explanation": "原文没说照片在提醒直觉不可靠；一眼看出男孩悲伤这个判断并没错，直觉出错的例子是[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:4]]的球拍和球。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "系统1快速判断的一个例子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2",
+              "quote": "The photograph is an example of System 1 thinking, characterized by its rapid, intuitive(直觉的), and largely unconscious nature.",
+              "anchor": "照片是系统1的例子"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2",
+              "quote": "a judgment formed without deliberate thought",
+              "anchor": "不经思考的判断"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "悲伤照片对费力思考的影响。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This mode is slow, demanding, and requires conscious effort",
+            "sourceEntity": "This mode",
+            "optionText": "Impact of sad photos on effortful thought.",
+            "optionEntity": "effortful thought",
+            "explanation": "费力的思考（requires conscious effort）说的是心算18×26用到的系统2；照片演示的恰恰是不费力的系统1。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:3",
+              "quote": "This mode is slow, demanding, and requires conscious effort",
+              "anchor": "系统2费力"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "丹尼尔·卡尼曼深刻见解的证据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Daniel Kahneman",
+            "optionText": "Daniel Kahneman",
+            "matchType": "exact",
+            "relationNote": "Kahneman 出自[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2|In his work Thinking]]，作者只是借他的书引出两个系统；照片是用来演示系统1的例子，不是在证明他多有见地。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2",
+              "quote": "Daniel Kahneman describes the brain’s cognitive(认知的) processes",
+              "anchor": "引出卡尼曼"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "photo",
+          "sourceRole": "stem",
+          "targetText": "The photograph is an example of System 1 thinking, characterized by its rapid, intuitive(直觉的), and largely unconscious nature.",
+          "relationType": "locationCue",
+          "targetCue": "photograph",
+          "sourceZh": "照片",
+          "targetCueZh": "照片",
+          "answerText": "an example of System 1 thinking, characterized by its rapid",
+          "note": "题干 photo 对应原文 photograph。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2"
+        },
+        {
+          "sourceText": "An example of System 1 rapid judgment",
+          "sourceRole": "correctOption",
+          "targetText": "an example of System 1 thinking, characterized by its rapid",
+          "relationType": "paraphrase",
+          "note": "选项的“系统1的例子”（an example of System 1）和“快速”（rapid）都沿用原文；“判断”（judgment）指[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2|a judgment formed without deliberate thought]]说的不经刻意思考就下的判断，也就是一眼看出男孩很悲伤。选 B。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:2"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:33": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把心算18×26和球拍与球两个例子合起来，看作者借它们共同说明了什么。",
+      "stemTranslationZh": "心算18×26和球拍与球的问题告诉我们什么？",
+      "locateBy": "options",
+      "locateFindZh": "两道题各回原文，看作者借它说明哪个系统、什么特点",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "系统1经常出错。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Many instinctively answer 10 cents, an intuitive yet incorrect response.",
+            "sourceHighlight": "intuitive yet incorrect",
+            "optionText": "System 1 often fails.",
+            "optionHighlight": "often fails",
+            "explanation": "太宽：只有球拍和球这一题里系统1答错了（incorrect），心算题讲的是系统2；[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7]]还说依赖系统1总体有益（generally helpful），推不出它经常出错。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:4",
+              "quote": "Many instinctively answer 10 cents, an intuitive yet incorrect response.",
+              "anchor": "直觉答案错了"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "学数学很难。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Learning maths is hard",
+            "explanation": "两道虽然都是数学题，作者是借它们讲大脑的两种思考方式，没谈学数学难不难。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "系统2需要费力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:3",
+              "quote": "This mode is slow, demanding, and requires conscious effort; pupils even widen during such hard work.",
+              "anchor": "系统2慢而费力"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:3",
+              "quote": "Most individuals give up on this task, which is an example of System 2 thinking.",
+              "anchor": "多数人放弃心算"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:5",
+              "quote": "With the sense of completion it brings, System 2 often remains inactive.",
+              "anchor": "系统2往往不启动"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "两个系统总是协同工作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "With the sense of completion it brings, System 2 often remains inactive.",
+            "sourceHighlight": "often remains inactive",
+            "optionText": "Systems always work together.",
+            "optionHighlight": "always work together",
+            "explanation": "原文说系统1抢先作答后，系统2往往按兵不动（remains inactive），选项却说两个系统总是（always）一起工作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:5",
+              "quote": "System 2 often remains inactive",
+              "anchor": "系统2不启动"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "System 2 involves hard work",
+          "sourceRole": "correctOption",
+          "targetText": "requires conscious effort; pupils even widen during such hard work",
+          "relationType": "paraphrase",
+          "note": "两处合起来看：心算18×26是系统2的例子，它慢、吃力，要有意识地用力（requires conscious effort），多数人干脆放弃（give up）；球拍和球一题里，系统1抢先给出直觉答案，系统2往往不启动（remains inactive），于是答错。两例都说明动用系统2要花力气，选 C。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:3"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:34": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出系统1在进化中是怎样帮人类活下来的。",
+      "stemTranslationZh": "在进化过程中，系统1是如何帮助我们生存的？",
+      "locateBy": "stem",
+      "locateFindZh": "This reliance 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它为了安全需要有意识地用力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This mode is slow, demanding, and requires conscious effort",
+            "sourceEntity": "This mode",
+            "optionText": "It needs conscious effort for safety.",
+            "optionEntity": "It",
+            "explanation": "要有意识地用力（requires conscious effort）的是系统2；系统1恰恰快速，而且基本是无意识的（largely unconscious）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:3",
+              "quote": "This mode is slow, demanding, and requires conscious effort",
+              "anchor": "系统2的特点"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它给出字面上正确的答案。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Many instinctively answer 10 cents, an intuitive yet incorrect response.",
+            "sourceHighlight": "intuitive yet incorrect",
+            "optionText": "It produces literally correct answers.",
+            "optionHighlight": "correct answers",
+            "explanation": "球拍和球一题里，系统1凭直觉给出的10美分恰恰是错的（incorrect），原文从没说它的答案总是对的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:4",
+              "quote": "Many instinctively answer 10 cents, an intuitive yet incorrect response.",
+              "anchor": "直觉答案错了"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它消耗的葡萄糖和能量更少。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "glucose",
+            "optionText": "glucose",
+            "matchType": "exact",
+            "relationNote": "glucose 出自[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6|intense mental activity uses a lot]]，原文只说费力的脑力活动很耗葡萄糖，用来解释大脑为什么爱省力，没提能量（energy），也没把省葡萄糖说成保命的办法；原文和性命挂钩的是没看见逼近的狮子。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6",
+              "quote": "From a biological and evolutionary standpoint, intense mental activity uses a lot of glucose (葡萄糖) resources.",
+              "anchor": "费力思考耗葡萄糖"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它能对危险迅速作出反应。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6",
+              "quote": "Furthermore, while deeply focused on finding food, an individual might fail to see an approaching lion. Consequently, the brain frequently turns to the straightforward, automatic responses offered by System 1",
+              "anchor": "看不见狮子，所以依赖系统1的自动反应"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+              "quote": "This reliance on System 1 is generally helpful, enabling survival",
+              "anchor": "依赖系统1让人得以生存"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "contribute to our survival",
+          "sourceRole": "stem",
+          "targetText": "This reliance on System 1 is generally helpful, enabling survival, processing vast information flows, and making the world understandable.",
+          "relationType": "locationCue",
+          "targetCue": "enabling survival",
+          "sourceZh": "有助于我们生存",
+          "targetCueZh": "让人得以生存",
+          "answerText": "might fail to see an approaching lion. Consequently, the brain frequently turns to the straightforward, automatic responses offered by System 1",
+          "bridgeZh": "This reliance 指大脑遇事依赖系统1的自动反应",
+          "note": "题干 contribute to our survival 对应原文 enabling survival。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7"
+        },
+        {
+          "sourceText": "It gives quick reactions against danger",
+          "sourceRole": "correctOption",
+          "targetText": "the straightforward, automatic responses offered by System 1",
+          "relationType": "paraphrase",
+          "note": "选项要落两处：“危险”落在专心觅食时可能看不见逼近的狮子（an approaching lion）；“快速反应”落在大脑转而依靠系统1简单、自动的反应（straightforward, automatic responses），不用停下来费力思考。选 D。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:35": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括最后一段讲了什么：看它从哪里转向，后面两个例子又在说明什么。",
+      "stemTranslationZh": "最后一段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "看 [[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7]] 从 System 1 有益转到 You can take advantage 后举的两个例子",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "慢思考的必要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "needing careful thought demands intentionally slowing the process to awaken System 2",
+            "sourceHighlight": "intentionally slowing the process",
+            "optionText": "The need for slow thinking.",
+            "optionHighlight": "slow thinking",
+            "explanation": "太窄：放慢思考只是[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7|Conversely, needing careful thought demands]]这一个例子，前面还有用直觉劝人捐款的用法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+              "quote": "needing careful thought demands intentionally slowing the process to awaken System 2",
+              "anchor": "放慢唤醒系统2"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "进一步研究的方向。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A direction for the further study",
+            "explanation": "整段没提今后研究什么，讲的是读者自己怎样利用这种倾向（You can take advantage）。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "这一发现的潜在应用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+              "quote": "You can take advantage of this tendency to make instinctive decisions to get people to do things.",
+              "anchor": "可以利用这一倾向"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+              "quote": "A request framed simply and intuitively will likely activate System 1 like appealing to people to donate",
+              "anchor": "劝捐的例子"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+              "quote": "needing careful thought demands intentionally slowing the process to awaken System 2 like investing in a retirement plan",
+              "anchor": "养老投资的例子"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "两种认知系统的好处。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "This reliance on System 1 is generally helpful",
+            "sourceHighlight": "generally helpful",
+            "optionText": "Benefits of the two cognitive systems.",
+            "optionHighlight": "Benefits",
+            "explanation": "太窄：讲好处的只有[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7|This reliance on System 1]]这一句，说的也只是依赖系统1有益，没讲两个系统各有什么好处；整段的重心在后面怎样利用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7",
+              "quote": "This reliance on System 1 is generally helpful",
+              "anchor": "依赖系统1有益"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Potential applications of the finding",
+          "sourceRole": "correctOption",
+          "targetText": "You can take advantage of this tendency to make instinctive decisions to get people to do things.",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7]]先肯定依赖系统1有益，接着说你可以利用这种倾向（take advantage of this tendency），再举两例：用照片劝捐是激活系统1，投资养老是放慢以唤醒系统2。整段落在怎样运用这一发现，正是“潜在应用”（Potential applications），选 C。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:7"
+        }
+      ]
+    }
+  }
+}

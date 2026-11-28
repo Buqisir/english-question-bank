@@ -1,0 +1,682 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a": {
+      "overview": "大英博物馆的展览导览，依次列出四个展览的展期和看点：17世纪珍稀素描、雕塑家阿林顿的素描、北欧版画的百年演变，以及讲述夏威夷与英国关系的历史文物展。",
+      "fullTranslationZh": "欢迎来到大英博物馆！在这里体验从人类历史开端到今天的全球文化。\n2025年9月23日—2026年1月25日：《与友为伴》\n本展重点展出馆方新近购入的塞缪尔·库珀和理查德·吉布森的17世纪珍稀素描。库珀的作品是为纪念他表亲尚在襁褓中的儿子而作，吉布森的肖像则描绘了一位年轻绅士。与这些作品形成对照的，是其他艺术家描绘日常生活的随手速写，让人难得一窥17世纪伦敦的私人圈子和艺术圈子。\n2025年9月10日—2026年5月20日：《用实物作诗》\n走近爱德华·阿林顿（1951—2017），他是20世纪80年代“新英国雕塑”运动的代表人物之一。尽管他以雕塑闻名，素描却是他创作的核心。这批素描展现了他作品背后的机智、好奇心和才智，突显了他对英国艺术的重大贡献。\n2025年10月9日—2026年3月22日：《北欧黑色》\n本展汇集来自北欧国家的150余件作品，以爱德华·蒙克的版画开篇，随后追溯版画艺术的演变历程。展品既有20世纪40年代挪威木刻中迷人的版画，也有70年代的丝网版画。当代艺术家创作的主旋律是自然，以及保护这一地区独有的山谷、山脉和森林的紧迫性。\n2026年1月15日—3月25日：《夏威夷：跨越大洋的王国》\n1824年，利霍利霍国王从北太平洋远航而来，寻求与英国王室结盟，这成了他的王国的转折点。本展通过夏威夷与英国之间复杂的关系探索夏威夷的历史，从酋长的羽毛外衣到大胆的当代作品，颂扬夏威夷的艺术遗产。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7",
+          "sourceText": "The dominant theme for contemporary artists is nature and the urgency to preserve the valleys, mountains and forests unique to the region.",
+          "displayText": "The dominant theme for contemporary artists is nature and the urgency to preserve the valleys, mountains and forests unique to the region.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:22"
+          ],
+          "translationZh": "当代艺术家创作的主旋律是自然，以及保护这一地区独有的山谷、山脉和森林的紧迫性。",
+          "analysisZh": "主干是 The dominant theme … is nature and the urgency（主旋律是……），is 后面有两个并列表语：nature 和 the urgency。for contemporary artists 修饰 theme，说明是谁的主题；to preserve … 是不定式作定语，说明是保护什么的紧迫性。preserve 的宾语是 the valleys, mountains and forests 三个并列名词，unique to the region 是形容词短语后置，修饰这三个名词，意思是“这一地区独有的”。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "The dominant theme"
+            },
+            {
+              "start": 44,
+              "end": 69,
+              "quote": "is nature and the urgency"
+            },
+            {
+              "start": 117,
+              "end": 137,
+              "quote": "unique to the region"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:9",
+          "sourceText": "This exhibition explores Hawaii’s history through its complex relationship with Britain, celebrating Hawaiian artistic heritage from feathered chiefly coats to bold contemporary works.",
+          "displayText": "This exhibition explores Hawaii’s history through its complex relationship with Britain, celebrating Hawaiian artistic heritage from feathered chiefly coats to bold contemporary works.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:23"
+          ],
+          "translationZh": "本展通过夏威夷与英国之间复杂的关系探索夏威夷的历史，从酋长的羽毛外衣到大胆的当代作品，颂扬夏威夷的艺术遗产。",
+          "analysisZh": "主干是 This exhibition explores Hawaii’s history（本展探索夏威夷的历史）。through its complex relationship with Britain 是方式状语，its 指夏威夷；celebrating … 是现在分词短语作伴随状语，逻辑主语仍是 This exhibition；from A to B 列出这份艺术遗产的范围，一头是酋长的羽毛外衣，一头是当代作品。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 41,
+              "quote": "This exhibition explores Hawaii’s history"
+            },
+            {
+              "start": 89,
+              "end": 100,
+              "quote": "celebrating"
+            },
+            {
+              "start": 128,
+              "end": 183,
+              "quote": "from feathered chiefly coats to bold contemporary works"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:1"
+              ],
+              "start": 0,
+              "end": 31,
+              "quote": "欢迎来到大英博物馆！在这里体验从人类历史开端到今天的全球文化。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:2"
+              ],
+              "start": 32,
+              "end": 60,
+              "quote": "2025年9月23日—2026年1月25日：《与友为伴》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:3"
+              ],
+              "start": 61,
+              "end": 190,
+              "quote": "本展重点展出馆方新近购入的塞缪尔·库珀和理查德·吉布森的17世纪珍稀素描。库珀的作品是为纪念他表亲尚在襁褓中的儿子而作，吉布森的肖像则描绘了一位年轻绅士。与这些作品形成对照的，是其他艺术家描绘日常生活的随手速写，让人难得一窥17世纪伦敦的私人圈子和艺术圈子。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:4"
+              ],
+              "start": 191,
+              "end": 220,
+              "quote": "2025年9月10日—2026年5月20日：《用实物作诗》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:5"
+              ],
+              "start": 221,
+              "end": 327,
+              "quote": "走近爱德华·阿林顿（1951—2017），他是20世纪80年代“新英国雕塑”运动的代表人物之一。尽管他以雕塑闻名，素描却是他创作的核心。这批素描展现了他作品背后的机智、好奇心和才智，突显了他对英国艺术的重大贡献。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:6"
+              ],
+              "start": 328,
+              "end": 356,
+              "quote": "2025年10月9日—2026年3月22日：《北欧黑色》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7"
+              ],
+              "start": 357,
+              "end": 477,
+              "quote": "本展汇集来自北欧国家的150余件作品，以爱德华·蒙克的版画开篇，随后追溯版画艺术的演变历程。展品既有20世纪40年代挪威木刻中迷人的版画，也有70年代的丝网版画。当代艺术家创作的主旋律是自然，以及保护这一地区独有的山谷、山脉和森林的紧迫性。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:8"
+              ],
+              "start": 478,
+              "end": 508,
+              "quote": "2026年1月15日—3月25日：《夏威夷：跨越大洋的王国》"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:9"
+              ],
+              "start": 509,
+              "end": 607,
+              "quote": "1824年，利霍利霍国王从北太平洋远航而来，寻求与英国王室结盟，这成了他的王国的转折点。本展通过夏威夷与英国之间复杂的关系探索夏威夷的历史，从酋长的羽毛外衣到大胆的当代作品，颂扬夏威夷的艺术遗产。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-reading-a-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:4",
+                "start": 0,
+                "end": 25,
+                "quote": "10 Sep 2025 - 20 May 2026"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p4",
+                "start": 0,
+                "end": 21,
+                "quote": "2025年9月10日—2026年5月20日"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-a-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7",
+                "start": 289,
+                "end": 379,
+                "quote": "nature and the urgency to preserve the valleys, mountains and forests unique to the region"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p7",
+                "start": 93,
+                "end": 119,
+                "quote": "自然，以及保护这一地区独有的山谷、山脉和森林的紧迫性"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-reading-a-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:9",
+                "start": 264,
+                "end": 319,
+                "quote": "from feathered chiefly coats to bold contemporary works"
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:3",
+                "start": 47,
+                "end": 73,
+                "quote": "rare 17th-century drawings"
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7",
+                "start": 78,
+                "end": 99,
+                "quote": "Edvard Munch’s prints"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 70,
+                "end": 86,
+                "quote": "从酋长的羽毛外衣到大胆的当代作品"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 28,
+                "end": 36,
+                "quote": "17世纪珍稀素描"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p7",
+                "start": 20,
+                "end": 29,
+                "quote": "爱德华·蒙克的版画"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:22"
+            ],
+            "selectedSentenceId": "sentence-reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7",
+                "start": 242,
+                "end": 380,
+                "quote": "The dominant theme for contemporary artists is nature and the urgency to preserve the valleys, mountains and forests unique to the region."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p7",
+                "start": 81,
+                "end": 120,
+                "quote": "当代艺术家创作的主旋律是自然，以及保护这一地区独有的山谷、山脉和森林的紧迫性。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:23"
+            ],
+            "selectedSentenceId": "sentence-reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:9",
+                "start": 136,
+                "end": 320,
+                "quote": "This exhibition explores Hawaii’s history through its complex relationship with Britain, celebrating Hawaiian artistic heritage from feathered chiefly coats to bold contemporary works."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 44,
+                "end": 98,
+                "quote": "本展通过夏威夷与英国之间复杂的关系探索夏威夷的历史，从酋长的羽毛外衣到大胆的当代作品，颂扬夏威夷的艺术遗产。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头一句欢迎语，随后用“展期+展名”的小标题依次介绍四个展览，每个小标题下用一段文字说明展品和看点。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:1",
+            "summary": "欢迎参观者来大英博物馆体验从古至今的全球文化。",
+            "function": "开篇欢迎语，交代这是博物馆的展览介绍"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:2",
+            "summary": "展期2025年9月23日至2026年1月25日，展名《与友为伴》。",
+            "function": "小标题，给出第一个展览的展期和名称"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:3",
+            "summary": "展出库珀和吉布森的17世纪珍稀素描，并与其他艺术家的日常速写对照，展现17世纪伦敦的生活与艺术圈。",
+            "function": "介绍第一个展览的展品和看点"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:4",
+            "summary": "展期2025年9月10日至2026年5月20日，展名《用实物作诗》。",
+            "function": "小标题，给出第二个展览的展期和名称"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:5",
+            "summary": "介绍雕塑家阿林顿的素描作品，展现他的机智与才智以及对英国艺术的贡献。",
+            "function": "介绍第二个展览的展品和看点"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:6",
+            "summary": "展期2025年10月9日至2026年3月22日，展名《北欧黑色》。",
+            "function": "小标题，给出第三个展览的展期和名称"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7",
+            "summary": "展出150余件北欧版画，从蒙克写到当代，当代艺术家的主题是自然和保护本地的山川森林。",
+            "function": "介绍第三个展览的展品和当代主题"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:8",
+            "summary": "展期2026年1月15日至3月25日，展名《夏威夷：跨越大洋的王国》。",
+            "function": "小标题，给出第四个展览的展期和名称"
+          },
+          {
+            "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:9",
+            "summary": "从1824年国王访英说起，借夏威夷与英国的关系讲其历史，展品从羽毛酋长外衣到当代作品。",
+            "function": "介绍第四个展览的背景和展品"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个展览的展期逐一和2026年4月比对，找出4月还在展出的那一个。",
+      "stemTranslationZh": "如果人们在2026年4月参观大英博物馆，可以看到下面哪个展览？",
+      "locateBy": "options",
+      "locateFindZh": "四个展名各对回小标题，看展期是否包含4月",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "《与友为伴》。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "23 Sep 2025 - 25 Jan 2026: In the company of friends",
+            "sourceEntity": "25 Jan 2026",
+            "optionText": "In the company of friends.",
+            "optionEntity": "In the company of friends",
+            "explanation": "这个展2026年1月25日就闭展了（25 Jan 2026），4月去已经看不到。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:2",
+              "quote": "23 Sep 2025 - 25 Jan 2026",
+              "anchor": "展期"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "《用实物作诗》。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:4",
+              "quote": "10 Sep 2025 - 20 May 2026: Making poetry with solid objects",
+              "anchor": "展期到2026年5月20日"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "《北欧黑色》。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "09 Oct 2025 - 22 Mar 2026: Nordic noir",
+            "sourceEntity": "22 Mar 2026",
+            "optionText": "Nordic noir.",
+            "optionEntity": "Nordic noir",
+            "explanation": "北欧版画展3月22日就结束了（22 Mar 2026），到4月已经撤展。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:6",
+              "quote": "09 Oct 2025 - 22 Mar 2026",
+              "anchor": "展期"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "《夏威夷：跨越大洋的王国》。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "15 Jan - 25 Mar 2026: Hawaii, a kingdom crossing oceans",
+            "sourceEntity": "25 Mar 2026",
+            "optionText": "Hawaii, a kingdom crossing oceans.",
+            "optionEntity": "Hawaii, a kingdom crossing oceans",
+            "explanation": "夏威夷展1月15日开展，3月25日收尾（25 Mar 2026），也赶不上4月。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:8",
+              "quote": "15 Jan - 25 Mar 2026",
+              "anchor": "展期"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Making poetry with solid objects",
+          "sourceRole": "correctOption",
+          "targetText": "10 Sep 2025 - 20 May 2026",
+          "relationType": "calculation",
+          "note": "这个展从2025年9月10日开到2026年5月20日（20 May 2026），4月在这段展期之内，所以4月去还能看到。选 B。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:4"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "把题干的“当今艺术家”“主要关注点”对到原文的说法，再把他们关注的内容概括成一个词。",
+      "stemTranslationZh": "在《北欧黑色》展中，当今艺术家主要关注什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "城市发展。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Urban development",
+            "explanation": "原文写的是山谷、山脉、森林这些自然景观，没提城市建设。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "社会福利制度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Social welfare systems",
+            "explanation": "北欧常让人想到高福利，可这段只谈版画和自然，没提福利制度。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "生态保护。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7",
+              "quote": "The dominant theme for contemporary artists is nature and the urgency to preserve the valleys, mountains and forests unique to the region.",
+              "anchor": "当代艺术家的主题"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "北欧历史文化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the exhibition opens with Edvard Munch’s prints and traces the evolution of graphic arts afterwards",
+            "sourceEntity": "the exhibition",
+            "optionText": "Historical Nordic culture.",
+            "optionEntity": "Historical Nordic culture",
+            "explanation": "回顾版画从蒙克开始的演变（traces the evolution）的是整场展览，当代艺术家关注的是眼下的自然保护。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7",
+              "quote": "traces the evolution of graphic arts afterwards",
+              "anchor": "展览回顾版画演变"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "today’s artists",
+          "sourceRole": "stem",
+          "targetText": "The dominant theme for contemporary artists is nature and the urgency to preserve the valleys, mountains and forests unique to the region.",
+          "relationType": "locationCue",
+          "targetCue": "contemporary artists",
+          "sourceZh": "当今的艺术家",
+          "targetCueZh": "当代艺术家",
+          "answerText": "nature and the urgency to preserve the valleys, mountains and forests",
+          "note": "题干 today’s artists 对应原文 contemporary artists，main focus 对应 dominant theme。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7"
+        },
+        {
+          "sourceText": "Ecological conservation",
+          "sourceRole": "correctOption",
+          "targetText": "nature and the urgency to preserve the valleys, mountains and forests",
+          "relationType": "paraphrase",
+          "note": "选项的“生态保护”（Ecological conservation）把原文的“自然”（nature）和“保护山谷、山脉、森林”（preserve the valleys…forests）合成了一个说法。选 C。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7"
+        }
+      ]
+    },
+    "question:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把夏威夷展的展品和其他三个展览比较，找出只有它才有的展品类型。",
+      "stemTranslationZh": "《夏威夷：跨越大洋的王国》展的展品与其他展览有什么不同？",
+      "locateBy": "options",
+      "locateFindZh": "四个展览逐个看展出的是哪一类作品",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "实物。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:9",
+              "quote": "celebrating Hawaiian artistic heritage from feathered chiefly coats to bold contemporary works",
+              "anchor": "夏威夷展的展品"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:3",
+              "quote": "This display highlights recent acquisitions of rare 17th-century drawings by Samuel Cooper and Richard Gibson.",
+              "anchor": "第一个展是素描"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7",
+              "quote": "the exhibition opens with Edvard Munch’s prints",
+              "anchor": "北欧展是版画"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "绘画。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Gibson’s portrait presents a picture of a young gentleman",
+            "sourceEntity": "Gibson’s portrait",
+            "optionText": "Paintings.",
+            "optionEntity": "Paintings",
+            "explanation": "画像（portrait、picture）是《与友为伴》展里吉布森的作品，而且是素描；夏威夷展写的是羽毛外衣这类展品，没提画作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:3",
+              "quote": "Gibson’s portrait presents a picture of a young gentleman",
+              "anchor": "吉布森的肖像"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "诗歌。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Making poetry with solid objects",
+            "optionText": "Poems",
+            "matchType": "wordFamily",
+            "relationNote": "poetry 和 Poems 同源，出自阿林顿展的展名 Making poetry with solid objects，只是“用实物作诗”的比喻，那个展实际展的是素描（collection of drawings）；夏威夷展与诗无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:4",
+              "quote": "Making poetry with solid objects",
+              "anchor": "阿林顿展的展名"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "木刻版画。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It spans the charming prints of the 1940s Norwegian woodcuts and the 1970s screenprints.",
+            "sourceEntity": "Norwegian woodcuts",
+            "optionText": "Woodcuts.",
+            "optionEntity": "Woodcuts",
+            "explanation": "木刻（woodcuts）是《北欧黑色》展里20世纪40年代的挪威版画，不是夏威夷展的展品。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7",
+              "quote": "the 1940s Norwegian woodcuts",
+              "anchor": "北欧展的木刻"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Objects",
+          "sourceRole": "correctOption",
+          "targetText": "from feathered chiefly coats to bold contemporary works",
+          "relationType": "paraphrase",
+          "note": "选项的“实物”（Objects）指夏威夷展的羽毛酋长外衣（feathered chiefly coats）这类器物；其他三个展都是纸上作品：[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:3]]和[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:5]]展素描（drawings），[[block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:7]]展版画（prints）。选 A。",
+          "targetParagraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:9"
+        }
+      ]
+    }
+  }
+}
