@@ -1,0 +1,1022 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiangzhewan-2024-10",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices": {
+      "overview": "文章谈读书的价值：各类书都蕴含人生智慧，摘句同样有意义；书能让忙碌的人静心专注；问别人在读什么能了解对方，读书还能了解作者、理解他人，培养同理心。",
+      "fullTranslationZh": "人们认为，你需要知道的一切都能在书中找到。人们一直从某些类型的非虚构作品中获得指导人生的智慧，常常是从“自助”类书籍中。但实际上，各种各样的书都能承载这种智慧。惊悚小说里随便一句话都会给你意想不到的启发。\n\n从诗歌和歌曲中摘录句子并以这种方式加以运用，是一个令人自豪的传统。有些人认为，小说和戏剧里的句子离不开它们的上下文。东摘一句、西摘一句是不恰当的。我不同意这种看法。它忽视了大脑收集、整理和组合信息的方式。我们能从一切事物中找到意义。\n\n如今，我们常常把日程排得过满，还不停抱怨太忙。书籍特别适合帮助我们改变自己与日常生活节奏和习惯之间的关系。它们需要我们投入注意力。它们要求我们暂时放下手头的工作，去倾听别人的声音。你可以对着一本书咆哮，甚至把它扔出窗外。但你仍然改变不了书页上的文字。\n\n我们彼此会问很多问题：“你睡得怎么样？”“你假期去哪儿了？”但有一个问题我们应该更常问问彼此，那就是：“你在读什么？”如果带着真诚的好奇心去问，这就不是一个简单的问题。它其实是了解你正在成为什么样的人的一种方式。\n\n你还可以通过评估作者的写作技巧，如思想、措辞、风格、语气和内容，来了解写这本书的人。对这些方面加以分析，能揭示出作者的一些情况。同样，审视书中的人物能让我们更好地理解人类的情感和行为。理解他人有助于我们与之共情，从而创造一个更富同情心的社会。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+          "sourceText": "Books are uniquely suited to helping us change our relationship to the rhythms and habits of daily life.",
+          "displayText": "Books are uniquely suited to helping us change our relationship to the rhythms and habits of daily life.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:38"
+          ],
+          "translationZh": "书籍特别适合帮助我们改变自己与日常生活节奏和习惯之间的关系。",
+          "analysisZh": "主干是 Books are suited to，意思是书籍适合做某事；uniquely 修饰 suited，强调这一点别的东西比不上。to 是介词，后面接动名词 helping，helping us change 是 help sb do 结构。change 的宾语是 our relationship，介词短语 to the rhythms and habits of daily life 说明是我们和什么的关系。这里的 Books 正是空后 They 所指的对象。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 28,
+              "quote": "Books are uniquely suited to"
+            },
+            {
+              "start": 29,
+              "end": 46,
+              "quote": "helping us change"
+            },
+            {
+              "start": 47,
+              "end": 103,
+              "quote": "our relationship to the rhythms and habits of daily life"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+          "sourceText": "You can also learn about the person who wrote the book by assessing their writing techniques, such as ideas, word choice, style, tone, and content.",
+          "displayText": "You can also learn about the person who wrote the book by assessing their writing techniques, such as ideas, word choice, style, tone, and content.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:40"
+          ],
+          "translationZh": "你还可以通过评估作者的写作技巧，如思想、措辞、风格、语气和内容，来了解写这本书的人。",
+          "analysisZh": "主干是 You can also learn about the person，意思是你还能了解这个人；who wrote the book 是定语从句，修饰 the person，说明是写书的人。by assessing their writing techniques 说明靠什么方式了解；such as 后面列出五项具体技巧。这五项正是答案句里 these aspects 所指的内容。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 35,
+              "quote": "You can also learn about the person"
+            },
+            {
+              "start": 36,
+              "end": 54,
+              "quote": "who wrote the book"
+            },
+            {
+              "start": 55,
+              "end": 92,
+              "quote": "by assessing their writing techniques"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "全文围绕“书能带给我们什么”展开：先说人生智慧不只在自助书里，再为从各类作品摘句辩护，接着说书能让忙碌的人专注倾听，然后说问人在读什么能了解对方，最后说读书还能了解作者、理解他人。",
+        "units": [
+          {
+            "unitId": "unit-1",
+            "paragraphIds": [
+              "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1"
+            ],
+            "summary": "人们常从自助类书籍获得人生智慧，作者指出各类书都有这种智慧，惊悚小说里的一句话也能给人启发。"
+          },
+          {
+            "unitId": "unit-2",
+            "paragraphIds": [
+              "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2"
+            ],
+            "summary": "有人认为小说、戏剧的句子离不开上下文，不该单独摘出；作者不认同，认为大脑会自己整合信息，处处都能找到意义。"
+          },
+          {
+            "unitId": "unit-3",
+            "paragraphIds": [
+              "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3"
+            ],
+            "summary": "忙碌的现代人需要书：书要求人放下手头工作，专心倾听别人的声音。"
+          },
+          {
+            "unitId": "unit-4",
+            "paragraphIds": [
+              "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4"
+            ],
+            "summary": "我们应该多问彼此“你在读什么”，这能了解对方正在成为什么样的人。"
+          },
+          {
+            "unitId": "unit-5",
+            "paragraphIds": [
+              "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5"
+            ],
+            "summary": "分析写作技巧能了解作者，审视书中人物能理解人的情感和行为，从而学会共情。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 36,
+          "secondary": 38,
+          "kind": "shadow",
+          "shadowOf": "E",
+          "shared": [
+            "But"
+          ],
+          "text": "选项用 But 转折，they 像是接第 36 题空前的 “self-help” books。但空前说人们一直从这些书里得到智慧（People have always received），说它们够不着就自相矛盾；空后的 thriller 也没人引出。放到第 38 题，又和空前 uniquely suited 相反。",
+          "quotes": [
+            "But",
+            "they",
+            "“self-help” books",
+            "People have always received",
+            "thriller",
+            "uniquely suited"
+          ]
+        },
+        "G": {
+          "target": 37,
+          "secondary": 36,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项的 collecting words and sentences 很像第 37 题这一段开头说的摘句（extracting(摘录) lines），they 和 them 也像接空前的 Some people 和 lines。但这些人认为句子离不开上下文（dependent on what surrounds them），不会一辈子摘句，空后 I don’t buy this 也没有可反驳的看法。放到第 36 题，接不上空后的 thriller。",
+          "quotes": [
+            "collecting words and sentences",
+            "extracting(摘录) lines",
+            "they",
+            "them",
+            "Some people",
+            "lines",
+            "dependent on what surrounds them",
+            "I don’t buy this",
+            "thriller"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 102,
+              "quote": "人们认为，你需要知道的一切都能在书中找到。人们一直从某些类型的非虚构作品中获得指导人生的智慧，常常是从“自助”类书籍中。但实际上，各种各样的书都能承载这种智慧。惊悚小说里随便一句话都会给你意想不到的启发。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2"
+              ],
+              "start": 104,
+              "end": 220,
+              "quote": "从诗歌和歌曲中摘录句子并以这种方式加以运用，是一个令人自豪的传统。有些人认为，小说和戏剧里的句子离不开它们的上下文。东摘一句、西摘一句是不恰当的。我不同意这种看法。它忽视了大脑收集、整理和组合信息的方式。我们能从一切事物中找到意义。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3"
+              ],
+              "start": 222,
+              "end": 347,
+              "quote": "如今，我们常常把日程排得过满，还不停抱怨太忙。书籍特别适合帮助我们改变自己与日常生活节奏和习惯之间的关系。它们需要我们投入注意力。它们要求我们暂时放下手头的工作，去倾听别人的声音。你可以对着一本书咆哮，甚至把它扔出窗外。但你仍然改变不了书页上的文字。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4"
+              ],
+              "start": 349,
+              "end": 455,
+              "quote": "我们彼此会问很多问题：“你睡得怎么样？”“你假期去哪儿了？”但有一个问题我们应该更常问问彼此，那就是：“你在读什么？”如果带着真诚的好奇心去问，这就不是一个简单的问题。它其实是了解你正在成为什么样的人的一种方式。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5"
+              ],
+              "start": 457,
+              "end": 578,
+              "quote": "你还可以通过评估作者的写作技巧，如思想、措辞、风格、语气和内容，来了解写这本书的人。对这些方面加以分析，能揭示出作者的一些情况。同样，审视书中的人物能让我们更好地理解人类的情感和行为。理解他人有助于我们与之共情，从而创造一个更富同情心的社会。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:36",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+            "text": "It’s believed that everything you need to know can be found in a book. People have always received life-guiding wisdom from certain types of non-fiction, often from “self-help” books. But actually all sorts of books can carry this kind of wisdom. A random sentence in a thriller(惊悚小说) will give you unexpected insight."
+          },
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:37",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+            "text": "There is a proud tradition of extracting(摘录) lines from poetry and songs and using them in this way. Some people argue that lines from novels and plays are dependent on what surrounds them. It’s improper to grab the odd line here and there. I don’t buy this. It ignores the way that your brain collects, sorts and combines information. We can find meaning in everything."
+          },
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:38",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+            "text": "Today, we often over-schedule our days and complain constantly about being too busy. Books are uniquely suited to helping us change our relationship to the rhythms and habits of daily life. They demand our attention. They demand that we briefly put aside our work at hand and listen to someone else. You can rant against(咆哮)a book, or even throw it out the window. Still, you won’t change the words on the page."
+          },
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:39",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4",
+            "text": "We all ask each other a lot of questions: “How did you sleep?” “Where did you go on your holidays?” But there’s one question we should ask of one another a lot more often, and that is: “What are you reading?” It isn’t a simple question when asked with genuine curiosity. It’s really a way of finding out what you are becoming."
+          },
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:40",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+            "text": "You can also learn about the person who wrote the book by assessing their writing techniques, such as ideas, word choice, style, tone, and content. An analysis of these aspects can reveal things about the author. Similarly, examining the characters in books can give us a better grasp of human emotions and actions. Understanding others helps us to empathize with them, which creates a more compassionate society."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiangzhewan-2024-10:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+                "start": 99,
+                "end": 118,
+                "quote": "life-guiding wisdom"
+              },
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+                "start": 191,
+                "end": 222,
+                "quote": "A random sentence in a thriller"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+                "start": 39,
+                "end": 46,
+                "quote": "指导人生的智慧"
+              },
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+                "start": 80,
+                "end": 90,
+                "quote": "惊悚小说里随便一句话"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiangzhewan-2024-10:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+                "start": 124,
+                "end": 188,
+                "quote": "lines from novels and plays are dependent on what surrounds them"
+              },
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+                "start": 197,
+                "end": 213,
+                "quote": "I don’t buy this"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+                "start": 39,
+                "end": 57,
+                "quote": "小说和戏剧里的句子离不开它们的上下文"
+              },
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+                "start": 73,
+                "end": 81,
+                "quote": "我不同意这种看法"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiangzhewan-2024-10:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+                "start": 85,
+                "end": 90,
+                "quote": "Books"
+              },
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+                "start": 197,
+                "end": 278,
+                "quote": "They demand that we briefly put aside our work at hand and listen to someone else"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+                "start": 23,
+                "end": 25,
+                "quote": "书籍"
+              },
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+                "start": 65,
+                "end": 89,
+                "quote": "它们要求我们暂时放下手头的工作，去倾听别人的声音"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiangzhewan-2024-10:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4",
+                "start": 185,
+                "end": 208,
+                "quote": "“What are you reading?”"
+              },
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4",
+                "start": 209,
+                "end": 269,
+                "quote": "It isn’t a simple question when asked with genuine curiosity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4",
+                "start": 51,
+                "end": 59,
+                "quote": "“你在读什么？”"
+              },
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4",
+                "start": 59,
+                "end": 83,
+                "quote": "如果带着真诚的好奇心去问，这就不是一个简单的问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiangzhewan-2024-10:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+                "start": 102,
+                "end": 146,
+                "quote": "ideas, word choice, style, tone, and content"
+              },
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+                "start": 155,
+                "end": 164,
+                "quote": "Similarly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+                "start": 17,
+                "end": 31,
+                "quote": "思想、措辞、风格、语气和内容"
+              },
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+                "start": 64,
+                "end": 66,
+                "quote": "同样"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiangzhewan-2024-10:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:36"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:36",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+                "start": 184,
+                "end": 246,
+                "quote": "But actually all sorts of books can carry this kind of wisdom."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+                "start": 60,
+                "end": 80,
+                "quote": "但实际上，各种各样的书都能承载这种智慧。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiangzhewan-2024-10:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:37"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:37",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+                "start": 190,
+                "end": 240,
+                "quote": "It’s improper to grab the odd line here and there."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+                "start": 58,
+                "end": 73,
+                "quote": "东摘一句、西摘一句是不恰当的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiangzhewan-2024-10:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:38"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:38",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+                "start": 190,
+                "end": 216,
+                "quote": "They demand our attention."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+                "start": 53,
+                "end": 65,
+                "quote": "它们需要我们投入注意力。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiangzhewan-2024-10:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:39"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:39",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4",
+                "start": 271,
+                "end": 326,
+                "quote": "It’s really a way of finding out what you are becoming."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4",
+                "start": 84,
+                "end": 106,
+                "quote": "它其实是了解你正在成为什么样的人的一种方式。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiangzhewan-2024-10:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:40"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiangzhewan-2024-10:40",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+                "start": 148,
+                "end": 212,
+                "quote": "An analysis of these aspects can reveal things about the author."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+                "start": 42,
+                "end": 64,
+                "quote": "对这些方面加以分析，能揭示出作者的一些情况。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:38"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+                "start": 85,
+                "end": 189,
+                "quote": "Books are uniquely suited to helping us change our relationship to the rhythms and habits of daily life."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+                "start": 23,
+                "end": 53,
+                "quote": "书籍特别适合帮助我们改变自己与日常生活节奏和习惯之间的关系。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:40"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+                "start": 0,
+                "end": 147,
+                "quote": "You can also learn about the person who wrote the book by assessing their writing techniques, such as ideas, word choice, style, tone, and content."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+                "start": 0,
+                "end": 42,
+                "quote": "你还可以通过评估作者的写作技巧，如思想、措辞、风格、语气和内容，来了解写这本书的人。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:36": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "life-guiding wisdom",
+        "certain types of non-fiction",
+        "“self-help” books",
+        "A random sentence in a thriller",
+        "unexpected insight"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:1",
+        "beforeQuote": "People have always received life-guiding wisdom from certain types of non-fiction, often from “self-help” books.",
+        "afterQuote": "A random sentence in a thriller(惊悚小说) will give you unexpected insight."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But actually",
+          "signalSide": "option",
+          "targetText": "certain types of non-fiction",
+          "relation": "But actually 把空前只限于某些非虚构书的说法扭过来，改说什么书都行。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this kind of wisdom",
+          "signalSide": "option",
+          "targetText": "life-guiding wisdom",
+          "relation": "this kind of wisdom 回指空前的 life-guiding wisdom。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "certain types of non-fiction",
+          "signalSide": "context-before",
+          "targetText": "all sorts of books",
+          "relation": "空前说某些类型，选项说各种各样，范围由窄放宽。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "thriller",
+          "signalSide": "context-after",
+          "targetText": "all sorts of books",
+          "relation": "惊悚小说不是自助书，正好证明各种书都有这种智慧。"
+        }
+      ],
+      "lock": [
+        "life-guiding wisdom",
+        "thriller",
+        "this kind of wisdom"
+      ],
+      "find": {
+        "text": "先看空后：例子换成了 \"thriller\"，不再是自助书。E 用 \"this kind of wisdom\" 接住空前的 \"life-guiding wisdom\"，再用 But 把书的范围放宽。",
+        "quotes": [
+          "thriller",
+          "this kind of wisdom",
+          "life-guiding wisdom"
+        ]
+      },
+      "explain": "空前说人们大多从自助类非虚构书里得到人生智慧，这句转过来说什么书都有这种智慧；空后马上拿一本惊悚小说里的随手一句作证。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "certain types of non-fiction / “self-help” books",
+            "optionSide": "all sorts of books",
+            "relation": "空前限定在某些书，选项放宽到各种书，两边形成转折。"
+          },
+          {
+            "contextSide": "A random sentence in a thriller",
+            "optionSide": "all sorts of books can carry this kind of wisdom",
+            "relation": "惊悚小说里的一句话是“各种书都行”的例证。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "空前说人们大多从自助类非虚构书里得到人生智慧，这句转过来说什么书都有这种智慧；空后马上拿一本惊悚小说里的随手一句作证。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "选项用 But 转折，they 像是接第 36 题空前的 “self-help” books。但空前说人们一直从这些书里得到智慧（People have always received），说它们够不着就自相矛盾；空后的 thriller 也没人引出。放到第 38 题，又和空前 uniquely suited 相反。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:37": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "extracting(摘录) lines from poetry and songs",
+        "lines from novels and plays",
+        "dependent on what surrounds them",
+        "I don’t buy this"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:2",
+        "beforeQuote": "Some people argue that lines from novels and plays are dependent on what surrounds them.",
+        "afterQuote": "I don’t buy this. It ignores the way that your brain collects, sorts and combines information."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "I don’t buy this",
+          "signalSide": "context-after",
+          "targetText": "It’s improper to grab the odd line here and there.",
+          "relation": "this 指前面那种反对摘句的看法，作者在这里表态不认同。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "lines from novels and plays",
+          "signalSide": "context-before",
+          "targetText": "the odd line",
+          "relation": "空前说小说、戏剧里的句子，选项的 the odd line 说的还是这些句子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "improper",
+          "signalSide": "option",
+          "targetText": "dependent on what surrounds them",
+          "relation": "句子离不开上下文，所以单摘出来不恰当，选项把这层意思说成结论。"
+        }
+      ],
+      "lock": [
+        "Some people argue",
+        "I don’t buy this",
+        "improper"
+      ],
+      "find": {
+        "text": "空后 \"I don’t buy this\" 要反驳一个看法，空前 \"Some people argue\" 刚开头。C 说摘句 \"improper\"，正是这些人的结论，作者才能接着反驳。",
+        "quotes": [
+          "I don’t buy this",
+          "Some people argue",
+          "improper"
+        ]
+      },
+      "explain": "空前给出反对者的理由：句子离不开上下文；这句替他们说出结论：单摘一句不妥。空后作者表态不认同，再说大脑能自己把零散信息拼起来。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "lines from novels and plays are dependent on what surrounds them",
+            "optionSide": "It’s improper to grab the odd line here and there.",
+            "relation": "理由在前，结论在后，都是反对者的观点。"
+          },
+          {
+            "contextSide": "I don’t buy this",
+            "optionSide": "It’s improper",
+            "relation": "作者不认同的正是“单摘句子不恰当”这一说法。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "空前给出反对者的理由：句子离不开上下文；这句替他们说出结论：单摘一句不妥。空后作者表态不认同，再说大脑能自己把零散信息拼起来。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "选项的 collecting words and sentences 很像第 37 题这一段开头说的摘句（extracting(摘录) lines），they 和 them 也像接空前的 Some people 和 lines。但这些人认为句子离不开上下文（dependent on what surrounds them），不会一辈子摘句，空后 I don’t buy this 也没有可反驳的看法。放到第 36 题，接不上空后的 thriller。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:38": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "over-schedule our days",
+        "too busy",
+        "Books are uniquely suited",
+        "put aside our work at hand",
+        "listen to someone else"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:3",
+        "beforeQuote": "Books are uniquely suited to helping us change our relationship to the rhythms and habits of daily life.",
+        "afterQuote": "They demand that we briefly put aside our work at hand and listen to someone else."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "They",
+          "signalSide": "option",
+          "targetText": "Books",
+          "relation": "选项的 They 指空前的 Books。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Books",
+          "signalSide": "context-before",
+          "targetText": "They",
+          "relation": "空前的主语 Books，选项和空后都用 They 接着说。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "demand our attention",
+          "signalSide": "option",
+          "targetText": "They demand that we briefly put aside our work at hand",
+          "relation": "选项先说书要我们的注意力，空后具体说要我们放下手头的事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "They demand that we",
+          "signalSide": "context-after",
+          "targetText": "demand our attention",
+          "relation": "空后重复 They demand，把选项的要求展开成具体做法。"
+        }
+      ],
+      "lock": [
+        "Books",
+        "They demand",
+        "demand our attention"
+      ],
+      "find": {
+        "text": "空后 \"They demand that we\" 把要求说得很具体，A 的 \"demand our attention\" 先概括，They 都指空前的 \"Books\"。",
+        "quotes": [
+          "They demand that we",
+          "demand our attention",
+          "Books"
+        ]
+      },
+      "explain": "空前说书能帮忙改掉忙乱的生活节奏，这句点出靠什么：书要人专注；空后具体说要人放下手头工作听别人讲，再说书上的字你改不了。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Books",
+            "optionSide": "They",
+            "relation": "They 指书。"
+          },
+          {
+            "contextSide": "put aside our work at hand and listen to someone else",
+            "optionSide": "demand our attention",
+            "relation": "放下工作、听别人讲，就是把注意力交给书。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "空前说书能帮忙改掉忙乱的生活节奏，这句点出靠什么：书要人专注；空后具体说要人放下手头工作听别人讲，再说书上的字你改不了。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:39": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:39",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "“What are you reading?”",
+        "It isn’t a simple question",
+        "genuine curiosity",
+        "ask of one another"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:4",
+        "beforeQuote": "It isn’t a simple question when asked with genuine curiosity.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It’s",
+          "signalSide": "option",
+          "targetText": "“What are you reading?”",
+          "relation": "选项的 It 和空前的 It 一样，都指“你在读什么”这个问题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "It isn’t a simple question",
+          "signalSide": "context-before",
+          "targetText": "It’s really a way of",
+          "relation": "空前说它不简单，选项说它其实是一种了解方式，先否定再说真相。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "context-after",
+          "targetText": "finding out what you are becoming",
+          "relation": "下一段的 also 说还能了解作者，前面要先有一样能了解的东西：读者自己。"
+        }
+      ],
+      "lock": [
+        "It isn’t a simple question",
+        "really",
+        "also"
+      ],
+      "find": {
+        "text": "空前 \"It isn’t a simple question\" 要说它到底是什么，D 用 \"really\" 接上；下一段 \"You can also learn about the person who wrote the book\" 的 also 说明前面先讲了解读者自己。",
+        "quotes": [
+          "It isn’t a simple question",
+          "really",
+          "You can also learn about the person who wrote the book"
+        ]
+      },
+      "explain": "这句给本段收尾：问别人在读什么，其实是在了解对方正在变成什么样的人；下一段顺着说，从书里还能了解作者。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "It isn’t a simple question",
+            "optionSide": "It’s really a way of",
+            "relation": "先说不简单，再说它其实是什么。"
+          },
+          {
+            "contextSide": "You can also learn about the person who wrote the book",
+            "optionSide": "finding out what you are becoming",
+            "relation": "一个了解读者，一个了解作者，also 把两者并列。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "这句给本段收尾：问别人在读什么，其实是在了解对方正在变成什么样的人；下一段顺着说，从书里还能了解作者。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:40": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "learn about the person who wrote the book",
+        "writing techniques",
+        "ideas, word choice, style, tone, and content",
+        "examining the characters in books"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:seven-choices:5",
+        "beforeQuote": "You can also learn about the person who wrote the book by assessing their writing techniques, such as ideas, word choice, style, tone, and content.",
+        "afterQuote": "Similarly, examining the characters in books can give us a better grasp of human emotions and actions."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these aspects",
+          "signalSide": "option",
+          "targetText": "ideas, word choice, style, tone, and content",
+          "relation": "these aspects 指空前列出的五项写作技巧。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Similarly",
+          "signalSide": "context-after",
+          "targetText": "An analysis of these aspects can reveal things about the author.",
+          "relation": "Similarly 前后都是“分析书里某样东西能让人有所了解”：前面分析写法了解作者，后面审视人物理解人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "An analysis of",
+          "signalSide": "option",
+          "targetText": "examining the characters",
+          "relation": "分析写法和审视人物是同一类动作，Similarly 才接得上。"
+        }
+      ],
+      "lock": [
+        "these aspects",
+        "such as",
+        "Similarly"
+      ],
+      "find": {
+        "text": "F 的 \"these aspects\" 指空前 \"such as\" 列出的五项；空后 \"Similarly, examining the characters\" 要前面也是分析书中某样东西，只有 \"An analysis of\" 对得上。",
+        "quotes": [
+          "these aspects",
+          "such as",
+          "Similarly, examining the characters",
+          "An analysis of"
+        ]
+      },
+      "explain": "空前列出评估作者的几项写作技巧，这句说分析这些能看出作者是怎样的人；空后用同样的思路转到书中人物，最后落到理解他人、学会共情。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "ideas, word choice, style, tone, and content",
+            "optionSide": "these aspects",
+            "relation": "五项技巧就是这些方面。"
+          },
+          {
+            "contextSide": "learn about the person who wrote the book",
+            "optionSide": "reveal things about the author",
+            "relation": "了解写书的人就是看出作者的情况，选项把空前的意思说成结论。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前列出评估作者的几项写作技巧，这句说分析这些能看出作者是怎样的人；空后用同样的思路转到书中人物，最后落到理解他人、学会共情。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

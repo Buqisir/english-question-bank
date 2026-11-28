@@ -1,0 +1,1827 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiangzhewan-2024-10",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:cloze": {
+      "overview": "作者七岁随父母从亚洲移居英国，家境拮据，靠奖学金取得好成绩后，只能边打工边读大学。作者每周工作38小时、上夜班，虽疲惫却不抱怨，专注学业，把吃苦看作为未来打拼。",
+      "fullTranslationZh": "我七岁时随父母从亚洲来到英国。家里手头很紧。不过我在学校很用功，并且在GT奖学金的帮助下，取得了一些最好的A-level成绩。但我能负担得起上大学的唯一办法，是找到一份能支付我全部生活费的兼职工作。\n处在这种境况并不好受，但抱怨毫无意义。我要做的事情很多，而努力对我来说并不陌生。在我成长的过程中，父母教会了我：想在生活中得到什么，就要为之努力，这一点很重要。\n我每周工作38小时，其中有三个夜班。我很累，但还得逼着自己保持清醒去上早课。我做的是很费体力的活——堆货架，把新货搬到卖场。我是个好动的人，常去健身房举重。我知道自己有力气扛得住。\n因为这份工作，我没有多少时间社交。理想的情况是，我还希望有更多时间学习。我的梦想是读一个理疗硕士，然后找份工作。但眼下，我只专注于尽力取得最好的成绩。每当觉得生活艰难时，我就告诉自己，这关乎我的未来。",
+      "mainLine": {
+        "theme": {
+          "text": "处境再难也不抱怨，靠努力去争取自己想要的东西（the importance of working hard）。",
+          "quote": "the importance of working hard"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+            "text": "作者七岁随父母移居英国，家境拮据，要靠打工才上得起大学。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+            "text": "作者不抱怨处境，从小就懂得要为想要的东西努力。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+            "text": "作者每周打工38小时，活累人，但相信自己扛得住。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+            "text": "打工挤占了社交和学习时间，作者仍怀着读硕士的梦想。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:5",
+            "text": "接上段：作者专心争取好成绩，难时提醒自己是为了将来。"
+          }
+        ],
+        "emotion": "拮据中求学→不抱怨→疲惫却坚持→心怀梦想、为未来打拼"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "cloze-ls-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+          "sourceText": "But the only way I could __43__ to go to university was whether I got a part-time job that would pay all my living costs.",
+          "displayText": "But the only way I could afford to go to university was whether I got a part-time job that would pay all my living costs.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:43"
+          ],
+          "translationZh": "但我能负担得起上大学的唯一办法，是找到一份能支付我全部生活费的兼职工作。",
+          "analysisZh": "主干是 the only way … was whether …（唯一的办法是……）。I could afford to go to university 是省略了关系词的定语从句，修饰 way；whether 引导表语从句，说出这个办法是什么；从句里的 that would pay all my living costs 又是定语从句，修饰 a part-time job。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 16,
+              "quote": "the only way"
+            },
+            {
+              "start": 52,
+              "end": 63,
+              "quote": "was whether"
+            },
+            {
+              "start": 86,
+              "end": 120,
+              "quote": "that would pay all my living costs"
+            }
+          ]
+        },
+        {
+          "sentenceId": "cloze-ls-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+          "sourceText": "Growing up, my parents taught me the importance of working hard for what I __46__ in life.",
+          "displayText": "Growing up, my parents taught me the importance of working hard for what I want in life.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:46"
+          ],
+          "translationZh": "在我成长的过程中，父母教会了我：想在生活中得到什么，就要为之努力，这一点很重要。",
+          "analysisZh": "主干是 my parents taught me the importance（父母教给我……的重要性），taught 带双宾语 me 和 the importance。句首 Growing up 交代时间，指作者成长的过程中；of working hard 说明是什么的重要性；for 后面的 what I want in life 是 what 引导的从句，作介词 for 的宾语。",
+          "underlineRanges": [
+            {
+              "start": 12,
+              "end": 47,
+              "quote": "my parents taught me the importance"
+            },
+            {
+              "start": 48,
+              "end": 63,
+              "quote": "of working hard"
+            },
+            {
+              "start": 68,
+              "end": 87,
+              "quote": "what I want in life"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1"
+              ],
+              "start": 0,
+              "end": 99,
+              "quote": "我七岁时随父母从亚洲来到英国。家里手头很紧。不过我在学校很用功，并且在GT奖学金的帮助下，取得了一些最好的A-level成绩。但我能负担得起上大学的唯一办法，是找到一份能支付我全部生活费的兼职工作。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2"
+              ],
+              "start": 100,
+              "end": 180,
+              "quote": "处在这种境况并不好受，但抱怨毫无意义。我要做的事情很多，而努力对我来说并不陌生。在我成长的过程中，父母教会了我：想在生活中得到什么，就要为之努力，这一点很重要。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3"
+              ],
+              "start": 181,
+              "end": 271,
+              "quote": "我每周工作38小时，其中有三个夜班。我很累，但还得逼着自己保持清醒去上早课。我做的是很费体力的活——堆货架，把新货搬到卖场。我是个好动的人，常去健身房举重。我知道自己有力气扛得住。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:5"
+              ],
+              "start": 272,
+              "end": 372,
+              "quote": "因为这份工作，我没有多少时间社交。理想的情况是，我还希望有更多时间学习。我的梦想是读一个理疗硕士，然后找份工作。但眼下，我只专注于尽力取得最好的成绩。每当觉得生活艰难时，我就告诉自己，这关乎我的未来。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+            "text": "I came to the UK from Asia with my parents when I was seven. Money was tight. I worked hard at school though, and with the help of GT Scholarship, I got some of the best A-level grades. But the only way I could afford to go to university was whether I got a part-time job that would pay all my living costs."
+          },
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+            "text": "It isn’t the best situation to be in Complaining is meaningless. I have a lot on my plate, and working hard isn’t new to me. Growing up, my parents taught me the importance of working hard for what I want in life."
+          },
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+            "text": "I work 38 hours a week and do three night shifts a week. I’m very tired, but I have to force myself to stay awake for morning lectures. The work I do is very physical—stacking (堆积) shelves, bringing new products out onto the shop floor. I’m a(n) active person and often lift weights in the gym. I know I have the strength to bear it."
+          },
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+            "text": "Because of my job, I don’t have much time to socialize. Ideally, I would also like to have more time to study. My dream is to do an MA in physiotherapy and then get a job. But right now, I’m just focused on"
+          },
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:5",
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:5",
+            "text": "trying to get the best grades I can. Whenever I find life hard, I tell myself this is about my future."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 287,
+                "end": 310,
+                "quote": "pay all my living costs"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 85,
+                "end": 93,
+                "quote": "支付我全部生活费"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 81,
+                "end": 102,
+                "quote": "worked hard at school"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 25,
+                "end": 31,
+                "quote": "在学校很用功"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 287,
+                "end": 310,
+                "quote": "pay all my living costs"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 85,
+                "end": 93,
+                "quote": "支付我全部生活费"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 44,
+                "end": 58,
+                "quote": "is meaningless"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 14,
+                "end": 18,
+                "quote": "毫无意义"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 135,
+                "end": 186,
+                "quote": "my parents taught me the importance of working hard"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 49,
+                "end": 55,
+                "quote": "父母教会了我"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 174,
+                "end": 197,
+                "quote": "working hard for what I"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 68,
+                "end": 72,
+                "quote": "为之努力"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 61,
+                "end": 71,
+                "quote": "very tired"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 18,
+                "end": 21,
+                "quote": "我很累"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 166,
+                "end": 187,
+                "quote": "stacking (堆积) shelves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 50,
+                "end": 53,
+                "quote": "堆货架"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 263,
+                "end": 292,
+                "quote": "often lift weights in the gym"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 70,
+                "end": 77,
+                "quote": "常去健身房举重"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 319,
+                "end": 329,
+                "quote": "to bear it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 86,
+                "end": 89,
+                "quote": "扛得住"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 0,
+                "end": 22,
+                "quote": "I work 38 hours a week"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 0,
+                "end": 9,
+                "quote": "我每周工作38小时"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 69,
+                "end": 111,
+                "quote": "would also like to have more time to study"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 25,
+                "end": 35,
+                "quote": "还希望有更多时间学习"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 129,
+                "end": 173,
+                "quote": "do an MA in physiotherapy and then get a job"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 41,
+                "end": 55,
+                "quote": "读一个理疗硕士，然后找份工作"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 165,
+                "end": 188,
+                "quote": "the best A-level grades"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 50,
+                "end": 62,
+                "quote": "最好的A-level成绩"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 129,
+                "end": 173,
+                "quote": "do an MA in physiotherapy and then get a job"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 41,
+                "end": 55,
+                "quote": "读一个理疗硕士，然后找份工作"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:41"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 71,
+                "end": 76,
+                "quote": "tight"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 17,
+                "end": 21,
+                "quote": "手头很紧"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:42"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 110,
+                "end": 113,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 32,
+                "end": 34,
+                "quote": "并且"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:43"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 211,
+                "end": 217,
+                "quote": "afford"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 66,
+                "end": 70,
+                "quote": "负担得起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:44"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 37,
+                "end": 48,
+                "quote": "Complaining"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 12,
+                "end": 14,
+                "quote": "抱怨"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:45"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 114,
+                "end": 117,
+                "quote": "new"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 37,
+                "end": 39,
+                "quote": "陌生"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:46"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 200,
+                "end": 204,
+                "quote": "want"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 61,
+                "end": 63,
+                "quote": "得到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:47"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 108,
+                "end": 113,
+                "quote": "awake"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 29,
+                "end": 33,
+                "quote": "保持清醒"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:48"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 158,
+                "end": 166,
+                "quote": "physical"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 43,
+                "end": 47,
+                "quote": "费体力的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:49"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 246,
+                "end": 252,
+                "quote": "active"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 65,
+                "end": 68,
+                "quote": "好动的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:50"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 313,
+                "end": 321,
+                "quote": "strength"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:3",
+                "start": 84,
+                "end": 86,
+                "quote": "力气"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:51"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 14,
+                "end": 17,
+                "quote": "job"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 2,
+                "end": 6,
+                "quote": "这份工作"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:52"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 56,
+                "end": 63,
+                "quote": "Ideally"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 17,
+                "end": 23,
+                "quote": "理想的情况是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:53"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 114,
+                "end": 119,
+                "quote": "dream"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 38,
+                "end": 40,
+                "quote": "梦想"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:54"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:5",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:5",
+                "start": 23,
+                "end": 29,
+                "quote": "grades"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 72,
+                "end": 74,
+                "quote": "成绩"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:55"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:5",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:5",
+                "start": 95,
+                "end": 101,
+                "quote": "future"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:4",
+                "start": 97,
+                "end": 99,
+                "quote": "未来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:43"
+            ],
+            "selectedSentenceId": "cloze-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 190,
+                "end": 202,
+                "quote": "the only way"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 238,
+                "end": 249,
+                "quote": "was whether"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 272,
+                "end": 306,
+                "quote": "that would pay all my living costs"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:1",
+                "start": 74,
+                "end": 78,
+                "quote": "唯一办法"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:46"
+            ],
+            "selectedSentenceId": "cloze-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 137,
+                "end": 172,
+                "quote": "my parents taught me the importance"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 173,
+                "end": 188,
+                "quote": "of working hard"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 193,
+                "end": 212,
+                "quote": "what I want in life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiangzhewan-2024-10:cloze:2",
+                "start": 49,
+                "end": 55,
+                "quote": "父母教会了我"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "拮据中求学→不抱怨→疲惫却坚持→心怀梦想、为未来打拼"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:41": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:41",
+      "blankNo": 41,
+      "pos": "adjective",
+      "role": "main",
+      "context": "刚移居英国，这里交代家里的经济状况，要一个说钱不宽裕的词，为后文打工求学铺垫。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "后文说只有找到能付全部生活费的兼职（pay all my living costs）才上得起大学，可见家里钱紧。",
+        "quotes": [
+          "pay all my living costs"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "拮据的",
+        "reason": "刚移居英国，这里交代家里的经济状况，要一个说钱不宽裕的词，为后文打工求学铺垫。形容词看语境义：后文说只有找到能付全部生活费的兼职（pay all my living costs）才上得起大学，可见家里钱紧。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "valuable",
+          "meaning": "宝贵的；这里交代的是家境，后文要靠兼职付全部生活费（pay all my living costs），说明钱不够用，不是钱宝贵。",
+          "quote": "pay all my living costs"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pointless",
+          "meaning": "无意义的；后文正因为缺钱才要靠兼职付生活费（pay all my living costs），钱对作者很要紧。",
+          "quote": "pay all my living costs"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "impressive",
+          "meaning": "可观的；后文要靠兼职付全部生活费（pay all my living costs），家里的钱并不多。",
+          "quote": "pay all my living costs"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Money was",
+          "signalSide": "context-before",
+          "relation": "空格作主语“钱”（Money）的表语，说家里钱的状况。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "pay all my living costs",
+          "signalSide": "context-after",
+          "relation": "后文要靠兼职付全部生活费，说明家里钱紧。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:42": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:42",
+      "blankNo": 42,
+      "pos": "other",
+      "role": "detail",
+      "context": "前面说在校用功，后面说拿到最好的成绩，两件事要顺着接下去。",
+      "find": {
+        "check": "logic",
+        "text": "前一分句在校用功（worked hard at school）与后一分句取得最好的成绩（got some of the best A-level grades）是顺承，用并列连词接。",
+        "quotes": [
+          "worked hard at school",
+          "got some of the best A-level grades"
+        ],
+        "posLabel": "连词"
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "并且",
+        "reason": "前面说在校用功，后面说拿到最好的成绩，两件事要顺着接下去。连词看逻辑：前一分句在校用功（worked hard at school）与后一分句取得最好的成绩（got some of the best A-level grades）是顺承，用并列连词接。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "or",
+          "meaning": "或者；在校用功（worked hard at school）和取得好成绩是先后都发生的事，不是二选一。",
+          "quote": "worked hard at school"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "thus",
+          "meaning": "因此；好成绩还借助了奖学金（with the help of GT Scholarship），这里只是把两件事顺着连起来。",
+          "quote": "with the help of GT Scholarship"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "yet",
+          "meaning": "然而；用功（worked hard at school）之后取得好成绩是顺理成章的，前后没有转折。",
+          "quote": "worked hard at school"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "worked hard at school",
+          "signalSide": "context-before",
+          "relation": "前一分句说作者在校用功，后一分句顺着说结果。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "got some of the best A-level grades",
+          "signalSide": "context-after",
+          "relation": "取得好成绩与在校用功同向，前后是顺承。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:43": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "main",
+      "context": "上大学要花钱，这里要说作者怎样才付得起上大学的钱，引出打工。",
+      "find": {
+        "check": "collocation",
+        "text": "后面的条件是找到能付全部生活费的兼职（pay all my living costs），说的是钱，所以是负担得起去上大学（to go to university）。",
+        "quotes": [
+          "pay all my living costs",
+          "to go to university"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "负担得起",
+        "reason": "上大学要花钱，这里要说作者怎样才付得起上大学的钱，引出打工。动词看搭配：后面的条件是找到能付全部生活费的兼职（pay all my living costs），说的是钱，所以是负担得起去上大学（to go to university）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "wait",
+          "meaning": "等待；后文的条件是兼职要付全部生活费（pay all my living costs），说的是钱够不够，不是等不等。",
+          "quote": "pay all my living costs"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "offer",
+          "meaning": "提议；主语是作者自己（I），后文讲的是要靠兼职付生活费（pay all my living costs），不是主动提出要去。",
+          "quote": "pay all my living costs"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promise",
+          "meaning": "答应；后文以兼职付全部生活费（pay all my living costs）为条件，讲的是钱够不够，不是作不作承诺。",
+          "quote": "pay all my living costs"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to go to university",
+          "signalSide": "context-after",
+          "relation": "负担得起（afford）后接不定式，这里指负担得起去上大学。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "pay all my living costs",
+          "signalSide": "context-after",
+          "relation": "后文讲兼职要付生活费，说的是钱的问题。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:44": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "main",
+      "context": "处境不好，作者却说某种做法毫无意义，要一个面对困境时的消极做法，表明作者的态度。",
+      "find": {
+        "check": "affect",
+        "text": "前面承认处境不好（isn’t the best situation），后面说这样做毫无意义（is meaningless），接着讲自己不怕吃苦，可见被否定的是抱怨。",
+        "quotes": [
+          "isn’t the best situation",
+          "is meaningless"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "抱怨",
+        "reason": "处境不好，作者却说某种做法毫无意义，要一个面对困境时的消极做法，表明作者的态度。动词看情感：前面承认处境不好（isn’t the best situation），后面说这样做毫无意义（is meaningless），接着讲自己不怕吃苦，可见被否定的是抱怨。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Struggling",
+          "meaning": "努力奋斗；后文作者正强调要努力（working hard），不会说奋斗毫无意义（is meaningless）。",
+          "quote": "is meaningless"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Reflecting",
+          "meaning": "反思；后文讲作者面对处境不怕吃苦（working hard isn’t），被说成没意义的是对处境的消极反应，不是思考。",
+          "quote": "working hard isn’t"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Dreaming",
+          "meaning": "做梦；作者后文还说想读理疗硕士（do an MA in physiotherapy），并不认为怀有梦想没有意义。",
+          "quote": "do an MA in physiotherapy"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "is meaningless",
+          "signalSide": "context-after",
+          "relation": "空格作主语，谓语说它毫无意义。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "isn’t the best situation",
+          "signalSide": "context-before",
+          "relation": "处境不好，被否定的是面对困境的消极做法。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:45": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "事情虽多，但努力对作者并不陌生，要一个表示新鲜、陌生的词。",
+      "find": {
+        "check": "echo",
+        "text": "下一句又说到努力（working hard for what I），父母从小就这样教（Growing up, my parents taught me），可见努力对作者早已不陌生。",
+        "quotes": [
+          "working hard for what I",
+          "Growing up, my parents taught me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "不熟悉的",
+        "reason": "事情虽多，但努力对作者并不陌生，要一个表示新鲜、陌生的词。形容词看复现：下一句又说到努力（working hard for what I），父母从小就这样教（Growing up, my parents taught me），可见努力对作者早已不陌生。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "kind",
+          "meaning": "友好的；努力（working hard）是一件事，谈不上对作者友不友好。",
+          "quote": "working hard"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "good",
+          "meaning": "好的；说努力对我不好，与父母从小教导努力很重要（the importance of working hard）相反。",
+          "quote": "the importance of working hard"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fair",
+          "meaning": "公平的；下一句讲父母从小的教导（Growing up, my parents taught me），说明作者早已习惯努力，与公不公平无关。",
+          "quote": "Growing up, my parents taught me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to me",
+          "signalSide": "context-after",
+          "relation": "对某人来说陌生（be new to sb），这里指努力对作者并不陌生。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "working hard for what I",
+          "signalSide": "context-after",
+          "relation": "下一句再提努力，说明这是作者从小就习惯的事。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:46": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "detail",
+      "context": "这里要说努力是为了人生中想得到的东西，要一个表示想得到的动词。",
+      "find": {
+        "check": "collocation",
+        "text": "为……努力（working hard for what I）后面接的是要争取的东西，即自己在生活中想要的。",
+        "quotes": [
+          "working hard for what I"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "想要",
+        "reason": "这里要说努力是为了人生中想得到的东西，要一个表示想得到的动词。动词看搭配：为……努力（working hard for what I）后面接的是要争取的东西，即自己在生活中想要的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "drop",
+          "meaning": "放弃；为放弃的东西努力（working hard for）说不通，努力是为了得到。",
+          "quote": "working hard for"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "face",
+          "meaning": "面对；为……努力（working hard for）指向要争取的目标，要面对的困难不是努力想得到的。",
+          "quote": "working hard for"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "spot",
+          "meaning": "发现；为……努力（working hard for）后接要争取的目标，不是偶然看见的东西。",
+          "quote": "working hard for"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "working hard for",
+          "signalSide": "context-before",
+          "relation": "为某物努力，空格说的是想得到的东西。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:47": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "上完夜班很累，还得逼自己撑着去上早课，要一个表示不睡着的词。",
+      "find": {
+        "check": "collocation",
+        "text": "很累（very tired）之后转折（but），逼自己（force myself to stay）去上早课（morning lectures），要保持的状态是醒着。",
+        "quotes": [
+          "very tired",
+          "force myself to stay",
+          "morning lectures"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "醒着的",
+        "reason": "上完夜班很累，还得逼自己撑着去上早课，要一个表示不睡着的词。形容词看搭配：很累（very tired）之后转折（but），逼自己（force myself to stay）去上早课（morning lectures），要保持的状态是醒着。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fit",
+          "meaning": "健康的；作者很累（very tired），要逼自己做到的是不睡着去上早课，不是保持健康。",
+          "quote": "very tired"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "young",
+          "meaning": "年轻的；年轻不是逼自己（force myself）就能保持的状态。",
+          "quote": "force myself"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "safe",
+          "meaning": "安全的；作者的难处是上完夜班太累（very tired），要撑着去上早课，不是安全问题。",
+          "quote": "very tired"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "force myself to stay",
+          "signalSide": "context-before",
+          "relation": "保持（stay）后接形容词表示保持某种状态，这里是保持清醒。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "very tired",
+          "signalSide": "context-before",
+          "relation": "很累却要上早课，需要的是保持清醒。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:48": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:48",
+      "blankNo": 48,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "破折号后列出了具体的活，这里要一个词把这些活概括起来。",
+      "find": {
+        "check": "echo",
+        "text": "破折号后的堆货架（stacking (堆积) shelves）、把新货搬到卖场（bringing new products out）都是费力气的活，空格把它们概括成一个词。",
+        "quotes": [
+          "stacking (堆积) shelves",
+          "bringing new products out"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "体力的",
+        "reason": "破折号后列出了具体的活，这里要一个词把这些活概括起来。形容词看复现：破折号后的堆货架（stacking (堆积) shelves）、把新货搬到卖场（bringing new products out）都是费力气的活，空格把它们概括成一个词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "rewarding",
+          "meaning": "有回报的；破折号后列的是堆货架、搬新货（bringing new products out），说的是活怎么干，不是回报多少。",
+          "quote": "bringing new products out"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dangerous",
+          "meaning": "危险的；堆货架、搬新货（bringing new products out）是费力气的活，后文说自己有力气扛住，说的是累不是险。",
+          "quote": "bringing new products out"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "urgent",
+          "meaning": "紧急的；破折号后讲的是活的内容，堆货架（stacking (堆积) shelves）要的是力气，与急不急无关。",
+          "quote": "stacking (堆积) shelves"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The work I do is very",
+          "signalSide": "context-before",
+          "relation": "空格作表语，说作者做的这份活是什么性质。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "stacking (堆积) shelves",
+          "signalSide": "context-after",
+          "relation": "破折号后的具体活计都是体力活，空格是对它们的概括。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:49": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:49",
+      "blankNo": 49,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "这里说作者是什么样的人，要和后面常去健身房举重相合的性格词。",
+      "find": {
+        "check": "echo",
+        "text": "后面说常在健身房举重（often lift weights in the gym），这是爱运动、好动的人。",
+        "quotes": [
+          "often lift weights in the gym"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "活跃的",
+        "meaning": "好动爱运动的",
+        "reason": "这里说作者是什么样的人，要和后面常去健身房举重相合的性格词。形容词看复现：后面说常在健身房举重（often lift weights in the gym），这是爱运动、好动的人。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "easy-going",
+          "meaning": "随和的；后面讲的是常去健身房举重（lift weights in the gym），说的是爱运动，不是脾气随和。",
+          "quote": "lift weights in the gym"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "proud",
+          "meaning": "骄傲的；举重（lift weights）表现的是作者爱运动、有力气，与骄傲无关。",
+          "quote": "lift weights"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "warm-hearted",
+          "meaning": "热心的；常去健身房举重（lift weights in the gym）说明体力好，不是待人热心。",
+          "quote": "lift weights in the gym"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "person",
+          "signalSide": "context-after",
+          "relation": "空格修饰“人”（person），说作者是什么样的人。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "often lift weights in the gym",
+          "signalSide": "context-after",
+          "relation": "常去健身房举重，具体说明作者好动。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:50": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "main",
+      "context": "活很累，作者却有信心扛住，要一个指扛住体力活所需的东西。",
+      "find": {
+        "check": "echo",
+        "text": "前句常在健身房举重（often lift weights in the gym），说明作者有扛住（to bear it）这份体力活的力气。",
+        "quotes": [
+          "often lift weights in the gym",
+          "to bear it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "力气",
+        "reason": "活很累，作者却有信心扛住，要一个指扛住体力活所需的东西。名词看复现：前句常在健身房举重（often lift weights in the gym），说明作者有扛住（to bear it）这份体力活的力气。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "pressure",
+          "meaning": "压力；作者常举重（lift weights），说的是有能力扛住（to bear it），不是有压力。",
+          "quote": "to bear it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "chance",
+          "meaning": "机会；作者说的是能不能扛住（to bear it）体力活，不是有没有机会。",
+          "quote": "to bear it"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "desire",
+          "meaning": "渴望；扛住体力活（to bear it）靠的是力气，前句举重（lift weights）说的正是力气。",
+          "quote": "to bear it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to bear it",
+          "signalSide": "context-after",
+          "relation": "有……去承受它，空格是承受体力活所需的东西。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "lift weights",
+          "signalSide": "context-before",
+          "relation": "举重说明作者有力气。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:51": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "main",
+      "context": "这里说作者没时间社交的原因，要指前面那份占去大量时间的兼职。",
+      "find": {
+        "check": "echo",
+        "text": "首段提到兼职（a part-time job），上段说每周工作38小时（I work 38 hours a week），正是这份工作挤掉了社交时间。",
+        "quotes": [
+          "a part-time job",
+          "I work 38 hours a week"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "工作",
+        "reason": "这里说作者没时间社交的原因，要指前面那份占去大量时间的兼职。名词看复现：首段提到兼职（a part-time job），上段说每周工作38小时（I work 38 hours a week），正是这份工作挤掉了社交时间。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "race",
+          "meaning": "比赛；挤掉社交时间的是每周38小时的工作（I work 38 hours a week），不是比赛。",
+          "quote": "I work 38 hours a week"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "training",
+          "meaning": "训练；去健身房举重只是爱好，占去时间的是每周38小时的工作（I work 38 hours a week）。",
+          "quote": "I work 38 hours a week"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fault",
+          "meaning": "过错；没时间社交是因为每周工作38小时（I work 38 hours a week），不是作者犯了错。",
+          "quote": "I work 38 hours a week"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Because of my",
+          "signalSide": "context-before",
+          "relation": "因为（Because of）后接原因，空格说是什么让作者没时间社交。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a part-time job",
+          "signalSide": "context-before",
+          "relation": "首段的兼职在这里用一个名词复现。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:52": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:52",
+      "blankNo": 52,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "这里说出一个现实里做不到的愿望，要一个表示在理想情况下的副词。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "前句刚说没多少时间（don’t have much time），空后说还想有更多时间学习（would also like to），是现实达不到的理想。",
+        "quotes": [
+          "don’t have much time",
+          "would also like to"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "理想情况下",
+        "reason": "这里说出一个现实里做不到的愿望，要一个表示在理想情况下的副词。副词看语境义：前句刚说没多少时间（don’t have much time），空后说还想有更多时间学习（would also like to），是现实达不到的理想。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "Temporarily",
+          "meaning": "暂时地；想有更多时间学习（have more time to study）是作者一直的愿望，不是暂时的。",
+          "quote": "have more time to study"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Helplessly",
+          "meaning": "无助地；作者说过抱怨没意义（is meaningless），这里只是平静地说出愿望（would also like to）。",
+          "quote": "would also like to"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Surprisingly",
+          "meaning": "出人意料地；学生想有更多时间学习（have more time to study）是常情，并不出人意料。",
+          "quote": "have more time to study"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "would also like to",
+          "signalSide": "context-after",
+          "relation": "还想（would also like to）表示愿望，空格说这是理想中的情况。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "don’t have much time",
+          "signalSide": "context-before",
+          "relation": "现实中没多少时间，更多时间学习只是理想。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:53": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "读理疗硕士再找工作是作者对将来的打算，要一个指人生目标的词。",
+      "find": {
+        "check": "collocation",
+        "text": "空格作主语，表语是读理疗硕士再就业（to do an MA in physiotherapy and then get a job），这是作者想实现的将来目标。",
+        "quotes": [
+          "to do an MA in physiotherapy and then get a job"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "梦想",
+        "reason": "读理疗硕士再找工作是作者对将来的打算，要一个指人生目标的词。名词看搭配：空格作主语，表语是读理疗硕士再就业（to do an MA in physiotherapy and then get a job），这是作者想实现的将来目标。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "worry",
+          "meaning": "担忧；读理疗硕士（do an MA in physiotherapy）再就业是作者想实现的事，不是担忧。",
+          "quote": "do an MA in physiotherapy"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "relief",
+          "meaning": "宽慰；读硕士再找工作（then get a job）是将来的目标，不是让人宽慰的事。",
+          "quote": "then get a job"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "load",
+          "meaning": "负担；读理疗硕士（do an MA in physiotherapy）是作者主动追求的，不是负担。",
+          "quote": "do an MA in physiotherapy"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "is to do an MA in physiotherapy",
+          "signalSide": "context-after",
+          "relation": "不定式作表语，说明空格是要去实现的目标。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:54": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "眼下作者专心争取的东西，要和学业有关、能尽力拿到最好的东西。",
+      "find": {
+        "check": "echo",
+        "text": "首段说拿到了最好的A-level成绩（the best A-level grades），这里的尽力拿最好（trying to get the best）呼应它，仍是成绩。",
+        "quotes": [
+          "the best A-level grades",
+          "trying to get the best"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "成绩",
+        "reason": "眼下作者专心争取的东西，要和学业有关、能尽力拿到最好的东西。名词看复现：首段说拿到了最好的A-level成绩（the best A-level grades），这里的尽力拿最好（trying to get the best）呼应它，仍是成绩。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "bonds",
+          "meaning": "纽带；作者说过没多少时间社交（time to socialize），眼下专注的不是人际关系。",
+          "quote": "time to socialize"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "memories",
+          "meaning": "回忆；作者说的是眼下（right now）专心要做的事，下一句又说为了将来，不是留下回忆。",
+          "quote": "right now"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "ideas",
+          "meaning": "想法；首段最好的成绩（the best A-level grades）提示这里争取的仍是成绩，不是想法。",
+          "quote": "the best A-level grades"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "trying to get the best",
+          "signalSide": "context-before",
+          "relation": "尽力取得最好的……，空格是可以拿到最好的东西。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the best A-level grades",
+          "signalSide": "context-before",
+          "relation": "首段的最好成绩在这里复现。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:55": {
+      "blankId": "blank:paper-mock-zhejiang-jiangzhewan-2024-10:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "这是作者难熬时激励自己的话，要一个概括前文读硕士、找工作这些将来打算的词。",
+      "find": {
+        "check": "echo",
+        "text": "上段说要读硕士再找工作（do an MA in physiotherapy and then get a job），这些都是将来的事，用一个词概括就是未来。",
+        "quotes": [
+          "do an MA in physiotherapy and then get a job"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "未来",
+        "reason": "这是作者难熬时激励自己的话，要一个概括前文读硕士、找工作这些将来打算的词。名词看复现：上段说要读硕士再找工作（do an MA in physiotherapy and then get a job），这些都是将来的事，用一个词概括就是未来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "image",
+          "meaning": "形象；作者吃苦是为了读硕士、再找工作（then get a job），不是为了形象。",
+          "quote": "then get a job"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "family",
+          "meaning": "家庭；作者紧接着说眼下专注于争取好成绩（trying to get the best），为的是自己读硕士、就业的将来。",
+          "quote": "trying to get the best"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "origin",
+          "meaning": "出身；作者来自亚洲（from Asia）是过去的事，吃苦是为了今后读硕士、就业。",
+          "quote": "from Asia"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "this is about my",
+          "signalSide": "context-before",
+          "relation": "这一切关乎我的……，空格是作者吃苦的目的所在。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "then get a job",
+          "signalSide": "context-before",
+          "relation": "读硕士再就业都是将来的事，空格把它们概括成未来。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,790 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiangzhewan-2024-10",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c": {
+      "overview": "说明文。介绍近来学世界语的人增多的现象，回顾扎门霍夫为让人们平等交流、避免冲突而创造它的初衷，说明其简单规则的构词与语法，并分析它未成为国际通用语的原因及它给学习者带来的归属感。",
+      "fullTranslationZh": "在巴拉斯顿村，能听到一种奇怪的语言。它不是亲切的陶瓷区方言，听起来倒有点像法语和德语的“混血儿”。一种易学、通用的第二语言的理念得到大力推广，吸引了许多说这种语言的人来到这一带。近来学习世界语的人越来越多。世界语协会已把初学者课程的数量增加到原来的四倍，以满足需求。\n世界语是由扎门霍夫创造的，他是一名犹太裔波兰医生，1859 年出生于比亚韦斯托克（今属波兰）。当时世界上不同群体之间的暴力冲突很常见。还在孩童时期，扎门霍夫就想到，一门易学易懂的人造第二语言能让人们以平等的身份交谈，而不是互相争斗。1887 年，扎门霍夫发表了他的设想。到 1905 年，世界语的基本规则已由在法国召开的使用者大会确定下来，世界各地的世界语团体也开始纷纷涌现。\n在世界语中，所有以 -o 结尾的词都是名词，以 -a 结尾的是形容词，而 -e 表示副词。例如，“vida”表示“视觉的”，“vide”表示“视觉上”，这两个概念在英语里要用不同的词来表达。如果你需要找一个反义词，可以加上前缀“mal”：“pura”是“干净的”，“malpura”就是“脏的”。这些构词单元能帮助使用者很快学会新词。它没有语法上的性别，动词变化完全规则。和多年的高中语言课相比，学它简直是小菜一碟。\n为什么世界语没有成为当今国际交流的首选？世界语是“中立的”，因为它不是任何国家的语言，但这也意味着没有国家在海外支持它的使用。“必须做选择的人会认为英语在经济上是更好的选择，”萨米·肯尼迪说，他是一名年轻的世界语者，在曼彻斯特帮助推广世界语。“然而，世界语能给你英语永远给不了的东西。”他认为，是那个“包容又关爱”的世界语社群帮他摆脱了孤独。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+          "sourceText": "While still a child, Zamenhof hit upon the idea that a constructed second language that was easy to learn and understand would allow people to talk as peers, rather than fight.",
+          "displayText": "While still a child, Zamenhof hit upon the idea that a constructed second language that was easy to learn and understand would allow people to talk as peers, rather than fight.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:29"
+          ],
+          "translationZh": "还在孩童时期，扎门霍夫就想到，一门易学易懂的人造第二语言能让人们以平等的身份交谈，而不是互相争斗。",
+          "analysisZh": "主干是 Zamenhof hit upon the idea，“扎门霍夫想到一个主意”。句首 While still a child 是省略的时间状语，相当于 While he was still a child。that a constructed second language … would allow … 是同位语从句，说明 idea 的内容；从句的主语 a constructed second language 后面又带定语从句 that was easy to learn and understand。allow people to talk as peers, rather than fight 里，rather than 把“平等交谈”和“打斗”对立起来，点出他造语言的用意。",
+          "underlineRanges": [
+            {
+              "start": 30,
+              "end": 52,
+              "quote": "hit upon the idea that"
+            },
+            {
+              "start": 121,
+              "end": 156,
+              "quote": "would allow people to talk as peers"
+            },
+            {
+              "start": 158,
+              "end": 175,
+              "quote": "rather than fight"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+          "sourceText": "Esperanto is “neutral” (中立的) because it is not a national language, but that also means it does not have a state backing its use abroad.",
+          "displayText": "Esperanto is “neutral” (中立的) because it is not a national language, but that also means it does not have a state backing its use abroad.",
+          "relatedQuestionIds": [],
+          "translationZh": "世界语是“中立的”，因为它不是任何国家的语言，但这也意味着没有国家在海外支持它的使用。",
+          "analysisZh": "前半句主干 Esperanto is “neutral”，because 从句说明它为什么中立：它不是任何国家的语言。but 后转出代价：that 指“不是国家语言”这一点，means 后接省略 that 的宾语从句 it does not have a state backing its use abroad，其中现在分词短语 backing its use abroad 修饰 a state，“在海外支持它使用的国家”。同一个特点，一面是中立，一面是没有靠山，这正回答了段首的问题。",
+          "underlineRanges": [
+            {
+              "start": 29,
+              "end": 66,
+              "quote": "because it is not a national language"
+            },
+            {
+              "start": 68,
+              "end": 87,
+              "quote": "but that also means"
+            },
+            {
+              "start": 113,
+              "end": 135,
+              "quote": "backing its use abroad"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1"
+              ],
+              "start": 0,
+              "end": 133,
+              "quote": "在巴拉斯顿村，能听到一种奇怪的语言。它不是亲切的陶瓷区方言，听起来倒有点像法语和德语的“混血儿”。一种易学、通用的第二语言的理念得到大力推广，吸引了许多说这种语言的人来到这一带。近来学习世界语的人越来越多。世界语协会已把初学者课程的数量增加到原来的四倍，以满足需求。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2"
+              ],
+              "start": 134,
+              "end": 322,
+              "quote": "世界语是由扎门霍夫创造的，他是一名犹太裔波兰医生，1859 年出生于比亚韦斯托克（今属波兰）。当时世界上不同群体之间的暴力冲突很常见。还在孩童时期，扎门霍夫就想到，一门易学易懂的人造第二语言能让人们以平等的身份交谈，而不是互相争斗。1887 年，扎门霍夫发表了他的设想。到 1905 年，世界语的基本规则已由在法国召开的使用者大会确定下来，世界各地的世界语团体也开始纷纷涌现。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3"
+              ],
+              "start": 323,
+              "end": 531,
+              "quote": "在世界语中，所有以 -o 结尾的词都是名词，以 -a 结尾的是形容词，而 -e 表示副词。例如，“vida”表示“视觉的”，“vide”表示“视觉上”，这两个概念在英语里要用不同的词来表达。如果你需要找一个反义词，可以加上前缀“mal”：“pura”是“干净的”，“malpura”就是“脏的”。这些构词单元能帮助使用者很快学会新词。它没有语法上的性别，动词变化完全规则。和多年的高中语言课相比，学它简直是小菜一碟。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4"
+              ],
+              "start": 532,
+              "end": 703,
+              "quote": "为什么世界语没有成为当今国际交流的首选？世界语是“中立的”，因为它不是任何国家的语言，但这也意味着没有国家在海外支持它的使用。“必须做选择的人会认为英语在经济上是更好的选择，”萨米·肯尼迪说，他是一名年轻的世界语者，在曼彻斯特帮助推广世界语。“然而，世界语能给你英语永远给不了的东西。”他认为，是那个“包容又关爱”的世界语社群帮他摆脱了孤独。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-c-ev1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+                "start": 299,
+                "end": 370,
+                "quote": "There has been an increase in people taking up Esperanto(世界语) recently."
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+                "start": 401,
+                "end": 479,
+                "quote": "increased the number of beginners’ courses by four-fold to keep up with demand"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 89,
+                "end": 103,
+                "quote": "近来学习世界语的人越来越多。"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 109,
+                "end": 132,
+                "quote": "把初学者课程的数量增加到原来的四倍，以满足需求"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-ev2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+                "start": 100,
+                "end": 158,
+                "quote": "Violence between different groups was common in the world."
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+                "start": 280,
+                "end": 334,
+                "quote": "would allow people to talk as peers, rather than fight"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 47,
+                "end": 67,
+                "quote": "当时世界上不同群体之间的暴力冲突很常见。"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 95,
+                "end": 115,
+                "quote": "能让人们以平等的身份交谈，而不是互相争斗"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-ev3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3",
+                "start": 14,
+                "end": 110,
+                "quote": "all words ending -o are nouns, an -a ending is for an adjective, while -e denotes (表示) an adverb"
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3",
+                "start": 389,
+                "end": 450,
+                "quote": "There are no grammatical genders, verbs are strictly regular."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 6,
+                "end": 44,
+                "quote": "所有以 -o 结尾的词都是名词，以 -a 结尾的是形容词，而 -e 表示副词"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 167,
+                "end": 186,
+                "quote": "它没有语法上的性别，动词变化完全规则。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-ev4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+                "start": 458,
+                "end": 565,
+                "quote": "He credits the “accepting and caring” Esperanto-speaking community with helping him to overcome loneliness."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 143,
+                "end": 171,
+                "quote": "他认为，是那个“包容又关爱”的世界语社群帮他摆脱了孤独。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-ss1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:29"
+            ],
+            "selectedSentenceId": "sentence-reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+                "start": 159,
+                "end": 335,
+                "quote": "While still a child, Zamenhof hit upon the idea that a constructed second language that was easy to learn and understand would allow people to talk as peers, rather than fight."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 67,
+                "end": 116,
+                "quote": "还在孩童时期，扎门霍夫就想到，一门易学易懂的人造第二语言能让人们以平等的身份交谈，而不是互相争斗。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-ss2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+                "start": 71,
+                "end": 207,
+                "quote": "Esperanto is “neutral” (中立的) because it is not a national language, but that also means it does not have a state backing its use abroad."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 20,
+                "end": 63,
+                "quote": "世界语是“中立的”，因为它不是任何国家的语言，但这也意味着没有国家在海外支持它的使用。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先从村里听到世界语写起，引出学世界语的人增多；接着回顾它的创造和发展，再介绍它构词与语法上的特点，最后分析它为何没成为国际交流首选，并借一位年轻使用者的话说明它的独特价值。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+            "summary": "巴拉斯顿村能听到世界语，近来学的人增多，协会把初学者课程增加到四倍。",
+            "function": "引出话题，描述世界语升温的现象"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+            "summary": "扎门霍夫有感于群体冲突，设想用一门易学的人造语言让人平等交流，后来发表设想，世界语逐渐传开。",
+            "function": "介绍世界语的起源和发展"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3",
+            "summary": "世界语靠词尾区分词性、加前缀构成反义词，没有语法性别，动词规则，比学其他语言容易得多。",
+            "function": "说明世界语的特点"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+            "summary": "世界语中立却缺少国家支持，人们更看重英语；年轻使用者肯尼迪说世界语社群帮他摆脱了孤独。",
+            "function": "分析它未普及的原因及其独特价值"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:28": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括文章开头描述的现象，判断哪个选项能统括开头几句的内容。",
+      "stemTranslationZh": "文章开头描述了什么现象？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1]] 先写村里听到一种怪语言，往后看说这种语言的人出现了什么变化",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "世界语越来越受欢迎。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+              "quote": "There has been an increase in people taking up Esperanto(世界语) recently.",
+              "anchor": "an increase in people taking up Esperanto"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+              "quote": "The Esperanto Association has increased the number of beginners’ courses by four-fold to keep up with demand.",
+              "anchor": "by four-fold to keep up with demand"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+              "quote": "The concept of an easy-to-learn, universal second tongue was energetically promoted, drawing many speakers to the area.",
+              "anchor": "drawing many speakers to the area"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "当地方言很难听懂。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the friendly Potteries dialect",
+            "optionText": "Local dialects",
+            "matchType": "exact",
+            "relationNote": "选项借了 dialect，原文说村里听到的怪语言不是当地亲切的方言（not the friendly Potteries dialect），没说方言难懂。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+              "quote": "It’s not the friendly Potteries dialect, but something that sounds a little like the lovechild of French and German.",
+              "anchor": "not the friendly Potteries dialect"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "初学者课程很赚钱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "beginners’ courses",
+            "optionText": "Beginners’ courses",
+            "matchType": "exact",
+            "relationNote": "选项照搬“初学者课程”（beginners’ courses），原文说课程增加到四倍是为了满足需求（keep up with demand），没提赚不赚钱。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+              "quote": "The Esperanto Association has increased the number of beginners’ courses by four-fold to keep up with demand.",
+              "anchor": "beginners’ courses"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "小村庄吸引了更多游客。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The concept of an easy-to-learn, universal second tongue was energetically promoted, drawing many speakers to the area.",
+            "sourceEntity": "many speakers",
+            "optionText": "Small villages attract more tourists.",
+            "optionEntity": "more tourists",
+            "explanation": "被吸引到当地的是说世界语的人（many speakers），不是游客；巴拉斯顿村只是能听到这种语言的地方。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+              "quote": "The concept of an easy-to-learn, universal second tongue was energetically promoted, drawing many speakers to the area.",
+              "anchor": "drawing many speakers to the area"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Esperanto is gaining popularity.",
+          "sourceRole": "correctOption",
+          "targetText": "There has been an increase in people taking up Esperanto(世界语) recently.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "开头几句都指向学世界语的人变多：先说这种语言吸引许多人来到当地（drawing many speakers），接着明说近来学的人增加了（an increase in people taking up Esperanto），协会还把初学者课程增加到四倍来满足需求。选项的“越来越受欢迎”（gaining popularity）正好概括这些，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:29": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出扎门霍夫当初设想这门语言要起的作用，再推出他创造它的目的。",
+      "stemTranslationZh": "创造世界语的初衷是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句把交谈和什么对立起来",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了取代英语。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "English",
+            "optionText": "English",
+            "matchType": "exact",
+            "relationNote": "英语出现在后文，是人们拿来和世界语比较的选择（English as the financially better option）；扎门霍夫当初设想的只是一门第二语言（second language），没说要取代谁。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+              "quote": "“People having to make a choice will see English as the financially better option,” says Sammy Kennedy, a young Esperantist who helps promote Esperanto in Manchester.",
+              "anchor": "English as the financially better option"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了推动医学进步。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Esperanto was created by Zamenhof, a Jewish-Polish doctor born in 1859 in Białystok, now in Poland.",
+            "sourceEntity": "doctor",
+            "optionText": "To advance medicine.",
+            "optionEntity": "medicine",
+            "explanation": "医生（doctor）只是扎门霍夫的职业；他造这门语言是想让人们平等交谈，原文没把它和医学联系起来。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+              "quote": "Esperanto was created by Zamenhof, a Jewish-Polish doctor born in 1859 in Białystok, now in Poland.",
+              "anchor": "a Jewish-Polish doctor"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了缓解同龄人压力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "talk as peers",
+            "optionText": "peer pressure",
+            "matchType": "exact",
+            "relationNote": "选项借了 peers，原文是让人们以平等身份交谈（talk as peers），说的是不同群体之间不再打斗，与同龄人压力无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+              "quote": "While still a child, Zamenhof hit upon the idea that a constructed second language that was easy to learn and understand would allow people to talk as peers, rather than fight.",
+              "anchor": "talk as peers"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了促进世界和平。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+              "quote": "a constructed second language that was easy to learn and understand would allow people to talk as peers, rather than fight",
+              "anchor": "talk as peers, rather than fight"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+              "quote": "Violence between different groups was common in the world.",
+              "anchor": "Violence between different groups"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "created",
+          "sourceRole": "stem",
+          "targetText": "While still a child, Zamenhof hit upon the idea that a constructed second language that was easy to learn and understand would allow people to talk as peers, rather than fight.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+          "relationType": "locationCue",
+          "targetCue": "constructed",
+          "sourceZh": "创造",
+          "targetCueZh": "人造的",
+          "answerText": "would allow people to talk as peers, rather than fight",
+          "note": "题干 created 对应原文 constructed。"
+        },
+        {
+          "sourceText": "To promote world peace.",
+          "sourceRole": "correctOption",
+          "targetText": "While still a child, Zamenhof hit upon the idea that a constructed second language that was easy to learn and understand would allow people to talk as peers, rather than fight.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "原文没直接说“和平”，要推一步：先交代当时不同群体间暴力冲突很常见（Violence … was common），接着说他设想用一门好学的语言让人们平等交谈，而不是打斗（rather than fight）。用交流代替冲突，由此推出他是为了促进世界和平，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:30": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括这一段关于世界语讲了哪方面的内容。",
+      "stemTranslationZh": "第 3 段主要告诉了我们世界语的什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3]] 列了词尾、前缀和语法几条规则，看它们合起来说明世界语哪方面",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它的发展历程。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "By 1905, the fundamental rules of Esperanto had been established by a conference of speakers in France, and Esperantist groups began popping up across the world.",
+            "sourceEntity": "By 1905",
+            "optionText": "Its development.",
+            "optionEntity": "development",
+            "explanation": "世界语怎样发展起来写在[[block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2]]：1887 年发表设想，1905 年定下基本规则（By 1905）；这一段讲的是它的词尾和语法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:2",
+              "quote": "By 1905, the fundamental rules of Esperanto had been established by a conference of speakers in France, and Esperantist groups began popping up across the world.",
+              "anchor": "By 1905"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它的独特之处。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3",
+              "quote": "In Esperanto, all words ending -o are nouns, an -a ending is for an adjective, while -e denotes (表示) an adverb.",
+              "anchor": "all words ending -o are nouns"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3",
+              "quote": "If you need to find an opposite, you can add the “mal” prefix: “pura” is clean, “malpura” is dirty.",
+              "anchor": "add the “mal” prefix"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3",
+              "quote": "There are no grammatical genders, verbs are strictly regular.",
+              "anchor": "no grammatical genders"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它对孩子们的吸引力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It’s child’s play to learn compared with years of high-school language lessons.",
+            "sourceEntity": "child’s play",
+            "optionText": "Its appeal to the kids.",
+            "optionEntity": "the kids",
+            "explanation": "段中的“小孩的游戏”（child’s play）是习语，意为“极其容易”，说的是世界语好学，不是说它吸引孩子。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3",
+              "quote": "It’s child’s play to learn compared with years of high-school language lessons.",
+              "anchor": "child’s play"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它与英语的联系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "concepts that require different words in English",
+            "optionText": "English",
+            "matchType": "exact",
+            "relationNote": "段中提英语（in English）只是拿来对比：英语里要用不同的词，世界语改个词尾就行；这一段没讲两种语言有什么联系。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3",
+              "quote": "For instance, “vida” for visual and “vide” for visually, concepts that require different words in English.",
+              "anchor": "require different words in English"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Its distinct features.",
+          "sourceRole": "correctOption",
+          "targetText": "There are no grammatical genders, verbs are strictly regular.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "这一段讲的都是世界语构词和语法上的规律：先说看词尾就知道词性（words ending -o are nouns），接着说加前缀就能构成反义词（the “mal” prefix），再说它没有语法性别、动词完全规则（strictly regular），所以学起来很容易。选项的“独特之处”（distinct features）把这几条规律都包进去，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:31": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从肯尼迪的话里找出世界语带给他的东西，并概括成选项里的说法。",
+      "stemTranslationZh": "肯尼迪说世界语给使用者带来了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看 However 后他的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一种归属感。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+              "quote": "He credits the “accepting and caring” Esperanto-speaking community with helping him to overcome loneliness.",
+              "anchor": "helping him to overcome loneliness"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+              "quote": "“However, Esperanto gives you things that English will never be able to give you.”",
+              "anchor": "Esperanto gives you things"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "更好的经济选择。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“People having to make a choice will see English as the financially better option,” says Sammy Kennedy, a young Esperantist who helps promote Esperanto in Manchester.",
+            "sourceEntity": "English",
+            "optionText": "Better financial options.",
+            "optionEntity": "Better financial options",
+            "explanation": "肯尼迪说经济上更划算的是英语（English as the financially better option），这恰是世界语比不上英语的地方，不是它带来的好处。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+              "quote": "“People having to make a choice will see English as the financially better option,” says Sammy Kennedy, a young Esperantist who helps promote Esperanto in Manchester.",
+              "anchor": "English as the financially better option"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "更高的学业成绩。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Higher academic grades.",
+            "explanation": "肯尼迪没谈成绩；原文提到高中，只是作者说学世界语比多年的高中语言课容易（high-school language lessons）。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "强烈的国家认同感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Esperanto is “neutral” (中立的) because it is not a national language, but that also means it does not have a state backing its use abroad.",
+            "sourceHighlight": "it is not a national language",
+            "optionText": "A strong national identity.",
+            "optionHighlight": "national identity",
+            "explanation": "原文恰恰说世界语不是任何国家的语言（not a national language），所以才“中立”，谈不上带来国家认同感。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+              "quote": "Esperanto is “neutral” (中立的) because it is not a national language, but that also means it does not have a state backing its use abroad.",
+              "anchor": "it is not a national language"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Kennedy",
+          "sourceRole": "stem",
+          "targetText": "“People having to make a choice will see English as the financially better option,” says Sammy Kennedy, a young Esperantist who helps promote Esperanto in Manchester.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "the “accepting and caring” Esperanto-speaking community with helping him to overcome loneliness",
+          "bridgeZh": "他先说英语更划算，随后转折说世界语另有好处，He 指他",
+          "note": "题干 Kennedy 原词出现在原文。"
+        },
+        {
+          "sourceText": "A sense of belonging.",
+          "sourceRole": "correctOption",
+          "targetText": "He credits the “accepting and caring” Esperanto-speaking community with helping him to overcome loneliness.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“归属感”是从两点推出来的：世界语社群“包容又关爱”（accepting and caring），帮他摆脱了孤独（overcome loneliness）。被一个群体接纳、不再孤单，就是有了归属感，选 A。"
+        }
+      ]
+    }
+  }
+}

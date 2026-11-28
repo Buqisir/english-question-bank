@@ -1,0 +1,804 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiangzhewan-2024-10",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b": {
+      "overview": "人物报道。作家约翰逊为应对独子离家后的空巢生活，加入刺猬救助组织当志愿司机，一年完成近 30 次救援，呼吁保护刺猬，刺猬也成了她新小说的灵感。",
+      "fullTranslationZh": "约翰逊小时候就对大自然着迷，常和母亲长时间散步，母亲会告诉她各种野花和树木的名字。开始写作生涯后，她收养了几只猫和几条狗，满足了自己对动物的喜爱。然而，她走进刺猬的世界，却是因为自己作为母亲的身份。\n2023 年，她的独子阿尔菲即将去剑桥上大学，约翰逊面临着家里将空荡荡的前景。“我有个朋友，她儿子要离家了，她非常害怕那一天的到来。我知道我得提前打算，让自己忙起来，免得也有同样的感受，”她说，“我所在的妇女协会里有几位会员一直在霍德梅多兹刺猬救助组织（HHS）做志愿者，这似乎是一项有意义的事业。我决定加入她们。”\n约翰逊自愿当一名刺猬司机，随时准备把需要帮助的刺猬送到安全的地方。她整周随叫随到，很快就发现自己奔波于诺里奇各地，四处寻找刺猬。她会非常小心地捡起刺猬，把它放进盒子，再火速送往当地的保护区。她的职责是救助受伤的刺猬、在私人地块上发现的需要重新安置的刺猬，以及被遗弃的幼崽。\n从第一次救援算起已过去一年，约翰逊估计自己完成了近 30 次救援。产仔季即将到来，约翰逊正为一年中最忙的时候做准备，要照顾刺猬幼崽和刚当妈妈的刺猬。“它们不仅可爱，还是了不起的动物，是我们国家的本土物种，需要保护，”她说，“住宅开发让它们处于危险之中，人们砍掉树篱、竖起它们无法穿过的围栏也是如此。”\n约翰逊自己的花园已成为这些小动物的庇护所。这些动物也为她的写作提供了灵感。她的下一部小说《多刺的伙伴》讲述了一个女人热衷于在邻居们的花园之间打造一条刺猬通道，并在此过程中发现了邻居们秘密的故事。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+          "sourceText": "Her next novel, Prickly Company, tells the story of a woman who becomes passionate about creating a hedgehog highway through her neighbours’ gardens and discovers their secrets in the process.",
+          "displayText": "Her next novel, Prickly Company, tells the story of a woman who becomes passionate about creating a hedgehog highway through her neighbours’ gardens and discovers their secrets in the process.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:27"
+          ],
+          "translationZh": "她的下一部小说《多刺的伙伴》讲述了一个女人热衷于在邻居们的花园之间打造一条刺猬通道，并在此过程中发现了邻居们秘密的故事。",
+          "analysisZh": "先抓主干 Her next novel tells the story of a woman，“她的下一部小说讲了一个女人的故事”。两个逗号之间的 Prickly Company 是同位语，说出书名。who 引导定语从句修饰 a woman，从句里 and 连接两个谓语：becomes passionate about creating a hedgehog highway（热衷于修一条刺猬通道）和 discovers their secrets（发现邻居们的秘密）；in the process 指“在修通道的过程中”。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 14,
+              "quote": "Her next novel"
+            },
+            {
+              "start": 33,
+              "end": 59,
+              "quote": "tells the story of a woman"
+            },
+            {
+              "start": 60,
+              "end": 88,
+              "quote": "who becomes passionate about"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+          "sourceText": "Her duty is to rescue injured hedgehogs, ones found on private property that need rehoming, and babies that have been abandoned.",
+          "displayText": "Her duty is to rescue injured hedgehogs, ones found on private property that need rehoming, and babies that have been abandoned.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:25"
+          ],
+          "translationZh": "她的职责是救助受伤的刺猬、在私人地块上发现的需要重新安置的刺猬，以及被遗弃的幼崽。",
+          "analysisZh": "主干是 Her duty is to rescue …，不定式 to rescue 作表语，说明职责是什么。rescue 后面跟三个并列宾语：injured hedgehogs（受伤的刺猬）；ones found on private property that need rehoming，ones 代替 hedgehogs，过去分词 found 和 that 从句都修饰它，意为“在私人地块上发现、需要重新安置的刺猬”；babies that have been abandoned（被遗弃的幼崽）。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 21,
+              "quote": "Her duty is to rescue"
+            },
+            {
+              "start": 41,
+              "end": 71,
+              "quote": "ones found on private property"
+            },
+            {
+              "start": 96,
+              "end": 127,
+              "quote": "babies that have been abandoned"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:1"
+              ],
+              "start": 0,
+              "end": 99,
+              "quote": "约翰逊小时候就对大自然着迷，常和母亲长时间散步，母亲会告诉她各种野花和树木的名字。开始写作生涯后，她收养了几只猫和几条狗，满足了自己对动物的喜爱。然而，她走进刺猬的世界，却是因为自己作为母亲的身份。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:2"
+              ],
+              "start": 100,
+              "end": 258,
+              "quote": "2023 年，她的独子阿尔菲即将去剑桥上大学，约翰逊面临着家里将空荡荡的前景。“我有个朋友，她儿子要离家了，她非常害怕那一天的到来。我知道我得提前打算，让自己忙起来，免得也有同样的感受，”她说，“我所在的妇女协会里有几位会员一直在霍德梅多兹刺猬救助组织（HHS）做志愿者，这似乎是一项有意义的事业。我决定加入她们。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3"
+              ],
+              "start": 259,
+              "end": 395,
+              "quote": "约翰逊自愿当一名刺猬司机，随时准备把需要帮助的刺猬送到安全的地方。她整周随叫随到，很快就发现自己奔波于诺里奇各地，四处寻找刺猬。她会非常小心地捡起刺猬，把它放进盒子，再火速送往当地的保护区。她的职责是救助受伤的刺猬、在私人地块上发现的需要重新安置的刺猬，以及被遗弃的幼崽。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4",
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:5"
+              ],
+              "start": 396,
+              "end": 546,
+              "quote": "从第一次救援算起已过去一年，约翰逊估计自己完成了近 30 次救援。产仔季即将到来，约翰逊正为一年中最忙的时候做准备，要照顾刺猬幼崽和刚当妈妈的刺猬。“它们不仅可爱，还是了不起的动物，是我们国家的本土物种，需要保护，”她说，“住宅开发让它们处于危险之中，人们砍掉树篱、竖起它们无法穿过的围栏也是如此。”"
+            },
+            {
+              "paragraphId": "zh-reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6"
+              ],
+              "start": 547,
+              "end": 644,
+              "quote": "约翰逊自己的花园已成为这些小动物的庇护所。这些动物也为她的写作提供了灵感。她的下一部小说《多刺的伙伴》讲述了一个女人热衷于在邻居们的花园之间打造一条刺猬通道，并在此过程中发现了邻居们秘密的故事。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-b-ev1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:2",
+                "start": 77,
+                "end": 129,
+                "quote": "Johnson was faced with the prospect of an empty home"
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:2",
+                "start": 217,
+                "end": 297,
+                "quote": "I knew I needed to plan ahead and keep myself occupied to avoid feeling the same"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 23,
+                "end": 38,
+                "quote": "约翰逊面临着家里将空荡荡的前景"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 66,
+                "end": 92,
+                "quote": "我知道我得提前打算，让自己忙起来，免得也有同样的感受"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-ev2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+                "start": 0,
+                "end": 94,
+                "quote": "Johnson volunteered to be a hedgehog driver, ready to transport the animals in need to safety."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+                "start": 314,
+                "end": 442,
+                "quote": "Her duty is to rescue injured hedgehogs, ones found on private property that need rehoming, and babies that have been abandoned."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 0,
+                "end": 33,
+                "quote": "约翰逊自愿当一名刺猬司机，随时准备把需要帮助的刺猬送到安全的地方。"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 95,
+                "end": 136,
+                "quote": "她的职责是救助受伤的刺猬、在私人地块上发现的需要重新安置的刺猬，以及被遗弃的幼崽。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-ev3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4",
+                "start": 344,
+                "end": 442,
+                "quote": "Housing developments put them at risk, as well as people cutting down hedges and putting up fences"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 112,
+                "end": 148,
+                "quote": "住宅开发让它们处于危险之中，人们砍掉树篱、竖起它们无法穿过的围栏也是如此"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-ev4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+                "start": 61,
+                "end": 124,
+                "quote": "The animals have also provided the inspiration for her writing."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+                "start": 125,
+                "end": 317,
+                "quote": "Her next novel, Prickly Company, tells the story of a woman who becomes passionate about creating a hedgehog highway through her neighbours’ gardens and discovers their secrets in the process."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 21,
+                "end": 37,
+                "quote": "这些动物也为她的写作提供了灵感。"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 37,
+                "end": 51,
+                "quote": "她的下一部小说《多刺的伙伴》"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-ss1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:27"
+            ],
+            "selectedSentenceId": "sentence-reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+                "start": 125,
+                "end": 317,
+                "quote": "Her next novel, Prickly Company, tells the story of a woman who becomes passionate about creating a hedgehog highway through her neighbours’ gardens and discovers their secrets in the process."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 37,
+                "end": 97,
+                "quote": "她的下一部小说《多刺的伙伴》讲述了一个女人热衷于在邻居们的花园之间打造一条刺猬通道，并在此过程中发现了邻居们秘密的故事。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-ss2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:25"
+            ],
+            "selectedSentenceId": "sentence-reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+                "start": 314,
+                "end": 442,
+                "quote": "Her duty is to rescue injured hedgehogs, ones found on private property that need rehoming, and babies that have been abandoned."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 95,
+                "end": 136,
+                "quote": "她的职责是救助受伤的刺猬、在私人地块上发现的需要重新安置的刺猬，以及被遗弃的幼崽。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先交代约翰逊爱自然、爱动物，引出她与刺猬结缘源于母亲身份；接着写她为应对空巢加入救助组织，再写志愿司机的日常工作、一年来的救援和刺猬面临的威胁，最后落到刺猬给她写作带来的灵感。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:1",
+            "summary": "约翰逊从小热爱自然、写作后收养猫狗，但她走进刺猬的世界是因为母亲的身份。",
+            "function": "介绍人物背景，引出与刺猬结缘的缘由"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:2",
+            "summary": "独子要去上大学，她为免空巢失落提前找事做，随妇女协会的朋友加入刺猬救助组织。",
+            "function": "交代加入救助组织的原因"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+            "summary": "她当志愿司机，整周待命，跑遍诺里奇寻找、接送需要救助的刺猬。",
+            "function": "写她在组织里的日常工作"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4",
+            "summary": "一年来她完成近 30 次救援，正为产仔季做准备；她呼吁保护刺猬，指出住宅开发、砍树篱和建围栏威胁着它们。",
+            "function": "写救援成果和刺猬面临的威胁"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+            "summary": "她的花园成了刺猬的庇护所，刺猬也给了她写作灵感，新小说就以刺猬通道为题材。",
+            "function": "写刺猬对她生活和写作的影响"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出约翰逊决定加入刺猬救助组织之前给出的理由。",
+      "stemTranslationZh": "约翰逊为什么加入霍德梅多兹刺猬救助组织？",
+      "locateBy": "stem",
+      "locateFindZh": "往前读她加入前的打算",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她有过类似的经历。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I had a friend whose son was leaving home and she was so frightened of it happening.",
+            "sourceEntity": "a friend",
+            "optionText": "She had similar experiences.",
+            "optionEntity": "She",
+            "explanation": "孩子要离家、为此害怕的是她的朋友（a friend）；她自己是想提前准备，免得也有同样的感受（avoid feeling the same）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:2",
+              "quote": "I had a friend whose son was leaving home and she was so frightened of it happening.",
+              "anchor": "I had a friend"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她对野生动物很好奇。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Yet her introduction to the world of hedgehogs（刺猬） came through her own role as a mother.",
+            "sourceEntity": "her own role as a mother",
+            "optionText": "She was curious about wildlife.",
+            "optionEntity": "curious about wildlife",
+            "explanation": "她从小喜欢大自然（fascinated by nature）是真的，但原文随即转折说，她接触刺猬是因为做了母亲（her own role as a mother），不是出于好奇。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:1",
+              "quote": "Johnson was fascinated by nature as a child and would often go on long walks with her mother, who pointed out the names of wild flowers and trees.",
+              "anchor": "fascinated by nature"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她受到了其他榜样的激励。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "her own role as a mother",
+            "optionText": "role models",
+            "matchType": "exact",
+            "relationNote": "选项借了 role，原文的 role 指她作为母亲的身份（her own role as a mother）；协会里几位会员（A few members）只是让她知道了这个组织，原文没说她把谁当作榜样。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:1",
+              "quote": "Yet her introduction to the world of hedgehogs（刺猬） came through her own role as a mother.",
+              "anchor": "her own role as a mother"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她需要一个应对空巢的办法。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:2",
+              "quote": "I knew I needed to plan ahead and keep myself occupied to avoid feeling the same,",
+              "anchor": "keep myself occupied"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:2",
+              "quote": "In 2023, her only child, Alfie, was due to begin university in Cambridge and Johnson was faced with the prospect of an empty home.",
+              "anchor": "the prospect of an empty home"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Hodmedods Hedgehog Support",
+          "sourceRole": "stem",
+          "targetText": "“A few members of my Women’s Institute group had been volunteering with Hodmedods Hedgehog Support (HHS), and it seemed like a worthy cause.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "I needed to plan ahead and keep myself occupied to avoid feeling the same",
+          "bridgeZh": "她先讲自己打算怎样面对儿子离家，接着才说加入",
+          "note": "题干 Hodmedods Hedgehog Support 原词出现在原文。"
+        },
+        {
+          "sourceText": "She needed a solution to her empty nest.",
+          "sourceRole": "correctOption",
+          "targetText": "I knew I needed to plan ahead and keep myself occupied to avoid feeling the same,",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“空巢”对应独子去上大学后家里将空下来（an empty home）；“需要办法”对应她说得提前打算、让自己忙起来（keep myself occupied），免得像朋友那样害怕，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:25": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括这一段写的是什么，判断哪个选项能覆盖整段内容。",
+      "stemTranslationZh": "第 3 段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3]] 从她报名当刺猬司机写起，看后面几句是否都是这份差事要做的事",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "HHS 对动物的照料和福利保障。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "She picked the hedgehog up very carefully, placed it into the box and rushed it to a local sanctuary （鸟兽保护区）.",
+            "sourceEntity": "a local sanctuary",
+            "optionText": "HHS animal care and welfare.",
+            "optionEntity": "HHS animal care",
+            "explanation": "这一段的主角是约翰逊本人，写她怎样接送刺猬；照料刺猬的是她送去的当地保护区（a local sanctuary），段中没讲组织怎样护理动物。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+              "quote": "She picked the hedgehog up very carefully, placed it into the box and rushed it to a local sanctuary （鸟兽保护区）.",
+              "anchor": "rushed it to a local sanctuary"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "约翰逊在 HHS 的日常工作。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+              "quote": "Johnson volunteered to be a hedgehog driver, ready to transport the animals in need to safety.",
+              "anchor": "a hedgehog driver"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+              "quote": "On call throughout the week, Johnson soon found herself travelling across Norwich and hunting for hedgehogs.",
+              "anchor": "On call throughout the week"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+              "quote": "Her duty is to rescue injured hedgehogs, ones found on private property that need rehoming, and babies that have been abandoned.",
+              "anchor": "Her duty is to rescue"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "刺猬生存问题的严重性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“They’re not just cute but they’re also amazing animals, native to our country, that need protecting,” she says.",
+            "sourceEntity": "need protecting",
+            "optionText": "The gravity of hedgehog’s survival.",
+            "optionEntity": "The gravity of hedgehog’s survival",
+            "explanation": "刺猬需要保护、面临危险，是[[block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4]]里她说的话（need protecting）；这一段只写她怎样寻找和接送刺猬。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4",
+              "quote": "“They’re not just cute but they’re also amazing animals, native to our country, that need protecting,” she says.",
+              "anchor": "need protecting"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "救助一只刺猬的复杂性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "She picked the hedgehog up very carefully, placed it into the box and rushed it to a local sanctuary （鸟兽保护区）.",
+            "sourceHighlight": "picked the hedgehog up very carefully",
+            "optionText": "The complexity of a hedgehog rescue.",
+            "optionHighlight": "complexity",
+            "explanation": "段中救一只刺猬只写了三个动作：小心捡起、放进盒子、赶紧送走，原文没说救援有多复杂，这也只是她众多差事里的一件。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+              "quote": "She picked the hedgehog up very carefully, placed it into the box and rushed it to a local sanctuary （鸟兽保护区）.",
+              "anchor": "picked the hedgehog up very carefully"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Johnson’s routine work with HHS.",
+          "sourceRole": "correctOption",
+          "targetText": "Her duty is to rescue injured hedgehogs, ones found on private property that need rehoming, and babies that have been abandoned.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "这一段写的都是她当刺猬司机要做的事：先说她报名当司机，把需要帮助的刺猬送到安全的地方，接着写她整周待命、跑遍诺里奇找刺猬，再写她把刺猬装箱送往保护区，最后交代她要救哪几类刺猬（Her duty）。选项的“日常工作”（routine work）把这些都包进去，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:26": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出约翰逊所说的让刺猬陷入危险的因素，并看哪个选项能把它们概括起来。",
+      "stemTranslationZh": "是什么让刺猬处于危险之中？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "过度繁殖。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "birthing season",
+            "optionText": "Overbirthing",
+            "matchType": "wordFamily",
+            "relationNote": "选项从 birthing season 化出 Overbirthing，原文只说产仔季快到了，她要照顾幼崽和新妈妈，没说刺猬生得太多带来危险。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4",
+              "quote": "With birthing season around the corner, Johnson is preparing for her busiest time of the year, looking after hoglets and the new mums.",
+              "anchor": "birthing season"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "捕猎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "hunting for hedgehogs",
+            "optionText": "Hunting",
+            "matchType": "exact",
+            "relationNote": "原文的 hunting 是她跑遍各地寻找需要救助的刺猬（hunting for hedgehogs），是在救刺猬，不是威胁刺猬的捕猎。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:3",
+              "quote": "On call throughout the week, Johnson soon found herself travelling across Norwich and hunting for hedgehogs.",
+              "anchor": "hunting for hedgehogs"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人类活动。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4",
+              "quote": "Housing developments put them at risk, as well as people cutting down hedges and putting up fences they",
+              "anchor": "Housing developments put them at risk"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "外来物种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "native to our country",
+            "optionText": "Non-native species",
+            "matchType": "exact",
+            "relationNote": "选项借了 native，原文说刺猬本身是本国原生动物（native to our country），没提有外来物种威胁它们。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4",
+              "quote": "“They’re not just cute but they’re also amazing animals, native to our country, that need protecting,” she says.",
+              "anchor": "native to our country"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "at risk",
+          "sourceRole": "stem",
+          "targetText": "“Housing developments put them at risk, as well as people cutting down hedges and putting up fences they",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4",
+          "relationType": "locationCue",
+          "answerText": "Housing developments put them at risk, as well as people cutting down hedges and putting up fences",
+          "note": "题干 at risk 原词出现在原文。"
+        },
+        {
+          "sourceText": "Human activities.",
+          "sourceRole": "correctOption",
+          "targetText": "“Housing developments put them at risk, as well as people cutting down hedges and putting up fences they",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "选项的“人类活动”把原文几件事归到一起：开发住宅（Housing developments），人们砍树篱、立围栏（cutting down hedges … putting up fences），都是人干的事，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:27": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "判断作者提到约翰逊的新小说是为了说明什么。",
+      "stemTranslationZh": "作者为什么提到《多刺的伙伴》？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句找它要说明的观点",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了举一个例子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+              "quote": "The animals have also provided the inspiration for her writing.",
+              "anchor": "provided the inspiration for her writing"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+              "quote": "Her next novel, Prickly Company, tells the story of a woman who becomes passionate about creating a hedgehog highway through her neighbours’ gardens and discovers their secrets in the process.",
+              "anchor": "creating a hedgehog highway"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了解释一项创新。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Her next novel, Prickly Company, tells the story of a woman who becomes passionate about creating a hedgehog highway through her neighbours’ gardens and discovers their secrets in the process.",
+            "sourceEntity": "a hedgehog highway",
+            "optionText": "To explain an innovation.",
+            "optionEntity": "an innovation",
+            "explanation": "刺猬通道（a hedgehog highway）是小说女主人公想做的事，作者只交代故事情节，没有解释哪项新发明。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+              "quote": "Her next novel, Prickly Company, tells the story of a woman who becomes passionate about creating a hedgehog highway through her neighbours’ gardens and discovers their secrets in the process.",
+              "anchor": "a hedgehog highway"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了总结全文。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To summarize the passage.",
+            "explanation": "这句只讲新书的情节，没有回到她当志愿者、救刺猬的经历，起不到总结全文的作用。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了介绍这部小说。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "The animals have also provided the inspiration for her writing.",
+            "sourceHighlight": "the inspiration for her writing",
+            "optionText": "To introduce the novel.",
+            "optionHighlight": "introduce the novel",
+            "explanation": "小说的情节只交代了一句，落点是刺猬给了她写作灵感（the inspiration for her writing），全文并不是在推介这本书。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+              "quote": "The animals have also provided the inspiration for her writing.",
+              "anchor": "the inspiration for her writing"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Prickly Company",
+          "sourceRole": "stem",
+          "targetText": "Her next novel, Prickly Company, tells the story of a woman who becomes passionate about creating a hedgehog highway through her neighbours’ gardens and discovers their secrets in the process.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+          "relationType": "locationCue",
+          "answerText": "The animals have also provided the inspiration for her writing",
+          "bridgeZh": "小说写的正是刺猬的故事，用来印证刺猬给了她灵感",
+          "note": "题干 Prickly Company 原词出现在原文。"
+        },
+        {
+          "sourceText": "To provide an example.",
+          "sourceRole": "correctOption",
+          "targetText": "The animals have also provided the inspiration for her writing.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "作者先说刺猬给了她写作灵感（provided the inspiration），再拿新小说来证明：书里的女人热衷于在邻居花园间修刺猬通道。这部小说让“灵感”有了具体内容，是一个例子，选 A。"
+        }
+      ]
+    }
+  }
+}

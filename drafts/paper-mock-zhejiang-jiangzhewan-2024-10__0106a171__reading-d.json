@@ -1,0 +1,821 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiangzhewan-2024-10",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d": {
+      "overview": "科普文。研究发现人们为摆脱无聊而切换、快进视频，反而更无聊；谭博士团队用两项实验证实完整看完一个视频更投入，从注意力角度解释原因，并建议看视频时沉浸其中。",
+      "fullTranslationZh": "无聊时抓起手机刷社交媒体，这种事我们都干过。心理学家在过去十年的大量研究中注意到，人们使用社交媒体和其他数字媒体是为了摆脱无聊。然而，同样的研究也显示，消费这类媒体实际上会让人更加无聊。\n这一结果可能源于在网上不同内容之间不断“切换”，即为了缓解眼前的无聊而无休止地追寻下一段媒体内容。\n为了探究快进和切换视频在无聊中所起的作用，研究的第一作者凯蒂·谭博士和研究人员对大约 1,200 人进行了两项实验。在第一项实验中，参与者有两种观看体验。他们都先观看了一段不能切换或快进的 10 分钟视频，然后有 10 分钟的时间可以在七段 5 分钟的视频之间切换。在第二项实验中，参与者一轮观看一段 10 分钟的视频，另一轮则可以对一段 50 分钟的视频进行快进或倒回。\n参与者预测，在两项实验中，能切换或快进时他们会觉得没那么无聊，但事后报告说，他们觉得从头到尾看完一个视频更投入、更令人满足、也更有意义。\n谭博士说，无聊与注意力密切相关。“当我们的投入程度与我们想要的投入程度之间存在差距时，我们就会感到无聊，”她说，“人们不停地切换视频时，对视频的投入就会减少，并会去寻找更有趣的东西。这会导致无聊感增加。”\n最后，谭博士说，在按下快进或跳过键之前，或许值得先缓一缓。“我们的研究表明，虽然人们快进或跳过视频是为了避免无聊，但这种行为实际上会让他们更无聊，”她说，“就像我们在电影院花钱买沉浸式体验一样，乐趣往往来自沉浸在视频之中，而不是滑屏跳过。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-d-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:4",
+          "sourceText": "Participants predicted they would be less bored with the option to switch or fast-forward for both experiments but reported afterward that they found watching one video all the way through to be more engaging, satisfying and meaningful.",
+          "displayText": "Participants predicted they would be less bored with the option to switch or fast-forward for both experiments but reported afterward that they found watching one video all the way through to be more engaging, satisfying and meaningful.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:33"
+          ],
+          "translationZh": "参与者预测，在两项实验中，能切换或快进时他们会觉得没那么无聊，但事后报告说，他们觉得从头到尾看完一个视频更投入、更令人满足、也更有意义。",
+          "analysisZh": "主干是 Participants predicted … but reported …，but 连接两个谓语：前面是事先的预测，后面是事后的报告，两者正好相反。predicted 后面是省略 that 的宾语从句 they would be less bored with the option to switch or fast-forward。reported afterward 后接 that 从句，从句里用了 find + 宾语 + to be 的结构：宾语是动名词短语 watching one video all the way through，to be more engaging, satisfying and meaningful 是宾补。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 22,
+              "quote": "predicted"
+            },
+            {
+              "start": 111,
+              "end": 133,
+              "quote": "but reported afterward"
+            },
+            {
+              "start": 144,
+              "end": 194,
+              "quote": "found watching one video all the way through to be"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-d-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:2",
+          "sourceText": "That result may be a product of constantly “switching” between different content online, the endless pursuit of the next piece of media to alleviate present boredom.",
+          "displayText": "That result may be a product of constantly “switching” between different content online, the endless pursuit of the next piece of media to alleviate present boredom.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:32"
+          ],
+          "translationZh": "这一结果可能源于在网上不同内容之间不断“切换”，即为了缓解眼前的无聊而无休止地追寻下一段媒体内容。",
+          "analysisZh": "主干是 That result may be a product of constantly “switching”，“这一结果可能是不停切换的产物”，That result 指上段说的媒体反而让人更无聊。逗号后的 the endless pursuit of the next piece of media 是同位语，进一步解释 switching 是什么；to alleviate present boredom 是不定式作目的状语，说明人们追寻下一段内容是为了缓解眼前的无聊。",
+          "underlineRanges": [
+            {
+              "start": 12,
+              "end": 31,
+              "quote": "may be a product of"
+            },
+            {
+              "start": 89,
+              "end": 111,
+              "quote": "the endless pursuit of"
+            },
+            {
+              "start": 136,
+              "end": 164,
+              "quote": "to alleviate present boredom"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:1"
+              ],
+              "start": 0,
+              "end": 93,
+              "quote": "无聊时抓起手机刷社交媒体，这种事我们都干过。心理学家在过去十年的大量研究中注意到，人们使用社交媒体和其他数字媒体是为了摆脱无聊。然而，同样的研究也显示，消费这类媒体实际上会让人更加无聊。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:2"
+              ],
+              "start": 94,
+              "end": 143,
+              "quote": "这一结果可能源于在网上不同内容之间不断“切换”，即为了缓解眼前的无聊而无休止地追寻下一段媒体内容。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3"
+              ],
+              "start": 144,
+              "end": 330,
+              "quote": "为了探究快进和切换视频在无聊中所起的作用，研究的第一作者凯蒂·谭博士和研究人员对大约 1,200 人进行了两项实验。在第一项实验中，参与者有两种观看体验。他们都先观看了一段不能切换或快进的 10 分钟视频，然后有 10 分钟的时间可以在七段 5 分钟的视频之间切换。在第二项实验中，参与者一轮观看一段 10 分钟的视频，另一轮则可以对一段 50 分钟的视频进行快进或倒回。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:4"
+              ],
+              "start": 331,
+              "end": 399,
+              "quote": "参与者预测，在两项实验中，能切换或快进时他们会觉得没那么无聊，但事后报告说，他们觉得从头到尾看完一个视频更投入、更令人满足、也更有意义。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5"
+              ],
+              "start": 400,
+              "end": 502,
+              "quote": "谭博士说，无聊与注意力密切相关。“当我们的投入程度与我们想要的投入程度之间存在差距时，我们就会感到无聊，”她说，“人们不停地切换视频时，对视频的投入就会减少，并会去寻找更有趣的东西。这会导致无聊感增加。”"
+            },
+            {
+              "paragraphId": "zh-reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6"
+              ],
+              "start": 503,
+              "end": 623,
+              "quote": "最后，谭博士说，在按下快进或跳过键之前，或许值得先缓一缓。“我们的研究表明，虽然人们快进或跳过视频是为了避免无聊，但这种行为实际上会让他们更无聊，”她说，“就像我们在电影院花钱买沉浸式体验一样，乐趣往往来自沉浸在视频之中，而不是滑屏跳过。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-d-ev1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:1",
+                "start": 170,
+                "end": 246,
+                "quote": "individuals engage in social media and other digital media to escape boredom"
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:2",
+                "start": 136,
+                "end": 164,
+                "quote": "to alleviate present boredom"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 41,
+                "end": 63,
+                "quote": "人们使用社交媒体和其他数字媒体是为了摆脱无聊"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 25,
+                "end": 34,
+                "quote": "为了缓解眼前的无聊"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-ev2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:4",
+                "start": 111,
+                "end": 208,
+                "quote": "but reported afterward that they found watching one video all the way through to be more engaging"
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3",
+                "start": 394,
+                "end": 430,
+                "quote": "switch between seven 5-minute videos"
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3",
+                "start": 549,
+                "end": 597,
+                "quote": "fast-forward or rewind through a 50-minute video"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 31,
+                "end": 55,
+                "quote": "但事后报告说，他们觉得从头到尾看完一个视频更投入"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 117,
+                "end": 132,
+                "quote": "在七段 5 分钟的视频之间切换"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 166,
+                "end": 185,
+                "quote": "对一段 50 分钟的视频进行快进或倒回"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-ev3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5",
+                "start": 51,
+                "end": 140,
+                "quote": "We feel bored when there’s a gap between how engaged we are and how engaged we want to be"
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5",
+                "start": 291,
+                "end": 338,
+                "quote": "This can lead to increased feelings of boredom."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 17,
+                "end": 51,
+                "quote": "当我们的投入程度与我们想要的投入程度之间存在差距时，我们就会感到无聊"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 91,
+                "end": 101,
+                "quote": "这会导致无聊感增加。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-ev4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6",
+                "start": 19,
+                "end": 101,
+                "quote": "it could be worth taking your time before hitting the fast-forward or skip buttons"
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6",
+                "start": 323,
+                "end": 416,
+                "quote": "enjoyment often comes from immersing ourselves in videos rather than swiping(滚屏) through them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 8,
+                "end": 28,
+                "quote": "在按下快进或跳过键之前，或许值得先缓一缓"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 97,
+                "end": 118,
+                "quote": "乐趣往往来自沉浸在视频之中，而不是滑屏跳过"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-ss1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:33"
+            ],
+            "selectedSentenceId": "sentence-reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:4",
+                "start": 0,
+                "end": 236,
+                "quote": "Participants predicted they would be less bored with the option to switch or fast-forward for both experiments but reported afterward that they found watching one video all the way through to be more engaging, satisfying and meaningful."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 0,
+                "end": 68,
+                "quote": "参与者预测，在两项实验中，能切换或快进时他们会觉得没那么无聊，但事后报告说，他们觉得从头到尾看完一个视频更投入、更令人满足、也更有意义。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-ss2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:32"
+            ],
+            "selectedSentenceId": "sentence-reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:2",
+                "start": 0,
+                "end": 165,
+                "quote": "That result may be a product of constantly “switching” between different content online, the endless pursuit of the next piece of media to alleviate present boredom."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 0,
+                "end": 49,
+                "quote": "这一结果可能源于在网上不同内容之间不断“切换”，即为了缓解眼前的无聊而无休止地追寻下一段媒体内容。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先指出用媒体解闷反而更无聊的现象，并推测原因是不停切换；接着介绍谭博士的两项实验和结果，再由她从注意力角度解释无聊的成因，最后给出看视频时别急着快进、沉浸其中的建议。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:1",
+            "summary": "人们无聊时刷社交媒体想解闷，研究却发现这样反而更无聊。",
+            "function": "提出现象，引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:2",
+            "summary": "这一结果可能源于在网上内容间不停切换、不断追寻下一段内容。",
+            "function": "推测现象的原因"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3",
+            "summary": "谭博士团队对约 1,200 人做了两项实验，比较不能切换快进的观看与可以切换或快进的观看。",
+            "function": "介绍实验设计"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:4",
+            "summary": "参与者原以为能切换、快进会更不无聊，事后却说完整看完一个视频更投入、更有意义。",
+            "function": "报告实验结果"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5",
+            "summary": "谭博士说无聊与注意力相关，投入程度达不到期望就会无聊，不停切换让人更不投入、更无聊。",
+            "function": "解释无聊的成因"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6",
+            "summary": "谭博士建议按快进或跳过键前先缓一缓，因为乐趣来自沉浸在视频中。",
+            "function": "给出建议，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:32": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据上下文说明人们刷媒体的目的，推断 alleviate 在句中的意思。",
+      "stemTranslationZh": "第 2 段中画线词“alleviate”是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往前找人们刷媒体的目的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "缓解。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:1",
+              "quote": "Psychologists have noted in numerous studies over the past decade that individuals engage in social media and other digital media to escape boredom.",
+              "anchor": "to escape boredom"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:2",
+              "quote": "That result may be a product of constantly “switching” between different content online, the endless pursuit of the next piece of media to alleviate present boredom.",
+              "anchor": "to alleviate present boredom"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "理解。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Understand.",
+            "explanation": "放进去成了“不停找下一段内容来理解眼前的无聊”，可人们刷媒体是想摆脱无聊（escape boredom），不是要弄懂它。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "给……下定义。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Define.",
+            "explanation": "放进去成了“找下一段内容来给眼前的无聊下定义”，和人们想赶走无聊的目的对不上。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为……辩护。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Justify.",
+            "explanation": "放进去成了“找下一段内容来为眼前的无聊辩护”，可人们正是嫌无聊才不停换内容，没有谁要证明无聊有道理。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "alleviate",
+          "sourceRole": "stem",
+          "targetText": "That result may be a product of constantly “switching” between different content online, the endless pursuit of the next piece of media to alleviate present boredom.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:2",
+          "relationType": "locationCue",
+          "answerText": "to escape boredom",
+          "bridgeZh": "不停追寻下一段内容，和刷社交媒体一样是为了摆脱无聊",
+          "note": "题干 alleviate 原词出现在原文。"
+        },
+        {
+          "sourceText": "Ease.",
+          "sourceRole": "correctOption",
+          "targetText": "That result may be a product of constantly “switching” between different content online, the endless pursuit of the next piece of media to alleviate present boredom.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "人们刷社交媒体是为了摆脱无聊（to escape boredom），不停找下一段内容也是同一个目的，所以 alleviate 必须是“让眼前的无聊变少”的意思。放回去：无休止地追寻下一段内容，来缓解眼前的无聊，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:33": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "对照两项实验里两种看法的结果，推出参与者在哪种情况下更无聊。",
+      "stemTranslationZh": "谭博士的研究发现，参与者在____时报告的无聊程度更高。",
+      "locateBy": "stem",
+      "locateFindZh": "看 but 后实际报告的结果",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "视频太长",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "In the second experiment, participants watched a 10-minute video in one round and in the other round were allowed to fast-forward or rewind through a 50-minute video.",
+            "sourceEntity": "a 50-minute video",
+            "optionText": "the length of a video was too long.",
+            "optionEntity": "the length of a video",
+            "explanation": "50 分钟的长视频只是第二项实验里可以快进的材料（a 50-minute video），研究比的是能不能快进，不是视频长短。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3",
+              "quote": "In the second experiment, participants watched a 10-minute video in one round and in the other round were allowed to fast-forward or rewind through a 50-minute video.",
+              "anchor": "a 50-minute video"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "视频内容被反复播放",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "the video content was played repeatedly.",
+            "explanation": "实验里能倒回（rewind）的只是第二轮的长视频，研究看的是切换和快进；原文没说反复播放同一内容会让人更无聊。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们在视频之间切换或在一个视频内跳转",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:4",
+              "quote": "Participants predicted they would be less bored with the option to switch or fast-forward for both experiments but reported afterward that they found watching one video all the way through to be more engaging, satisfying and meaningful.",
+              "anchor": "watching one video all the way through to be more engaging"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3",
+              "quote": "They both watched a 10-minute video without the option to switch or fast-forward and then had a 10-minute period where they could switch between seven 5-minute videos.",
+              "anchor": "switch between seven 5-minute videos"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3",
+              "quote": "In the second experiment, participants watched a 10-minute video in one round and in the other round were allowed to fast-forward or rewind through a 50-minute video.",
+              "anchor": "fast-forward or rewind through a 50-minute video"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们把同一个视频从头看到尾",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Participants predicted they would be less bored with the option to switch or fast-forward for both experiments but reported afterward that they found watching one video all the way through to be more engaging, satisfying and meaningful.",
+            "sourceHighlight": "watching one video all the way through to be more engaging",
+            "optionText": "they watched the same video through to the end.",
+            "optionHighlight": "watched the same video through to the end",
+            "explanation": "参与者说的恰恰相反：从头看完一个视频更投入、更满足（more engaging, satisfying），这时并不更无聊。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:4",
+              "quote": "Participants predicted they would be less bored with the option to switch or fast-forward for both experiments but reported afterward that they found watching one video all the way through to be more engaging, satisfying and meaningful.",
+              "anchor": "watching one video all the way through to be more engaging"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "reported",
+          "sourceRole": "stem",
+          "targetText": "Participants predicted they would be less bored with the option to switch or fast-forward for both experiments but reported afterward that they found watching one video all the way through to be more engaging, satisfying and meaningful.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "with the option to switch or fast-forward for both experiments but reported afterward that they found watching one video all the way through to be more engaging",
+          "note": "题干 reported 原词出现在原文。"
+        },
+        {
+          "sourceText": "they switched between videos and within a video.",
+          "sourceRole": "correctOption",
+          "targetText": "Participants predicted they would be less bored with the option to switch or fast-forward for both experiments but reported afterward that they found watching one video all the way through to be more engaging, satisfying and meaningful.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "比的是同一批人的两种看法：能切换、快进时和一口气看完时。参与者事后说一口气看完一个视频更投入（more engaging），反过来可见切换和快进时更无聊。选项两半各有出处：“在视频之间切换”是[[block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3|In the first trial]]里在七段视频间换看（switch between），“在一个视频内”是[[block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3|In the second experiment]]里快进或倒回（fast-forward or rewind），选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:34": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括谭博士在这一段里讲了什么。",
+      "stemTranslationZh": "谭博士在第 5 段中阐述了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5]] 先说无聊与注意力相关，看她接着怎样解释人为什么会无聊",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "看视频的方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "keep switching through videos",
+            "optionText": "watching videos",
+            "matchType": "exact",
+            "relationNote": "段中提到不停切换视频（keep switching through videos），是用它说明无聊怎样产生，并没有介绍看视频的方法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5",
+              "quote": "“When people keep switching through videos, they become less engaged with the videos and they are looking for something more interesting.",
+              "anchor": "keep switching through videos"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她的实验设计。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "To investigate the role that fast-forwarding and switching videos has in boredom, Dr Katy Tam, the lead author of the research and researchers performed two experiments on about 1,200 people.",
+            "sourceEntity": "two experiments",
+            "optionText": "The design of her experiment.",
+            "optionEntity": "The design of her experiment",
+            "explanation": "实验怎样设计写在[[block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3]]：两项实验、约 1,200 人、看哪几种视频（two experiments）；这一段是她在解释无聊从哪来，没再谈实验安排。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:3",
+              "quote": "To investigate the role that fast-forwarding and switching videos has in boredom, Dr Katy Tam, the lead author of the research and researchers performed two experiments on about 1,200 people.",
+              "anchor": "performed two experiments"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "注意力分散的例子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "closely linked to attention",
+            "optionText": "divided attention",
+            "matchType": "exact",
+            "relationNote": "选项借了 attention，原文只说无聊与注意力密切相关（closely linked to attention），没举分心的例子。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5",
+              "quote": "Tam said boredom was closely linked to attention.",
+              "anchor": "closely linked to attention"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "人们感到无聊的原因。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5",
+              "quote": "“We feel bored when there’s a gap between how engaged we are and how engaged we want to be,” she said.",
+              "anchor": "We feel bored when there’s a gap"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5",
+              "quote": "This can lead to increased feelings of boredom.",
+              "anchor": "lead to increased feelings of boredom"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5",
+              "quote": "Tam said boredom was closely linked to attention.",
+              "anchor": "closely linked to attention"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The cause of people’s boredom.",
+          "sourceRole": "correctOption",
+          "targetText": "“We feel bored when there’s a gap between how engaged we are and how engaged we want to be,” she said.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "这一段几句都在说人为什么会无聊：先说无聊与注意力密切相关，接着说投入程度达不到想要的程度时就会无聊（a gap between），再说不停切换视频让人更不投入，从而更无聊（lead to increased feelings of boredom）。选项的“无聊的原因”正好概括这几句，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:35": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出谭博士给出的建议及理由，判断哪个选项说的是同一件事。",
+      "stemTranslationZh": "谭博士在最后一段给出了什么建议？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读她怎样说明这样做的好处",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "花钱买一次观看体验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "pay for an immersive (沉浸式) experience",
+            "optionText": "Pay for a viewing experience",
+            "matchType": "exact",
+            "relationNote": "选项照搬 pay for，原文“在影院花钱买沉浸式体验”只是打比方，用来说明看视频也要沉浸，并没有建议花钱。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6",
+              "quote": "“Just as we pay for an immersive (沉浸式) experience in a movie theatre, enjoyment often comes from immersing ourselves in videos rather than swiping(滚屏) through them.”",
+              "anchor": "pay for an immersive (沉浸式) experience"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "看视频前先参考评分。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Refer to the ratings before watching videos.",
+            "explanation": "她的建议是按快进或跳过键之前先缓一缓（taking your time），原文没提看视频前先查评分。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "去电影院获得沉浸式体验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "an immersive (沉浸式) experience in a movie theatre",
+            "optionText": "an immersive experience",
+            "matchType": "exact",
+            "relationNote": "选项借了影院里的沉浸体验（in a movie theatre），可原文拿影院作比，落点是看视频时也要沉浸其中，不是劝人去电影院。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6",
+              "quote": "“Just as we pay for an immersive (沉浸式) experience in a movie theatre, enjoyment often comes from immersing ourselves in videos rather than swiping(滚屏) through them.”",
+              "anchor": "an immersive (沉浸式) experience in a movie theatre"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "看视频时专注于内容。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6",
+              "quote": "enjoyment often comes from immersing ourselves in videos rather than swiping(滚屏) through them",
+              "anchor": "immersing ourselves in videos"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6",
+              "quote": "Finally, said Tam, it could be worth taking your time before hitting the fast-forward or skip buttons.",
+              "anchor": "taking your time before hitting the fast-forward or skip buttons"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "suggestion",
+          "sourceRole": "stem",
+          "targetText": "Finally, said Tam, it could be worth taking your time before hitting the fast-forward or skip buttons.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6",
+          "relationType": "locationCue",
+          "targetCue": "could be worth",
+          "sourceZh": "建议",
+          "targetCueZh": "值得这样做",
+          "answerText": "enjoyment often comes from immersing ourselves in videos rather than swiping(滚屏) through them",
+          "bridgeZh": "她用影院作比，说明别急着快进的好处在于能沉浸其中",
+          "note": "题干 suggestion 对应原文 could be worth。"
+        },
+        {
+          "sourceText": "Stay focused on the content while watching videos.",
+          "sourceRole": "correctOption",
+          "targetText": "Finally, said Tam, it could be worth taking your time before hitting the fast-forward or skip buttons.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "选项的“专注于内容”合了两处：先是别急着按快进或跳过键（taking your time before hitting），接着说乐趣来自沉浸在视频里，而不是滑屏跳过（immersing ourselves in videos）。看视频时不跳、沉下心看，就是专注于内容，选 D。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: I bought an exercise bike and used it for 30 minutes three times a week. At first, I could hardly push the pedals, and every turn sent pain shooting up my leg. Still, I refused to give up, because each ride kept the amputation one more day away. Slowly, the pain grew weaker and my leg grew stronger. After a year, I put away one crutch, and a few months later I could walk to the shop without any help. One evening I tried a slow jog around the garden. It was only a few steps, but for the first time I believed that my dream might come true.\n\nParagraph 2: Almost 4 years after my accident, I entered a local half marathon. On the morning of the race, my leg felt stiff and my heart was pounding. The first few miles went well, but at about halfway the old pain came back. I slowed down and thought of those long days alone on the mountain. If I had survived that, I could survive this. So I kept going, one step after another. When I finally crossed the finish line, I was not the fastest runner, but I didn’t care. That night, I had the same dream again. This time, when I woke up, I didn’t need a few seconds to remember. The dream and my life were finally the same.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写只需写“我”：一个从少年起就参加体育比赛、热爱跑步的登山者，腿受重伤后被建议截肢，心里不肯接受。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "原文是“我”用第一人称、一般过去时回忆，句子短，直叙事情和感受，描写很少。全文没有一处引号，医生和顾问的话都是转述。续写照样用“我”和过去时，人物的话用转述，基本不用直接引语。",
+          "evidence": [
+            "my doctor recommended an amputation",
+            "telling me I would be walking within six months"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在“我”每晚梦见扔掉拐杖跑起来，醒来却要几秒才想起自己的腿。截肢一直拖着没定，续写要回答：不截肢，“我”还能不能重新走路、跑步。",
+          "evidence": [
+            "I would lift them up and throw them in the river",
+            "When I woke it would take me a few seconds to remember."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "腿部重伤的登山者，长年参加体育比赛",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "保住这条腿，重新跑起来，过回运动的生活。",
+              "evidence": "I had been competing in sport since I was a teenager."
+            },
+            {
+              "label": "性格",
+              "text": "不轻易认命：医生建议截肢，假肢中心说前景很好，“我”还是想尽量往后拖。",
+              "evidence": "was determined to put off the decision for as long as possible"
+            },
+            {
+              "label": "此刻",
+              "text": "还拄着拐杖，想到截肢就沮丧，只有在梦里才能扔掉拐杖奔跑。",
+              "evidence": "I found the experience too depressing for words"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "I would lift them up and throw them in the river",
+          "use": "第 1 段用拐杖记录恢复进度：一年后“我”先收起一根拐杖，让梦里扔拐杖的事在现实里一点点发生。"
+        },
+        {
+          "sourceQuote": "For two days I lay alone.",
+          "use": "第 2 段比赛中旧伤复发时，“我”想起在山上独自熬过的日子，用它给自己撑下去的理由。"
+        },
+        {
+          "sourceQuote": "When I woke it would take me a few seconds to remember.",
+          "use": "第 2 段结尾让同一个梦再出现，这次醒来不用再花几秒去想现实，原文的问题就此收住。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "“我”不截肢，靠健身车一点点练回腿力，从收起拐杖到能慢跑；四年后跑完半程马拉松，梦里的奔跑成了真。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "从买健身车、每周骑三次写起；第二段一开头“我”就报名了半程马拉松，所以第一段结束时，“我”的腿必须恢复到能跑步、敢想比赛的程度，但不要提前写比赛。",
+          "draft": "起初蹬不动、腿很疼，“我”把每次骑车当成把截肢再往后推一天，坚持下来；一年后收起一根拐杖，后来能独自走到商店；一天傍晚在花园里试着慢跑几步，第一次相信梦能成真。",
+          "bridgeQuote": "I entered a local half marathon",
+          "bridge": "一个被建议截肢的人，凭什么敢报名半程马拉松？"
+        },
+        {
+          "paragraph": 2,
+          "must": "从报名本地半程马拉松写起，写比赛经过；名次和成绩是开放的，但要收住原文留下的问题：腿能不能跑，那个梦怎样了。",
+          "draft": "比赛中途旧伤又疼，“我”想起在山上独自熬过的日子，一步一步跑完全程，不在乎名次；当晚又做了同一个梦，醒来不用再花几秒去想现实，梦和生活终于一样了。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: I bought an exercise bike and used it for 30 minutes three times a week. At first, I could hardly push the pedals, and every turn sent pain shooting up my leg. Still, I refused to give up, because each ride kept the amputation one more day away. Slowly, the pain grew weaker and my leg grew stronger. After a year, I put away one crutch, and a few months later I could walk to the shop without any help. One evening I tried a slow jog around the garden. It was only a few steps, but for the first time I believed that my dream might come true.\n\nParagraph 2: Almost 4 years after my accident, I entered a local half marathon. On the morning of the race, my leg felt stiff and my heart was pounding. The first few miles went well, but at about halfway the old pain came back. I slowed down and thought of those long days alone on the mountain. If I had survived that, I could survive this. So I kept going, one step after another. When I finally crossed the finish line, I was not the fastest runner, but I didn’t care. That night, I had the same dream again. This time, when I woke up, I didn’t need a few seconds to remember. The dream and my life were finally the same.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写“我”靠骑车从蹬不动练到能慢跑，为报名半马做好准备",
+          "items": [
+            {
+              "quote": "every turn sent pain shooting up my leg",
+              "explain": "疼痛用动作写：每蹬一圈，疼就往上窜。比 It was very painful 有画面，也说明伤还很重，后面的进步才有分量。"
+            },
+            {
+              "quote": "because each ride kept the amputation one more day away",
+              "explain": "坚持的理由接回原文：“我”决心把截肢尽量往后拖，骑车正是拖的办法。动机来自原文，不是突然振作。"
+            },
+            {
+              "quote": "After a year, I put away one crutch",
+              "explain": "用时间词加一个看得见的变化交代恢复进度；拐杖是原文梦里的东西，收起一根正是梦在一点点成真。"
+            },
+            {
+              "quote": "for the first time I believed that my dream might come true",
+              "explain": "段末停在“相信能跑”，第二段报名半马才有底气；my dream 回扣原文每晚的梦，might 留了分寸，没有把话说满。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写比赛中的难关和完赛，用那个梦收住全文",
+          "items": [
+            {
+              "quote": "at about halfway the old pain came back",
+              "explain": "比赛不一路顺利，旧伤复发给了真正的难关，后面的坚持才有事可写。"
+            },
+            {
+              "quote": "If I had survived that, I could survive this.",
+              "explain": "转折由回忆触发：在山上独自熬过两天的“我”，自然扛得住这点疼。这句是心里话，用叙述写出来，和原文不用引号的写法一致。"
+            },
+            {
+              "quote": "I was not the fastest runner, but I didn’t care",
+              "explain": "结果写得克制：不写夺冠，只写跑完本身的意义，符合伤后复出的真实处境。"
+            },
+            {
+              "quote": "This time, when I woke up, I didn’t need a few seconds to remember.",
+              "explain": "回到原文最后一句：以前醒来要几秒才想起腿伤，现在梦和现实一样，不用再想。原文的问题落在这个具体的变化上。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "send pain shooting up my leg",
+          "function": "写伤腿一用力就疼，让读者看到恢复训练有多难。"
+        },
+        {
+          "expression": "keep the amputation one more day away",
+          "function": "把骑车和“推迟截肢”连起来，说明“我”为什么咬牙坚持。"
+        },
+        {
+          "expression": "keep going, one step after another",
+          "function": "写比赛中忍痛向前，动作简单，适合放在转折之后。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段直接写“我”截了肢、装上假肢",
+          "why": "原文没有排除截肢，但“我”一心想推迟这个决定，梦里扔掉的是拐杖，段首句写的又是自己骑车练腿。走截肢路线，这些伏笔都用不上，也很难在两段里交代清楚。"
+        },
+        {
+          "pitfall": "第一段就写报名或参加比赛",
+          "why": "第二段首句才写“我”报名半程马拉松，第一段写掉比赛会和段首句重复；第一段只需要练到能跑。"
+        },
+        {
+          "pitfall": "第二段跑完就结束，或用“永不放弃”之类的口号收尾",
+          "why": "原文停在那个反复出现的梦上，结尾不回到梦、拐杖或跑步，原文的问题就没收住；口号放在任何故事后面都成立，不推进任何事。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: I bought an exercise bike and used it for 30 minutes three times a week. In the beginning, I could barely turn the pedals, and each push sent a sharp pain up my shin. More than once I wanted to stop, but every ride felt like a small argument against the amputation, so I kept pedalling. Gradually the pain eased and the muscles in my leg began to come back. After a year, I swapped my crutches for a walking stick, though my ankle was still stiff and I limped badly. Then, one quiet evening, I left the stick by the door and jogged slowly to the end of the street. It was no more than a hundred metres, yet I came home shaking with excitement. Running, I realised, was no longer something I could only do in my sleep.\n\nParagraph 2: Almost 4 years after my accident, I entered a local half marathon. Standing at the start among hundreds of runners, I felt my leg tighten and wondered whether I had been foolish. The gun went off, and for the first few miles I settled into a steady rhythm. Around the halfway point, however, the familiar ache returned and every step felt heavier than the last. I thought of the two days I had lain alone on the mountain, waiting for help that might never come. Compared with that, this pain was something I could manage. I lowered my head and pushed on. When the finish line came into view, I found I still had enough strength to speed up. I crossed it with tears in my eyes, though my time was far from impressive. That night the old dream came back. The next morning, for once, there was nothing I needed to remember. I got up and laced up my running shoes.",
+      "beyondStandard": [
+        {
+          "quote": "every ride felt like a small argument against the amputation",
+          "explain": "把每次骑车说成反驳截肢的一个小理由，比标准版的 kept the amputation one more day away 更贴“我”和截肢决定较劲的心理。"
+        },
+        {
+          "quote": "I swapped my crutches for a walking stick, though my ankle was still stiff and I limped badly",
+          "explain": "swap A for B 很地道，写出从拐杖换成手杖这一阶段；though 后面保留脚踝僵硬和跛行，进步写得有分寸，不一步到位。"
+        },
+        {
+          "quote": "I thought of the two days I had lain alone on the mountain, waiting for help that might never come",
+          "explain": "had lain 交代先后，waiting for help that might never come 补出当时的绝望，回忆比标准版具体，撑得起下一句“这点疼我能扛”。"
+        }
+      ]
+    }
+  }
+}

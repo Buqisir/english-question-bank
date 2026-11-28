@@ -1,0 +1,1147 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiangzhewan-2024-10",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "Hi, Anne. The music festival begins on May 28th and tickets go on sale on the 6th. Are you interested in going? Sure. Actually, the organizer is coming to our school on the 10th. I’d like to get more information from him before I buy tickets.",
+      "translationZh": "你好，安妮。音乐节 5 月 28 日开幕，门票 6 日开始发售。你有兴趣去吗？当然。其实，主办人 10 日要来我们学校。我想先向他多了解一些情况，再买票。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士约安妮去音乐节，安妮谈到主办人要来学校，想先了解情况再买票。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "你好，安妮。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "音乐节 5 月 28 日开幕，门票 6 日开始发售。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "你有兴趣去吗？"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "其实，主办人 10 日要来我们学校。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "我想先向他多了解一些情况，再买票。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "That chocolate cake looks delicious. Aren’t you going to have some with me? Well, that was a huge meal we just had, and I’m trying to watch my weight. But I suppose birthdays only happen once a year.",
+      "translationZh": "那块巧克力蛋糕看起来真好吃。你不打算和我一起吃一点吗？嗯，我们刚吃了一顿大餐，而且我正在控制体重。不过我想生日一年也就一次。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "饭后，女士邀请男士一起吃巧克力蛋糕，男士提到刚吃过大餐、正在控制体重。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "那块巧克力蛋糕看起来真好吃。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "你不打算和我一起吃一点吗？"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "嗯，我们刚吃了一顿大餐，而且我正在控制体重。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "不过我想生日一年也就一次。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "Mom, will you come and play a game with me? Can you just rest and be quiet? I have to hand in this report tomorrow and I need to concentrate on writing it. Sorry, Mom. Can I have some of that cake you baked?",
+      "translationZh": "妈妈，你能来陪我玩个游戏吗？你就不能安静地休息一会儿吗？我明天得交这份报告，需要集中精力写。对不起，妈妈。我能吃点你烤的那个蛋糕吗？",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "男孩想让妈妈陪他玩游戏，妈妈说明自己当下的情况，男孩又问起蛋糕。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "妈妈，你能来陪我玩个游戏吗？"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "你就不能安静地休息一会儿吗？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "我明天得交这份报告，需要集中精力写。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "对不起，妈妈。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "我能吃点你烤的那个蛋糕吗？"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "What a day! I was up at 5:00 a.m. and I haven’t stopped working since then. I can’t keep my eyes open now. Oh dear, you must be too tired. Get some rest and I’ll wake you when dinner’s ready.",
+      "translationZh": "这一天可真够呛！我早上 5 点就起床，从那以后一直没停下工作。我现在眼睛都睁不开了。哎呀，你一定累坏了。去休息一下吧，晚饭好了我叫醒你。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "一方说自己从早忙到晚、困得睁不开眼，另一方让对方先休息，晚饭好了再叫醒。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "这一天可真够呛！"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "我早上 5 点就起床，从那以后一直没停下工作。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "我现在眼睛都睁不开了。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "哎呀，你一定累坏了。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "去休息一下吧，晚饭好了我叫醒你。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "The weather today is looking awful. Are you sure you still want to go to the national park? It’s supposed to clear up at lunch. Besides, there won’t be any people there because they thought the weather would be bad all day.",
+      "translationZh": "今天的天气看起来很糟糕。你确定还要去国家公园吗？据说午饭时天就会放晴。再说，那里不会有什么人，因为大家以为一整天天气都会很差。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "天气看起来很糟，女士问男士是否还要去国家公园，男士说出自己的看法。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "今天的天气看起来很糟糕。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "你确定还要去国家公园吗？"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "据说午饭时天就会放晴。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "再说，那里不会有什么人，因为大家以为一整天天气都会很差。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "I’m so sure I left the book on the table in our room before leaving. It’s not there anymore. I asked Jim if he had seen it, but he said no. Where could it have gone? Maybe you’re mistaking where you kept it. Don’t you usually read outside in the yard on Sundays? It’s possible you forgot to bring it inside. I hope that’s not the case. I’ll go check right now, but it rained all day yesterday. If the book has been outside since morning, it’ll be ruined by now. I need it for tomorrow’s lecture. I suppose you’ll have to make another trip to the bookstore today, then.",
+      "translationZh": "我很确定出门前把书放在我们房间的桌子上了。现在它不在那儿了。我问吉姆有没有看到，他说没有。它会跑到哪儿去呢？也许你记错放书的地方了。你周日不是常在外面院子里看书吗？可能你忘了把它拿进屋。但愿不是这样。我这就去看看，可是昨天下了一整天雨。要是书从早上起就一直在外面，现在肯定已经泡坏了。明天的讲座我要用它。那我想你今天只好再跑一趟书店了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士找不到明天讲座要用的书，女士帮他回想书可能落在哪里。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "我很确定出门前把书放在我们房间的桌子上了。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "现在它不在那儿了。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "我问吉姆有没有看到，他说没有。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "它会跑到哪儿去呢？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "也许你记错放书的地方了。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "你周日不是常在外面院子里看书吗？"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "可能你忘了把它拿进屋。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "但愿不是这样。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "我这就去看看，可是昨天下了一整天雨。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "要是书从早上起就一直在外面，现在肯定已经泡坏了。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "明天的讲座我要用它。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "那我想你今天只好再跑一趟书店了。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "The first thing you must do when you arrive in China is go to the police station. This is required for everyone staying longer than several months. I remember. There was the same rule when I went to college there. After that, you should find a hotel for a few nights. Where would you recommend? What kind of area do you want? Do you want to live near entertainment facilities? I’d recommend Area 1 of the city. No, I’d just like to stay somewhere quiet. Well, that would be Area 2. If you want somewhere cheaper, try Area 3. I’ll read some reviews online and then decide. Maybe I can find a discount. When will you leave? In two weeks before the Mid-Autumn Festival. You’d better hurry, then. Hotels get busy before the holidays.",
+      "translationZh": "你到中国后要做的第一件事是去派出所。在那里停留超过几个月的人都必须这样做。我记得。我在那里上大学的时候也有同样的规定。办完之后，你应该先找家酒店住几晚。你推荐哪里？你想要什么样的区域？想住在娱乐设施附近吗？那我推荐城里的 1 区。不，我只想找个安静的地方住。嗯，那就是 2 区。如果想便宜些，可以试试 3 区。我会在网上看看评价再决定。也许还能找到折扣。你什么时候走？两周后，在中秋节之前。那你最好抓紧。节假日前酒店会很紧张。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士准备去中国，男士提醒她到达后要办的事，并介绍城市里不同区域的住处。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "你到中国后要做的第一件事是去派出所。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "在那里停留超过几个月的人都必须这样做。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "我记得。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "我在那里上大学的时候也有同样的规定。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "办完之后，你应该先找家酒店住几晚。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "你推荐哪里？"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "你想要什么样的区域？"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "想住在娱乐设施附近吗？"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "那我推荐城里的 1 区。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "不，我只想找个安静的地方住。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "嗯，那就是 2 区。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "如果想便宜些，可以试试 3 区。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我会在网上看看评价再决定。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "也许还能找到折扣。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "你什么时候走？"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "两周后，在中秋节之前。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "那你最好抓紧。"
+        },
+        {
+          "id": "listening-text-7:18",
+          "zh": "节假日前酒店会很紧张。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12"
+      ],
+      "transcript": "Hello, welcome to Marriott Hotel. How can I help you today? Checking in please. Certainly, sir. Can I take the name or booking reference? My company booked it for me. It should be under Lloyds Bank. And your name? Martin Trask. I have you staying for two nights. Is that correct? No, it should be three. Not a problem, I’ll get that extended. Have you stayed with us before? No, I have not. So breakfast is served on the first floor in the main restaurant. Here you will also find a bar that is open 24 hours a day. There’s also a rooftop bar open from 6:00 p.m. until 2:00 a.m. I bet you get some good views from up there. The best. There’s also a pool and a gym on the third level. I might try the pool before my first meeting tomorrow. It looks like everything is already paid for. Can I help you with anything else? No, thank you.",
+      "translationZh": "您好，欢迎光临万豪酒店。今天有什么可以帮您？请帮我办入住。好的，先生。能告诉我姓名或预订号吗？是我们公司帮我订的。应该是登记在劳埃德银行名下。您的姓名是？马丁·特拉斯克。我这里显示您住两晚。对吗？不对，应该是三晚。没问题，我帮您延长。您以前住过我们酒店吗？没有。那我介绍一下：早餐在一楼的主餐厅供应。那里还有一个 24 小时营业的酒吧。楼顶还有一个酒吧，从晚上 6 点开到凌晨 2 点。我猜在上面能看到很棒的景色。是最好的景色。三楼还有游泳池和健身房。明天第一个会之前我也许会去游会儿泳。看起来所有费用都已经付过了。还有什么可以帮您的吗？没有了，谢谢。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "男士来到万豪酒店，接待员为他办理手续，并介绍酒店的餐厅、酒吧和健身设施。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "您好，欢迎光临万豪酒店。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "今天有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "请帮我办入住。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "好的，先生。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "能告诉我姓名或预订号吗？"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "是我们公司帮我订的。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "应该是登记在劳埃德银行名下。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "您的姓名是？"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "马丁·特拉斯克。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "我这里显示您住两晚。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "对吗？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "不对，应该是三晚。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "没问题，我帮您延长。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "您以前住过我们酒店吗？"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "没有。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "那我介绍一下：早餐在一楼的主餐厅供应。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "那里还有一个 24 小时营业的酒吧。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "楼顶还有一个酒吧，从晚上 6 点开到凌晨 2 点。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "我猜在上面能看到很棒的景色。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "是最好的景色。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "三楼还有游泳池和健身房。"
+        },
+        {
+          "id": "listening-text-8:22",
+          "zh": "明天第一个会之前我也许会去游会儿泳。"
+        },
+        {
+          "id": "listening-text-8:23",
+          "zh": "看起来所有费用都已经付过了。"
+        },
+        {
+          "id": "listening-text-8:24",
+          "zh": "还有什么可以帮您的吗？"
+        },
+        {
+          "id": "listening-text-8:25",
+          "zh": "没有了，谢谢。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:13",
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "Hey, do you want to go ahead of me? Sure, but you’ve been waiting for 20 minutes. Yeah, but I still can’t decide what style I want. Who are you waiting for? Whoever is ready first, I guess. Your first time at this place? I’ve been coming here for years, and usually go to Tony. But trust me, Lorraine is the best for men’s hair. Really? I think that guy is pretty good too, the one who’s giving that short man a crew cut. I’m not too familiar with men’s styles. Crew cut is when it’s long on the top and short on the sides, right? Not quite – it’s short on both. Think it’ll look good on me? Hmm, I don’t know. It’s tough to picture. Or maybe I should ask for a new color? Not sure it would suit you. Why not? A suit like this with some light hair like yours, or maybe green. Do you think your firm or college would be OK with that? Where do you work or study? I just started at an ad agency. It’s my first week. How is that? I’ve been thinking about getting into the industry. Different from what you’d probably think. Looks like the crew cut guy – it’s Joe, by the way – is done. You’re up. Give me your number. We should meet for a drink.",
+      "translationZh": "嘿，你要不要排到我前面？好啊，不过你已经等了 20 分钟了。是啊，可我还是拿不定主意要剪什么发型。你在等哪位理发师？我想谁先空下来就找谁吧。你第一次来这家店？我来这里好几年了，通常找托尼剪。不过相信我，剪男士头发最好的是洛兰。真的吗？我觉得那个人也挺不错，就是正在给那个矮个子男士剪平头的那位。我不太熟悉男士发型。平头就是顶上长、两边短，对吧？不完全对，是两处都短。你觉得我剪平头好看吗？嗯，我说不好。很难想象。或者我该染个新颜色？不确定适不适合你。为什么不？像这样的西装配上和你一样的浅色头发，或者也可以染绿色。你觉得你的公司或学校能接受吗？你在哪里工作或上学？我刚到一家广告公司上班。这是我的第一周。感觉怎么样？我一直在考虑进这一行。和你大概想的不一样。看样子剪平头的那位理发师（顺便说一句，他叫乔）忙完了。轮到你了。把你的电话号码给我吧。我们该约着一起喝一杯。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "一男一女在理发店排队等候，聊起理发师、男士发型和各自的工作。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "嘿，你要不要排到我前面？"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "好啊，不过你已经等了 20 分钟了。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "是啊，可我还是拿不定主意要剪什么发型。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "你在等哪位理发师？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "我想谁先空下来就找谁吧。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "你第一次来这家店？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "我来这里好几年了，通常找托尼剪。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "不过相信我，剪男士头发最好的是洛兰。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "真的吗？"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我觉得那个人也挺不错，就是正在给那个矮个子男士剪平头的那位。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "我不太熟悉男士发型。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "平头就是顶上长、两边短，对吧？"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "不完全对，是两处都短。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "你觉得我剪平头好看吗？"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "嗯，我说不好。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "很难想象。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "或者我该染个新颜色？"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "不确定适不适合你。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "为什么不？"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "像这样的西装配上和你一样的浅色头发，或者也可以染绿色。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "你觉得你的公司或学校能接受吗？"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "你在哪里工作或上学？"
+        },
+        {
+          "id": "listening-text-9:23",
+          "zh": "我刚到一家广告公司上班。"
+        },
+        {
+          "id": "listening-text-9:24",
+          "zh": "这是我的第一周。"
+        },
+        {
+          "id": "listening-text-9:25",
+          "zh": "感觉怎么样？"
+        },
+        {
+          "id": "listening-text-9:26",
+          "zh": "我一直在考虑进这一行。"
+        },
+        {
+          "id": "listening-text-9:27",
+          "zh": "和你大概想的不一样。"
+        },
+        {
+          "id": "listening-text-9:28",
+          "zh": "看样子剪平头的那位理发师（顺便说一句，他叫乔）忙完了。"
+        },
+        {
+          "id": "listening-text-9:29",
+          "zh": "轮到你了。"
+        },
+        {
+          "id": "listening-text-9:30",
+          "zh": "把你的电话号码给我吧。"
+        },
+        {
+          "id": "listening-text-9:31",
+          "zh": "我们该约着一起喝一杯。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "The argumentative essay is a very interesting type of essay. The point of an argumentative essay is basically to make an argument. You are not telling the reader about something new or describing anything. Instead, you have to convince them about something. A good argument must be clear and logical. Indeed, many Chinese students find it difficult to write good essays in schools and universities in America. It is not because there is no history of essays in China. Rather, there is a very long history of essays. But they have their own unique features. Primarily, Chinese students are used to the kind of essays that put the writer’s argument at the end. The first several parts introduce the topic or different views. These lead to a turn, which introduces conflict and different aspects. Finally, these are concluded. In America, most teachers like essays that state the conclusion of the argument in the first paragraph. While some people might regard many Chinese students’ essays as badly written, it is important to remember that they are actually written very well according to Chinese style. Therefore, it is essential to point out early how the Western style is different. Once the Chinese students know about the differences, they can easily adapt their writing to the correct cultural context.",
+      "translationZh": "议论文是一种很有意思的文章类型。议论文的要义基本上就是提出论点。你不是在给读者讲什么新鲜事，也不是在描述什么。相反，你要说服他们相信某件事。好的论证必须清楚、合乎逻辑。的确，许多中国学生在美国的中学和大学里很难写出好文章。这并不是因为中国没有写文章的历史。恰恰相反，中国的文章历史非常悠久。只是这些文章有自己独特的特点。首先，中国学生习惯的文章是把作者的观点放在结尾。开头几部分介绍话题或不同的看法。接着引出转折，带出矛盾和不同的方面。最后对这些内容加以总结。在美国，大多数老师喜欢在第一段就写明论证结论的文章。虽然有些人可能认为许多中国学生的文章写得不好，但要记住，按中国的写法，这些文章其实写得很好。因此，有必要尽早指出西方写法有何不同。中国学生一旦了解了这些差异，就能轻松地让自己的写作适应相应的文化语境。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "跨文化沟通"
+      },
+      "summaryZh": "说话人介绍议论文的写法，并比较中国学生熟悉的文章写法与美国学校的要求。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "议论文是一种很有意思的文章类型。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "议论文的要义基本上就是提出论点。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "你不是在给读者讲什么新鲜事，也不是在描述什么。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "相反，你要说服他们相信某件事。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "好的论证必须清楚、合乎逻辑。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "的确，许多中国学生在美国的中学和大学里很难写出好文章。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "这并不是因为中国没有写文章的历史。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "恰恰相反，中国的文章历史非常悠久。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "只是这些文章有自己独特的特点。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "首先，中国学生习惯的文章是把作者的观点放在结尾。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "开头几部分介绍话题或不同的看法。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "接着引出转折，带出矛盾和不同的方面。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "最后对这些内容加以总结。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "在美国，大多数老师喜欢在第一段就写明论证结论的文章。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "虽然有些人可能认为许多中国学生的文章写得不好，但要记住，按中国的写法，这些文章其实写得很好。"
+        },
+        {
+          "id": "listening-text-10:16",
+          "zh": "因此，有必要尽早指出西方写法有何不同。"
+        },
+        {
+          "id": "listening-text-10:17",
+          "zh": "中国学生一旦了解了这些差异，就能轻松地让自己的写作适应相应的文化语境。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士将在什么时候见主办人？",
+      "optionTranslationsZh": {
+        "A": "6 日。",
+        "B": "10 日。",
+        "C": "28 日。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Actually, the organizer is coming to our school on the 10th."
+      },
+      "reasonZh": "安妮说主办人 10 日要来学校（on the 10th），她想先向他了解情况再买票，所以她 10 日见主办人，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "6 日是门票开始发售的日子（tickets go on sale on the 6th），不是见主办人的日子。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "28 日是音乐节开幕的日子（begins on May 28th），与见主办人无关。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士接下来可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "吃一顿大餐。",
+        "B": "吃点蛋糕。",
+        "C": "买生日礼物。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "But I suppose birthdays only happen once a year."
+      },
+      "reasonZh": "男士先说刚吃过大餐、正在控制体重，又转口说生日一年只有一次（birthdays only happen once a year），可见他会破例吃点蛋糕，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "大餐（a huge meal）是他们刚刚吃过的（we just had），是男士犹豫的理由，不是接下来要做的事。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "生日（birthdays）是男士破例吃蛋糕的理由，两人谈的是吃不吃蛋糕，没有说要买礼物。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士为什么不能和男孩玩？",
+      "optionTranslationsZh": {
+        "A": "她需要完成一些工作。",
+        "B": "她需要休息一下。",
+        "C": "她需要烤蛋糕。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I have to hand in this report tomorrow and I need to concentrate on writing it."
+      },
+      "reasonZh": "“完成一些工作”就是妈妈说的明天要交报告、得专心写（hand in this report … concentrate on writing it），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "休息（rest）是妈妈让男孩安静休息（Can you just rest and be quiet?），不是她自己要休息。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "蛋糕是妈妈已经烤好的（that cake you baked），男孩想吃，妈妈现在要忙的是写报告。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人之间最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "夫妻。",
+        "B": "同事。",
+        "C": "老板和员工。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Get some rest and I’ll wake you when dinner’s ready."
+      },
+      "reasonZh": "一方累得睁不开眼，另一方让对方先去休息、晚饭好了再叫醒（I’ll wake you when dinner’s ready），这是一家人在家里的照顾，最可能是夫妻，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "一方说从早上 5 点起一直在工作（haven’t stopped working），但这是在家里向家人诉累，对方要等晚饭做好再叫醒他，不是同事间的对话。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "男士认为他们今天应该去公园的原因是什么？",
+      "optionTranslationsZh": {
+        "A": "全天天气都很好。",
+        "B": "公园很干净。",
+        "C": "人很少。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Besides, there won’t be any people there because they thought the weather would be bad all day."
+      },
+      "reasonZh": "“人很少”就是男士说的公园里不会有什么人（there won’t be any people there），因为别人以为全天天气都差，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "男士只说午饭时会放晴（clear up at lunch）；全天（all day）出现在别人以为天气一整天都差的说法里，不是全天晴好。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "公园（park）只是他们要去的地方，男士给的理由是会放晴和人少，没有说公园干净。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士感觉如何？",
+      "optionTranslationsZh": {
+        "A": "放松的。",
+        "B": "担心的。",
+        "C": "生气的。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "If the book has been outside since morning, it’ll be ruined by now."
+      },
+      "reasonZh": "男士怕书在外面淋了一天雨已经泡坏（it’ll be ruined by now），又说明天讲座要用，可见他很担心，选 B。"
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士认为书可能在哪里？",
+      "optionTranslationsZh": {
+        "A": "在他们的房间里。",
+        "B": "在学校里。",
+        "C": "在院子里。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Don’t you usually read outside in the yard on Sundays?"
+      },
+      "reasonZh": "女士提醒男士周日常在院子里看书（read outside in the yard），接着说他可能忘了把书拿进屋，所以她认为书在院子里，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "房间（our room）是男士自己认为放书的地方，女士觉得他记错了地方（mistaking where you kept it）。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士以前在中国做什么？",
+      "optionTranslationsZh": {
+        "A": "工作。",
+        "B": "学习。",
+        "C": "旅行。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "There was the same rule when I went to college there."
+      },
+      "reasonZh": "女士说自己以前在那里上大学时（went to college there）也有这条规定，“学习”是对上大学的说法，选 B。"
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "哪个区域可能有游乐园？",
+      "optionTranslationsZh": {
+        "A": "1 区。",
+        "B": "2 区。",
+        "C": "3 区。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’d recommend Area 1 of the city."
+      },
+      "reasonZh": "男士先问女士想不想住在娱乐设施附近（near entertainment facilities），接着推荐 1 区；游乐园属于娱乐设施，所以最可能在 1 区，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "2 区是女士说只想住得安静（somewhere quiet）之后男士推荐的，不是娱乐设施集中的地方。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "3 区是给想住得便宜些的人推荐的（somewhere cheaper），说的是价格，不是娱乐设施。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "对话最可能发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在酒店酒吧。",
+        "B": "在酒店房间。",
+        "C": "在酒店入住登记台。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Checking in please."
+      },
+      "reasonZh": "男士一开口就说要办入住（Checking in please），接待员核对预订和入住天数，可见是在酒店入住登记台，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "酒吧（bar）是接待员介绍酒店设施时说到的，一个在一楼、一个在楼顶，两人并不在酒吧里。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "男士还在办入住（Checking in），接待员正在介绍早餐、酒吧和泳池在哪里，他还没进房间。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士在哪家公司工作？",
+      "optionTranslationsZh": {
+        "A": "劳埃德银行。",
+        "B": "万豪酒店。",
+        "C": "特拉斯克餐厅。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It should be under Lloyds Bank."
+      },
+      "reasonZh": "男士先说房间是公司替他订的（My company booked it for me），又说预订登记在劳埃德银行名下，可见他在劳埃德银行工作，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "万豪酒店（Marriott Hotel）是他来入住的酒店，接待员开口说的是欢迎光临。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "特拉斯克（Trask）是男士报的自己的姓，餐厅（main restaurant）是供应早餐的地方，都不是公司名。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "主酒吧什么时候营业？",
+      "optionTranslationsZh": {
+        "A": "从下午 2 点到午夜。",
+        "B": "从晚上 6 点到凌晨 2 点。",
+        "C": "全天。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Here you will also find a bar that is open 24 hours a day."
+      },
+      "reasonZh": "接待员说一楼主餐厅那里有个酒吧，24 小时营业（open 24 hours a day），“全天”就是这个意思，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的 2 点是楼顶酒吧凌晨 2 点关门（until 2:00 a.m.），没有下午 2 点开到午夜的说法。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "晚上 6 点到凌晨 2 点是楼顶酒吧（rooftop bar）的营业时间，不是主酒吧。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士为什么让女士排到他前面？",
+      "optionTranslationsZh": {
+        "A": "他拿不准要剪哪种发型。",
+        "B": "他在等自己的发型师。",
+        "C": "他想要她的电话号码。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Yeah, but I still can’t decide what style I want."
+      },
+      "reasonZh": "男士说自己还拿不定主意要剪什么发型（can’t decide what style I want），选项的“拿不准”就是这个意思，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士问他在等谁，他说谁先空下来就找谁（Whoever is ready first），并没有在等固定的发型师。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "要电话号码（Give me your number）是对话结尾约着喝一杯时说的，不是让她先剪的原因。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "谁可能最擅长剪女士发型？",
+      "optionTranslationsZh": {
+        "A": "托尼。",
+        "B": "乔。",
+        "C": "洛兰。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’ve been coming here for years, and usually go to Tony."
+      },
+      "reasonZh": "女士说多年来常找托尼剪（usually go to Tony），又说剪男士头发最好的是洛兰，可见托尼最可能擅长女士发型，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "乔（Joe）是正在给矮个子男士剪平头的理发师（the crew cut guy），说的是男士发型。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "洛兰（Lorraine）是女士说的剪男士头发最好的人（the best for men’s hair），不是女士发型。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "平头是什么样的？",
+      "optionTranslationsZh": {
+        "A": "两边和顶部都长。",
+        "B": "两边和顶部都短。",
+        "C": "两边短，顶部长。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Not quite – it’s short on both."
+      },
+      "reasonZh": "女士以为平头是顶上长、两边短，男士纠正说两处都短（short on both），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的长（long）只用来说顶部，而且这个说法随即被否定，没有两边也长的说法。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "顶上长、两边短（long on the top and short on the sides）是女士猜错的说法，男士马上否定（Not quite）。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士在哪里工作？",
+      "optionTranslationsZh": {
+        "A": "在学校。",
+        "B": "在广告公司。",
+        "C": "在理发店。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I just started at an ad agency."
+      },
+      "reasonZh": "男士说自己刚到一家广告公司上班（an ad agency），选项的广告公司（ad company）是同一个意思，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "女士问他在公司还是学校（your firm or college），男士回答的是广告公司。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "理发店是两人排队剪头发的地方，不是男士工作的地方。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "议论文最重要的基本上是什么？",
+      "optionTranslationsZh": {
+        "A": "一开始就提出问题。",
+        "B": "详细描述某事。",
+        "C": "说服读者相信某事。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Instead, you have to convince them about something."
+      },
+      "reasonZh": "说话人说写议论文不是讲新鲜事或描述什么，而是要说服读者（convince them about something），选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "描述（describing anything）出现在说话人否定的那句里，议论文恰恰不是在讲新鲜事或描述什么。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人认为怎样才是好的论证？",
+      "optionTranslationsZh": {
+        "A": "逻辑清楚。",
+        "B": "故事新颖。",
+        "C": "话题有趣。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "A good argument must be clear and logical."
+      },
+      "reasonZh": "说话人说好的论证必须清楚、合乎逻辑（clear and logical），“逻辑清楚”把这两点合在一起，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "新（new）出现在不是给读者讲新鲜事这句里（not telling the reader about something new），是被否定的，也没提到故事。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "有趣（interesting）形容的是议论文这种文体（a very interesting type of essay），话题（topic）是中式文章开头介绍的内容。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "西方文章与中国文章有何不同？",
+      "optionTranslationsZh": {
+        "A": "在长度上。",
+        "B": "在话题上。",
+        "C": "在结构上。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Primarily, Chinese students are used to the kind of essays that put the writer’s argument at the end."
+      },
+      "reasonZh": "中国学生习惯把作者观点放在结尾（at the end），美国老师喜欢第一段就写明结论（in the first paragraph），差别在观点放在哪里，也就是结构，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "话题（topic）是中式文章开头几部分要介绍的内容（introduce the topic），说的是文章各部分写什么，不是两种文章话题不同。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "美国老师期望文章第一段写什么？",
+      "optionTranslationsZh": {
+        "A": "不同的观点。",
+        "B": "支持性细节。",
+        "C": "作者的论点。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "In America, most teachers like essays that state the conclusion of the argument in the first paragraph."
+      },
+      "reasonZh": "美国老师喜欢在第一段写明论证结论（the conclusion of the argument），也就是作者的观点，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "不同的看法（different views）是中式文章开头几部分介绍的内容，美国老师要第一段写的是结论。"
+        }
+      ]
+    }
+  }
+}

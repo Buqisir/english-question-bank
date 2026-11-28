@@ -1,0 +1,138 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Chris,\n\nI’m writing to share with you a camping experience my family engaged in last weekend. It was our first night in the open air, and it turned out to be wonderful.\n\nOn Saturday morning, we drove to a campsite by a lake near the mountains. Setting up the tent took Dad and me almost an hour, because we kept mixing up the poles. In the afternoon, Dad caught two fish, which Mom cooked with corn over a small stove. After dark, we lay on the grass, counting stars and telling stories without our phones.\n\nThe trip brought us closer than ever. I realized that the best moments are often the simple ones shared with family. Have you ever gone camping in the UK? If you visit China next summer, why not join us?\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给英国朋友 Chris 的邮件，沿用题面给出的称呼、首句和落款",
+        "personTense": "用第一人称；讲露营经过用一般过去时，谈感想和向对方提问用一般现在时",
+        "readerTone": "写给外国朋友，语气亲切、轻松，像平时聊天",
+        "goal": "让 Chris 知道这次露营是怎么过的、我有什么收获，并引他回信"
+      },
+      "taskRequires": [
+        "讲清这次露营的过程",
+        "说出自己的感想"
+      ],
+      "thisEssayChooses": "标准版按时间顺序挑四个场景写过程：开车到湖边营地、和爸爸搭帐篷搭了快一小时、爸爸钓鱼妈妈煮鱼、天黑后放下手机数星星讲故事；感想落在一家人更亲近、简单的时刻最珍贵，最后问 Chris 有没有露过营，并邀请他明年夏天一起来。"
+    },
+    "standard": {
+      "essay": "Dear Chris,\n\nI’m writing to share with you a camping experience my family engaged in last weekend. It was our first night in the open air, and it turned out to be wonderful.\n\nOn Saturday morning, we drove to a campsite by a lake near the mountains. Setting up the tent took Dad and me almost an hour, because we kept mixing up the poles. In the afternoon, Dad caught two fish, which Mom cooked with corn over a small stove. After dark, we lay on the grass, counting stars and telling stories without our phones.\n\nThe trip brought us closer than ever. I realized that the best moments are often the simple ones shared with family. Have you ever gone camping in the UK? If you visit China next summer, why not join us?\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "讲清这次露营的过程",
+          "quote": "On Saturday morning, we drove to a campsite by a lake near the mountains."
+        },
+        {
+          "point": "讲清这次露营的过程",
+          "quote": "After dark, we lay on the grass, counting stars and telling stories without our phones."
+        },
+        {
+          "point": "说出自己的感想",
+          "quote": "I realized that the best moments are often the simple ones shared with family."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接住给定首句，先给这次露营定个调子",
+          "items": [
+            {
+              "quote": "It was our first night in the open air",
+              "explain": "首句只说要分享露营，这句补上“第一次在野外过夜”，Chris 马上明白这次为什么值得讲。"
+            },
+            {
+              "quote": "it turned out to be wonderful",
+              "explain": "turn out to be 表示“结果是”，先给总体感受，后面的经过就是在证明这句话。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成第一个要点：按时间顺序讲露营经过",
+          "items": [
+            {
+              "quote": "On Saturday morning",
+              "explain": "这一段用 On Saturday morning、In the afternoon、After dark 三个时间词排好顺序，读者不会乱。"
+            },
+            {
+              "quote": "because we kept mixing up the poles",
+              "explain": "不只说搭帐篷很难，而是说出难在哪：总把支杆弄混。一个小细节让经过显得真实，也有点好笑。"
+            },
+            {
+              "quote": "which Mom cooked with corn over a small stove",
+              "explain": "which 引出非限制性定语从句，把钓鱼和做饭连成一件事，一句话交代了全家人各自在做什么。"
+            },
+            {
+              "quote": "counting stars and telling stories without our phones",
+              "explain": "两个 -ing 短语写躺在草地上时在干什么；without our phones 为下一段“更亲近”的感想埋下理由。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成第二个要点：说感想，再把话题交给 Chris",
+          "items": [
+            {
+              "quote": "The trip brought us closer than ever.",
+              "explain": "感想直接落在家人关系上，和上一段放下手机聊天的场景对得上，不是空喊“很有意义”。"
+            },
+            {
+              "quote": "the best moments are often the simple ones shared with family",
+              "explain": "ones 代替 moments，避免重复；shared with family 是过去分词作后置定语，点明简单时刻为什么珍贵。"
+            },
+            {
+              "quote": "Have you ever gone camping in the UK? If you visit China next summer, why not join us?",
+              "explain": "给朋友写信，结尾问对方的经历并发出邀请，Chris 读完就有话可回，比“期待回信”更自然。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "It turned out to be wonderful.",
+          "function": "先给整次经历的总体感受，适合分享经历类邮件的开头。"
+        },
+        {
+          "expression": "keep doing sth（we kept mixing up the poles）",
+          "function": "写反复出错的小麻烦，让叙述有画面、有真实感。"
+        },
+        {
+          "expression": "bring sb closer（The trip brought us closer than ever.）",
+          "function": "把感想落到具体的人际关系上，代替空泛的“很有意义”。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Chris,\n\nI’m writing to share with you a camping experience my family engaged in last weekend. It was our first time sleeping outdoors, and it gave me a weekend I won’t forget.\n\nEarly on Saturday, we drove to a quiet campsite beside a lake. Putting up the tent turned out to be harder than it looked: Dad and I mixed up the poles twice, while Mom stood by, laughing and taking photos. Later, Dad caught two fish, and we grilled them with corn over a tiny stove. Once night fell, we lay on the grass, gazing at a sky full of stars and sharing stories, with our phones left untouched in the car.\n\nLooking back, what I treasure most is not the scenery but the time we spent together. At home we are always busy with our own things, but out there we really talked. Have you ever been camping in the UK? If you come to China next summer, you’re welcome to join us!\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "讲清这次露营的过程",
+          "quote": "Early on Saturday, we drove to a quiet campsite beside a lake."
+        },
+        {
+          "point": "讲清这次露营的过程",
+          "quote": "Once night fell, we lay on the grass, gazing at a sky full of stars and sharing stories, with our phones left untouched in the car."
+        },
+        {
+          "point": "说出自己的感想",
+          "quote": "Looking back, what I treasure most is not the scenery but the time we spent together."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "while Mom stood by, laughing and taking photos",
+          "explain": "标准版只写爸爸和我搭帐篷，这里补上妈妈在一旁笑着拍照，三个人都出现在画面里，全家出游的气氛更足。"
+        },
+        {
+          "quote": "with our phones left untouched in the car",
+          "explain": "with 复合结构代替标准版的 without our phones，写出手机一直放在车里没碰，“放下手机”的意思更具体。"
+        },
+        {
+          "quote": "what I treasure most is not the scenery but the time we spent together",
+          "explain": "用 not...but... 先排除风景，再点出最珍惜的是相处时间；下一句拿在家各忙各的作对比，感想有了理由。"
+        }
+      ]
+    }
+  }
+}

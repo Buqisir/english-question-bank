@@ -1,0 +1,718 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiangzhewan-2024-10",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a": {
+      "overview": "旅游推介文。介绍纽约布鲁克林四家每晚不超过 150 美元的平价酒店，分别突出 NU 酒店的便利位置、阿罗酒店的曼哈顿景观、盒子屋酒店的居家氛围和洛克威酒店的海滨休闲。",
+      "fullTranslationZh": "一个特别的住处能让假期大放异彩，但也可能让你花光积蓄。我们挑选了纽约布鲁克林几家新开的平价住处，每间房每晚不超过 150 美元。\nNU 酒店\nNU 酒店有 93 间极简风格的客房，每间都装修得各具特色。免费早餐和店内健身中心是它的舒适之处。但真正让这家酒店在同行中脱颖而出的是它的位置。布鲁克林的各个角落都很容易到达。饿了吗？步行到联合街的格斯排骨馆，那里的每道菜都很美味。\n阿罗威廉斯堡酒店\n想找一间有景观的房间？那就不用再找了。这家酒店的 126 间客房中，许多都有落地窗，可以眺望曼哈顿。酒店还有一个巨大的屋顶泳池——你很难找到比这里更适合俯瞰天际线的地方了。想游览布鲁克林的话，可应要求提供免费使用的自行车。\n盒子屋酒店\n拥有 147 间客房的盒子屋酒店是游览布鲁克林绿点区的理想落脚点。这里的住宿有一种家的感觉，装饰一点也不沉闷。这个热门住宅区不乏吃喝的去处。另外，步行只需 10 分钟就能到达中央车站。\n洛克威酒店\n这家海滨酒店有 53 间客房。轻松惬意的屋顶餐厅和酒吧既能望见远处的曼哈顿天际线，也能眺望大西洋。你可以在水疗中心的泳池边放松，也可以前往海滩，夏日的阳光、沙滩和海浪在那里等着你。花 4 美元，牙买加湾渡轮就能把你直接送到布鲁克林，再送进曼哈顿。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+          "sourceText": "But it’s the location that really sets this hotel apart from its competitors.",
+          "displayText": "But it’s the location that really sets this hotel apart from its competitors.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:22"
+          ],
+          "translationZh": "但真正让这家酒店在同行中脱颖而出的是它的位置。",
+          "analysisZh": "这是强调句 it is … that …：被强调的是 the location。去掉 it’s 和 that，还原成 The location really sets this hotel apart from its competitors，主干是“位置使这家酒店与对手区别开来”。set A apart from B 意为“使 A 比 B 突出”。句首 But 承接前面的免费早餐和健身中心：那些只是舒适之处，位置才是真正的卖点。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 8,
+              "quote": "it’s"
+            },
+            {
+              "start": 22,
+              "end": 26,
+              "quote": "that"
+            },
+            {
+              "start": 34,
+              "end": 60,
+              "quote": "sets this hotel apart from"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+          "sourceText": "There’s also a vast rooftop pool – you’ll have a hard time finding a better spot from which to survey the skyline.",
+          "displayText": "There’s also a vast rooftop pool – you’ll have a hard time finding a better spot from which to survey the skyline.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiangzhewan-2024-10:23"
+          ],
+          "translationZh": "酒店还有一个巨大的屋顶泳池——你很难找到比这里更适合俯瞰天际线的地方了。",
+          "analysisZh": "破折号前是主干 There’s also a vast rooftop pool，“还有一个巨大的屋顶泳池”。破折号后补充它好在哪里：have a hard time doing 意为“很难做某事”，“很难找到更好的地点”就是说这里最好。from which to survey the skyline 是“介词 + which + 不定式”，修饰 spot，相当于 from which you can survey the skyline，“可以从那里俯瞰天际线”。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 32,
+              "quote": "There’s also a vast rooftop pool"
+            },
+            {
+              "start": 42,
+              "end": 66,
+              "quote": "have a hard time finding"
+            },
+            {
+              "start": 81,
+              "end": 101,
+              "quote": "from which to survey"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:1"
+              ],
+              "start": 0,
+              "end": 64,
+              "quote": "一个特别的住处能让假期大放异彩，但也可能让你花光积蓄。我们挑选了纽约布鲁克林几家新开的平价住处，每间房每晚不超过 150 美元。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:2"
+              ],
+              "start": 65,
+              "end": 70,
+              "quote": "NU 酒店"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:4"
+              ],
+              "start": 71,
+              "end": 187,
+              "quote": "NU 酒店有 93 间极简风格的客房，每间都装修得各具特色。免费早餐和店内健身中心是它的舒适之处。但真正让这家酒店在同行中脱颖而出的是它的位置。布鲁克林的各个角落都很容易到达。饿了吗？步行到联合街的格斯排骨馆，那里的每道菜都很美味。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:5"
+              ],
+              "start": 188,
+              "end": 196,
+              "quote": "阿罗威廉斯堡酒店"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6"
+              ],
+              "start": 197,
+              "end": 308,
+              "quote": "想找一间有景观的房间？那就不用再找了。这家酒店的 126 间客房中，许多都有落地窗，可以眺望曼哈顿。酒店还有一个巨大的屋顶泳池——你很难找到比这里更适合俯瞰天际线的地方了。想游览布鲁克林的话，可应要求提供免费使用的自行车。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:7"
+              ],
+              "start": 309,
+              "end": 314,
+              "quote": "盒子屋酒店"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:8"
+              ],
+              "start": 315,
+              "end": 407,
+              "quote": "拥有 147 间客房的盒子屋酒店是游览布鲁克林绿点区的理想落脚点。这里的住宿有一种家的感觉，装饰一点也不沉闷。这个热门住宅区不乏吃喝的去处。另外，步行只需 10 分钟就能到达中央车站。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:9"
+              ],
+              "start": 408,
+              "end": 413,
+              "quote": "洛克威酒店"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:10"
+              ],
+              "start": 414,
+              "end": 537,
+              "quote": "这家海滨酒店有 53 间客房。轻松惬意的屋顶餐厅和酒吧既能望见远处的曼哈顿天际线，也能眺望大西洋。你可以在水疗中心的泳池边放松，也可以前往海滩，夏日的阳光、沙滩和海浪在那里等着你。花 4 美元，牙买加湾渡轮就能把你直接送到布鲁克林，再送进曼哈顿。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-a-ev1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:8",
+                "start": 0,
+                "end": 28,
+                "quote": "The 147-room Box House Hotel"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p7",
+                "start": 0,
+                "end": 16,
+                "quote": "拥有 147 间客房的盒子屋酒店"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-ev2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+                "start": 146,
+                "end": 218,
+                "quote": "it’s the location that really sets this hotel apart from its competitors"
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+                "start": 220,
+                "end": 266,
+                "quote": "All corners of Brooklyn are within easy reach."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 50,
+                "end": 71,
+                "quote": "真正让这家酒店在同行中脱颖而出的是它的位置"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 72,
+                "end": 87,
+                "quote": "布鲁克林的各个角落都很容易到达"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-ev3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+                "start": 98,
+                "end": 151,
+                "quote": "floor-to-ceiling windows looking out across Manhattan"
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:10",
+                "start": 78,
+                "end": 125,
+                "quote": "has views of both the distant Manhattan skyline"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p5",
+                "start": 37,
+                "end": 49,
+                "quote": "有落地窗，可以眺望曼哈顿"
+              },
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p9",
+                "start": 27,
+                "end": 40,
+                "quote": "既能望见远处的曼哈顿天际线"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-ss1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:22"
+            ],
+            "selectedSentenceId": "sentence-reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+                "start": 142,
+                "end": 219,
+                "quote": "But it’s the location that really sets this hotel apart from its competitors."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 49,
+                "end": 72,
+                "quote": "但真正让这家酒店在同行中脱颖而出的是它的位置。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-ss2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiangzhewan-2024-10:23"
+            ],
+            "selectedSentenceId": "sentence-reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+                "start": 153,
+                "end": 267,
+                "quote": "There’s also a vast rooftop pool – you’ll have a hard time finding a better spot from which to survey the skyline."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p5",
+                "start": 50,
+                "end": 86,
+                "quote": "酒店还有一个巨大的屋顶泳池——你很难找到比这里更适合俯瞰天际线的地方了。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头点明要推荐布鲁克林的平价住处，随后以酒店名为小标题逐一介绍四家酒店的房间数和各自卖点。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:1",
+            "summary": "特别的住处能成就假期也可能很费钱，作者挑选了布鲁克林每晚 150 美元以内的新平价住处。",
+            "function": "引出话题，交代推荐标准"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:2",
+            "summary": "NU 酒店。",
+            "function": "标出第一家酒店"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+            "summary": "NU 酒店有 93 间极简风客房，有免费早餐和健身中心，最大卖点是位置便利，去布鲁克林各处都方便，附近餐馆的菜都很好吃。",
+            "function": "介绍 NU 酒店，突出位置"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:5",
+            "summary": "阿罗威廉斯堡酒店。",
+            "function": "标出第二家酒店"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+            "summary": "阿罗酒店 126 间客房中许多有落地窗可望曼哈顿，有屋顶泳池可看天际线，还免费提供自行车。",
+            "function": "介绍阿罗酒店，突出景观"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:7",
+            "summary": "盒子屋酒店。",
+            "function": "标出第三家酒店"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:8",
+            "summary": "盒子屋酒店有 147 间客房，是游览绿点区的理想落脚点，有家的感觉，周边吃喝方便，步行 10 分钟到中央车站。",
+            "function": "介绍盒子屋酒店，突出居家感和周边便利"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:9",
+            "summary": "洛克威酒店。",
+            "function": "标出第四家酒店"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:10",
+            "summary": "洛克威酒店是海滨酒店，有 53 间客房，屋顶餐厅酒吧能看曼哈顿天际线和大西洋，可泳池放松或去海滩，乘渡轮可直达布鲁克林和曼哈顿。",
+            "function": "介绍洛克威酒店，突出海滨休闲"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "从四家酒店的介绍里分别找出房间数，比较哪家最多。",
+      "stemTranslationZh": "哪家酒店的房间数量最多？",
+      "locateBy": "options",
+      "locateFindZh": "四家酒店逐个找出房间数，再比大小",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "NU 酒店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The 147-room Box House Hotel makes an ideal base from which to explore Brooklyn’s Greenpoint.",
+            "sourceEntity": "Box House Hotel",
+            "optionText": "NU Hotel.",
+            "optionEntity": "NU Hotel",
+            "explanation": "NU 酒店只有 93 间房（93 minimalist rooms），比盒子屋酒店的 147 间少。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+              "quote": "There are 93 minimalist rooms at NU Hotel, each decorated individually.",
+              "anchor": "93 minimalist rooms"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "盒子屋酒店。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:8",
+              "quote": "The 147-room Box House Hotel makes an ideal base from which to explore Brooklyn’s Greenpoint.",
+              "anchor": "The 147-room Box House Hotel"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+              "quote": "Many of the 126 rooms at this hotel have floor-to-ceiling windows looking out across Manhattan.",
+              "anchor": "126 rooms"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "阿罗威廉斯堡酒店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The 147-room Box House Hotel makes an ideal base from which to explore Brooklyn’s Greenpoint.",
+            "sourceEntity": "Box House Hotel",
+            "optionText": "Arlo Williamsburg Hotel.",
+            "optionEntity": "Arlo Williamsburg Hotel",
+            "explanation": "阿罗酒店有 126 间房（126 rooms），在四家里排第二，仍比 147 间少 21 间。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+              "quote": "Many of the 126 rooms at this hotel have floor-to-ceiling windows looking out across Manhattan.",
+              "anchor": "126 rooms"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "洛克威酒店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The 147-room Box House Hotel makes an ideal base from which to explore Brooklyn’s Greenpoint.",
+            "sourceEntity": "Box House Hotel",
+            "optionText": "The Rockaway Hotel.",
+            "optionEntity": "The Rockaway Hotel",
+            "explanation": "洛克威酒店只有 53 间房（53 rooms），反而是四家里最少的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:10",
+              "quote": "This beach-side property has 53 rooms.",
+              "anchor": "53 rooms"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The Box House Hotel.",
+          "sourceRole": "correctOption",
+          "targetText": "The 147-room Box House Hotel makes an ideal base from which to explore Brooklyn’s Greenpoint.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:8",
+          "relationType": "calculation",
+          "note": "比的是四家酒店的房间数：NU 酒店 93 间，阿罗酒店 126 间，盒子屋酒店 147 间（147-room），洛克威酒店 53 间。147 最大，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在 NU 酒店的介绍里找出作者认为它胜过同行的地方。",
+      "stemTranslationZh": "NU 酒店的优势是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 But 后真正的卖点",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它供应美味的食物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Hungry? Walk down to Gus’s Chop House at Union Street, where every",
+            "sourceEntity": "Gus’s Chop House",
+            "optionText": "It serves tasty foods.",
+            "optionEntity": "It",
+            "explanation": "每道菜都好吃（dish is delicious）说的是步行可到的格斯排骨馆，不是酒店自己供应的饭菜。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+              "quote": "Walk down to Gus’s Chop House at Union Street, where every",
+              "anchor": "Gus’s Chop House"
+            },
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:4",
+              "quote": "dish is delicious.",
+              "anchor": "dish is delicious"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它有免费的健身指导。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Free breakfast and on-site fitness centre",
+            "optionText": "free fitness coaching",
+            "matchType": "exact",
+            "relationNote": "选项借了 free 和 fitness 两个词：原文免费的是早餐（Free breakfast），健身只说店里有健身中心（on-site fitness centre），没提有人指导。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+              "quote": "Free breakfast and on-site fitness centre are among its pleasantness.",
+              "anchor": "Free breakfast and on-site fitness centre"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它位置便利。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+              "quote": "But it’s the location that really sets this hotel apart from its competitors.",
+              "anchor": "it’s the location"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+              "quote": "All corners of Brooklyn are within easy reach.",
+              "anchor": "within easy reach"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它装修豪华。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "each decorated individually",
+            "optionText": "decorated luxuriously",
+            "matchType": "exact",
+            "relationNote": "选项照搬 decorated，原文说客房是极简风（minimalist），每间装修各不相同（individually），没说豪华。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+              "quote": "There are 93 minimalist rooms at NU Hotel, each decorated individually.",
+              "anchor": "each decorated individually"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "advantage",
+          "sourceRole": "stem",
+          "targetText": "But it’s the location that really sets this hotel apart from its competitors.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+          "relationType": "locationCue",
+          "targetCue": "sets this hotel apart",
+          "sourceZh": "优势",
+          "targetCueZh": "让这家酒店与众不同",
+          "answerText": "it’s the location",
+          "note": "题干 advantage 对应原文 sets this hotel apart。"
+        },
+        {
+          "sourceText": "It is conveniently located.",
+          "sourceRole": "correctOption",
+          "targetText": "All corners of Brooklyn are within easy reach.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:3",
+          "relationType": "paraphrase",
+          "note": "选项的“位置便利”由两处合成：先说它真正胜出的是位置（the location），接着说布鲁克林各个角落都很容易到达（within easy reach），选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiangzhewan-2024-10:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把洛克威酒店和阿罗酒店的介绍对照着看，找出两家都能做的事。",
+      "stemTranslationZh": "游客在洛克威酒店和阿罗威廉斯堡酒店都能做什么？",
+      "locateBy": "options",
+      "locateFindZh": "每个选项分别回两家酒店的介绍，看是否两家都有",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "进行骑行训练。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "free-to-use bicycles",
+            "optionText": "cycling",
+            "matchType": "wordFamily",
+            "relationNote": "选项的 cycling 和原文 bicycles 同属“自行车”一族，但只有阿罗酒店提供免费自行车，用来游览布鲁克林（To explore Brooklyn），不是训练；洛克威酒店没提自行车。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+              "quote": "To explore Brooklyn, free-to-use bicycles are available on request.",
+              "anchor": "free-to-use bicycles"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "沐浴阳光。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Relax by the pool in the spa, or head to the beach where summer sun, sand and surf await you.",
+            "sourceHighlight": "summer sun",
+            "optionText": "Bathe in the sunshine.",
+            "optionHighlight": "sunshine",
+            "explanation": "夏日阳光（summer sun）只出现在洛克威酒店旁的海滩；阿罗酒店的介绍写的是落地窗、屋顶泳池和自行车，没提晒太阳。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:10",
+              "quote": "Relax by the pool in the spa, or head to the beach where summer sun, sand and surf await you.",
+              "anchor": "summer sun"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "在屋顶餐厅用餐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "There’s also a vast rooftop pool – you’ll have a hard time finding a better spot from which to survey the skyline.",
+            "sourceEntity": "rooftop pool",
+            "optionText": "Dine in the rooftop restaurants.",
+            "optionEntity": "rooftop restaurants",
+            "explanation": "屋顶餐厅只有洛克威酒店有（rooftop restaurant），阿罗酒店屋顶上的是一个大泳池（rooftop pool）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:10",
+              "quote": "The relaxed rooftop restaurant and bar has views of both the distant Manhattan skyline and out to the Atlantic.",
+              "anchor": "rooftop restaurant"
+            },
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+              "quote": "There’s also a vast rooftop pool – you’ll have a hard time finding a better spot from which to survey the skyline.",
+              "anchor": "rooftop pool"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "欣赏曼哈顿的景色。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+              "quote": "Many of the 126 rooms at this hotel have floor-to-ceiling windows looking out across Manhattan.",
+              "anchor": "looking out across Manhattan"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:10",
+              "quote": "The relaxed rooftop restaurant and bar has views of both the distant Manhattan skyline and out to the Atlantic.",
+              "anchor": "views of both the distant Manhattan skyline"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Enjoy views out over Manhattan.",
+          "sourceRole": "correctOption",
+          "targetText": "Many of the 126 rooms at this hotel have floor-to-ceiling windows looking out across Manhattan.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiangzhewan-2024-10:reading-a:6",
+          "relationType": "paraphrase",
+          "note": "选项的“看曼哈顿景色”两家都写到了：先是阿罗酒店的落地窗望向曼哈顿（looking out across Manhattan），接着是洛克威酒店的屋顶餐厅能看到远处的曼哈顿天际线（Manhattan skyline），选 D。"
+        }
+      ]
+    }
+  }
+}
