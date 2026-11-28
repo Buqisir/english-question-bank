@@ -1,0 +1,736 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiyang-2024-11",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiyang-2024-11:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiyang-2024-11:reading-c": {
+      "overview": "本文讨论身体质量指数 BMI：它简单易用、沿用多年，但专家指出它往往反映不了整体健康，分不清脂肪和肌肉，BMI 正常的人也可能不健康，只用它评估健康问题很大。",
+      "fullTranslationZh": "在医生的诊室、健身房和在线计算器上，你都能看到它：身体质量指数，即 BMI。自 20 世纪 70 年代问世以来，它就无处不在。但在过去十年左右，这一“健康体重”的度量标准受到了审视，而且理由充分。专家们说，身体健康与 BMI 之间的关系很复杂，BMI 往往不能很好地反映你的整体健康状况。\nBMI 是一种简单的测量方法，用一个人的体重（如果用公制，就是以千克计的质量）除以身高算出。几十年来，临床医生一直用 BMI 把我们的体重分成几类：偏瘦、正常、超重或肥胖。25 是个关键数字：达到或超过这个数，你就属于超重或肥胖一类。\n一些人群研究把高 BMI 与心血管疾病、II 型糖尿病和其他内分泌失调的风险增加联系在一起。然而，造成这些健康危害的可能不只是体重：研究表明，高 BMI 人群所承受的社会羞辱感也可能导致健康状况不佳。\n另一些研究则没能发现 BMI 与健康之间有很强的关联。哈佛医学院副教授、麻省总医院肥胖医学医生 Fatima Stanford 说，偏瘦的人可能不健康，而 BMI 超过 25 的人也可能具备一些健康的指标。\n那为什么我们仍然依赖 BMI 呢？原因之一是它测量起来相对简单。梅奥诊所的医生 Eleanna De Filippis 说，这让没有受过专门训练的从业人员也能轻松使用这一指标。Stanford 说，尽管 BMI 问世已久，极低或极高的 BMI 值仍可能提示潜在的健康问题，但如果没有其他健康指标，25 到 30 之间的数值就很难解读。\n然而，只用 BMI 来评估健康存在很大问题。BMI 无法分辨一个人的体重中有多少来自脂肪、肌肉或骨骼。De Filippis 说，这就是为什么肌肉发达的运动员虽然体脂很少，BMI 却常常很高。Stanford 说，一个人也可能血压、胆固醇偏高等健康指标不佳，BMI 却处在“正常”范围。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:3",
+          "sourceText": "However, it may not be weight alone that plays into these negative health effects: research shows the societal shame people with high BMI have could also contribute to poor health outcomes.",
+          "displayText": "However, it may not be weight alone that plays into these negative health effects: research shows the societal shame people with high BMI have could also contribute to poor health outcomes.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:31"
+          ],
+          "translationZh": "然而，造成这些健康危害的可能不只是体重：研究表明，高 BMI 人群所承受的社会羞辱感也可能导致健康状况不佳。",
+          "analysisZh": "冒号前是强调句 it is ... that ...，被强调的是 weight alone，前面加了 may not：造成这些健康危害的可能不只是体重。冒号后具体说明：主干是 research shows 加宾语从句；从句的主语是 the societal shame people with high BMI have，其中 people with high BMI have 是省略了 that 的定语从句，修饰 shame，指高 BMI 人群所承受的羞辱；谓语是 could also contribute to poor health outcomes。also 呼应前面的 not ... alone。",
+          "underlineRanges": [
+            {
+              "start": 9,
+              "end": 51,
+              "quote": "it may not be weight alone that plays into"
+            },
+            {
+              "start": 98,
+              "end": 142,
+              "quote": "the societal shame people with high BMI have"
+            },
+            {
+              "start": 143,
+              "end": 167,
+              "quote": "could also contribute to"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5",
+          "sourceText": "Stanford says that extremely low or high values of BMI could be an indicator of potential health issues despite its early introduction, but values around 25 to 30 are difficult to interpret without other health metrics.",
+          "displayText": "Stanford says that extremely low or high values of BMI could be an indicator of potential health issues despite its early introduction, but values around 25 to 30 are difficult to interpret without other health metrics.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:30"
+          ],
+          "translationZh": "Stanford 说，尽管 BMI 问世已久，极低或极高的 BMI 值仍可能提示潜在的健康问题，但如果没有其他健康指标，25 到 30 之间的数值就很难解读。",
+          "analysisZh": "主干是 Stanford says 加 that 引导的宾语从句，从句由 but 连成两半。前一半的主干是 extremely low or high values of BMI could be an indicator：极低或极高的 BMI 值可能起到提示作用，of potential health issues 说明提示什么，despite its early introduction 是让步：尽管它推出已久。but 后转到另一种情况：values around 25 to 30 are difficult to interpret，without other health metrics 是条件：没有别的健康指标就很难解读。",
+          "underlineRanges": [
+            {
+              "start": 19,
+              "end": 76,
+              "quote": "extremely low or high values of BMI could be an indicator"
+            },
+            {
+              "start": 136,
+              "end": 189,
+              "quote": "but values around 25 to 30 are difficult to interpret"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1"
+              ],
+              "start": 0,
+              "end": 144,
+              "quote": "在医生的诊室、健身房和在线计算器上，你都能看到它：身体质量指数，即 BMI。自 20 世纪 70 年代问世以来，它就无处不在。但在过去十年左右，这一“健康体重”的度量标准受到了审视，而且理由充分。专家们说，身体健康与 BMI 之间的关系很复杂，BMI 往往不能很好地反映你的整体健康状况。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:2"
+              ],
+              "start": 145,
+              "end": 262,
+              "quote": "BMI 是一种简单的测量方法，用一个人的体重（如果用公制，就是以千克计的质量）除以身高算出。几十年来，临床医生一直用 BMI 把我们的体重分成几类：偏瘦、正常、超重或肥胖。25 是个关键数字：达到或超过这个数，你就属于超重或肥胖一类。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:3"
+              ],
+              "start": 263,
+              "end": 363,
+              "quote": "一些人群研究把高 BMI 与心血管疾病、II 型糖尿病和其他内分泌失调的风险增加联系在一起。然而，造成这些健康危害的可能不只是体重：研究表明，高 BMI 人群所承受的社会羞辱感也可能导致健康状况不佳。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4"
+              ],
+              "start": 364,
+              "end": 467,
+              "quote": "另一些研究则没能发现 BMI 与健康之间有很强的关联。哈佛医学院副教授、麻省总医院肥胖医学医生 Fatima Stanford 说，偏瘦的人可能不健康，而 BMI 超过 25 的人也可能具备一些健康的指标。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5"
+              ],
+              "start": 468,
+              "end": 635,
+              "quote": "那为什么我们仍然依赖 BMI 呢？原因之一是它测量起来相对简单。梅奥诊所的医生 Eleanna De Filippis 说，这让没有受过专门训练的从业人员也能轻松使用这一指标。Stanford 说，尽管 BMI 问世已久，极低或极高的 BMI 值仍可能提示潜在的健康问题，但如果没有其他健康指标，25 到 30 之间的数值就很难解读。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:6"
+              ],
+              "start": 636,
+              "end": 779,
+              "quote": "然而，只用 BMI 来评估健康存在很大问题。BMI 无法分辨一个人的体重中有多少来自脂肪、肌肉或骨骼。De Filippis 说，这就是为什么肌肉发达的运动员虽然体脂很少，BMI 却常常很高。Stanford 说，一个人也可能血压、胆固醇偏高等健康指标不佳，BMI 却处在“正常”范围。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-c-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:6",
+                "start": 258,
+                "end": 373,
+                "quote": "It’s also possible to have poor health measures, like high blood pressure and cholesterol, and be at a “normal” BMI"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4",
+                "start": 79,
+                "end": 115,
+                "quote": "People who are lean can be unhealthy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p6",
+                "start": 107,
+                "end": 142,
+                "quote": "一个人也可能血压、胆固醇偏高等健康指标不佳，BMI 却处在“正常”范围"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p4",
+                "start": 66,
+                "end": 75,
+                "quote": "偏瘦的人可能不健康"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-c-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4",
+                "start": 79,
+                "end": 179,
+                "quote": "People who are lean can be unhealthy, and people who have a BMI over 25 can have some health markers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p4",
+                "start": 66,
+                "end": 102,
+                "quote": "偏瘦的人可能不健康，而 BMI 超过 25 的人也可能具备一些健康的指标"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-c-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5",
+                "start": 263,
+                "end": 347,
+                "quote": "extremely low or high values of BMI could be an indicator of potential health issues"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p5",
+                "start": 111,
+                "end": 135,
+                "quote": "极低或极高的 BMI 值仍可能提示潜在的健康问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-c-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1",
+                "start": 362,
+                "end": 416,
+                "quote": "it’s often not a good indicator of your overall health"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:6",
+                "start": 9,
+                "end": 49,
+                "quote": "there are big issues with only using BMI"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p1",
+                "start": 122,
+                "end": 143,
+                "quote": "BMI 往往不能很好地反映你的整体健康状况"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p6",
+                "start": 3,
+                "end": 21,
+                "quote": "只用 BMI 来评估健康存在很大问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:3",
+                "start": 154,
+                "end": 343,
+                "quote": "However, it may not be weight alone that plays into these negative health effects: research shows the societal shame people with high BMI have could also contribute to poor health outcomes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p3",
+                "start": 46,
+                "end": 100,
+                "quote": "然而，造成这些健康危害的可能不只是体重：研究表明，高 BMI 人群所承受的社会羞辱感也可能导致健康状况不佳。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:30"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5",
+                "start": 244,
+                "end": 463,
+                "quote": "Stanford says that extremely low or high values of BMI could be an indicator of potential health issues despite its early introduction, but values around 25 to 30 are difficult to interpret without other health metrics."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-c",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-c-p5",
+                "start": 88,
+                "end": 167,
+                "quote": "Stanford 说，尽管 BMI 问世已久，极低或极高的 BMI 值仍可能提示潜在的健康问题，但如果没有其他健康指标，25 到 30 之间的数值就很难解读。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "首段指出 BMI 无处不在却受到质疑，接着介绍它怎么算、怎么分档，再用两段摆出研究上的分歧，然后解释人们为何仍依赖它，末段集中指出只用 BMI 评估健康的问题。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1",
+            "summary": "BMI 随处可见、沿用多年，但近年受到审视，专家说它往往反映不了整体健康。",
+            "function": "引出话题并亮出全文观点。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:2",
+            "summary": "BMI 用体重除以身高算出，按数值分为四类，25 及以上属超重或肥胖。",
+            "function": "介绍 BMI 的算法和分档。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:3",
+            "summary": "有研究把高 BMI 和疾病风险联系起来，但健康危害可能还来自社会羞辱感。",
+            "function": "说明高 BMI 与疾病的关联并不简单。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4",
+            "summary": "另一些研究没发现 BMI 与健康的强关联：瘦人可能不健康，BMI 超过 25 的人也可能健康。",
+            "function": "用反例进一步质疑 BMI。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5",
+            "summary": "BMI 仍被依赖，是因为测量简单；极端数值有提示作用，但 25 到 30 之间难以解读。",
+            "function": "解释 BMI 沿用至今的原因，同时指出它的局限。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:6",
+            "summary": "只用 BMI 问题很大：它分不清脂肪、肌肉和骨骼，BMI 正常的人也可能健康不佳。",
+            "function": "集中指出 BMI 的缺陷，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiyang-2024-11:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "带着各选项回原文核对关于 BMI 的说法，找出与原文一致的一项。",
+      "stemTranslationZh": "关于 BMI，我们可以知道什么？",
+      "locateBy": "options",
+      "locateFindZh": "数字回[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:2]]对分档，人群和用法回后几段找原话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "BMI 在正常范围内的人也可能不健康。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:6",
+              "quote": "It’s also possible to have poor health measures, like high blood pressure and cholesterol, and be at a “normal” BMI",
+              "anchor": "BMI 正常也可能健康不佳"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4",
+              "quote": "People who are lean can be unhealthy",
+              "anchor": "瘦人也可能不健康"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "专家建议用 BMI 来反映我们的整体健康状况。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "it’s often not a good indicator of your overall health, experts say",
+            "sourceHighlight": "not a good indicator",
+            "optionText": "Experts suggest using BMI to imply our overall health.",
+            "optionHighlight": "suggest using BMI to imply our overall health",
+            "explanation": "专家说 BMI 往往不能很好地反映整体健康（not a good indicator），选项却说专家建议用它来反映整体健康。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1",
+              "quote": "it’s often not a good indicator of your overall health, experts say",
+              "anchor": "专家的看法"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "BMI 为 26 的人属于肥胖一类。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "at this number or higher, you fall into the overweight or obese category",
+            "sourceEntity": "the overweight or obese category",
+            "optionText": "People who have a BMI of 26 fall into the obese category.",
+            "optionEntity": "the obese category",
+            "explanation": "原文说 25 及以上归入超重或肥胖一类（overweight or obese），26 只能说落在这两类之一，选项直接定成了肥胖。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "如今人们不常用 BMI 来衡量健康。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Then why do we still rely on BMI?",
+            "sourceHighlight": "still rely on BMI",
+            "optionText": "People don’t often use BMI to measure their health nowadays.",
+            "optionHighlight": "don’t often use BMI",
+            "explanation": "[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1]]说诊室、健身房、在线计算器里都能见到 BMI，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5|Then why do we still rely on BMI?]]也说人们至今仍依赖它，选项说成如今不常用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5",
+              "quote": "Then why do we still rely on BMI?",
+              "anchor": "仍然依赖 BMI"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "People within normal BMI range can be unhealthy",
+          "sourceRole": "correctOption",
+          "targetText": "It’s also possible to have poor health measures, like high blood pressure and cholesterol, and be at a “normal” BMI",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:6",
+          "relationType": "paraphrase",
+          "note": "原文说血压、胆固醇偏高的人也可能 BMI“正常”（be at a “normal” BMI），也就是 BMI 在正常范围的人照样可能不健康；[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4|People who are lean can be unhealthy]]说瘦人也会不健康，指向同一点，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:29": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "借前后两句的对照和例子，推断 correlation 在句中的意思。",
+      "stemTranslationZh": "第 4 段中画线词“correlation”是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看反例",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "假设。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Assumption",
+            "explanation": "放进去成了“没能找到 BMI 与健康之间很强的假设”，可研究要查的是两者挂不挂钩，后文举的也是对不上的实例，不是假设。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "联系。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4",
+              "quote": "People who are lean can be unhealthy, and people who have a BMI over 25 can have some health markers",
+              "anchor": "瘦人不健康、BMI 高也健康"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:3",
+              "quote": "Some population studies have associated having a high BMI with increased risk of cardiovascular disease",
+              "anchor": "一些研究把两者联系起来"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "纠正。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Correction",
+            "explanation": "放进去成了“没能找到 BMI 与健康之间很强的纠正”，句子不成话；correction 只是拼写和 correlation 相近。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "区别。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Distinction",
+            "explanation": "放进去成了“没能找到 BMI 与健康之间明显的区别”，等于说两者一致，可后文的例子恰恰说明两者常常对不上。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "correlation",
+          "sourceRole": "stem",
+          "targetText": "Other studies have failed to find a strong correlation between BMI and health.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4",
+          "relationType": "locationCue",
+          "answerText": "People who are lean can be unhealthy, and people who have a BMI over 25 can have some health markers",
+          "bridgeZh": "瘦人不健康、BMI 过 25 也健康，说明两者常对不上",
+          "note": "题干 correlation 原词出现在原文。"
+        },
+        {
+          "sourceText": "Connection",
+          "sourceRole": "correctOption",
+          "targetText": "Other studies have failed to find a strong correlation between BMI and health.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:3]]说一些研究把高 BMI 和疾病风险联系起来（associated），这里 Other studies 唱反调，后面又举出 BMI 和健康对不上的例子，所以 correlation 必须是两者之间的“联系”。放回去：另一些研究没能找到 BMI 与健康之间很强的联系，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到 Stanford 本人的说法，分清她和 De Filippis 各自给出的理由。",
+      "stemTranslationZh": "为什么 Stanford 认为 BMI 被广泛使用？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 but 前",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它在很多情况下既科学又可靠。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "values around 25 to 30 are difficult to interpret without other health metrics",
+            "sourceHighlight": "difficult to interpret",
+            "optionText": "It is scientific and reliable in many cases.",
+            "optionHighlight": "scientific and reliable in many cases",
+            "explanation": "Stanford 只认可极低或极高的数值，还说 25 到 30 之间的数值离开别的指标就很难解读（difficult to interpret），谈不上多数情况下科学可靠。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5",
+              "quote": "values around 25 to 30 are difficult to interpret without other health metrics",
+              "anchor": "25 到 30 难以解读"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "没受过多少训练的人也容易使用它。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This makes the metric easily accessible to practitioners without specialized training, says Eleanna De Filippis",
+            "sourceEntity": "Eleanna De Filippis",
+            "optionText": "It is easy to use for those without much training.",
+            "optionEntity": "easy to use for those without much training",
+            "explanation": "没受过专门训练的人也能用，是 De Filippis 的说法（says Eleanna De Filippis），不是 Stanford 给的理由。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它仍然能准确反映你的整体健康状况。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "it’s often not a good indicator of your overall health, experts say",
+            "sourceHighlight": "not a good indicator",
+            "optionText": "It is still an accurate indicator of your overall health.",
+            "optionHighlight": "still an accurate indicator",
+            "explanation": "选项借[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1]]的 indicator of your overall health，原文说的是 BMI 往往不能很好地反映整体健康（not a good indicator），方向正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1",
+              "quote": "it’s often not a good indicator of your overall health, experts say",
+              "anchor": "专家的看法"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它在提示健康问题方面能起一些作用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5",
+              "quote": "Stanford says that extremely low or high values of BMI could be an indicator of potential health issues despite its early introduction",
+              "anchor": "极端数值能提示健康问题"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Stanford",
+          "sourceRole": "stem",
+          "targetText": "Stanford says that extremely low or high values of BMI could be an indicator of potential health issues despite its early introduction, but values around 25 to 30 are difficult to interpret without other health metrics.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "extremely low or high values of BMI could be an indicator of potential health issues",
+          "note": "题干 Stanford 原词出现在原文。"
+        },
+        {
+          "sourceText": "It could be of some use in indicating health problems",
+          "sourceRole": "correctOption",
+          "targetText": "Stanford says that extremely low or high values of BMI could be an indicator of potential health issues despite its early introduction, but values around 25 to 30 are difficult to interpret without other health metrics.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项的“提示健康问题”（indicating health problems）对应原文 could be an indicator of potential health issues；原文只说极低或极高的数值有提示作用，选项用“起一些作用”（of some use）把程度收住，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:31": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "通读全文各段在讲什么，判断作者写这篇文章的主要目的。",
+      "stemTranslationZh": "作者写这篇文章的目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1]] 先说 BMI 随处可见却 come under examination，再看后几段围绕它摆出了哪些问题",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "向读者介绍什么是 BMI。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "BMI is a simple measurement calculated by dividing a person’s weight (or mass in kilograms if using metric) by their height.",
+            "sourceHighlight": "BMI is a simple measurement",
+            "optionText": "To introduce to readers what BMI is.",
+            "optionHighlight": "what BMI is",
+            "explanation": "太窄：介绍 BMI 是什么、怎么算只在[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:2]]，后面几段都在讲它的问题。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "论证 BMI 不应被广泛使用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "However, there are big issues with only using BMI.",
+            "sourceHighlight": "only using BMI",
+            "optionText": "To argue that BMI should not be used widely.",
+            "optionHighlight": "should not be used widely",
+            "explanation": "原文反对的是只用 BMI 评估健康（only using BMI），还承认它测量简单、极端数值有提示作用，没有主张少用它。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "告诉读者 BMI 的缺点。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1",
+              "quote": "it’s often not a good indicator of your overall health, experts say",
+              "anchor": "往往反映不了整体健康"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:6",
+              "quote": "However, there are big issues with only using BMI.",
+              "anchor": "只用 BMI 问题很大"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "鼓励读者放弃使用 BMI。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "extremely low or high values of BMI could be an indicator of potential health issues",
+            "sourceHighlight": "could be an indicator of potential health issues",
+            "optionText": "To encourage readers to abandon the use of BMI.",
+            "optionHighlight": "abandon the use of BMI",
+            "explanation": "原文没有劝读者放弃 BMI，Stanford 还说极低或极高的数值可能提示健康问题，作者只是讲清它的局限。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To inform readers of the shortcomings of BMI",
+          "sourceRole": "correctOption",
+          "targetText": "However, there are big issues with only using BMI.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-c:6",
+          "relationType": "paraphrase",
+          "note": "几段写的都是 BMI 衡量健康的不足：[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:1]]说它往往反映不了整体健康，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:3]]说健康危害不只来自体重，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:4]]说瘦人也会不健康，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:5]]说 25 到 30 难以解读，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-c:6]]直说问题很大（big issues）。选项的“缺点”（shortcomings）把这些都包进去，作者是把问题讲给读者听，选 C。"
+        }
+      ]
+    }
+  }
+}

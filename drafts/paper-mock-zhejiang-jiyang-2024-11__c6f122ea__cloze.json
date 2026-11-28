@@ -1,0 +1,1793 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiyang-2024-11",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiyang-2024-11:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiyang-2024-11:cloze": {
+      "overview": "杰里总是心情愉快，说每天都选择好心情。多年后他遭抢劫中枪，在急救室里选择活下去，用一声“子弹”的玩笑让医护把他当活人抢救，最终活了下来，“我”由此学会每天选择乐观生活。",
+      "fullTranslationZh": "杰里是那种总是心情很好、总有积极的话可说的人。有一天，我走到杰里跟前问他：“我搞不懂！你不可能一直都心情好。你是怎么做到的？”杰里回答说：“每天早上醒来，我都会对自己说：杰里，你今天有两个选择——心情好，或者心情坏。我选择前者。”“是啊，可没那么容易。”我反驳道。\n“是的，很容易，”杰里说，“人生就是选择。你选择怎样应对各种情况，你选择别人怎样影响你的心情。怎样过一生是你自己的选择。”我反复思考杰里的话。此后不久，我换了工作，我们失去了联系。几年后，我听说杰里遭到抢劫，还中了枪。事发大约六个月后，我见到了杰里。\n我问他被送往医院时脑子里闪过了什么。杰里回答：“我有两个选择：可以选择活，也可以选择死。我选择了活。”杰里接着说：“护士们一直跟我说我会没事的。可当他们把我推进急救室时，医生和护士脸上的表情把我吓坏了。从他们的眼神里，我读出了‘他死定了’。我知道我得采取行动。”“你做了什么？”我问。“嗯，手术前，一位护士问我对什么东西过敏。医生护士们都在等我回答……我深吸一口气，大喊：‘子弹！’在他们的笑声中，我告诉他们：‘请把我当成活人来做手术，而不是死人。’”杰里能活下来，离不开医生的专业技术，也因为他那了不起的心态。我从他身上懂得了：每天我们都可以选择乐观地生活——这要感谢杰里。",
+      "mainLine": {
+        "theme": {
+          "text": "人生就是选择，人每天都能选择用怎样的心态面对生活（Life is all about choices）。",
+          "quote": "Life is all about choices"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+            "text": "杰里总是心情好，说每天都选择好心情，“我”不以为然。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+            "text": "杰里说人生就是选择，“我”反复琢磨；多年后听说他中枪。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+            "text": "杰里在急救室选择活下去，靠玩笑和心态得救，“我”学会乐观。"
+          }
+        ],
+        "emotion": "不解→不以为然→震惊→深受启发"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "cloze-ls-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+          "sourceText": "But when they __48__ me into the emergency room, the expressions on the faces of the doctors and nurses __49__ me.",
+          "displayText": "But when they wheeled me into the emergency room, the expressions on the faces of the doctors and nurses scared me.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:48",
+            "question:paper-mock-zhejiang-jiyang-2024-11:49"
+          ],
+          "translationZh": "可当他们把我推进急救室时，医生和护士脸上的表情把我吓坏了。",
+          "analysisZh": "主干是“表情吓坏了我”（the expressions … scared me）。主语后面接两层介词短语（on the faces of the doctors and nurses），说明是医生和护士脸上的表情。句首时间状语从句（when they wheeled me into the emergency room）交代被推进急救室的那一刻；但是（But）把这一刻和前一句护士说“你会没事”对立起来。",
+          "underlineRanges": [
+            {
+              "start": 4,
+              "end": 48,
+              "quote": "when they wheeled me into the emergency room"
+            },
+            {
+              "start": 50,
+              "end": 65,
+              "quote": "the expressions"
+            },
+            {
+              "start": 105,
+              "end": 114,
+              "quote": "scared me"
+            }
+          ]
+        },
+        {
+          "sentenceId": "cloze-ls-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+          "sourceText": "I asked him what had __46__ his mind when he was taken to the hospital.",
+          "displayText": "I asked him what had gone through his mind when he was taken to the hospital.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:46"
+          ],
+          "translationZh": "我问他被送往医院时脑子里闪过了什么。",
+          "analysisZh": "主干是“我问他”（I asked him），后面的宾语从句（what had gone through his mind）是问的内容，从句里的连接词（what）作主语，意思是“什么闪过了他的脑海”。时间状语从句（when he was taken to the hospital）说明是在被送医时；宾语从句用过去完成时，因为闪念发生在“我问”之前。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 11,
+              "quote": "I asked him"
+            },
+            {
+              "start": 12,
+              "end": 42,
+              "quote": "what had gone through his mind"
+            },
+            {
+              "start": 43,
+              "end": 76,
+              "quote": "when he was taken to the hospital"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:cloze:1"
+              ],
+              "start": 0,
+              "end": 132,
+              "quote": "杰里是那种总是心情很好、总有积极的话可说的人。有一天，我走到杰里跟前问他：“我搞不懂！你不可能一直都心情好。你是怎么做到的？”杰里回答说：“每天早上醒来，我都会对自己说：杰里，你今天有两个选择——心情好，或者心情坏。我选择前者。”“是啊，可没那么容易。”我反驳道。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:cloze:2"
+              ],
+              "start": 133,
+              "end": 258,
+              "quote": "“是的，很容易，”杰里说，“人生就是选择。你选择怎样应对各种情况，你选择别人怎样影响你的心情。怎样过一生是你自己的选择。”我反复思考杰里的话。此后不久，我换了工作，我们失去了联系。几年后，我听说杰里遭到抢劫，还中了枪。事发大约六个月后，我见到了杰里。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3"
+              ],
+              "start": 259,
+              "end": 547,
+              "quote": "我问他被送往医院时脑子里闪过了什么。杰里回答：“我有两个选择：可以选择活，也可以选择死。我选择了活。”杰里接着说：“护士们一直跟我说我会没事的。可当他们把我推进急救室时，医生和护士脸上的表情把我吓坏了。从他们的眼神里，我读出了‘他死定了’。我知道我得采取行动。”“你做了什么？”我问。“嗯，手术前，一位护士问我对什么东西过敏。医生护士们都在等我回答……我深吸一口气，大喊：‘子弹！’在他们的笑声中，我告诉他们：‘请把我当成活人来做手术，而不是死人。’”杰里能活下来，离不开医生的专业技术，也因为他那了不起的心态。我从他身上懂得了：每天我们都可以选择乐观地生活——这要感谢杰里。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+            "text": "Jerry was the kind of guy who was always in a good mood and always had something positive to say. One day I went up to Jerry and asked him, “I don’t get it! You can’t be in a good mood all of the time. How do you do it?” Jerry replied, “Each morning I wake up and say to myself, Jerry, you have two choices today – to be in a good mood or in a bad one.I choose the former.” “Yeah, it’s not that easy,” I protested."
+          },
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+            "text": "“Yes. it is,” Jerry said. “Life is all about choices. You choose how you react to situations. You choose how people will affect your mood. It’s your choice how you live a life. “I reflected on what Jerry said. Soon thereafter, I changed my job. We lost touch. Several years later. I heard that Jerry was robbed and was shot. I saw Jerry about six months after the accident."
+          },
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+            "text": "I asked him what had gone through his mind when he was taken to the hospital. Jerry replied, “I had two choices: I could choose to live, or I could choose to die. I chose to live.” Jerry continued, “The nurses kept telling me I was going to be fine. But when they wheeled me into the emergency room, the expressions on the faces of the doctors and nurses scared me. In their eyes, I read, ‘He’s a dead man.’ I knew I needed to take action.” “What did you do?” I asked. “Well, before the surgery, a nurse asked if I was allergic to（对……过敏） anything. The doctors and nurses were waiting for my reply... I took a deep breath and yelled. ‘Bullets!’ Over their laughter, I told them, ‘Operate on me as if I am alive, not dead’.” Jerry would not have survived without the expertise of his doctors, but also because of his amazing attitude.I learned from him that every day we have the choice to live optimistically thanks to Jerry."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "start": 160,
+                "end": 203,
+                "quote": "You can’t be in a good mood all of the time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "start": 43,
+                "end": 53,
+                "quote": "你不可能一直都心情好"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:41"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "start": 149,
+                "end": 152,
+                "quote": "get"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "start": 39,
+                "end": 42,
+                "quote": "搞不懂"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "start": 384,
+                "end": 402,
+                "quote": "it’s not that easy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "start": 119,
+                "end": 125,
+                "quote": "可没那么容易"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:42"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "start": 404,
+                "end": 413,
+                "quote": "protested"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:1",
+                "start": 128,
+                "end": 130,
+                "quote": "反驳"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 80,
+                "end": 93,
+                "quote": "to situations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 28,
+                "end": 32,
+                "quote": "各种情况"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:43"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 73,
+                "end": 78,
+                "quote": "react"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 26,
+                "end": 28,
+                "quote": "应对"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 188,
+                "end": 203,
+                "quote": "what Jerry said"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 66,
+                "end": 70,
+                "quote": "杰里的话"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:44"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 180,
+                "end": 192,
+                "quote": "reflected on"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 62,
+                "end": 66,
+                "quote": "反复思考"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 310,
+                "end": 318,
+                "quote": "was shot"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 105,
+                "end": 108,
+                "quote": "中了枪"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:45"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 304,
+                "end": 310,
+                "quote": "robbed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:2",
+                "start": 99,
+                "end": 103,
+                "quote": "遭到抢劫"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 28,
+                "end": 36,
+                "quote": "his mind"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 9,
+                "end": 12,
+                "quote": "脑子里"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:46"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 21,
+                "end": 33,
+                "quote": "gone through"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 12,
+                "end": 14,
+                "quote": "闪过"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 211,
+                "end": 244,
+                "quote": "telling me I was going to be fine"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 63,
+                "end": 71,
+                "quote": "跟我说我会没事的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:47"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 210,
+                "end": 214,
+                "quote": "kept"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 61,
+                "end": 63,
+                "quote": "一直"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 270,
+                "end": 293,
+                "quote": "into the emergency room"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 80,
+                "end": 83,
+                "quote": "急救室"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:48"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 264,
+                "end": 271,
+                "quote": "wheeled"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 78,
+                "end": 80,
+                "quote": "推进"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 387,
+                "end": 402,
+                "quote": "He’s a dead man"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 114,
+                "end": 118,
+                "quote": "他死定了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:49"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 355,
+                "end": 361,
+                "quote": "scared"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 97,
+                "end": 100,
+                "quote": "吓坏了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 361,
+                "end": 374,
+                "quote": "In their eyes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 101,
+                "end": 108,
+                "quote": "从他们的眼神里"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:50"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 383,
+                "end": 387,
+                "quote": "read"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 110,
+                "end": 113,
+                "quote": "读出了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 674,
+                "end": 687,
+                "quote": "Operate on me"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 213,
+                "end": 217,
+                "quote": "来做手术"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:51"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 487,
+                "end": 494,
+                "quote": "surgery"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 145,
+                "end": 148,
+                "quote": "手术前"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 639,
+                "end": 658,
+                "quote": "Over their laughter"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 191,
+                "end": 198,
+                "quote": "在他们的笑声中"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:52"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 634,
+                "end": 641,
+                "quote": "Bullets"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 187,
+                "end": 189,
+                "quote": "子弹"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 767,
+                "end": 781,
+                "quote": "of his doctors"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 236,
+                "end": 239,
+                "quote": "医生的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:53"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 765,
+                "end": 774,
+                "quote": "expertise"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 239,
+                "end": 243,
+                "quote": "专业技术"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 157,
+                "end": 172,
+                "quote": "I chose to live"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 44,
+                "end": 49,
+                "quote": "我选择了活"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:54"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 823,
+                "end": 831,
+                "quote": "attitude"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 253,
+                "end": 255,
+                "quote": "心态"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 846,
+                "end": 882,
+                "quote": "every day we have the choice to live"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 265,
+                "end": 274,
+                "quote": "每天我们都可以选择"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:55"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 893,
+                "end": 907,
+                "quote": "optimistically"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 274,
+                "end": 277,
+                "quote": "乐观地"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-cloze-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:48",
+              "question:paper-mock-zhejiang-jiyang-2024-11:49"
+            ],
+            "selectedSentenceId": "cloze-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 254,
+                "end": 298,
+                "quote": "when they wheeled me into the emergency room"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 300,
+                "end": 315,
+                "quote": "the expressions"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 355,
+                "end": 364,
+                "quote": "scared me"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 72,
+                "end": 101,
+                "quote": "可当他们把我推进急救室时，医生和护士脸上的表情把我吓坏了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-cloze-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:46"
+            ],
+            "selectedSentenceId": "cloze-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 0,
+                "end": 11,
+                "quote": "I asked him"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 12,
+                "end": 42,
+                "quote": "what had gone through his mind"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 43,
+                "end": 76,
+                "quote": "when he was taken to the hospital"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:cloze:3",
+                "start": 0,
+                "end": 18,
+                "quote": "我问他被送往医院时脑子里闪过了什么。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "不解→不以为然→震惊→深受启发"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-zhejiang-jiyang-2024-11:41": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "detail",
+      "context": "“我”不信有人能一直心情好，这里要说“我”想不通、不明白。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "后面说你不可能一直心情好（You can’t be in a good mood all of the time），又问你怎么做到的（How do you do it?），可见“我”弄不明白。",
+        "quotes": [
+          "You can’t be in a good mood all of the time",
+          "How do you do it?"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "理解",
+        "reason": "“我”不信有人能一直心情好，这里要说“我”想不通、不明白。动词看语境义：后面说你不可能一直心情好（You can’t be in a good mood all of the time），又问你怎么做到的（How do you do it?），可见“我”弄不明白。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "make",
+          "meaning": "做成；“我没做成”接不上后面的追问，“我”问的是杰里怎么做到的（How do you do it?）。",
+          "quote": "How do you do it?"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "keep",
+          "meaning": "保持；“我没保持住它”说不通，“我”是对杰里总是心情好（always in a good mood）感到想不通。",
+          "quote": "always in a good mood"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "beat",
+          "meaning": "打败；“我没打败它”说不通，“我”是在质疑有人能一直心情好（in a good mood all of the time）。",
+          "quote": "in a good mood all of the time"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "How do you do it?",
+          "signalSide": "context-after",
+          "relation": "追问杰里怎么做到，说明“我”对此不明白。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:42": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "main",
+      "context": "“我”不认同杰里“选择好心情”的说法，要一个表示反对的说话动词。",
+      "find": {
+        "check": "affect",
+        "text": "“我”说的是没那么容易（it’s not that easy），杰里随即坚持“是的，很容易”（Yes. it is），可见“我”在唱反调。",
+        "quotes": [
+          "it’s not that easy",
+          "Yes. it is"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "抗议",
+        "meaning": "反驳",
+        "reason": "“我”不认同杰里“选择好心情”的说法，要一个表示反对的说话动词。动词看情感：“我”说的是没那么容易（it’s not that easy），杰里随即坚持“是的，很容易”（Yes. it is），可见“我”在唱反调。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "promised",
+          "meaning": "许诺；“我”说的是没那么容易（it’s not that easy），是在反对杰里，没有答应什么。",
+          "quote": "it’s not that easy"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "admitted",
+          "meaning": "承认；承认要顺着杰里说，可杰里接着还要坚持“是的，很容易”（Yes. it is），说明“我”在反对。",
+          "quote": "Yes. it is"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "commented",
+          "meaning": "评论；中性地发表看法，显不出“我”对“选择好心情”（I choose the former）的不认同。",
+          "quote": "I choose the former"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "it’s not that easy",
+          "signalSide": "context-before",
+          "relation": "“我”觉得没那么容易，态度是反对。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Yes. it is",
+          "signalSide": "context-after",
+          "relation": "杰里坚持原来的说法，回应的正是“我”的反驳。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:43": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "main",
+      "context": "杰里讲“人生就是选择”，第一条是人能选择怎样面对遇到的情况。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是介词（to）加各种情况（situations），对情况作出反应（react to）正好搭上。",
+        "quotes": [
+          "situations"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "作出反应",
+        "meaning": "应对",
+        "reason": "杰里讲“人生就是选择”，第一条是人能选择怎样面对遇到的情况。动词看搭配：空后是介词（to）加各种情况（situations），对情况作出反应（react to）正好搭上。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "attend",
+          "meaning": "照料、处理；杰里说的是面对情况（situations）时的态度，下一句讲别人怎样影响心情，都是心态而非处理事务。",
+          "quote": "situations"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "reply",
+          "meaning": "回答；能回答的是问题或人，不能“回答”各种情况（situations）。",
+          "quote": "situations"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "devote",
+          "meaning": "奉献；“选择怎样奉献给各种情况（situations）”说不通，这里讲的是怎样面对。",
+          "quote": "situations"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to situations",
+          "signalSide": "context-after",
+          "targetText": "react to situations",
+          "relation": "对各种情况作出反应。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:44": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:44",
+      "blankNo": 44,
+      "pos": "phrase",
+      "role": "main",
+      "context": "“我”听完杰里的话后，要一个表示“认真想一想”的动作。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "宾语是杰里说的话（what Jerry said），末段“我”说从他身上学到了道理（I learned from him），可见这番话“我”反复想过。",
+        "quotes": [
+          "what Jerry said",
+          "I learned from him"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "仔细思考",
+        "reason": "“我”听完杰里的话后，要一个表示“认真想一想”的动作。词组看语境义：宾语是杰里说的话（what Jerry said），末段“我”说从他身上学到了道理（I learned from him），可见这番话“我”反复想过。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "carried on",
+          "meaning": "继续进行；杰里的话（what Jerry said）已经说完，“我”是听的人，谈不上继续。",
+          "quote": "what Jerry said"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "depended on",
+          "meaning": "依靠；“我”刚反驳过没那么容易（it’s not that easy），谈不上依靠他的话。",
+          "quote": "it’s not that easy"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "held on",
+          "meaning": "坚持住；它后面不直接接宾语，接不上杰里说的话（what Jerry said）。",
+          "quote": "what Jerry said"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "what Jerry said",
+          "signalSide": "context-after",
+          "targetText": "reflected on what Jerry said",
+          "relation": "思考的对象是杰里的话。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "on",
+          "signalSide": "option",
+          "targetText": "reflected on",
+          "relation": "小品词（on）引出思考的对象。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:45": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "多年后杰里出了事，要一个和后面“中枪”连在一起的遭遇。",
+      "find": {
+        "check": "collocation",
+        "text": "和后面的中枪（was shot）用并列连词（and）相连，后文又称这件事为意外（the accident），是遭抢劫时中的枪。",
+        "quotes": [
+          "was shot",
+          "the accident"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "抢劫",
+        "meaning": "遭到抢劫",
+        "reason": "多年后杰里出了事，要一个和后面“中枪”连在一起的遭遇。动词看搭配：和后面的中枪（was shot）用并列连词（and）相连，后文又称这件事为意外（the accident），是遭抢劫时中的枪。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "swallowed",
+          "meaning": "吞下；“杰里被吞下”说不通，后面讲的是他中了枪（was shot）。",
+          "quote": "was shot"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "sentenced",
+          "meaning": "判刑；被判刑是因为犯罪，后文却把这件事称为意外（the accident）。",
+          "quote": "the accident"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "accused",
+          "meaning": "指控；被指控不会接着就中枪（was shot），后文说的是一场意外。",
+          "quote": "was shot"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "was shot",
+          "signalSide": "context-after",
+          "relation": "与中枪并列，是同一次遭遇。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the accident",
+          "signalSide": "context-after",
+          "relation": "后文把遭抢劫中枪称为这次意外。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:46": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:46",
+      "blankNo": 46,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "“我”问杰里被送往医院时心里冒出了什么念头。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "宾语是他的脑海（his mind），杰里接着说出当时的念头：我有两个选择（I had two choices），可见是念头闪过脑海。",
+        "quotes": [
+          "his mind",
+          "I had two choices"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "穿过",
+        "meaning": "在脑海中闪过",
+        "reason": "“我”问杰里被送往医院时心里冒出了什么念头。词组看语境义：宾语是他的脑海（his mind），杰里接着说出当时的念头：我有两个选择（I had two choices），可见是念头闪过脑海。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "broken through",
+          "meaning": "突破；冲破他的脑海（his mind）说不通，“我”问的是当时的念头。",
+          "quote": "his mind"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pulled through",
+          "meaning": "挺过难关；说的是病人挺过来，不能说什么挺过了他的脑海（his mind）。",
+          "quote": "his mind"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "carried through",
+          "meaning": "完成；完成的是计划，杰里的回答是当时的想法（I had two choices）。",
+          "quote": "I had two choices"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his mind",
+          "signalSide": "context-after",
+          "targetText": "gone through his mind",
+          "relation": "念头闪过脑海。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:47": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "detail",
+      "context": "护士们反复安慰杰里说他会没事，要表示动作一直持续。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是动名词短语（telling me I was going to be fine），表示不停地说；下一句用但是（But）转到医生的神情。",
+        "quotes": [
+          "telling me I was going to be fine",
+          "But"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "继续不断",
+        "reason": "护士们反复安慰杰里说他会没事，要表示动作一直持续。动词看搭配：空后是动名词短语（telling me I was going to be fine），表示不停地说；下一句用但是（But）转到医生的神情。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "risked",
+          "meaning": "冒险；冒险说你会没事（I was going to be fine）不合护士安慰伤员的情景。",
+          "quote": "I was going to be fine"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "regretted",
+          "meaning": "后悔；护士没有理由后悔说你会没事（I was going to be fine），这是安慰的话。",
+          "quote": "I was going to be fine"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "forgot",
+          "meaning": "忘记；后面用但是（But when they）转到神情吓人，前面应是护士在安慰他，而不是忘了安慰。",
+          "quote": "But when they"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "telling me",
+          "signalSide": "context-after",
+          "targetText": "kept telling me",
+          "relation": "后接动名词，表示不停地说。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:48": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "中枪的杰里被送进急救室，要一个运送伤员的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是我（me），去处是急救室（into the emergency room），伤员躺在带轮的推床上被推进去。",
+        "quotes": [
+          "into the emergency room"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "用轮子推动",
+        "meaning": "用推床推进",
+        "reason": "中枪的杰里被送进急救室，要一个运送伤员的动作。动词看搭配：宾语是我（me），去处是急救室（into the emergency room），伤员躺在带轮的推床上被推进去。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "involved",
+          "meaning": "使卷入；“把我卷入急救室”说不通，急救室（the emergency room）是运送的去处。",
+          "quote": "the emergency room"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "signaled",
+          "meaning": "示意；中枪（was shot）的杰里走不进去，是被人送进去的，不是看手势进去。",
+          "quote": "was shot"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "persuaded",
+          "meaning": "说服；把伤员送进急救室（the emergency room）抢救不需要劝说。",
+          "quote": "the emergency room"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "into the emergency room",
+          "signalSide": "context-after",
+          "targetText": "wheeled me into the emergency room",
+          "relation": "把杰里推进急救室。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:49": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "医护的神情让杰里觉得自己凶多吉少，这是他处境的低谷，要负面的感受。",
+      "find": {
+        "check": "affect",
+        "text": "但是（But）把护士说的会没事（going to be fine）翻过来，下一句他从眼神里读出他死定了（He’s a dead man）。",
+        "quotes": [
+          "going to be fine",
+          "He’s a dead man"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "使惊恐",
+        "reason": "医护的神情让杰里觉得自己凶多吉少，这是他处境的低谷，要负面的感受。动词看情感：但是（But）把护士说的会没事（going to be fine）翻过来，下一句他从眼神里读出他死定了（He’s a dead man）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "inspired",
+          "meaning": "鼓舞；医护的眼神透出他死定了（He’s a dead man），不会鼓舞他。",
+          "quote": "He’s a dead man"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "reminded",
+          "meaning": "提醒；下一句写眼神里读出死定了（a dead man），重点是吓人，而不是提醒他什么。",
+          "quote": "a dead man"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "transformed",
+          "meaning": "彻底改变；神情只是让他害怕，他随后才决定采取行动（I knew I needed to take action）。",
+          "quote": "I knew I needed to take action"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "He’s a dead man",
+          "signalSide": "context-after",
+          "relation": "眼神里读出死定了，感受是恐惧。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "the expressions on the faces",
+          "signalSide": "context-before",
+          "targetText": "the expressions … scared me",
+          "relation": "是脸上的表情吓到了杰里。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:50": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "detail",
+      "context": "杰里没听到谁说话，是从医护的眼神里看出“他死定了”。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "地点是在他们的眼睛里（In their eyes），得到的是一句话，所以是从神情里读出来。",
+        "quotes": [
+          "In their eyes"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "读懂",
+        "meaning": "看出",
+        "reason": "杰里没听到谁说话，是从医护的眼神里看出“他死定了”。动词看语境义：地点是在他们的眼睛里（In their eyes），得到的是一句话，所以是从神情里读出来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "claimed",
+          "meaning": "声称；声称要由“我”说出口，而这句话只在别人眼神里（In their eyes）。",
+          "quote": "In their eyes"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "agreed",
+          "meaning": "同意；杰里不会同意自己死定了，他接着就决定采取行动（take action）。",
+          "quote": "take action"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "pronounced",
+          "meaning": "宣布；宣布死亡的是医生，这里主语是杰里自己，话在别人眼神里（In their eyes）。",
+          "quote": "In their eyes"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "In their eyes",
+          "signalSide": "context-before",
+          "relation": "从眼神里看出对方的想法。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:51": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:51",
+      "blankNo": 51,
+      "pos": "noun",
+      "role": "detail",
+      "context": "护士问过敏史，是在一项医疗处置之前，要一个医疗名词。",
+      "find": {
+        "check": "echo",
+        "text": "护士先问是否对什么过敏（allergic to），后面杰里说给我做手术（Operate on me），手术前后呼应。",
+        "quotes": [
+          "allergic to",
+          "Operate on me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "外科手术",
+        "reason": "护士问过敏史，是在一项医疗处置之前，要一个医疗名词。名词看复现：护士先问是否对什么过敏（allergic to），后面杰里说给我做手术（Operate on me），手术前后呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "survival",
+          "meaning": "幸存；“在幸存之前”问过敏说不通，后面要给他做的是手术（Operate on me）。",
+          "quote": "Operate on me"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "struggle",
+          "meaning": "挣扎；问过敏（allergic to）是医疗处置前的例行询问，不针对挣扎。",
+          "quote": "allergic to"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "strategy",
+          "meaning": "策略；护士问过敏史（allergic to），这里要的是一项医疗操作，不是计划。",
+          "quote": "allergic to"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "Operate on me",
+          "signalSide": "context-after",
+          "relation": "后文的做手术复现了这个词。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "before the",
+          "signalSide": "context-before",
+          "targetText": "before the surgery",
+          "relation": "在手术之前询问过敏史。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:52": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "main",
+      "context": "杰里用一句玩笑回答过敏问题，既引来笑声，又扣住自己中枪的事。",
+      "find": {
+        "check": "echo",
+        "text": "他是中枪（was shot）送医的，说对子弹过敏是在拿伤情开玩笑，所以引来众人笑声（Over their laughter）。",
+        "quotes": [
+          "was shot",
+          "Over their laughter"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "子弹",
+        "reason": "杰里用一句玩笑回答过敏问题，既引来笑声，又扣住自己中枪的事。名词看复现：他是中枪（was shot）送医的，说对子弹过敏是在拿伤情开玩笑，所以引来众人笑声（Over their laughter）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Hospital",
+          "meaning": "医院；他此刻就在急救室（the emergency room），喊医院扣不上他中枪的经历。",
+          "quote": "the emergency room"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Mango",
+          "meaning": "芒果；对芒果过敏是平常的回答，引不出众人的笑声（Over their laughter）。",
+          "quote": "Over their laughter"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Alcohol",
+          "meaning": "酒精；正经报出过敏原不会引来笑声，杰里是借中枪（was shot）开玩笑。",
+          "quote": "was shot"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "was shot",
+          "signalSide": "context-before",
+          "relation": "中枪与子弹相呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "allergic to",
+          "signalSide": "context-before",
+          "targetText": "allergic to bullets",
+          "relation": "回答对什么过敏。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:53": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "detail",
+      "context": "说杰里得救离不开医生，要一个指医生专业能力的名词。",
+      "find": {
+        "check": "collocation",
+        "text": "修饰语是他的医生们（of his doctors），能救活中枪伤员、给他做手术（Operate on me）的是医术。",
+        "quotes": [
+          "of his doctors",
+          "Operate on me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "专门技能",
+        "meaning": "医术",
+        "reason": "说杰里得救离不开医生，要一个指医生专业能力的名词。名词看搭配：修饰语是他的医生们（of his doctors），能救活中枪伤员、给他做手术（Operate on me）的是医术。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ambition",
+          "meaning": "雄心；医生的雄心（of his doctors）救不了命，做手术靠的是技术。",
+          "quote": "of his doctors"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sympathy",
+          "meaning": "同情；同情救不活中枪的人，杰里能活下来（would not have survived without）靠的是医术。",
+          "quote": "would not have survived without"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "enthusiasm",
+          "meaning": "热情；光有热情做不了手术（Operate on me），医生这一方贡献的是专业能力。",
+          "quote": "Operate on me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of his doctors",
+          "signalSide": "context-after",
+          "targetText": "the expertise of his doctors",
+          "relation": "医生们的专业技术。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:54": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "杰里自己得救的原因，要概括他选择活下去、积极面对的心态。",
+      "find": {
+        "check": "echo",
+        "text": "前面他选择活下去（I chose to live），要求按活人来救（as if I am alive），这些概括成一个词就是态度。",
+        "quotes": [
+          "I chose to live",
+          "as if I am alive"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "态度",
+        "meaning": "积极的心态",
+        "reason": "杰里自己得救的原因，要概括他选择活下去、积极面对的心态。名词看复现：前面他选择活下去（I chose to live），要求按活人来救（as if I am alive），这些概括成一个词就是态度。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "humor",
+          "meaning": "幽默；喊子弹确实幽默，但让他活下来的是他选择活下去（I chose to live）的心态。",
+          "quote": "I chose to live"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "talent",
+          "meaning": "天赋；全文讲的是人生在于选择（Life is all about choices），不是天生的才能。",
+          "quote": "Life is all about choices"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "patience",
+          "meaning": "耐心；他是急着采取行动（take action），不是耐心等待。",
+          "quote": "take action"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "I chose to live",
+          "signalSide": "context-before",
+          "relation": "选择活下去就是他的态度。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "his amazing",
+          "signalSide": "context-before",
+          "targetText": "his amazing attitude",
+          "relation": "他那了不起的态度。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:55": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:55",
+      "blankNo": 55,
+      "pos": "adverb",
+      "role": "main",
+      "context": "全文收束，“我”从杰里身上学到每天都能选择积极地生活，这是点题处。",
+      "find": {
+        "check": "affect",
+        "text": "呼应开头杰里每天选择好心情（to be in a good mood），总有积极的话说（something positive to say）。",
+        "quotes": [
+          "to be in a good mood",
+          "something positive to say"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "乐观地",
+        "reason": "全文收束，“我”从杰里身上学到每天都能选择积极地生活，这是点题处。副词看情感：呼应开头杰里每天选择好心情（to be in a good mood），总有积极的话说（something positive to say）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "comfortably",
+          "meaning": "舒适地；杰里中枪后谈不上舒适，他选的是积极面对（I chose to live）。",
+          "quote": "I chose to live"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "peacefully",
+          "meaning": "平静地；平静不等于乐观，杰里每天选的是好心情（to be in a good mood）。",
+          "quote": "to be in a good mood"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "simply",
+          "meaning": "简单地；杰里讲的是选好心情（something positive to say），不是过简单的生活。",
+          "quote": "something positive to say"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "something positive to say",
+          "signalSide": "context-before",
+          "relation": "杰里总有积极的话说，对应乐观。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "the choice to live",
+          "signalSide": "context-before",
+          "targetText": "the choice to live optimistically",
+          "relation": "修饰生活（live），说明怎样生活。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    }
+  }
+}

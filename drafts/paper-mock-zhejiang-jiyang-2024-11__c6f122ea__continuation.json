@@ -1,0 +1,188 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: About one hundred years later, I heard his voice say my name. It was quiet and tired, not angry. I looked up and saw Dad outside the bars, still in his work clothes. I couldn’t meet his eyes. He signed some papers, and the woman waved me out of the cell. “Let’s go home,” was all he said. On the way, we passed our church again. I stole a look at him. His hands held the wheel tightly, and his eyes were red. I knew I had broken his heart.\n\nParagraph 2: After we arrived home, Dad finally asked me, \"Why?\" I opened my mouth, but no good reason came out. I had money in my pocket. I hadn’t needed any of those things. “It started with a lipstick,” I said at last. “My heart beat so fast when I walked out of the store, and I liked that feeling.” I lowered my head. “I did it just for the thrill.” Dad was silent for a long time. Then he said, “Tomorrow we’ll take back everything and pay for it.” That night I put the lipstick, the magazine and the other things into a bag. The next morning, Dad drove me from store to store. Each time I said sorry, my face burned, but Dad stood beside me all the way.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "十四岁的“我”因偷发带被店主抓住、送进警局，正等着父亲来接；父亲还没露面，但他是“我”此刻最怕面对的人。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "“我”用第一人称、一般过去时回忆，短句多，人物的话大多直接引出，情绪靠身体动作写（发抖、缩进座位、落泪）。续写照样用 I 和过去时，留几句短的直接引语，多写看得见的动作。",
+          "evidence": [
+            "I sat there, trembling uncontrollably."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在女警喊“你爸在路上了”：“我”还没见到父亲，父亲知道后怎么反应、“我”为什么偷、做错的事怎样弥补，都要在续写里解决。",
+          "evidence": [
+            "“Hey kid, your father’s on his way.”"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "十四岁的女孩，偷东西被抓",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "最怕父亲知道，一被抓就求店主别打电话给爸爸。",
+              "evidence": "“You’re not going to call my dad, are you?”"
+            },
+            {
+              "label": "此刻",
+              "text": "偷东西时的刺激已经变成恐惧和羞愧。",
+              "evidence": "now gave way to immense fear and shame."
+            },
+            {
+              "label": "表现",
+              "text": "看到自家教堂的尖塔就骂自己蠢，已经认错，但还没面对父亲。",
+              "evidence": "“How could I have been so stupid?"
+            }
+          ]
+        },
+        {
+          "name": "Dad",
+          "role": "“我”的父亲，正赶来警局",
+          "lines": [
+            {
+              "label": "性格",
+              "text": "原文没正面写他，只从“我”最怕伤他的心、全家去教堂看出，他是“我”敬重、看重是非的父亲；续写里他的反应要像这样一个父亲，不必写成大吵大闹。",
+              "evidence": "I’ve broken my father’s heart... and God’s,"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "I’ve broken my father’s heart",
+          "use": "第 1 段结尾用：回家路上“我”从父亲紧握方向盘的手和发红的眼睛看出，自己真的伤了他的心，把原文的担心落成眼前的事实。"
+        },
+        {
+          "sourceQuote": "just for the thrill of it",
+          "use": "第 2 段回答 Why 时用：店主骂的话由“我”自己说出口，承认偷东西只是为了刺激，这个答案才让人难受。"
+        },
+        {
+          "sourceQuote": "stealing lipstick, a teen magazine and all that stuff",
+          "use": "第 2 段用：从第一支口红讲起交代原因，结尾把口红、杂志这些东西装袋退回、付钱，问题落在具体动作上。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "父亲来警局接“我”，一路沉默；到家后“我”说出偷东西只为刺激，父亲带“我”第二天把偷来的东西挨家退回并付钱。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "父亲到达警局并接“我”离开；第二段首句说到家后父亲才“终于”开口问为什么，所以第一段里父亲不能质问原因，回家路上要保持沉默。",
+          "draft": "父亲的声音不带怒气，“我”不敢看他；他签完字带“我”出来，只说了一句回家，路过教堂时“我”看见他发红的眼睛，明白自己伤了他的心。",
+          "bridgeQuote": "Dad finally asked me, \"Why?\"",
+          "bridge": "父亲一路忍着没问，“我”到底为什么要偷？"
+        },
+        {
+          "paragraph": 2,
+          "must": "回答父亲的“为什么”，并让偷窃这件事有一个结果，收住原文留下的问题。",
+          "draft": "“我”想到自己口袋里有钱、并不缺这些东西，坦白从一支口红开始、只为刺激；父亲沉默后决定第二天把东西退回并付钱，“我”装好袋子，第二天在父亲陪同下挨家道歉。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: About one hundred years later, I heard his voice say my name. It was quiet and tired, not angry. I looked up and saw Dad outside the bars, still in his work clothes. I couldn’t meet his eyes. He signed some papers, and the woman waved me out of the cell. “Let’s go home,” was all he said. On the way, we passed our church again. I stole a look at him. His hands held the wheel tightly, and his eyes were red. I knew I had broken his heart.\n\nParagraph 2: After we arrived home, Dad finally asked me, \"Why?\" I opened my mouth, but no good reason came out. I had money in my pocket. I hadn’t needed any of those things. “It started with a lipstick,” I said at last. “My heart beat so fast when I walked out of the store, and I liked that feeling.” I lowered my head. “I did it just for the thrill.” Dad was silent for a long time. Then he said, “Tomorrow we’ll take back everything and pay for it.” That night I put the lipstick, the magazine and the other things into a bag. The next morning, Dad drove me from store to store. Each time I said sorry, my face burned, but Dad stood beside me all the way.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "让父亲出场并把“我”带出警局，用一路的沉默把“为什么”留给第二段。",
+          "items": [
+            {
+              "quote": "It was quiet and tired, not angry.",
+              "explain": "紧接段首句写那声“名字”的语气：不是怒吼而是疲惫，比骂人更让“我”难受，也定下父亲克制的形象。"
+            },
+            {
+              "quote": "“Let’s go home,” was all he said.",
+              "explain": "父亲只说一句回家，别的都不问，第二段首句的 finally 才接得上。"
+            },
+            {
+              "quote": "On the way, we passed our church again.",
+              "explain": "回到原文路过的教堂，again 提醒读者“我”来时就是在这里感到内疚，同一个地方再看一次，内疚更重。"
+            },
+            {
+              "quote": "His hands held the wheel tightly, and his eyes were red.",
+              "explain": "不直接说父亲伤心，而用握紧方向盘、红了眼睛两个看得见的细节写出来，最后一句才点明“伤了他的心”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "回答“为什么”，再用一件具体的弥补行动收住偷窃这件事。",
+          "items": [
+            {
+              "quote": "I had money in my pocket. I hadn’t needed any of those things.",
+              "explain": "借原文“我”求饶时说的“口袋里有钱”，说明偷窃不是因为缺钱，为下面坦白真正的原因铺路。"
+            },
+            {
+              "quote": "“I did it just for the thrill.”",
+              "explain": "店主骂“为了刺激”的话由“我”亲口承认，回答了父亲的问题，也让“我”真正面对自己。"
+            },
+            {
+              "quote": "“Tomorrow we’ll take back everything and pay for it.”",
+              "explain": "父亲不打不骂，而是给出一个要“我”自己去做的办法，符合原文里“我”敬重的父亲。"
+            },
+            {
+              "quote": "Each time I said sorry, my face burned, but Dad stood beside me all the way.",
+              "explain": "结尾落在挨家道歉这个动作上：脸发烫写出难，父亲站在身边写出陪伴，不另加口号式的道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I couldn’t meet his eyes.",
+          "function": "写“我”羞愧得不敢看父亲，比 I felt ashamed 更具体，可用在任何犯错后面对亲人的场景。"
+        },
+        {
+          "expression": "I stole a look at him.",
+          "function": "偷偷看一眼父亲，既写出“我”不敢正视，又顺势带出对父亲神情的观察。"
+        },
+        {
+          "expression": "my face burned",
+          "function": "用脸发烫写出道歉时的难堪，情绪落在身体反应上，和原文写发抖、落泪的方法一致。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就让父亲在警局或车上追问、训斥“我”为什么偷。",
+          "why": "第二段首句说到家后父亲才 finally asked “Why?”，第一段提前问了，两段就接不上。"
+        },
+        {
+          "pitfall": "让店主、警察或新出现的人来原谅“我”，或者写父亲当场原谅、拥抱了事。",
+          "why": "原文要解决的是“我”和父亲之间的事，也要让偷窃有个交代；靠旁人或一个拥抱收尾，问题没有解决。"
+        },
+        {
+          "pitfall": "结尾写成“从此我明白了诚实最重要”这类大道理。",
+          "why": "这类句子放在任何故事后面都成立，不如落在退还东西、当面道歉这样的具体动作上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: About one hundred years later, I heard his voice say my name. It was low and tired, with no anger in it, and somehow that hurt more. I lifted my head. Dad was standing outside the bars, still in his work clothes. My eyes dropped to the floor. He signed the papers the woman pushed across the desk, and she waved me out of the cell. “Let’s go home,” he said, and that was all. The drive home was the longest of my life. As we passed the church, its steeple stood dark against the sky. I stole a glance at Dad. His knuckles were white on the wheel, and his jaw was tight. I had broken his heart, and nothing I could say would fix it.\n\nParagraph 2: After we arrived home, Dad finally asked me, \"Why?\" He sat down across the kitchen table and waited. I searched for an excuse, but there was none. I had money in my pocket; I hadn’t needed a single thing I took. “It began with a tube of lipstick,” I said at last. “When I walked out of the store, my heart was pounding, and I felt clever. Then one thing led to another.” I swallowed hard. “I guess I did it just for the thrill.” The words sounded even uglier in my own voice. Dad rubbed his face with both hands. “Then we’ll fix it together,” he said quietly. That night I emptied my drawer: the lipstick, the magazine, the earrings I had never worn. The next morning, Dad drove me from store to store. At each counter, I put the things down, paid for them and said I was sorry. My cheeks burned every time, but Dad stood right behind me, and I kept going.",
+      "beyondStandard": [
+        {
+          "quote": "with no anger in it, and somehow that hurt more",
+          "explain": "标准版只说不生气，这里补一句“反而更疼”，把父亲的语气和“我”的感受连起来。"
+        },
+        {
+          "quote": "its steeple stood dark against the sky",
+          "explain": "标准版只说路过教堂，这里写回原文的尖塔，暗下来的天色和“我”沉重的心情相合，更贴原文的写法。"
+        },
+        {
+          "quote": "At each counter, I put the things down, paid for them and said I was sorry.",
+          "explain": "把标准版的“每次道歉”拆成放下、付钱、道歉三个动作，弥补的过程更具体，也更像真实发生的事。"
+        }
+      ]
+    }
+  }
+}

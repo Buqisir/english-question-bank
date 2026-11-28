@@ -1,0 +1,149 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Mr. Smith,\nWith the sports meet coming up, I’d like to invite you to join us in long rope jumping, a team event for our whole class.\n\nTwo students swing a long rope while the others jump over it one by one. The class with the most jumps in two minutes wins, so timing and teamwork matter most.\n\nWe’ll practise on the playground after school next Tuesday and Thursday. Please wear sports shoes and loose clothes. Don’t worry if it’s new to you, as we’ll show you when to jump in.\n\nCould you tell me by Wednesday if you can come? We look forward to jumping with you!\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给外教的邀请邮件；题面没有印出格式，用 Dear Mr. Smith 称呼，Yours 和 Li Hua 落款",
+        "personTense": "以第一人称代表全班发出邀请；介绍玩法用一般现在时，练习安排用将来时",
+        "readerTone": "读者是熟悉的外籍老师，语气礼貌热情，不卑不亢，不用公文腔",
+        "goal": "请 Mr. Smith 来参加班里的跳长绳，读完知道怎么玩、要准备什么、何时回复"
+      },
+      "taskRequires": [
+        "邀请外教参加班级集体项目跳长绳",
+        "介绍跳长绳这项运动",
+        "说明参加前的准备事宜"
+      ],
+      "thisEssayChooses": "标准版用“两人摇绳、其他人依次跳过、两分钟比跳的次数”介绍玩法；准备事宜落在下周二、周四放学后的练习和穿着上，并打消外教没跳过的顾虑；结尾请他周三前回复，赶在周四练习之前。"
+    },
+    "standard": {
+      "essay": "Dear Mr. Smith,\nWith the sports meet coming up, I’d like to invite you to join us in long rope jumping, a team event for our whole class.\n\nTwo students swing a long rope while the others jump over it one by one. The class with the most jumps in two minutes wins, so timing and teamwork matter most.\n\nWe’ll practise on the playground after school next Tuesday and Thursday. Please wear sports shoes and loose clothes. Don’t worry if it’s new to you, as we’ll show you when to jump in.\n\nCould you tell me by Wednesday if you can come? We look forward to jumping with you!\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "邀请外教参加班级集体项目跳长绳",
+          "quote": "I’d like to invite you to join us in long rope jumping, a team event for our whole class."
+        },
+        {
+          "point": "介绍跳长绳这项运动",
+          "quote": "Two students swing a long rope while the others jump over it one by one."
+        },
+        {
+          "point": "说明参加前的准备事宜",
+          "quote": "We’ll practise on the playground after school next Tuesday and Thursday. Please wear sports shoes and loose clothes."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "交代背景并直接发出邀请，外教一读就知道这封信要他做什么。",
+          "items": [
+            {
+              "quote": "With the sports meet coming up",
+              "explain": "用 with 结构交代写信背景，邀请紧跟在同一句里，不另写一句“运动会快到了”占词数。"
+            },
+            {
+              "quote": "a team event for our whole class",
+              "explain": "同位语点出这是全班一起上的集体项目，外教来了就是和全班站在一起，邀请有了分量，也回扣题面的“集体活动”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成第一个要点：用外教没见过也能看懂的话介绍跳长绳。",
+          "items": [
+            {
+              "quote": "Two students swing a long rope while the others jump over it one by one.",
+              "explain": "用 while 把摇绳的人和跳绳的人放进一句，谁在做什么一目了然，比分两句罗列动作更清楚。"
+            },
+            {
+              "quote": "The class with the most jumps in two minutes wins",
+              "explain": "一句话交代比赛怎么算输赢，外教知道这是比次数，不是比速度。"
+            },
+            {
+              "quote": "so timing and teamwork matter most",
+              "explain": "由规则推出取胜关键，暗示外教不必担心体力，为下一段打消顾虑做铺垫。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成第二个要点：说清何时何地练、穿什么，并接住外教可能有的担心。",
+          "items": [
+            {
+              "quote": "We’ll practise on the playground after school next Tuesday and Thursday.",
+              "explain": "时间、地点写具体，外教可以直接对照自己的安排，比“我们会安排练习”有用得多。"
+            },
+            {
+              "quote": "Please wear sports shoes and loose clothes.",
+              "explain": "跳绳要跳、要落地，穿什么是外教真正需要准备的，用 Please 祈使句说得直接又礼貌。"
+            },
+            {
+              "quote": "Don’t worry if it’s new to you, as we’ll show you when to jump in.",
+              "explain": "先替读者说出顾虑，再用 as 给出解决办法，体现从对方角度考虑。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "落到下一步：请外教在期限前回复，热情收尾。",
+          "items": [
+            {
+              "quote": "Could you tell me by Wednesday if you can come?",
+              "explain": "用 Could you 礼貌地提请求，by Wednesday 给出期限，赶在周四练习前，外教读完知道该做什么。"
+            },
+            {
+              "quote": "We look forward to jumping with you!",
+              "explain": "jumping with you 回到跳绳本身，比通用的“期待您的回复”更贴这封信。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I’d like to invite you to join us in …",
+          "function": "开门见山说明写信目的，邀请对象和活动一次说全。"
+        },
+        {
+          "expression": "Don’t worry if it’s new to you, as …",
+          "function": "邀请别人尝试新活动时，先接住对方的顾虑，再说明我们会帮忙。"
+        },
+        {
+          "expression": "Could you tell me by … if you can come?",
+          "function": "礼貌地请对方在期限前答复，让邀请有明确的下一步。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Mr. Smith,\nAs the sports meet is around the corner, I’m writing on behalf of my class to invite you to join us in long rope jumping, the one event we all take part in together. It would mean a lot to have you with us.\n\nThe rules are easy to pick up. Two classmates swing a long rope in steady circles, while the rest of us run in and jump over it in turn. The class with the most jumps in two minutes wins.\n\nWe practise on the playground every Tuesday and Thursday. Just come in trainers and loose clothes and leave the rope and the counting to us. If it’s your first try, a few rounds will get your timing right.\n\nCould you tell me by Wednesday if you can make it? We’d be thrilled to have you jumping with us!\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "邀请外教参加班级集体项目跳长绳",
+          "quote": "I’m writing on behalf of my class to invite you to join us in long rope jumping, the one event we all take part in together."
+        },
+        {
+          "point": "介绍跳长绳这项运动",
+          "quote": "Two classmates swing a long rope in steady circles, while the rest of us run in and jump over it in turn."
+        },
+        {
+          "point": "说明参加前的准备事宜",
+          "quote": "We practise on the playground every Tuesday and Thursday. Just come in trainers and loose clothes and leave the rope and the counting to us."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "It would mean a lot to have you with us.",
+          "explain": "标准版只发出邀请，这句说出外教到场对全班意味着什么，邀请更有温度，也更贴近师生关系。"
+        },
+        {
+          "quote": "run in and jump over it in turn",
+          "explain": "标准版只说依次跳过，run in 补出跳长绳要看准时机冲进绳里的动作，外教读了更容易想象画面。"
+        },
+        {
+          "quote": "leave the rope and the counting to us",
+          "explain": "标准版只说穿什么，这里还告诉外教绳子和计数由学生负责，他只要人到就行，准备事宜交代得更完整。"
+        }
+      ]
+    }
+  }
+}

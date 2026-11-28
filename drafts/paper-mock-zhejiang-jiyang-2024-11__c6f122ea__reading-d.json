@@ -1,0 +1,789 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiyang-2024-11",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiyang-2024-11:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiyang-2024-11:reading-d": {
+      "overview": "本文介绍 Bouchard 团队对分开抚养的同卵双胞胎的研究：他们发现双胞胎惊人相似，认为基因对性格和智力影响很大；批评者和其他科学家提出质疑，Bouchard 也承认环境同样塑造人。",
+      "fullTranslationZh": "为什么有些人擅长数学或写作，而另一些人在美术或篮球上出类拔萃？是什么造成了这些差异？它们在很大程度上是由我们从父母那里遗传来的基因（先天）决定的吗？社会环境（后天）又在其中起多大作用？如果你是一位对这些问题感兴趣的科学家，难道你不想研究同卵双胞胎吗？\n过去 10 年里，心理学家 Thomas J. Bouchard Jr. 带领的科学家团队研究了大约 65 对分开抚养的同卵双胞胎。科学家们把每对双胞胎请到明尼苏达大学，进行为期一周的密集测试。他们记录双胞胎的身高、体重、眼睛颜色、耳朵形状和头长。同时，他们还让双胞胎做智商和性格测试。\nBouchard 的团队对分开抚养的双胞胎之间的相似之处感到震惊。比如，这些双胞胎的手势和姿势常常惊人地相似。他们的人生经历也极为相似。成年同卵双胞胎的病史也往往相似，例如会在同一时间患上青光眼这种眼病。\n明尼苏达研究的一些批评者说：“这些巧合并不令人意外。”他们认为，每个人的生活都有那么多细节，必然会存在一些巧合。而且，分开抚养的同卵双胞胎每发现一处巧合，批评者就能指出大量尚未被发现的差异。\n据 Bouchard 说，他们发现基因在塑造我们的性格方面起着很大作用——帮助决定我们是否尊重传统、是否喜欢守规矩。该团队报告说，智力受基因的影响似乎也远大于受环境的影响。尽管由不同的家庭抚养长大，分开的同卵双胞胎在成人智力测试中的得分却相同或几乎相同。\n然而，其他科学家并不认同。“定义智力的方法就有那么多种，你怎么能研究智力是否遗传呢？”他们说，这个问题同样适用于其他特征。\nBouchard 本人也指出，即使是最相像的双胞胎彼此也有不同。所以，尽管基因可能对我们的人生有很大影响，但它们不是唯一的影响。我们的日常经历也在塑造我们。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+          "sourceText": "What’s more, for every coincidence discovered by a pair of identical twins raised apart, the critics could point to a vast number of undiscovered differences.",
+          "displayText": "What’s more, for every coincidence discovered by a pair of identical twins raised apart, the critics could point to a vast number of undiscovered differences.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:33"
+          ],
+          "translationZh": "而且，分开抚养的同卵双胞胎每发现一处巧合，批评者就能指出大量尚未被发现的差异。",
+          "analysisZh": "主干是 the critics could point to a vast number of undiscovered differences：批评者能指出大量尚未发现的差异。句首 What’s more 表递进；for every coincidence 意为“每有一处巧合”，discovered by a pair of identical twins raised apart 是过去分词短语作后置定语，修饰 coincidence，其中 raised apart 又修饰 twins。全句用“每一处巧合”对“大量差异”，说明巧合不足为奇。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 48,
+              "quote": "for every coincidence discovered by"
+            },
+            {
+              "start": 89,
+              "end": 157,
+              "quote": "the critics could point to a vast number of undiscovered differences"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7",
+          "sourceText": "So even though genes may have a strong influence over our lives, they’re not the only influence.",
+          "displayText": "So even though genes may have a strong influence over our lives, they’re not the only influence.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:34"
+          ],
+          "translationZh": "所以，尽管基因可能对我们的人生有很大影响，但它们不是唯一的影响。",
+          "analysisZh": "主干是 they’re not the only influence：它们不是唯一的影响，they 指 genes。even though 引导让步状语从句，先承认基因可能影响很大，主句再说“不是唯一”，重点落在主句。句首 So 承接前一句“最相像的双胞胎也有不同”，由此得出这个结论。",
+          "underlineRanges": [
+            {
+              "start": 3,
+              "end": 48,
+              "quote": "even though genes may have a strong influence"
+            },
+            {
+              "start": 65,
+              "end": 95,
+              "quote": "they’re not the only influence"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1"
+              ],
+              "start": 0,
+              "end": 125,
+              "quote": "为什么有些人擅长数学或写作，而另一些人在美术或篮球上出类拔萃？是什么造成了这些差异？它们在很大程度上是由我们从父母那里遗传来的基因（先天）决定的吗？社会环境（后天）又在其中起多大作用？如果你是一位对这些问题感兴趣的科学家，难道你不想研究同卵双胞胎吗？"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2"
+              ],
+              "start": 126,
+              "end": 269,
+              "quote": "过去 10 年里，心理学家 Thomas J. Bouchard Jr. 带领的科学家团队研究了大约 65 对分开抚养的同卵双胞胎。科学家们把每对双胞胎请到明尼苏达大学，进行为期一周的密集测试。他们记录双胞胎的身高、体重、眼睛颜色、耳朵形状和头长。同时，他们还让双胞胎做智商和性格测试。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:3"
+              ],
+              "start": 270,
+              "end": 372,
+              "quote": "Bouchard 的团队对分开抚养的双胞胎之间的相似之处感到震惊。比如，这些双胞胎的手势和姿势常常惊人地相似。他们的人生经历也极为相似。成年同卵双胞胎的病史也往往相似，例如会在同一时间患上青光眼这种眼病。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4"
+              ],
+              "start": 373,
+              "end": 468,
+              "quote": "明尼苏达研究的一些批评者说：“这些巧合并不令人意外。”他们认为，每个人的生活都有那么多细节，必然会存在一些巧合。而且，分开抚养的同卵双胞胎每发现一处巧合，批评者就能指出大量尚未被发现的差异。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:5"
+              ],
+              "start": 469,
+              "end": 596,
+              "quote": "据 Bouchard 说，他们发现基因在塑造我们的性格方面起着很大作用——帮助决定我们是否尊重传统、是否喜欢守规矩。该团队报告说，智力受基因的影响似乎也远大于受环境的影响。尽管由不同的家庭抚养长大，分开的同卵双胞胎在成人智力测试中的得分却相同或几乎相同。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:6"
+              ],
+              "start": 597,
+              "end": 658,
+              "quote": "然而，其他科学家并不认同。“定义智力的方法就有那么多种，你怎么能研究智力是否遗传呢？”他们说，这个问题同样适用于其他特征。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7"
+              ],
+              "start": 659,
+              "end": 737,
+              "quote": "Bouchard 本人也指出，即使是最相像的双胞胎彼此也有不同。所以，尽管基因可能对我们的人生有很大影响，但它们不是唯一的影响。我们的日常经历也在塑造我们。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-d-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1",
+                "start": 115,
+                "end": 263,
+                "quote": "Are they largely determined by the genes(nature) we inherit(遗传) from our parents? How much does the social environment (nurture) have to do with it?"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2",
+                "start": 118,
+                "end": 155,
+                "quote": "identical twins who were raised apart"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p1",
+                "start": 42,
+                "end": 92,
+                "quote": "它们在很大程度上是由我们从父母那里遗传来的基因（先天）决定的吗？社会环境（后天）又在其中起多大作用？"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p2",
+                "start": 55,
+                "end": 65,
+                "quote": "分开抚养的同卵双胞胎"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-d-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+                "start": 1,
+                "end": 36,
+                "quote": "The coincidences are not surprising"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+                "start": 137,
+                "end": 180,
+                "quote": "a number of coincidences are bound to exist"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p4",
+                "start": 15,
+                "end": 25,
+                "quote": "这些巧合并不令人意外"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p4",
+                "start": 46,
+                "end": 55,
+                "quote": "必然会存在一些巧合"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-d-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:5",
+                "start": 38,
+                "end": 88,
+                "quote": "genes play a big part in shaping our personalities"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7",
+                "start": 120,
+                "end": 168,
+                "quote": "genes may have a strong influence over our lives"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p5",
+                "start": 17,
+                "end": 35,
+                "quote": "基因在塑造我们的性格方面起着很大作用"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p7",
+                "start": 37,
+                "end": 52,
+                "quote": "基因可能对我们的人生有很大影响"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-d-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2",
+                "start": 88,
+                "end": 155,
+                "quote": "has studied about 65 pairs of identical twins who were raised apart"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+                "start": 1,
+                "end": 36,
+                "quote": "The coincidences are not surprising"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:6",
+                "start": 0,
+                "end": 36,
+                "quote": "Other scientists, however, disagree."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p2",
+                "start": 45,
+                "end": 65,
+                "quote": "研究了大约 65 对分开抚养的同卵双胞胎"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p4",
+                "start": 15,
+                "end": 25,
+                "quote": "这些巧合并不令人意外"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p6",
+                "start": 0,
+                "end": 13,
+                "quote": "然而，其他科学家并不认同。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+                "start": 182,
+                "end": 340,
+                "quote": "What’s more, for every coincidence discovered by a pair of identical twins raised apart, the critics could point to a vast number of undiscovered differences."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p4",
+                "start": 56,
+                "end": 95,
+                "quote": "而且，分开抚养的同卵双胞胎每发现一处巧合，批评者就能指出大量尚未被发现的差异。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:34"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7",
+                "start": 105,
+                "end": 201,
+                "quote": "So even though genes may have a strong influence over our lives, they’re not the only influence."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-d",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-d-p7",
+                "start": 32,
+                "end": 64,
+                "quote": "所以，尽管基因可能对我们的人生有很大影响，但它们不是唯一的影响。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "首段用一连串问题抛出先天与后天之争，并点出研究同卵双胞胎的价值；接着介绍 Bouchard 团队的研究方法和发现，中间穿插批评者和其他科学家的质疑，末段 Bouchard 承认基因不是唯一影响。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1",
+            "summary": "人与人的差异来自基因还是环境？研究同卵双胞胎正好能回答这个问题。",
+            "function": "设问引出话题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2",
+            "summary": "Bouchard 团队研究约 65 对分开抚养的同卵双胞胎，做一周的身体测量和智商、性格测试。",
+            "function": "介绍研究对象和方法。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:3",
+            "summary": "团队发现分开抚养的双胞胎在举止、人生经历和病史上惊人相似。",
+            "function": "呈现研究的初步发现。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+            "summary": "批评者认为这些相似只是必然会有的巧合，而且未发现的差异更多。",
+            "function": "提出反方质疑。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:5",
+            "summary": "Bouchard 认为基因对性格影响很大，智力受基因影响也远大于环境。",
+            "function": "给出研究的主要结论。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:6",
+            "summary": "其他科学家质疑：智力的定义五花八门，难以研究它是否遗传。",
+            "function": "再次呈现不同意见。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7",
+            "summary": "Bouchard 承认最相像的双胞胎也有差异，基因不是唯一影响，日常经历也在塑造人。",
+            "function": "收尾，给出较平衡的结论。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiyang-2024-11:32": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从首段提出的先天后天之问，推出研究分开抚养的同卵双胞胎有什么价值。",
+      "stemTranslationZh": "为什么科学家对研究在不同环境中分开抚养的同卵双胞胎如此感兴趣？",
+      "locateBy": "stem",
+      "locateFindZh": "these questions 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "因为可以用一周的密集测试来研究他们。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a week of intensive testing",
+            "optionText": "a week of intensive testing",
+            "matchType": "exact",
+            "relationNote": "选项照搬 a week of intensive testing，原文这是研究的做法：把每对双胞胎请到明尼苏达大学测一周，不是科学家感兴趣的原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2",
+              "quote": "for a week of intensive testing",
+              "anchor": "一周的密集测试"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "因为这类双胞胎有着最惊人的相似之处。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Bouchard’s team has been startled by the similarities between twins raised apart.",
+            "sourceEntity": "startled by the similarities",
+            "optionText": "Because this group of twins have the most striking similarities.",
+            "optionEntity": "the most striking similarities",
+            "explanation": "团队对相似之处感到吃惊（startled by the similarities）是研究之后的发现，不是研究的动机；原文也没说这类双胞胎最相似。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "因为这是衡量先天和后天影响的好办法。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1",
+              "quote": "Are they largely determined by the genes(nature) we inherit(遗传) from our parents? How much does the social environment (nurture) have to do with it?",
+              "anchor": "先天还是后天"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2",
+              "quote": "has studied about 65 pairs of identical twins who were raised apart",
+              "anchor": "分开抚养的同卵双胞胎"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "因为对一起长大的同卵双胞胎已经有了大量研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "there has already been a lot of research on identical twins raised together",
+            "explanation": "原文没提一起长大的双胞胎已有多少研究，研究的价值来自[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1]]的先天后天之问。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "interested",
+          "sourceRole": "stem",
+          "targetText": "If you were a scientist interested in these questions, wouldn’t you love to study identical twins?",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1",
+          "relationType": "locationCue",
+          "answerText": "the genes(nature) we inherit(遗传) from our parents? How much does the social environment (nurture)",
+          "bridgeZh": "these questions 指差异来自基因还是环境",
+          "note": "题干 interested 原词出现在原文。"
+        },
+        {
+          "sourceText": "a good way to measure the effects of nature and nurture",
+          "sourceRole": "correctOption",
+          "targetText": "Are they largely determined by the genes(nature) we inherit(遗传) from our parents? How much does the social environment (nurture) have to do with it?",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "原文没直接说原因，要补一步：同卵双胞胎基因相同，分开抚养又让成长环境不同，两人的相似多半来自基因（nature），差异多半来自环境（nurture），所以研究他们正好能衡量先天和后天各起多大作用，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到批评者的原话，看他们怎样定性分开抚养的双胞胎之间的相似。",
+      "stemTranslationZh": "明尼苏达研究的批评者对分开抚养的双胞胎之间的相似之处有什么看法？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们只是巧合。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+              "quote": "“The coincidences are not surprising,” some critics of the Minnesota study say.",
+              "anchor": "巧合不足为奇"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+              "quote": "a number of coincidences are bound to exist",
+              "anchor": "巧合必然存在"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们在一定程度上被夸大了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are overstated to some extent",
+            "explanation": "批评者说的是这些相似不稀奇，是生活细节多带来的巧合，没有说研究团队把相似程度说大了。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "和差异相比，它们微不足道。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "the critics could point to a vast number of undiscovered differences",
+            "sourceHighlight": "a vast number of undiscovered differences",
+            "optionText": "They are nothing compared with the differences.",
+            "optionHighlight": "nothing compared with the differences",
+            "explanation": "原文说每发现一处巧合，批评者就能指出大量尚未发现的差异，是拿差异多来说明巧合不稀奇；选项说相似和差异比起来算不了什么（nothing），把话说绝了。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们太常见了，不值得认真对待。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "a number of coincidences are bound to exist",
+            "sourceHighlight": "bound to exist",
+            "optionText": "They are too common to deserve any serious consideration.",
+            "optionHighlight": "too common to deserve any serious consideration",
+            "explanation": "原文说一些巧合注定会有（bound to exist），只是说巧合难免，没说相似多到不值得认真对待。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "critics of the Minnesota study",
+          "sourceRole": "stem",
+          "targetText": "“The coincidences are not surprising,” some critics of the Minnesota study say.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "The coincidences are not surprising",
+          "note": "题干 critics of the Minnesota study 原词出现在原文。"
+        },
+        {
+          "sourceText": "They are merely coincidences",
+          "sourceRole": "correctOption",
+          "targetText": "“The coincidences are not surprising,” some critics of the Minnesota study say.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 coincidences：批评者直接把这些相似叫作巧合，还说不足为奇（not surprising）；[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4|a number of coincidences are bound to exist]]给出理由：生活细节那么多，碰上几处巧合是必然的。在他们看来相似只是巧合，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:34": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把各选项拿去对照 Bouchard 的研究结论和他本人的说法，判断他会认同哪一项。",
+      "stemTranslationZh": "Bouchard 会同意下列哪种说法？",
+      "locateBy": "options",
+      "locateFindZh": "每项回[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:5]]和[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7]]里 Bouchard 的说法核对程度",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "相似与差异总是相伴而生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Bouchard himself makes the point that even the most closely matched twins are different from each other.",
+            "sourceHighlight": "different from each other",
+            "optionText": "Similarities go hand in hand with differences.",
+            "optionHighlight": "go hand in hand",
+            "explanation": "太宽：Bouchard 只说最相像的双胞胎也彼此不同，用来说明基因不是唯一影响；选项把它扩成“相似总与差异相伴”的普遍道理，原文没这样概括。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "先天因素对我们的人生有显著影响。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7",
+              "quote": "So even though genes may have a strong influence over our lives, they’re not the only influence.",
+              "anchor": "基因影响很大"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:5",
+              "quote": "genes play a big part in shaping our personalities",
+              "anchor": "基因塑造性格"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "智力是遗传的，而不是后天习得的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "intelligence also seems to be influenced much more by genes than by environment",
+            "sourceHighlight": "seems to be influenced much more by genes",
+            "optionText": "Intelligence is something inherited rather than acquired.",
+            "optionHighlight": "inherited rather than acquired",
+            "explanation": "原文说智力似乎（seems）受基因影响远大于环境，环境仍有作用；选项用 rather than 把后天完全排除，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7|they’re not the only influence]]也说基因不是唯一影响。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "环境在个人发展中起的作用更大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "intelligence also seems to be influenced much more by genes than by environment",
+            "sourceHighlight": "much more by genes than by environment",
+            "optionText": "Environment plays a bigger part in personal development.",
+            "optionHighlight": "Environment plays a bigger part",
+            "explanation": "原文说智力受基因影响远大于受环境影响（much more by genes than by environment），选项把大小说反了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:5",
+              "quote": "intelligence also seems to be influenced much more by genes than by environment",
+              "anchor": "基因影响大于环境"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Nature has a notable influence over our lives",
+          "sourceRole": "correctOption",
+          "targetText": "So even though genes may have a strong influence over our lives, they’re not the only influence.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7",
+          "relationType": "paraphrase",
+          "note": "选项的“先天”（nature）就是[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1|the genes(nature) we inherit]]括号里注明的基因，“显著影响”对应[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:5|genes play a big part]]的 play a big part 和[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7|genes may have a strong influence]]的 a strong influence，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:35": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括全文的研究和争议，选出覆盖最全又贴切的标题。",
+      "stemTranslationZh": "下列哪一项是本文的最佳标题？",
+      "locateBy": "passage",
+      "locateFindZh": "[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1]] 抛出先天后天之问，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2]]、[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:3]] 写研究和发现，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4]]、[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:6]] 插进质疑，标题要盖住研究和争议",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "遗传基因偏爱双胞胎",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "genes play a big part in shaping our personalities",
+            "sourceHighlight": "genes play a big part",
+            "optionText": "Inherited Genes Favor Twins",
+            "optionHighlight": "Inherited Genes",
+            "explanation": "太窄：只抓住[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:5]]基因作用大的发现，丢了批评者的质疑和环境的作用；“基因偏爱双胞胎”原文也没有这层意思。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "环境让双胞胎变得不同",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Our day-to-day experiences help to shape us too.",
+            "sourceHighlight": "day-to-day experiences",
+            "optionText": "Environment Tells Apart Twins",
+            "optionHighlight": "Environment",
+            "explanation": "太窄：只呼应[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:7]]日常经历也塑造人的说法，全文大部分在讲研究发现和围绕它的争议。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "科学再审视双胞胎",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2",
+              "quote": "has studied about 65 pairs of identical twins who were raised apart",
+              "anchor": "研究分开抚养的双胞胎"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4",
+              "quote": "“The coincidences are not surprising,” some critics of the Minnesota study say.",
+              "anchor": "批评者的质疑"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:6",
+              "quote": "Other scientists, however, disagree.",
+              "anchor": "其他科学家不认同"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "身体特征传给双胞胎",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "They record the twins’ height, weight, eye color, ear shape, and head length.",
+            "sourceHighlight": "height, weight, eye color",
+            "optionText": "Physical Traits Come to Twins",
+            "optionHighlight": "Physical Traits",
+            "explanation": "太窄：身高、体重这些身体特征只是[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2]]列出的测试项目，研究和争论的重点是性格和智力。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Science Looks Twice at Twins",
+          "sourceRole": "correctOption",
+          "targetText": "has studied about 65 pairs of identical twins who were raised apart",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "全文写科学家怎样研究分开抚养的同卵双胞胎：[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:1]]抛出先天后天之问，接着讲 Bouchard 团队的测试和发现，中间穿插[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:4]]批评者和[[block:paper-mock-zhejiang-jiyang-2024-11:reading-d:6]]其他科学家的质疑。标题的“科学”盖住研究和争论，“再看一眼”（Looks Twice）既扣着双胞胎，又点出科学界对这项研究的反复审视，选 C。"
+        }
+      ]
+    }
+  }
+}

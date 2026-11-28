@@ -1,0 +1,1065 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiyang-2024-11",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "Mike, what have you been busy with recently? I’ve been working overtime since last week. That sounds terrible. It’s boiling hot outside. Let’s find a place to sit. How about the café next to the bakery?",
+      "translationZh": "迈克，你最近在忙什么？从上周开始我一直在加班。听起来真够累的。外面热得要命。我们找个地方坐坐吧。面包店旁边那家咖啡馆怎么样？",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "朋友问迈克最近忙什么，两人因天气炎热商量找个地方坐坐。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "迈克，你最近在忙什么？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "从上周开始我一直在加班。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "听起来真够累的。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "外面热得要命。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "我们找个地方坐坐吧。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "面包店旁边那家咖啡馆怎么样？"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "Could you give an exclusive interview about your newly launched program at 10 a.m. tomorrow? I’m sorry, but I’ll be making a speech then. Can we reschedule it for another time? Sure.",
+      "translationZh": "明天上午10点，您能就新推出的项目接受一次独家专访吗？抱歉，那时我要做演讲。我们能改到别的时间吗？当然可以。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "一方邀请对方明天上午就新推出的项目接受专访，对方说明自己那时的安排。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "明天上午10点，您能就新推出的项目接受一次独家专访吗？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "抱歉，那时我要做演讲。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我们能改到别的时间吗？"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "当然可以。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "What date would you like to book the table for? The 16th of October. Oh, sorry. I forget that’s my departure date. I will arrive in York in two days. Done. A deposit of $25 is required.",
+      "translationZh": "您想订哪天的桌位？10月16日。哦，抱歉。我忘了那天是我出发的日子。我两天后才到约克。好了，订好了。需要交25美元的定金。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士向店员预订餐桌，双方确认用餐日期，店员告知需要交定金。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "您想订哪天的桌位？"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "10月16日。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "哦，抱歉。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "我忘了那天是我出发的日子。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "我两天后才到约克。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "好了，订好了。"
+        },
+        {
+          "id": "listening-text-3:7",
+          "zh": "需要交25美元的定金。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "If you are new to picking mushrooms in the forest, I wouldn’t recommend relying on pictures in books to identify them. What about using phone apps? You can’t expect strong cell phone signals there. If possible, go with a few people led by experts.",
+      "translationZh": "如果你是第一次在森林里采蘑菇，我不建议你靠书上的图片来辨认它们。那用手机应用呢？那里手机信号可不会好。如果可能，跟着由专家带领的几个人一起去。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "灾害防范",
+        "subtopic": "安全常识"
+      },
+      "summaryZh": "女士想去森林里采蘑菇，男士就怎样辨认蘑菇给出建议。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "如果你是第一次在森林里采蘑菇，我不建议你靠书上的图片来辨认它们。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "那用手机应用呢？"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "那里手机信号可不会好。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "如果可能，跟着由专家带领的几个人一起去。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "No worries. Mr. Maude will have the report ready for you. But I’m at a loss now. Have you seen Mr. Ward? I need his unique opinions about an issue. He went out to pick up Ms. Robbins.",
+      "translationZh": "别担心。莫德先生会帮你把报告准备好。可我现在一筹莫展。你见到沃德先生了吗？我需要听听他对一个问题的独到见解。他出去接罗宾斯女士了。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "男士告诉女士报告会有人准备好，女士又打听一位同事的去向。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "别担心。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "莫德先生会帮你把报告准备好。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "可我现在一筹莫展。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "你见到沃德先生了吗？"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "我需要听听他对一个问题的独到见解。"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "他出去接罗宾斯女士了。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "Hey, Felix. I heard your cat crying in your yard last night. What was wrong with her? I’m sorry. Lily must have disturbed you. She felt scared because my uncle paid me a visit. I saw all her hair standing on end. Wow, you know a lot about the cat’s body language. Could you tell me more about it? Sure. If a cat’s tail is upright or its eyes are half-closed, it means it is relaxed. And when the cat stays low to the ground trying to hide, it indicates that it’s feeling stressed. Interesting. Animals also have their own ways of expressing emotions.",
+      "translationZh": "嘿，菲利克斯。昨晚我听到你的猫在你家院子里叫。它怎么了？真抱歉。莉莉一定打扰到你了。我叔叔来看我，它就害怕了。我看到它全身的毛都竖了起来。哇，你对猫的肢体语言很了解啊。能多跟我讲讲吗？当然。如果猫的尾巴竖直或者眼睛半闭，说明它很放松。而当猫贴近地面、想要躲起来时，说明它感到有压力。真有意思。动物也有自己表达情绪的方式。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "自然生态",
+        "subtopic": "人与动植物"
+      },
+      "summaryZh": "菲利克斯解释自家的猫夜里叫的原因，并介绍猫的肢体语言。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "嘿，菲利克斯。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "昨晚我听到你的猫在你家院子里叫。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "它怎么了？"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "真抱歉。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "莉莉一定打扰到你了。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "我叔叔来看我，它就害怕了。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "我看到它全身的毛都竖了起来。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "哇，你对猫的肢体语言很了解啊。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "能多跟我讲讲吗？"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "如果猫的尾巴竖直或者眼睛半闭，说明它很放松。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "而当猫贴近地面、想要躲起来时，说明它感到有压力。"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "真有意思。"
+        },
+        {
+          "id": "listening-text-6:14",
+          "zh": "动物也有自己表达情绪的方式。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "Mr. Johnson, I heard that you are an expert in classroom management. Would you please share some tips with me? Sure. I worked as an educational consultant right before becoming a teacher in 2010. When it comes to classroom management, the most important thing is to build a sense of community. It sounds a bit abstract. Any details? First, hold a meeting with your class once a week. This gives you a chance to keep track of how your students are doing and present concerns to them. I believe that is what all teachers should do. Yeah. Then create a goal for the course and ask students to work together toward it. I agree. And let students know how they can contact you. Chat with them before, during, and after class to engage with your students.",
+      "translationZh": "约翰逊先生，听说您是课堂管理方面的专家。能跟我分享一些诀窍吗？当然。2010年当老师之前，我是一名教育顾问。说到课堂管理，最重要的是建立集体感。听起来有点抽象。有具体做法吗？第一，每周和班级开一次会。这让你有机会了解学生的情况，也能向他们提出你关心的问题。我认为所有老师都应该这么做。是的。然后，为课程定一个目标，让学生一起为之努力。我同意。还要让学生知道怎样联系你。在课前、课中和课后都和学生聊聊，与他们互动。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "约翰逊先生应对方请求，分享课堂管理的经验和具体做法。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "约翰逊先生，听说您是课堂管理方面的专家。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "能跟我分享一些诀窍吗？"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "2010年当老师之前，我是一名教育顾问。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "说到课堂管理，最重要的是建立集体感。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "听起来有点抽象。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "有具体做法吗？"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "第一，每周和班级开一次会。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "这让你有机会了解学生的情况，也能向他们提出你关心的问题。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "我认为所有老师都应该这么做。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "是的。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "然后，为课程定一个目标，让学生一起为之努力。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我同意。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "还要让学生知道怎样联系你。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "在课前、课中和课后都和学生聊聊，与他们互动。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "Steve, my essay centered on Scottish culture is nearly driving me crazy. I need your help. Tell me something about Hogmanay, please. Hogmanay is a Scottish word for the last day of the year or New Year’s Eve. We don’t know exactly where the word comes from. It is thought to have first been used widely after Mary, Queen of Scots, returned to Scotland from France in 1561. How do you celebrate during Hogmanay? First footing is a traditional part of Hogmanay celebrations. First footing is when you visit friends or family immediately after midnight to become the first person to visit them in the new year. The first person should bring dark rye bread and a piece of coal to ensure the people you’re visiting don’t go hungry or suffer from the cold in the coming months. Interesting. In Germany, we usually watch the British comedy sketch, Dinner for One during the New Year.",
+      "translationZh": "史蒂夫，我那篇以苏格兰文化为主题的论文快把我逼疯了。我需要你帮忙。请给我讲讲Hogmanay吧。Hogmanay是苏格兰语，指一年的最后一天，也就是新年前夜。我们并不确切知道这个词是从哪儿来的。一般认为，它是在苏格兰女王玛丽1561年从法国回到苏格兰之后才开始被广泛使用的。Hogmanay期间你们怎么庆祝？“第一脚”是Hogmanay庆祝活动的传统内容。“第一脚”就是午夜一过就去拜访亲友，成为新年里第一个登门的人。第一个登门的人要带上黑麦面包和一块煤，保佑主人在接下来的几个月里不挨饿、不受冻。真有意思。在德国，新年期间我们通常会看英国喜剧小品《一个人的晚餐》。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "文化习俗"
+      },
+      "summaryZh": "女士为写苏格兰文化的论文，向史蒂夫请教苏格兰除夕的来历和习俗。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "史蒂夫，我那篇以苏格兰文化为主题的论文快把我逼疯了。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "我需要你帮忙。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "请给我讲讲Hogmanay吧。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "Hogmanay是苏格兰语，指一年的最后一天，也就是新年前夜。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "我们并不确切知道这个词是从哪儿来的。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "一般认为，它是在苏格兰女王玛丽1561年从法国回到苏格兰之后才开始被广泛使用的。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "Hogmanay期间你们怎么庆祝？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "“第一脚”是Hogmanay庆祝活动的传统内容。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "“第一脚”就是午夜一过就去拜访亲友，成为新年里第一个登门的人。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "第一个登门的人要带上黑麦面包和一块煤，保佑主人在接下来的几个月里不挨饿、不受冻。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "真有意思。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "在德国，新年期间我们通常会看英国喜剧小品《一个人的晚餐》。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "Hello, David speaking. How may I help you? Hello, this is Helen. I’m flying to Toronto the day after tomorrow. Could you tell me how I can get to Milton from the airport? You can take a Greyhound bus or use the airport shuttle service. The Greyhound bus sounds good. How much does it cost per person? $15 one way or $27.50 return, but there is only one bus a day. It leaves at 3:45 p.m. We are due to arrive at 11:30 a.m. That will keep us waiting for more than 4 hours. What about the shuttle bus? It will take you right to your hotel or private address. There is one every 2 hours. Great. Please reserve a one-way ticket for me. Okay, $35 per person. And since the Canadian International Air Show is currently going on, you can also enjoy a 20% discount. I need your flight number and credit card number. Hold on. I have forgotten the card number. Let me get my card from my study.",
+      "translationZh": "您好，我是大卫。有什么可以帮您？您好，我是海伦。我后天要飞多伦多。能告诉我从机场怎么去米尔顿吗？您可以坐灰狗巴士，或者乘机场班车。灰狗巴士听起来不错。每人多少钱？单程15美元，往返27.5美元，不过一天只有一班。下午3点45分发车。我们预计上午11点半到。那我们得等4个多小时。机场班车呢？它会把您直接送到酒店或私人住址。每两小时一班。太好了。请帮我订一张单程票。好的，每人35美元。而且加拿大国际航空展正在举行，您还能享受八折优惠。我需要您的航班号和信用卡号。请稍等。我忘了卡号。我去书房拿一下卡。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "海伦打电话询问从多伦多机场去米尔顿的交通方式，并预订车票。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "您好，我是大卫。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "您好，我是海伦。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "我后天要飞多伦多。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "能告诉我从机场怎么去米尔顿吗？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "您可以坐灰狗巴士，或者乘机场班车。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "灰狗巴士听起来不错。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "每人多少钱？"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "单程15美元，往返27.5美元，不过一天只有一班。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "下午3点45分发车。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "我们预计上午11点半到。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "那我们得等4个多小时。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "机场班车呢？"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "它会把您直接送到酒店或私人住址。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "每两小时一班。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "太好了。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "请帮我订一张单程票。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "好的，每人35美元。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "而且加拿大国际航空展正在举行，您还能享受八折优惠。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "我需要您的航班号和信用卡号。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "请稍等。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "我忘了卡号。"
+        },
+        {
+          "id": "listening-text-9:23",
+          "zh": "我去书房拿一下卡。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "When night fell, around the same time as now, Jessica Rhea was chatting with a client. During the conversation, Jessica noticed that something was wrong. The client began to drop off and had problems understanding what Jessica was saying – classic signs of a stroke. Jessica did not hesitate to take immediate action. She called 911 at once, making sure that the client would receive urgent medical attention. Meanwhile, Jessica contacted the emergency center to inform the doctors of the situation. Jessica’s response did not stop there. She contacted the emergency center again to provide the most recent situation about the client. Her ability to quickly identify the signs of a stroke and take effective action, undoubtedly saved the client’s life. We could not be more proud of Jessica. And her outstanding efforts should be highlighted. Jessica Rhea’s actions serve as a powerful reminder of the critical role that caregivers play in the lives of their clients. Now, let’s welcome Richard Rochester to present Jessica Rhea with the Lifesaving Award.",
+      "translationZh": "夜幕降临时，大约就是现在这个时候，杰西卡·雷亚正在和一位客户聊天。聊着聊着，杰西卡发现有些不对劲。这位客户开始昏昏欲睡，也听不明白杰西卡在说什么——这些都是中风的典型征兆。杰西卡毫不犹豫，立即采取行动。她马上拨打了911，确保客户能得到紧急救治。同时，她联系急救中心，把情况告诉了医生。杰西卡的应对并没有到此为止。她再次联系急救中心，提供客户的最新情况。她能迅速识别中风征兆并采取有效行动，无疑挽救了这位客户的生命。我们为杰西卡感到无比自豪。她的杰出表现值得表彰。杰西卡·雷亚的行动有力地提醒我们，护理人员在客户的生活中起着至关重要的作用。现在，让我们欢迎理查德·罗切斯特为杰西卡·雷亚颁发救生奖。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "优秀品行"
+      },
+      "summaryZh": "说话人讲述护理员杰西卡与客户聊天时遇到突发情况后的处理经过。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "夜幕降临时，大约就是现在这个时候，杰西卡·雷亚正在和一位客户聊天。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "聊着聊着，杰西卡发现有些不对劲。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "这位客户开始昏昏欲睡，也听不明白杰西卡在说什么——这些都是中风的典型征兆。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "杰西卡毫不犹豫，立即采取行动。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "她马上拨打了911，确保客户能得到紧急救治。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "同时，她联系急救中心，把情况告诉了医生。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "杰西卡的应对并没有到此为止。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "她再次联系急救中心，提供客户的最新情况。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "她能迅速识别中风征兆并采取有效行动，无疑挽救了这位客户的生命。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "我们为杰西卡感到无比自豪。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "她的杰出表现值得表彰。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "杰西卡·雷亚的行动有力地提醒我们，护理人员在客户的生活中起着至关重要的作用。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "现在，让我们欢迎理查德·罗切斯特为杰西卡·雷亚颁发救生奖。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "这段对话最可能发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在街上。",
+        "B": "在咖啡馆里。",
+        "C": "在面包店里。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Let’s find a place to sit."
+      },
+      "reasonZh": "两人先说外面热得要命（boiling hot outside），又提议找个地方坐坐（find a place to sit），说明还在室外找去处，所以是在街上，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "咖啡馆是两人提议要去的地方（How about the café），他们还没进去。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "面包店只是用来说明那家咖啡馆的位置（next to the bakery）。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "说话人主要在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一个新项目。",
+        "B": "一场演讲。",
+        "C": "一次约见。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Can we reschedule it for another time?"
+      },
+      "reasonZh": "一方约对方明天上午10点做专访，对方那时要演讲，请求改个时间（reschedule it for another time），对方同意，两人谈的是这次约见的安排，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "新推出的项目是专访要谈的内容（newly launched program），两人商量的是专访安排在什么时候。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "演讲是对方10点没空的原因（making a speech），只是顺带说明。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士预订的是哪一天？",
+      "optionTranslationsZh": {
+        "A": "10月16日。",
+        "B": "10月18日。",
+        "C": "10月25日。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I will arrive in York in two days."
+      },
+      "reasonZh": "女士先报了10月16日，随即想起那天是她出发的日子（my departure date），两天后才到约克（in two days），16 + 2 = 18，订的是10月18日，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "16日是女士先报的日子，她马上改口说那天自己才出发（that’s my departure date）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "25是店员说要交的定金金额（A deposit of $25），不是日期。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "男士建议女士做什么？",
+      "optionTranslationsZh": {
+        "A": "用手机应用。",
+        "B": "加入一个小组。",
+        "C": "带一本书。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "If possible, go with a few people led by experts."
+      },
+      "reasonZh": "男士建议跟着由专家带领的几个人一起去（go with a few people led by experts），也就是加入一个有专家带的小组，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "用手机应用是女士自己提出的（What about using phone apps），男士回答林子里手机信号不会好（can’t expect strong cell phone signals）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "男士开头就说不建议靠书上的图片辨认蘑菇（wouldn’t recommend relying on pictures in books）。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "女士想征求谁的意见？",
+      "optionTranslationsZh": {
+        "A": "沃德先生的。",
+        "B": "莫德先生的。",
+        "C": "罗宾斯女士的。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I need his unique opinions about an issue."
+      },
+      "reasonZh": "女士先问对方有没有见到沃德先生（Have you seen Mr. Ward），接着说需要他的独到见解（his unique opinions），his 指的就是沃德先生，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "莫德先生是男士说会帮女士准备报告的人（have the report ready），女士要的是意见，不是报告。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "罗宾斯女士是沃德先生出去接的人（pick up Ms. Robbins）。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "说话人之间最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "夫妻。",
+        "B": "叔侄。",
+        "C": "邻居。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I heard your cat crying in your yard last night."
+      },
+      "reasonZh": "对方夜里能听到菲利克斯家院子里的猫叫（your cat crying in your yard），菲利克斯还道歉说猫打扰了对方（must have disturbed you），可见两人住得很近，是邻居，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "叔叔是菲利克斯说来看他的亲戚（my uncle paid me a visit），猫因此受了惊，他不是对话的另一方。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "猫焦虑时会怎么做？",
+      "optionTranslationsZh": {
+        "A": "把尾巴竖起来。",
+        "B": "贴近地面。",
+        "C": "眼睛半闭。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "And when the cat stays low to the ground trying to hide, it indicates that it’s feeling stressed."
+      },
+      "reasonZh": "题中的焦虑（anxious）就是菲利克斯说的感到有压力（feeling stressed），这时猫会贴近地面（stays low to the ground），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "尾巴竖直（tail is upright）是菲利克斯说的猫放松的表现（it is relaxed）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "眼睛半闭（eyes are half-closed）和尾巴竖直在同一句里，也是放松的信号，不是焦虑。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士2010年以前是做什么的？",
+      "optionTranslationsZh": {
+        "A": "经理。",
+        "B": "老师。",
+        "C": "顾问。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I worked as an educational consultant right before becoming a teacher in 2010."
+      },
+      "reasonZh": "约翰逊先生说2010年当老师之前（right before becoming a teacher in 2010）他是教育顾问（educational consultant），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的管理（management）说的是课堂管理（classroom management），他没有当过经理。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "老师是他2010年才开始做的工作（becoming a teacher in 2010），在当顾问之后。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士的第二条建议是什么？",
+      "optionTranslationsZh": {
+        "A": "设定一个共同目标。",
+        "B": "和学生聊天。",
+        "C": "每周开一次班会。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Then create a goal for the course and ask students to work together toward it."
+      },
+      "reasonZh": "男士先用 First 讲每周开班会，再用 Then 引出第二条：为课程定一个目标，让学生一起努力（create a goal … work together toward it），这就是共同目标，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "和学生聊天（Chat with them）是最后一条建议，排在告诉学生怎么联系你之后。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "每周开班会是第一条建议（First, hold a meeting with your class once a week）。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士一开始听起来怎么样？",
+      "optionTranslationsZh": {
+        "A": "感激的。",
+        "B": "焦虑的。",
+        "C": "怀疑的。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Steve, my essay centered on Scottish culture is nearly driving me crazy."
+      },
+      "reasonZh": "女士开口就说关于苏格兰文化的论文快把她逼疯了（nearly driving me crazy），又急着说需要帮忙（I need your help），可见她很焦虑，选 B。"
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "关于Hogmanay这个词，我们知道什么？",
+      "optionTranslationsZh": {
+        "A": "它是1561年发明的。",
+        "B": "它的来源仍不清楚。",
+        "C": "它在法国被广泛使用。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "We don’t know exactly where the word comes from."
+      },
+      "reasonZh": "史蒂夫说大家并不确切知道这个词从哪儿来（don’t know exactly where the word comes from），也就是词源至今不清楚，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "1561年是玛丽女王从法国回到苏格兰的年份，这个词一般认为在那之后才被广泛使用（first been used widely after），不是那年发明的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "法国是女王回国前待的地方（returned to Scotland from France），这个词广泛使用是在她回到苏格兰以后。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "Hogmanay期间“第一脚”的传统是什么？",
+      "optionTranslationsZh": {
+        "A": "带面包和煤作为礼物。",
+        "B": "午夜前拜访朋友。",
+        "C": "和朋友一起看传统喜剧。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The first person should bring dark rye bread and a piece of coal to ensure the people you’re visiting don’t go hungry or suffer from the cold in the coming months."
+      },
+      "reasonZh": "第一个登门的人要带黑麦面包和一块煤（dark rye bread and a piece of coal），保佑主人来年不挨饿受冻，也就是带面包和煤当礼物，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "拜访亲友是在午夜刚过的时候（immediately after midnight），不是午夜之前。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "看喜剧小品是女士说的德国新年习惯（In Germany, we usually watch），和苏格兰的“第一脚”无关。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士来自哪里？",
+      "optionTranslationsZh": {
+        "A": "德国。",
+        "B": "法国。",
+        "C": "英国。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "In Germany, we usually watch the British comedy sketch, Dinner for One during the New Year."
+      },
+      "reasonZh": "女士说“在德国，我们通常……”（In Germany, we usually），用 we 把自己算在德国人里，可见她来自德国，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "法国是史蒂夫讲词源时提到的，玛丽女王从那里回到苏格兰（from France），和女士无关。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "英国的（British）修饰的是德国人新年看的喜剧小品，说的是节目来自哪里。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "与灰狗巴士相比，机场班车的优势是什么？",
+      "optionTranslationsZh": {
+        "A": "费用更低。",
+        "B": "预订更方便。",
+        "C": "发车更频繁。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "There is one every 2 hours."
+      },
+      "reasonZh": "灰狗巴士一天只有一班（only one bus a day），机场班车每两小时就有一班，所以班车发车更频繁，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里问到每人多少钱（How much does it cost），灰狗巴士单程15美元，班车单程35美元，打折后也要28美元，班车反而更贵。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士要付多少钱？",
+      "optionTranslationsZh": {
+        "A": "15美元。",
+        "B": "28美元。",
+        "C": "35美元。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "And since the Canadian International Air Show is currently going on, you can also enjoy a 20% discount."
+      },
+      "reasonZh": "海伦订的是机场班车单程票，每人35美元（$35 per person），航展期间打八折（a 20% discount），35 × (1 − 20%) = 28美元，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "15美元是灰狗巴士的单程票价（$15 one way），海伦最后订的是机场班车。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "35美元是班车打折前的原价，还要再享受八折优惠。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "赶飞机。",
+        "B": "找她的信用卡。",
+        "C": "订一家私人酒店。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Let me get my card from my study."
+      },
+      "reasonZh": "大卫要她的信用卡号，海伦说忘了卡号（forgotten the card number），要去书房拿卡，所以接下来是去找信用卡，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "海伦后天才飞多伦多（the day after tomorrow），大卫这时只是要她的航班号（flight number）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "酒店或私人住址（hotel or private address）是大卫说班车能直接送到的地方，海伦并没有要订酒店。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人在做什么？",
+      "optionTranslationsZh": {
+        "A": "报道一则新闻。",
+        "B": "进行急救培训。",
+        "C": "主持颁奖仪式。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Now, let’s welcome Richard Rochester to present Jessica Rhea with the Lifesaving Award."
+      },
+      "reasonZh": "说话人讲完杰西卡救人的经过，最后请理查德上台为她颁发救生奖（present … with the Lifesaving Award），可见是在主持颁奖仪式，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "前面讲杰西卡救人的经过像新闻，但说话人说为她感到无比自豪（could not be more proud of Jessica），还请人上台颁奖，这是颁奖现场的致辞。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "杰西卡注意到客户有什么症状？",
+      "optionTranslationsZh": {
+        "A": "噎住的声音。",
+        "B": "血压突然下降。",
+        "C": "无法正常交流。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "The client began to drop off and had problems understanding what Jessica was saying – classic signs of a stroke."
+      },
+      "reasonZh": "客户听不明白杰西卡在说什么（had problems understanding what Jessica was saying），也就是没法正常交流，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录音里的 drop off 说的是客户开始昏昏欲睡（began to drop off），不是血压下降。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "杰西卡最先采取的行动是什么？",
+      "optionTranslationsZh": {
+        "A": "她马上拨打了911。",
+        "B": "她更新了客户的情况。",
+        "C": "她给客户吃了些药。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "She called 911 at once, making sure that the client would receive urgent medical attention."
+      },
+      "reasonZh": "说话人直接说杰西卡马上拨打了911（called 911 at once），选项沿用原话，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "再次联系急救中心报告客户的最新情况（provide the most recent situation）是后来的事，说话人用“没有到此为止”（did not stop there）引出它。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人主要介绍了什么？",
+      "optionTranslationsZh": {
+        "A": "杰西卡的救人事迹。",
+        "B": "杰西卡和一位客户的聊天。",
+        "C": "理查德争分夺秒的经历。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Her ability to quickly identify the signs of a stroke and take effective action, undoubtedly saved the client’s life."
+      },
+      "reasonZh": "从发现中风征兆、拨打911，到两次联系急救中心，说话人一直在讲杰西卡怎样救人，并说她救了客户的命（saved the client’s life），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "和客户聊天只是开头交代的场景（was chatting with a client），后面讲的都是她怎样救人。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "理查德只在最后出场，是来给杰西卡颁奖的（present Jessica Rhea with the Lifesaving Award），录音没有讲他的经历。"
+        }
+      ]
+    }
+  }
+}

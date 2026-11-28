@@ -1,0 +1,659 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiyang-2024-11",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiyang-2024-11:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiyang-2024-11:reading-a": {
+      "overview": "这是一份年度酒店精选，介绍奥地利、墨西哥、希腊和意大利的四家特色酒店：翻新后的糖果色浴场酒店、雨林树屋、注重可持续的生态酒店和山间木屋。",
+      "fullTranslationZh": "我们走遍全球，为你搜罗了今年最好的酒店。以下是我们挑选的几家。\n焕新酒店（奥地利，Badeschloss）\n维也纳建筑事务所 BWM 把它改造成了一处炙手可热的度假胜地。新加建的 13 层混凝土楼让客房总数达到 102 间，所有房间都采用糖果色设计，点缀着浴场元素，比如泳池扶梯、私人桑拿房，还有深得几乎能在里面游泳的浴缸。锦上添花的是三层桑拿楼顶上的屋顶恒温泳池。\n远离尘嚣的住处（墨西哥，Boca de Agua）\n这里有一片由 22 座架高树屋组成的建筑群，深藏在尤卡坦半岛的雨林中。树屋用废旧材料建成，采用简约的美学风格，让周围的丛林成为主角。设计的重点是淡化荒野与住客之间的隔阂：有露天淋浴，还能看到吊床在平台上悠闲地摇晃。\n生态住宿（希腊，Santo Mine）\nSanto Mine 位于圣托里尼岛北部、房屋粉刷得雪白的伊亚村，一直热衷于可持续发展。支持本地供应商、负责任地处理垃圾、用本土植物园保护生物多样性，是它的使命目标（MO）。套房简约而雅致，以浅色木材装饰，床铺面朝大海，最多可住四人，配有私人泳池、私人按摩浴缸，每天还能欣赏壮观的日落。\n山间避世处（意大利，Odles Lodge）\nOdles 融合了低调的奢华与原始的荒野，脚下是松林和繁花点点的草甸。这些极简清爽的木屋用浅色云杉和瑞士石松建成——据说这种未经处理、气味芬芳的木材有助于睡得更好——窗户和阳台则把壮丽的景色框入其中。南蒂罗尔传统山间小屋的韵味也保留了下来。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:3",
+          "sourceText": "Its 13-storey concrete addition has brought the room total to 102, and all are designed in candy colours with bathhouse accents like pool ladders, private saunas and deep tubs you can practically swim in.",
+          "displayText": "Its 13-storey concrete addition has brought the room total to 102, and all are designed in candy colours with bathhouse accents like pool ladders, private saunas and deep tubs you can practically swim in.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:23"
+          ],
+          "translationZh": "新加建的 13 层混凝土楼让客房总数达到 102 间，所有房间都采用糖果色设计，点缀着浴场元素，比如泳池扶梯、私人桑拿房，还有深得几乎能在里面游泳的浴缸。",
+          "analysisZh": "全句是 and 连接的两个分句。前一半主干是 addition has brought the room total to 102：加建的楼让客房总数达到 102 间。后一半主干是 all are designed in candy colours，all 指全部客房；with bathhouse accents 说明点缀的元素，like 后举了三个例子。最后的 deep tubs you can practically swim in 省略了关系词 that，you can practically swim in 修饰 tubs，in 的宾语就是 tubs：深得几乎能在里面游泳的浴缸。",
+          "underlineRanges": [
+            {
+              "start": 32,
+              "end": 65,
+              "quote": "has brought the room total to 102"
+            },
+            {
+              "start": 71,
+              "end": 104,
+              "quote": "all are designed in candy colours"
+            },
+            {
+              "start": 166,
+              "end": 203,
+              "quote": "deep tubs you can practically swim in"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:1"
+              ],
+              "start": 0,
+              "end": 31,
+              "quote": "我们走遍全球，为你搜罗了今年最好的酒店。以下是我们挑选的几家。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:2"
+              ],
+              "start": 32,
+              "end": 53,
+              "quote": "焕新酒店（奥地利，Badeschloss）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:3"
+              ],
+              "start": 54,
+              "end": 183,
+              "quote": "维也纳建筑事务所 BWM 把它改造成了一处炙手可热的度假胜地。新加建的 13 层混凝土楼让客房总数达到 102 间，所有房间都采用糖果色设计，点缀着浴场元素，比如泳池扶梯、私人桑拿房，还有深得几乎能在里面游泳的浴缸。锦上添花的是三层桑拿楼顶上的屋顶恒温泳池。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:4"
+              ],
+              "start": 184,
+              "end": 209,
+              "quote": "远离尘嚣的住处（墨西哥，Boca de Agua）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:5",
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:6"
+              ],
+              "start": 210,
+              "end": 317,
+              "quote": "这里有一片由 22 座架高树屋组成的建筑群，深藏在尤卡坦半岛的雨林中。树屋用废旧材料建成，采用简约的美学风格，让周围的丛林成为主角。设计的重点是淡化荒野与住客之间的隔阂：有露天淋浴，还能看到吊床在平台上悠闲地摇晃。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:7"
+              ],
+              "start": 318,
+              "end": 337,
+              "quote": "生态住宿（希腊，Santo Mine）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8"
+              ],
+              "start": 338,
+              "end": 481,
+              "quote": "Santo Mine 位于圣托里尼岛北部、房屋粉刷得雪白的伊亚村，一直热衷于可持续发展。支持本地供应商、负责任地处理垃圾、用本土植物园保护生物多样性，是它的使命目标（MO）。套房简约而雅致，以浅色木材装饰，床铺面朝大海，最多可住四人，配有私人泳池、私人按摩浴缸，每天还能欣赏壮观的日落。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:9"
+              ],
+              "start": 482,
+              "end": 504,
+              "quote": "山间避世处（意大利，Odles Lodge）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:10"
+              ],
+              "start": 505,
+              "end": 625,
+              "quote": "Odles 融合了低调的奢华与原始的荒野，脚下是松林和繁花点点的草甸。这些极简清爽的木屋用浅色云杉和瑞士石松建成——据说这种未经处理、气味芬芳的木材有助于睡得更好——窗户和阳台则把壮丽的景色框入其中。南蒂罗尔传统山间小屋的韵味也保留了下来。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-a-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:5",
+                "start": 0,
+                "end": 88,
+                "quote": "With a complex of 22 elevated treehouses deep in the rainforest on the Yucatán Peninsula"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p5",
+                "start": 0,
+                "end": 21,
+                "quote": "这里有一片由 22 座架高树屋组成的建筑群"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-a-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+                "start": 58,
+                "end": 99,
+                "quote": "Santo Mine has been hot on sustainability"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+                "start": 129,
+                "end": 207,
+                "quote": "managing waste responsibly and protecting biodiversity with indigenous gardens"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p7",
+                "start": 33,
+                "end": 43,
+                "quote": "一直热衷于可持续发展"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p7",
+                "start": 52,
+                "end": 74,
+                "quote": "负责任地处理垃圾、用本土植物园保护生物多样性"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-a-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:3",
+                "start": 29,
+                "end": 66,
+                "quote": "transformed it into a red-hot retreat"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:6",
+                "start": 139,
+                "end": 192,
+                "quote": "softening the walls between the wilderness and guests"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+                "start": 78,
+                "end": 99,
+                "quote": "hot on sustainability"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:10",
+                "start": 9,
+                "end": 55,
+                "quote": "a mix of understated luxury and raw wilderness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p3",
+                "start": 15,
+                "end": 30,
+                "quote": "改造成了一处炙手可热的度假胜地"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p5",
+                "start": 72,
+                "end": 84,
+                "quote": "淡化荒野与住客之间的隔阂"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p7",
+                "start": 35,
+                "end": 43,
+                "quote": "热衷于可持续发展"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p9",
+                "start": 6,
+                "end": 20,
+                "quote": "融合了低调的奢华与原始的荒野"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:3",
+                "start": 68,
+                "end": 272,
+                "quote": "Its 13-storey concrete addition has brought the room total to 102, and all are designed in candy colours with bathhouse accents like pool ladders, private saunas and deep tubs you can practically swim in."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-a",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-a-p3",
+                "start": 31,
+                "end": 108,
+                "quote": "新加建的 13 层混凝土楼让客房总数达到 102 间，所有房间都采用糖果色设计，点缀着浴场元素，比如泳池扶梯、私人桑拿房，还有深得几乎能在里面游泳的浴缸。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头一句引出年度酒店精选，随后依次介绍四家酒店，每家先用标题点出类型和所在国家，再写设计、设施和最突出的特色。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:1",
+            "summary": "作者说走遍全球选出了年度最佳酒店，下面是推荐名单。",
+            "function": "开篇引出全文，交代这是一份酒店精选。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:2",
+            "summary": "第一家是奥地利的 Badeschloss，一家翻新酒店。",
+            "function": "标题，点出酒店类型和所在国家。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:3",
+            "summary": "BWM 把它改造成度假胜地，102 间糖果色客房带浴场元素，屋顶还有恒温泳池。",
+            "function": "介绍翻新后的客房设计和招牌设施。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:4",
+            "summary": "第二家是墨西哥 Boca de Agua 的一处远离尘嚣的住处。",
+            "function": "标题，点出酒店类型和所在国家。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:5",
+            "summary": "22 座树屋藏在雨林中，用废旧材料建成，设计上让住客贴近丛林。",
+            "function": "介绍树屋的环境、用材和设计理念。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:7",
+            "summary": "第三家是希腊的生态酒店 Santo Mine。",
+            "function": "标题，点出酒店类型和所在国家。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+            "summary": "酒店热衷可持续发展，支持本地供应商、处理垃圾、保护生物多样性，套房带私人泳池和海景。",
+            "function": "先点明经营理念，再介绍套房配置。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:9",
+            "summary": "第四家是意大利的山间避世处 Odles Lodge。",
+            "function": "标题，点出酒店类型和所在国家。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:10",
+            "summary": "木屋融合奢华与荒野，用天然木材助眠，保留了南蒂罗尔山屋的韵味。",
+            "function": "介绍木屋的环境、用材和风格。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiyang-2024-11:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "按标题里的地名找到 Boca de Agua 这一节，看游客在这里住的是什么。",
+      "stemTranslationZh": "在 Boca de Agua，游客可以________。",
+      "locateBy": "stem",
+      "locateFindZh": "往下一段看这里的住处",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "淡化墙壁",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "softening the walls",
+            "optionText": "soften the walls",
+            "matchType": "wordFamily",
+            "relationNote": "选项借 softening the walls，原文指设计上淡化荒野与住客之间的隔阂，是酒店的设计理念，不是游客去做的事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:6",
+              "quote": "The emphasis is on softening the walls between the wilderness and guests",
+              "anchor": "设计重点"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "住在树屋里",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:5",
+              "quote": "With a complex of 22 elevated treehouses deep in the rainforest on the Yucatán Peninsula",
+              "anchor": "22 座架高树屋"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "在中心舞台上表演",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "centre stage",
+            "optionText": "centre stage",
+            "matchType": "exact",
+            "relationNote": "选项照搬 centre stage，原文 take centre stage 是说让周围的丛林成为主角，这里没有舞台，也没有表演。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:6",
+              "quote": "a pared-back aesthetic that allows the surrounding jungle to take centre stage",
+              "anchor": "丛林成为主角"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "观看丛林里的吊床",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "views of hammocks",
+            "optionText": "view hammocks",
+            "matchType": "wordFamily",
+            "relationNote": "选项借 views of hammocks，原文说能看到吊床在树屋平台上（on the deck）悠闲摇晃，选项把吊床挪进了丛林。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:6",
+              "quote": "views of hammocks swinging lazily on the deck",
+              "anchor": "平台上的吊床"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Boca de Agua",
+          "sourceRole": "stem",
+          "targetText": "Remote Sleep (Boca de Agua, Mexico)",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:4",
+          "relationType": "locationCue",
+          "answerText": "22 elevated treehouses",
+          "bridgeZh": "标题下面的正文介绍的就是这里的住处",
+          "note": "题干 Boca de Agua 原词出现在这一节的标题里。"
+        },
+        {
+          "sourceText": "live in a treehouse",
+          "sourceRole": "correctOption",
+          "targetText": "With a complex of 22 elevated treehouses deep in the rainforest on the Yucatán Peninsula",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:5",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 treehouse：这家的住处就是 22 座架高树屋（elevated treehouses），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到希腊那家酒店的介绍，判断它最看重的是什么。",
+      "stemTranslationZh": "希腊这家酒店主要关注的是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "生态环保。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+              "quote": "Santo Mine has been hot on sustainability",
+              "anchor": "热衷于可持续发展"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+              "quote": "managing waste responsibly and protecting biodiversity with indigenous gardens",
+              "anchor": "处理垃圾、保护生物多样性"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "自然风光。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "sea-facing beds sleep up to four people with private pools, private whirlpool baths and the spectacular daily sunset",
+            "sourceEntity": "the spectacular daily sunset",
+            "optionText": "Natural scenery.",
+            "optionEntity": "Natural scenery",
+            "explanation": "海景床和每天壮观的日落（daily sunset）是在介绍套房能享受到什么，酒店明说自己热衷的是可持续发展。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "顾客的隐私。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "private pools",
+            "optionText": "privacy",
+            "matchType": "wordFamily",
+            "relationNote": "选项借 private pools 里的 private，原文只是说套房配有私人泳池和私人按摩浴缸，是房间配置，没说酒店看重顾客隐私。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+              "quote": "private pools, private whirlpool baths",
+              "anchor": "私人泳池和按摩浴缸"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "社会责任。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Supporting local suppliers, managing waste responsibly and protecting biodiversity with indigenous gardens is the MO (Mission Objective).",
+            "sourceHighlight": "Supporting local suppliers",
+            "optionText": "Social responsibility.",
+            "optionHighlight": "Social responsibility",
+            "explanation": "太宽：原文点明酒店热衷的是 sustainability，选项换成范围大得多的“社会责任”；使命目标三件事里也只有支持本地供应商沾得上边。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "main concern",
+          "sourceRole": "stem",
+          "targetText": "In the whitewashed village of Oia, in northern Santorini, Santo Mine has been hot on sustainability.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+          "relationType": "locationCue",
+          "targetCue": "hot on",
+          "sourceZh": "主要关注",
+          "targetCueZh": "热衷于",
+          "answerText": "hot on sustainability",
+          "note": "题干 main concern 对应原文 hot on。"
+        },
+        {
+          "sourceText": "Eco-friendliness",
+          "sourceRole": "correctOption",
+          "targetText": "In the whitewashed village of Oia, in northern Santorini, Santo Mine has been hot on sustainability.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+          "relationType": "paraphrase",
+          "note": "选项的“生态环保”（Eco-friendliness）就是原文的“可持续发展”（sustainability）；[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8|is the MO (Mission Objective)]]列的处理垃圾、保护生物多样性也都是环保做法，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "比较四家酒店的介绍，找出每一家都写到的方面。",
+      "stemTranslationZh": "上文提到的四家酒店都包含了哪一方面的介绍？",
+      "locateBy": "options",
+      "locateFindZh": "拿每项回四家的介绍逐家找，缺一家就排除",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "建筑材料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "The minimalist-cool lodges use blonde spruce and Swiss stone pine",
+            "sourceHighlight": "blonde spruce and Swiss stone pine",
+            "optionText": "Building materials.",
+            "optionHighlight": "Building materials",
+            "explanation": "用料写明的是[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:3]]的混凝土加建楼、[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:6]]的废旧材料和[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:10]]的云杉、石松；[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8]]讲经营理念和套房配置，light woods 只是形容套房的装饰。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "可供房间数。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Its 13-storey concrete addition has brought the room total to 102",
+            "sourceHighlight": "the room total to 102",
+            "optionText": "Rooms available.",
+            "optionHighlight": "Rooms available",
+            "explanation": "房间数只在[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:3]]（共 102 间）和[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:5]]（22 座树屋）写明，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8]]只说每间套房最多住四人，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:10]]完全没提有多少间。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "具体位置。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Revamped Hotel (Badeschloss, Austria)",
+            "sourceHighlight": "Austria",
+            "optionText": "Specific location.",
+            "optionHighlight": "Specific location",
+            "explanation": "雨林树屋、伊亚村的生态酒店都交代了具体在哪里，但 Badeschloss 只在标题里标了国名 Austria，正文没写它在奥地利什么地方。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "独特之处。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:3",
+              "quote": "Viennese architects BWM have transformed it into a red-hot retreat.",
+              "anchor": "翻新成度假胜地"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8",
+              "quote": "Santo Mine has been hot on sustainability",
+              "anchor": "热衷可持续发展"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:10",
+              "quote": "Odles is a mix of understated luxury and raw wilderness",
+              "anchor": "奢华与荒野的结合"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Distinctive feature",
+          "sourceRole": "correctOption",
+          "targetText": "Odles is a mix of understated luxury and raw wilderness",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-a:10",
+          "relationType": "paraphrase",
+          "note": "四家的标题都先点出特色：焕新、远离尘嚣、生态、山间避世，正文再展开：[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:3]]写翻新后的糖果色客房和屋顶泳池，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:5]]写雨林里的树屋，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:8]]写可持续理念，[[block:paper-mock-zhejiang-jiyang-2024-11:reading-a:10]]写奢华与荒野的结合。选项的“独特之处”（Distinctive feature）四家都有，选 D。"
+        }
+      ]
+    }
+  }
+}

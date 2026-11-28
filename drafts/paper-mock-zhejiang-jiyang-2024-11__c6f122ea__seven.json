@@ -1,0 +1,1021 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiyang-2024-11",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiyang-2024-11:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiyang-2024-11:seven-choices": {
+      "overview": "文章探讨低因咖啡能否带来与普通咖啡相同的健康益处，比较两者的差别，分析咖啡因的利与弊，并指出喝咖啡的效果还取决于吸烟、加糖等相伴的习惯和喝法。",
+      "fullTranslationZh": "喝咖啡被认为与降低患 II 型糖尿病、痴呆等神经系统疾病乃至死亡的风险有关。但随着越来越多的人改喝低因咖啡，他们还能获得同样的这些好处吗？\n低因咖啡与普通咖啡相比如何\n好消息是，咖啡的许多健康益处在脱咖啡因咖啡中依然存在。人们认为，这是因为咖啡豆中含有抗氧化剂，其中许多在咖啡因被去除后仍然保留。尽管有所减少，抗氧化剂的总体含量仍然很高。这能为喝低因咖啡的人带来实实在在的好处。\n咖啡因的利与弊\n研究人员发现，所有喝咖啡的人（包括喝低因咖啡的人）患心血管疾病和死亡的风险都有所降低。此外，咖啡因还有助于缓解偏头痛。不过，咖啡因的影响可能各不相同。短期内，摄入过多咖啡因会导致神经紧张、睡眠紊乱、头痛或心跳过快。从长期看，摄入过多咖啡因会使人在试图戒掉时出现头痛等戒断症状。\n具体情况很重要\n咖啡的健康益处之所以争论了这么久，原因之一是喝咖啡往往与其他习惯相伴。研究人员发现，喝咖啡与较高的吸烟率有关，而这些人面临的肺癌等健康风险是吸烟而非咖啡造成的。另一项研究发现，经常喝咖啡与随着时间推移体重增加较少有关。但前提是饮用者喝的是黑咖啡或只加奶油、不加糖的咖啡。无论喝的是普通咖啡还是低因咖啡，这一点都成立。“喝不加糖的咖啡似乎是正确的选择。”鲍尔说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+          "sourceText": "One of the reasons that the health benefits of coffee have been debated for so long is due to the fact that its consumption can often go hand in hand with other habits.",
+          "displayText": "One of the reasons that the health benefits of coffee have been debated for so long is due to the fact that its consumption can often go hand in hand with other habits.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:39"
+          ],
+          "translationZh": "咖啡的健康益处之所以争论了这么久，原因之一是喝咖啡往往与其他习惯相伴。",
+          "analysisZh": "主干是 One of the reasons … is due to the fact …（原因之一在于……这一事实）。that the health benefits … so long 是修饰 reasons 的定语从句，说的是“什么事的原因”；the fact 后面的 that 从句是同位语，交代事实的内容：喝咖啡常和其他习惯同时出现。这句点出本段要说的“喝咖啡的背景”，正是小标题所概括的内容。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "One of the reasons"
+            },
+            {
+              "start": 84,
+              "end": 102,
+              "quote": "is due to the fact"
+            },
+            {
+              "start": 134,
+              "end": 167,
+              "quote": "go hand in hand with other habits"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:2",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+          "sourceText": "The reason for this is thought to be due to the levels of antioxidants(抗氧化剂) in coffee beans, many of which remain even after the caffeine has been removed.",
+          "displayText": "The reason for this is thought to be due to the levels of antioxidants(抗氧化剂) in coffee beans, many of which remain even after the caffeine has been removed.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:37"
+          ],
+          "translationZh": "人们认为，这是因为咖啡豆中含有抗氧化剂，其中许多在咖啡因被去除后仍然保留。",
+          "analysisZh": "主干是 The reason for this is thought to be due to …（这被认为是由于……），this 指上一句“低因咖啡仍保留许多健康益处”。many of which 引导非限制性定语从句，which 指 antioxidants，说明其中许多在去除咖啡因后依然留存；even after 引出时间状语。读懂这层原因，才能理解段尾为什么说这对喝低因咖啡的人有实际好处。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 43,
+              "quote": "The reason for this is thought to be due to"
+            },
+            {
+              "start": 94,
+              "end": 114,
+              "quote": "many of which remain"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "首段列出喝咖啡的好处并提出问题：改喝低因咖啡还能得到这些好处吗？随后三个小标题部分依次作答：低因咖啡保留了多数好处；咖啡因本身有利有弊；喝咖啡的效果还要看相伴的习惯和喝法。",
+        "units": [
+          {
+            "unitId": "unit-1",
+            "paragraphIds": [
+              "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1"
+            ],
+            "summary": "喝咖啡与降低多种疾病和死亡风险有关，进而提出低因咖啡是否同样有益的问题。"
+          },
+          {
+            "unitId": "unit-2",
+            "heading": "How decaf compares to regular coffee",
+            "paragraphIds": [
+              "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:2",
+              "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3"
+            ],
+            "summary": "低因咖啡仍保留大量抗氧化剂，因而保留了许多健康益处。"
+          },
+          {
+            "unitId": "unit-3",
+            "heading": "The pros and cons of caffeine",
+            "paragraphIds": [
+              "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:4",
+              "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5"
+            ],
+            "summary": "咖啡因能缓解偏头痛，但过量摄入会带来短期不适和长期戒断症状。"
+          },
+          {
+            "unitId": "unit-4",
+            "paragraphIds": [
+              "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:6",
+              "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7"
+            ],
+            "summary": "吸烟等习惯曾让人错怪咖啡；咖啡帮助控制体重也以不加糖为前提，喝法和习惯决定效果。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 39,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "C",
+          "shared": [
+            "effect"
+          ],
+          "text": "选项的 \"cause\" 像在概括第 39 题下面那项研究：肺癌是 \"due to smoking rather than coffee\"。但这段还讲体重研究和不加糖的条件，段首 \"other habits\" 说的是相伴的习惯和喝法，不只一组因果，B 管不住全段。",
+          "quotes": [
+            "cause",
+            "due to smoking rather than coffee",
+            "other habits"
+          ]
+        },
+        "E": {
+          "target": 36,
+          "secondary": 40,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "coffee",
+            "drink"
+          ],
+          "text": "选项顺着第 36 题空前喝咖啡的好处给出建议，看似能收尾。但下面小标题 \"How decaf compares to regular coffee\" 转谈低因，E 没有引出这个话题。放到第 40 题，空后 \"This held true\" 要接一项研究发现，接不上对医生的建议。",
+          "quotes": [
+            "How decaf compares to regular coffee",
+            "This held true"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 69,
+              "quote": "喝咖啡被认为与降低患 II 型糖尿病、痴呆等神经系统疾病乃至死亡的风险有关。但随着越来越多的人改喝低因咖啡，他们还能获得同样的这些好处吗？"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:2"
+              ],
+              "start": 70,
+              "end": 83,
+              "quote": "低因咖啡与普通咖啡相比如何"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3"
+              ],
+              "start": 84,
+              "end": 189,
+              "quote": "好消息是，咖啡的许多健康益处在脱咖啡因咖啡中依然存在。人们认为，这是因为咖啡豆中含有抗氧化剂，其中许多在咖啡因被去除后仍然保留。尽管有所减少，抗氧化剂的总体含量仍然很高。这能为喝低因咖啡的人带来实实在在的好处。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:4"
+              ],
+              "start": 190,
+              "end": 197,
+              "quote": "咖啡因的利与弊"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5"
+              ],
+              "start": 198,
+              "end": 336,
+              "quote": "研究人员发现，所有喝咖啡的人（包括喝低因咖啡的人）患心血管疾病和死亡的风险都有所降低。此外，咖啡因还有助于缓解偏头痛。不过，咖啡因的影响可能各不相同。短期内，摄入过多咖啡因会导致神经紧张、睡眠紊乱、头痛或心跳过快。从长期看，摄入过多咖啡因会使人在试图戒掉时出现头痛等戒断症状。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:6",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:6"
+              ],
+              "start": 337,
+              "end": 344,
+              "quote": "具体情况很重要"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7"
+              ],
+              "start": 345,
+              "end": 525,
+              "quote": "咖啡的健康益处之所以争论了这么久，原因之一是喝咖啡往往与其他习惯相伴。研究人员发现，喝咖啡与较高的吸烟率有关，而这些人面临的肺癌等健康风险是吸烟而非咖啡造成的。另一项研究发现，经常喝咖啡与随着时间推移体重增加较少有关。但前提是饮用者喝的是黑咖啡或只加奶油、不加糖的咖啡。无论喝的是普通咖啡还是低因咖啡，这一点都成立。“喝不加糖的咖啡似乎是正确的选择。”鲍尔说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:36",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+            "text": "Drinking coffee has been linked to a reduced risk of developing type II diabetes, neurological conditions such as dementia, and even death. But as people increasingly turn to decaf, are they still getting those same benefits?"
+          },
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:37",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+            "text": "The good news is that many of coffee’s health benefits are still found in decaffeinated(脱咖啡因) coffee. The reason for this is thought to be due to the levels of antioxidants(抗氧化剂) in coffee beans, many of which remain even after the caffeine has been removed. Reduced though, the overall levels of antioxidants are still high. That can translate to real benefits for decaf drinkers."
+          },
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:38",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5",
+            "text": "Researchers found a reduced risk of cardiovascular disease and death in all coffee drinkers, which included people who drank decaf. Also, caffeine can help alleviate migraines (偏头痛) The effects of caffeine can vary, however. In the short-term, consuming too much caffeine can cause jitteriness, sleep disruptions, headaches, or a racing heart. Long-term, consuming too much caffeine can lead to withdrawal symptoms, such as headaches, if a person tries to stop."
+          },
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:39",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:6",
+            "text": "Context matters."
+          },
+          {
+            "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:40",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+            "text": "One of the reasons that the health benefits of coffee have been debated for so long is due to the fact that its consumption can often go hand in hand with other habits. Researchers found coffee drinking was associated with a higher rate of smoking cigarettes – and that the health risks they faced such as lung cancer were due to smoking rather than coffee. Another study found, regular coffee consumption is associated with a reduced amount of weight gain over time. But only if drinkers had their coffee black or with cream, but no sugar. This held true whether people were drinking regular or decaf coffee. “Having unsweetened coffee seems to be the way to go,” Ball says."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiyang-2024-11:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+                "start": 35,
+                "end": 49,
+                "quote": "a reduced risk"
+              },
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:2",
+                "start": 0,
+                "end": 36,
+                "quote": "How decaf compares to regular coffee"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+                "start": 7,
+                "end": 35,
+                "quote": "降低患 II 型糖尿病、痴呆等神经系统疾病乃至死亡的风险"
+              },
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:2",
+                "start": 0,
+                "end": 13,
+                "quote": "低因咖啡与普通咖啡相比如何"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiyang-2024-11:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+                "start": 275,
+                "end": 324,
+                "quote": "the overall levels of antioxidants are still high"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+                "start": 71,
+                "end": 84,
+                "quote": "抗氧化剂的总体含量仍然很高"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiyang-2024-11:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5",
+                "start": 138,
+                "end": 175,
+                "quote": "caffeine can help alleviate migraines"
+              },
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5",
+                "start": 208,
+                "end": 257,
+                "quote": "consuming too much caffeine can cause jitteriness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5",
+                "start": 46,
+                "end": 58,
+                "quote": "咖啡因还有助于缓解偏头痛"
+              },
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5",
+                "start": 79,
+                "end": 93,
+                "quote": "摄入过多咖啡因会导致神经紧张"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiyang-2024-11:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 108,
+                "end": 167,
+                "quote": "its consumption can often go hand in hand with other habits"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 22,
+                "end": 34,
+                "quote": "喝咖啡往往与其他习惯相伴"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-zhejiang-jiyang-2024-11:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 544,
+                "end": 598,
+                "quote": "“Having unsweetened coffee seems to be the way to go,”"
+              },
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 475,
+                "end": 543,
+                "quote": "This held true whether people were drinking regular or decaf coffee."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 158,
+                "end": 176,
+                "quote": "“喝不加糖的咖啡似乎是正确的选择。”"
+              },
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 135,
+                "end": 158,
+                "quote": "无论喝的是普通咖啡还是低因咖啡，这一点都成立。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiyang-2024-11:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:36"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:36",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+                "start": 140,
+                "end": 225,
+                "quote": "But as people increasingly turn to decaf, are they still getting those same benefits?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+                "start": 38,
+                "end": 69,
+                "quote": "但随着越来越多的人改喝低因咖啡，他们还能获得同样的这些好处吗？"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiyang-2024-11:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:37"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:37",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+                "start": 326,
+                "end": 381,
+                "quote": "That can translate to real benefits for decaf drinkers."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+                "start": 85,
+                "end": 105,
+                "quote": "这能为喝低因咖啡的人带来实实在在的好处。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiyang-2024-11:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:38"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:38",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5",
+                "start": 182,
+                "end": 224,
+                "quote": "The effects of caffeine can vary, however."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5",
+                "start": 59,
+                "end": 75,
+                "quote": "不过，咖啡因的影响可能各不相同。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiyang-2024-11:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:39"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:39",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:6",
+                "start": 0,
+                "end": 16,
+                "quote": "Context matters."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:6",
+                "start": 0,
+                "end": 7,
+                "quote": "具体情况很重要"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-zhejiang-jiyang-2024-11:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:40"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-zhejiang-jiyang-2024-11:40",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 468,
+                "end": 540,
+                "quote": "But only if drinkers had their coffee black or with cream, but no sugar."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 109,
+                "end": 135,
+                "quote": "但前提是饮用者喝的是黑咖啡或只加奶油、不加糖的咖啡。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:39"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 0,
+                "end": 168,
+                "quote": "One of the reasons that the health benefits of coffee have been debated for so long is due to the fact that its consumption can often go hand in hand with other habits."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+                "start": 0,
+                "end": 35,
+                "quote": "咖啡的健康益处之所以争论了这么久，原因之一是喝咖啡往往与其他习惯相伴。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:37"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+                "start": 102,
+                "end": 258,
+                "quote": "The reason for this is thought to be due to the levels of antioxidants(抗氧化剂) in coffee beans, many of which remain even after the caffeine has been removed."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+                "start": 27,
+                "end": 64,
+                "quote": "人们认为，这是因为咖啡豆中含有抗氧化剂，其中许多在咖啡因被去除后仍然保留。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiyang-2024-11:36": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:36",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion",
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "a reduced risk",
+        "type II diabetes",
+        "dementia",
+        "How decaf compares to regular coffee"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:1",
+        "beforeQuote": "Drinking coffee has been linked to a reduced risk of developing type II diabetes, neurological conditions such as dementia, and even death.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "a reduced risk … and even death",
+          "relation": "But 在列完好处之后拐出疑问，把话题从咖啡的好处引向低因咖啡还有没有这些好处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "those same benefits",
+          "signalSide": "option",
+          "targetText": "a reduced risk of developing type II diabetes, neurological conditions such as dementia, and even death",
+          "relation": "those same benefits 回指空前列出的降低疾病和死亡风险这些好处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "How decaf compares to regular coffee",
+          "signalSide": "context-after",
+          "targetText": "turn to decaf",
+          "relation": "下面的小标题比较低因和普通咖啡，正接选项里 turn to decaf 提出的问题。"
+        }
+      ],
+      "lock": [
+        "those same benefits",
+        "decaf"
+      ],
+      "find": {
+        "text": "空前列了喝咖啡的好处，下面小标题 \"How decaf compares to regular coffee\" 转向低因。只有 G 用 \"those same benefits\" 接住前文，又提出 decaf 的问题。",
+        "quotes": [
+          "How decaf compares to regular coffee",
+          "those same benefits",
+          "decaf"
+        ]
+      },
+      "explain": "首段先摆出喝咖啡的种种好处，这句用 But 把话题拐到低因咖啡上，抛出全文要回答的问题；下一部分开头的 \"The good news\" 就是对它的答复。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 的 \"real benefits\" 似乎能接空前的好处，但首段还没提低因，\"decaf drinkers\" 来得突兀，结论也抢在下面的比较之前。",
+          "quotes": [
+            "real benefits",
+            "decaf drinkers"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "a reduced risk of developing type II diabetes, neurological conditions such as dementia, and even death",
+            "optionSide": "those same benefits",
+            "relation": "选项用 those same benefits 概括空前列出的几项好处。"
+          },
+          {
+            "contextSide": "How decaf compares to regular coffee",
+            "optionSide": "as people increasingly turn to decaf",
+            "relation": "选项提出低因咖啡的问题，下面小标题和正文接着比较低因与普通咖啡。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "首段先摆出喝咖啡的种种好处，这句用 But 把话题拐到低因咖啡上，抛出全文要回答的问题；下一部分开头的 \"The good news\" 就是对它的答复。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 的 \"real benefits\" 似乎能接空前的好处，但首段还没提低因，\"decaf drinkers\" 来得突兀，结论也抢在下面的比较之前。"
+        },
+        {
+          "optionLabel": "E",
+          "reason": "选项顺着第 36 题空前喝咖啡的好处给出建议，看似能收尾。但下面小标题 \"How decaf compares to regular coffee\" 转谈低因，E 没有引出这个话题。放到第 40 题，空后 \"This held true\" 要接一项研究发现，接不上对医生的建议。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:37": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:37",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "decaffeinated(脱咖啡因) coffee",
+        "health benefits",
+        "antioxidants(抗氧化剂)",
+        "still high"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:3",
+        "headingAnchor": "How decaf compares to regular coffee",
+        "beforeQuote": "Reduced though, the overall levels of antioxidants are still high.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "That",
+          "signalSide": "option",
+          "targetText": "the overall levels of antioxidants are still high",
+          "relation": "That 指空前“抗氧化剂总量仍然很高”这一事实。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "still high",
+          "signalSide": "context-before",
+          "targetText": "That",
+          "relation": "空前的 still high 给 That 提供了可以指代的内容。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "decaf drinkers",
+          "signalSide": "option",
+          "targetText": "decaffeinated(脱咖啡因) coffee",
+          "relation": "选项把本段讲的低因咖啡落到喝它的人身上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "many of coffee’s health benefits are still found in decaffeinated(脱咖啡因) coffee",
+          "signalSide": "context-before",
+          "targetText": "real benefits",
+          "relation": "段首说好处仍在，段尾的 real benefits 与之首尾呼应。"
+        }
+      ],
+      "lock": [
+        "That",
+        "still high"
+      ],
+      "find": {
+        "text": "空前说抗氧化剂总量 \"still high\"，D 的 \"That\" 正好回指这一事实，再由它推出对 \"decaf drinkers\" 的好处。",
+        "quotes": [
+          "still high",
+          "That",
+          "decaf drinkers"
+        ]
+      },
+      "explain": "本段先下结论说低因咖啡保留了许多好处，再用抗氧化剂解释原因；这句把成分上的数据落回饮用者身上，和段首 \"The good news\" 首尾呼应。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "the overall levels of antioxidants are still high",
+            "optionSide": "That",
+            "relation": "That 指抗氧化剂含量仍高这件事。"
+          },
+          {
+            "contextSide": "many of coffee’s health benefits are still found in decaffeinated(脱咖啡因) coffee",
+            "optionSide": "real benefits for decaf drinkers",
+            "relation": "段尾回到段首的“好处仍在”，并说清受益的是喝低因咖啡的人。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "本段先下结论说低因咖啡保留了许多好处，再用抗氧化剂解释原因；这句把成分上的数据落回饮用者身上，和段首 \"The good news\" 首尾呼应。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:38": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "help alleviate migraines",
+        "too much caffeine",
+        "jitteriness",
+        "withdrawal symptoms"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:5",
+        "headingAnchor": "The pros and cons of caffeine",
+        "beforeQuote": "Also, caffeine can help alleviate migraines (偏头痛)",
+        "afterQuote": "In the short-term, consuming too much caffeine can cause jitteriness, sleep disruptions, headaches, or a racing heart."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "however",
+          "signalSide": "option",
+          "targetText": "help alleviate migraines / too much caffeine can cause jitteriness",
+          "relation": "however 把前面咖啡因的好处转到后面过量摄入的坏处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "help alleviate migraines",
+          "signalSide": "context-before",
+          "targetText": "The effects of caffeine",
+          "relation": "空前是咖啡因的一项好处。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "consuming too much caffeine can cause",
+          "signalSide": "context-after",
+          "targetText": "The effects of caffeine can vary",
+          "relation": "空后列出过量咖啡因的害处，说明它的作用并非只有好的一面。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "vary",
+          "signalSide": "option",
+          "targetText": "help alleviate migraines / cause jitteriness",
+          "relation": "vary 概括咖啡因既能缓解头痛、过量又会引起不适的两面。"
+        }
+      ],
+      "lock": [
+        "however",
+        "too much caffeine"
+      ],
+      "find": {
+        "text": "空前讲咖啡因能 \"help alleviate migraines\"，空后讲 \"too much caffeine\" 的害处，中间要一个转折，只有 C 带 \"however\"。",
+        "quotes": [
+          "help alleviate migraines",
+          "too much caffeine",
+          "however"
+        ]
+      },
+      "explain": "本段小标题是利与弊，空前收住利的一面，这句一转，空后分短期、长期两层列出过量的害处，把段落从 pros 带到 cons。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "caffeine can help alleviate migraines",
+            "optionSide": "The effects of caffeine",
+            "relation": "同说咖啡因的作用，空前是好的一面。"
+          },
+          {
+            "contextSide": "consuming too much caffeine can cause jitteriness, sleep disruptions, headaches, or a racing heart",
+            "optionSide": "can vary, however",
+            "relation": "however 引出与前面相反的一面，空后的害处就是 vary 的具体内容。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "本段小标题是利与弊，空前收住利的一面，这句一转，空后分短期、长期两层列出过量的害处，把段落从 pros 带到 cons。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:39": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "topicClues": [
+        "go hand in hand with other habits",
+        "smoking cigarettes",
+        "rather than coffee",
+        "unsweetened coffee"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:6",
+        "beforeQuote": "",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Context",
+          "signalSide": "option",
+          "targetText": "other habits / smoking / unsweetened",
+          "relation": "Context 概括本段说的喝咖啡时的搭配和习惯。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "go hand in hand with other habits",
+          "signalSide": "context-after",
+          "targetText": "Context",
+          "relation": "段首句说喝咖啡常与其他习惯相伴，这就是要看的“背景”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "due to smoking rather than coffee",
+          "signalSide": "context-after",
+          "targetText": "Context",
+          "relation": "吸烟这一背景让人把风险错算到咖啡上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "unsweetened coffee",
+          "signalSide": "context-after",
+          "targetText": "Context",
+          "relation": "加不加糖这种喝法也决定好处在不在。"
+        }
+      ],
+      "lock": [
+        "Context",
+        "other habits"
+      ],
+      "find": {
+        "text": "先跳过，读完下面一段再回来。下段开头说喝咖啡常 \"go hand in hand with other habits\"，A 的 \"Context\" 正概括这一点。",
+        "quotes": [
+          "go hand in hand with other habits",
+          "Context"
+        ]
+      },
+      "explain": "小标题要管下面整段：吸烟者的肺癌被算到咖啡头上，咖啡少长体重也要看加不加糖，两项研究都说明咖啡的好坏离不开饮用者的习惯和喝法。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "its consumption can often go hand in hand with other habits",
+            "optionSide": "Context",
+            "relation": "其他习惯就是喝咖啡的背景。"
+          },
+          {
+            "contextSide": "the health risks they faced such as lung cancer were due to smoking rather than coffee",
+            "optionSide": "Context matters",
+            "relation": "不看吸烟这个背景，就会错怪咖啡。"
+          },
+          {
+            "contextSide": "“Having unsweetened coffee seems to be the way to go,”",
+            "optionSide": "Context matters",
+            "relation": "喝法不同，结果不同，也是背景的一部分。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "小标题要管下面整段：吸烟者的肺癌被算到咖啡头上，咖啡少长体重也要看加不加糖，两项研究都说明咖啡的好坏离不开饮用者的习惯和喝法。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "选项的 \"cause\" 像在概括第 39 题下面那项研究：肺癌是 \"due to smoking rather than coffee\"。但这段还讲体重研究和不加糖的条件，段首 \"other habits\" 说的是相伴的习惯和喝法，不只一组因果，B 管不住全段。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:40": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "a reduced amount of weight gain",
+        "regular or decaf coffee",
+        "unsweetened coffee",
+        "the way to go"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:seven-choices:7",
+        "beforeQuote": "Another study found, regular coffee consumption is associated with a reduced amount of weight gain over time.",
+        "afterQuote": "This held true whether people were drinking regular or decaf coffee. “Having unsweetened coffee seems to be the way to go,”"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But only if",
+          "signalSide": "option",
+          "targetText": "a reduced amount of weight gain over time",
+          "relation": "But only if 给空前的研究发现加上限制条件。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "no sugar",
+          "signalSide": "option",
+          "targetText": "unsweetened",
+          "relation": "选项的 no sugar 与空后的 unsweetened 意思一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "unsweetened",
+          "signalSide": "context-after",
+          "targetText": "no sugar",
+          "relation": "空后专家建议喝不加糖的咖啡，要前面先出现“不加糖”的条件。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This held true",
+          "signalSide": "context-after",
+          "targetText": "a reduced amount of weight gain … only if … no sugar",
+          "relation": "This 指带着条件的这项发现，空后补充它对普通和低因咖啡都成立。"
+        }
+      ],
+      "lock": [
+        "But only if",
+        "unsweetened"
+      ],
+      "find": {
+        "text": "空后说 \"unsweetened\" 才是正道，前面要先有关于糖的限制，只有 F 的 \"But only if\" 和 \"no sugar\" 能铺垫。",
+        "quotes": [
+          "unsweetened",
+          "But only if",
+          "no sugar"
+        ]
+      },
+      "explain": "空前给出喝咖啡少长体重的发现，这句立刻加上限制；空后 \"This held true\" 说普通和低因咖啡都如此，再用专家的话落在不加糖上。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "regular coffee consumption is associated with a reduced amount of weight gain over time",
+            "optionSide": "But only if",
+            "relation": "先有发现，再加“只有在……时”的条件。"
+          },
+          {
+            "contextSide": "“Having unsweetened coffee seems to be the way to go,”",
+            "optionSide": "but no sugar",
+            "relation": "不加糖的条件与空后不加糖的建议一致。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前给出喝咖啡少长体重的发现，这句立刻加上限制；空后 \"This held true\" 说普通和低因咖啡都如此，再用专家的话落在不加糖上。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

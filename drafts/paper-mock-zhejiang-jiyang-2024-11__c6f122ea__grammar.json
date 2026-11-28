@@ -1,0 +1,1020 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-zhejiang-jiyang-2024-11",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiyang-2024-11:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiyang-2024-11:grammar-fill": {
+      "overview": "短文介绍中国传统节气冬至：它在12月22日前后，北半球白昼最短，被视为二十四节气的起点；节日起源于汉代、盛于唐宋，如今南北各地以不同的饮食习俗来庆祝。",
+      "fullTranslationZh": "冬至又称冬节，是中国二十四节气之一，在每年12月22日或其前后一天。这一天，太阳直射南回归线，这意味着北半球白昼最短、黑夜最长。由于冬至是最早被确立的节气，它常被看作中国二十四节气的起点。因为这一天标志着气候的重大变化，古人非常重视它，把它看得和春节一样重要。\n冬至这个节日已有两千多年的历史，起源于汉代，在唐宋时期达到鼎盛。唐代为庆祝冬至，皇帝和大臣们祭天并举行朝会，百姓则举行各种庆祝仪式，迎接即将到来的新年。\n总体而言，如今冬至的庆祝活动体现在中国各地不同的饮食习俗中。在北方，人们往往吃饺子，饺子的形状像耳朵，用来防止耳朵生冻疮；而南方人更喜欢吃汤圆、米团和长面条，以表达美好的祝愿。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "grammar-ls-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+          "sourceText": "In the north, people tend to eat dumplings, __64__ shape looks like ears, in order to prevent people from frostbite（冻疮） on ears, __65__ people in southern China prefer sweet dumplings, rice balls and long noodles to express their good wishes.",
+          "displayText": "In the north, people tend to eat dumplings, whose shape looks like ears, in order to prevent people from frostbite（冻疮） on ears, while people in southern China prefer sweet dumplings, rice balls and long noodles to express their good wishes.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:64",
+            "question:paper-mock-zhejiang-jiyang-2024-11:65"
+          ],
+          "translationZh": "在北方，人们往往吃饺子，饺子的形状像耳朵，用来防止耳朵生冻疮；而南方人更喜欢吃汤圆、米团和长面条，以表达美好的祝愿。",
+          "analysisZh": "全句由两个分句构成，用连词（while）连起来作对比。前一个分句主干是“人们吃饺子”（people tend to eat dumplings），后面先接非限制性定语从句（whose shape looks like ears）说明饺子的样子，再接目的状语（in order to prevent people from frostbite on ears）说明吃饺子的用意；后一个分句主干是“南方人更喜欢……”（people in southern China prefer），末尾不定式（to express their good wishes）表目的。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 42,
+              "quote": "people tend to eat dumplings"
+            },
+            {
+              "start": 128,
+              "end": 133,
+              "quote": "while"
+            },
+            {
+              "start": 134,
+              "end": 165,
+              "quote": "people in southern China prefer"
+            }
+          ]
+        },
+        {
+          "sentenceId": "grammar-ls-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+          "sourceText": "Since this day __58__ (mark) a major change in climate, the ancient people attached great importance to it, __59__ (view) it as significant as the Spring Festival.",
+          "displayText": "Since this day marks a major change in climate, the ancient people attached great importance to it, viewing it as significant as the Spring Festival.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:58",
+            "question:paper-mock-zhejiang-jiyang-2024-11:59"
+          ],
+          "translationZh": "因为这一天标志着气候的重大变化，古人非常重视它，把它看得和春节一样重要。",
+          "analysisZh": "主干是“古人非常重视它”（the ancient people attached great importance to it）。句首原因状语从句（Since this day marks a major change in climate）交代重视的理由；句末现在分词短语（viewing it as significant as the Spring Festival）以古人为逻辑主语，进一步说明重视到什么程度，其中（view … as …）是“把……看作……”。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "Since this day marks"
+            },
+            {
+              "start": 48,
+              "end": 98,
+              "quote": "the ancient people attached great importance to it"
+            },
+            {
+              "start": 100,
+              "end": 128,
+              "quote": "viewing it as significant as"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2"
+              ],
+              "start": 0,
+              "end": 130,
+              "quote": "冬至又称冬节，是中国二十四节气之一，在每年12月22日或其前后一天。这一天，太阳直射南回归线，这意味着北半球白昼最短、黑夜最长。由于冬至是最早被确立的节气，它常被看作中国二十四节气的起点。因为这一天标志着气候的重大变化，古人非常重视它，把它看得和春节一样重要。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3"
+              ],
+              "start": 131,
+              "end": 207,
+              "quote": "冬至这个节日已有两千多年的历史，起源于汉代，在唐宋时期达到鼎盛。唐代为庆祝冬至，皇帝和大臣们祭天并举行朝会，百姓则举行各种庆祝仪式，迎接即将到来的新年。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4"
+              ],
+              "start": 208,
+              "end": 296,
+              "quote": "总体而言，如今冬至的庆祝活动体现在中国各地不同的饮食习俗中。在北方，人们往往吃饺子，饺子的形状像耳朵，用来防止耳朵生冻疮；而南方人更喜欢吃汤圆、米团和长面条，以表达美好的祝愿。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+            "text": "The Winter Solstice, also known as the winter festival, is one of the 24 solar terms in China which falls on December 22, or one day before or after it. On that day, the sun is directly on the Tropic of Capricorn, which means the day in the northern hemisphere is the shortest day and the night longest. As the Winter Solstice is the"
+          },
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+            "text": "first term to be established, it is often regarded as the starting point of China’s 24 solar terms. Since this day marks a major change in climate, the ancient people attached great importance to it, viewing it as significant as the Spring Festival."
+          },
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+            "text": "The Winter Solstice, a festival with a history of more than 2,000 years originated from the Han Dynasty and reached its peak in glory in the Tang and Song Dynasties. In the Tang Dynasty, to celebrate the festival, the emperor and his ministers offered sacrifices to heaven and held court meetings, while the common people held celebration ceremonies to welcome the upcoming year."
+          },
+          {
+            "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+            "text": "Basically, the celebration of Winter Solstice nowadays is reflected in different eating customs in different parts of China. In the north, people tend to eat dumplings, whose shape looks like ears, in order to prevent people from frostbite（冻疮） on ears, while people in southern China prefer sweet dumplings, rice balls and long noodles to express their good wishes."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 291,
+                "end": 308,
+                "quote": "the night longest"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 59,
+                "end": 63,
+                "quote": "黑夜最长"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:56"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 268,
+                "end": 276,
+                "quote": "shortest"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 56,
+                "end": 58,
+                "quote": "最短"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "start": 0,
+                "end": 10,
+                "quote": "first term"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 69,
+                "end": 71,
+                "quote": "最早"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:57"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "start": 11,
+                "end": 28,
+                "quote": "to be established"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 71,
+                "end": 74,
+                "quote": "被确立"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "start": 107,
+                "end": 115,
+                "quote": "this day"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 96,
+                "end": 99,
+                "quote": "这一天"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:58"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "start": 115,
+                "end": 120,
+                "quote": "marks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 99,
+                "end": 102,
+                "quote": "标志着"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "start": 157,
+                "end": 207,
+                "quote": "the ancient people attached great importance to it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 110,
+                "end": 117,
+                "quote": "古人非常重视它"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:59"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "start": 200,
+                "end": 207,
+                "quote": "viewing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 118,
+                "end": 122,
+                "quote": "把它看得"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 44,
+                "end": 76,
+                "quote": "history of more than 2,000 years"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 8,
+                "end": 12,
+                "quote": "两千多年"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:60"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 37,
+                "end": 38,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 8,
+                "end": 15,
+                "quote": "两千多年的历史"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 249,
+                "end": 267,
+                "quote": "offered sacrifices"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 40,
+                "end": 46,
+                "quote": "皇帝和大臣们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:61"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 263,
+                "end": 265,
+                "quote": "to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 46,
+                "end": 48,
+                "quote": "祭天"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 313,
+                "end": 347,
+                "quote": "the common people held celebration"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 54,
+                "end": 59,
+                "quote": "百姓则举行"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:62"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 339,
+                "end": 349,
+                "quote": "ceremonies"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:3",
+                "start": 59,
+                "end": 65,
+                "quote": "各种庆祝仪式"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 11,
+                "end": 54,
+                "quote": "the celebration of Winter Solstice nowadays"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 5,
+                "end": 14,
+                "quote": "如今冬至的庆祝活动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:63"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 55,
+                "end": 67,
+                "quote": "is reflected"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 14,
+                "end": 17,
+                "quote": "体现在"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 143,
+                "end": 171,
+                "quote": "people tend to eat dumplings"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 34,
+                "end": 41,
+                "quote": "人们往往吃饺子"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:64"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 169,
+                "end": 174,
+                "quote": "whose"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 42,
+                "end": 47,
+                "quote": "饺子的形状"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 129,
+                "end": 171,
+                "quote": "In the north, people tend to eat dumplings"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 265,
+                "end": 296,
+                "quote": "people in southern China prefer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 30,
+                "end": 33,
+                "quote": "在北方"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 62,
+                "end": 68,
+                "quote": "南方人更喜欢"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:65"
+            ],
+            "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 253,
+                "end": 258,
+                "quote": "while"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 61,
+                "end": 62,
+                "quote": "而"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-grammar-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:64",
+              "question:paper-mock-zhejiang-jiyang-2024-11:65"
+            ],
+            "selectedSentenceId": "grammar-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 139,
+                "end": 167,
+                "quote": "people tend to eat dumplings"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 253,
+                "end": 258,
+                "quote": "while"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 259,
+                "end": 290,
+                "quote": "people in southern China prefer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:4",
+                "start": 30,
+                "end": 88,
+                "quote": "在北方，人们往往吃饺子，饺子的形状像耳朵，用来防止耳朵生冻疮；而南方人更喜欢吃汤圆、米团和长面条，以表达美好的祝愿。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-grammar-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:58",
+              "question:paper-mock-zhejiang-jiyang-2024-11:59"
+            ],
+            "selectedSentenceId": "grammar-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "start": 100,
+                "end": 120,
+                "quote": "Since this day marks"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "start": 148,
+                "end": 198,
+                "quote": "the ancient people attached great importance to it"
+              },
+              {
+                "textId": "done-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:2",
+                "start": 200,
+                "end": 228,
+                "quote": "viewing it as significant as"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-zhejiang-jiyang-2024-11:grammar-fill:1",
+                "start": 94,
+                "end": 130,
+                "quote": "因为这一天标志着气候的重大变化，古人非常重视它，把它看得和春节一样重要。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-zhejiang-jiyang-2024-11:56": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "short",
+      "facetKey": "grammar-fill.given.adjective.comparison",
+      "answer": "shortest",
+      "role": null,
+      "similarityProfile": {
+        "route": "superlative",
+        "features": [
+          "semantic-superlative"
+        ]
+      },
+      "reason": "空格修饰名词（day），说北半球这一天的白昼是一年中最短的；后面并列的半句说黑夜最长（longest），两者对应，所以填最高级（shortest）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "day",
+          "signalSide": "passage",
+          "relation": "空格修饰白天这个名词。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "the night longest",
+          "signalSide": "passage",
+          "relation": "并列的黑夜用最高级，白天也用最高级。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:57": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "establish",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to be established",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-special-limiter",
+        "features": []
+      },
+      "reason": "空格作后置定语，修饰名词（term），说明这是第一个被确立的节气；名词前有序数词（first）限定时，后面用不定式作定语，节气是被人确立的，所以用不定式的被动式（to be established）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "first term",
+          "signalSide": "passage",
+          "relation": "被修饰的名词由序数词限定，后接不定式作定语。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:58": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "mark",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "marks",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "空格作原因状语从句的谓语，主语是这一天（this day），第三人称单数；冬至标志着气候大变化是一般事实，用一般现在时（marks）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "this day",
+          "signalSide": "passage",
+          "relation": "从句主语是第三人称单数。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "Since",
+          "signalSide": "passage",
+          "relation": "由连词引出原因状语从句，空格是从句谓语。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:59": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "view",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "viewing",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "主句（the ancient people attached great importance to it）已完整，空格引出逗号后的短语作状语，补充说明古人怎样看待冬至；它的逻辑主语是古人（the ancient people），古人主动把冬至看作和春节一样重要，用现在分词（viewing）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "the ancient people",
+          "signalSide": "passage",
+          "relation": "分词的逻辑主语是古人，与动作是主动关系。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "it as significant as",
+          "signalSide": "passage",
+          "relation": "与提示词构成“把……看作……”的结构。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:60": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-structural",
+        "features": [
+          "concretized-abstract",
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "空格限定名词（history）；这里不是泛指历史，而是由（of more than 2,000 years）限定的一段两千多年的历史，抽象名词具体化，要用不定冠词；名词以辅音音素开头，所以用（a）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "history",
+          "signalSide": "passage",
+          "relation": "抽象名词在这里具体化为一段历史，前面要用不定冠词。"
+        },
+        {
+          "type": "of-phrase",
+          "signalText": "of more than 2,000 years",
+          "signalSide": "passage",
+          "relation": "后置的介词短语把历史限定为两千多年的一段。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:61": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "to",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格要把天（heaven）接到动词短语（offered sacrifices）上，说明祭祀的对象；“向……献祭”用介词（to）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "offered sacrifices",
+          "signalSide": "passage",
+          "relation": "献祭后面接介词引出祭祀对象。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:62": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "ceremony",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "ceremonies",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-multiple-generic",
+        "features": []
+      },
+      "reason": "空格作动词（held）的宾语，前面有名词（celebration）修饰；前面没有冠词或其他限定词，可数名词不能以单数单独出现，这里说的是百姓举行的各种庆典，用复数（ceremonies）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "held celebration",
+          "signalSide": "passage",
+          "relation": "空格是举行的宾语，前面没有限定词。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:63": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "reflect",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is reflected",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "空格作句子的谓语，主语是庆祝活动（the celebration of Winter Solstice），中心词单数；庆祝活动是“被体现”在饮食习俗中的，又有时间词（nowadays）说明讲的是现在的情况，所以用一般现在时的被动语态（is reflected）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "the celebration of Winter Solstice",
+          "signalSide": "passage",
+          "relation": "主语中心词为单数，且是被体现的对象。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "nowadays",
+          "signalSide": "passage",
+          "relation": "讲的是现在的情况，用一般现在时。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:64": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "whose",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-possessive",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导非限制性定语从句，修饰先行词饺子（dumplings）；从句里形状（shape）前缺一个限定词，意思是“饺子的形状”，所以用（whose）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "dumplings",
+          "signalSide": "passage",
+          "relation": "先行词是饺子，从句说明它的形状。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "shape looks like ears",
+          "signalSide": "passage",
+          "relation": "从句主谓齐全，只缺修饰形状的所属关系词。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:65": {
+      "blankId": "blank:paper-mock-zhejiang-jiyang-2024-11:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "while",
+      "role": null,
+      "similarityProfile": {
+        "route": "contrast",
+        "features": []
+      },
+      "reason": "空格连接前后两个完整分句：北方人往往吃饺子，南方人则更喜欢汤圆、长面条，两边形成对比，所以用表示对比的连词（while）。",
+      "evidence": [
+        {
+          "type": "connector",
+          "signalText": "In the north",
+          "signalSide": "passage",
+          "relation": "前一分句讲北方的习俗。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "people in southern China prefer",
+          "signalSide": "passage",
+          "relation": "后一分句讲南方的习俗，与北方形成对比。"
+        }
+      ]
+    }
+  }
+}

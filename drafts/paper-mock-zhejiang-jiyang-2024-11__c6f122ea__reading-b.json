@@ -1,0 +1,755 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-zhejiang-jiyang-2024-11",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-zhejiang-jiyang-2024-11:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-zhejiang-jiyang-2024-11:reading-b": {
+      "overview": "本文介绍台湾顶尖配音演员 Kathryn Lin：她因家贫辍学后借公会招学生入行，很快完成学徒期；她欣赏大陆动画融合东西方的风格，业余帮助失足少年，也以开放心态看待 AI 配音。",
+      "fullTranslationZh": "在人工智能时代，我们真的还需要真人配音演员吗？的确，许多人对真人配音演员的前途和必要性心存疑虑。然而对来自中国台湾岛的顶尖配音演员 Kathryn Lin 来说，这份职业意味着海峡两岸几代观众共同的快乐。\nLin 生于 1975 年，上学时常被学校选去参加各种演讲比赛。不幸的是，大学一年级时，她家遭遇了严重的经济危机，她别无选择，只能辍学，到商店和餐馆打零工。台湾岛的配音员公会想招收学生参与配音演出，进入配音行业的机会就此到来，而她成功入选了。\n由于是行业新人，她必须先完成学徒期才能接到真正的工作，学徒期通常需要三到五年的苦练，而 Lin 用了不到两年就完成了。\n“工作几年后，我意识到这份工作不只是为了糊口。”她说，并强调她配过音的那些人气角色给了她“许多人生感悟和有趣的经历”。谈到中国大陆的动画市场，Lin 说大陆作品有很多原创元素。大陆动画“是东西方文化的融合，这种风格在配音时给了我很多启发。”\n业余时间，她还去做讲座，帮助失足青少年和辍学儿童。“他们犯法之前可能承受着压力，或者真的很迷茫，也可能是因为家庭原因才辍学的。”她说。\n谈到 AI 配音，Lin 说她“其实在努力让自己不那么悲观……我认为这是未来的趋势。”\nLin 认为，配音演员可以实现转型，比如向年轻人传授配音艺术、出书、到学校任教和开讲座。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-1",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:2",
+          "sourceText": "The chance to join the dubbing industry came when the dubbing artists’ union on Taiwan island wanted to recruit students for dubbing performances, and she made it.",
+          "displayText": "The chance to join the dubbing industry came when the dubbing artists’ union on Taiwan island wanted to recruit students for dubbing performances, and she made it.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:24"
+          ],
+          "translationZh": "台湾岛的配音员公会想招收学生参与配音演出，进入配音行业的机会就此到来，而她成功入选了。",
+          "analysisZh": "主干是 The chance came：机会来了。to join the dubbing industry 是不定式作定语，说明是进入配音行业的机会；when 引导时间状语从句，交代机会出现的时机：台湾岛的配音员公会要招学生参与配音演出。and she made it 是并列的另一个分句，made it 意为成功做到，这里指她被选上了。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 44,
+              "quote": "The chance to join the dubbing industry came"
+            },
+            {
+              "start": 45,
+              "end": 120,
+              "quote": "when the dubbing artists’ union on Taiwan island wanted to recruit students"
+            },
+            {
+              "start": 151,
+              "end": 162,
+              "quote": "she made it"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-2",
+          "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:3",
+          "sourceText": "Since she was a newcomer to the industry, she had to complete her apprenticeship(学徒期) before getting real work, which usually takes three to five years of hard work, but Lin achieved that in less than two years.",
+          "displayText": "Since she was a newcomer to the industry, she had to complete her apprenticeship(学徒期) before getting real work, which usually takes three to five years of hard work, but Lin achieved that in less than two years.",
+          "relatedQuestionIds": [
+            "question:paper-mock-zhejiang-jiyang-2024-11:26"
+          ],
+          "translationZh": "由于是行业新人，她必须先完成学徒期才能接到真正的工作，学徒期通常需要三到五年的苦练，而 Lin 用了不到两年就完成了。",
+          "analysisZh": "主干是 she had to complete her apprenticeship：她必须完成学徒期。Since 从句交代原因：她是行业新人；before getting real work 说明先后：先学徒，后接正式工作。which 引导非限制性定语从句，指 apprenticeship，说明学徒期通常要三到五年苦练。but 后转到 Lin 本人，that 指完成学徒期这件事，in less than two years 和前面的三到五年对比，突出她的勤奋。",
+          "underlineRanges": [
+            {
+              "start": 42,
+              "end": 80,
+              "quote": "she had to complete her apprenticeship"
+            },
+            {
+              "start": 112,
+              "end": 164,
+              "quote": "which usually takes three to five years of hard work"
+            },
+            {
+              "start": 170,
+              "end": 210,
+              "quote": "Lin achieved that in less than two years"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:1"
+              ],
+              "start": 0,
+              "end": 102,
+              "quote": "在人工智能时代，我们真的还需要真人配音演员吗？的确，许多人对真人配音演员的前途和必要性心存疑虑。然而对来自中国台湾岛的顶尖配音演员 Kathryn Lin 来说，这份职业意味着海峡两岸几代观众共同的快乐。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:2"
+              ],
+              "start": 103,
+              "end": 224,
+              "quote": "Lin 生于 1975 年，上学时常被学校选去参加各种演讲比赛。不幸的是，大学一年级时，她家遭遇了严重的经济危机，她别无选择，只能辍学，到商店和餐馆打零工。台湾岛的配音员公会想招收学生参与配音演出，进入配音行业的机会就此到来，而她成功入选了。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:3"
+              ],
+              "start": 225,
+              "end": 284,
+              "quote": "由于是行业新人，她必须先完成学徒期才能接到真正的工作，学徒期通常需要三到五年的苦练，而 Lin 用了不到两年就完成了。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:4"
+              ],
+              "start": 285,
+              "end": 405,
+              "quote": "“工作几年后，我意识到这份工作不只是为了糊口。”她说，并强调她配过音的那些人气角色给了她“许多人生感悟和有趣的经历”。谈到中国大陆的动画市场，Lin 说大陆作品有很多原创元素。大陆动画“是东西方文化的融合，这种风格在配音时给了我很多启发。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:5"
+              ],
+              "start": 406,
+              "end": 473,
+              "quote": "业余时间，她还去做讲座，帮助失足青少年和辍学儿童。“他们犯法之前可能承受着压力，或者真的很迷茫，也可能是因为家庭原因才辍学的。”她说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:6"
+              ],
+              "start": 474,
+              "end": 517,
+              "quote": "谈到 AI 配音，Lin 说她“其实在努力让自己不那么悲观……我认为这是未来的趋势。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:7"
+              ],
+              "start": 518,
+              "end": 562,
+              "quote": "Lin 认为，配音演员可以实现转型，比如向年轻人传授配音艺术、出书、到学校任教和开讲座。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ev-b-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:2",
+                "start": 335,
+                "end": 430,
+                "quote": "the dubbing artists’ union on Taiwan island wanted to recruit students for dubbing performances"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p2",
+                "start": 78,
+                "end": 98,
+                "quote": "台湾岛的配音员公会想招收学生参与配音演出"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-b-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:4",
+                "start": 372,
+                "end": 417,
+                "quote": "are a cultural blend of the East and the West"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p4",
+                "start": 93,
+                "end": 102,
+                "quote": "是东西方文化的融合"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-b-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:3",
+                "start": 112,
+                "end": 210,
+                "quote": "which usually takes three to five years of hard work, but Lin achieved that in less than two years"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:5",
+                "start": 116,
+                "end": 197,
+                "quote": "They might have been under stress or were really confused before breaking the law"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p3",
+                "start": 27,
+                "end": 58,
+                "quote": "学徒期通常需要三到五年的苦练，而 Lin 用了不到两年就完成了"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p5",
+                "start": 26,
+                "end": 47,
+                "quote": "他们犯法之前可能承受着压力，或者真的很迷茫"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-b-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:6",
+                "start": 87,
+                "end": 114,
+                "quote": "I think it’s a future trend"
+              },
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:7",
+                "start": 0,
+                "end": 53,
+                "quote": "Lin believes dubbing artists can transform themselves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p6",
+                "start": 31,
+                "end": 41,
+                "quote": "我认为这是未来的趋势"
+              },
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p7",
+                "start": 7,
+                "end": 17,
+                "quote": "配音演员可以实现转型"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:24"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:2",
+                "start": 285,
+                "end": 448,
+                "quote": "The chance to join the dubbing industry came when the dubbing artists’ union on Taiwan island wanted to recruit students for dubbing performances, and she made it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p2",
+                "start": 78,
+                "end": 121,
+                "quote": "台湾岛的配音员公会想招收学生参与配音演出，进入配音行业的机会就此到来，而她成功入选了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-zhejiang-jiyang-2024-11:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:3",
+                "start": 0,
+                "end": 211,
+                "quote": "Since she was a newcomer to the industry, she had to complete her apprenticeship(学徒期) before getting real work, which usually takes three to five years of hard work, but Lin achieved that in less than two years."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-zhejiang-jiyang-2024-11:reading-b",
+                "paragraphId": "zh-group:paper-mock-zhejiang-jiyang-2024-11:reading-b-p3",
+                "start": 0,
+                "end": 59,
+                "quote": "由于是行业新人，她必须先完成学徒期才能接到真正的工作，学徒期通常需要三到五年的苦练，而 Lin 用了不到两年就完成了。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "首段由“AI 时代还需不需要真人配音”的疑问引出 Lin，接着按时间写她的入行经过和成长，再写她对工作和大陆动画的感悟、业余的公益讲座，最后落到她对 AI 配音的看法和配音员转型的出路。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:1",
+            "summary": "很多人怀疑 AI 时代真人配音还有没有必要，而对 Lin 来说，这份职业意味着两岸观众共同的快乐。",
+            "function": "用疑问引出话题和人物。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:2",
+            "summary": "Lin 上学时常参加演讲比赛，大学时因家庭经济危机辍学打工，后来借配音员公会招学生的机会入行。",
+            "function": "交代她的经历和入行的契机。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:3",
+            "summary": "学徒期通常要三到五年，她不到两年就完成了。",
+            "function": "用对比突出她的勤奋和能力。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:4",
+            "summary": "她意识到工作不只为糊口，角色带给她人生感悟；她称赞大陆动画原创元素多、融合东西方。",
+            "function": "写她对职业和大陆动画的看法。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:5",
+            "summary": "她业余做讲座帮助失足青少年和辍学儿童，并体谅他们的处境。",
+            "function": "补充她在工作之外的善举。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:6",
+            "summary": "她努力不那么悲观，认为 AI 配音是未来趋势。",
+            "function": "回应首段的疑问，给出她对 AI 配音的态度。"
+          },
+          {
+            "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:7",
+            "summary": "她认为配音演员可以通过教学、出书、讲座等方式转型。",
+            "function": "收尾，指出配音员的出路。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-zhejiang-jiyang-2024-11:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到 Lin 进入配音行业的那句话，看是什么促成她入行。",
+      "stemTranslationZh": "是什么促使 Lin 从事配音工作的？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 when 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她家人的要求。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "her family",
+            "optionText": "Her family",
+            "matchType": "exact",
+            "relationNote": "选项借 her family，原文说的是她家遭遇经济危机（financial crisis），她只好辍学打零工，家里并没有要她去做配音。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:2",
+              "quote": "her family faced a major financial crisis",
+              "anchor": "家庭经济危机"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她学校的推荐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Lin was frequently chosen by her school to take part in various speech contests",
+            "sourceEntity": "various speech contests",
+            "optionText": "Her school’s recommendation.",
+            "optionEntity": "Her school’s recommendation",
+            "explanation": "学校常选她去参加的是演讲比赛（speech contests），给她入行机会的是配音员公会招学生，不是学校推荐。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "配音员公会的招募。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:2",
+              "quote": "The chance to join the dubbing industry came when the dubbing artists’ union on Taiwan island wanted to recruit students for dubbing performances, and she made it.",
+              "anchor": "公会招学生"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她对配音行业的浓厚兴趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Her keen interest in the dubbing industry",
+            "explanation": "原文没写她入行前就对配音有浓厚兴趣，只写她辍学打零工时碰上公会招学生，才进了这一行。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "take up dubbing",
+          "sourceRole": "stem",
+          "targetText": "The chance to join the dubbing industry came when the dubbing artists’ union on Taiwan island wanted to recruit students for dubbing performances, and she made it.",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:2",
+          "relationType": "locationCue",
+          "targetCue": "join the dubbing industry",
+          "sourceZh": "从事配音",
+          "targetCueZh": "进入配音行业",
+          "answerText": "the dubbing artists’ union on Taiwan island wanted to recruit students",
+          "note": "题干 take up dubbing 对应原文 join the dubbing industry。"
+        },
+        {
+          "sourceText": "The dubbing union’s recruitment",
+          "sourceRole": "correctOption",
+          "targetText": "the dubbing artists’ union on Taiwan island wanted to recruit students for dubbing performances",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:2",
+          "relationType": "wordFamily",
+          "note": "选项的“招募”（recruitment）对应原文的“招学生”（recruit students）：配音员公会要招人，她抓住机会入选，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到 Lin 评价大陆动画的话，看她认为大陆作品有什么特点。",
+      "stemTranslationZh": "在 Lin 看来，关于大陆作品我们能知道什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们完全是原创的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Lin said mainland productions have a lot of original elements",
+            "sourceHighlight": "a lot of original elements",
+            "optionText": "They are fully original.",
+            "optionHighlight": "fully original",
+            "explanation": "原文只说大陆作品有很多原创元素（a lot of original elements），选项说成了完全原创（fully original）。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们的风格能极大地启发观众。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the style inspires me a lot when dubbing",
+            "sourceEntity": "me",
+            "optionText": "Their style can greatly inspire viewers.",
+            "optionEntity": "viewers",
+            "explanation": "原文说这种风格在配音时给“我”很多启发（inspires me），受启发的是 Lin 自己，选项换成了观众。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们的人物形象吸引人且发人深思。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the popular characters she has dubbed for have given her “a lot of insight into life and intriguing experiences”",
+            "sourceEntity": "the popular characters she has dubbed for",
+            "optionText": "Their figures are appealing and thought-provoking.",
+            "optionEntity": "Their figures",
+            "explanation": "给她人生感悟的是她配过音的人气角色（characters she has dubbed for），原文没说这些角色出自大陆作品，谈大陆动画时也没评价人物。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们的特点是东西方的结合。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:4",
+              "quote": "Mainland animations “are a cultural blend of the East and the West, and the style inspires me a lot when dubbing.”",
+              "anchor": "东西方文化的融合"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mainland productions",
+          "sourceRole": "stem",
+          "targetText": "Mainland animations “are a cultural blend of the East and the West, and the style inspires me a lot when dubbing.”",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:4",
+          "relationType": "locationCue",
+          "targetCue": "Mainland animations",
+          "sourceZh": "大陆的作品",
+          "targetCueZh": "大陆的动画",
+          "answerText": "a cultural blend of the East and the West",
+          "note": "题干 mainland productions 对应原文 Mainland animations。"
+        },
+        {
+          "sourceText": "a combination of the East and the West",
+          "sourceRole": "correctOption",
+          "targetText": "are a cultural blend of the East and the West",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "选项的“结合”（combination）就是原文的“融合”（cultural blend），东方和西方两头原样保留，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "character-trait",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从 Lin 的经历和言行概括她的品质，两个形容词都要有原文依据。",
+      "stemTranslationZh": "下列哪一项最能描述 Lin？",
+      "locateBy": "options",
+      "locateFindZh": "两个词都要在她学艺和业余做的事里找到依据",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "勤奋且体贴。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:3",
+              "quote": "which usually takes three to five years of hard work, but Lin achieved that in less than two years",
+              "anchor": "不到两年完成学徒期"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:5",
+              "quote": "They might have been under stress or were really confused before breaking the law",
+              "anchor": "体谅失足少年"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有天赋且慷慨。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "generous",
+            "explanation": "她常被学校选去参加演讲比赛，“有天赋”还能找到影子，但原文没有一件事写她慷慨大方。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "能干且随和。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "easy-going",
+            "explanation": "她不到两年就完成学徒期，算得上能干，但原文没有写她待人随和的言行。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "外向且幽默。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Outgoing and humorous",
+            "explanation": "原文没有写她说笑逗趣的言行；常参加演讲比赛只说明她口才好，也看不出性格外向。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Diligent and thoughtful",
+          "sourceRole": "correctOption",
+          "targetText": "which usually takes three to five years of hard work, but Lin achieved that in less than two years",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "两个词各有出处：“勤奋”落在[[block:paper-mock-zhejiang-jiyang-2024-11:reading-b:3|but Lin achieved that in less than two years]]，别人要苦练三到五年的学徒期，她不到两年就完成；“体贴”落在[[block:paper-mock-zhejiang-jiyang-2024-11:reading-b:5|They might have been under stress]]，她业余去讲座帮助失足青少年，还设身处地替他们想犯错的原因，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-zhejiang-jiyang-2024-11:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据 Lin 谈 AI 配音的话和她给配音员的出路，推断她怎么看配音的未来。",
+      "stemTranslationZh": "Lin 怎样看待配音的未来？",
+      "locateBy": "stem",
+      "locateFindZh": "it 指 AI 配音，往后一段看配音员的出路",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她对 AI 配音感到悲观。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "pessimistic",
+            "optionText": "pessimistic",
+            "matchType": "exact",
+            "relationNote": "选项照搬 pessimistic，原文前面还有 trying to be less：她在努力让自己不那么悲观，并接受 AI 配音是未来趋势。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:6",
+              "quote": "actually trying to be less pessimistic",
+              "anchor": "努力不那么悲观"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "AI 配音将在一定程度上取代配音演员。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:6",
+              "quote": "I think it’s a future trend",
+              "anchor": "AI 配音是未来趋势"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:7",
+              "quote": "Lin believes dubbing artists can transform themselves",
+              "anchor": "配音员可以转型"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "AI 配音只会占这个行业的一小部分。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "I think it’s a future trend",
+            "sourceHighlight": "a future trend",
+            "optionText": "AI dubbing will merely make up a small part of the industry.",
+            "optionHighlight": "merely make up a small part",
+            "explanation": "原文说 AI 配音是未来的趋势（a future trend），意思是它会越来越多，选项却说它只占行业的一小部分。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:6",
+              "quote": "I think it’s a future trend",
+              "anchor": "未来趋势"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "配音演员不会被取代，因为配音代表着共同的快乐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "shared happiness",
+            "optionText": "shared happiness",
+            "matchType": "exact",
+            "relationNote": "选项借[[block:paper-mock-zhejiang-jiyang-2024-11:reading-b:1]]的 shared happiness，原文说这份职业对 Lin 意味着两岸观众共同的快乐，没有据此说配音员不会被取代；她还认为配音员需要转型。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:1",
+              "quote": "the profession means the shared happiness of generations of audiences",
+              "anchor": "共同的快乐"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "in the future",
+          "sourceRole": "stem",
+          "targetText": "I think it’s a future trend.”",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:6",
+          "relationType": "locationCue",
+          "targetCue": "a future trend",
+          "sourceZh": "将来",
+          "targetCueZh": "未来的趋势",
+          "answerText": "it’s a future trend",
+          "note": "题干 in the future 对应原文 a future trend。"
+        },
+        {
+          "sourceText": "AI dubbing will substitute for dubbing artists to an extent",
+          "sourceRole": "correctOption",
+          "targetText": "I think it’s a future trend",
+          "targetParagraphId": "block:paper-mock-zhejiang-jiyang-2024-11:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "原文说 AI 配音是未来趋势（a future trend），可见它会接过一部分配音工作；[[block:paper-mock-zhejiang-jiyang-2024-11:reading-b:7|dubbing artists can transform themselves]]又说配音员可以转去教学、出书、开讲座，说明人还有别的出路，所以是“一定程度上”替代，选 B。"
+        }
+      ]
+    }
+  }
+}
