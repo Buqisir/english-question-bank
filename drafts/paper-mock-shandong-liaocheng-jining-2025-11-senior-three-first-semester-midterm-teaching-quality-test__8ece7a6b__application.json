@@ -1,0 +1,126 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Be Self-directed Learners\n\nIn a class of more than forty students, teachers can hardly plan every step for each of us. That is why being a self-directed learner matters. When we decide what and how to learn, we can work on our own weak points instead of waiting to be told.\n\nSo how can we become one? First, set a clear goal for each week, such as learning 100 new words. Next, make a simple plan and stick to it, even when no one is checking. Finally, review your progress every Sunday and change any method that is not working.\n\nLet's take charge of our own learning, starting with one small goal this week.",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "校英文报征文短文，标题用题面给的 Be Self-directed Learners，不写称呼和署名",
+        "personTense": "以第一人称复数 we 和同学说话，讲道理用一般现在时，给做法可用祈使句",
+        "readerTone": "读者是全校同学，语气像同龄人分享经验，真诚、直接，不说教",
+        "goal": "让同学明白自主学习为什么要紧，并拿到几条这周就能照做的办法"
+      },
+      "taskRequires": [
+        "说明成为自主学习者的重要性",
+        "说明如何成为自主学习者"
+      ],
+      "thisEssayChooses": "用“一个班四十多人，老师顾不到每个人”说明自主学习的必要，理由落在能针对自己的弱项；做法选了三步：定每周目标、按计划坚持、每周日回顾并调整方法，结尾号召从这周的一个小目标做起。"
+    },
+    "standard": {
+      "essay": "Be Self-directed Learners\n\nIn a class of more than forty students, teachers can hardly plan every step for each of us. That is why being a self-directed learner matters. When we decide what and how to learn, we can work on our own weak points instead of waiting to be told.\n\nSo how can we become one? First, set a clear goal for each week, such as learning 100 new words. Next, make a simple plan and stick to it, even when no one is checking. Finally, review your progress every Sunday and change any method that is not working.\n\nLet's take charge of our own learning, starting with one small goal this week.",
+      "pointMap": [
+        {
+          "point": "成为自主学习者的重要性",
+          "quote": "When we decide what and how to learn, we can work on our own weak points instead of waiting to be told."
+        },
+        {
+          "point": "如何成为自主学习者",
+          "quote": "First, set a clear goal for each week, such as learning 100 new words."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "点题并讲清重要性：先摆出班里的实际情况，再说自主学习能带来什么。",
+          "items": [
+            {
+              "quote": "In a class of more than forty students, teachers can hardly plan every step for each of us.",
+              "explain": "开头不喊口号，先说一个同学们天天看得见的事实：老师顾不过来。读者马上明白为什么要靠自己。"
+            },
+            {
+              "quote": "That is why being a self-directed learner matters.",
+              "explain": "用 That is why 把上一句的事实直接变成结论，题目要的“重要性”在第二句就亮出来了。"
+            },
+            {
+              "quote": "we can work on our own weak points instead of waiting to be told",
+              "explain": "理由落到同学自己身上：能补自己的弱项。instead of waiting to be told 和被动等安排形成对比，说清自主学习好在哪。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "回答“怎么做”：用一个问句转入，再给三步具体做法。",
+          "items": [
+            {
+              "quote": "So how can we become one?",
+              "explain": "用问句从“为什么”转到“怎么做”，读者一眼看出第二个要点开始了；one 替代 a self-directed learner，避免重复。"
+            },
+            {
+              "quote": "such as learning 100 new words",
+              "explain": "给“定目标”配一个具体例子，同学一读就知道目标该定多大，比“定一个目标”好照着做。"
+            },
+            {
+              "quote": "stick to it, even when no one is checking",
+              "explain": "点出自主学习最难的地方：没人盯着也要坚持。even when 让这一步落到自律上。"
+            },
+            {
+              "quote": "Finally, review your progress every Sunday and change any method that is not working.",
+              "explain": "First、Next、Finally 排出顺序；最后一步是每周日检查、调整方法，和前面“每周一个目标”对得上，形成一个循环。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "收束：号召行动，并把行动落到这周一个小目标上。",
+          "items": [
+            {
+              "quote": "Let's take charge of our own learning, starting with one small goal this week.",
+              "explain": "Let's 把作者和同学放在一起；starting with one small goal this week 把号召落到这周就能做的一件事，而不是空喊口号。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "That is why ... matters.",
+          "function": "把前面的事实直接转成“所以这件事很重要”的结论，写“重要性”类要点时好用。"
+        },
+        {
+          "expression": "instead of waiting to be told",
+          "function": "用主动安排和被动等待作对比，说明自主学习比等老师安排好在哪里。"
+        },
+        {
+          "expression": "take charge of our own learning",
+          "function": "“自己掌管学习”，结尾号召同学主动起来，比 learn by ourselves 更有分量。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Be Self-directed Learners\n\nIn a class of more than forty students, even the most caring teacher cannot plan every step for each of us. That is exactly why we need to become self-directed learners. Only when we decide what to learn and how to learn it can we spend our time on our own weak points rather than waiting for instructions. What's more, this habit will go with us to university and beyond.\n\nHow, then, can we get there? To begin with, set a specific goal for each week, for example, learning 100 new words or getting rid of one grammar mistake you keep making. Then turn the goal into a daily plan and stick to it, even when no one is watching. Finally, check your progress every Sunday evening and adjust whatever method is not paying off.\n\nLearning is our own business, so let's take the first step this week!",
+      "pointMap": [
+        {
+          "point": "成为自主学习者的重要性",
+          "quote": "Only when we decide what to learn and how to learn it can we spend our time on our own weak points rather than waiting for instructions."
+        },
+        {
+          "point": "如何成为自主学习者",
+          "quote": "To begin with, set a specific goal for each week, for example, learning 100 new words or getting rid of one grammar mistake you keep making."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "even the most caring teacher cannot plan every step for each of us",
+          "explain": "加上 even the most caring teacher，先肯定老师用心，再说顾不过来，既不抱怨老师，理由也更有说服力。"
+        },
+        {
+          "quote": "Only when we decide what to learn and how to learn it can we spend our time on our own weak points",
+          "explain": "Only when 放句首，后面主句倒装为 can we，强调“只有自己做主”才能把时间用在弱项上，比标准版的 When 语气更强。"
+        },
+        {
+          "quote": "getting rid of one grammar mistake you keep making",
+          "explain": "标准版只举了背单词；这里补一个“改掉总犯的一个语法错”，you keep making 写出学生真实的困扰，例子更贴近同学。"
+        }
+      ]
+    }
+  }
+}

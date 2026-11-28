@@ -1,0 +1,975 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: Hello, Benjamin, Dan and I are going for a run Sunday morning. Would you like to join us?\nM: I’d love to, but I hurt my ankle last weekend playing football with colleagues.",
+      "translationZh": "女：你好，本杰明，丹和我周日早上要去跑步。你想和我们一起去吗？\n男：我很想去，可是上周末和同事踢足球时我把脚踝弄伤了。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "日常体育活动"
+      },
+      "summaryZh": "女士约本杰明周日早上和她及丹一起去跑步，男士回应这个邀请并说明自己的近况。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "你好，本杰明，丹和我周日早上要去跑步。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "你想和我们一起去吗？"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我很想去，可是上周末和同事踢足球时我把脚踝弄伤了。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: I think we should take the blue line instead of the red one. It’s usually faster during this time of day.\nM: But the blue line doesn’t stop at Central Station, does it? I need to get off there.\nW: Oh, you’re right. In that case, let’s stick with the red line.",
+      "translationZh": "女：我觉得我们应该坐蓝线，别坐红线。每天这个时段蓝线通常更快。\n男：可是蓝线不停中央车站，对吧？我得在那儿下车。\n女：哦，你说得对。既然这样，我们还是坐红线吧。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "两人出行时商量该乘坐蓝线还是红线，并谈到两条线路的速度和停靠站点。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "我觉得我们应该坐蓝线，别坐红线。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "每天这个时段蓝线通常更快。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "可是蓝线不停中央车站，对吧？"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "我得在那儿下车。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "哦，你说得对。"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "既然这样，我们还是坐红线吧。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: I’m going to the National Gallery of Victoria next Saturday.\nM: The NGV?\nW: Yeah, my little nephew turns six, and he loves art, so the whole family is going.\nM: There’s no denying it is fun and educational for children.",
+      "translationZh": "女：下周六我要去维多利亚国家美术馆。\n男：维多利亚国家美术馆？\n女：是啊，我的小外甥满六岁了，他喜欢艺术，所以全家都要去。\n男：不可否认，那里对孩子来说既好玩又有教育意义。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "女士告诉男士自己下周六要去维多利亚国家美术馆，并说起这次出行的缘由。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "下周六我要去维多利亚国家美术馆。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "维多利亚国家美术馆？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "是啊，我的小外甥满六岁了，他喜欢艺术，所以全家都要去。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "不可否认，那里对孩子来说既好玩又有教育意义。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: Hey, how was the lecture you attended yesterday?\nM: It was amazing. The speaker was so engaging, and the topic was really insightful.\nW: Wow, I wish I could have been there.\nM: Guess what? They’re going to post the recording online.",
+      "translationZh": "女：嘿，你昨天去听的讲座怎么样？\n男：太精彩了。主讲人非常有感染力，话题也很有见地。\n女：哇，真希望我当时也在场。\n男：你猜怎么着？他们要把讲座录像发到网上。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "乐于学习"
+      },
+      "summaryZh": "女士询问男士昨天所听讲座的情况，男士介绍讲座感受，并告诉她一个相关消息。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "嘿，你昨天去听的讲座怎么样？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "太精彩了。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "主讲人非常有感染力，话题也很有见地。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "哇，真希望我当时也在场。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "你猜怎么着？"
+        },
+        {
+          "id": "listening-text-4:6",
+          "zh": "他们要把讲座录像发到网上。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: How did your exam results turn out?\nM: I thought I would hardly pass but all that studying paid off. I actually did way better than I expected.\nW: See, I told you not to stress too much. You’re smarter than you give yourself credit for.",
+      "translationZh": "女：你的考试成绩怎么样？\n男：我原以为自己很难及格，可那些功夫都没白下。我实际考得比预想的好得多。\n女：瞧，我早跟你说过别太紧张。你比自己以为的要聪明。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "女士询问男士考试成绩怎么样，男士谈起考试结果，女士借此鼓励他。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "你的考试成绩怎么样？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "我原以为自己很难及格，可那些功夫都没白下。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我实际考得比预想的好得多。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "瞧，我早跟你说过别太紧张。"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "你比自己以为的要聪明。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: You look like you’ve been hit by a burst of energy. What’s the secret?\nW: I just got back from my morning jog. It’s like a hidden treasure for me. I feel supercharged.\nM: Jogging? But it’s freezing outside.\nW: I’ve got this cool new collection of music that keeps me pumped. Plus, I’ve got my running buddies.\nM: Running buddies, huh? Maybe I should find some. My couch potato days are officially over.\nW: That’s the spirit. You’ll love it. Let’s hit the road together sometime.\nM: You got yourself a deal.",
+      "translationZh": "男：你看起来精力十足，像充满了电一样。有什么秘诀吗？\n女：我刚晨跑回来。晨跑对我来说就像一件藏起来的宝贝。我觉得浑身是劲。\n男：慢跑？可外面冷得要命。\n女：我有一套很酷的新歌单，能让我一直保持兴奋。另外，我还有几个跑步伙伴。\n男：跑步伙伴，是吗？也许我也该找几个。我当“沙发土豆”的日子正式结束了。\n女：这就对了。你会爱上它的。改天我们一起去跑吧。\n男：一言为定。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "男士问女士为何精神这么好，两人聊起天冷时坚持锻炼的话题，并约定以后同行。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "你看起来精力十足，像充满了电一样。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "有什么秘诀吗？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "我刚晨跑回来。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "晨跑对我来说就像一件藏起来的宝贝。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "我觉得浑身是劲。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "慢跑？"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "可外面冷得要命。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "我有一套很酷的新歌单，能让我一直保持兴奋。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "另外，我还有几个跑步伙伴。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "跑步伙伴，是吗？"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "也许我也该找几个。"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "我当“沙发土豆”的日子正式结束了。"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "这就对了。"
+        },
+        {
+          "id": "listening-text-6:14",
+          "zh": "你会爱上它的。"
+        },
+        {
+          "id": "listening-text-6:15",
+          "zh": "改天我们一起去跑吧。"
+        },
+        {
+          "id": "listening-text-6:16",
+          "zh": "一言为定。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "W: Hi Mark, how was your weekend?\nM: Not bad. I went to the cinema with my friends. We watched a new movie called Space Adventure.\nW: Oh, I’ve heard of it. It’s said to be really exciting. What do you think?\nM: It was awesome! The special effects were out of this world. It felt like we were in space ourselves.\nW: That sounds fantastic. I love movies like that. They really take you to another world. By the way, what did you guys do after the movie?\nM: We decided to grab some dinner at a nearby restaurant. We talked about the movie the whole time, because we were all still on a high from the excitement.\nW: You guys are so much better at having fun than I am. I just ended up at the park. Maybe I’ll head to the cinema this weekend.",
+      "translationZh": "女：嗨，马克，你周末过得怎么样？\n男：还不错。我和朋友去了电影院。我们看了一部叫《太空历险》的新电影。\n女：哦，我听说过这部电影。据说特别刺激。你觉得怎么样？\n男：太棒了！特效好得不得了。感觉就像我们自己置身太空一样。\n女：听起来真棒。我喜欢那样的电影。它们真能把你带到另一个世界。顺便问一下，看完电影你们做了什么？\n男：我们决定在附近一家餐馆吃顿晚饭。我们一直在聊这部电影，因为大家都还沉浸在兴奋之中。\n女：你们比我会玩多了。我最后只是去了公园。也许这个周末我会去电影院。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士和马克聊起周末：马克和朋友去电影院看了一部新电影，两人谈起观影感受和各自的周末。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "嗨，马克，你周末过得怎么样？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "还不错。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "我和朋友去了电影院。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "我们看了一部叫《太空历险》的新电影。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "哦，我听说过这部电影。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "据说特别刺激。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "你觉得怎么样？"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "太棒了！"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "特效好得不得了。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "感觉就像我们自己置身太空一样。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "听起来真棒。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "我喜欢那样的电影。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "它们真能把你带到另一个世界。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "顺便问一下，看完电影你们做了什么？"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "我们决定在附近一家餐馆吃顿晚饭。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "我们一直在聊这部电影，因为大家都还沉浸在兴奋之中。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "你们比我会玩多了。"
+        },
+        {
+          "id": "listening-text-7:18",
+          "zh": "我最后只是去了公园。"
+        },
+        {
+          "id": "listening-text-7:19",
+          "zh": "也许这个周末我会去电影院。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "M: You won’t believe what happened to me today. I was walking down the street and I saw a dog wearing a hat.\nW: That’s funny. What kind of hat was it?\nM: It was a tiny baseball cap. The dog looked so proud, like it was ready for a game. I almost laughed out loud.\nW: That’s so cute. I wish I had seen it, by the way. Have you heard about the new coffee shop that opened up around the corner?\nM: No, I haven’t. What’s so special about it?\nW: They have this amazing new drink called Morning magic. It’s supposed to wake you up better than any coffee ever.\nM: Oh, really, I need to try that. I’ve been struggling to wake up early these days.\nW: Yeah, you should. Maybe we can go together sometime this week.\nM: Sounds like a plan. I’ll bring my camera just in case I see another dog wearing a hat.",
+      "translationZh": "男：你都不会相信我今天遇到了什么。我在街上走着，看见一只戴着帽子的狗。\n女：真有意思。那是一顶什么样的帽子？\n男：是一顶小小的棒球帽。那只狗看起来很神气，好像准备好去比赛了。我差点笑出声来。\n女：太可爱了。真希望我也看到了。对了，你听说拐角那儿新开的咖啡店了吗？\n男：没有。它有什么特别的？\n女：他们有一款很棒的新饮品，叫“晨间魔法”。据说它提神的效果比任何咖啡都好。\n男：哦，真的吗？我得去尝尝。这些天我早上总是很难起床。\n女：是啊，你该去试试。也许这周我们可以找个时间一起去。\n男：好主意。我会带上相机，万一再看到一只戴帽子的狗呢。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士讲起今天在街上看到的一件趣事，女士介绍街角新开的咖啡店，两人相约同去。"
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "M: Guess what, I just got a new job offer?\nW: Oh, wow, that’s amazing. Where is it?\nM: It’s at a tech startup downtown. They’re working on some really cool projects like virtual reality and artificial intelligence.\nW: That sounds so exciting. What’s the job title?\nM: I’ll be a project manager. It’s a bit demanding, but I’m super excited about the challenge.\nW: I’m sure you’ll do great. You’ve always been so organized and cared about details.\nM: Thanks. I really hope so. By the way, have you heard about the new office building they’re planning to build near the river?\nW: Yeah, I’ve heard about it. It’s supposed to be a huge building with a rooftop garden and everything.\nM: That’s right. It’s going to be the greenest building in the city. I can’t wait to see it.\nW: It sounds like a dream come true for anyone who cares about the environment. Maybe we can visit it once it’s done.\nM: Absolutely, it’ll be a great place to work and a great place to visit.",
+      "translationZh": "男：你猜怎么着，我刚收到一份新工作的录用通知！\n女：哦，哇，太棒了。在哪儿？\n男：在市中心的一家科技初创公司。他们在做一些很酷的项目，比如虚拟现实和人工智能。\n女：听起来真令人兴奋。是什么职位？\n男：我会当项目经理。这份工作要求有点高，但我对这个挑战特别期待。\n女：我相信你会干得很好。你一向很有条理，又注重细节。\n男：谢谢。我真希望如此。对了，你听说他们打算在河边建的那栋新办公楼了吗？\n女：嗯，听说了。据说那是一栋很大的楼，有屋顶花园，什么都有。\n男：没错。它将是全市最环保的建筑。我都等不及想看看了。\n女：对任何关心环境的人来说，这听起来都像梦想成真。也许等它建好了我们可以去参观一下。\n男：当然，那里会是一个很棒的工作场所，也很值得参观。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "男士告诉女士自己收到了新工作的邀约，两人谈起新公司、新职位和河边计划修建的新办公楼。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "你猜怎么着，我刚收到一份新工作的录用通知！"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "哦，哇，太棒了。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "在哪儿？"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "在市中心的一家科技初创公司。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "他们在做一些很酷的项目，比如虚拟现实和人工智能。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "听起来真令人兴奋。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "是什么职位？"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "我会当项目经理。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "这份工作要求有点高，但我对这个挑战特别期待。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我相信你会干得很好。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "你一向很有条理，又注重细节。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "谢谢。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "我真希望如此。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "对了，你听说他们打算在河边建的那栋新办公楼了吗？"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "嗯，听说了。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "据说那是一栋很大的楼，有屋顶花园，什么都有。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "没错。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "它将是全市最环保的建筑。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "我都等不及想看看了。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "对任何关心环境的人来说，这听起来都像梦想成真。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "也许等它建好了我们可以去参观一下。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "当然，那里会是一个很棒的工作场所，也很值得参观。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Hey, there. I just got back from the wildest adventure ever. No, not a roller coaster ride, but something way cooler. I was at the local zoo, and let me tell you, those animals are the real stars. You know, I always thought the lions were just big, lazy cats who sleep all day. But today I saw one pacing back and forth, looking like he was planning to take over the world. And those monkeys, forget it. They were more energetic than a bunch of kids on a sugar high. One of them even threw a banana at me, classic. But the best part was the penguin exhibit. These little guys are like nature’s comedians. They walk around like they have invisible suits on, and when they slide on the ice, it’s like watching a ballet, a clumsy, funny ballet. I swear one of them smiled at me. I mean, who needs TikTok when you’ve got these guys entertaining you for free? Next time I’m bringing popcorn, maybe they’ll trade me for some fish.",
+      "translationZh": "嘿，大家好。我刚经历了一场史上最疯狂的冒险回来。不，不是坐过山车，而是比那酷得多的事。我去了当地的动物园，跟你们说，那些动物才是真正的明星。你们知道，我一直以为狮子不过是整天睡觉的大懒猫。可今天我看到一头狮子来回踱步，看起来像是在谋划征服世界。还有那些猴子，就别提了。它们比一群吃多了糖的孩子还要精力旺盛。其中一只甚至朝我扔了根香蕉，真是经典。不过最精彩的是企鹅展区。这些小家伙就像大自然的喜剧演员。它们走起路来就像穿着隐形的礼服，在冰上滑行时，就像在看一场芭蕾，一场笨拙又滑稽的芭蕾。我发誓其中一只还冲我笑了。我是说，有这些家伙免费逗你开心，谁还需要刷 TikTok 呢？下次我要带上爆米花，说不定它们会拿鱼跟我换。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "自然生态",
+        "subtopic": "人与动植物"
+      },
+      "summaryZh": "说话人讲述自己刚在当地动物园的经历，逐一描述狮子、猴子和企鹅给自己留下的印象。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "嘿，大家好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我刚经历了一场史上最疯狂的冒险回来。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "不，不是坐过山车，而是比那酷得多的事。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我去了当地的动物园，跟你们说，那些动物才是真正的明星。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "你们知道，我一直以为狮子不过是整天睡觉的大懒猫。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "可今天我看到一头狮子来回踱步，看起来像是在谋划征服世界。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "还有那些猴子，就别提了。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "它们比一群吃多了糖的孩子还要精力旺盛。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "其中一只甚至朝我扔了根香蕉，真是经典。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "不过最精彩的是企鹅展区。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "这些小家伙就像大自然的喜剧演员。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "它们走起路来就像穿着隐形的礼服，在冰上滑行时，就像在看一场芭蕾，一场笨拙又滑稽的芭蕾。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "我发誓其中一只还冲我笑了。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "我是说，有这些家伙免费逗你开心，谁还需要刷 TikTok 呢？"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "下次我要带上爆米花，说不定它们会拿鱼跟我换。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "两位说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "最近受的伤。",
+        "B": "一场足球比赛。",
+        "C": "周末的安排。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Hello, Benjamin, Dan and I are going for a run Sunday morning."
+      },
+      "reasonZh": "女士约男士周日早上一起跑步（going for a run Sunday morning），男士接着回答自己能不能去，两人谈的是周末安排，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "脚踝受伤（hurt my ankle）是男士用来解释去不了的原因，只是回应邀请时顺带说的，整段对话围绕周日跑步的邀约。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "足球是男士说上周末和同事踢球时受了伤（playing football with colleagues），交代的是受伤经过，两人并没有谈论哪场比赛。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "这段对话最可能发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在地铁站。",
+        "B": "在美术教室。",
+        "C": "在杂货店。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "But the blue line doesn’t stop at Central Station, does it?"
+      },
+      "reasonZh": "两人商量坐蓝线还是红线（the blue line … the red one），还说到哪条线停中央车站（stop at Central Station），这是在地铁站选乘线路，选 A。"
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "女士为什么要去维多利亚国家美术馆？",
+      "optionTranslationsZh": {
+        "A": "去买一幅画。",
+        "B": "去接她的外甥。",
+        "C": "去参加一次家庭活动。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Yeah, my little nephew turns six, and he loves art, so the whole family is going."
+      },
+      "reasonZh": "女士说小外甥满六岁又喜欢艺术，所以全家都要去（the whole family is going），她是随全家一起出行，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "外甥（nephew）是全家去美术馆的缘由，女士说的是全家一起去，没说要去那里接他。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士接下来可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "和讲座主讲人交谈。",
+        "B": "上传她的录音。",
+        "C": "补看这场讲座。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "They’re going to post the recording online."
+      },
+      "reasonZh": "女士遗憾自己没能到场（I wish I could have been there），男士告诉她讲座录像会发到网上（post the recording online），她很可能在网上补看讲座，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "录像（recording）是男士说的讲座那边要发到网上的（They’re going to post），并不是女士自己录了东西要上传。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "男士现在感觉如何？",
+      "optionTranslationsZh": {
+        "A": "有压力。",
+        "B": "满意。",
+        "C": "失望。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I actually did way better than I expected."
+      },
+      "reasonZh": "男士原以为自己很难及格（would hardly pass），结果考得比预想好得多（way better than I expected），他现在感到满意，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "紧张（stress）出现在女士的话里，她是说自己之前就劝他别太紧张（told you not to stress too much），指的是出成绩之前。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士为什么看起来精力这么充沛？",
+      "optionTranslationsZh": {
+        "A": "她得到了自己最喜欢的音乐。",
+        "B": "她去晨跑了。",
+        "C": "她认识了一些新朋友。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I just got back from my morning jog."
+      },
+      "reasonZh": "男士问她精神好的秘诀（What’s the secret?），女士回答刚晨跑回来（morning jog），选项换成去晨跑，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "音乐（music）是男士说外面很冷后，女士解释自己为什么还跑得下去：新歌单让她保持兴奋（keeps me pumped），说的是跑步时的助力。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "跑步伙伴是女士早就有的同伴（I’ve got my running buddies），不是新认识的朋友，也是在说冷天怎么坚持跑。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士打算做什么？",
+      "optionTranslationsZh": {
+        "A": "尝试慢跑。",
+        "B": "找一位健身教练。",
+        "C": "下载一些音乐。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "My couch potato days are officially over."
+      },
+      "reasonZh": "男士说自己当“沙发土豆”的日子结束了（couch potato days are officially over），女士约他改天一起跑，他答应了（You got yourself a deal），可见他打算试试慢跑，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "男士说也许该找几个（Maybe I should find some），指的是跑步伙伴（running buddies），不是健身教练。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "音乐（music）是女士说她自己跑步时听的新歌单，男士没有说要下载音乐。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "关于这部电影，他们谈到了什么？",
+      "optionTranslationsZh": {
+        "A": "情节。",
+        "B": "人物。",
+        "C": "特效。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "The special effects were out of this world."
+      },
+      "reasonZh": "男士评价电影时直接说特效（special effects）好得不得了，选项沿用，选 C。"
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士觉得这部电影怎么样？",
+      "optionTranslationsZh": {
+        "A": "引人入胜。",
+        "B": "感人。",
+        "C": "有教育意义。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It felt like we were in space ourselves."
+      },
+      "reasonZh": "男士说电影太棒了（awesome），看得像自己身在太空（in space ourselves），散场后大家还兴奋地聊个不停（still on a high），可见电影很吸引人，选 A。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士这个周末可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "去公园。",
+        "B": "看电影。",
+        "C": "去餐馆。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Maybe I’ll head to the cinema this weekend."
+      },
+      "reasonZh": "女士最后说这个周末也许会去电影院（head to the cinema），去电影院就是去看电影，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "公园（park）是女士说自己上个周末最后只是去了公园（I just ended up at the park），是已经过去的事。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "餐馆（restaurant）是男士和朋友看完电影后吃晚饭的地方（grab some dinner at a nearby restaurant），不是女士这周末的打算。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "街上什么引起了男士的注意？",
+      "optionTranslationsZh": {
+        "A": "一只戴帽子的狗。",
+        "B": "一场有趣的棒球比赛。",
+        "C": "一只叼着棒球的狗。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I was walking down the street and I saw a dog wearing a hat."
+      },
+      "reasonZh": "男士直接说在街上看见一只戴着帽子的狗（a dog wearing a hat），选项沿用，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "棒球（baseball）是狗戴的那顶小棒球帽（tiny baseball cap），比赛（game）是说狗神气得像要去比赛，街上并没有棒球比赛。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "狗是戴着帽子，不是叼着球，棒球只出现在帽子的名称里（tiny baseball cap）。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "这家新咖啡店以什么出名？",
+      "optionTranslationsZh": {
+        "A": "它的特色饮品。",
+        "B": "它独特的位置。",
+        "C": "它对狗友好的环境。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "They have this amazing new drink called Morning magic."
+      },
+      "reasonZh": "男士问新咖啡店有什么特别（What’s so special about it?），女士答它有一款叫“晨间魔法”的新饮品（amazing new drink），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "拐角（around the corner）只是说店开在附近，男士问特别之处时，女士介绍的是饮品而不是位置。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "狗是男士在街上看到的那只，女士介绍咖啡店时没有说它对狗友好。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士打算带什么去咖啡店？",
+      "optionTranslationsZh": {
+        "A": "他的帽子。",
+        "B": "他的相机。",
+        "C": "他的狗。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ll bring my camera just in case I see another dog wearing a hat."
+      },
+      "reasonZh": "男士说会带上相机（bring my camera），选项沿用，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "帽子（hat）是他希望再遇到的那种狗戴的帽子（another dog wearing a hat），不是他要带的东西。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "狗（dog）是他想碰上并拍下来的对象，对话里没有说他自己养狗、要带狗去。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "这家公司在做什么？",
+      "optionTranslationsZh": {
+        "A": "绿色能源。",
+        "B": "城市规划。",
+        "C": "数字创新。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "They’re working on some really cool projects like virtual reality and artificial intelligence."
+      },
+      "reasonZh": "男士说公司在做虚拟现实和人工智能（virtual reality and artificial intelligence）这类项目，两者都属于数字技术创新，选项作了概括，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "最环保（greenest）说的是河边那栋计划中的新办公楼，不是这家公司做的项目。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "计划（planning）出现在男士问河边要建的新办公楼时（they’re planning to build），说的是盖楼的打算，不是公司在做的项目内容。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士的新工作是什么？",
+      "optionTranslationsZh": {
+        "A": "一名技术开发员。",
+        "B": "一名项目经理。",
+        "C": "一名市场总监。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I’ll be a project manager."
+      },
+      "reasonZh": "男士被问到职位时直接说自己将担任项目经理（project manager），选项沿用，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "科技（tech）说的是公司的类型，市中心一家科技初创公司（tech startup），不是他的职位。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士认为男士怎么样？",
+      "optionTranslationsZh": {
+        "A": "能干。",
+        "B": "灵活。",
+        "C": "独立。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You’ve always been so organized and cared about details."
+      },
+      "reasonZh": "女士相信他会干得很好（you’ll do great），又夸他一向有条理、注重细节（so organized … cared about details），可见她认为他能胜任，选 A。"
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "这栋新办公楼最突出的特点是什么？",
+      "optionTranslationsZh": {
+        "A": "文化底蕴丰富。",
+        "B": "环保。",
+        "C": "外观富有艺术感。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It’s going to be the greenest building in the city."
+      },
+      "reasonZh": "“环保”就是男士说的全市最环保的建筑（greenest building），女士接着也说关心环境的人会喜欢（cares about the environment），选 B。"
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人是什么身份？",
+      "optionTranslationsZh": {
+        "A": "动物园饲养员。",
+        "B": "游客。",
+        "C": "导游。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I was at the local zoo, and let me tell you, those animals are the real stars."
+      },
+      "reasonZh": "说话人说自己刚从当地动物园回来（I was at the local zoo），讲的都是看动物的见闻，还说下次要带爆米花再来，是游客，选 B。"
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人是怎样描述猴子的？",
+      "optionTranslationsZh": {
+        "A": "爱玩闹的。",
+        "B": "吓人的。",
+        "C": "聪明的。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "They were more energetic than a bunch of kids on a sugar high."
+      },
+      "reasonZh": "说话人说猴子比一群吃多了糖的孩子还闹腾（more energetic than a bunch of kids），其中一只还朝说话人扔香蕉（threw a banana at me），可见猴子很爱玩闹，选 A。"
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人把企鹅比作什么？",
+      "optionTranslationsZh": {
+        "A": "精力旺盛的孩子。",
+        "B": "TikTok 上的表演者。",
+        "C": "笨拙的芭蕾舞者。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "They walk around like they have invisible suits on, and when they slide on the ice, it’s like watching a ballet, a clumsy, funny ballet."
+      },
+      "reasonZh": "说话人说企鹅在冰上滑行就像在看芭蕾，一场笨拙又滑稽的芭蕾（a clumsy, funny ballet），选项换成笨拙的芭蕾舞者，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "精力旺盛的孩子是拿来比猴子的（They were more energetic than a bunch of kids），不是比企鹅。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "短视频应用是说话人说有企鹅免费逗乐、用不着再刷它时提到的（who needs TikTok），并没有把企鹅比成上面的表演者，原话作比的是芭蕾。"
+        }
+      ]
+    }
+  }
+}

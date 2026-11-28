@@ -1,0 +1,772 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b": {
+      "overview": "作者回顾自己的阅读历程：从报纸上的连环漫画入门，因觉得纯文字小说难读而转向图像小说，又借助图像版《霍比特人》读懂了托尔金原著，最终表示对图像小说的热爱会一直持续。",
+      "fullTranslationZh": "我最初接触漫画世界，是通过报纸上的连环漫画。起初是喜欢加菲猫和它的冒险故事，后来又发现了《Champak》《Archie》等一系列漫画书。小时候我能看到的漫画仅限于报纸上登的那些，但等我长大一些，开始去书店买自己想读的书，情况就变了。\n由于从小读的都是图画丰富的书，我把一头扎进纯文字小说看作一件令人发怵的事。在寻找介于两者之间的书时，我偶然发现了一本《Bhimayana》——一部图像小说。它那漫画般的主题和设计让我感到很熟悉。而且，借助图画理解复杂的故事相对更容易，也更有趣。随着年龄增长，我发现自己从幼稚的漫画书“升级”到了图像小说。图像小说以更吸引人的方式探讨严肃话题，还真真切切地把发生的事呈现在我眼前。\n几年过去，有人送了我一本 J.R.R. 托尔金的《霍比特人》。虽然他小说中扣人心弦的叙事让我印象深刻，但如果不是先读过查尔斯·狄克逊的《霍比特人》，我不确定自己能否把他的纯文字版本想象成画面，并读得那么津津有味。多亏了查尔斯·狄克逊，故事里发生的一切我都有了画面，这让我理解托尔金的版本更容易、也更有趣。\n从黑白连环漫画到配图的图像小说，这一转变已走过很长的路。虽然我与书的“恋爱”仍在继续，但从长远看，我对图像小说的爱更加深厚，并将一直延续下去。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+          "sourceText": "While I was impressed by the compelling（扣人心弦的） nature of storytelling in his novel, I am not sure if I would have been able to visualize and enjoy his text-only version so much had I not read Charles Dixon’s The Hobbit first.",
+          "displayText": "While I was impressed by the compelling（扣人心弦的） nature of storytelling in his novel, I am not sure if I would have been able to visualize and enjoy his text-only version so much had I not read Charles Dixon’s The Hobbit first.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:26"
+          ],
+          "translationZh": "虽然他小说中扣人心弦的叙事让我印象深刻，但如果不是先读过查尔斯·狄克逊的《霍比特人》，我不确定自己能否把他的纯文字版本想象成画面，并读得那么津津有味。",
+          "analysisZh": "主句主干是 I am not sure（我不确定）。if 引导 sure 的宾语从句，这里 if 相当于 whether，意为“是否”：I would have been able to visualize and enjoy his text-only version so much，visualize 和 enjoy 两个动词并列，共用宾语 his text-only version（托尔金的纯文字版）。句末 had I not read Charles Dixon’s The Hobbit first 是省略 if 的倒装条件句，等于 if I had not read …，和 would have been able to 配合，表示与过去事实相反的假设：要是没先读狄克逊的版本，我未必能在脑中看到画面、读得那么享受。句首 While 引出让步：虽然托尔金的叙事很吸引人。",
+          "underlineRanges": [
+            {
+              "start": 84,
+              "end": 97,
+              "quote": "I am not sure"
+            },
+            {
+              "start": 98,
+              "end": 146,
+              "quote": "if I would have been able to visualize and enjoy"
+            },
+            {
+              "start": 177,
+              "end": 224,
+              "quote": "had I not read Charles Dixon’s The Hobbit first"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+          "sourceText": "Having grown up on a diet of image-heavy books, I regarded diving into all-text novels as a formidable undertaking.",
+          "displayText": "Having grown up on a diet of image-heavy books, I regarded diving into all-text novels as a formidable undertaking.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:25"
+          ],
+          "translationZh": "由于从小读的都是图画丰富的书，我把一头扎进纯文字小说看作一件令人发怵的事。",
+          "analysisZh": "主干是 I regarded A as B（我把 A 看作 B）：A 是动名词短语 diving into all-text novels（一头扎进纯文字小说），B 是 a formidable undertaking（一件令人发怵的事）。句首 Having grown up on a diet of image-heavy books 是现在分词的完成式作原因状语，逻辑主语就是 I，表示“读着图多的书长大”发生在前；on a diet of 本指“以……为日常饮食”，这里比喻从小读的多是这类书。前因后果连起来看，formidable 说的就是他对纯文字小说的畏难。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 46,
+              "quote": "Having grown up on a diet of image-heavy books"
+            },
+            {
+              "start": 48,
+              "end": 89,
+              "quote": "I regarded diving into all-text novels as"
+            },
+            {
+              "start": 90,
+              "end": 114,
+              "quote": "a formidable undertaking"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1"
+              ],
+              "start": 0,
+              "end": 117,
+              "quote": "我最初接触漫画世界，是通过报纸上的连环漫画。起初是喜欢加菲猫和它的冒险故事，后来又发现了《Champak》《Archie》等一系列漫画书。小时候我能看到的漫画仅限于报纸上登的那些，但等我长大一些，开始去书店买自己想读的书，情况就变了。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2"
+              ],
+              "start": 118,
+              "end": 307,
+              "quote": "由于从小读的都是图画丰富的书，我把一头扎进纯文字小说看作一件令人发怵的事。在寻找介于两者之间的书时，我偶然发现了一本《Bhimayana》——一部图像小说。它那漫画般的主题和设计让我感到很熟悉。而且，借助图画理解复杂的故事相对更容易，也更有趣。随着年龄增长，我发现自己从幼稚的漫画书“升级”到了图像小说。图像小说以更吸引人的方式探讨严肃话题，还真真切切地把发生的事呈现在我眼前。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3"
+              ],
+              "start": 308,
+              "end": 460,
+              "quote": "几年过去，有人送了我一本 J.R.R. 托尔金的《霍比特人》。虽然他小说中扣人心弦的叙事让我印象深刻，但如果不是先读过查尔斯·狄克逊的《霍比特人》，我不确定自己能否把他的纯文字版本想象成画面，并读得那么津津有味。多亏了查尔斯·狄克逊，故事里发生的一切我都有了画面，这让我理解托尔金的版本更容易、也更有趣。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4"
+              ],
+              "start": 461,
+              "end": 532,
+              "quote": "从黑白连环漫画到配图的图像小说，这一转变已走过很长的路。虽然我与书的“恋爱”仍在继续，但从长远看，我对图像小说的爱更加深厚，并将一直延续下去。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-b-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1",
+                "start": 106,
+                "end": 162,
+                "quote": "It began with a fondness for Garfield and his adventures"
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+                "start": 0,
+                "end": 46,
+                "quote": "Having grown up on a diet of image-heavy books"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 22,
+                "end": 37,
+                "quote": "起初是喜欢加菲猫和它的冒险故事"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 0,
+                "end": 14,
+                "quote": "由于从小读的都是图画丰富的书"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+                "start": 0,
+                "end": 115,
+                "quote": "Having grown up on a diet of image-heavy books, I regarded diving into all-text novels as a formidable undertaking."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+                "start": 116,
+                "end": 169,
+                "quote": "As I searched for books that lay somewhere in between"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 0,
+                "end": 37,
+                "quote": "由于从小读的都是图画丰富的书，我把一头扎进纯文字小说看作一件令人发怵的事。"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 37,
+                "end": 49,
+                "quote": "在寻找介于两者之间的书时"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+                "start": 211,
+                "end": 308,
+                "quote": "visualize and enjoy his text-only version so much had I not read Charles Dixon’s The Hobbit first"
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+                "start": 310,
+                "end": 375,
+                "quote": "Thanks to Charles Dixon, I had a picture of whatever had happened"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 52,
+                "end": 95,
+                "quote": "如果不是先读过查尔斯·狄克逊的《霍比特人》，我不确定自己能否把他的纯文字版本想象成画面"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 106,
+                "end": 131,
+                "quote": "多亏了查尔斯·狄克逊，故事里发生的一切我都有了画面"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-b-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4",
+                "start": 163,
+                "end": 230,
+                "quote": "my love for illustrated novels is more substantial and here to stay"
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+                "start": 388,
+                "end": 457,
+                "quote": "I found myself graduating to graphic novels from childish comic books"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 49,
+                "end": 70,
+                "quote": "我对图像小说的爱更加深厚，并将一直延续下去"
+              },
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 129,
+                "end": 151,
+                "quote": "我发现自己从幼稚的漫画书“升级”到了图像小说"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-b-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:26"
+            ],
+            "selectedSentenceId": "sentence-reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+                "start": 84,
+                "end": 309,
+                "quote": "While I was impressed by the compelling（扣人心弦的） nature of storytelling in his novel, I am not sure if I would have been able to visualize and enjoy his text-only version so much had I not read Charles Dixon’s The Hobbit first."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 31,
+                "end": 106,
+                "quote": "虽然他小说中扣人心弦的叙事让我印象深刻，但如果不是先读过查尔斯·狄克逊的《霍比特人》，我不确定自己能否把他的纯文字版本想象成画面，并读得那么津津有味。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-b-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:25"
+            ],
+            "selectedSentenceId": "sentence-reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+                "start": 0,
+                "end": 115,
+                "quote": "Having grown up on a diet of image-heavy books, I regarded diving into all-text novels as a formidable undertaking."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 0,
+                "end": 37,
+                "quote": "由于从小读的都是图画丰富的书，我把一头扎进纯文字小说看作一件令人发怵的事。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章按时间顺序写作者的阅读成长：童年读报上的漫画，少年时找到图像小说，后来靠图像版读懂托尔金原著，最后点明对图像小说的爱会一直延续。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1",
+            "summary": "作者童年从报纸连环漫画接触漫画，喜欢加菲猫，又读到更多漫画书；长大后开始去书店买想读的书。",
+            "function": "交代阅读的起点"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+            "summary": "作者觉得纯文字小说难啃，找到了介于两者之间的图像小说，借图画理解复杂故事更轻松，渐渐从漫画书转向图像小说。",
+            "function": "写转向图像小说的原因和过程"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+            "summary": "作者读托尔金的《霍比特人》前先读了狄克逊的图像版，脑中有了画面，读懂原著更容易也更有趣。",
+            "function": "用亲身例子说明图像小说的帮助"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4",
+            "summary": "回顾从黑白漫画到图像小说的转变，作者表示对图像小说的爱更深厚、会一直持续。",
+            "function": "总结全文，点明主旨"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:24": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个选项分别放回作者童年读漫画的描写里核对，选出与原文相符的一项。",
+      "stemTranslationZh": "关于作者小时候，我们可以了解到什么？",
+      "locateBy": "options",
+      "locateFindZh": "四项分别回 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1]] 童年读报看漫画的经历核对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他从报纸中挖掘知识。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "newspapers",
+            "optionText": "newspapers",
+            "matchType": "exact",
+            "relationNote": "选项借了“报纸”（newspapers）；报纸只是他看连环漫画的地方，他在报上读的是加菲猫，不是去找知识。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1",
+              "quote": "happened through the comic strips（连环漫画） in newspapers",
+              "anchor": "报上的连环漫画"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他觉得漫画很肤浅。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "It began with a fondness for Garfield and his adventures",
+            "sourceHighlight": "a fondness",
+            "optionText": "Comics struck him as shallow.",
+            "optionHighlight": "shallow",
+            "explanation": "童年时他喜爱加菲猫漫画（a fondness）；[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2]] 的“幼稚的漫画书”（childish comic books）是长大后回头看的说法，不是小时候的感受。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1",
+              "quote": "It began with a fondness for Garfield and his adventures",
+              "anchor": "童年的喜爱"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他不太在意书的类别。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He cared little for book categories.",
+            "explanation": "原文没写他小时候对书的类别怎么看；后来他还专门找介于漫画和纯文字之间的书，可见并非不在乎类别。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "漫画是他主要的阅读乐趣。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1",
+              "quote": "It began with a fondness for Garfield and his adventures",
+              "anchor": "童年喜欢加菲猫"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+              "quote": "Having grown up on a diet of image-heavy books",
+              "anchor": "从小读图多的书"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "main reading joy",
+          "sourceRole": "correctOption",
+          "targetText": "It began with a fondness for Garfield and his adventures",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "“乐趣”落在[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1|It began with a fondness]]（a fondness for Garfield）；“主要读物”落在[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2|Having grown up on a diet]]（grown up on a diet of image-heavy books），他从小读的多是图多的书，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:25": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据画线词所在句的原因和下文的反应，推断 formidable 的意思。",
+      "stemTranslationZh": "第 2 段中画线词 formidable 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "令人望而却步的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+              "quote": "Having grown up on a diet of image-heavy books, I regarded diving into all-text novels as a formidable undertaking.",
+              "anchor": "画线词所在句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+              "quote": "As I searched for books that lay somewhere in between",
+              "anchor": "转去找折中的书"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有回报的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "As I searched for books that lay somewhere in between",
+            "sourceHighlight": "somewhere in between",
+            "optionText": "Rewarding.",
+            "optionHighlight": "Rewarding",
+            "explanation": "放进去就成了“扎进纯文字小说很有收获”，可他接着去找介于漫画和纯文字之间的书，是在绕开纯文字小说。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+              "quote": "As I searched for books that lay somewhere in between",
+              "anchor": "转去找折中的书"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "有趣的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "understanding complex narratives through pictures was relatively easier and more fun",
+            "sourceEntity": "through pictures",
+            "optionText": "Entertaining.",
+            "optionEntity": "Entertaining",
+            "explanation": "放进去就成了“纯文字小说读来有趣”，但原文说更有趣（more fun）的是借图画读故事，不是纯文字小说。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+              "quote": "understanding complex narratives through pictures was relatively easier and more fun",
+              "anchor": "借图画读更有趣"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "有启发性的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Enlightening.",
+            "explanation": "放进去就成了“纯文字小说令人受启发”，原文没提他从中得到启发，他正因觉得难才另找图像小说。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "formidable",
+          "sourceRole": "stem",
+          "targetText": "Having grown up on a diet of image-heavy books, I regarded diving into all-text novels as a formidable undertaking.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "Having grown up on a diet of image-heavy books",
+          "note": "题干画线词 formidable 原词出现在原文。"
+        },
+        {
+          "sourceText": "Discouraging.",
+          "sourceRole": "correctOption",
+          "targetText": "Having grown up on a diet of image-heavy books, I regarded diving into all-text novels as a formidable undertaking.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "他一直读图多的书（image-heavy books），所以 formidable 必须是对纯文字小说的畏难；紧接着他去找介于两者之间的书（somewhere in between），也是在避开它。放回去：我觉得一头扎进纯文字小说让人发怵，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把狄克逊版和托尔金纯文字原著对照，推断狄克逊版《霍比特人》的特点。",
+      "stemTranslationZh": "关于查尔斯·狄克逊的《霍比特人》，可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它包含丰富的图像内容。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+              "quote": "visualize and enjoy his text-only version so much had I not read Charles Dixon’s The Hobbit first",
+              "anchor": "纯文字版和狄克逊版对照"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+              "quote": "Thanks to Charles Dixon, I had a picture of whatever had happened",
+              "anchor": "读后有了画面"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它呈现了复杂的情节。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "understanding complex narratives through pictures was relatively easier and more fun",
+            "sourceEntity": "complex narratives",
+            "optionText": "It presents a complicated plot.",
+            "optionEntity": "a complicated plot",
+            "explanation": "[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2]] 的“复杂故事”（complex narratives）是说借图画能把它读懂；狄克逊版的作用是让原著更好懂（easier … to understand），原文没说它情节复杂。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+              "quote": "understanding complex narratives through pictures was relatively easier and more fun",
+              "anchor": "图画让复杂故事好懂"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它聚焦最新的新闻。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It focuses on the latest news.",
+            "explanation": "报纸只在 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1]] 作者童年看漫画时出现；狄克逊版讲的是《霍比特人》的故事，和新闻无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它塑造了托尔金的写作风格。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "that made it easier and more fun to understand J.R.R. Tolkien’s version",
+            "sourceEntity": "to understand",
+            "optionText": "It shapes Tolkien’s writing style.",
+            "optionEntity": "Tolkien’s writing style",
+            "explanation": "狄克逊版帮的是作者读懂托尔金的原著（to understand … Tolkien’s version），影响的是作者的阅读，不是托尔金怎么写。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+              "quote": "that made it easier and more fun to understand J.R.R. Tolkien’s version",
+              "anchor": "帮作者读懂原著"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Charles Dixon’s The Hobbit",
+          "sourceRole": "stem",
+          "targetText": "While I was impressed by the compelling（扣人心弦的） nature of storytelling in his novel, I am not sure if I would have been able to visualize and enjoy his text-only version so much had I not read Charles Dixon’s The Hobbit first.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "visualize and enjoy his text-only version so much had I not read Charles Dixon’s The Hobbit first",
+          "note": "题干 Charles Dixon’s The Hobbit 原词出现在原文。"
+        },
+        {
+          "sourceText": "It contains rich visual material.",
+          "sourceRole": "correctOption",
+          "targetText": "While I was impressed by the compelling（扣人心弦的） nature of storytelling in his novel, I am not sure if I would have been able to visualize and enjoy his text-only version so much had I not read Charles Dixon’s The Hobbit first.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "原文没直说狄克逊版有图，只说托尔金原著是纯文字版（text-only version），而先读了狄克逊版，他才能在脑中看到画面（visualize）；接着又说多亏狄克逊，他对故事有了画面（had a picture）。由此推出狄克逊版图像丰富，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:27": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "理清作者阅读历程的主线，选出能概括全文的标题。",
+      "stemTranslationZh": "本文最好的标题可能是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1]] 的连环漫画读起，看各段怎样一步步走向图像小说，再读 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4]] 末尾的表态",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "欢迎来到文学世界",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "my love for illustrated novels is more substantial and here to stay",
+            "sourceHighlight": "illustrated novels",
+            "optionText": "Welcome to the World of Literature",
+            "optionHighlight": "the World of Literature",
+            "explanation": "全文只写作者从漫画到图像小说的阅读经历，落点是图像小说（illustrated novels），不是介绍整个文学世界。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4",
+              "quote": "my love for illustrated novels is more substantial and here to stay",
+              "anchor": "结尾的落点"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "对图像小说爱不释手",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4",
+              "quote": "my love for illustrated novels is more substantial and here to stay",
+              "anchor": "结尾表态"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+              "quote": "I found myself graduating to graphic novels from childish comic books",
+              "anchor": "转向图像小说"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1",
+              "quote": "My initial exploration of the world of comic books happened through the comic strips（连环漫画） in newspapers.",
+              "anchor": "阅读起点"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "让漫画书塑造我",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "comic books",
+            "optionText": "Comic Books",
+            "matchType": "exact",
+            "relationNote": "选项借了“漫画书”（comic books）；漫画只是 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1]] 的起点，作者后来从幼稚的漫画书转向图像小说，也没谈漫画塑造自己。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2",
+              "quote": "graduating to graphic novels from childish comic books",
+              "anchor": "离开漫画书"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过读小说找到自我",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Find Myself through Reading Novels",
+            "explanation": "原文没写借读小说认识自己；作者觉得纯文字小说让人发怵（formidable），偏爱的是图像小说。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Graphic Novels",
+          "sourceRole": "correctOption",
+          "targetText": "While my romance with books is still ongoing, in the long run, my love for illustrated novels is more substantial and here to stay.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:1]] 从报上的漫画入门，[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:2]] 找到并转向图像小说，[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:3]] 靠狄克逊的图像版读懂原著，[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-b:4]] 说对图像小说的爱会一直延续（here to stay）。几段都落在图像小说上，“对图像小说爱不释手”（Can’t Get Enough of Graphic Novels）正好盖住这条主线，选 B。"
+        }
+      ]
+    }
+  }
+}

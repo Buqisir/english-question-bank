@@ -1,0 +1,195 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Just then, a minibus stopped before Ethan. The door slid open, and Coach Schultz jumped out, followed by the whole team. “I brought some extra help!” he called. Ethan’s heart lifted. He quickly explained that Zeke was hiding among the trees. The coach told the kids to spread out in a big circle and move in slowly so that Zeke could not run off again. Ethan stood in the middle and shook the bucket of cracked corn. Zeke stuck his head out, sniffed the air and trotted over to eat. Gently, Ethan slipped the rope around his neck. The kids cheered as he led Zeke back into the barn and checked the gate twice.\n\nParagraph 2: “Thanks, but sorry this took so much of our warm-up time,” Ethan said guiltily. Coach Schultz laughed and patted his shoulder. “Are you kidding? Look at them. They’re warmed up, and they just worked as one team.” The kids nodded, red-faced and grinning. On the way to the match, Ethan went over the pitching tips again, but this time his hands didn’t shake. When he finally stood on the mound, he saw the same kids who had circled the trees with him. He took a deep breath and threw his first pitch straight into the catcher’s glove.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "Ethan 是第一次在正式比赛里投球的男孩，责任心强；Coach Schultz 是他的教练，答应安顿好队员后回来帮忙；Zeke 是逃出去的小山羊。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第三人称、过去时，紧跟 Ethan 的所见所感。句子短，动作密，人物多用带引号的短句直接对话，一问一答推进情节。续写也用短句写动作，让 Ethan 和教练用几句短的直接引语交谈。",
+          "evidence": [
+            "“Ready?” Coach Schultz asked."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在 Ethan 追羊追得筋疲力尽、坐在地上，Zeke 还没抓到，队里已经开始热身。续写要解决两件事：把 Zeke 弄回畜棚，Ethan 还能不能赶上第一次投球。",
+          "evidence": [
+            "How he wished he could be there!"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "Ethan",
+          "role": "第一次在正式比赛中投球的男孩",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "很怕让教练和队友失望。",
+              "evidence": "“I hope I don’t let Coach Schultz and the kids in the team down.”"
+            },
+            {
+              "label": "表现",
+              "text": "羊跑了就不肯走，先想办法：用玉米引、用绳子牵。",
+              "evidence": "Knowing he couldn’t leave with Zeke on the loose"
+            },
+            {
+              "label": "此刻",
+              "text": "追不上羊，累得坐在地上喘气，心里惦记着热身。",
+              "evidence": "Exhausted from the run-around, Ethan collapsed down on the ground to catch his breath."
+            }
+          ]
+        },
+        {
+          "name": "Coach Schultz",
+          "role": "Ethan 的教练",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "听说羊跑了，主动答应安顿好队员后回来帮忙。",
+              "evidence": "I’ll come back and help you after I get the kids settled!"
+            }
+          ]
+        },
+        {
+          "name": "Zeke",
+          "role": "Ethan 家的小山羊",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "一见 Ethan 追来就跑，越跑越远，一个人很难抓住。",
+              "evidence": "But Zeke saw him and rushed off, getting farther and farther away."
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "a bucket of cracked corn to attract the goat and a rope to catch him and lead him back",
+          "use": "第 1 段用上：大家围住树林后，Ethan 摇玉米桶把 Zeke 引出来，再用绳子套住牵回畜棚。"
+        },
+        {
+          "sourceQuote": "I’ll come back and help you after I get the kids settled!",
+          "use": "第 1 段开头的小巴就是教练兑现这句承诺：他把队员一起带来帮忙。"
+        },
+        {
+          "sourceQuote": "all the pitching tips Coach Schultz had given him",
+          "use": "第 2 段去比赛的路上，Ethan 再想一遍这些投球要点，这次手不抖了，接到第一次投球。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "教练带着全队坐小巴赶来，大家围成圈、Ethan 用玉米桶和绳子抓回 Zeke；Ethan 为占用热身时间道歉，教练说这就是最好的热身，Ethan 安心投出第一球。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "小巴停在 Ethan 面前，车上的人要来帮忙；第二段首句 Ethan 道谢又为占用热身时间道歉，所以第 1 段结束时 Zeke 必须已经被大家一起抓回来，而且用掉了不少热身时间。",
+          "draft": "教练和全队下车，听 Ethan 说明情况后围成大圈慢慢合拢，Ethan 摇玉米桶引出 Zeke，用绳子套住，牵回畜棚关好门。",
+          "bridgeQuote": "sorry this took so much of our warm-up time",
+          "bridge": "第 1 段结束时，全队是不是已经帮 Ethan 把羊抓回来，热身时间也确实花在了这上面？"
+        },
+        {
+          "paragraph": 2,
+          "must": "接住 Ethan 的道谢和愧疚，写清别人怎么回应，再收住原文的另一件事：Ethan 第一次正式投球。",
+          "draft": "教练笑着让他看队员：大家已经热好身，刚才还配合得像一个整体；去比赛路上 Ethan 不再紧张，站上投手丘看见刚才一起围树林的队友，投出第一球。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Just then, a minibus stopped before Ethan. The door slid open, and Coach Schultz jumped out, followed by the whole team. “I brought some extra help!” he called. Ethan’s heart lifted. He quickly explained that Zeke was hiding among the trees. The coach told the kids to spread out in a big circle and move in slowly so that Zeke could not run off again. Ethan stood in the middle and shook the bucket of cracked corn. Zeke stuck his head out, sniffed the air and trotted over to eat. Gently, Ethan slipped the rope around his neck. The kids cheered as he led Zeke back into the barn and checked the gate twice.\n\nParagraph 2: “Thanks, but sorry this took so much of our warm-up time,” Ethan said guiltily. Coach Schultz laughed and patted his shoulder. “Are you kidding? Look at them. They’re warmed up, and they just worked as one team.” The kids nodded, red-faced and grinning. On the way to the match, Ethan went over the pitching tips again, but this time his hands didn’t shake. When he finally stood on the mound, he saw the same kids who had circled the trees with him. He took a deep breath and threw his first pitch straight into the catcher’s glove.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "让小巴带来帮手，把抓羊这件事一步步做完，给第二段的道谢和道歉铺好路。",
+          "items": [
+            {
+              "quote": "Coach Schultz jumped out, followed by the whole team",
+              "explain": "小巴上来的是原文里已有的教练和队员，不新造人物；教练说过会回来帮忙，这里兑现，帮手来得有原因。"
+            },
+            {
+              "quote": "spread out in a big circle and move in slowly so that Zeke could not run off again",
+              "explain": "原文 Zeke 一见人就跑，一个人追不上；围成圈慢慢合拢正好解决这个难题，so that 说清这样做的目的。"
+            },
+            {
+              "quote": "Ethan stood in the middle and shook the bucket of cracked corn",
+              "explain": "用回原文 Ethan 准备好的玉米桶，原文说它是用来引羊的，这里真的派上用场，读者觉得前后是一个故事。"
+            },
+            {
+              "quote": "he led Zeke back into the barn and checked the gate twice",
+              "explain": "把羊牵回畜棚、再检查两遍门，原文“羊开门逃走”的问题有了落点，也写出 Ethan 做事仔细。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "接住 Ethan 的愧疚，由教练一句话化解，再把故事落到第一次投球上。",
+          "items": [
+            {
+              "quote": "“Are you kidding? Look at them. They’re warmed up, and they just worked as one team.”",
+              "explain": "教练没有讲大道理，而是让 Ethan 看看队员：大家已经热好身，还刚刚配合得像一个整体。愧疚有了回应，用的是原文那种短句对话。"
+            },
+            {
+              "quote": "but this time his hands didn’t shake",
+              "explain": "原文开头 Ethan 担心让大家失望，这里用“手不抖了”这个看得见的动作写他放下了紧张，比直接说 he felt confident 具体。"
+            },
+            {
+              "quote": "threw his first pitch straight into the catcher’s glove",
+              "explain": "结尾落在第一次投球这个具体动作上，收住原文“第一次正式投球”这条线，不贴口号。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "spread out in a big circle and move in slowly",
+          "function": "写多人配合抓羊的动作，具体到怎么站、怎么走，比 they helped him catch the goat 更能推动情节。"
+        },
+        {
+          "expression": "Ethan’s heart lifted.",
+          "function": "用一个短句写 Ethan 看到帮手时的心情变化，从原文的沮丧转到希望。"
+        },
+        {
+          "expression": "his hands didn’t shake",
+          "function": "用身体动作写紧张消失，适合写比赛、上台前的情绪。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "让小巴上下来司机、路人或其他新人物抓住山羊",
+          "why": "原文已经铺垫教练答应回来帮忙，第二段首句 Ethan 又说 our warm-up time，帮手应是教练和队员；新人物解决问题就成了天降帮助。"
+        },
+        {
+          "pitfall": "第 1 段只写教练来了，羊还没抓到",
+          "why": "第二段首句 Ethan 先道谢、再为占用热身时间道歉，说明帮忙已经完成，第 1 段必须写到把 Zeke 抓回。"
+        },
+        {
+          "pitfall": "结尾写 Ethan 错过比赛，或空喊团队精神的口号",
+          "why": "第二段首句只说用掉了热身时间，比赛还在；原文的另一条线是第一次投球，结尾应落在这个具体动作上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Just then, a minibus stopped before Ethan. The door slid open, and out poured the whole team, with Coach Schultz right behind them. “I brought some extra hands!” the coach called. Ethan scrambled to his feet, hardly believing his eyes. Pointing at the trees, he explained that Zeke kept running off whenever he got close. Coach Schultz thought for a second and had the kids spread out in a wide circle around the trees. “Nice and slow,” he whispered. “Don’t scare him.” As the circle closed in, Ethan crouched in the middle and shook the bucket of cracked corn. The rattle did the trick. Zeke poked his head out from behind a bush, sniffed, and trotted straight to the bucket. While the goat buried his nose in the corn, Ethan slipped the rope around his neck. A cheer went up. Ethan led Zeke back into the barn and checked the gate twice.\n\nParagraph 2: “Thanks, but sorry this took so much of our warm-up time,” Ethan said guiltily. Coach Schultz laughed and squeezed his shoulder. “Sorry? Look at them.” The kids were red-faced and grinning, still breathing hard. “They’re warmed up, and they just worked together better than they do at most practices. Now let’s go play some ball.” Ethan grabbed his glove and climbed into the minibus. On the way, he went over the pitching tips in his head, and for the first time that morning his hands were steady. When he finally stepped onto the mound, he glanced at his teammates in the field, the same kids who had circled the trees with him an hour before. Ethan took a deep breath, wound up, and threw his first pitch straight into the catcher’s glove.",
+      "beyondStandard": [
+        {
+          "quote": "out poured the whole team, with Coach Schultz right behind them",
+          "explain": "out poured 倒装，写出一车队员涌下来的场面，比 jumped out, followed by 更有画面感。"
+        },
+        {
+          "quote": "“Nice and slow,” he whispered. “Don’t scare him.”",
+          "explain": "把围羊的办法放进教练压低声音说的两句短话里，更像原文那种一来一回的对话，也写出要小心别惊动羊。"
+        },
+        {
+          "quote": "The rattle did the trick.",
+          "explain": "rattle 写出玉米在桶里哗哗响的声音，did the trick 是“奏效了”的地道说法，一个短句交代转折。"
+        }
+      ]
+    }
+  }
+}

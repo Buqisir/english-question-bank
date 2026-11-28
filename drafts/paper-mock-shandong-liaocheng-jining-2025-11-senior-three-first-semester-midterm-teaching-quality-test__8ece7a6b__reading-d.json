@@ -1,0 +1,774 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d": {
+      "overview": "文章介绍一项跨文化心理学研究：对比美国和泰国参与者发现，个人主义社会里个人担忧更能推动环保行动，集体主义社会里则是他人的做法更起作用，研究提醒政策制定要考虑文化差异。",
+      "fullTranslationZh": "据发表在《心理科学》上的一项新研究，一个国家特定的文化价值观，可能决定人们对环境问题的担忧是否真的会促使个人采取环保行为。\n加州大学心理学家 Kimin Eom 注意到，无论是公众讨论还是以往关于环保行为的学术研究，通常都聚焦于西方国家的人，于是萌生了研究文化、环境担忧与环保行动三者关系的想法。这一点值得注意，因为西方社会的文化价值观往往看重个人自身的态度和信念，并鼓励人们表达出来。\n“过去的理论似乎是：一旦人们相信环境问题的紧迫性，对可持续发展有了更强烈的担忧，他们就会改变并采取行动来解决这些问题。”Eom 解释说。但这种关系对生活在集体主义色彩更浓的社会中的人可能并不成立，这些社会更看重社会和谐与一致，而不是自我表达。\n为了研究在这两种文化中是什么驱动了环保行动，Eom 的团队以来自美国（个人主义文化）和泰国（集体主义文化）的参与者开展了一项研究。他们发现，环境担忧与环保行为——在本研究中指选择环保产品——相关，但只限于美国参与者。另一方面，相信有很大比例的人在采取环保行为，与泰国参与者做出环保选择有关，与美国参与者则无关。\n研究结果表明，生活在个人主义国家的人，更可能因个人担忧而采取环保行动；而生活在集体主义国家的人，更可能受社会标准驱动去做环保之事。\n“让公民积极参与，对解决气候变化等紧迫的社会问题至关重要，”Eom 说，“我们的研究表明，科学家、政策制定者和活动人士需要了解文化如何塑造行动背后的心理因素，从而制定出应对重要社会问题的政策、宣传活动和干预措施。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-d-1",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:1",
+          "sourceText": "The specific cultural values of a country may determine whether concern about environmental issues actually leads individuals to engage in environmentally friendly behaviors, according to the new research published in Psychological Science.",
+          "displayText": "The specific cultural values of a country may determine whether concern about environmental issues actually leads individuals to engage in environmentally friendly behaviors, according to the new research published in Psychological Science.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:35"
+          ],
+          "translationZh": "据发表在《心理科学》上的一项新研究，一个国家特定的文化价值观，可能决定人们对环境问题的担忧是否真的会促使个人采取环保行为。",
+          "analysisZh": "主干是 The specific cultural values of a country may determine …（一个国家特定的文化价值观可能决定……）。whether 引导宾语从句，说明决定的内容：从句主语是 concern about environmental issues（对环境问题的担忧），谓语用 lead sb to do 结构（leads individuals to engage in …），意思是这种担忧是否真会促使个人采取环保行为。句末 according to the new research 交代出处，过去分词短语 published in Psychological Science 作后置定语修饰 research。may 表示“可能”，结论留有余地。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 55,
+              "quote": "The specific cultural values of a country may determine"
+            },
+            {
+              "start": 56,
+              "end": 138,
+              "quote": "whether concern about environmental issues actually leads individuals to engage in"
+            },
+            {
+              "start": 205,
+              "end": 239,
+              "quote": "published in Psychological Science"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-d-2",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:5",
+          "sourceText": "The findings reveal that personal concerns are more likely to motivate people to take environmental action if they live in individualistic countries, whereas social criteria are more likely to drive people to engage in environmentally friendly behavior if they live in collectivistic countries.",
+          "displayText": "The findings reveal that personal concerns are more likely to motivate people to take environmental action if they live in individualistic countries, whereas social criteria are more likely to drive people to engage in environmentally friendly behavior if they live in collectivistic countries.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:33",
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:35"
+          ],
+          "translationZh": "研究结果表明，生活在个人主义国家的人，更可能因个人担忧而采取环保行动；而生活在集体主义国家的人，更可能受社会标准驱动去做环保之事。",
+          "analysisZh": "主干是 The findings reveal that …（研究结果表明……）。that 引导宾语从句，从句里是 whereas 连接的两个对比分句，两句都是 reveal 的内容。两句结构平行：主语（personal concerns 个人担忧／social criteria 社会标准）+ are more likely to + 动词（motivate／drive）+ people to do + if 条件状语（they live in individualistic／collectivistic countries）。whereas 意为“而”，把两类国家的驱动因素对照起来；泰国属于集体主义文化，正对应后一个分句。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 24,
+              "quote": "The findings reveal that"
+            },
+            {
+              "start": 150,
+              "end": 157,
+              "quote": "whereas"
+            },
+            {
+              "start": 253,
+              "end": 293,
+              "quote": "if they live in collectivistic countries"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:1"
+              ],
+              "start": 0,
+              "end": 61,
+              "quote": "据发表在《心理科学》上的一项新研究，一个国家特定的文化价值观，可能决定人们对环境问题的担忧是否真的会促使个人采取环保行为。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2"
+              ],
+              "start": 62,
+              "end": 193,
+              "quote": "加州大学心理学家 Kimin Eom 注意到，无论是公众讨论还是以往关于环保行为的学术研究，通常都聚焦于西方国家的人，于是萌生了研究文化、环境担忧与环保行动三者关系的想法。这一点值得注意，因为西方社会的文化价值观往往看重个人自身的态度和信念，并鼓励人们表达出来。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:3"
+              ],
+              "start": 194,
+              "end": 315,
+              "quote": "“过去的理论似乎是：一旦人们相信环境问题的紧迫性，对可持续发展有了更强烈的担忧，他们就会改变并采取行动来解决这些问题。”Eom 解释说。但这种关系对生活在集体主义色彩更浓的社会中的人可能并不成立，这些社会更看重社会和谐与一致，而不是自我表达。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:4"
+              ],
+              "start": 316,
+              "end": 471,
+              "quote": "为了研究在这两种文化中是什么驱动了环保行动，Eom 的团队以来自美国（个人主义文化）和泰国（集体主义文化）的参与者开展了一项研究。他们发现，环境担忧与环保行为——在本研究中指选择环保产品——相关，但只限于美国参与者。另一方面，相信有很大比例的人在采取环保行为，与泰国参与者做出环保选择有关，与美国参与者则无关。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:5"
+              ],
+              "start": 472,
+              "end": 537,
+              "quote": "研究结果表明，生活在个人主义国家的人，更可能因个人担忧而采取环保行动；而生活在集体主义国家的人，更可能受社会标准驱动去做环保之事。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6"
+              ],
+              "start": 538,
+              "end": 645,
+              "quote": "“让公民积极参与，对解决气候变化等紧迫的社会问题至关重要，”Eom 说，“我们的研究表明，科学家、政策制定者和活动人士需要了解文化如何塑造行动背后的心理因素，从而制定出应对重要社会问题的政策、宣传活动和干预措施。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-d-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2",
+                "start": 193,
+                "end": 320,
+                "quote": "both public discussion and prior academic research on environmental behavior typically focused on people from western countries"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 23,
+                "end": 58,
+                "quote": "无论是公众讨论还是以往关于环保行为的学术研究，通常都聚焦于西方国家的人"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:4",
+                "start": 396,
+                "end": 556,
+                "quote": "believing that a large percentage of people engage in environmentally friendly behaviors was associated with making eco-friendly choices among Thai participants"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 113,
+                "end": 144,
+                "quote": "相信有很大比例的人在采取环保行为，与泰国参与者做出环保选择有关"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6",
+                "start": 146,
+                "end": 309,
+                "quote": "scientists, policymakers, and activists need to understand how culture shapes the psychological factors of action to develop policies, campaigns, and interventions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p6",
+                "start": 45,
+                "end": 105,
+                "quote": "科学家、政策制定者和活动人士需要了解文化如何塑造行动背后的心理因素，从而制定出应对重要社会问题的政策、宣传活动和干预措施"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-d-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:1",
+                "start": 0,
+                "end": 173,
+                "quote": "The specific cultural values of a country may determine whether concern about environmental issues actually leads individuals to engage in environmentally friendly behaviors"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 18,
+                "end": 60,
+                "quote": "一个国家特定的文化价值观，可能决定人们对环境问题的担忧是否真的会促使个人采取环保行为"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-d-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:35"
+            ],
+            "selectedSentenceId": "sentence-reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:1",
+                "start": 0,
+                "end": 240,
+                "quote": "The specific cultural values of a country may determine whether concern about environmental issues actually leads individuals to engage in environmentally friendly behaviors, according to the new research published in Psychological Science."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 0,
+                "end": 61,
+                "quote": "据发表在《心理科学》上的一项新研究，一个国家特定的文化价值观，可能决定人们对环境问题的担忧是否真的会促使个人采取环保行为。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-d-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:33",
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:35"
+            ],
+            "selectedSentenceId": "sentence-reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:5",
+                "start": 0,
+                "end": 294,
+                "quote": "The findings reveal that personal concerns are more likely to motivate people to take environmental action if they live in individualistic countries, whereas social criteria are more likely to drive people to engage in environmentally friendly behavior if they live in collectivistic countries."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 0,
+                "end": 65,
+                "quote": "研究结果表明，生活在个人主义国家的人，更可能因个人担忧而采取环保行动；而生活在集体主义国家的人，更可能受社会标准驱动去做环保之事。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先抛出研究结论，再交代研究起因和以往理论的局限，接着介绍美泰对比实验及发现，最后说明研究对制定政策的意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:1",
+            "summary": "新研究指出，一个国家的文化价值观可能决定环境担忧能否转化为环保行为。",
+            "function": "开门见山提出研究结论"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2",
+            "summary": "Eom 发现以往讨论和研究多只关注西方人，而西方文化重视个人态度和表达，因此着手研究文化、担忧与行动的关系。",
+            "function": "交代研究起因"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:3",
+            "summary": "以往理论认为人有了担忧就会行动，但这在重视和谐一致的集体主义社会未必成立。",
+            "function": "指出旧理论的局限"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:4",
+            "summary": "研究对比美国和泰国参与者：环境担忧只在美国人中与环保选择相关，相信多数人都在环保则只在泰国人中起作用。",
+            "function": "介绍实验及发现"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:5",
+            "summary": "个人主义国家的人更受个人担忧驱动，集体主义国家的人更受社会标准驱动。",
+            "function": "概括研究结论"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6",
+            "summary": "Eom 指出公民参与是解决紧迫社会问题的关键，研究提示科学家、决策者和活动人士要了解文化对行动的影响来设计政策和活动。",
+            "function": "说明研究的意义"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:32": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "找出 Eom 对以往环保行为研究的看法，并概括它的不足。",
+      "stemTranslationZh": "Eom 如何看待以往关于环保行为的研究？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它优先考虑多元的文化价值观。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "prioritize",
+            "optionText": "prioritizes",
+            "matchType": "wordFamily",
+            "relationNote": "选项的“优先考虑”（prioritizes）借自[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2|This is noteworthy because]]，那句说西方文化看重个人态度；以往研究只盯西方人，谈不上重视多元文化。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2",
+              "quote": "western societies tend to have cultural values that prioritize individuals’ own attitudes and beliefs",
+              "anchor": "西方文化的特点"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它依赖理论假设。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "theory",
+            "optionText": "theoretical",
+            "matchType": "wordFamily",
+            "relationNote": "选项的“理论上的”（theoretical）与 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:3]] 的“理论”（The theory）同源；Eom 指出的是这套说法在集体主义社会可能不成立（might not hold），毛病在只研究了西方人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:3",
+              "quote": "“The theory seemed to be that",
+              "anchor": "以往的理论"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的研究对象范围狭窄。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2",
+              "quote": "both public discussion and prior academic research on environmental behavior typically focused on people from western countries",
+              "anchor": "以往研究只关注西方人"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它低估了个人观念。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "they will change and act to address the issues",
+            "sourceHighlight": "they will change and act",
+            "optionText": "It underestimates personal views.",
+            "optionHighlight": "underestimates",
+            "explanation": "以往看法认定人一有担忧就会行动（they will change and act），是把个人观念的作用看得很重，不是低估。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:3",
+              "quote": "they will change and act to address the issues",
+              "anchor": "以往理论的结论"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "previous research",
+          "sourceRole": "stem",
+          "targetText": "Kimin Eom, a psychological scientist at the University of California, was inspired to investigate the links between culture, environmental concern, and environmental action after noticing that both public discussion and prior academic research on environmental behavior typically focused on people from western countries.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2",
+          "relationType": "locationCue",
+          "targetCue": "prior academic research",
+          "sourceZh": "以前的研究",
+          "targetCueZh": "以往的学术研究",
+          "answerText": "typically focused on people from western countries",
+          "note": "题干 previous research 对应原文 prior academic research。"
+        },
+        {
+          "sourceText": "It targets a narrow group of subjects.",
+          "sourceRole": "correctOption",
+          "targetText": "Kimin Eom, a psychological scientist at the University of California, was inspired to investigate the links between culture, environmental concern, and environmental action after noticing that both public discussion and prior academic research on environmental behavior typically focused on people from western countries.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "以往研究通常只关注西方国家的人（focused on people from western countries），选项把“只研究西方人”概括成“研究对象范围窄”（a narrow group of subjects），选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:33": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把研究中泰国参与者的发现套到一位泰国男子身上，推断什么最能促使他环保。",
+      "stemTranslationZh": "一位泰国男子最有可能在______的情况下采取环保行为。",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他看到很多人都这样做",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:4",
+              "quote": "believing that a large percentage of people engage in environmentally friendly behaviors was associated with making eco-friendly choices among Thai participants",
+              "anchor": "泰国参与者的发现"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:5",
+              "quote": "social criteria are more likely to drive people to engage in environmentally friendly behavior if they live in collectivistic countries",
+              "anchor": "集体主义国家的结论"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他研究集体主义价值观",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "collectivistic",
+            "optionText": "collectivistic",
+            "matchType": "exact",
+            "relationNote": "选项借了“集体主义”（collectivistic）；原文只说泰国属于集体主义文化，影响他的是周围人的做法，不是他去研究这种价值观。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:4",
+              "quote": "Thailand (a collectivistic culture)",
+              "anchor": "泰国的文化类型"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他个人强烈感到紧迫",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "They found environmental concern was correlated with environmental behavior – in this case, choosing environmentally friendly products – but only among American participants.",
+            "sourceEntity": "American participants",
+            "optionText": "he feels a strong personal urgency",
+            "optionEntity": "a strong personal urgency",
+            "explanation": "个人的环境担忧只在美国参与者中与环保行为相关（only among American participants），对泰国人并不成立。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:4",
+              "quote": "but only among American participants",
+              "anchor": "只限美国参与者"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他搬到一个个人主义国家",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "he moves to an individualistic country",
+            "explanation": "研究只比较了美、泰两国的参与者，没有研究移居的人；搬到个人主义国家能否让他更环保，原文推不出来。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Thai",
+          "sourceRole": "stem",
+          "targetText": "On the other hand, believing that a large percentage of people engage in environmentally friendly behaviors was associated with making eco-friendly choices among Thai participants, but not American participants.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "believing that a large percentage of people engage in environmentally friendly behaviors was associated with making eco-friendly choices among Thai participants",
+          "note": "题干 Thai 原词出现在原文。"
+        },
+        {
+          "sourceText": "he witnesses many others do so",
+          "sourceRole": "correctOption",
+          "targetText": "On the other hand, believing that a large percentage of people engage in environmentally friendly behaviors was associated with making eco-friendly choices among Thai participants, but not American participants.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“看到很多人这样做”（many others do so）对应原文“相信很大比例的人都在做环保之事”（a large percentage of people engage in …），这一点只在泰国参与者中带来环保选择，套到泰国男子身上，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:34": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括最后一段 Eom 的两句话在讲研究的哪一方面。",
+      "stemTranslationZh": "关于 Eom 的研究，最后一段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6]] 的两句引语，先看公民参与那句讲的问题，再看研究和它有什么关系",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它面临的挑战。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "addressing urgent social issues, such as climate change",
+            "sourceEntity": "urgent social issues",
+            "optionText": "Its challenges.",
+            "optionEntity": "challenges",
+            "explanation": "[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6]] 的“紧迫的社会问题”（urgent social issues）指气候变化这类问题，是研究要帮忙应对的对象，不是研究本身遇到的困难。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6",
+              "quote": "addressing urgent social issues, such as climate change",
+              "anchor": "紧迫的社会问题"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它的背景。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "was inspired to investigate the links between culture, environmental concern, and environmental action",
+            "sourceEntity": "was inspired to investigate",
+            "optionText": "Its background.",
+            "optionEntity": "background",
+            "explanation": "研究的起因写在 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2]]：Eom 注意到以往研究只关注西方人；[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6]] 讲的是结论能拿来做什么。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:2",
+              "quote": "was inspired to investigate the links between culture, environmental concern, and environmental action",
+              "anchor": "研究起因"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的研究人员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "scientists, policymakers, and activists need to understand how culture shapes the psychological factors of action",
+            "sourceEntity": "scientists, policymakers, and activists",
+            "optionText": "Its researchers.",
+            "optionEntity": "researchers",
+            "explanation": "[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6]] 点到的科学家、决策者和活动人士（scientists, policymakers, and activists）是需要用研究结论的人，不是做这项研究的人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6",
+              "quote": "scientists, policymakers, and activists need to understand how culture shapes the psychological factors of action",
+              "anchor": "用到结论的人"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它的意义。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6",
+              "quote": "Getting citizens actively engaged is critical to addressing urgent social issues, such as climate change",
+              "anchor": "公民参与的重要性"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6",
+              "quote": "scientists, policymakers, and activists need to understand how culture shapes the psychological factors of action to develop policies, campaigns, and interventions",
+              "anchor": "研究的用处"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Its significance.",
+          "sourceRole": "correctOption",
+          "targetText": "“Our research suggests that scientists, policymakers, and activists need to understand how culture shapes the psychological factors of action to develop policies, campaigns, and interventions that address important social issues.”",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:6]] 先说让公民参与是解决气候变化等紧迫问题的关键（critical），再说研究提示科学家、决策者和活动人士要了解文化如何影响行动，好去制定政策和活动（to develop policies）。两句讲的都是这项研究有什么用处，也就是它的意义（significance），选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:35": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "找出新研究的核心结论，判断哪项陈述最有依据。",
+      "stemTranslationZh": "哪一项陈述最能得到这项新研究的支持？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "环境问题根源于文化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The specific cultural values of a country may determine whether concern about environmental issues actually leads individuals to engage in environmentally friendly behaviors, according to the new research published in Psychological Science.",
+            "sourceEntity": "environmentally friendly behaviors",
+            "optionText": "Environmental issues are culture-rooted.",
+            "optionEntity": "Environmental issues",
+            "explanation": "原文说文化影响的是人们会不会采取环保行为（environmentally friendly behaviors），不是说环境问题本身源于文化。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:1",
+              "quote": "leads individuals to engage in environmentally friendly behaviors",
+              "anchor": "文化影响的对象"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "社会标准有助于控制污染。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "social criteria are more likely to drive people to engage in environmentally friendly behavior if they live in collectivistic countries",
+            "sourceHighlight": "if they live in collectivistic countries",
+            "optionText": "Social standards help control pollution.",
+            "optionHighlight": "Social standards",
+            "explanation": "[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:5]] 说社会标准只在集体主义国家更能带动环保行为（if … collectivistic countries），选项去掉了条件，还换成了原文没测的控制污染。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:5",
+              "quote": "social criteria are more likely to drive people to engage in environmentally friendly behavior if they live in collectivistic countries",
+              "anchor": "社会标准起作用的条件"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "文化价值观引导环保行为。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:1",
+              "quote": "The specific cultural values of a country may determine whether concern about environmental issues actually leads individuals to engage in environmentally friendly behaviors",
+              "anchor": "研究结论"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:5",
+              "quote": "The findings reveal that personal concerns are more likely to motivate people to take environmental action if they live in individualistic countries, whereas social criteria are more likely to drive people to engage in environmentally friendly behavior if they live in collectivistic countries.",
+              "anchor": "两类国家的对比"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "担忧越多，行动越多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "but only among American participants",
+            "sourceHighlight": "only among American participants",
+            "optionText": "More concerns lead to more action.",
+            "optionHighlight": "More concerns lead to more action",
+            "explanation": "担忧带来行动只在美国参与者中成立（only among American participants），选项把它说成普遍规律，正是研究质疑的旧看法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:4",
+              "quote": "but only among American participants",
+              "anchor": "只限美国参与者"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the new research",
+          "sourceRole": "stem",
+          "targetText": "The specific cultural values of a country may determine whether concern about environmental issues actually leads individuals to engage in environmentally friendly behaviors, according to the new research published in Psychological Science.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:1",
+          "relationType": "locationCue",
+          "answerText": "The specific cultural values of a country may determine whether concern about environmental issues actually leads individuals to engage in environmentally friendly behaviors",
+          "note": "题干 the new research 原词出现在原文。"
+        },
+        {
+          "sourceText": "Cultural values guide green behaviors.",
+          "sourceRole": "correctOption",
+          "targetText": "The specific cultural values of a country may determine whether concern about environmental issues actually leads individuals to engage in environmentally friendly behaviors, according to the new research published in Psychological Science.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "选项的“文化价值观”沿用原文 cultural values，“引导环保行为”（guide green behaviors）对应文化决定担忧能否变成环保行为（may determine … environmentally friendly behaviors）；[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-d:5]] 也说两类国家的人受不同因素驱动，选 C。"
+        }
+      ]
+    }
+  }
+}

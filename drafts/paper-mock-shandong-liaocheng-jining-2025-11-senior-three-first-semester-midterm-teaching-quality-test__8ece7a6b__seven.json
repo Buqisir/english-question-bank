@@ -1,0 +1,1025 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices": {
+      "overview": "文章以 Sarah Jennings 买房前做房屋检查的经历开头，介绍房屋检查查什么、要花多少钱、需要多长时间，说明这笔花费能帮买房人避开错买和日后的高额维修。",
+      "fullTranslationZh": "那是一套新房，售价15.4万美元。纽约州贝肖尔的萨拉·詹宁斯已经准备买下它，但她的房产经纪人建议先做一次房屋检查。几小时后，房屋检查员交给詹宁斯一份清单，上面列了20多个问题。詹宁斯说：“我当时真的很沮丧。这房子并不完美。”由于这些问题都不大，修起来也花不了多少钱，詹宁斯最后还是决定买下这套房子。\n\n现在，许多人在买房过程中加上了房屋检查这一重要步骤。房屋检查员并不检查房价是否合理。相反，持证检查员检查的是房屋各方面的使用功能。水电是否运转正常？屋顶状况好不好？可能需要做哪些维修？\n\n一次普通的房屋检查费用在200美元到500美元不等，全国平均价格在336美元左右。这看起来也许是一笔不必要的开支。然而，一次彻底的房屋检查能让你避免一次不明智的购买，还可能免去将来代价高昂的维修。换句话说，房屋检查费是为求安心而做的一笔投资。\n\n房屋检查不是你想匆匆走过场的事。这是购房过程中重要的一步，能保障你这笔投资的价值。虽然检查一套房子要花多长时间并没有固定标准，但整个过程通常需要两到三个小时。附加设施多的房子检查时间会更长，而小房子可能只需一两个小时。\n\n拥有自己住房的美国梦是可以实现的。不过，许多人仍未找到属于自己的住处。在贝肖尔，有2000多人想购买新住宅项目中的52套房子。其中至少有1948个家庭仍在找房。幸运的是，詹宁斯不在其中。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+          "sourceText": "However, a thorough home inspection can save you from an unwise purchase and possibly costly repairs in the future.",
+          "displayText": "However, a thorough home inspection can save you from an unwise purchase and possibly costly repairs in the future.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:38"
+          ],
+          "translationZh": "然而，一次彻底的房屋检查能让你避免一次不明智的购买，还可能免去将来代价高昂的维修。",
+          "analysisZh": "主干是 a thorough home inspection can save you from …，save sb from sth 意为“使某人免于某事”。from 后面有两个并列宾语：an unwise purchase 和 possibly costly repairs in the future，由 and 连接；possibly（可能）修饰后面的 costly repairs，说明将来的高价维修只是可能发生，in the future 交代时间。句首 However 与上一句“检查费像是多余开支”形成转折，这正是第 38 题的线索。",
+          "underlineRanges": [
+            {
+              "start": 36,
+              "end": 53,
+              "quote": "can save you from"
+            },
+            {
+              "start": 54,
+              "end": 72,
+              "quote": "an unwise purchase"
+            },
+            {
+              "start": 77,
+              "end": 100,
+              "quote": "possibly costly repairs"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+          "sourceText": "While there are no set standards when it comes to the length of time it takes to inspect a home, the process usually takes about two to three hours.",
+          "displayText": "While there are no set standards when it comes to the length of time it takes to inspect a home, the process usually takes about two to three hours.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:39"
+          ],
+          "translationZh": "虽然检查一套房子要花多长时间并没有固定标准，但整个过程通常需要两到三个小时。",
+          "analysisZh": "主句在逗号后：the process usually takes about two to three hours，主语 the process 指房屋检查过程。逗号前是 While 引导的让步状语从句，意为“虽然”；从句里 when it comes to 意为“说到、涉及”，后接名词 the length of time；the length of time 后面省略了关系词 that，it takes to inspect a home 是修饰它的定语从句，套用 it takes (time) to do sth 结构。这句给出的时长，正说明第 39 题说的检查不能赶。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 32,
+              "quote": "While there are no set standards"
+            },
+            {
+              "start": 33,
+              "end": 68,
+              "quote": "when it comes to the length of time"
+            },
+            {
+              "start": 97,
+              "end": 122,
+              "quote": "the process usually takes"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先讲 Jennings 的买房故事引出房屋检查，中间三段分别说明检查的内容、费用和耗时，最后回到买房难的现实，用 Jennings 买到房收尾。",
+        "units": [
+          {
+            "unitId": "unit-1",
+            "paragraphIds": [
+              "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1"
+            ],
+            "summary": "Jennings 买房前听从经纪人建议做检查，查出 20 多个小问题，仍决定买下。"
+          },
+          {
+            "unitId": "unit-2",
+            "paragraphIds": [
+              "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+              "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+              "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4"
+            ],
+            "summary": "介绍房屋检查：查房屋功能而非价格；费用看似多余，其实是买个安心；检查需要两三个小时，不能赶。"
+          },
+          {
+            "unitId": "unit-3",
+            "paragraphIds": [
+              "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5"
+            ],
+            "summary": "回到买房难：2000 多人抢 52 套房，大多数家庭仍在找房，Jennings 幸运地买到了。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "D": {
+          "target": 36,
+          "secondary": 40,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "Jennings",
+            "inspect"
+          ],
+          "text": "选项和第 36 题空前一样谈检查（After the inspection），又写 Jennings 的反应。但段尾 “Jennings decided to buy the house anyway” 说她照样买了，与选项相反。放进第 40 题也接不上：空后 “one of them” 要指一群人，选项只说 Jennings 一人。",
+          "quotes": [
+            "After the inspection",
+            "Jennings decided to buy the house anyway",
+            "one of them"
+          ]
+        },
+        "G": {
+          "target": 38,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "A",
+          "shared": [
+            "expense"
+          ],
+          "text": "选项的 “expenses” 和第 38 题空前的 “can cost anywhere from $200 to $500” 都谈花钱。但空前说的是一次检查费，选项换成每月住房开支占收入的比例；空后 “However” 要反驳的是“检查费不值”，选项没有这种看法。",
+          "quotes": [
+            "expenses",
+            "can cost anywhere from $200 to $500",
+            "However"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 149,
+              "quote": "那是一套新房，售价15.4万美元。纽约州贝肖尔的萨拉·詹宁斯已经准备买下它，但她的房产经纪人建议先做一次房屋检查。几小时后，房屋检查员交给詹宁斯一份清单，上面列了20多个问题。詹宁斯说：“我当时真的很沮丧。这房子并不完美。”由于这些问题都不大，修起来也花不了多少钱，詹宁斯最后还是决定买下这套房子。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2"
+              ],
+              "start": 151,
+              "end": 243,
+              "quote": "现在，许多人在买房过程中加上了房屋检查这一重要步骤。房屋检查员并不检查房价是否合理。相反，持证检查员检查的是房屋各方面的使用功能。水电是否运转正常？屋顶状况好不好？可能需要做哪些维修？"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3"
+              ],
+              "start": 245,
+              "end": 366,
+              "quote": "一次普通的房屋检查费用在200美元到500美元不等，全国平均价格在336美元左右。这看起来也许是一笔不必要的开支。然而，一次彻底的房屋检查能让你避免一次不明智的购买，还可能免去将来代价高昂的维修。换句话说，房屋检查费是为求安心而做的一笔投资。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4"
+              ],
+              "start": 368,
+              "end": 477,
+              "quote": "房屋检查不是你想匆匆走过场的事。这是购房过程中重要的一步，能保障你这笔投资的价值。虽然检查一套房子要花多长时间并没有固定标准，但整个过程通常需要两到三个小时。附加设施多的房子检查时间会更长，而小房子可能只需一两个小时。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5"
+              ],
+              "start": 479,
+              "end": 572,
+              "quote": "拥有自己住房的美国梦是可以实现的。不过，许多人仍未找到属于自己的住处。在贝肖尔，有2000多人想购买新住宅项目中的52套房子。其中至少有1948个家庭仍在找房。幸运的是，詹宁斯不在其中。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+            "text": "It was a new home. It cost $154,000. Sarah Jennings of Bay Shore, New York was ready to buy it, but her real estate agent suggested getting a home inspection. Hours later, the home inspector gave Jennings a list of over 20 problems. Jennings said, “I was just depressed. It was less than perfect.” Since the problems were minor and would cost little to fix, Jennings decided to buy the house anyway."
+          },
+          {
+            "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+            "text": "Many people are now adding the important step of home inspection into the process of buying a home. A home inspector does not check to see if the price is reasonable. Instead, a certified one checks on all functional aspects of the house. Do the electricity and water work well? Is the roof in good condition? What repairs may be necessary?"
+          },
+          {
+            "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+            "text": "A typical home inspection can cost anywhere from $200 to $500, with the national average sitting right around $336. This may seem like an unnecessary expense. However, a thorough home inspection can save you from an unwise purchase and possibly costly repairs in the future. Put another way, the home inspection fee is an investment in peace of mind."
+          },
+          {
+            "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+            "text": "A home inspection isn’t something you want to rush through. This is an important step in the home buying process and secures the value of your investment. While there are no set standards when it comes to the length of time it takes to inspect a home, the process usually takes about two to three hours. For homes with additional features, this process will take longer, while for small homes an inspection may only take an hour or two."
+          },
+          {
+            "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+            "text": "The American dream of owning a home is possible. Still, many have yet to find a place to call their own. In Bay Shore, there were more than 2,000 people interested in buying 52 houses in the new housing project. Among those, at least 1,948 families are still looking. Luckily, Jennings is not one of them."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+                "start": 231,
+                "end": 289,
+                "quote": "Since the problems were minor and would cost little to fix"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+                "start": 112,
+                "end": 132,
+                "quote": "由于这些问题都不大，修起来也花不了多少钱"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+                "start": 100,
+                "end": 166,
+                "quote": "A home inspector does not check to see if the price is reasonable."
+              },
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+                "start": 174,
+                "end": 244,
+                "quote": "Do the electricity and water work well? Is the roof in good condition?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+                "start": 26,
+                "end": 42,
+                "quote": "房屋检查员并不检查房价是否合理。"
+              },
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+                "start": 65,
+                "end": 82,
+                "quote": "水电是否运转正常？屋顶状况好不好？"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+                "start": 123,
+                "end": 195,
+                "quote": "However, a thorough home inspection can save you from an unwise purchase"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+                "start": 57,
+                "end": 82,
+                "quote": "然而，一次彻底的房屋检查能让你避免一次不明智的购买"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+                "start": 7,
+                "end": 59,
+                "quote": "This is an important step in the home buying process"
+              },
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+                "start": 199,
+                "end": 249,
+                "quote": "the process usually takes about two to three hours"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+                "start": 16,
+                "end": 28,
+                "quote": "这是购房过程中重要的一步"
+              },
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+                "start": 64,
+                "end": 78,
+                "quote": "整个过程通常需要两到三个小时"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+                "start": 119,
+                "end": 183,
+                "quote": "there were more than 2,000 people interested in buying 52 houses"
+              },
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+                "start": 219,
+                "end": 256,
+                "quote": "Luckily, Jennings is not one of them."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+                "start": 40,
+                "end": 62,
+                "quote": "有2000多人想购买新住宅项目中的52套房子"
+              },
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+                "start": 80,
+                "end": 93,
+                "quote": "幸运的是，詹宁斯不在其中。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:36"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+                "start": 159,
+                "end": 232,
+                "quote": "Hours later, the home inspector gave Jennings a list of over 20 problems."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+                "start": 57,
+                "end": 88,
+                "quote": "几小时后，房屋检查员交给詹宁斯一份清单，上面列了20多个问题。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:37"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+                "start": 167,
+                "end": 238,
+                "quote": "Instead, a certified one checks on all functional aspects of the house."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+                "start": 42,
+                "end": 65,
+                "quote": "相反，持证检查员检查的是房屋各方面的使用功能。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:38"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+                "start": 116,
+                "end": 158,
+                "quote": "This may seem like an unnecessary expense."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+                "start": 41,
+                "end": 57,
+                "quote": "这看起来也许是一笔不必要的开支。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:39"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+                "start": 0,
+                "end": 59,
+                "quote": "A home inspection isn’t something you want to rush through."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+                "start": 0,
+                "end": 16,
+                "quote": "房屋检查不是你想匆匆走过场的事。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:40"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+                "start": 212,
+                "end": 267,
+                "quote": "Among those, at least 1,948 families are still looking."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+                "start": 63,
+                "end": 80,
+                "quote": "其中至少有1948个家庭仍在找房。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:38"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+                "start": 123,
+                "end": 238,
+                "quote": "However, a thorough home inspection can save you from an unwise purchase and possibly costly repairs in the future."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+                "start": 57,
+                "end": 98,
+                "quote": "然而，一次彻底的房屋检查能让你避免一次不明智的购买，还可能免去将来代价高昂的维修。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:39"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+                "start": 102,
+                "end": 250,
+                "quote": "While there are no set standards when it comes to the length of time it takes to inspect a home, the process usually takes about two to three hours."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+                "start": 41,
+                "end": 79,
+                "quote": "虽然检查一套房子要花多长时间并没有固定标准，但整个过程通常需要两到三个小时。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:36": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "getting a home inspection",
+        "real estate agent",
+        "depressed",
+        "less than perfect",
+        "the problems were minor",
+        "cost little to fix"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:1",
+        "beforeQuote": "her real estate agent suggested getting a home inspection.",
+        "afterQuote": "Jennings said, “I was just depressed. It was less than perfect.” Since the problems were minor and would cost little to fix"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the problems",
+          "signalSide": "context-after",
+          "targetText": "over 20 problems",
+          "relation": "the problems 带定冠词，指前面已经提到的问题，即 F 列出的 20 多个问题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "over 20 problems",
+          "signalSide": "option",
+          "targetText": "the problems were minor",
+          "relation": "选项先列出问题，空后才能用 the problems 回指并评价它们“不大”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "getting a home inspection",
+          "signalSide": "context-before",
+          "targetText": "the home inspector",
+          "relation": "空前建议做检查，选项写检查员交出结果，事情接着往下走。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the home inspector",
+          "signalSide": "option",
+          "targetText": "getting a home inspection",
+          "relation": "检查员呼应空前提到的房屋检查。"
+        }
+      ],
+      "lock": [
+        "the problems",
+        "depressed",
+        "over 20 problems"
+      ],
+      "find": {
+        "text": "先看空后：“the problems” 带定冠词，前面得先出现问题，Jennings 还说自己 “depressed”；F 的 “over 20 problems” 两头都接得上。",
+        "quotes": [
+          "the problems",
+          "depressed",
+          "over 20 problems"
+        ]
+      },
+      "explain": "空前经纪人刚建议做检查，这句交代检查的结果；空后 Jennings 先是沮丧，再因问题不大、修理便宜而照样买房，都是对这份问题清单的反应。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "the problems were minor / cost little to fix",
+            "optionSide": "a list of over 20 problems",
+            "relation": "空后评价问题“小、修理便宜”，评价的对象就是选项列出的 20 多个问题。"
+          },
+          {
+            "contextSide": "I was just depressed. It was less than perfect.",
+            "optionSide": "a list of over 20 problems",
+            "relation": "看到一长串问题，Jennings 才会沮丧并说房子不完美。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前经纪人刚建议做检查，这句交代检查的结果；空后 Jennings 先是沮丧，再因问题不大、修理便宜而照样买房，都是对这份问题清单的反应。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "选项和第 36 题空前一样谈检查（After the inspection），又写 Jennings 的反应。但段尾 “Jennings decided to buy the house anyway” 说她照样买了，与选项相反。放进第 40 题也接不上：空后 “one of them” 要指一群人，选项只说 Jennings 一人。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:37": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion",
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "does not check",
+        "if the price is reasonable",
+        "electricity and water",
+        "the roof",
+        "repairs may be necessary"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:2",
+        "beforeQuote": "A home inspector does not check to see if the price is reasonable.",
+        "afterQuote": "Do the electricity and water work well? Is the roof in good condition? What repairs may be necessary?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Instead",
+          "signalSide": "option",
+          "targetText": "does not check to see if the price is reasonable",
+          "relation": "Instead 接在否定句后，表示“不查房价，而是查别的”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "does not check",
+          "signalSide": "context-before",
+          "targetText": "Instead",
+          "relation": "空前先否定检查员的一项职责，后面要用 Instead 说出他真正查什么。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "one",
+          "signalSide": "option",
+          "targetText": "A home inspector",
+          "relation": "a certified one 中的 one 替代空前的 home inspector。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "functional aspects",
+          "signalSide": "option",
+          "targetText": "electricity and water / the roof",
+          "relation": "functional aspects 概括空后问到的水电、屋顶等使用功能。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "electricity and water",
+          "signalSide": "context-after",
+          "targetText": "functional aspects",
+          "relation": "空后的水电问题是“功能方面”的具体例子。"
+        }
+      ],
+      "lock": [
+        "does not check",
+        "Instead",
+        "functional aspects"
+      ],
+      "find": {
+        "text": "空前 “does not check” 先说检查员不管房价，E 用 “Instead” 转到他管什么；空后水电、屋顶的问题正是 “functional aspects”。",
+        "quotes": [
+          "does not check",
+          "Instead",
+          "functional aspects"
+        ]
+      },
+      "explain": "这句把检查员的职责从“不看价格”扭到“查房子好不好用”，先给出一个总说法；空后三个问句再把这个总说法拆成水电、屋顶、维修几项具体检查内容。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "does not check to see if the price is reasonable",
+            "optionSide": "Instead, a certified one checks on",
+            "relation": "否定句后用 Instead 引出真正的检查内容，one 替代 home inspector。"
+          },
+          {
+            "contextSide": "electricity and water / the roof / repairs",
+            "optionSide": "all functional aspects of the house",
+            "relation": "选项先概括，空后用三个问句列出具体项目。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "这句把检查员的职责从“不看价格”扭到“查房子好不好用”，先给出一个总说法；空后三个问句再把这个总说法拆成水电、屋顶、维修几项具体检查内容。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:38": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "can cost anywhere from $200 to $500",
+        "national average",
+        "save you from an unwise purchase",
+        "costly repairs",
+        "the home inspection fee",
+        "an investment in peace of mind"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:3",
+        "beforeQuote": "A typical home inspection can cost anywhere from $200 to $500, with the national average sitting right around $336.",
+        "afterQuote": "However, a thorough home inspection can save you from an unwise purchase and possibly costly repairs in the future."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "context-after",
+          "targetText": "This may seem like an unnecessary expense.",
+          "relation": "However 表示转折，空里要先有一个与“检查能省钱”相反的看法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "unnecessary expense",
+          "signalSide": "option",
+          "targetText": "can save you from an unwise purchase",
+          "relation": "“不必要的开支”正是 However 后面要反驳的看法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "option",
+          "targetText": "can cost anywhere from $200 to $500",
+          "relation": "This 指空前说的那笔检查费。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "can cost anywhere from $200 to $500",
+          "signalSide": "context-before",
+          "targetText": "This",
+          "relation": "空前给出的检查费数额，是选项 This 的所指。"
+        }
+      ],
+      "lock": [
+        "However",
+        "This",
+        "unnecessary expense"
+      ],
+      "find": {
+        "text": "空后 “However” 转去说检查能帮你省钱，空里得先有“这钱不值”的看法；A 的 “This” 指空前的检查费，“unnecessary expense” 正是被反驳的一面。",
+        "quotes": [
+          "However",
+          "This",
+          "unnecessary expense"
+        ]
+      },
+      "explain": "空前报出检查费的数额，这句先替读者说出“这钱花得冤”的顾虑；空后用转折反驳，说检查能避开错买和高价维修，最后落到这笔钱是“买个安心”。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "can cost anywhere from $200 to $500",
+            "optionSide": "This … expense",
+            "relation": "This 回指空前的检查费，expense 与 cost 同属花费。"
+          },
+          {
+            "contextSide": "However, a thorough home inspection can save you from …",
+            "optionSide": "may seem like an unnecessary expense",
+            "relation": "“看似多余”与“其实能省钱”构成先让步、后转折。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "空前报出检查费的数额，这句先替读者说出“这钱花得冤”的顾虑；空后用转折反驳，说检查能避开错买和高价维修，最后落到这笔钱是“买个安心”。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "选项的 “expenses” 和第 38 题空前的 “can cost anywhere from $200 to $500” 都谈花钱。但空前说的是一次检查费，选项换成每月住房开支占收入的比例；空后 “However” 要反驳的是“检查费不值”，选项没有这种看法。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:39": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "an important step",
+        "the home buying process",
+        "the length of time",
+        "two to three hours",
+        "will take longer"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "This is an important step in the home buying process and secures the value of your investment. While there are no set standards when it comes to the length of time it takes to inspect a home, the process usually takes about two to three hours."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "context-after",
+          "targetText": "A home inspection",
+          "relation": "段首空后的 This 需要前面先有一件事，指的就是选项里的 home inspection。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "A home inspection",
+          "signalSide": "option",
+          "targetText": "This is an important step",
+          "relation": "选项先说出房屋检查，空后才能用 This 指它。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "rush through",
+          "signalSide": "option",
+          "targetText": "two to three hours / will take longer",
+          "relation": "“别赶着做完”与空后讲检查要花的时间相呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "two to three hours",
+          "signalSide": "context-after",
+          "targetText": "rush through",
+          "relation": "空后给出通常的检查时长，说明检查要花时间、不能图快。"
+        }
+      ],
+      "lock": [
+        "This",
+        "rush through",
+        "two to three hours"
+      ],
+      "find": {
+        "text": "段首空先看空后：“This is an important step” 要前面先有一件事，下文又讲检查要 “two to three hours”；C 说检查别 “rush through”，两头都接上。",
+        "quotes": [
+          "This is an important step",
+          "two to three hours",
+          "rush through"
+        ]
+      },
+      "explain": "这句给本段定下话题：检查别图快。空后先说它是购房的重要一步，再说一般要两三个小时、房子设施多还要更久，都在说明为什么不能赶。",
+      "distractors": [
+        {
+          "label": "A",
+          "text": "A 的 “This” 也能开头，但它说检查像是多余开支，空后紧接 “This is an important step”，前后自相矛盾。",
+          "quotes": [
+            "This",
+            "This is an important step"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "This is an important step",
+            "optionSide": "A home inspection",
+            "relation": "This 指选项里的房屋检查。"
+          },
+          {
+            "contextSide": "the length of time / two to three hours",
+            "optionSide": "rush through",
+            "relation": "空后讲检查耗时，呼应选项“不能匆匆做完”。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "这句给本段定下话题：检查别图快。空后先说它是购房的重要一步，再说一般要两三个小时、房子设施多还要更久，都在说明为什么不能赶。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 的 “This” 也能开头，但它说检查像是多余开支，空后紧接 “This is an important step”，前后自相矛盾。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:40": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "many have yet to find a place",
+        "more than 2,000 people",
+        "interested in buying",
+        "52 houses",
+        "one of them"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:seven-choices:5",
+        "beforeQuote": "In Bay Shore, there were more than 2,000 people interested in buying 52 houses in the new housing project.",
+        "afterQuote": "Luckily, Jennings is not one of them."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Among those",
+          "signalSide": "option",
+          "targetText": "more than 2,000 people",
+          "relation": "those 指空前想买房的 2000 多人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "more than 2,000 people",
+          "signalSide": "context-before",
+          "targetText": "Among those",
+          "relation": "空前的人群是选项 those 的所指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "one of them",
+          "signalSide": "context-after",
+          "targetText": "families are still looking",
+          "relation": "them 指选项里仍在找房的家庭，Jennings 不在其中。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "still looking",
+          "signalSide": "option",
+          "targetText": "many have yet to find a place",
+          "relation": "“仍在找”呼应上文许多人还没找到住处。"
+        }
+      ],
+      "lock": [
+        "2,000 people",
+        "52 houses",
+        "one of them"
+      ],
+      "find": {
+        "text": "空前 “2,000 people” 抢 “52 houses”，空后 “one of them” 要一群还没买到房的人；B 的 “Among those” 和 “still looking” 正好接住两头。",
+        "quotes": [
+          "2,000 people",
+          "52 houses",
+          "one of them",
+          "Among those",
+          "still looking"
+        ]
+      },
+      "explain": "这句把空前的人数落到结果上：2000 多人抢 52 套房，减下来至少 1948 家没买到；空后的 them 就指这些家庭，再用 Luckily 把 Jennings 和他们分开，回到开头她买房的故事。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "more than 2,000 people interested in buying 52 houses",
+            "optionSide": "Among those, at least 1,948 families",
+            "relation": "2000 减去 52 约为 1948，those 指这 2000 多人。"
+          },
+          {
+            "contextSide": "Luckily, Jennings is not one of them.",
+            "optionSide": "are still looking",
+            "relation": "them 指仍在找房的家庭，Jennings 已经买到房，不在其中。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "这句把空前的人数落到结果上：2000 多人抢 52 套房，减下来至少 1948 家没买到；空后的 them 就指这些家庭，再用 Luckily 把 Jennings 和他们分开，回到开头她买房的故事。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

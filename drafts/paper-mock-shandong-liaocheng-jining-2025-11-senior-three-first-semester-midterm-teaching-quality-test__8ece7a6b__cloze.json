@@ -1,0 +1,1923 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze": {
+      "overview": "巴尔的摩一家餐馆收到邮件，顾客想要一道菜的食谱，为病危的岳母做菜。店主没有只给食谱，而是带团队驱车近五百英里赶到佛蒙特现场烹制，老人深受感动，店主谢绝报酬，称这是荣幸。",
+      "fullTranslationZh": "三月下旬，一封不同寻常的电子邮件发到了巴尔的摩的 Ekiben 餐馆。发件人布兰登·琼斯要的并不是那道菜本身——西兰花天妇罗，而是它的食谱。他的岳母非常喜爱这道菜，如今她正在佛蒙特州与晚期肺癌作斗争。他希望能在那里亲手为她做这道菜。\n这家亚洲餐馆的老板史蒂夫·朱读了邮件，很快回信提出了另一种建议：“谢谢你联系我们。我们想去佛蒙特和你见面，现场给你们做这道菜。”布兰登十分惊讶，回信说那可是佛蒙特，有498英里远。但朱回应道：“没问题。告诉我们日期、时间和地点。”\n第二天，朱和他的团队往一辆卡车上装好了一块电热板和一个装满食材的冷藏箱，随后便上路了。他们把车开进停车场，立刻动手干活，准备这道菜。不一会儿，刚出锅的西兰花天妇罗那诱人的香气就弥漫在空气中。把食物装好盒后，他们敲响了这位顾客家的门。\n门一开，布兰登的岳母立刻认出了这股诱人的香气。团队的仁爱之心让她深受感动。她简直不敢相信。\n至于朱，他不禁想起了这位忠实的老顾客。“每次她吃完这道菜，都会马上告诉我们这道菜让她多么倾心。”朱回忆道。团队谢绝了留下吃晚饭，也不肯收钱。“这是我们的荣幸。做这件事会带来许多美好的正能量。”他说。",
+      "mainLine": {
+        "theme": {
+          "text": "为病重的老顾客远道做菜是一种荣幸，这样做本身就有满满正能量（good, positive energy in doing this）。",
+          "quote": "good, positive energy in doing this"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+            "text": "女婿来信只求一道菜的食谱，想为病危的岳母做。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+            "text": "店主提出去佛蒙特现做，女婿吃惊，店主一口答应。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+            "text": "团队次日装车上路，现场做好菜、装盒后敲门。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+            "text": "岳母一闻就认出香味，被团队的关爱深深打动。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+            "text": "店主怀念老顾客，谢绝酬谢，称这是一种荣幸。"
+          }
+        ],
+        "emotion": "期盼→惊讶→感动→欣慰"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "cloze-ls-1",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+          "sourceText": "__44__, Brandon e-mailed back, saying it was Vermont, 498 miles away.",
+          "displayText": "Astonished, Brandon e-mailed back, saying it was Vermont, 498 miles away.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:44"
+          ],
+          "translationZh": "布兰登十分惊讶，回信说那可是佛蒙特，有498英里远。",
+          "analysisZh": "主干是布兰登回了信（Brandon e-mailed back）。句首的形容词（Astonished）说明他回信时的心情，逻辑主语就是布兰登；逗号后的现在分词短语（saying …）作伴随状语，交代信里说了什么，其中「那是佛蒙特」（it was Vermont）是分词（saying）的宾语从句，省略了连接词（that），距离（498 miles away）补充说明佛蒙特有多远。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 10,
+              "quote": "Astonished"
+            },
+            {
+              "start": 12,
+              "end": 33,
+              "quote": "Brandon e-mailed back"
+            },
+            {
+              "start": 35,
+              "end": 56,
+              "quote": "saying it was Vermont"
+            }
+          ]
+        },
+        {
+          "sentenceId": "cloze-ls-2",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+          "sourceText": "The next day, Chu and his team __47__ a truck with a hot plate and a cooler filled with ingredients, and then __48__ the road.",
+          "displayText": "The next day, Chu and his team loaded a truck with a hot plate and a cooler filled with ingredients, and then hit the road.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:47",
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:48"
+          ],
+          "translationZh": "第二天，朱和他的团队往一辆卡车上装好了一块电热板和一个装满食材的冷藏箱，随后便上路了。",
+          "analysisZh": "主语是朱和他的团队（Chu and his team），后面有两个并列谓语：装车（loaded a truck with …）和上路（hit the road），由（and then）连接，说明先后。第一个谓语里，介词（with）后有两个并列宾语：一块电热板（a hot plate）和一个冷藏箱（a cooler）；过去分词短语（filled with ingredients）作后置定语，只修饰冷藏箱。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 30,
+              "quote": "Chu and his team"
+            },
+            {
+              "start": 31,
+              "end": 50,
+              "quote": "loaded a truck with"
+            },
+            {
+              "start": 76,
+              "end": 99,
+              "quote": "filled with ingredients"
+            },
+            {
+              "start": 101,
+              "end": 122,
+              "quote": "and then hit the road"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1"
+              ],
+              "start": 0,
+              "end": 116,
+              "quote": "三月下旬，一封不同寻常的电子邮件发到了巴尔的摩的 Ekiben 餐馆。发件人布兰登·琼斯要的并不是那道菜本身——西兰花天妇罗，而是它的食谱。他的岳母非常喜爱这道菜，如今她正在佛蒙特州与晚期肺癌作斗争。他希望能在那里亲手为她做这道菜。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2"
+              ],
+              "start": 117,
+              "end": 232,
+              "quote": "这家亚洲餐馆的老板史蒂夫·朱读了邮件，很快回信提出了另一种建议：“谢谢你联系我们。我们想去佛蒙特和你见面，现场给你们做这道菜。”布兰登十分惊讶，回信说那可是佛蒙特，有498英里远。但朱回应道：“没问题。告诉我们日期、时间和地点。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3"
+              ],
+              "start": 233,
+              "end": 349,
+              "quote": "第二天，朱和他的团队往一辆卡车上装好了一块电热板和一个装满食材的冷藏箱，随后便上路了。他们把车开进停车场，立刻动手干活，准备这道菜。不一会儿，刚出锅的西兰花天妇罗那诱人的香气就弥漫在空气中。把食物装好盒后，他们敲响了这位顾客家的门。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4"
+              ],
+              "start": 350,
+              "end": 395,
+              "quote": "门一开，布兰登的岳母立刻认出了这股诱人的香气。团队的仁爱之心让她深受感动。她简直不敢相信。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5"
+              ],
+              "start": 396,
+              "end": 495,
+              "quote": "至于朱，他不禁想起了这位忠实的老顾客。“每次她吃完这道菜，都会马上告诉我们这道菜让她多么倾心。”朱回忆道。团队谢绝了留下吃晚饭，也不肯收钱。“这是我们的荣幸。做这件事会带来许多美好的正能量。”他说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+            "text": "In late March, an unusual e-mail reached Ekiben restaurant in Baltimore. Brandon Jones, the e-mail sender, wasn’t requesting the actual dish – broccoli tempura – but its recipe. His mother-in-law, who deeply loved it, is now battling lung cancer in its final stage in Vermont. He hoped to make it for her there."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+            "text": "The Asian restaurant owner, Steve Chu, read the e-mail and quickly replied with a(n) alternative suggestion. “Thanks for reaching out. We’d like to meet you in Vermont and make it fresh for you.” Astonished, Brandon e-mailed back, saying it was Vermont, 498 miles away. But Chu responded, “No problem. Tell us the date, time, and location.”"
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+            "text": "The next day, Chu and his team loaded a truck with a hot plate and a cooler filled with ingredients, and then hit the road. They pulled into the parking lot and got straight to work, preparing the dish. Moments later, the amazing aroma (芳香) of freshly cooked broccoli tempura filled the air. After boxing the food, they knocked on their customer’s door."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+            "text": "When the door opened, Brandon’s mother-in-law immediately recognized the amazing aroma. She was deeply touched by the team’s humanity. She just couldn’t believe it."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+            "text": "As for Chu, he couldn’t help remembering the loyal customer. “Every time she finished off the course, she’d tell us straightaway how completely it had won her heart,” Chu recalled. The team declined joining dinner or payment. “It is a(n) privilege. There is a lot of good, positive energy in doing this,” he stated."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 107,
+                "end": 140,
+                "quote": "wasn’t requesting the actual dish"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 275,
+                "end": 308,
+                "quote": "He hoped to make it for her there"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 44,
+                "end": 54,
+                "quote": "要的并不是那道菜本身"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 100,
+                "end": 115,
+                "quote": "他希望能在那里亲手为她做这道菜"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:41"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 170,
+                "end": 176,
+                "quote": "recipe"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 67,
+                "end": 69,
+                "quote": "食谱"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 232,
+                "end": 262,
+                "quote": "lung cancer in its final stage"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 92,
+                "end": 96,
+                "quote": "晚期肺癌"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:42"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 225,
+                "end": 233,
+                "quote": "battling"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 96,
+                "end": 99,
+                "quote": "作斗争"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 143,
+                "end": 188,
+                "quote": "meet you in Vermont and make it fresh for you"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 41,
+                "end": 62,
+                "quote": "我们想去佛蒙特和你见面，现场给你们做这道菜"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:43"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 85,
+                "end": 96,
+                "quote": "alternative"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 26,
+                "end": 29,
+                "quote": "另一种"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 222,
+                "end": 259,
+                "quote": "saying it was Vermont, 498 miles away"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 72,
+                "end": 89,
+                "quote": "回信说那可是佛蒙特，有498英里远"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:44"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 196,
+                "end": 206,
+                "quote": "Astonished"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 67,
+                "end": 71,
+                "quote": "十分惊讶"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 207,
+                "end": 220,
+                "quote": "e-mailed back"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 278,
+                "end": 288,
+                "quote": "No problem"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 97,
+                "end": 100,
+                "quote": "没问题"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:45"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 278,
+                "end": 287,
+                "quote": "responded"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 92,
+                "end": 95,
+                "quote": "回应道"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 290,
+                "end": 317,
+                "quote": "Tell us the date, time, and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 101,
+                "end": 111,
+                "quote": "告诉我们日期、时间和"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:46"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 330,
+                "end": 338,
+                "quote": "location"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 111,
+                "end": 113,
+                "quote": "地点"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 38,
+                "end": 99,
+                "quote": "a truck with a hot plate and a cooler filled with ingredients"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 19,
+                "end": 35,
+                "quote": "一块电热板和一个装满食材的冷藏箱"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:47"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 31,
+                "end": 37,
+                "quote": "loaded"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 16,
+                "end": 19,
+                "quote": "装好了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 117,
+                "end": 125,
+                "quote": "the road"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 132,
+                "end": 159,
+                "quote": "pulled into the parking lot"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 43,
+                "end": 52,
+                "quote": "他们把车开进停车场"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:48"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 110,
+                "end": 113,
+                "quote": "hit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 39,
+                "end": 41,
+                "quote": "上路"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 164,
+                "end": 184,
+                "quote": "got straight to work"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 244,
+                "end": 258,
+                "quote": "freshly cooked"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 53,
+                "end": 59,
+                "quote": "立刻动手干活"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 71,
+                "end": 74,
+                "quote": "刚出锅"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:49"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 183,
+                "end": 192,
+                "quote": "preparing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 60,
+                "end": 62,
+                "quote": "准备"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 218,
+                "end": 275,
+                "quote": "the amazing aroma (芳香) of freshly cooked broccoli tempura"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 283,
+                "end": 290,
+                "quote": "the air"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 85,
+                "end": 87,
+                "quote": "香气"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 91,
+                "end": 94,
+                "quote": "空气中"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:50"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 276,
+                "end": 282,
+                "quote": "filled"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 88,
+                "end": 91,
+                "quote": "弥漫在"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 305,
+                "end": 313,
+                "quote": "the food"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 315,
+                "end": 352,
+                "quote": "they knocked on their customer’s door"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 103,
+                "end": 115,
+                "quote": "他们敲响了这位顾客家的门"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:51"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 298,
+                "end": 304,
+                "quote": "boxing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 98,
+                "end": 101,
+                "quote": "装好盒"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "start": 46,
+                "end": 57,
+                "quote": "immediately"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 197,
+                "end": 216,
+                "quote": "who deeply loved it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "start": 10,
+                "end": 12,
+                "quote": "立刻"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:1",
+                "start": 70,
+                "end": 81,
+                "quote": "他的岳母非常喜爱这道菜"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:52"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "start": 58,
+                "end": 68,
+                "quote": "recognized"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "start": 12,
+                "end": 15,
+                "quote": "认出了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "start": 84,
+                "end": 120,
+                "quote": "She was deeply touched by the team’s"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "start": 30,
+                "end": 36,
+                "quote": "让她深受感动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:53"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "start": 125,
+                "end": 133,
+                "quote": "humanity"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:4",
+                "start": 26,
+                "end": 30,
+                "quote": "仁爱之心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 96,
+                "end": 158,
+                "quote": "she’d tell us straightaway how completely it had won her heart"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 29,
+                "end": 46,
+                "quote": "都会马上告诉我们这道菜让她多么倾心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:54"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 77,
+                "end": 89,
+                "quote": "finished off"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 23,
+                "end": 25,
+                "quote": "吃完"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 175,
+                "end": 218,
+                "quote": "The team declined joining dinner or payment"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 240,
+                "end": 293,
+                "quote": "There is a lot of good, positive energy in doing this"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 53,
+                "end": 69,
+                "quote": "团队谢绝了留下吃晚饭，也不肯收钱"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 79,
+                "end": 94,
+                "quote": "做这件事会带来许多美好的正能量"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:55"
+            ],
+            "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 238,
+                "end": 247,
+                "quote": "privilege"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:5",
+                "start": 76,
+                "end": 78,
+                "quote": "荣幸"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-cloze-ls-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:44"
+            ],
+            "selectedSentenceId": "cloze-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 196,
+                "end": 269,
+                "quote": "Astonished, Brandon e-mailed back, saying it was Vermont, 498 miles away."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:2",
+                "start": 64,
+                "end": 90,
+                "quote": "布兰登十分惊讶，回信说那可是佛蒙特，有498英里远。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-cloze-ls-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:47",
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:48"
+            ],
+            "selectedSentenceId": "cloze-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 0,
+                "end": 123,
+                "quote": "The next day, Chu and his team loaded a truck with a hot plate and a cooler filled with ingredients, and then hit the road."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:cloze:3",
+                "start": 0,
+                "end": 43,
+                "quote": "第二天，朱和他的团队往一辆卡车上装好了一块电热板和一个装满食材的冷藏箱，随后便上路了。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "期盼→惊讶→感动→欣慰"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:41": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:41",
+      "blankNo": 41,
+      "pos": "noun",
+      "role": "main",
+      "context": "他不要现成的菜，要的是能让他自己做出这道菜的东西。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "不要菜本身（wasn’t requesting the actual dish）而要它的什么，后句说他想亲手做（He hoped to make it），只能是做法。",
+        "quotes": [
+          "wasn’t requesting the actual dish",
+          "He hoped to make it"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "食谱",
+        "meaning": "这道天妇罗的做法",
+        "reason": "他不要现成的菜，要的是能让他自己做出这道菜的东西。名词看语境义：不要菜本身（wasn’t requesting the actual dish）而要它的什么，后句说他想亲手做（He hoped to make it），只能是做法。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "comment",
+          "meaning": "评论；他想亲手为岳母做菜（He hoped to make it），一条评论帮不了他做菜。",
+          "quote": "He hoped to make it"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "image",
+          "meaning": "图片；他要能自己动手做（He hoped to make it）的东西，一张菜的图片做不出菜。",
+          "quote": "He hoped to make it"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "origin",
+          "meaning": "起源；他是想为岳母做这道菜（He hoped to make it for her），菜的来历和做菜无关。",
+          "quote": "He hoped to make it for her"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "He hoped to make it for her there",
+          "signalSide": "context-after",
+          "relation": "他打算亲手做菜，需要的是这道菜的做法。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "wasn’t requesting the actual dish",
+          "signalSide": "context-before",
+          "relation": "不要菜本身，而要与做菜有关的另一样东西。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:42": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "main",
+      "context": "岳母身患晚期肺癌，这里要说她正在和病魔抗争，这是来信的起因。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是晚期肺癌（lung cancer in its final stage），病人对重病只能是与之抗争。",
+        "quotes": [
+          "lung cancer in its final stage"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "与……作斗争",
+        "reason": "岳母身患晚期肺癌，这里要说她正在和病魔抗争，这是来信的起因。动词看搭配：宾语是晚期肺癌（lung cancer in its final stage），病人对重病只能是与之抗争。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "funding",
+          "meaning": "资助；晚期肺癌（lung cancer in its final stage）是她自己患的病，不是她出钱资助的项目。",
+          "quote": "lung cancer in its final stage"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "studying",
+          "meaning": "研究；她是深爱这道菜的老顾客（who deeply loved it），身患肺癌，不是研究肺癌的学者。",
+          "quote": "who deeply loved it"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "assessing",
+          "meaning": "评估；患晚期肺癌（lung cancer in its final stage）的是她本人，评估病情是医生的事。",
+          "quote": "lung cancer in its final stage"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "lung cancer in its final stage",
+          "signalSide": "context-after",
+          "relation": "与晚期肺癌搭配，表示正在与重病抗争。",
+          "targetText": "battling lung cancer"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:43": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "main",
+      "context": "店主没有照对方的请求给食谱，而是提出了另一种办法。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "后面的建议是去佛蒙特见面、现场做菜（make it fresh for you），不同于对方要的食谱。",
+        "quotes": [
+          "make it fresh for you"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "可供选择的",
+        "meaning": "换一种做法的",
+        "reason": "店主没有照对方的请求给食谱，而是提出了另一种办法。形容词看语境义：后面的建议是去佛蒙特见面、现场做菜（make it fresh for you），不同于对方要的食谱。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "formal",
+          "meaning": "正式的；回信开头一句谢谢你联系我们（Thanks for reaching out）很随和，建议的特别之处在于换了做法。",
+          "quote": "Thanks for reaching out"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "professional",
+          "meaning": "专业的；建议的关键是不给食谱而上门现做（make it fresh for you），这和对方所求不同，不在专业与否。",
+          "quote": "make it fresh for you"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "similar",
+          "meaning": "相似的；上门现做（make it fresh for you）与对方只要一份食谱完全不同，谈不上相似。",
+          "quote": "make it fresh for you"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "suggestion",
+          "signalSide": "context-after",
+          "relation": "修饰建议，说明这是一种什么样的建议。",
+          "targetText": "alternative suggestion"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "meet you in Vermont and make it fresh for you",
+          "signalSide": "context-after",
+          "relation": "建议的内容是上门现做，与要食谱不同，所以是另一种方案。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:44": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:44",
+      "blankNo": 44,
+      "pos": "adjective",
+      "role": "main",
+      "context": "店主要亲自跑一趟，远超女婿的请求，他的第一反应是吃惊。",
+      "find": {
+        "check": "affect",
+        "text": "他回信特意强调那是佛蒙特、远在498英里外（498 miles away），透出不敢相信对方会来。",
+        "quotes": [
+          "498 miles away"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "惊讶的",
+        "reason": "店主要亲自跑一趟，远超女婿的请求，他的第一反应是吃惊。形容词看情感：他回信特意强调那是佛蒙特、远在498英里外（498 miles away），透出不敢相信对方会来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Confident",
+          "meaning": "自信的；他特意提醒路程有498英里（498 miles away），是怕对方没想清楚，不是心里有把握。",
+          "quote": "498 miles away"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Curious",
+          "meaning": "好奇的；他回信不是打听什么，而是提醒路远（498 miles away），透出的是吃惊。",
+          "quote": "498 miles away"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Disappointed",
+          "meaning": "失望的；店主愿意上门现做（make it fresh for you），远超他的请求，他没有失望的理由。",
+          "quote": "make it fresh for you"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Brandon e-mailed back",
+          "signalSide": "context-after",
+          "relation": "形容词说明布兰登回信时的心情。",
+          "targetText": "Astonished, Brandon e-mailed back"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "498 miles away",
+          "signalSide": "context-after",
+          "relation": "强调路途遥远，说明他没想到店主会提出跑这么远。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:45": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "detail",
+      "context": "女婿提醒路远之后，店主回话答复他。",
+      "find": {
+        "check": "collocation",
+        "text": "前面是女婿回信（Brandon e-mailed back），后面引号里是店主的答复（No problem），动词要表示回应。",
+        "quotes": [
+          "Brandon e-mailed back",
+          "No problem"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "回答",
+        "reason": "女婿提醒路远之后，店主回话答复他。动词看搭配：前面是女婿回信（Brandon e-mailed back），后面引号里是店主的答复（No problem），动词要表示回应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "admitted",
+          "meaning": "承认；店主说的是没问题（No problem），是爽快答应，不是承认什么错误或事实。",
+          "quote": "No problem"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "repeated",
+          "meaning": "重复；没问题（No problem）是店主对路远的新答复，前文没有人说过，谈不上重复。",
+          "quote": "No problem"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "whispered",
+          "meaning": "低声说；双方是用邮件往来（e-mailed back），而且店主是爽快答应，谈不上低声耳语。",
+          "quote": "e-mailed back"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "No problem",
+          "signalSide": "context-after",
+          "relation": "后接店主的答话，动词表示回应对方。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "e-mailed back",
+          "signalSide": "context-before",
+          "relation": "女婿先回信，店主接着回应，一来一往。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:46": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "要上门做菜，除了日期和时间，还得知道在哪里。",
+      "find": {
+        "check": "collocation",
+        "text": "与日期、时间（the date, time）并列，又要去对方那里见面（meet you in Vermont），缺的是具体地点。",
+        "quotes": [
+          "the date, time",
+          "meet you in Vermont"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "地点",
+        "reason": "要上门做菜，除了日期和时间，还得知道在哪里。名词看搭配：与日期、时间（the date, time）并列，又要去对方那里见面（meet you in Vermont），缺的是具体地点。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "menu",
+          "meaning": "菜单；他们只做这一道西兰花天妇罗（broccoli tempura），不需要对方提供菜单。",
+          "quote": "broccoli tempura"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "price",
+          "meaning": "价格；后文团队连饭和钱都谢绝了（declined joining dinner or payment），店主不会先问价格。",
+          "quote": "declined joining dinner or payment"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "distance",
+          "meaning": "距离；路程对方已经说了是498英里（498 miles away），店主要知道的是具体在哪儿。",
+          "quote": "498 miles away"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the date, time",
+          "signalSide": "context-before",
+          "relation": "与日期、时间并列，都是上门所需的安排。",
+          "targetText": "the date, time, and location"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "meet you in Vermont",
+          "signalSide": "context-before",
+          "relation": "要去对方所在的地方见面，所以要问地点。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:47": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "detail",
+      "context": "出发前要把电热板和装满食材的冷藏箱放上卡车。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是卡车（a truck），后面列出车上放的东西（with a hot plate and a cooler），是往车上装东西。",
+        "quotes": [
+          "a truck",
+          "with a hot plate and a cooler"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "装载",
+        "reason": "出发前要把电热板和装满食材的冷藏箱放上卡车。动词看搭配：宾语是卡车（a truck），后面列出车上放的东西（with a hot plate and a cooler），是往车上装东西。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "encountered",
+          "meaning": "遇到；后面带出的是装进车里的电热板和冷藏箱（with a hot plate and a cooler），不是路上偶然碰到卡车。",
+          "quote": "with a hot plate and a cooler"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "decorated",
+          "meaning": "装饰；车上放的是电热板和装满食材的冷藏箱（a cooler filled with ingredients），是做菜用的，不是装饰品。",
+          "quote": "a cooler filled with ingredients"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "purchased",
+          "meaning": "购买；后面列的是车上装的东西（with a hot plate and a cooler），说的是装车出发，不是买车。",
+          "quote": "with a hot plate and a cooler"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with a hot plate and a cooler",
+          "signalSide": "context-after",
+          "relation": "往卡车上装电热板和冷藏箱，用把某物装上车的动词。",
+          "targetText": "loaded a truck with a hot plate and a cooler"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:48": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "装好车后，团队动身出发。",
+      "find": {
+        "check": "collocation",
+        "text": "后面接道路（the road），合起来表示动身上路，接上后句开进停车场（pulled into the parking lot）。",
+        "quotes": [
+          "the road",
+          "pulled into the parking lot"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "到达",
+        "meaning": "动身上路",
+        "reason": "装好车后，团队动身出发。动词看搭配：后面接道路（the road），合起来表示动身上路，接上后句开进停车场（pulled into the parking lot）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "crossed",
+          "meaning": "穿过；这里是装好车后出发远行，下一句就开进停车场（pulled into the parking lot），不是横穿一条马路。",
+          "quote": "pulled into the parking lot"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "circled",
+          "meaning": "绕圈；他们是要赶去佛蒙特，下一句就开进停车场（pulled into the parking lot），不会在路上兜圈子。",
+          "quote": "pulled into the parking lot"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "repaired",
+          "meaning": "修理；他们装好车就出发，接着开进停车场（pulled into the parking lot），中间没有修路的事。",
+          "quote": "pulled into the parking lot"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the road",
+          "signalSide": "context-after",
+          "relation": "与道路搭配，表示上路出发。",
+          "targetText": "hit the road"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "pulled into the parking lot",
+          "signalSide": "context-after",
+          "relation": "下一句车已开到目的地，这里是出发。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:49": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "一到地方就动手，这里是现场做这道菜，正是店主承诺的上门现做。",
+      "find": {
+        "check": "action-sequence",
+        "text": "先开进停车场立刻开工（got straight to work），随后香气飘出（freshly cooked），中间是做菜。",
+        "quotes": [
+          "got straight to work",
+          "freshly cooked"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "准备",
+        "meaning": "烹制",
+        "reason": "一到地方就动手，这里是现场做这道菜，正是店主承诺的上门现做。动词看动作顺序：先开进停车场立刻开工（got straight to work），随后香气飘出（freshly cooked），中间是做菜。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "serving",
+          "meaning": "上菜；菜做好还要装盒再敲门（they knocked on their customer’s door），刚开工时谈不上上菜。",
+          "quote": "they knocked on their customer’s door"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "enjoying",
+          "meaning": "享用；菜是为老顾客现做的（make it fresh for you），团队不是自己来吃。",
+          "quote": "make it fresh for you"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "displaying",
+          "meaning": "展示；刚开工（got straight to work）就是动手做菜，停车场里没有向谁展示的场面。",
+          "quote": "got straight to work"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the dish",
+          "signalSide": "context-after",
+          "relation": "以这道菜为宾语，开工就是做菜。",
+          "targetText": "preparing the dish"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "freshly cooked",
+          "signalSide": "context-after",
+          "relation": "随后写菜刚出锅，说明前面是在做菜。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:50": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "detail",
+      "context": "刚出锅的香气四处飘散，充满了空气。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是香气（the amazing aroma），宾语是空气（the air），香气充满空气。",
+        "quotes": [
+          "the amazing aroma",
+          "the air"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "充满",
+        "meaning": "弥漫",
+        "reason": "刚出锅的香气四处飘散，充满了空气。动词看搭配：主语是香气（the amazing aroma），宾语是空气（the air），香气充满空气。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cleared",
+          "meaning": "清除；香气（the amazing aroma）是飘散开来，不会把空气清除掉。",
+          "quote": "the amazing aroma"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "freshened",
+          "meaning": "使清新；刚出锅的天妇罗（freshly cooked broccoli tempura）香气浓郁四溢，清新空气说的是去除异味。",
+          "quote": "freshly cooked broccoli tempura"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "blew",
+          "meaning": "吹；吹要靠风，香气（the amazing aroma）不会去吹动空气。",
+          "quote": "the amazing aroma"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the air",
+          "signalSide": "context-after",
+          "relation": "香气充满空气，表示香味四溢。",
+          "targetText": "filled the air"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:51": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "detail",
+      "context": "菜做好后要先装起来，才好送到顾客家里。",
+      "find": {
+        "check": "action-sequence",
+        "text": "做好菜之后、敲门（they knocked on their customer’s door）之前，要把食物装盒好带进去。",
+        "quotes": [
+          "they knocked on their customer’s door"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "装箱",
+        "meaning": "把菜装盒打包",
+        "reason": "菜做好后要先装起来，才好送到顾客家里。动词看动作顺序：做好菜之后、敲门（they knocked on their customer’s door）之前，要把食物装盒好带进去。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sharing",
+          "meaning": "分享；菜是专为顾客做的，装好后敲门送去（they knocked on their customer’s door），团队没有先分着吃。",
+          "quote": "they knocked on their customer’s door"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "storing",
+          "meaning": "储存；菜一装好就去敲门（they knocked on their customer’s door），是趁热送去，不是存起来。",
+          "quote": "they knocked on their customer’s door"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recycling",
+          "meaning": "回收；刚出锅的菜（freshly cooked broccoli tempura）是要送给顾客的，不是拿去回收。",
+          "quote": "freshly cooked broccoli tempura"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the food",
+          "signalSide": "context-after",
+          "relation": "以食物为宾语，表示把食物装盒。",
+          "targetText": "boxing the food"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "they knocked on their customer’s door",
+          "signalSide": "context-after",
+          "relation": "装好食物后才去敲门送菜。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.verb.action-sequence"
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:52": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "main",
+      "context": "门一开，老人马上知道这是自己最爱的那道菜，故事到这里进入高潮。",
+      "find": {
+        "check": "collocation",
+        "text": "她一向深爱这道菜（who deeply loved it），一开门就（immediately）对熟悉的香气（the amazing aroma）有了反应。",
+        "quotes": [
+          "who deeply loved it",
+          "immediately",
+          "the amazing aroma"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "认出",
+        "reason": "门一开，老人马上知道这是自己最爱的那道菜，故事到这里进入高潮。动词看搭配：她一向深爱这道菜（who deeply loved it），一开门就（immediately）对熟悉的香气（the amazing aroma）有了反应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "welcomed",
+          "meaning": "欢迎；门一开她立刻（immediately）闻到香气，欢迎一般对人，这里是闻出了自己深爱的那道菜。",
+          "quote": "immediately"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "recommended",
+          "meaning": "推荐；门一开（When the door opened）她就闻到香气，身边没有可推荐的对象。",
+          "quote": "When the door opened"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "described",
+          "meaning": "描述；开门那一刻（immediately）她是闻出了香气，还来不及描述。",
+          "quote": "immediately"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the amazing aroma",
+          "signalSide": "context-after",
+          "relation": "宾语是香气，表示一闻就认出这股熟悉的味道。",
+          "targetText": "recognized the amazing aroma"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "who deeply loved it",
+          "signalSide": "context-before",
+          "relation": "她一向深爱这道菜，所以熟悉它的味道。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:53": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "把团队远道上门为病人做菜这件事，概括成打动老人的一种品质。",
+      "find": {
+        "check": "echo",
+        "text": "前文团队跑498英里（498 miles away）上门现做（make it fresh for you），用一个名词概括为对病人的关爱。",
+        "quotes": [
+          "498 miles away",
+          "make it fresh for you"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "仁慈",
+        "meaning": "对病人的关爱",
+        "reason": "把团队远道上门为病人做菜这件事，概括成打动老人的一种品质。名词看复现：前文团队跑498英里（498 miles away）上门现做（make it fresh for you），用一个名词概括为对病人的关爱。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "courage",
+          "meaning": "勇气；驱车498英里（498 miles away）为人做菜不涉险，打动老人的是团队的关爱。",
+          "quote": "498 miles away"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "modesty",
+          "meaning": "谦虚；老人感动的是团队远道上门现做（make it fresh for you），谈的不是他们谦不谦虚。",
+          "quote": "make it fresh for you"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "honesty",
+          "meaning": "诚实；团队做的是远道上门现做（make it fresh for you），打动她的是善意，不是说没说实话。",
+          "quote": "make it fresh for you"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "deeply touched by",
+          "signalSide": "context-before",
+          "relation": "让人深受感动的是团队的某种品质。",
+          "targetText": "deeply touched by the team’s humanity"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "make it fresh for you",
+          "signalSide": "context-before",
+          "relation": "上门现做这件事被概括成对病人的关爱。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:54": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:54",
+      "blankNo": 54,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "她每次吃完这道菜，都会马上告诉店里有多喜欢。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "她马上（straightaway）说菜已经赢得了她的心（had won her heart），是吃过之后的反应，要表示吃完。",
+        "quotes": [
+          "straightaway",
+          "had won her heart"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "吃光",
+        "meaning": "吃完这道菜",
+        "reason": "她每次吃完这道菜，都会马上告诉店里有多喜欢。词组看语境义：她马上（straightaway）说菜已经赢得了她的心（had won her heart），是吃过之后的反应，要表示吃完。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "cooked up",
+          "meaning": "做出；菜是店里做的，她是忠实的老顾客（the loyal customer），是吃完才夸。",
+          "quote": "the loyal customer"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "longed for",
+          "meaning": "渴望；后面说菜已赢得她的心（had won her heart），是吃过以后的感受，光想吃还谈不上。",
+          "quote": "had won her heart"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "registered for",
+          "meaning": "报名参加；宾语（the course）在这里指一道菜，下文说它赢得了她的心（won her heart），不是报名上的课程。",
+          "quote": "the course"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the course",
+          "signalSide": "context-after",
+          "relation": "宾语（the course）在这里指一道菜，表示把这道菜吃完。",
+          "targetText": "finished off the course"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "had won her heart",
+          "signalSide": "context-after",
+          "relation": "菜已经征服了她，说明她是吃完后马上夸。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:55": {
+      "blankId": "blank:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "店主谢绝报酬，把这次远道送菜看作一件光荣的好事，点出全文的意义。",
+      "find": {
+        "check": "affect",
+        "text": "前面谢绝吃饭和收钱（declined joining dinner or payment），后面说这事充满正能量（positive energy），要一个褒义词。",
+        "quotes": [
+          "declined joining dinner or payment",
+          "positive energy"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "荣幸",
+        "reason": "店主谢绝报酬，把这次远道送菜看作一件光荣的好事，点出全文的意义。名词看情感：前面谢绝吃饭和收钱（declined joining dinner or payment），后面说这事充满正能量（positive energy），要一个褒义词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "advertisement",
+          "meaning": "广告；他们连钱都不收（declined joining dinner or payment），说的是做好事的正能量，不是借机宣传。",
+          "quote": "declined joining dinner or payment"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cooperation",
+          "meaning": "合作；这事是团队主动为老顾客做的，店主强调其中的正能量（positive energy），不是双方合作。",
+          "quote": "positive energy"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "discipline",
+          "meaning": "纪律；店主说做这事充满正能量（positive energy），是心甘情愿，不是纪律要求。",
+          "quote": "positive energy"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "It is a(n)",
+          "signalSide": "context-before",
+          "relation": "作表语，说明这件事对团队意味着什么。",
+          "targetText": "It is a(n) privilege"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "good, positive energy",
+          "signalSide": "context-after",
+          "relation": "后句的正能量说明这是一个褒义词。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,694 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a": {
+      "overview": "《The Week》周刊的有奖征集启事：本周请读者给 NASA 征集研制的太空马桶取名，交代投稿、截稿和公布日期，并列出上周为停产的 Segway 平衡车拟告别标题的获奖名单。",
+      "fullTranslationZh": "《The Week》竞赛——本周题目：美国国家航空航天局（NASA）向全国的“创客、车库设计师和公民科学家群体”发出公开号召，请大家帮助研制一款零重力马桶。NASA 该给这款研制出来、可安全用于太空的马桶起一个什么样朗朗上口、适合全家的名字？\n参赛方式：\n参赛作品请发送至邮箱 contest@theweek.com。请写明你的姓名、地址和白天联系电话；本周请在邮件主题栏填写“Space potty”。截稿时间为 11 月 21 日中午。获奖者将于 11 月 24 日在 www.theweek.com/puzzles 网站公布，并刊登在 11 月 30 日那期的谜题版上。如有雷同作品，以最先收到的为准。所有参赛作品归《The Week》所有。获胜者将获得《The Week》一年的订阅。\n上周竞赛及结果：\nSegway 公司宣布，将于 10 月 15 日停产其个人代步车——一种双轮自平衡车。请用不超过七个词，为一篇告别这款问题重重的代步车的文章拟写标题。\n获奖名单\n“Segway 没能站稳”——Jim Durning（宾夕法尼亚州）——荣誉提名\n“两个轮子的不幸”——Ujjal Kohli（加利福尼亚州）——第三名\n“Segway 散了架”——Laurel Rose（俄亥俄州）——亚军\n“总的来说，这是个馊主意”——Jon Marks（新泽西州）——冠军",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3",
+          "sourceText": "Winners will appear at www.theweek.com/puzzles on November 24 and on the Puzzle Page of the November 30 issue.",
+          "displayText": "Winners will appear at www.theweek.com/puzzles on November 24 and on the Puzzle Page of the November 30 issue.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:22"
+          ],
+          "translationZh": "获奖者将于 11 月 24 日在 www.theweek.com/puzzles 网站公布，并刊登在 11 月 30 日那期的谜题版上。",
+          "analysisZh": "主干是 Winners will appear（获奖者将会刊出）。and 连接两组并列状语，都修饰 appear：一组是 at www.theweek.com/puzzles on November 24，地点是网站，时间是 11 月 24 日；另一组是 on the Puzzle Page of the November 30 issue，地点是谜题版，of the November 30 issue 修饰 the Puzzle Page，时间就藏在“11 月 30 日那一期”里。两组按时间先后排列，问最先公布时取前一组的 11 月 24 日。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 19,
+              "quote": "Winners will appear"
+            },
+            {
+              "start": 20,
+              "end": 61,
+              "quote": "at www.theweek.com/puzzles on November 24"
+            },
+            {
+              "start": 66,
+              "end": 109,
+              "quote": "on the Puzzle Page of the November 30 issue"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
+          "sourceText": "NASA has issued a public call to the nation’s “community of makers, garage designers, and citizen scientists” to help develop a zero-gravity toilet.",
+          "displayText": "NASA has issued a public call to the nation’s “community of makers, garage designers, and citizen scientists” to help develop a zero-gravity toilet.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:21"
+          ],
+          "translationZh": "美国国家航空航天局（NASA）向全国的“创客、车库设计师和公民科学家群体”发出公开号召，请大家帮助研制一款零重力马桶。",
+          "analysisZh": "主干是 NASA has issued a public call（NASA 发出了公开号召）。to the nation’s “community of …” 说明号召的对象：引号里 makers、garage designers、citizen scientists 三个名词并列，共同作 community of 的宾语，指全国的创客、车库设计师和公民科学家这一群体。句末不定式 to help develop a zero-gravity toilet 说明号召他们做什么（a call to sb to do sth）。这句只交代背景：NASA 要人帮忙研制马桶；竞赛真正的提问在后面那个问句里，要的是给马桶取名。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 29,
+              "quote": "NASA has issued a public call"
+            },
+            {
+              "start": 60,
+              "end": 108,
+              "quote": "makers, garage designers, and citizen scientists"
+            },
+            {
+              "start": 110,
+              "end": 147,
+              "quote": "to help develop a zero-gravity toilet"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1"
+              ],
+              "start": 0,
+              "end": 121,
+              "quote": "《The Week》竞赛——本周题目：美国国家航空航天局（NASA）向全国的“创客、车库设计师和公民科学家群体”发出公开号召，请大家帮助研制一款零重力马桶。NASA 该给这款研制出来、可安全用于太空的马桶起一个什么样朗朗上口、适合全家的名字？"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:2"
+              ],
+              "start": 122,
+              "end": 127,
+              "quote": "参赛方式："
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3"
+              ],
+              "start": 128,
+              "end": 346,
+              "quote": "参赛作品请发送至邮箱 contest@theweek.com。请写明你的姓名、地址和白天联系电话；本周请在邮件主题栏填写“Space potty”。截稿时间为 11 月 21 日中午。获奖者将于 11 月 24 日在 www.theweek.com/puzzles 网站公布，并刊登在 11 月 30 日那期的谜题版上。如有雷同作品，以最先收到的为准。所有参赛作品归《The Week》所有。获胜者将获得《The Week》一年的订阅。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:4"
+              ],
+              "start": 347,
+              "end": 355,
+              "quote": "上周竞赛及结果："
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:6"
+              ],
+              "start": 356,
+              "end": 431,
+              "quote": "Segway 公司宣布，将于 10 月 15 日停产其个人代步车——一种双轮自平衡车。请用不超过七个词，为一篇告别这款问题重重的代步车的文章拟写标题。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:7"
+              ],
+              "start": 432,
+              "end": 436,
+              "quote": "获奖名单"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:1:1",
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:1:2",
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:1:3"
+              ],
+              "start": 437,
+              "end": 477,
+              "quote": "“Segway 没能站稳”——Jim Durning（宾夕法尼亚州）——荣誉提名"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:2:1",
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:2:2",
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:2:3"
+              ],
+              "start": 478,
+              "end": 513,
+              "quote": "“两个轮子的不幸”——Ujjal Kohli（加利福尼亚州）——第三名"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:3:1",
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:3:2",
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:3:3"
+              ],
+              "start": 514,
+              "end": 549,
+              "quote": "“Segway 散了架”——Laurel Rose（俄亥俄州）——亚军"
+            },
+            {
+              "paragraphId": "zh-reading-a-p10",
+              "sourceParagraphIds": [
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:4:1",
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:4:2",
+                "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:4:3"
+              ],
+              "start": 550,
+              "end": 584,
+              "quote": "“总的来说，这是个馊主意”——Jon Marks（新泽西州）——冠军"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-a-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
+                "start": 187,
+                "end": 277,
+                "quote": "What catchy and family-friendly name should NASA give the resulting safe-for-space toilet?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p1",
+                "start": 78,
+                "end": 121,
+                "quote": "NASA 该给这款研制出来、可安全用于太空的马桶起一个什么样朗朗上口、适合全家的名字？"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3",
+                "start": 215,
+                "end": 325,
+                "quote": "Winners will appear at www.theweek.com/puzzles on November 24 and on the Puzzle Page of the November 30 issue."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 92,
+                "end": 160,
+                "quote": "获奖者将于 11 月 24 日在 www.theweek.com/puzzles 网站公布，并刊登在 11 月 30 日那期的谜题版上。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-a-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:4:2",
+                "start": 0,
+                "end": 22,
+                "quote": "Jon Marks (New Jersey)"
+              },
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:4:3",
+                "start": 0,
+                "end": 6,
+                "quote": "WINNER"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p10",
+                "start": 15,
+                "end": 34,
+                "quote": "Jon Marks（新泽西州）——冠军"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-a-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:22"
+            ],
+            "selectedSentenceId": "sentence-reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3",
+                "start": 215,
+                "end": 325,
+                "quote": "Winners will appear at www.theweek.com/puzzles on November 24 and on the Puzzle Page of the November 30 issue."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p3",
+                "start": 92,
+                "end": 160,
+                "quote": "获奖者将于 11 月 24 日在 www.theweek.com/puzzles 网站公布，并刊登在 11 月 30 日那期的谜题版上。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-a-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:21"
+            ],
+            "selectedSentenceId": "sentence-reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
+                "start": 38,
+                "end": 186,
+                "quote": "NASA has issued a public call to the nation’s “community of makers, garage designers, and citizen scientists” to help develop a zero-gravity toilet."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p1",
+                "start": 19,
+                "end": 78,
+                "quote": "美国国家航空航天局（NASA）向全国的“创客、车库设计师和公民科学家群体”发出公开号召，请大家帮助研制一款零重力马桶。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "启事分两部分：先出本周题目并交代投稿、截稿、公布和奖品等规则，再回顾上周题目并列出获奖名单。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
+            "summary": "介绍本周题目：NASA 号召民间帮忙研制零重力马桶，竞赛请读者给这款马桶取一个好记又适合全家的名字。",
+            "function": "提出本周竞赛任务"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:2",
+            "summary": "引出参赛方式。",
+            "function": "小节标题，领起下面的投稿规则"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3",
+            "summary": "说明投稿邮箱、需填信息和邮件主题，截稿为 11 月 21 日中午，结果 11 月 24 日在网站、11 月 30 日在杂志公布，并交代雷同作品处理、作品归属和奖品。",
+            "function": "列出参赛规则和时间安排"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:4",
+            "summary": "转到上周竞赛及其结果。",
+            "function": "小节标题，领起上周的题目和名单"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:6",
+            "summary": "上周题目：Segway 宣布 10 月 15 日停产平衡车，请读者用不超过七个词为告别文章拟标题。",
+            "function": "交代上周竞赛任务"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:7",
+            "summary": "引出获奖名单。",
+            "function": "表格标题，领起下面的获奖名单"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出本周竞赛要参赛者完成的具体任务。",
+      "stemTranslationZh": "本周的竞赛任务是关于什么的？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找问句问的是什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "拟写一条新闻标题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "headline",
+            "optionText": "headline",
+            "matchType": "exact",
+            "relationNote": "拟标题（write the headline）是 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:6]] 上周竞赛的任务，本周的问句要的是名字，不是标题。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:6",
+              "quote": "please write the headline for a good-bye article about this problematic vehicle",
+              "anchor": "上周题目"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "提出一项太空旅行计划。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Proposing a space travel plan",
+            "explanation": "选项借 NASA 和太空说事，可原文只围绕一款太空马桶，没有让人提交太空旅行计划。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为一个太空装置命名。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
+              "quote": "What catchy and family-friendly name should NASA give the resulting safe-for-space toilet?",
+              "anchor": "本周题目的问句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "设计一款可安全用于太空的马桶。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "safe-for-space toilet",
+            "optionText": "safe-for-space toilet",
+            "matchType": "exact",
+            "relationNote": "选项照搬“可安全用于太空的马桶”（safe-for-space toilet）；研制马桶（help develop）是 NASA 向创客发出的号召，竞赛只要给造好的马桶取名。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
+              "quote": "to help develop a zero-gravity toilet",
+              "anchor": "NASA 的号召"
+            },
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
+              "quote": "the resulting safe-for-space toilet",
+              "anchor": "要取名的马桶"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "this week’s",
+          "sourceRole": "stem",
+          "targetText": "This week’s question",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
+          "relationType": "locationCue",
+          "answerText": "What catchy and family-friendly name should NASA give the resulting safe-for-space toilet?",
+          "bridgeZh": "标题只点出题目，NASA 的号召是背景，问句才是任务",
+          "note": "题干 this week’s 对应原文小标题 This week’s question。"
+        },
+        {
+          "sourceText": "Naming a space device",
+          "sourceRole": "correctOption",
+          "targetText": "What catchy and family-friendly name should NASA give the resulting safe-for-space toilet?",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:figure-b9bdefcc84262ddc:cell-1-1",
+          "relationType": "paraphrase",
+          "note": "选项的“给太空装置命名”（Naming a space device）就是原文问的“该给这款太空马桶取什么名字”（What … name），选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在投稿规则里找出结果公布的日期，并比较哪个最早。",
+      "stemTranslationZh": "本周的竞赛结果最先在什么时候公布？",
+      "locateBy": "stem",
+      "locateFindZh": "同句 and 连着两个日期，比早晚",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "10 月 15 日。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "October 15",
+            "optionText": "October 15",
+            "matchType": "exact",
+            "relationNote": "10 月 15 日（October 15）出自 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:6]]，是 Segway 停产平衡车的日子，和本周结果何时公布无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:6",
+              "quote": "on October 15",
+              "anchor": "Segway 停产日期"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "11 月 21 日。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Entries are due by noon, November 21.",
+            "sourceEntity": "Entries are due",
+            "optionText": "November 21.",
+            "optionEntity": "November 21",
+            "explanation": "11 月 21 日中午是截稿时间（Entries are due），那天只停止收稿，结果要到之后才公布。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3",
+              "quote": "Entries are due by noon, November 21.",
+              "anchor": "截稿时间"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "11 月 24 日。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3",
+              "quote": "Winners will appear at www.theweek.com/puzzles on November 24 and on the Puzzle Page of the November 30 issue.",
+              "anchor": "结果公布日期"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "11 月 30 日。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "timeOrderReversal",
+            "sourceQuote": "on the Puzzle Page of the November 30 issue",
+            "sourceHighlight": "November 30",
+            "optionText": "November 30.",
+            "optionHighlight": "November 30",
+            "explanation": "11 月 30 日那期杂志确实也会刊登名单，但它排在网站公布的 11 月 24 日之后，不是最先公布的时间。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3",
+              "quote": "on the Puzzle Page of the November 30 issue",
+              "anchor": "杂志刊登日期"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "be revealed",
+          "sourceRole": "stem",
+          "targetText": "Winners will appear at www.theweek.com/puzzles on November 24 and on the Puzzle Page of the November 30 issue.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3",
+          "relationType": "locationCue",
+          "targetCue": "appear",
+          "sourceZh": "被公布",
+          "targetCueZh": "刊出",
+          "answerText": "on November 24",
+          "note": "题干 be revealed 对应原文 Winners will appear。"
+        },
+        {
+          "sourceText": "November 24.",
+          "sourceRole": "correctOption",
+          "targetText": "Winners will appear at www.theweek.com/puzzles on November 24 and on the Puzzle Page of the November 30 issue.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:3",
+          "relationType": "paraphrase",
+          "note": "获奖结果先在 11 月 24 日登上网站（on November 24），11 月 30 日那期杂志再刊登，最早的是 24 日，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在获奖名单表格里找到冠军那一行，读出获奖人。",
+      "stemTranslationZh": "上周竞赛的冠军是谁？",
+      "locateBy": "stem",
+      "locateFindZh": "沿这一行找人名",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "Ujjal Kohli。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "THIRD PLACE",
+            "sourceEntity": "THIRD PLACE",
+            "optionText": "Ujjal Kohli.",
+            "optionEntity": "Ujjal Kohli",
+            "explanation": "Ujjal Kohli 那一行写的奖项是第三名（THIRD PLACE）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:2:3",
+              "quote": "THIRD PLACE",
+              "anchor": "Ujjal Kohli 的奖项"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "Jon Marks。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:4:2",
+              "quote": "Jon Marks (New Jersey)",
+              "anchor": "冠军行的获奖人"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:4:3",
+              "quote": "WINNER",
+              "anchor": "冠军行的奖项"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Laurel Rose。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "RUNNER-UP",
+            "sourceEntity": "RUNNER-UP",
+            "optionText": "Laurel Rose.",
+            "optionEntity": "Laurel Rose",
+            "explanation": "Laurel Rose 紧挨着冠军一行，但她那一行写的是亚军（RUNNER-UP）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:3:3",
+              "quote": "RUNNER-UP",
+              "anchor": "Laurel Rose 的奖项"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "Jim Durning。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "HONORABLE MENTION",
+            "sourceEntity": "HONORABLE MENTION",
+            "optionText": "Jim Durning.",
+            "optionEntity": "Jim Durning",
+            "explanation": "Jim Durning 排在名单第一行，看着像第一名，可他那行写的是 HONORABLE MENTION（荣誉提名），名单是从低往高排的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:1:3",
+              "quote": "HONORABLE MENTION",
+              "anchor": "Jim Durning 的奖项"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "champion",
+          "sourceRole": "stem",
+          "targetText": "WINNER",
+          "targetParagraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:4:3",
+          "relationType": "locationCue",
+          "targetCue": "WINNER",
+          "sourceZh": "冠军",
+          "targetCueZh": "获胜者",
+          "answerText": "Jon Marks",
+          "bridgeZh": "表格按行读，WINNER 同一行的人名就是冠军",
+          "note": "题干 champion 对应表中奖项 WINNER。"
+        },
+        {
+          "sourceText": "Jon Marks.",
+          "sourceRole": "correctOption",
+          "targetText": "Jon Marks (New Jersey)",
+          "targetParagraphId": "cell:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-a:ocr-916a21169272a7ae:4:2",
+          "relationType": "paraphrase",
+          "note": "选项沿用表中人名 Jon Marks；名单从荣誉提名往上排，他在最后一行，选 B。"
+        }
+      ]
+    }
+  }
+}

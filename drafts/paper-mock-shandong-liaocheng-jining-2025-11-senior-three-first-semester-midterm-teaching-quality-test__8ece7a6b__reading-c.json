@@ -1,0 +1,809 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c": {
+      "overview": "文章谈电动化从汽车走向船舶：大众集团人士预言电动船将接替电动车，但美国船主担心航速慢、续航短；船企打算借用汽车技术，工程师看好前景，品牌与顾客忠诚则是成败关键。",
+      "fullTranslationZh": "至少在大众集团看来，电动化对汽车行业来说已是定局。这家德国汽车制造商预测，到 2030 年，在欧洲销售的汽车中将有 70% 完全由电池驱动。\n“内燃机终将消亡，”大众集团前负责人迈克尔·约斯特说。负责这家车企向电动化关键转型的约斯特，把目光转向了水上。“继智能电动汽车之后，智能电动船将会到来。”他预言道。\n然而，对大多数美国船主来说，电动船仍然无人问津。除了为省电不得不慢速行驶——这在许多船主看来简直太不“美国”了——大多数人还害怕被困在离岸数英里、无人救援的海上。现在有几家美国造船商推出了电动船型，但往往是用于尾波冲浪的小船，供人上班前锻炼，用完就得开回去充电，才能再跑一趟。\n当然，汽车制造业和造船业存在明显差异。大众集团每天生产 44,000 辆汽车，而 SILENT-YACHTS 每年只造十几艘船。不过，这两种产品的电动化算法是相似的。“我们已经计划在产品研发中采用共通的技术，”SILENT-YACHTS 创始人迈克尔·科勒说，“我们很快就会在汽车行业寻找能帮助推动新技术发展的软件和合作伙伴。”\n造船业将迎来一场代际变革。“我们看到陆地上和空中正在进行的电动化变革，不禁想知道为什么海上领域落后这么多，”工程师里奥·贝尔德说，“那场革命还要好几年才会到来。不过在过去两年里，新的电动船制造商不断涌现，其他更先进的替代电池方案最近也已问世。”\n仅仅拥有一艘电动船是不够的。随着电动船市场的扩大，成功将取决于品牌的价值，以及品牌在消费者中培养起来的忠诚度。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+          "sourceText": "Beyond having to go slow to conserve juice – which seems downright un-American to many boaters – most are afraid of getting stuck offshore with no assistance for miles.",
+          "displayText": "Beyond having to go slow to conserve juice – which seems downright un-American to many boaters – most are afraid of getting stuck offshore with no assistance for miles.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:29"
+          ],
+          "translationZh": "除了为省电不得不慢速行驶——这在许多船主看来简直太不“美国”了——大多数人还害怕被困在离岸数英里、无人救援的海上。",
+          "analysisZh": "主干是 most are afraid of getting stuck offshore（大多数人害怕在海上被困），most 指前一句的 most US boaters，介词短语 with no assistance for miles 补充被困时的处境：方圆数英里无人救援。句首 Beyond having to go slow to conserve juice 意为“除了不得不慢速行驶来省电之外”，Beyond 先摆出一层顾虑，主句再说另一层。两个破折号之间的 which 从句是插入成分，指前面“为省电而慢开”这件事，说许多船主觉得这样简直不像美国人的作风。juice 在这里是口语，指电量。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 42,
+              "quote": "Beyond having to go slow to conserve juice"
+            },
+            {
+              "start": 45,
+              "end": 94,
+              "quote": "which seems downright un-American to many boaters"
+            },
+            {
+              "start": 97,
+              "end": 138,
+              "quote": "most are afraid of getting stuck offshore"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+          "sourceText": "“We looked at the electrification reform taking place on land and in the air and wondered why the sea sector was so far behind,” said engineer Reo Baird.",
+          "displayText": "“We looked at the electrification reform taking place on land and in the air and wondered why the sea sector was so far behind,” said engineer Reo Baird.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:31"
+          ],
+          "translationZh": "“我们看到陆地上和空中正在进行的电动化变革，不禁想知道为什么海上领域落后这么多，”工程师里奥·贝尔德说。",
+          "analysisZh": "引号里是 Reo Baird 的原话，句末 said engineer Reo Baird 是主谓倒装。引语的主干是 We looked at … and wondered …：主语 We 带两个并列谓语 looked at 和 wondered。looked at 的宾语是 the electrification reform，现在分词短语 taking place on land and in the air 作后置定语修饰 reform，其中 on land 和 in the air 是并列的地点状语。wondered 后接 why 引导的宾语从句，问海上领域为什么落后这么多。句中两个 and 分工不同：前一个连接两个地点状语，后一个连接两个谓语。",
+          "underlineRanges": [
+            {
+              "start": 1,
+              "end": 13,
+              "quote": "We looked at"
+            },
+            {
+              "start": 41,
+              "end": 76,
+              "quote": "taking place on land and in the air"
+            },
+            {
+              "start": 77,
+              "end": 126,
+              "quote": "and wondered why the sea sector was so far behind"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:1"
+              ],
+              "start": 0,
+              "end": 70,
+              "quote": "至少在大众集团看来，电动化对汽车行业来说已是定局。这家德国汽车制造商预测，到 2030 年，在欧洲销售的汽车中将有 70% 完全由电池驱动。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2"
+              ],
+              "start": 71,
+              "end": 153,
+              "quote": "“内燃机终将消亡，”大众集团前负责人迈克尔·约斯特说。负责这家车企向电动化关键转型的约斯特，把目光转向了水上。“继智能电动汽车之后，智能电动船将会到来。”他预言道。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3"
+              ],
+              "start": 154,
+              "end": 292,
+              "quote": "然而，对大多数美国船主来说，电动船仍然无人问津。除了为省电不得不慢速行驶——这在许多船主看来简直太不“美国”了——大多数人还害怕被困在离岸数英里、无人救援的海上。现在有几家美国造船商推出了电动船型，但往往是用于尾波冲浪的小船，供人上班前锻炼，用完就得开回去充电，才能再跑一趟。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4"
+              ],
+              "start": 293,
+              "end": 457,
+              "quote": "当然，汽车制造业和造船业存在明显差异。大众集团每天生产 44,000 辆汽车，而 SILENT-YACHTS 每年只造十几艘船。不过，这两种产品的电动化算法是相似的。“我们已经计划在产品研发中采用共通的技术，”SILENT-YACHTS 创始人迈克尔·科勒说，“我们很快就会在汽车行业寻找能帮助推动新技术发展的软件和合作伙伴。”"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5"
+              ],
+              "start": 458,
+              "end": 580,
+              "quote": "造船业将迎来一场代际变革。“我们看到陆地上和空中正在进行的电动化变革，不禁想知道为什么海上领域落后这么多，”工程师里奥·贝尔德说，“那场革命还要好几年才会到来。不过在过去两年里，新的电动船制造商不断涌现，其他更先进的替代电池方案最近也已问世。”"
+            },
+            {
+              "paragraphId": "zh-reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:6"
+              ],
+              "start": 581,
+              "end": 636,
+              "quote": "仅仅拥有一艘电动船是不够的。随着电动船市场的扩大，成功将取决于品牌的价值，以及品牌在消费者中培养起来的忠诚度。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "evidence-reading-c-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+                "start": 211,
+                "end": 283,
+                "quote": "“After smart electric cars will come smart electric boats,” he predicts."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p2",
+                "start": 55,
+                "end": 82,
+                "quote": "“继智能电动汽车之后，智能电动船将会到来。”他预言道。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+                "start": 162,
+                "end": 232,
+                "quote": "most are afraid of getting stuck offshore with no assistance for miles"
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+                "start": 72,
+                "end": 107,
+                "quote": "having to go slow to conserve juice"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 57,
+                "end": 80,
+                "quote": "大多数人还害怕被困在离岸数英里、无人救援的海上"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 26,
+                "end": 36,
+                "quote": "为省电不得不慢速行驶"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4",
+                "start": 420,
+                "end": 523,
+                "quote": "look for software and partners in the automotive industries who can help drive new technologies forward"
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4",
+                "start": 278,
+                "end": 355,
+                "quote": "We’ve already planned to adopt common technologies in the product development"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 131,
+                "end": 162,
+                "quote": "我们很快就会在汽车行业寻找能帮助推动新技术发展的软件和合作伙伴"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 84,
+                "end": 103,
+                "quote": "我们已经计划在产品研发中采用共通的技术"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-reading-c-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+                "start": 284,
+                "end": 408,
+                "quote": "new electric builders have continued to appear and other even more advanced alternative battery solutions have recently come"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 89,
+                "end": 120,
+                "quote": "新的电动船制造商不断涌现，其他更先进的替代电池方案最近也已问世"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-c-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:29"
+            ],
+            "selectedSentenceId": "sentence-reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+                "start": 65,
+                "end": 233,
+                "quote": "Beyond having to go slow to conserve juice – which seems downright un-American to many boaters – most are afraid of getting stuck offshore with no assistance for miles."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 24,
+                "end": 81,
+                "quote": "除了为省电不得不慢速行驶——这在许多船主看来简直太不“美国”了——大多数人还害怕被困在离岸数英里、无人救援的海上。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-reading-c-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:31"
+            ],
+            "selectedSentenceId": "sentence-reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+                "start": 65,
+                "end": 218,
+                "quote": "“We looked at the electrification reform taking place on land and in the air and wondered why the sea sector was so far behind,” said engineer Reo Baird."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 13,
+                "end": 64,
+                "quote": "“我们看到陆地上和空中正在进行的电动化变革，不禁想知道为什么海上领域落后这么多，”工程师里奥·贝尔德说"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先由汽车电动化引出电动船的预言，再写美国船主的顾虑，接着写造船企业借汽车技术发展、工程师看好前景，最后指出品牌和顾客忠诚决定成败。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:1",
+            "summary": "大众集团认为汽车电动化已成定局，预测 2030 年欧洲七成新车将是纯电动车。",
+            "function": "以汽车电动化引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+            "summary": "Michael Jost 断言内燃机终将消亡，并预言智能电动船会接在智能电动车之后出现。",
+            "function": "引出电动船这一话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+            "summary": "多数美国船主仍不接受电动船：既嫌省电只能慢开，更怕远离海岸时被困无援；现有电动船多是用完就得回去充电的小船。",
+            "function": "转折，写电动船面临的问题"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4",
+            "summary": "汽车和造船规模差别大，但电动化算法相似，SILENT-YACHTS 计划采用共通技术，并到汽车行业找软件和合作伙伴。",
+            "function": "写造船企业借汽车技术发展的打算"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+            "summary": "工程师 Reo Baird 承认海上电动化落后、革命还要几年，但指出近两年新造船商不断出现，更先进的电池方案已经问世。",
+            "function": "写行业变革的前景"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:6",
+            "summary": "光有电动船不够，市场扩大后成败取决于品牌价值和顾客忠诚度。",
+            "function": "总结，指出成功的关键"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:28": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完 Michael Jost 的几句话，推断他真正想强调的观点。",
+      "stemTranslationZh": "Michael Jost 想要强调什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读他对船的预言",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "电动船前景光明。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+              "quote": "“After smart electric cars will come smart electric boats,” he predicts.",
+              "anchor": "Jost 的预言"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+              "quote": "turns his attention to the waterfront",
+              "anchor": "把目光转向水上"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "电动汽车将在海浪上行驶。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "electric cars",
+            "optionText": "Electric cars",
+            "matchType": "exact",
+            "relationNote": "选项借了“电动车”（electric cars）；原文说电动船会跟在电动车之后出现（After … will come），不是电动车开到水上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+              "quote": "After smart electric cars will come smart electric boats",
+              "anchor": "Jost 的预言"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "内燃机时代值得关注。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Combustion engines（内燃机） will die",
+            "sourceHighlight": "will die",
+            "optionText": "The combustion era deserves attention.",
+            "optionHighlight": "deserves attention",
+            "explanation": "Jost 断言内燃机终将消亡（will die），是在宣告这个时代结束，不是呼吁人们关注它。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+              "quote": "Combustion engines（内燃机） will die",
+              "anchor": "Jost 对内燃机的判断"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "智能技术已占据主导地位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "After smart electric cars will come smart electric boats",
+            "sourceHighlight": "will come",
+            "optionText": "Smart technology has come to dominate.",
+            "optionHighlight": "has come to dominate",
+            "explanation": "原文的“智能”（smart）只用来修饰电动车和电动船，说的是电动船将会到来（will come），没说智能技术已经占据主导。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+              "quote": "After smart electric cars will come smart electric boats",
+              "anchor": "Jost 的预言"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Michael Jost",
+          "sourceRole": "stem",
+          "targetText": "“Combustion engines（内燃机） will die,” says Michael Jost, former head of the Volkswagen Group.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "After smart electric cars will come smart electric boats",
+          "bridgeZh": "Jost 先说内燃机会消亡，再把话题转到船上",
+          "note": "题干 Michael Jost 原词出现在原文。"
+        },
+        {
+          "sourceText": "Electric boats have a bright outlook.",
+          "sourceRole": "correctOption",
+          "targetText": "“After smart electric cars will come smart electric boats,” he predicts.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "原文是预言智能电动船会跟在电动车之后到来（will come smart electric boats）；汽车电动化已成定局，船也会走这条路，可见他看好电动船的前景（a bright outlook），选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:29": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从美国船主不接受电动船的原因里，推断电动船最该先改进的方面。",
+      "stemTranslationZh": "要改进电动船，应该优先考虑哪个方面？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句找船主怕什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "可靠的售后服务。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Reliable after-sales service.",
+            "explanation": "原文没提售后服务；船主顾虑的是慢开省电、怕没电被困海上，问题出在船一次能开多远。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "更长的航程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+              "quote": "most are afraid of getting stuck offshore with no assistance for miles",
+              "anchor": "最怕被困海上"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+              "quote": "having to go slow to conserve juice",
+              "anchor": "为省电只能慢开"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+              "quote": "going back to be recharged for another run",
+              "anchor": "跑一趟就得回去充电"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "先进的驾驶辅助。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "assistance",
+            "optionText": "assistance",
+            "matchType": "exact",
+            "relationNote": "选项借了“帮助”（assistance）；原文的“无人救援”（no assistance）指船被困在离岸数英里处没人来救，和驾驶辅助技术无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+              "quote": "getting stuck offshore with no assistance for miles",
+              "anchor": "被困无援"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "沿海充电站。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "recharged",
+            "optionText": "charging",
+            "matchType": "wordFamily",
+            "relationNote": "选项的“充电”（charging）和原文的“再充电”（recharged）同源；船主怕的是在离岸数英里处没电被困，岸边多建充电站解决不了这一点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+              "quote": "going back to be recharged for another run",
+              "anchor": "回去充电"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "electric boats",
+          "sourceRole": "stem",
+          "targetText": "However, to most US boaters, electric boats remain a nonstarter.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "most are afraid of getting stuck offshore with no assistance for miles",
+          "bridgeZh": "船主不接受电动船的原因，就是要先改进的地方",
+          "note": "题干 electric boats 原词出现在 However 引出的这句。"
+        },
+        {
+          "sourceText": "Extended sailing range.",
+          "sourceRole": "correctOption",
+          "targetText": "Beyond having to go slow to conserve juice – which seems downright un-American to many boaters – most are afraid of getting stuck offshore with no assistance for miles.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "船主最怕开到离岸很远处被困、无人救援（getting stuck offshore），为省电又只能慢开（conserve juice），根子都在电量撑不起远航；先要改进的就是续航，让船一次充电开得更远（Extended sailing range），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在 Köhler 的话里找出公司接下来要做的事。",
+      "stemTranslationZh": "Kohler 很快会把什么纳入公司的发展战略？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为他们的电动船寻找新市场。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "market",
+            "optionText": "markets",
+            "matchType": "wordFamily",
+            "relationNote": "选项的“市场”（markets）借自 [[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:6]] 的“市场扩大”（the market … expands），那句讲的是品牌和顾客忠诚；Köhler 要找的是软件和合作伙伴。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:6",
+              "quote": "as the market for electric boats expands",
+              "anchor": "电动船市场扩大"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "引进电动汽车所用的技术。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4",
+              "quote": "look for software and partners in the automotive industries who can help drive new technologies forward",
+              "anchor": "到汽车行业找软件和伙伴"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4",
+              "quote": "We’ve already planned to adopt common technologies in the product development",
+              "anchor": "采用共通技术"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "寻求与大型造船商更紧密的合作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "look for software and partners in the automotive industries",
+            "sourceEntity": "the automotive industries",
+            "optionText": "Seeking closer cooperation with large shipbuilders.",
+            "optionEntity": "large shipbuilders",
+            "explanation": "合作伙伴要到汽车行业（automotive industries）去找，不是找大型造船商。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4",
+              "quote": "look for software and partners in the automotive industries",
+              "anchor": "合作对象"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在汽车制造业推广他们的软件。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "look for software and partners in the automotive industries",
+            "sourceHighlight": "look for software",
+            "optionText": "Promoting their software in the car-making industry.",
+            "optionHighlight": "Promoting their software",
+            "explanation": "原文是到汽车行业寻找软件（look for software），从汽车业往船上引；选项反过来成了把自家软件推销给汽车业。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4",
+              "quote": "look for software and partners in the automotive industries",
+              "anchor": "寻找软件"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "soon",
+          "sourceRole": "stem",
+          "targetText": "“We’ll shortly look for software and partners in the automotive industries who can help drive new technologies forward.”",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4",
+          "relationType": "locationCue",
+          "targetCue": "shortly",
+          "sourceZh": "很快",
+          "targetCueZh": "不久",
+          "answerText": "look for software and partners in the automotive industries",
+          "note": "题干 soon 对应原文 shortly。"
+        },
+        {
+          "sourceText": "Bringing in technologies used by electric cars.",
+          "sourceRole": "correctOption",
+          "targetText": "“We’ll shortly look for software and partners in the automotive industries who can help drive new technologies forward.”",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“引进电动车所用的技术”（technologies used by electric cars）对应原文到汽车行业（automotive industries）找软件和合作伙伴；[[block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:4|We’ve already planned to]]也说要在研发中采用与汽车共通的技术（common technologies），选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:31": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完 Reo Baird 的整段话，判断他对电动船前景的态度。",
+      "stemTranslationZh": "Reo Baird 对电动船的未来持什么态度？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读他的话，看转折后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "怀疑的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "new electric builders have continued to appear",
+            "sourceHighlight": "continued to appear",
+            "optionText": "Skeptical.",
+            "optionHighlight": "Skeptical",
+            "explanation": "他问海上为什么落后（why the sea sector was so far behind），是在追问差距，不是怀疑电动船的前途；接着列的都是进展。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+              "quote": "new electric builders have continued to appear",
+              "anchor": "新造船商不断出现"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "保守的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "other even more advanced alternative battery solutions have recently come",
+            "sourceHighlight": "even more advanced",
+            "optionText": "Conservative.",
+            "optionHighlight": "Conservative",
+            "explanation": "选项抓住“还要好几年”（still years away）；可他接着强调更先进的电池方案已经出现（even more advanced），看好的是进展。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+              "quote": "other even more advanced alternative battery solutions have recently come",
+              "anchor": "更先进的电池方案"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "不明确的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Unclear.",
+            "explanation": "他的态度并不含糊：先认差距，再用 Yet 引出两项具体进展，立场落在看好上。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "充满希望的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+              "quote": "new electric builders have continued to appear and other even more advanced alternative battery solutions have recently come",
+              "anchor": "Yet 后的进展"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Reo Baird",
+          "sourceRole": "stem",
+          "targetText": "“We looked at the electrification reform taking place on land and in the air and wondered why the sea sector was so far behind,” said engineer Reo Baird.",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "new electric builders have continued to appear and other even more advanced alternative battery solutions have recently come",
+          "bridgeZh": "Baird 先认差距，Yet 一转说出近年的进展",
+          "note": "题干 Reo Baird 原词出现在原文。"
+        },
+        {
+          "sourceText": "Hopeful.",
+          "sourceRole": "correctOption",
+          "targetText": "Yet in the last two years, new electric builders have continued to appear and other even more advanced alternative battery solutions have recently come.”",
+          "targetParagraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "“抱有希望”是从他列的两项进展推出来的：新的电动船制造商不断出现（continued to appear），更先进的电池方案已经问世（have recently come）。差距他承认，落点却在进展上，选 D。"
+        }
+      ]
+    }
+  }
+}
