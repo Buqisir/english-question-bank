@@ -1,0 +1,1015 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: Oh, Helga, I’m sure there’ll be something in your cupboard that you can wear for your interview. What about this dress?\nW: Oh, no, Dad! The style is completely out of fashion!",
+      "translationZh": "男：哦，海尔格，我敢肯定你衣柜里总有能穿去面试的衣服。这条裙子怎么样？\n女：哦，不行，爸爸！这款式完全过时了！",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "父亲帮女儿海尔格挑选面试要穿的衣服，女儿嫌他拿出的裙子款式太旧。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "哦，海尔格，我敢肯定你衣柜里总有能穿去面试的衣服。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "这条裙子怎么样？"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "哦，不行，爸爸！"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "这款式完全过时了！"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Welcome to our program, Mr. Johnson. Congratulations on winning the Teacher of the Year award. Now could you tell our audience something about yourself?\nM: Sure.",
+      "translationZh": "女：欢迎来到我们的节目，约翰逊先生。祝贺您荣获年度教师奖。现在您能给我们的观众讲讲您自己吗？\n男：当然可以。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "女主持人在节目中祝贺约翰逊先生获得年度教师奖，并向他提出一个请求。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "欢迎来到我们的节目，约翰逊先生。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "祝贺您荣获年度教师奖。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "现在您能给我们的观众讲讲您自己吗？"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "当然可以。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: Hi, Gina. This is David. I’m just calling to see what you’re up to this Saturday afternoon. I’d like to get together to celebrate good food and good friends.\nW: Sounds interesting. I’d love to come.",
+      "translationZh": "男：嗨，吉娜。我是戴维。我打电话是想问问你这周六下午有什么安排。我想和大家聚一聚，一起享受美食、欢聚好友。\n女：听起来很有意思。我很乐意来。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "戴维给吉娜打电话，谈起本周六下午的安排，吉娜欣然答应。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "嗨，吉娜。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "我是戴维。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "我打电话是想问问你这周六下午有什么安排。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "我想和大家聚一聚，一起享受美食、欢聚好友。"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "听起来很有意思。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "我很乐意来。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: I haven’t heard anything about the geography trip. You’re still coming, aren’t you?\nM: I wouldn’t miss a trip like that. Mr. Li said he’ll be sending out an email soon to everyone who signed up. It’ll have a lot more information.",
+      "translationZh": "女：我还没听到地理考察旅行的任何消息。你还是会去的，对吧？\n男：这样的旅行我可不会错过。李老师说他很快会给每个报名的人发一封邮件。邮件里会有更多信息。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "女士向男士打听一次出行的消息，男士说李老师很快会发邮件通知报名的人。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "我还没听到地理考察旅行的任何消息。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "你还是会去的，对吧？"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "这样的旅行我可不会错过。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "李老师说他很快会给每个报名的人发一封邮件。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "邮件里会有更多信息。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: Oh, it’s you again. What a chance meeting! My directions didn’t help? Are you lost?\nM: Yes! I’ve been looking but I didn’t see any signs posted.",
+      "translationZh": "女：哦，又是你。真是巧遇！我指的路没帮上忙吗？你迷路了？\n男：是啊！我一直在找，可没看到任何路标。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "女士又碰到了自己先前指过路的男士，得知他还没找到要去的地方。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "哦，又是你。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "真是巧遇！"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我指的路没帮上忙吗？"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "你迷路了？"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "是啊！"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "我一直在找，可没看到任何路标。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Hello, madam. Do you need a taxi?\nW: Yes. I have two suitcases. Can you help me put them in the back?\nM: Sure. So where are you going?\nW: The Comfort Inn, the one downtown. I need to stay there for a few days.\nM: OK. So what are you doing in Singapore? Taking a tour?\nW: No. I need to train some new employees in the branch office. By the way, how long will it take me to get there?\nM: It wouldn’t take long, about 15 minutes.",
+      "translationZh": "男：您好，女士。您需要出租车吗？\n女：是的。我有两个行李箱。您能帮我把它们放到后面吗？\n男：当然。那么您要去哪儿？\n女：康福特酒店，市中心那家。我要在那儿住几天。\n男：好的。那您来新加坡做什么？来旅游吗？\n女：不是。我要给分公司的一些新员工做培训。顺便问一下，到那儿要多长时间？\n男：用不了多久，大约十五分钟。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "出租车司机帮女士放好行李，路上和她聊起要去的酒店和她来新加坡的原因。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "您好，女士。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "您需要出租车吗？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "是的。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "我有两个行李箱。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "您能帮我把它们放到后面吗？"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "那么您要去哪儿？"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "康福特酒店，市中心那家。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "我要在那儿住几天。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-6:11",
+          "zh": "那您来新加坡做什么？"
+        },
+        {
+          "id": "listening-text-6:12",
+          "zh": "来旅游吗？"
+        },
+        {
+          "id": "listening-text-6:13",
+          "zh": "不是。"
+        },
+        {
+          "id": "listening-text-6:14",
+          "zh": "我要给分公司的一些新员工做培训。"
+        },
+        {
+          "id": "listening-text-6:15",
+          "zh": "顺便问一下，到那儿要多长时间？"
+        },
+        {
+          "id": "listening-text-6:16",
+          "zh": "用不了多久，大约十五分钟。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "M: What are you reading, Amy?\nW: I’m reading a news story about a kind-hearted man named Michael. He is an employee of the city supermarket. He often helps an old lady called Mrs. Smith to shop in the supermarket.\nM: Why does the old lady need help?\nW: She doesn’t have good eyesight. It’s difficult for her to read the labels clearly. So Michael often does that for her.\nM: So how long has the man been doing that?\nW: For a few years. He began to do that when the old lady was 72. Now she is 75 years old.\nM: I’m sure his story has warmed the hearts of many people.\nW: Yes. Thanks to him, many of the customers and his colleagues have begun to engage in such acts of kindness.",
+      "translationZh": "男：你在读什么呢，艾米？\n女：我在读一篇新闻报道，讲的是一个名叫迈克尔的好心人。他是城市超市的一名员工。他经常帮一位叫史密斯太太的老人在超市里购物。\n男：老太太为什么需要帮助？\n女：她视力不好。她很难看清商品标签。所以迈克尔常常替她读标签。\n男：那他这样做多久了？\n女：好几年了。老太太 72 岁时他就开始这样做了。现在她已经 75 岁了。\n男：我相信他的故事温暖了很多人的心。\n女：是的。因为他，许多顾客和他的同事也开始做这样的善事了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "优秀品行"
+      },
+      "summaryZh": "艾米向男士讲述她读到的一则新闻：好心人迈克尔常在超市帮一位老太太购物。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "你在读什么呢，艾米？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "我在读一篇新闻报道，讲的是一个名叫迈克尔的好心人。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "他是城市超市的一名员工。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "他经常帮一位叫史密斯太太的老人在超市里购物。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "老太太为什么需要帮助？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "她视力不好。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "她很难看清商品标签。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "所以迈克尔常常替她读标签。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "那他这样做多久了？"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "好几年了。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "老太太 72 岁时他就开始这样做了。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "现在她已经 75 岁了。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我相信他的故事温暖了很多人的心。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "是的。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "因为他，许多顾客和他的同事也开始做这样的善事了。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Across rural Europe, young people are leaving small towns and villages. They leave behind them empty streets, and closed schools and stores. However, some projects have been launched to change this trend of rural depopulation. The project Bring Life Back to the Village by Mark is taking place. Today I’ll be talking to the project leader Mark Welcome, Mark.\nM: Thanks.\nW: How is your project going?\nM: We’re making good progress. A team of volunteers started to work in the village. We’ve opened a village shop that sells organic produce. We’ve even created an eco-center which has educational resources for visitors. We welcome families with young children as we’re going to open the village school again.\nW: Wow! So has the project worked?\nM: Well, let me give you a few statistics – the population of the village has risen from 200 to over 400. I believe it will continue in the future.",
+      "translationZh": "女：在欧洲农村各地，年轻人正在离开小城镇和村庄。他们身后留下的是空荡荡的街道，以及关了门的学校和商店。不过，已经有一些项目启动，想要扭转这种农村人口流失的趋势。马克发起的“让乡村重获生机”项目正在开展。今天我将采访项目负责人马克。欢迎你，马克。\n男：谢谢。\n女：你们的项目进展如何？\n男：我们进展顺利。一支志愿者队伍已经开始在村里工作。我们开了一家出售有机农产品的村里商店。我们甚至建了一个生态中心，为来访者提供教育资源。我们欢迎带着小孩的家庭来住，因为我们打算重新开办村里的学校。\n女：哇！那这个项目见效了吗？\n男：嗯，我给你几个数据：村里的人口已经从 200 人增加到了 400 多人。我相信这种势头今后还会继续。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "乡村振兴"
+      },
+      "summaryZh": "主持人谈到欧洲农村年轻人外流，并采访项目负责人马克，请他介绍项目的进展和成效。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "在欧洲农村各地，年轻人正在离开小城镇和村庄。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "他们身后留下的是空荡荡的街道，以及关了门的学校和商店。"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "不过，已经有一些项目启动，想要扭转这种农村人口流失的趋势。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "马克发起的“让乡村重获生机”项目正在开展。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "今天我将采访项目负责人马克。欢迎你，马克。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "谢谢。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "你们的项目进展如何？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "我们进展顺利。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "一支志愿者队伍已经开始在村里工作。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "我们开了一家出售有机农产品的村里商店。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "我们甚至建了一个生态中心，为来访者提供教育资源。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "我们欢迎带着小孩的家庭来住，因为我们打算重新开办村里的学校。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "哇！"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "那这个项目见效了吗？"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "嗯，我给你几个数据：村里的人口已经从 200 人增加到了 400 多人。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "我相信这种势头今后还会继续。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "M: Deanna, how did you get into this line of work?\nW: It all started at home. I used to tell my kids a story when they went to bed at night. I’d been telling them a story and getting into each of the characters. I think that’s when I realized I had a talent for narration, so I decided to pursue a career as a voice-over artist.\nM: Is it difficult to get into?\nW: Well, it’s not as difficult as you might think. I search online for potential projects. These can be audiobooks or TV adverts. I also provide voice-overs for animated films, which is my favorite.\nM: What is your typical working day like?\nW: I usually don’t do any recording with my “morning voice”. I start recording in the afternoon. After dinner, I like to go for a walk. It’s a great way to rest my voice.\nM: Are there any challenges with the job?\nW: Yes, the biggest challenge is that you need to understand the meaning behind the script. But when you manage to get behind the character you’re voicing and express what they’d feel, it sort of makes it all worthwhile.",
+      "translationZh": "男：迪安娜，你是怎么进入这一行的？\n女：一切都是从家里开始的。我以前每晚在孩子们睡觉时给他们讲故事。我一直给他们讲故事，还会进入每个角色。我想就是在那时，我意识到自己有讲述的天赋，于是决定以配音演员为职业。\n男：这一行难进吗？\n女：嗯，没有你想象的那么难。我在网上寻找可能的项目。这些项目可以是有声书，也可以是电视广告。我还给动画电影配音，这是我最喜欢的。\n男：你通常的一天是怎样的？\n女：我一般不用“早晨的嗓音”录音。我下午才开始录。晚饭后，我喜欢去散散步。这是让嗓子休息的好办法。\n男：这份工作有什么挑战吗？\n女：有的，最大的挑战是你得读懂台本背后的含义。但当你成功进入你配音的角色、表达出角色的感受时，就会觉得这一切都很值得。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "男士采访配音演员迪安娜，她谈了自己的入行经历、工作内容、日常安排和挑战。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "迪安娜，你是怎么进入这一行的？"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "一切都是从家里开始的。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "我以前每晚在孩子们睡觉时给他们讲故事。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "我一直给他们讲故事，还会进入每个角色。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "我想就是在那时，我意识到自己有讲述的天赋，于是决定以配音演员为职业。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "这一行难进吗？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "嗯，没有你想象的那么难。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "我在网上寻找可能的项目。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "这些项目可以是有声书，也可以是电视广告。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我还给动画电影配音，这是我最喜欢的。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "你通常的一天是怎样的？"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "我一般不用“早晨的嗓音”录音。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "我下午才开始录。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "晚饭后，我喜欢去散散步。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "这是让嗓子休息的好办法。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "这份工作有什么挑战吗？"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "有的，最大的挑战是你得读懂台本背后的含义。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "但当你成功进入你配音的角色、表达出角色的感受时，就会觉得这一切都很值得。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Why are more and more people taking up the challenge of jumping into ice-cold water wearing nothing but a swimsuit? The popularity of wild swimming has grown hugely in recent years. So, what’s it like to swim in nearly freezing water? I always had a desire to try it, so I joined a group of swimmers on a beach one cold January morning. Talking to the other members, I found they all had their own positive reasons for their cold morning swims. Gabbie told me that the cold water takes away the pain in her legs and allows her to move more freely. Since she started swimming, her condition has improved. Stan explained that he’d suffered from anxiety for years and now believes cold-water swimming has given him the confidence to get back to work. Some also think it can help heal damaged skin and muscle tissue. So, how did I feel after my try in the sea? As I expected, it wasn’t pleasant, and ten minutes later, I couldn’t wait to get out. I didn’t want to repeat the experience.",
+      "translationZh": "为什么越来越多的人接受挑战，只穿一件泳衣就跳进冰冷的水里？近年来，野泳越来越受欢迎。那么，在几乎结冰的水里游泳是什么感觉呢？我一直想试一试，于是在一月一个寒冷的早晨，我在海滩上加入了一群游泳的人。和其他成员聊过后，我发现他们每个人都有自己晨间冷水游泳的积极理由。加比告诉我，冷水能消除她腿上的疼痛，让她活动得更自如。自从她开始游泳，她的身体状况就好转了。斯坦说他多年来一直饱受焦虑困扰，现在他认为是冷水游泳给了他重返工作的信心。也有人认为冷水游泳有助于修复受损的皮肤和肌肉组织。那么，我在海里试过之后感觉如何呢？和我预料的一样，那并不愉快，十分钟后，我就迫不及待地想上岸了。我不想再来一次了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "说话人介绍冷水野泳的流行，讲述自己在一月寒冷清晨和一群人下海游泳的经历。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "为什么越来越多的人接受挑战，只穿一件泳衣就跳进冰冷的水里？"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "近年来，野泳越来越受欢迎。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "那么，在几乎结冰的水里游泳是什么感觉呢？"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我一直想试一试，于是在一月一个寒冷的早晨，我在海滩上加入了一群游泳的人。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "和其他成员聊过后，我发现他们每个人都有自己晨间冷水游泳的积极理由。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "加比告诉我，冷水能消除她腿上的疼痛，让她活动得更自如。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "自从她开始游泳，她的身体状况就好转了。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "斯坦说他多年来一直饱受焦虑困扰，现在他认为是冷水游泳给了他重返工作的信心。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "也有人认为冷水游泳有助于修复受损的皮肤和肌肉组织。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "那么，我在海里试过之后感觉如何呢？"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "和我预料的一样，那并不愉快，十分钟后，我就迫不及待地想上岸了。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "我不想再来一次了。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "这段对话最可能发生在哪里？",
+      "optionTranslationsZh": {
+        "A": "在家里。",
+        "B": "在学校。",
+        "C": "在商店里。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Oh, Helga, I’m sure there’ll be something in your cupboard that you can wear for your interview."
+      },
+      "reasonZh": "爸爸让女儿从她自己的衣柜里（in your cupboard）找面试穿的衣服，还拿起一条裙子给她看，父女俩是在家里挑衣服，选 A。"
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "男士接下来会做什么？",
+      "optionTranslationsZh": {
+        "A": "领奖。",
+        "B": "采访一位老师。",
+        "C": "做自我介绍。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Now could you tell our audience something about yourself?"
+      },
+      "reasonZh": "“做自我介绍”就是女主持人请约翰逊先生向观众讲讲他自己（tell our audience something about yourself），男士答应了（Sure），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "奖（award）是女主持人祝贺他已经获得的年度教师奖（Congratulations on winning），不是他接下来要去领的。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "老师（Teacher）指的是男士本人获得的年度教师称号；是女主持人在采访他，他不是去采访老师的人。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "男士为什么给女士打电话？",
+      "optionTranslationsZh": {
+        "A": "为了表达感谢。",
+        "B": "为了取消一次拜访。",
+        "C": "为了发出邀请。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’d like to get together to celebrate good food and good friends."
+      },
+      "reasonZh": "戴维先问吉娜周六下午有什么安排，又说想大家聚一聚（get together），这是在约她，吉娜也答应会来（I’d love to come），选 C。"
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一次学校组织的出行。",
+        "B": "一位地理老师。",
+        "C": "一封工作邮件。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I haven’t heard anything about the geography trip."
+      },
+      "reasonZh": "两人从地理考察旅行（the geography trip）说起，男士说一定会去，又说李老师会给报名的人发邮件介绍详情，话题一直围绕这次学校的出行，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "地理（geography）是这次旅行的主题；对话里的李老师（Mr. Li）只是要发通知的人，两人并没有谈论哪位老师。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "邮件（email）是李老师要发给报名者的旅行通知（to everyone who signed up），只是一个细节，也不是工作邮件。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "女士听起来是什么语气？",
+      "optionTranslationsZh": {
+        "A": "焦虑的。",
+        "B": "惊讶的。",
+        "C": "感激的。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "What a chance meeting!"
+      },
+      "reasonZh": "女士一见到男士就说“又是你”（it’s you again），还感叹真是巧遇（What a chance meeting），说明她没想到会再碰到他，语气是惊讶，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "迷路着急的是男士，他回答自己没找到路标（I didn’t see any signs posted）；女士只是意外再次遇到他。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "两位说话人最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "同事。",
+        "B": "同学。",
+        "C": "陌生人。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Do you need a taxi?"
+      },
+      "reasonZh": "男士称对方“女士”（madam），问她要不要打车（Do you need a taxi），再问她去哪儿、来新加坡做什么，这是司机和刚上车的乘客，彼此并不认识，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "新员工（new employees）是女士要去分公司培训的人，不是正在和她说话的出租车司机。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士为什么来新加坡？",
+      "optionTranslationsZh": {
+        "A": "为了度假。",
+        "B": "为了找工作。",
+        "C": "为了出差。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I need to train some new employees in the branch office."
+      },
+      "reasonZh": "司机问她是不是来旅游（Taking a tour），她先否认（No），再说要给分公司的新员工做培训（train some new employees），这是因公出差，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "她是去培训新员工（train some new employees）的人，在公司已有职位，不是来新加坡求职的。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "迈克尔可能是什么人？",
+      "optionTranslationsZh": {
+        "A": "一名志愿者。",
+        "B": "一名店员。",
+        "C": "一名送货员。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "He is an employee of the city supermarket."
+      },
+      "reasonZh": "艾米说迈克尔是城市超市的员工（an employee of the city supermarket），他在超市里帮顾客购物，可见他是店员，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "他帮老人购物是出于好心（kind-hearted），但他的身份是超市员工（an employee），不是志愿者。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音只说迈克尔是个好心人（a kind-hearted man），没有提到送货；他是在超市里帮老人买东西。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "迈克尔通常为史密斯太太做什么？",
+      "optionTranslationsZh": {
+        "A": "他给她读商品标签。",
+        "B": "他替她订购商品。",
+        "C": "他带她去医院。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "So Michael often does that for her."
+      },
+      "reasonZh": "前一句说老太太视力不好，很难看清商品标签（read the labels clearly），接着说迈克尔常替她做这件事（does that for her），也就是替她读标签，选 A。"
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "迈克尔帮助史密斯太太多久了？",
+      "optionTranslationsZh": {
+        "A": "大约两年。",
+        "B": "大约三年。",
+        "C": "大约五年。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "He began to do that when the old lady was 72."
+      },
+      "reasonZh": "迈克尔从老太太 72 岁时开始帮她（when the old lady was 72），下一句说她现在 75 岁（Now she is 75），75 − 72 = 3，帮了大约三年，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的“年”（years）一处说的是“好几年”（For a few years），一处说的是年龄（75 years old），都没有说两年；从 72 岁到 75 岁是三年。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "“75 岁”（75 years old）说的是老太太现在的年龄，不是帮忙的年数；帮忙的时长要用 75 减去 72。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "马克为什么开展这个项目？",
+      "optionTranslationsZh": {
+        "A": "为了给当地人提供工作。",
+        "B": "为了帮助留守的老人。",
+        "C": "为了帮助扭转农村人口流失。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "However, some projects have been launched to change this trend of rural depopulation."
+      },
+      "reasonZh": "主持人先说年轻人在离开欧洲乡村，接着说一些项目就是为了扭转这种农村人口流失的趋势（change this trend of rural depopulation），下一句介绍的马克的项目就是其中之一，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "留下（leave behind）说的是年轻人走后留下空荡的街道和关门的学校、商店（empty streets, and closed schools and stores），没有说留守老人。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "马克接下来打算做什么？",
+      "optionTranslationsZh": {
+        "A": "重新开办学校。",
+        "B": "建一个生态中心。",
+        "C": "开一家乡村商店。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "We welcome families with young children as we’re going to open the village school again."
+      },
+      "reasonZh": "“重新开办学校”就是马克说的打算再次开办村里的学校（going to open the village school again），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "生态中心是已经建好的（We’ve even created an eco-center），是项目做成的事，不是下一步计划。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "村里的商店也已经开起来了（We’ve opened a village shop），不是接下来才要做的事。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "关于这个村子的人口，我们可以知道什么？",
+      "optionTranslationsZh": {
+        "A": "保持稳定。",
+        "B": "正在增加。",
+        "C": "正在减少。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Well, let me give you a few statistics – the population of the village has risen from 200 to over 400."
+      },
+      "reasonZh": "马克说村里人口已从 200 人增加到 400 多人（has risen from 200 to over 400），还相信这种势头会继续（continue），可见人口在增加，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "人口流失（rural depopulation）是主持人开头讲的欧洲农村普遍情况，是项目开展前的背景；这个村子现在的人口在增加。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "是什么启发女士成为配音演员？",
+      "optionTranslationsZh": {
+        "A": "给孩子讲故事。",
+        "B": "翻译一本书。",
+        "C": "写电影剧本。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I used to tell my kids a story when they went to bed at night."
+      },
+      "reasonZh": "迪安娜以前每晚给孩子讲睡前故事（tell my kids a story），她说正是那时发现了自己讲述的天赋（a talent for narration），于是决定当配音演员，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "电影（animated films）是她现在配音的动画片，剧本（the script）是她说工作中要读懂的台本，她没有写剧本，这也不是她入行的起因。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士最喜欢录制哪类作品？",
+      "optionTranslationsZh": {
+        "A": "有声书。",
+        "B": "电视广告。",
+        "C": "动画电影。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I also provide voice-overs for animated films, which is my favorite."
+      },
+      "reasonZh": "迪安娜说给动画电影配音是她最喜欢的（which is my favorite），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "有声书（audiobooks）是她在网上找到的项目种类之一，她没说最喜欢。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "电视广告（TV adverts）和有声书一样，只是她能接到的项目种类（These can be audiobooks or TV adverts），最喜欢的是动画电影。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士怎样让嗓子放松？",
+      "optionTranslationsZh": {
+        "A": "听音乐。",
+        "B": "散步。",
+        "C": "喝温水。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It’s a great way to rest my voice."
+      },
+      "reasonZh": "迪安娜先说晚饭后喜欢去散步（go for a walk），接着说这是让嗓子休息的好办法（rest my voice），这里的“这”就是散步，选 B。"
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士认为她的工作怎么样？",
+      "optionTranslationsZh": {
+        "A": "很轻松。",
+        "B": "值得付出。",
+        "C": "很累人。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "But when you manage to get behind the character you’re voicing and express what they’d feel, it sort of makes it all worthwhile."
+      },
+      "reasonZh": "“值得付出”就是迪安娜说的，能进入角色、表达出角色的感受时，一切都很值得（makes it all worthwhile），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "她说入行没有想象的那么难（it’s not as difficult as you might think），说的是进这一行，而且她还说最大的挑战是读懂台本背后的含义，所以不能说工作轻松。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音里只在说散步时提到“这是让嗓子休息的好办法”（It’s a great way to rest my voice），她没有说工作累人。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人为什么尝试冷水游泳？",
+      "optionTranslationsZh": {
+        "A": "为了满足好奇心。",
+        "B": "为了打破纪录。",
+        "C": "为了接受一项挑战。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I always had a desire to try it, so I joined a group of swimmers on a beach one cold January morning."
+      },
+      "reasonZh": "说话人刚问完在冰冷的水里游泳是什么感觉，就说自己一直想试一试（always had a desire to try it），想亲身体验这种感觉就是好奇，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "挑战（taking up the challenge）出现在开头的问题里，说的是越来越多的人去冬泳；她自己下水是因为一直想试试。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "斯坦从冷水游泳中得到了什么好处？",
+      "optionTranslationsZh": {
+        "A": "缓解了他的焦虑。",
+        "B": "减轻了他的腿疼。",
+        "C": "改善了他的皮肤。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Stan explained that he’d suffered from anxiety for years and now believes cold-water swimming has given him the confidence to get back to work."
+      },
+      "reasonZh": "斯坦多年饱受焦虑困扰（suffered from anxiety for years），现在认为冷水游泳给了他重返工作的信心（given him the confidence），焦虑得到了缓解，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "腿疼减轻（the pain in her legs）说的是加比，不是斯坦。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "好转（has improved）说的是加比的身体状况，修复受损皮肤（heal damaged skin）是“有些人”（Some）的看法，都不是斯坦得到的好处。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人第一次冷水游泳后感觉如何？",
+      "optionTranslationsZh": {
+        "A": "放松。",
+        "B": "失望。",
+        "C": "困惑。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "As I expected, it wasn’t pleasant, and ten minutes later, I couldn’t wait to get out."
+      },
+      "reasonZh": "其他人都说冷水游泳有好处（positive reasons），她自己下水却觉得不愉快（wasn’t pleasant），十分钟就想上岸，下一句又说不想再来一次（didn’t want to repeat），这种感受对应失望，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "让人活动更自如（move more freely）是加比说的好处，说话人自己只觉得不愉快，没有放松。"
+        }
+      ]
+    }
+  }
+}

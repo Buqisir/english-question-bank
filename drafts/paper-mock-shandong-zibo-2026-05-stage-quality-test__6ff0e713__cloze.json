@@ -1,0 +1,1873 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze": {
+      "overview": "文章介绍布达佩斯图书馆每月一次的讲座：青少年教老年人数字技能。64岁的基什借此学会用翻译工具上网；项目弥合数字鸿沟，青少年也收获耐心和对旧时代的了解，两代人建立起真正的联系。",
+      "fullTranslationZh": "在布达佩斯一个寒冷的下午，64岁的焦尔吉·佩蒂克·基什急切地赶往图书馆。她去那里不是为了看书，而是去参加 Netrevalók——一个每月举办的讲座，老年人在这里跟青少年学习数字技能。\n基什曾在昏迷状态中度过了四年，她迫切需要脑力上的刺激。然而，由于不懂英语，她缺乏独自上网的信心。“我以前都不敢乱点东西。万一我弄砸了怎么办？”通过这个项目，她学会了使用微软翻译——这个“新工具”帮助她不再那么与外界脱节。\n这个项目弥合了日益扩大的数字鸿沟。在匈牙利，15至50岁的人中有97%使用互联网，而80岁以上的老人中有90%不上网。许多老年人连基本操作都很吃力。正如图书馆馆长所指出的：“对老年人来说，数字化实际上把他们排除在外了。”受益是双向的。青少年志愿者收获了耐心，也得以了解数字时代之前的世界。“和他们聊天就像回到了过去。”19岁的萨吉·弗鲁赫特说。这段经历激励他设计更便于使用的技术。\n对基什这样的参与者来说，这些讲座提供的不只是技能。他们不仅学会了在数字世界中畅行，还与年轻一代建立起有意义的联系。这座跨越技术鸿沟、简单却有力的桥梁提醒我们：真正的联结取决于耐心、理解以及彼此学习的共同意愿——用真正重要的技能把两代人的世界连在一起。",
+      "mainLine": {
+        "theme": {
+          "text": "两代人真正的联结，靠的是耐心、理解和互相学习的意愿（genuine connection depends on patience, understanding）。",
+          "quote": "genuine connection depends on patience, understanding"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+            "text": "64岁的基什赶去图书馆，参加青少年教老人数字技能的讲座。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+            "text": "基什不懂英语、不敢上网，学会翻译工具后不再那么与外界脱节。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+            "text": "项目弥合数字鸿沟，老人学上网，青少年志愿者也有收获。"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+            "text": "讲座让两代人建立联系，说明真正的联结靠耐心与互学。"
+          }
+        ],
+        "emotion": ""
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "cloze-ls-1",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+          "sourceText": "This simple yet powerful bridge across the technological divide __54__ as a reminder that genuine connection depends on patience, understanding, and a mutual __55__ to learn from one another – using the skills that truly matter to bring their worlds together.",
+          "displayText": "This simple yet powerful bridge across the technological divide serves as a reminder that genuine connection depends on patience, understanding, and a mutual willingness to learn from one another – using the skills that truly matter to bring their worlds together.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:54",
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:55"
+          ],
+          "translationZh": "这座跨越技术鸿沟、简单却有力的桥梁提醒我们：真正的联结取决于耐心、理解以及彼此学习的共同意愿——用真正重要的技能把两代人的世界连在一起。",
+          "analysisZh": "主干是“这座桥梁充当一种提醒”（This simple yet powerful bridge … serves as a reminder），across the technological divide 修饰桥梁。that 引导同位语从句，说明提醒的内容：真正的联结取决于（depends on）三个并列宾语，即耐心、理解，以及互相学习的共同意愿（a mutual willingness to learn from one another）。破折号后的 using 短语是补充说明，句中没有交代由谁来使用这些技能，按上下文指两代人用真正重要的技能把彼此的世界连起来；这种主语不明的分词写法不宜模仿，自己写作时可改为 as the two generations use the skills that truly matter to bring their worlds together。",
+          "underlineRanges": [
+            {
+              "quote": "This simple yet powerful bridge",
+              "start": 0,
+              "end": 31
+            },
+            {
+              "quote": "serves as a reminder",
+              "start": 64,
+              "end": 84
+            },
+            {
+              "quote": "depends on patience, understanding, and a mutual willingness to learn from one another",
+              "start": 109,
+              "end": 195
+            }
+          ]
+        },
+        {
+          "sentenceId": "cloze-ls-2",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+          "sourceText": "Through the program, she has learned to use Microsoft Translate – a “new tool” helping her feel less __45__.",
+          "displayText": "Through the program, she has learned to use Microsoft Translate – a “new tool” helping her feel less disconnected.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:45"
+          ],
+          "translationZh": "通过这个项目，她学会了使用微软翻译——这个“新工具”帮助她不再那么与外界脱节。",
+          "analysisZh": "主干是“她学会了使用微软翻译”（she has learned to use Microsoft Translate），句首的 Through the program 作状语，说明她是靠这个项目学会的。破折号后的 a “new tool” 是 Microsoft Translate 的同位语，helping her feel less disconnected 是现在分词短语作后置定语，修饰 tool，说明这个工具的作用：帮她不再那么与外界脱节。",
+          "underlineRanges": [
+            {
+              "quote": "she has learned to use Microsoft Translate",
+              "start": 21,
+              "end": 63
+            },
+            {
+              "quote": "a “new tool” helping her feel less disconnected",
+              "start": 66,
+              "end": 113
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1"
+              ],
+              "start": 0,
+              "end": 92,
+              "quote": "在布达佩斯一个寒冷的下午，64岁的焦尔吉·佩蒂克·基什急切地赶往图书馆。她去那里不是为了看书，而是去参加 Netrevalók——一个每月举办的讲座，老年人在这里跟青少年学习数字技能。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2"
+              ],
+              "start": 93,
+              "end": 203,
+              "quote": "基什曾在昏迷状态中度过了四年，她迫切需要脑力上的刺激。然而，由于不懂英语，她缺乏独自上网的信心。“我以前都不敢乱点东西。万一我弄砸了怎么办？”通过这个项目，她学会了使用微软翻译——这个“新工具”帮助她不再那么与外界脱节。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3"
+              ],
+              "start": 204,
+              "end": 394,
+              "quote": "这个项目弥合了日益扩大的数字鸿沟。在匈牙利，15至50岁的人中有97%使用互联网，而80岁以上的老人中有90%不上网。许多老年人连基本操作都很吃力。正如图书馆馆长所指出的：“对老年人来说，数字化实际上把他们排除在外了。”受益是双向的。青少年志愿者收获了耐心，也得以了解数字时代之前的世界。“和他们聊天就像回到了过去。”19岁的萨吉·弗鲁赫特说。这段经历激励他设计更便于使用的技术。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4"
+              ],
+              "start": 395,
+              "end": 520,
+              "quote": "对基什这样的参与者来说，这些讲座提供的不只是技能。他们不仅学会了在数字世界中畅行，还与年轻一代建立起有意义的联系。这座跨越技术鸿沟、简单却有力的桥梁提醒我们：真正的联结取决于耐心、理解以及彼此学习的共同意愿——用真正重要的技能把两代人的世界连在一起。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+            "text": "On a cold Budapest afternoon, 64-year-old Györgyi Petik Kis eagerly hurries to the library. She isn’t there to read, but to attend Netrevalók – monthly lectures where seniors learn digital skills from teenagers."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+            "text": "Kis, who spent four years in a state of unconsciousness, desperately needs mental stimulation. However, without English skills, she lacks confidence to navigate the internet on her own. “I was afraid to click on things. What if I messed up?” Through the program, she has learned to use Microsoft Translate – a “new tool” helping her feel less disconnected."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+            "text": "The program bridges a growing digital divide. While 97% of Hungarians aged 15-50 use the internet, 90% of those over 80 do not go online. Many seniors struggle with basic tasks. As the library director points out, “For the elderly, going digital actually leaves them out.” The benefits extend both ways. Teen volunteers gain patience and insights into a pre-digital world. “Talking to them is like going back in time,” says 19-year-old Sagie Fruchter. The experience inspires him to design more accessible technology."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+            "text": "For participants like Kis, the lectures offer more than skills. They not only learn to navigate the digital world but also build meaningful connections with younger generations. This simple yet powerful bridge across the technological divide serves as a reminder that genuine connection depends on patience, understanding, and a mutual willingness to learn from one another – using the skills that truly matter to bring their worlds together."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+                "start": 60,
+                "end": 90,
+                "quote": "eagerly hurries to the library"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+                "start": 167,
+                "end": 210,
+                "quote": "seniors learn digital skills from teenagers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+                "start": 27,
+                "end": 35,
+                "quote": "急切地赶往图书馆"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+                "start": 75,
+                "end": 91,
+                "quote": "老年人在这里跟青少年学习数字技能"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:41"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+                "start": 124,
+                "end": 130,
+                "quote": "attend"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+                "start": 50,
+                "end": 52,
+                "quote": "参加"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 9,
+                "end": 55,
+                "quote": "spent four years in a state of unconsciousness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 3,
+                "end": 14,
+                "quote": "在昏迷状态中度过了四年"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:42"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 57,
+                "end": 68,
+                "quote": "desperately"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 16,
+                "end": 18,
+                "quote": "迫切"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 178,
+                "end": 209,
+                "quote": "I was afraid to click on things"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 49,
+                "end": 59,
+                "quote": "我以前都不敢乱点东西"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:43"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 138,
+                "end": 148,
+                "quote": "confidence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 45,
+                "end": 47,
+                "quote": "信心"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 184,
+                "end": 209,
+                "quote": "afraid to click on things"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 53,
+                "end": 59,
+                "quote": "不敢乱点东西"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:44"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 230,
+                "end": 239,
+                "quote": "messed up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 63,
+                "end": 66,
+                "quote": "弄砸了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 143,
+                "end": 175,
+                "quote": "navigate the internet on her own"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 299,
+                "end": 307,
+                "quote": "new tool"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 40,
+                "end": 44,
+                "quote": "独自上网"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 93,
+                "end": 96,
+                "quote": "新工具"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:45"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 343,
+                "end": 355,
+                "quote": "disconnected"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 104,
+                "end": 109,
+                "quote": "与外界脱节"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 199,
+                "end": 237,
+                "quote": "bridge across the technological divide"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 59,
+                "end": 65,
+                "quote": "跨越技术鸿沟"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:46"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 12,
+                "end": 19,
+                "quote": "bridges"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 4,
+                "end": 6,
+                "quote": "弥合"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 157,
+                "end": 173,
+                "quote": "with basic tasks"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 65,
+                "end": 69,
+                "quote": "基本操作"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:47"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 151,
+                "end": 159,
+                "quote": "struggle"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 70,
+                "end": 73,
+                "quote": "很吃力"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 229,
+                "end": 251,
+                "quote": "going digital actually"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 94,
+                "end": 100,
+                "quote": "数字化实际上"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:48"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 255,
+                "end": 261,
+                "quote": "leaves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 103,
+                "end": 107,
+                "quote": "排除在外"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 388,
+                "end": 411,
+                "quote": "like going back in time"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 150,
+                "end": 157,
+                "quote": "就像回到了过去"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:49"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 338,
+                "end": 346,
+                "quote": "insights"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 132,
+                "end": 134,
+                "quote": "了解"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 369,
+                "end": 384,
+                "quote": "Talking to them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 145,
+                "end": 150,
+                "quote": "和他们聊天"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:50"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 456,
+                "end": 466,
+                "quote": "experience"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 174,
+                "end": 176,
+                "quote": "经历"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 493,
+                "end": 503,
+                "quote": "technology"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 187,
+                "end": 189,
+                "quote": "技术"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:51"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 495,
+                "end": 505,
+                "quote": "accessible"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+                "start": 182,
+                "end": 186,
+                "quote": "便于使用"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 27,
+                "end": 39,
+                "quote": "the lectures"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 47,
+                "end": 63,
+                "quote": "more than skills"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 12,
+                "end": 16,
+                "quote": "这些讲座"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 19,
+                "end": 24,
+                "quote": "不只是技能"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:52"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 40,
+                "end": 45,
+                "quote": "offer"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 16,
+                "end": 18,
+                "quote": "提供"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 264,
+                "end": 282,
+                "quote": "genuine connection"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 148,
+                "end": 172,
+                "quote": "with younger generations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 79,
+                "end": 84,
+                "quote": "真正的联结"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 42,
+                "end": 47,
+                "quote": "与年轻一代"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:53"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 140,
+                "end": 151,
+                "quote": "connections"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 54,
+                "end": 56,
+                "quote": "联系"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 245,
+                "end": 258,
+                "quote": "as a reminder"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 74,
+                "end": 78,
+                "quote": "提醒我们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:54"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 242,
+                "end": 248,
+                "quote": "serves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 74,
+                "end": 78,
+                "quote": "提醒我们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 339,
+                "end": 364,
+                "quote": "to learn from one another"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 323,
+                "end": 331,
+                "quote": "a mutual"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 94,
+                "end": 98,
+                "quote": "彼此学习"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 99,
+                "end": 101,
+                "quote": "共同"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:55"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 336,
+                "end": 347,
+                "quote": "willingness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 101,
+                "end": 103,
+                "quote": "意愿"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:54",
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:55"
+            ],
+            "selectedSentenceId": "cloze-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 178,
+                "end": 262,
+                "quote": "This simple yet powerful bridge across the technological divide serves as a reminder"
+              },
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 287,
+                "end": 373,
+                "quote": "depends on patience, understanding, and a mutual willingness to learn from one another"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+                "start": 57,
+                "end": 125,
+                "quote": "这座跨越技术鸿沟、简单却有力的桥梁提醒我们：真正的联结取决于耐心、理解以及彼此学习的共同意愿——用真正重要的技能把两代人的世界连在一起。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:45"
+            ],
+            "selectedSentenceId": "cloze-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 263,
+                "end": 305,
+                "quote": "she has learned to use Microsoft Translate"
+              },
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 308,
+                "end": 355,
+                "quote": "a “new tool” helping her feel less disconnected"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+                "start": 71,
+                "end": 110,
+                "quote": "通过这个项目，她学会了使用微软翻译——这个“新工具”帮助她不再那么与外界脱节。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:41": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:41",
+      "blankNo": 41,
+      "pos": "verb",
+      "role": "main",
+      "context": "她赶去图书馆不是为了读书，而是要以学员身份去上讲座。",
+      "find": {
+        "check": "collocation",
+        "text": "后文说讲座上是老人跟青少年学数字技能（seniors learn digital skills from teenagers），64岁的她是去听课的。",
+        "quotes": [
+          "seniors learn digital skills from teenagers"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "参加",
+        "reason": "她赶去图书馆不是为了读书，而是要以学员身份去上讲座。动词看搭配：后文说讲座上是老人跟青少年学数字技能（seniors learn digital skills from teenagers），64岁的她是去听课的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cancel",
+          "meaning": "取消；她急切地赶往图书馆（eagerly hurries to the library），是去上课，不会去取消讲座。",
+          "quote": "eagerly hurries to the library"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "organize",
+          "meaning": "组织；讲座是老人跟青少年学技能（seniors learn digital skills from teenagers），她是学员不是组织者。",
+          "quote": "seniors learn digital skills from teenagers"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "finance",
+          "meaning": "资助；她是去学数字技能的老人（seniors learn digital skills），赶去是为了听课，不是出钱办讲座。",
+          "quote": "seniors learn digital skills"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "monthly lectures",
+          "signalSide": "context-after",
+          "relation": "参加的对象是每月举办的讲座（monthly lectures）。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "eagerly hurries to the library",
+          "signalSide": "context-before",
+          "relation": "她急着赶去图书馆，是去上讲座。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:42": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:42",
+      "blankNo": 42,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "昏迷多年后她很需要动脑，这里要一个表示需要程度很深的词。",
+      "find": {
+        "check": "affect",
+        "text": "定语从句交代她昏迷了四年（spent four years in a state of unconsciousness），所以她格外需要脑力刺激（mental stimulation）。",
+        "quotes": [
+          "spent four years in a state of unconsciousness",
+          "mental stimulation"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "极度地",
+        "meaning": "迫切地",
+        "reason": "昏迷多年后她很需要动脑，这里要一个表示需要程度很深的词。副词看情感：定语从句交代她昏迷了四年（spent four years in a state of unconsciousness），所以她格外需要脑力刺激（mental stimulation）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "frequently",
+          "meaning": "经常；这里说的是她需要脑力刺激（needs mental stimulation）的程度有多深，不是需要的次数多少。",
+          "quote": "needs mental stimulation"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "originally",
+          "meaning": "起初；需要脑力刺激（needs mental stimulation）用现在时，说的是她昏迷醒来后的现状，不是当初怎样。",
+          "quote": "needs mental stimulation"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "temporarily",
+          "meaning": "暂时地；她昏迷了整整四年（spent four years in a state of unconsciousness），这份需要来得强烈，不是一时的。",
+          "quote": "spent four years in a state of unconsciousness"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "spent four years in a state of unconsciousness",
+          "signalSide": "context-before",
+          "relation": "昏迷四年，大脑长期缺少刺激，需要格外强烈。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "needs mental stimulation",
+          "signalSide": "context-after",
+          "relation": "副词修饰谓语需要（needs），说明需要的程度。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adverb.affective-consistency"
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:43": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:43",
+      "blankNo": 43,
+      "pos": "noun",
+      "role": "main",
+      "context": "不懂英语让她不敢独自上网，这里要一个她缺少的心理状态。",
+      "find": {
+        "check": "echo",
+        "text": "后面她自己说不敢乱点东西（I was afraid to click on things），害怕正对应缺乏信心。",
+        "quotes": [
+          "I was afraid to click on things"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "信心",
+        "reason": "不懂英语让她不敢独自上网，这里要一个她缺少的心理状态。名词看复现：后面她自己说不敢乱点东西（I was afraid to click on things），害怕正对应缺乏信心。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "prejudice",
+          "meaning": "偏见；缺乏偏见是好事，而后文她说不敢乱点（afraid to click on things），是在讲困难。",
+          "quote": "afraid to click on things"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "judgment",
+          "meaning": "判断力；她担心的是一点就出错（afraid to click on things），是胆怯，不是不会判断。",
+          "quote": "afraid to click on things"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "curiosity",
+          "meaning": "好奇心；她急切地赶去图书馆（eagerly hurries to the library），并不缺好奇心，缺的是胆量。",
+          "quote": "eagerly hurries to the library"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "afraid to click on things",
+          "signalSide": "context-after",
+          "relation": "不敢乱点与缺乏信心意思相承。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "to navigate the internet on her own",
+          "signalSide": "context-after",
+          "relation": "缺乏独自上网的信心，信心后接不定式说明做什么。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:44": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:44",
+      "blankNo": 44,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "她不敢乱点，这里说的是她担心点完之后把事情弄坏。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "前一句说她不敢乱点东西（afraid to click on things），后面的万一（What if）引出她担心的坏结果：点错出问题。",
+        "quotes": [
+          "afraid to click on things",
+          "What if"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "搞砸",
+        "reason": "她不敢乱点，这里说的是她担心点完之后把事情弄坏。词组看语境义：前一句说她不敢乱点东西（afraid to click on things），后面的万一（What if）引出她担心的坏结果：点错出问题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gave up",
+          "meaning": "放弃；她怕的是点了出错（afraid to click on things），不是怕自己半途不学。",
+          "quote": "afraid to click on things"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "shut up",
+          "meaning": "闭嘴；她说的是在电脑上点东西（click on things），担心的事和说不说话无关。",
+          "quote": "click on things"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "hurried up",
+          "meaning": "赶快；她怕的是点击（click on things）带来的后果，“赶快”算不上让人害怕的结果。",
+          "quote": "click on things"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "messed",
+          "signalSide": "option",
+          "relation": "弄乱（messed）与副词（up）合起来，表示把事情搞糟。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "afraid to click on things",
+          "signalSide": "context-before",
+          "relation": "不敢乱点，担心的就是点错把事情弄糟。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:45": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "main",
+      "context": "翻译工具解决了她上网的难题，这里要一种她原有、现在减轻的消极感受。",
+      "find": {
+        "check": "affect",
+        "text": "工具让不懂英语的她能独自上网（navigate the internet on her own），减轻的是和网络世界隔开的感觉。",
+        "quotes": [
+          "navigate the internet on her own"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "与外界隔绝的",
+        "meaning": "与网络世界脱节",
+        "reason": "翻译工具解决了她上网的难题，这里要一种她原有、现在减轻的消极感受。形容词看情感：工具让不懂英语的她能独自上网（navigate the internet on her own），减轻的是和网络世界隔开的感觉。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "disturbed",
+          "meaning": "心烦意乱的；这个工具解决的是不懂英语、上不了网（navigate the internet）的问题，不是平复烦躁。",
+          "quote": "navigate the internet"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "embarrassed",
+          "meaning": "尴尬的；她怕的是乱点出错（afraid to click on things），工具帮她解决的是上不了网，不是难为情。",
+          "quote": "afraid to click on things"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "motivated",
+          "meaning": "有动力的；她本来就急切地赶去上课（eagerly hurries），说新工具让她更没动力与此相反。",
+          "quote": "eagerly hurries"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "navigate the internet on her own",
+          "signalSide": "context-before",
+          "relation": "能独自上网后，与网络世界隔开的感觉减轻。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "feel less",
+          "signalSide": "context-before",
+          "relation": "感觉不那么（feel less）后面接她原有的消极感受。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:46": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "main",
+      "context": "项目教老人上网，这里说它对数字鸿沟起的作用：缩小差距。",
+      "find": {
+        "check": "echo",
+        "text": "末段把这个项目称作跨越技术鸿沟的桥梁（bridge across the technological divide），动词与它复现。",
+        "quotes": [
+          "bridge across the technological divide"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "弥合",
+        "reason": "项目教老人上网，这里说它对数字鸿沟起的作用：缩小差距。动词看复现：末段把这个项目称作跨越技术鸿沟的桥梁（bridge across the technological divide），动词与它复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ignores",
+          "meaning": "忽视；这个项目专门教老人数字技能（seniors learn digital skills），正是在应对鸿沟。",
+          "quote": "seniors learn digital skills"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "accelerates",
+          "meaning": "加快；末段称项目是跨越鸿沟的桥梁（bridge across the technological divide），是缩小差距，不是加剧。",
+          "quote": "bridge across the technological divide"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "creates",
+          "meaning": "制造；鸿沟本来就在扩大（a growing digital divide），后文的数据说明它早已存在，不是项目造成的。",
+          "quote": "a growing digital divide"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "bridge across the technological divide",
+          "signalSide": "context-after",
+          "relation": "末段把项目比作跨越鸿沟的桥梁，与动词弥合呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "a growing digital divide",
+          "signalSide": "context-after",
+          "relation": "宾语是日益扩大的数字鸿沟，项目做的是弥合它。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:47": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:47",
+      "blankNo": 47,
+      "pos": "verb",
+      "role": "detail",
+      "context": "前面说八旬老人九成不上网，这里说许多老人做基本操作都很困难。",
+      "find": {
+        "check": "collocation",
+        "text": "空后的介词短语是做基本操作（with basic tasks），前文说八旬老人九成不上网（do not go online），要表示应付得很吃力。",
+        "quotes": [
+          "with basic tasks",
+          "do not go online"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "吃力地应付",
+        "reason": "前面说八旬老人九成不上网，这里说许多老人做基本操作都很困难。动词看搭配：空后的介词短语是做基本操作（with basic tasks），前文说八旬老人九成不上网（do not go online），要表示应付得很吃力。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "communicate",
+          "meaning": "交流；交流的对象应是人，基本操作（basic tasks）不能拿来交流。",
+          "quote": "basic tasks"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "volunteer",
+          "meaning": "当志愿者；当志愿者的是青少年（Teen volunteers），老人在这里是来学的。",
+          "quote": "Teen volunteers"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "attempt",
+          "meaning": "尝试；它直接带宾语，不与介词搭配，也说不出老人做基本操作（basic tasks）的困难。",
+          "quote": "basic tasks"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with basic tasks",
+          "signalSide": "context-after",
+          "relation": "与介词（with）连用，表示吃力地应付基本操作。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "do not go online",
+          "signalSide": "context-before",
+          "relation": "九成八旬老人不上网，接着说老人上网之难。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:48": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "detail",
+      "context": "馆长这句解释老人为何吃力：数字化非但没帮上忙，反而把老人落下了。",
+      "find": {
+        "check": "collocation",
+        "text": "空后接宾语和副词（them out），反而（actually）说明数字化本该带来便利，结果却把老人排除在外。",
+        "quotes": [
+          "them out",
+          "actually"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "排除在外",
+        "meaning": "让老人被数字化落下",
+        "reason": "馆长这句解释老人为何吃力：数字化非但没帮上忙，反而把老人落下了。动词看搭配：空后接宾语和副词（them out），反而（actually）说明数字化本该带来便利，结果却把老人排除在外。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "shows",
+          "meaning": "带领；与副词（out）连用指送人出门，馆长说的是数字化（going digital）给老人带来的处境，不是送客。",
+          "quote": "going digital"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "picks",
+          "meaning": "挑选；与副词（out）连用指挑出来，前面说老人做基本操作吃力（basic tasks），这里讲的是困境，不是被选中。",
+          "quote": "basic tasks"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "crosses",
+          "meaning": "穿过；与副词（out）连用指划掉文字，数字化（going digital）对老人的影响不是在纸上划掉什么。",
+          "quote": "going digital"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "them out",
+          "signalSide": "context-after",
+          "relation": "与（them out）连用，表示把某人排除在外。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "actually",
+          "signalSide": "context-before",
+          "relation": "反而表示结果与数字化本该带来的便利相反。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:49": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:49",
+      "blankNo": 49,
+      "pos": "noun",
+      "role": "main",
+      "context": "青少年也有收获：除了耐心，还对没有网络的旧时代有了认识。",
+      "find": {
+        "check": "collocation",
+        "text": "空后接介词短语（into a pre-digital world），萨吉说和老人聊天像回到过去（like going back in time），收获的是了解。",
+        "quotes": [
+          "into a pre-digital world",
+          "like going back in time"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "深入了解",
+        "meaning": "对过去世界的认识",
+        "reason": "青少年也有收获：除了耐心，还对没有网络的旧时代有了认识。名词看搭配：空后接介词短语（into a pre-digital world），萨吉说和老人聊天像回到过去（like going back in time），收获的是了解。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "investigations",
+          "meaning": "调查；青少年只是在和老人聊天（Talking to them），不是在做调查研究。",
+          "quote": "Talking to them"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "admission",
+          "meaning": "准许进入；回到过去（going back in time）只是比喻聊天的感受，没有谁被准许进入过去的世界。",
+          "quote": "going back in time"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "entrance",
+          "meaning": "进入；与耐心（patience）并列的是一种收获，回到过去只是比喻，不是真的进入某个世界。",
+          "quote": "patience"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "into a pre-digital world",
+          "signalSide": "context-after",
+          "relation": "对某个世界的深入了解，后接介词（into）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "like going back in time",
+          "signalSide": "context-after",
+          "relation": "聊天像回到过去，说明他们了解了过去的世界。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:50": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "main",
+      "context": "前一句是萨吉和老人聊天的感受，这里用一个名词把这件事概括起来。",
+      "find": {
+        "check": "echo",
+        "text": "前一句写和老人聊天像回到过去（Talking to them is like going back in time），这里用定冠词回指这件事，概括为经历。",
+        "quotes": [
+          "Talking to them is like going back in time"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "经历",
+        "reason": "前一句是萨吉和老人聊天的感受，这里用一个名词把这件事概括起来。名词看复现：前一句写和老人聊天像回到过去（Talking to them is like going back in time），这里用定冠词回指这件事，概括为经历。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ambition",
+          "meaning": "抱负；激励他的是前一句和老人聊天（Talking to them）这件事，不是他原有的志向。",
+          "quote": "Talking to them"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "atmosphere",
+          "meaning": "氛围；前一句说的是和老人交谈（Talking to them）的感受，不是某个场所的气氛。",
+          "quote": "Talking to them"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "experiment",
+          "meaning": "实验；和老人聊天（Talking to them）是志愿活动里的交流，不是科学实验。",
+          "quote": "Talking to them"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "Talking to them",
+          "signalSide": "context-before",
+          "relation": "和老人聊天这件事被概括为一段经历。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "inspires him",
+          "signalSide": "context-after",
+          "relation": "这段经历激励（inspires）他去设计技术。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:51": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:51",
+      "blankNo": 51,
+      "pos": "adjective",
+      "role": "main",
+      "context": "他受启发要设计的技术，应能解决老人用不了的问题，也就是好用。",
+      "find": {
+        "check": "collocation",
+        "text": "空格修饰技术（technology），前文说许多老人连基本操作都吃力（basic tasks），要设计的是更便于使用的技术。",
+        "quotes": [
+          "technology",
+          "basic tasks"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "容易使用的",
+        "reason": "他受启发要设计的技术，应能解决老人用不了的问题，也就是好用。形容词看搭配：空格修饰技术（technology），前文说许多老人连基本操作都吃力（basic tasks），要设计的是更便于使用的技术。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "enjoyable",
+          "meaning": "有趣的；老人的难处是做基本操作吃力（basic tasks），技术要解决的是难用，不是不好玩。",
+          "quote": "basic tasks"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "acceptable",
+          "meaning": "可接受的；老人卡在基本操作上（basic tasks），技术要改的是好不好用，不是能不能被接受。",
+          "quote": "basic tasks"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "favorable",
+          "meaning": "赞同的；馆长说数字化反而把老人排除在外（going digital actually），设计要让老人用得上，不是讨人喜欢。",
+          "quote": "going digital actually"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "technology",
+          "signalSide": "context-after",
+          "relation": "形容词修饰技术，说明技术要具备的特点。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:52": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "detail",
+      "context": "这里说讲座给参与者带来的东西不只是技能，主语是讲座。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是讲座（the lectures），宾语是不只是技能（more than skills），讲座能发出的动作是提供。",
+        "quotes": [
+          "the lectures",
+          "more than skills"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "提供",
+        "reason": "这里说讲座给参与者带来的东西不只是技能，主语是讲座。动词看搭配：主语是讲座（the lectures），宾语是不只是技能（more than skills），讲座能发出的动作是提供。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "own",
+          "meaning": "拥有；讲座（the lectures）是授课活动，不能说它拥有技能，下文讲的是参与者得到什么。",
+          "quote": "the lectures"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "receive",
+          "meaning": "接受；接受技能的是基什这样的参与者（participants like Kis），不是讲座本身。",
+          "quote": "participants like Kis"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "gain",
+          "meaning": "获得；获得是人的收获，像前文青少年获得耐心（gain patience），讲座本身不会获得什么。",
+          "quote": "gain patience"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the lectures",
+          "signalSide": "context-before",
+          "relation": "主语是讲座，讲座能给人提供东西。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "more than skills",
+          "signalSide": "context-after",
+          "relation": "提供的不只是技能。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:53": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "讲座在技能之外带给参与者的，是和年轻一代之间的关系。",
+      "find": {
+        "check": "echo",
+        "text": "后一句说真正的联结（genuine connection）取决于耐心和理解，这里与年轻一代（with younger generations）建立的正是这种联系。",
+        "quotes": [
+          "genuine connection",
+          "with younger generations"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "人际联系",
+        "reason": "讲座在技能之外带给参与者的，是和年轻一代之间的关系。名词看复现：后一句说真正的联结（genuine connection）取决于耐心和理解，这里与年轻一代（with younger generations）建立的正是这种联系。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "schedules",
+          "meaning": "日程；要与年轻一代建立（build）的是人和人之间的东西，后一句说的是真正的联结（genuine connection）。",
+          "quote": "genuine connection"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "impressions",
+          "meaning": "印象；印象是单方面留下的，后一句说两代人之间形成的是真正的联结（genuine connection）。",
+          "quote": "genuine connection"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reactions",
+          "meaning": "反应；与年轻一代（with younger generations）建立的是长期的关系，一时的反应谈不上建立。",
+          "quote": "with younger generations"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "genuine connection",
+          "signalSide": "context-after",
+          "relation": "后一句的联结与这里的联系是同一个意思。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "build meaningful",
+          "signalSide": "context-before",
+          "relation": "建立有意义的联系，动词建立（build）要接关系类名词。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:54": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:54",
+      "blankNo": 54,
+      "pos": "verb",
+      "role": "detail",
+      "context": "这里说这座桥梁对人们起的作用：成为一种提醒。",
+      "find": {
+        "check": "collocation",
+        "text": "空后是作为提醒（as a reminder），主语是这座桥梁（bridge），这句说的是桥梁本身起的作用，所以用充当。",
+        "quotes": [
+          "as a reminder",
+          "bridge"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "充当",
+        "reason": "这里说这座桥梁对人们起的作用：成为一种提醒。动词看搭配：空后是作为提醒（as a reminder），主语是这座桥梁（bridge），这句说的是桥梁本身起的作用，所以用充当。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "doubles",
+          "meaning": "兼作；兼作要先有一个主要用途，这句却是说桥梁本身的意义就是提醒（as a reminder）。",
+          "quote": "as a reminder"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "qualifies",
+          "meaning": "有资格；这句不是在评桥梁够不够格，而是说它让人想到（as a reminder）真正的联结靠什么。",
+          "quote": "as a reminder"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "promises",
+          "meaning": "承诺；它不能与介词（as）连用表示充当，和后面的作为提醒（as a reminder）接不上。",
+          "quote": "as a reminder"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "as a reminder",
+          "signalSide": "context-after",
+          "relation": "与介词（as）连用，表示充当一种提醒。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:55": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:55",
+      "blankNo": 55,
+      "pos": "noun",
+      "role": "main",
+      "context": "这里是真正的联结所依靠的第三样东西：双方愿意互相学习。",
+      "find": {
+        "check": "collocation",
+        "text": "空后接不定式（to learn from one another），前有相互（mutual），和耐心、理解并列，要的是愿意互相学习。",
+        "quotes": [
+          "to learn from one another",
+          "mutual"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "意愿",
+        "reason": "这里是真正的联结所依靠的第三样东西：双方愿意互相学习。名词看搭配：空后接不定式（to learn from one another），前有相互（mutual），和耐心、理解并列，要的是愿意互相学习。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "authority",
+          "meaning": "权力；和耐心、理解（patience, understanding）并列的是一种态度，互相学习也谈不上权力。",
+          "quote": "patience, understanding"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "option",
+          "meaning": "选择；前有相互（mutual），后接互相学习，讲的是双方都愿意，不是可选可不选。",
+          "quote": "mutual"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "consideration",
+          "meaning": "体谅；它与前面的理解（understanding）意思重叠，后面也接不上互相学习（to learn from one another）。",
+          "quote": "to learn from one another"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to learn from one another",
+          "signalSide": "context-after",
+          "relation": "意愿后接不定式，表示愿意做某事。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "a mutual",
+          "signalSide": "context-before",
+          "relation": "相互的意愿，说明双方都愿意。"
+        }
+      ]
+    }
+  }
+}

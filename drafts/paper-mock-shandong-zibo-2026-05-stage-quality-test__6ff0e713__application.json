@@ -1,0 +1,126 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear teachers and fellow students,\nAs President of the Student Union, I am honoured to speak on “Health First”. Our school is going to give us more time for sports, which comes at just the right time.\n\nMany of us sit at our desks almost all day. We often stay up late doing homework and seldom exercise. As a result, more and more students feel sleepy in class and catch colds easily. Our bodies are sending us a warning.\n\nHere are my two suggestions. First, let’s make full use of the extra sports time instead of staying in the classroom. Second, find a sport you enjoy, such as running or basketball, and stick to it. Let’s put health first and get moving together!\nThank you for listening!",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "英语演讲比赛的演讲稿，沿用题面给出的称呼和结束语",
+        "personTense": "以学生会主席“我”的身份演讲，描述现状用一般现在时，学校的安排用一般将来时",
+        "readerTone": "听众是全校师生，语气真诚、有号召力，用 let’s 拉近距离",
+        "goal": "让听众意识到大家缺乏运动的现状，并响应倡议，用好学校增加的体育活动时间"
+      },
+      "taskRequires": [
+        "描述同学们目前的健康和运动现状",
+        "向全体师生提出倡议"
+      ],
+      "thisEssayChooses": "开头点明自己的身份和学校准备增加体育活动时间；现状选“久坐、熬夜、少运动”和它带来的上课犯困、容易感冒；倡议分两条：等新增的体育时间到来时用好它、找一项喜欢的运动坚持下去。"
+    },
+    "standard": {
+      "essay": "Dear teachers and fellow students,\nAs President of the Student Union, I am honoured to speak on “Health First”. Our school is going to give us more time for sports, which comes at just the right time.\n\nMany of us sit at our desks almost all day. We often stay up late doing homework and seldom exercise. As a result, more and more students feel sleepy in class and catch colds easily. Our bodies are sending us a warning.\n\nHere are my two suggestions. First, let’s make full use of the extra sports time instead of staying in the classroom. Second, find a sport you enjoy, such as running or basketball, and stick to it. Let’s put health first and get moving together!\nThank you for listening!",
+      "pointMap": [
+        {
+          "point": "描述现状",
+          "quote": "We often stay up late doing homework and seldom exercise."
+        },
+        {
+          "point": "提出倡议",
+          "quote": "First, let’s make full use of the extra sports time instead of staying in the classroom."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "交代演讲人身份和题目，并把题目和学校的新安排连起来。",
+          "items": [
+            {
+              "quote": "As President of the Student Union, I am honoured to speak on “Health First”.",
+              "explain": "演讲开头先说“我是谁、讲什么”，一句话交代身份和题目，听众马上知道这是比赛演讲。"
+            },
+            {
+              "quote": "Our school is going to give us more time for sports",
+              "explain": "题面说学校“准备”增加体育活动时间，所以用 is going to，不写成已经实施，也不编具体时长和开始日期。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "描述现状：先说做法，再说后果。",
+          "items": [
+            {
+              "quote": "Many of us sit at our desks almost all day.",
+              "explain": "用 Many of us 而不是 You，演讲人把自己也算进去，听众不会觉得被批评。"
+            },
+            {
+              "quote": "As a result, more and more students feel sleepy in class and catch colds easily.",
+              "explain": "As a result 把“久坐熬夜”和“犯困感冒”连成因果，后果都是同学们身边看得见的事，比空说“身体变差”具体。"
+            },
+            {
+              "quote": "Our bodies are sending us a warning.",
+              "explain": "一句短句收住现状，顺势引出下一段的倡议。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "提出倡议，每条都落到同学们具体能做的事。",
+          "items": [
+            {
+              "quote": "First, let’s make full use of the extra sports time instead of staying in the classroom.",
+              "explain": "第一条倡议直接回应学校的新安排，instead of 点出同学们最可能的做法——留在教室里写作业。"
+            },
+            {
+              "quote": "find a sport you enjoy, such as running or basketball, and stick to it",
+              "explain": "用 such as 举出学生熟悉的运动，stick to it 说明要坚持，倡议就有了做法。"
+            },
+            {
+              "quote": "Let’s put health first and get moving together!",
+              "explain": "结尾用 Let’s 呼应题目 Health First，号召大家一起动起来，再接题面给的 Thank you for listening!"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "make full use of ...",
+          "function": "号召大家用好学校新增的体育活动时间，是本题倡议的核心动作。"
+        },
+        {
+          "expression": "stay up late doing homework",
+          "function": "具体写出学生熬夜写作业的现状，比 have bad habits 更能让听众对号入座。"
+        },
+        {
+          "expression": "put health first",
+          "function": "把演讲题目 Health First 变成动词短语，用在结尾号召里，前后呼应。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear teachers and fellow students,\nAs President of the Student Union, I am honoured to speak on “Health First”. Our school is going to give us more time for sports on campus, which is exactly what many of us need.\n\nLet’s be honest about how we live now. Most of us sit at our desks from morning till night, stay up late over piles of homework and rarely break a sweat. No wonder so many classmates yawn through morning lessons and catch every cold going around.\n\nSo here is my proposal. When the extra sports time comes, step away from your desks and head outdoors rather than squeezing in more homework. Pick an activity you truly enjoy, whether it is a ball game with friends or a few laps around the track, and keep at it. A stronger body will give us a clearer mind for study. Let’s put health first and keep moving!\nThank you for listening!",
+      "pointMap": [
+        {
+          "point": "描述现状",
+          "quote": "Most of us sit at our desks from morning till night, stay up late over piles of homework and rarely break a sweat."
+        },
+        {
+          "point": "提出倡议",
+          "quote": "When the extra sports time comes, step away from your desks and head outdoors rather than squeezing in more homework."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "stay up late over piles of homework and rarely break a sweat",
+          "explain": "用 piles of homework、break a sweat 这样的地道说法，把“作业多、几乎不出汗”写成画面，比标准版的 seldom exercise 更生动。"
+        },
+        {
+          "quote": "No wonder so many classmates yawn through morning lessons and catch every cold going around.",
+          "explain": "No wonder 把后果说成大家都见过的事，yawn through、catch every cold going around 比 feel sleepy、catch colds easily 更像真人说话。"
+        },
+        {
+          "quote": "When the extra sports time comes, step away from your desks and head outdoors rather than squeezing in more homework.",
+          "explain": "When ... comes 贴合学校“准备增加”的安排，squeezing in more homework 点破有人会拿体育时间补作业，倡议更有针对性。"
+        }
+      ]
+    }
+  }
+}

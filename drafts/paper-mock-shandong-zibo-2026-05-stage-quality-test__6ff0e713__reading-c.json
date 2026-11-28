@@ -1,0 +1,764 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c": {
+      "overview": "作者发现一位盲人女性主动用曲线表现轮子旋转，便设计实验，让盲人和视力正常者给五种轮辐线条配上运动。结果两组的理解几乎一致，说明盲人也能理解视觉隐喻。",
+      "fullTranslationZh": "近来的研究表明，盲人能够理解用轮廓和透视来描述物体及其他表面在空间中的排列，但图画远不只是对事物的如实再现。一位参与我研究的盲人女性主动画了一个正在旋转的轮子，这让我深刻地注意到了这一点。为了表现这种运动，她在圆圈里画了一条曲线（图1）。我大吃一惊。像她用的这种运动线条，在插画史上是很晚才出现的发明。\n我请其他几位盲人受试者画一个旋转的轮子，有几位把轮辐画成了曲线，并说这是暗示运动的隐喻方式。但比起断开的线、波浪线或其他任何线条，曲线真的是更好的表示方法吗？我决定做个测试。\n我制作了五个不同轮子的凸线图，轮辐的线条分别是弯曲的、折弯的、波浪形的、虚线的，以及伸出轮缘的。然后我请十八名盲人志愿者触摸这些轮子，并给每个轮子配上下列运动中的一种：摇摆、快速旋转、匀速旋转、抖动或刹车。我的对照组同样由十八名视力正常的大学生组成。\n大多数人猜测：弯曲的轮辐表示轮子在匀速旋转；波浪形的表示摇摆；折弯的表示抖动；伸出轮缘的表示刹车；虚线的则表示快速旋转。\n此外，在每一种情况下，视力正常者最认可的描述也正是盲人最认可的描述。视力正常者之间的一致程度只比盲人略高一点。显然，盲人不仅理解了每一种运动线条，而且作为一个群体，他们得出相同含义的频率和视力正常者一样高。这清楚地表明，盲人也能理解其他类型的视觉隐喻（图2）。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c-1",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5",
+          "sourceText": "Most guessed that the curved spokes indicated that the wheel was spinning steadily; the wavy suggested rocking; the bent indicated shaking; the spokes extending beyond the perimeter signified braking and the dashed indicated fast spinning.",
+          "displayText": "Most guessed that the curved spokes indicated that the wheel was spinning steadily; the wavy suggested rocking; the bent indicated shaking; the spokes extending beyond the perimeter signified braking and the dashed indicated fast spinning.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:29",
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:30"
+          ],
+          "translationZh": "大多数人猜测：弯曲的轮辐表示轮子在匀速旋转；波浪形的表示摇摆；折弯的表示抖动；伸出轮缘的表示刹车；虚线的则表示快速旋转。",
+          "analysisZh": "主干是 Most guessed that …（大多数人猜测……），that 引出 guessed 的宾语。宾语由五个并列的判断组成，前四个之间用分号隔开，最后两个用 and 连接：the curved spokes indicated that the wheel was spinning steadily、the wavy suggested rocking、the bent indicated shaking、the spokes extending beyond the perimeter signified braking、the dashed indicated fast spinning。the wavy、the bent、the dashed 后面都省略了 spokes；extending beyond the perimeter 是现在分词短语，修饰 the spokes。indicated、suggested、signified 都是“表示”，五组都是“哪种线条 → 哪种运动”，其中 the bent indicated shaking 说折弯的轮辐表示抖动。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 17,
+              "quote": "Most guessed that"
+            },
+            {
+              "start": 112,
+              "end": 138,
+              "quote": "the bent indicated shaking"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c-2",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7",
+          "sourceText": "Evidently, the blind not only understood each line of motion, but collectively came up with the same meaning as frequently as sighted subjects.",
+          "displayText": "Evidently, the blind not only understood each line of motion, but collectively came up with the same meaning as frequently as sighted subjects.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:29",
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:31"
+          ],
+          "translationZh": "显然，盲人不仅理解了每一种运动线条，而且作为一个群体，他们得出相同含义的频率和视力正常者一样高。",
+          "analysisZh": "主语是 the blind（盲人），后面带两个并列谓语，用 not only … but … 连接：一是 understood each line of motion（理解每一种运动线条），二是 collectively came up with the same meaning（作为一个群体得出相同的含义）。as frequently as sighted subjects 是比较状语，修饰 came up with，表示频率和视力正常者一样高。句首 Evidently 表示这是根据前面的数据得出的结论。",
+          "underlineRanges": [
+            {
+              "start": 21,
+              "end": 60,
+              "quote": "not only understood each line of motion"
+            },
+            {
+              "start": 62,
+              "end": 108,
+              "quote": "but collectively came up with the same meaning"
+            },
+            {
+              "start": 109,
+              "end": 142,
+              "quote": "as frequently as sighted subjects"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1"
+              ],
+              "start": 0,
+              "end": 151,
+              "quote": "近来的研究表明，盲人能够理解用轮廓和透视来描述物体及其他表面在空间中的排列，但图画远不只是对事物的如实再现。一位参与我研究的盲人女性主动画了一个正在旋转的轮子，这让我深刻地注意到了这一点。为了表现这种运动，她在圆圈里画了一条曲线（图1）。我大吃一惊。像她用的这种运动线条，在插画史上是很晚才出现的发明。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:3"
+              ],
+              "start": 152,
+              "end": 239,
+              "quote": "我请其他几位盲人受试者画一个旋转的轮子，有几位把轮辐画成了曲线，并说这是暗示运动的隐喻方式。但比起断开的线、波浪线或其他任何线条，曲线真的是更好的表示方法吗？我决定做个测试。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:4"
+              ],
+              "start": 240,
+              "end": 365,
+              "quote": "我制作了五个不同轮子的凸线图，轮辐的线条分别是弯曲的、折弯的、波浪形的、虚线的，以及伸出轮缘的。然后我请十八名盲人志愿者触摸这些轮子，并给每个轮子配上下列运动中的一种：摇摆、快速旋转、匀速旋转、抖动或刹车。我的对照组同样由十八名视力正常的大学生组成。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5"
+              ],
+              "start": 366,
+              "end": 426,
+              "quote": "大多数人猜测：弯曲的轮辐表示轮子在匀速旋转；波浪形的表示摇摆；折弯的表示抖动；伸出轮缘的表示刹车；虚线的则表示快速旋转。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7"
+              ],
+              "start": 427,
+              "end": 557,
+              "quote": "此外，在每一种情况下，视力正常者最认可的描述也正是盲人最认可的描述。视力正常者之间的一致程度只比盲人略高一点。显然，盲人不仅理解了每一种运动线条，而且作为一个群体，他们得出相同含义的频率和视力正常者一样高。这清楚地表明，盲人也能理解其他类型的视觉隐喻（图2）。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-c-q28-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1",
+                "start": 370,
+                "end": 427,
+                "quote": "To show this motion, she traced a curve inside the circle"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1",
+                "start": 457,
+                "end": 559,
+                "quote": "Lines of motion, such as the one she used, are a very recent invention in the history of illustration."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 94,
+                "end": 114,
+                "quote": "为了表现这种运动，她在圆圈里画了一条曲线"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 125,
+                "end": 151,
+                "quote": "像她用的这种运动线条，在插画史上是很晚才出现的发明。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q29-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5",
+                "start": 0,
+                "end": 239,
+                "quote": "Most guessed that the curved spokes indicated that the wheel was spinning steadily; the wavy suggested rocking; the bent indicated shaking; the spokes extending beyond the perimeter signified braking and the dashed indicated fast spinning."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7",
+                "start": 182,
+                "end": 325,
+                "quote": "Evidently, the blind not only understood each line of motion, but collectively came up with the same meaning as frequently as sighted subjects."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 0,
+                "end": 60,
+                "quote": "大多数人猜测：弯曲的轮辐表示轮子在匀速旋转；波浪形的表示摇摆；折弯的表示抖动；伸出轮缘的表示刹车；虚线的则表示快速旋转。"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 55,
+                "end": 103,
+                "quote": "显然，盲人不仅理解了每一种运动线条，而且作为一个群体，他们得出相同含义的频率和视力正常者一样高。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q30-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5",
+                "start": 0,
+                "end": 239,
+                "quote": "Most guessed that the curved spokes indicated that the wheel was spinning steadily; the wavy suggested rocking; the bent indicated shaking; the spokes extending beyond the perimeter signified braking and the dashed indicated fast spinning."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 0,
+                "end": 60,
+                "quote": "大多数人猜测：弯曲的轮辐表示轮子在匀速旋转；波浪形的表示摇摆；折弯的表示抖动；伸出轮缘的表示刹车；虚线的则表示快速旋转。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-q31-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7",
+                "start": 326,
+                "end": 408,
+                "quote": "This makes it clear that the blind also understand other kinds of visual metaphors"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 103,
+                "end": 125,
+                "quote": "这清楚地表明，盲人也能理解其他类型的视觉隐喻"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:29",
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:30"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5",
+                "start": 0,
+                "end": 239,
+                "quote": "Most guessed that the curved spokes indicated that the wheel was spinning steadily; the wavy suggested rocking; the bent indicated shaking; the spokes extending beyond the perimeter signified braking and the dashed indicated fast spinning."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 0,
+                "end": 60,
+                "quote": "大多数人猜测：弯曲的轮辐表示轮子在匀速旋转；波浪形的表示摇摆；折弯的表示抖动；伸出轮缘的表示刹车；虚线的则表示快速旋转。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-c-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:29",
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7",
+                "start": 182,
+                "end": 325,
+                "quote": "Evidently, the blind not only understood each line of motion, but collectively came up with the same meaning as frequently as sighted subjects."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 55,
+                "end": 103,
+                "quote": "显然，盲人不仅理解了每一种运动线条，而且作为一个群体，他们得出相同含义的频率和视力正常者一样高。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者先讲一位盲人女性主动用曲线画出旋转的轮子，令他吃惊；再讲其他盲人也用曲线表示运动，由此提出问题并决定测试；接着交代实验设计和结果；最后与对照组比较，得出盲人也能理解视觉隐喻的结论。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1",
+            "summary": "盲人女性主动在圆里画曲线表现轮子转动，作者吃惊，因为运动线条在插画史上出现得很晚",
+            "function": "由一件事引出话题"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:3",
+            "summary": "其他盲人也把轮辐画成曲线来暗示运动，作者想知道曲线是否比别的线条更好，决定测试",
+            "function": "提出研究问题"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:4",
+            "summary": "五种轮辐线条的凸线图，十八名盲人摸图配运动，十八名视力正常的大学生作对照组",
+            "function": "交代实验设计"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5",
+            "summary": "多数人给五种线条配出了五种不同的运动",
+            "function": "报告实验结果"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7",
+            "summary": "两组最认可的描述完全一致，盲人理解运动线条的程度与视力正常者相当，也能理解其他视觉隐喻",
+            "function": "比较两组并得出结论"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:28": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出盲人女性画轮子时的哪一点让作者吃惊。",
+      "stemTranslationZh": "作者为什么对那位盲人女性感到吃惊？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句看她画了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "她按指示画了一个粗略的圆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "This fact was drawn to my attention dramatically when a blind woman in my investigation decided on her own initiative to draw a wheel as it was spinning.",
+            "sourceHighlight": "on her own initiative",
+            "optionText": "She drew a rough circle by instructions.",
+            "optionHighlight": "by instructions",
+            "explanation": "她是自己主动（on her own initiative）画旋转的轮子，不是照指示画；让作者吃惊的是圆里那条曲线，不是圆本身。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "decided on her own initiative to draw a wheel as it was spinning",
+              "anchor": "主动画轮子",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "她用了一个表示运动的符号。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "To show this motion, she traced a curve inside the circle",
+              "anchor": "用曲线表现转动",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1"
+            },
+            {
+              "role": "supporting",
+              "quote": "Lines of motion, such as the one she used, are a very recent invention in the history of illustration.",
+              "anchor": "运动线条出现很晚",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "她不明白轮子是什么样子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "She did not understand what a wheel looked like.",
+            "explanation": "原文没说她不懂轮子的样子；她画出了轮子，还用曲线表现它在转，理解得很到位。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "她是第一个使用运动线条的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Lines of motion, such as the one she used, are a very recent invention in the history of illustration.",
+            "sourceHighlight": "a very recent invention",
+            "optionText": "She was the first person to use lines of motion.",
+            "optionHighlight": "the first person",
+            "explanation": "原文只说运动线条在插画史上发明得很晚（very recent invention），这种画法早已有人发明，没说她是第一个用的人。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "Lines of motion, such as the one she used, are a very recent invention in the history of illustration.",
+              "anchor": "运动线条出现很晚",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "surprised",
+          "sourceRole": "stem",
+          "targetText": "I was taken aback.",
+          "relationType": "locationCue",
+          "targetCue": "taken aback",
+          "sourceZh": "感到吃惊",
+          "targetCueZh": "大吃一惊",
+          "answerText": "To show this motion, she traced a curve inside the circle",
+          "bridgeZh": "吃惊紧跟在她的画法之后，起因就在她怎么画",
+          "note": "题干 surprised 对应原文 taken aback。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1"
+        },
+        {
+          "sourceText": "a symbol representing movement",
+          "sourceRole": "correctOption",
+          "targetText": "she traced a curve inside the circle",
+          "relationType": "paraphrase",
+          "note": "选项的“表示运动的符号”就是她在圆里画的那条曲线（traced a curve），用来表现轮子在转；而这种运动线条在插画史上很晚才出现（very recent invention），盲人能自己用上，作者才吃惊，选 B。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "根据实验结果判断作者对受测盲人有什么发现。",
+      "stemTranslationZh": "关于接受测试的盲人，作者有什么发现？",
+      "locateBy": "options",
+      "locateFindZh": "把各项说法带回实验结果，看盲人怎样理解线条",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们把线条理解为不同运动的符号。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "Evidently, the blind not only understood each line of motion, but collectively came up with the same meaning as frequently as sighted subjects.",
+              "anchor": "盲人理解运动线条",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7"
+            },
+            {
+              "role": "supporting",
+              "quote": "Most guessed that the curved spokes indicated that the wheel was spinning steadily; the wavy suggested rocking; the bent indicated shaking; the spokes extending beyond the perimeter signified braking and the dashed indicated fast spinning.",
+              "anchor": "线条与运动的对应",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们主要依靠经验来理解运动的物体。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They relied mainly on experience to interpret moving objects.",
+            "explanation": "原文没讲盲人靠经验理解运动的物体；实验是让他们摸凸线图，再给每种线条配一种运动。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "描述运动时，他们更喜欢曲线而不是别的线条。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "curved lines",
+            "optionText": "curved lines",
+            "matchType": "exact",
+            "relationNote": "curved lines 来自 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:3|several showed the wheels spokes]]，那只是测试前几位盲人的画法；测试结果是不同线条各配一种运动，没说他们偏爱曲线。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "several showed the wheels spokes（轮辐）as curved lines",
+              "anchor": "几位盲人画成曲线",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:3"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们比视力正常者更擅长识别视觉隐喻。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "The agreement among the sighted was barely higher than the blind.",
+            "sourceHighlight": "barely higher",
+            "optionText": "They were better at recognizing visual metaphors than the sighted.",
+            "optionHighlight": "better at recognizing visual metaphors than the sighted",
+            "explanation": "视力正常者之间的一致程度只比盲人略高（barely higher），盲人与他们相当、略低一点，不是比他们强。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "The agreement among the sighted was barely higher than the blind.",
+              "anchor": "视力正常者略高",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "understood lines as symbols of different motions",
+          "sourceRole": "correctOption",
+          "targetText": "the blind not only understood each line of motion",
+          "relationType": "paraphrase",
+          "note": "两处合起来：[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5]] 写受测者给五种线条各配了一种运动，如弯曲的轮辐表示匀速旋转；[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7|the blind not only understood each line of motion]] 说盲人理解了每一种运动线条。选项的“把线条理解为不同运动的符号”就是这两层意思，选 A。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:30": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "按实验结果里线条和运动的对应关系，挑出表示抖动的轮子图。",
+      "stemTranslationZh": "盲人会画哪幅图来表示抖动？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "图 A：轮辐画成虚线的轮子",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the dashed indicated fast spinning",
+            "sourceEntity": "fast spinning",
+            "explanation": "轮辐画成虚线，原文说虚线（the dashed）表示快速旋转，不是抖动。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "the dashed indicated fast spinning",
+              "anchor": "虚线表示快转",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "图 B：轮辐为几条交叉直线的轮子",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "Most guessed that the curved spokes indicated that the wheel was spinning steadily; the wavy suggested rocking; the bent indicated shaking; the spokes extending beyond the perimeter signified braking and the dashed indicated fast spinning.",
+              "anchor": "线条与运动的对应",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "图 C：轮辐弯成弧线的轮子",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the curved spokes indicated that the wheel was spinning steadily",
+            "sourceEntity": "spinning steadily",
+            "explanation": "轮辐弯成弧线，原文说弯曲的轮辐（the curved spokes）表示轮子在匀速旋转。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "the curved spokes indicated that the wheel was spinning steadily",
+              "anchor": "弯曲表示匀速转",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "图 D：圆内画着几条波浪线的轮子",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the wavy suggested rocking",
+            "sourceEntity": "rocking",
+            "explanation": "圆里画的是波浪线，原文说波浪形的（the wavy）表示摇摆（rocking），不是抖动。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "the wavy suggested rocking",
+              "anchor": "波浪表示摇摆",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "shaking",
+          "sourceRole": "stem",
+          "targetText": "Most guessed that the curved spokes indicated that the wheel was spinning steadily; the wavy suggested rocking; the bent indicated shaking; the spokes extending beyond the perimeter signified braking and the dashed indicated fast spinning.",
+          "relationType": "locationCue",
+          "answerText": "the bent indicated shaking",
+          "note": "题干 shaking 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5"
+        },
+        {
+          "sourceText": "图 B",
+          "sourceRole": "correctOption",
+          "targetText": "the bent indicated shaking",
+          "relationType": "paraphrase",
+          "note": "原文说折弯的轮辐（the bent）表示抖动。先排除另三幅：A 是虚线，表示快速旋转；C 是弯曲的轮辐，表示匀速旋转；D 是波浪线，表示摇摆。剩下的 B 就是表示抖动的图，选 B。B 图轮辐的弯折画得不明显，用排除法确认更稳妥。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括全文的研究对象和结论，选出最贴切的标题。",
+      "stemTranslationZh": "本文最好的标题是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1]] 盲人女性画运动线条读起，看 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7]] 最后得出什么结论",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "旋转的轮子：艺术创作中的一个题材",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I created raised-line drawings of five different wheels",
+            "sourceEntity": "five different wheels",
+            "optionText": "Spinning Wheels:A Topic in Art Creation",
+            "optionEntity": "Spinning Wheels",
+            "explanation": "旋转的轮子只是实验用的画题（five different wheels），文章关心的是盲人能否读懂线条表示的运动，不是艺术创作。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "I created raised-line drawings of five different wheels",
+              "anchor": "实验用图",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:4"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "视力正常者与盲人：一项比较研究",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "My control group also consisted of eighteen sighted undergraduates.",
+            "sourceHighlight": "control group",
+            "optionText": "Sighted and Blind:A Comparative Research",
+            "optionHighlight": "A Comparative Research",
+            "explanation": "视力正常的大学生只是对照组（control group），比较是为了证明盲人也能理解运动线条，重点不在两组的对比。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "My control group also consisted of eighteen sighted undergraduates.",
+              "anchor": "对照组",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:4"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "视觉隐喻：盲人也能理解",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "This makes it clear that the blind also understand other kinds of visual metaphors",
+              "anchor": "结论",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7"
+            },
+            {
+              "role": "supporting",
+              "quote": "describing them as metaphorical（隐喻的）ways of suggesting motion",
+              "anchor": "曲线是隐喻",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:3"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "运动线条：插画中的一项新发明",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "invention",
+            "optionText": "Invention",
+            "matchType": "exact",
+            "relationNote": "invention 出自 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1|a very recent invention]]，那只是交代运动线条出现得晚，说明她的画法为何让人吃惊；全文讲的是盲人能理解这类线条。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "Lines of motion, such as the one she used, are a very recent invention in the history of illustration.",
+              "anchor": "运动线条出现很晚",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Visual Metaphors: Accessible to the Blind",
+          "sourceRole": "correctOption",
+          "targetText": "This makes it clear that the blind also understand other kinds of visual metaphors",
+          "relationType": "paraphrase",
+          "note": "全文从盲人女性用曲线表现转动写起，再用实验证明盲人能读懂各种运动线条，最后推到盲人也能理解其他视觉隐喻（visual metaphors）。运动线条本身就是一种视觉隐喻（metaphorical ways），这个标题把几层都包住了，选 C。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7"
+        }
+      ]
+    }
+  }
+}

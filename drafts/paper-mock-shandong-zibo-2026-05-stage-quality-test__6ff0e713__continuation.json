@@ -1,0 +1,193 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: I was lost in painting, recreating the elderly lady from my memory. I propped the sketchbook beside the canvas and squeezed fresh paint onto the palette. This time my brush no longer felt heavy. I began with her bent back and the knitting in her lap, then her wrinkled hands. The hardest part was her smile. Twice I painted it and twice I wiped it away, because it looked only happy. Then I remembered the two kids with their ice cream and the faraway look in her eyes. I added a little sadness to the corners of her lips, and suddenly the smile was hers. Night fell, but I kept painting, afraid that the feeling would fade if I stopped.\n\nParagraph 2: Sunlight flooded my studio as I finished the painting. I put down my brush and stepped back. On the canvas, the old lady sat in the untidy square, smiling at something only she could see. The canvas that had laughed at me the day before now seemed to smile back. I had searched museums and books for inspiration, but it had been waiting for me on an ordinary afternoon on a city bench. I signed my name in the corner and placed the painting at the front of my collection. Then I opened my sketchbook to a fresh page, ready to go back to the streets.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写里动笔的是叙述者“我”，一个为申请艺术学校发愁、几周画不出东西的学画学生；广场上的老太太只出现在“我”的记忆和画里。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "“我”用第一人称、一般过去时讲述，句子中等长，大量写看到的画面和心里的感受，全文没有一句直接引语。续写照样用第一人称过去时，不写对话，靠作画的动作和画面写出感受。",
+          "evidence": [
+            "I let out a deep sigh of frustration, the sound filling the silent studio."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在“我”冲回画室、终于准备好动笔：灵感有了，可那幅要放进申请作品集的代表作还是一张空白画布。续写要让“我”把那一刻画出来，并回应开头那张“嘲笑”自己的画布。",
+          "evidence": [
+            "Yet my mind was just as empty as the canvas before me."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "叙述者，准备报考艺术学校的学画学生",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "想画出申请艺术学校用的代表作。",
+              "evidence": "This painting was meant to be my masterpiece"
+            },
+            {
+              "label": "表现",
+              "text": "几周里逛博物馆、翻画册、去公园散步，什么都打动不了自己。",
+              "evidence": "Every idea felt dull and unoriginal."
+            },
+            {
+              "label": "此刻",
+              "text": "速写本上已经画下老人，心跳很快地赶回画室，准备开画。",
+              "evidence": "I was finally ready to paint."
+            }
+          ]
+        },
+        {
+          "name": "广场上的老太太",
+          "role": "陌生人，“我”的灵感来源",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "一边织东西，一边看两个孩子分吃冰淇淋，笑里带着回忆和怀念。",
+              "evidence": "Her pale eyes stared at two kids laughing and sharing an ice cream."
+            },
+            {
+              "label": "此刻",
+              "text": "始终没发现“我”在画她，已经走进人群。",
+              "evidence": "She never noticed me."
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "its endless white surface seeming to laugh at my stubborn creative block",
+          "use": "第 2 段：画完后让这张曾经“嘲笑”我的画布换了样子，首尾呼应，说明问题解决了。"
+        },
+        {
+          "sourceQuote": "not just simple joy, but a mix of memory, longing for the past, and love remembered",
+          "use": "第 1 段：画笑容时只画出快乐就不像她，要改到带上回忆和怀念才算画对，作画就有了一个具体的难点。"
+        },
+        {
+          "sourceQuote": "the key work in my collection for art school applications",
+          "use": "第 2 段：画完后把它放进作品集，交代代表作有了着落。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "“我”凭记忆和速写本画老人，卡在她的笑上，想起孩子和冰淇淋才画对，一直画到天亮；画完后看着画想明白灵感从哪来，把它放进作品集，再带着速写本准备出门。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "写“我”凭记忆画老人的过程。第二段段首说画完时阳光照满画室，所以第一段结尾画还没完成，“我”还在画，而且要有时间在流逝；画到傍晚还是画到第二天早上，可以自己选。",
+          "draft": "把速写本放在画布旁、挤上新颜料，画笔不再沉重；先画身形和双手，笑容画了两次都只有快乐，想起孩子和冰淇淋、她望向过去的眼神后，给嘴角添一点伤感才画对；天黑了也没停，一直画下去。",
+          "bridgeQuote": "Sunlight flooded my studio as I finished the painting.",
+          "bridge": "阳光照进来时画刚好完成，第一段要停在画到哪一步、过了多久？"
+        },
+        {
+          "paragraph": 2,
+          "must": "从画完写起，收住原文的问题：空白画布有了作品，几周找不到的灵感有了答案。",
+          "draft": "放下画笔后退看画，觉得曾经嘲笑我的画布在对我笑；想到灵感原来在一个平常的下午、一张长椅上；签名后把画放在作品集最前面，再翻开速写本新的一页，准备回到街头。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: I was lost in painting, recreating the elderly lady from my memory. I propped the sketchbook beside the canvas and squeezed fresh paint onto the palette. This time my brush no longer felt heavy. I began with her bent back and the knitting in her lap, then her wrinkled hands. The hardest part was her smile. Twice I painted it and twice I wiped it away, because it looked only happy. Then I remembered the two kids with their ice cream and the faraway look in her eyes. I added a little sadness to the corners of her lips, and suddenly the smile was hers. Night fell, but I kept painting, afraid that the feeling would fade if I stopped.\n\nParagraph 2: Sunlight flooded my studio as I finished the painting. I put down my brush and stepped back. On the canvas, the old lady sat in the untidy square, smiling at something only she could see. The canvas that had laughed at me the day before now seemed to smile back. I had searched museums and books for inspiration, but it had been waiting for me on an ordinary afternoon on a city bench. I signed my name in the corner and placed the painting at the front of my collection. Then I opened my sketchbook to a fresh page, ready to go back to the streets.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写作画过程：状态变了，遇到一个难点，解决它，并让时间走到夜里。",
+          "items": [
+            {
+              "quote": "This time my brush no longer felt heavy.",
+              "explain": "回扣原文开头 “My brush felt heavy and lifeless”，用画笔的手感写出“我”的状态变了，不用直说“我有灵感了”。"
+            },
+            {
+              "quote": "Twice I painted it and twice I wiped it away, because it looked only happy.",
+              "explain": "原文强调她的笑 “not just simple joy”，所以只画出快乐就不像她。给作画设一个小难点，过程才不是一句“我画得很顺利”。"
+            },
+            {
+              "quote": "I added a little sadness to the corners of her lips, and suddenly the smile was hers.",
+              "explain": "难点靠一个具体动作解决，触发它的是上一句想起孩子和冰淇淋，因果不跳步；“was hers” 说明画像终于像她本人。"
+            },
+            {
+              "quote": "Night fell, but I kept painting, afraid that the feeling would fade if I stopped.",
+              "explain": "画还没完成，天已经黑了，“我”还在画，第二段段首的阳光就顺理成章地成了第二天早上。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "画完后回看作品，收住空白画布和找灵感两件事，落在具体动作上。",
+          "items": [
+            {
+              "quote": "The canvas that had laughed at me the day before now seemed to smile back.",
+              "explain": "接住原文开头画布“嘲笑”我的说法，从 laugh at 换成 smile back，一句话写出问题已经解决。"
+            },
+            {
+              "quote": "but it had been waiting for me on an ordinary afternoon on a city bench",
+              "explain": "点到灵感从哪来，但落在“平常的下午、城里的长椅”这些原文里有的东西上，不贴一句空泛的道理。"
+            },
+            {
+              "quote": "placed the painting at the front of my collection",
+              "explain": "回应原文 “the key work in my collection for art school applications”，代表作有了着落。"
+            },
+            {
+              "quote": "Then I opened my sketchbook to a fresh page, ready to go back to the streets.",
+              "explain": "结尾落在一个动作上，用原文的速写本收尾，暗示“我”找到了以后继续找灵感的路。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "squeeze fresh paint onto the palette",
+          "function": "开画前的具体动作，和原文调色板上干成硬块的颜料形成对比，写出“重新开始”。"
+        },
+        {
+          "expression": "wipe ... away",
+          "function": "写画错后擦掉重来，把“画得不满意”变成看得见的动作。"
+        },
+        {
+          "expression": "Night fell, but I kept painting",
+          "function": "交代时间流逝，连起第一段的夜和第二段的阳光，也写出“我”舍不得停笔。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就把画画完，甚至写完画后的心情",
+          "why": "第二段段首 “as I finished the painting” 才是画完的时刻，第一段提前写掉，两段就接不上。"
+        },
+        {
+          "pitfall": "让老太太再次出现、来画室看画，或新添有名字的老师、评委来夸画",
+          "why": "原文说 “She never noticed me” 她已经走进人群；新人物来推动结局，就成了天降的帮助，也抢了“我”的戏。"
+        },
+        {
+          "pitfall": "结尾写“生活处处有灵感，我们要热爱生活”这类大道理",
+          "why": "这句话放在任何故事后面都成立，不推进情节；应落在签名、放进作品集、翻开速写本这类具体动作上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: I was lost in painting, recreating the elderly lady from my memory. With my sketchbook propped against the easel, I scraped the dried blobs off the palette and squeezed out fresh colours. The brush that had hung so heavily in my hand now moved almost on its own. I roughed in her bent shoulders and the half-finished knitting in her lap, then worked slowly on her hands, building up the wrinkles with warm browns and touches of gold. Her smile, though, refused to come. Twice I painted it, and twice I wiped it off, because it showed nothing but simple happiness. Closing my eyes, I pictured the two kids sharing their ice cream and the faraway look in her pale eyes. With the tip of a fine brush, I lifted one corner of her mouth and softened the other, and at last she was smiling the way she had in the square. Night crept over the window, but I painted on, afraid the feeling would slip away if I paused.\n\nParagraph 2: Sunlight flooded my studio as I finished the painting. I set down my brush and stepped back, my eyes stinging from the long night. There she was on her bench in the untidy square, her needles resting in her lap, her smile holding memory, longing and love all at once. The white surface that had once seemed to mock me was gone; in its place was a whole life of stories. For weeks I had hunted for inspiration in museums and books, never guessing it would be waiting for me on a city bench. I signed my name in the corner and moved the painting to the front of my collection. Then I tucked the sketchbook into my jacket pocket, ready for the streets again.",
+      "beyondStandard": [
+        {
+          "quote": "I scraped the dried blobs off the palette and squeezed out fresh colours",
+          "explain": "接住原文 “drying into hard blobs” 的细节：先刮掉干颜料再挤新的，比标准版只写挤颜料更具体，也更贴原文。"
+        },
+        {
+          "quote": "With the tip of a fine brush, I lifted one corner of her mouth and softened the other",
+          "explain": "把“添一点伤感”拆成两个细小的笔触动作，lift、soften 是画画时真会用的动词，比 added a little sadness 更像画家写的。"
+        },
+        {
+          "quote": "The white surface that had once seemed to mock me was gone; in its place was a whole life of stories.",
+          "explain": "同时回扣原文开头的 “endless white surface” 和写老人笑容的 “a whole life of stories”，用原文的两处细节收住全文。"
+        }
+      ]
+    }
+  }
+}

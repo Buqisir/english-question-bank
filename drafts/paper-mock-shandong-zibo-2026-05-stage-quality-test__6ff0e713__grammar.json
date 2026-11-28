@@ -1,0 +1,1049 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill": {
+      "overview": "文章介绍良渚古城遗址出土的玉器及其意义：精美玉器表明良渚是技术先进的发达社会，其历史比商朝早近两千年，改变了人们对中华文明起源的认识；遗址已于2019年列入世界遗产名录。",
+      "fullTranslationZh": "在良渚古城发现的一件非凡玉雕，可能掌握着理解一个古老文明的钥匙，这个文明早于许多历史学家原本认为的中国最古老的文明。\n良渚遗址位于长江下游流域，出土了展现精湛工艺的非凡玉器。这些发现表明，良渚不仅仅是一个聚居地，而是一个拥有先进技术能力的发达社会。这些玉器，尤其是璧、琮等独具特色的珍品，揭示出一个艺术传统高度发达的文明。这些发现促使学者们重新思考关于中国历史的一些基本假设。\n良渚文化代表着我们对早期中华文明认识的一次重大转变。它表明，复杂社会曾在以往被视为中华文明发展边缘的地区繁荣发展。遗址占地300多万平方米，拥有城墙和水利系统等令人惊叹的建筑。良渚真正了不起的地方在于，它比商朝早了近两千年。良渚的发现改变了我们对中华文明最早何时出现的认识。\n2019年，良渚古城遗址被列入联合国教科文组织《世界遗产名录》，其全球意义由此得到认可。如今，这处遗址吸引着来自世界各地的研究者和游客。这些玉器是最伟大的中国古代文明的见证。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "grammar-ls-1",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+          "sourceText": "A remarkable jade carving (玉雕) __56__ (discover) at Liangzhu ancient city may hold the key to understanding an ancient civilization that predates (早于) what many historians believed to be China's oldest.",
+          "displayText": "A remarkable jade carving (玉雕) discovered at Liangzhu ancient city may hold the key to understanding an ancient civilization that predates (早于) what many historians believed to be China's oldest.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:56"
+          ],
+          "translationZh": "在良渚古城发现的一件非凡玉雕，可能掌握着理解一个古老文明的钥匙，这个文明早于许多历史学家原本认为的中国最古老的文明。",
+          "analysisZh": "主干是「一件玉雕可能掌握着钥匙」（A remarkable jade carving … may hold the key）。discovered at Liangzhu ancient city 是过去分词短语作后置定语，修饰 jade carving。the key to understanding … 里的 to 是介词，后接动名词 understanding。that predates … 是定语从句，修饰 an ancient civilization；从句中 predates 的宾语是 what 引导的名词性从句，可还原为 many historians believed something to be China's oldest（许多历史学家认为某个文明是中国最古老的），China's oldest 后面省略了 civilization。",
+          "underlineRanges": [
+            {
+              "quote": "A remarkable jade carving",
+              "start": 0,
+              "end": 25
+            },
+            {
+              "quote": "may hold the key",
+              "start": 67,
+              "end": 83
+            },
+            {
+              "quote": "what many historians believed to be China's oldest",
+              "start": 144,
+              "end": 194
+            }
+          ]
+        },
+        {
+          "sentenceId": "grammar-ls-2",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+          "sourceText": "__62__ makes Liangzhu truly remarkable is that it predates the Shang Dynasty __63__ nearly two thousand years.",
+          "displayText": "What makes Liangzhu truly remarkable is that it predates the Shang Dynasty by nearly two thousand years.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:62",
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:63"
+          ],
+          "translationZh": "良渚真正了不起的地方在于，它比商朝早了近两千年。",
+          "analysisZh": "整句是「主语从句 + is + 表语从句」：What makes Liangzhu truly remarkable 作主语，is 是系动词，that it predates the Shang Dynasty by nearly two thousand years 作表语。表语从句里 it 指良渚，by nearly two thousand years 说明它比商朝早出多少年。",
+          "underlineRanges": [
+            {
+              "quote": "What makes Liangzhu truly remarkable",
+              "start": 0,
+              "end": 36
+            },
+            {
+              "quote": "is that",
+              "start": 37,
+              "end": 44
+            },
+            {
+              "quote": "by nearly two thousand years",
+              "start": 75,
+              "end": 103
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 58,
+              "quote": "在良渚古城发现的一件非凡玉雕，可能掌握着理解一个古老文明的钥匙，这个文明早于许多历史学家原本认为的中国最古老的文明。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2"
+              ],
+              "start": 59,
+              "end": 188,
+              "quote": "良渚遗址位于长江下游流域，出土了展现精湛工艺的非凡玉器。这些发现表明，良渚不仅仅是一个聚居地，而是一个拥有先进技术能力的发达社会。这些玉器，尤其是璧、琮等独具特色的珍品，揭示出一个艺术传统高度发达的文明。这些发现促使学者们重新思考关于中国历史的一些基本假设。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3"
+              ],
+              "start": 189,
+              "end": 326,
+              "quote": "良渚文化代表着我们对早期中华文明认识的一次重大转变。它表明，复杂社会曾在以往被视为中华文明发展边缘的地区繁荣发展。遗址占地300多万平方米，拥有城墙和水利系统等令人惊叹的建筑。良渚真正了不起的地方在于，它比商朝早了近两千年。良渚的发现改变了我们对中华文明最早何时出现的认识。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4"
+              ],
+              "start": 327,
+              "end": 414,
+              "quote": "2019年，良渚古城遗址被列入联合国教科文组织《世界遗产名录》，其全球意义由此得到认可。如今，这处遗址吸引着来自世界各地的研究者和游客。这些玉器是最伟大的中国古代文明的见证。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+            "text": "A remarkable jade carving (玉雕) discovered at Liangzhu ancient city may hold the key to understanding an ancient civilization that predates (早于) what many historians believed to be China's oldest."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+            "text": "Located in the lower Yangtze River Basin, the site has revealed extraordinary jade artifacts demonstrating delicate craftsmanship. The discoveries suggest that Liangzhu was not merely a settlement but a developed society with advanced technological abilities. The jade artifacts, particularly the distinctive treasures like bi discs and cong tubes, reveal a civilization with highly developed artistic traditions. These findings have inspired scholars to reconsider fundamental assumptions about Chinese history."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+            "text": "The Liangzhu culture represents a significant change in our understanding of early Chinese civilization. It demonstrates that complex societies flourished in regions previously considered peripheral(周边的) to the development of Chinese civilization. The site, covering an area of over 3 million square meters, contains impressive structures including city walls and a water management system. What makes Liangzhu truly remarkable is that it predates the Shang Dynasty by nearly two thousand years. The discoveries at Liangzhu have changed our understanding of when Chinese civilization first emerged."
+          },
+          {
+            "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+            "text": "In 2019, the Liangzhu ruins were added (was added) to the UNESCO World Heritage List, recognizing its global significance. Today, the site attracts researchers and tourists from around the world. These jade artifacts serve as evidence of the greatest ancient Chinese civilization."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "start": 0,
+                "end": 25,
+                "quote": "A remarkable jade carving"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "start": 74,
+                "end": 90,
+                "quote": "may hold the key"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "start": 8,
+                "end": 14,
+                "quote": "一件非凡玉雕"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "start": 15,
+                "end": 20,
+                "quote": "可能掌握着"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:56"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "start": 31,
+                "end": 41,
+                "quote": "discovered"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "start": 5,
+                "end": 8,
+                "quote": "发现的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 64,
+                "end": 92,
+                "quote": "extraordinary jade artifacts"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 42,
+                "end": 63,
+                "quote": "the site has revealed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 23,
+                "end": 27,
+                "quote": "非凡玉器"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 13,
+                "end": 16,
+                "quote": "出土了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:57"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 93,
+                "end": 106,
+                "quote": "demonstrating"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 16,
+                "end": 18,
+                "quote": "展现"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 180,
+                "end": 203,
+                "quote": "not merely a settlement"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 211,
+                "end": 230,
+                "quote": "a developed society"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 37,
+                "end": 46,
+                "quote": "不仅仅是一个聚居地"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 60,
+                "end": 64,
+                "quote": "发达社会"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:58"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 197,
+                "end": 200,
+                "quote": "but"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 47,
+                "end": 49,
+                "quote": "而是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 325,
+                "end": 363,
+                "quote": "treasures like bi discs and cong tubes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 73,
+                "end": 77,
+                "quote": "璧、琮等"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:59"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 297,
+                "end": 308,
+                "quote": "distinctive"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 77,
+                "end": 82,
+                "quote": "独具特色的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 445,
+                "end": 467,
+                "quote": "have inspired scholars"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 106,
+                "end": 111,
+                "quote": "促使学者们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:60"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 452,
+                "end": 465,
+                "quote": "to reconsider"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+                "start": 111,
+                "end": 115,
+                "quote": "重新思考"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 39,
+                "end": 57,
+                "quote": "significant change"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 21,
+                "end": 25,
+                "quote": "重大转变"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:61"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 32,
+                "end": 33,
+                "quote": "a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 19,
+                "end": 21,
+                "quote": "一次"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 403,
+                "end": 442,
+                "quote": "makes Liangzhu truly remarkable is that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 88,
+                "end": 100,
+                "quote": "良渚真正了不起的地方在于"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:62"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 391,
+                "end": 395,
+                "quote": "What"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 92,
+                "end": 98,
+                "quote": "了不起的地方"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 480,
+                "end": 505,
+                "quote": "nearly two thousand years"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 107,
+                "end": 111,
+                "quote": "近两千年"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:63"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 466,
+                "end": 468,
+                "quote": "by"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 105,
+                "end": 111,
+                "quote": "早了近两千年"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 0,
+                "end": 7,
+                "quote": "In 2019"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 9,
+                "end": 27,
+                "quote": "the Liangzhu ruins"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 0,
+                "end": 5,
+                "quote": "2019年"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 6,
+                "end": 12,
+                "quote": "良渚古城遗址"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:64"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 28,
+                "end": 50,
+                "quote": "were added (was added)"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 12,
+                "end": 15,
+                "quote": "被列入"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 100,
+                "end": 119,
+                "quote": "global significance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 33,
+                "end": 37,
+                "quote": "全球意义"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:65"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 98,
+                "end": 101,
+                "quote": "its"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+                "start": 32,
+                "end": 33,
+                "quote": "其"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:56"
+            ],
+            "selectedSentenceId": "grammar-ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "start": 0,
+                "end": 25,
+                "quote": "A remarkable jade carving"
+              },
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "start": 67,
+                "end": 83,
+                "quote": "may hold the key"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+                "start": 0,
+                "end": 58,
+                "quote": "在良渚古城发现的一件非凡玉雕，可能掌握着理解一个古老文明的钥匙，这个文明早于许多历史学家原本认为的中国最古老的文明。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:62",
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:63"
+            ],
+            "selectedSentenceId": "grammar-ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 391,
+                "end": 495,
+                "quote": "What makes Liangzhu truly remarkable is that it predates the Shang Dynasty by nearly two thousand years."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+                "start": 88,
+                "end": 112,
+                "quote": "良渚真正了不起的地方在于，它比商朝早了近两千年。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:56": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "discover",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "discovered",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "passive-relation"
+        ]
+      },
+      "reason": "空格作后置定语，修饰主语「玉雕」（jade carving），这句的谓语已经是「可能掌握」（may hold）。玉雕是被人发现的，与发现是被动关系，用过去分词（discovered）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "A remarkable jade carving",
+          "signalSide": "passage",
+          "relation": "被修饰的是玉雕，它是被发现的对象。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "may hold the key",
+          "signalSide": "passage",
+          "relation": "句子已有谓语，空格只能用非谓语形式。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:57": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "demonstrate",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "demonstrating",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-participle",
+        "features": [
+          "postposed",
+          "active-relation"
+        ]
+      },
+      "reason": "空格作后置定语，修饰「玉器」（jade artifacts），这句的谓语是「出土了」（has revealed）。玉器本身展现精湛工艺，是主动关系，用现在分词（demonstrating）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "extraordinary jade artifacts",
+          "signalSide": "passage",
+          "relation": "被修饰的是玉器，玉器主动展现工艺。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "the site has revealed",
+          "signalSide": "passage",
+          "relation": "句子已有谓语，空格只能用非谓语形式。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:58": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "but",
+      "role": null,
+      "similarityProfile": {
+        "route": "not-just-but-also",
+        "features": []
+      },
+      "reason": "空格连接两个并列的表语「一个聚居地」（a settlement）和「一个发达社会」（a developed society）。前面已有「不仅仅」（not merely），与它呼应、引出后一项的是（but）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "not merely a settlement",
+          "signalSide": "passage",
+          "relation": "前一项由不仅仅引出。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "a developed society",
+          "signalSide": "passage",
+          "relation": "后一项与前一项并列，由（but）引出。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:59": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "distinct",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adjective",
+      "answer": "distinctive",
+      "role": null,
+      "similarityProfile": {
+        "route": "suffix-derivation",
+        "features": []
+      },
+      "reason": "空格修饰名词「珍品」（treasures），要用形容词。提示词本身也是形容词，但意思是「有区别的、清楚的」；这里说璧、琮这类珍品「独具特色」，用派生形容词（distinctive）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "treasures like bi discs and cong tubes",
+          "signalSide": "passage",
+          "relation": "被修饰的是璧、琮这类珍品，要说它们独具特色。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "particularly the",
+          "signalSide": "passage",
+          "relation": "定冠词后、名词前，要填形容词修饰名词。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:60": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "reconsider",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to reconsider",
+      "role": "object-complement",
+      "similarityProfile": {
+        "route": "object-complement-general",
+        "features": []
+      },
+      "reason": "空格是宾语补足语，补充说明「激励」（inspired）的宾语「学者们」（scholars）去做什么。「激励某人去做某事」后面接不定式，用（to reconsider）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "have inspired scholars",
+          "signalSide": "passage",
+          "relation": "激励的宾语是学者们，后面要说明他们去做什么。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:61": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:61",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-first-mention",
+        "features": [
+          "a-consonant-sound"
+        ]
+      },
+      "reason": "空格限定单数可数名词「转变」（change）。这里第一次提到良渚文化带来的一次重大转变，需要不定冠词；「重大的」（significant）以辅音音素开头，用（a）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "significant change",
+          "signalSide": "passage",
+          "relation": "单数可数名词前要有限定词，表示一次转变。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:62": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "What",
+      "role": null,
+      "similarityProfile": {
+        "route": "what",
+        "features": [
+          "subject-clause"
+        ]
+      },
+      "reason": "空格引导主语从句（… makes Liangzhu truly remarkable），整句的谓语是后面的「是」（is），表语是（that）引导的从句。从句里缺主语，前面又没有先行词，表示「……的东西」，用（What），位于句首要大写。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "makes Liangzhu truly remarkable is that",
+          "signalSide": "passage",
+          "relation": "从句缺主语，整个从句作系动词（is）的主语。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:63": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "by",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-relation",
+        "features": []
+      },
+      "reason": "空格把差额「近两千年」（nearly two thousand years）接到「早于」（predates the Shang Dynasty）上，说明早了多少。表示相差的幅度，用介词（by）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "predates the Shang Dynasty",
+          "signalSide": "passage",
+          "relation": "早于商朝，后面说明早了多少。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "nearly two thousand years",
+          "signalSide": "passage",
+          "relation": "这是相差的幅度，由介词（by）引出。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:64": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "add",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "were added (was added)",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-explicit-time",
+        "features": []
+      },
+      "reason": "空格作句子谓语，主语是「良渚古城遗址」（the Liangzhu ruins），遗址是被列入名录的，要用被动语态；时间状语「2019年」（In 2019）说明是过去发生的事，用一般过去时。遗址（ruins）是复数形式，用（were added）；把遗址看作一处整体时也可用（was added）。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "In 2019",
+          "signalSide": "passage",
+          "relation": "明确的过去时间，谓语用一般过去时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "the Liangzhu ruins",
+          "signalSide": "passage",
+          "relation": "主语是遗址，遗址是被列入名录的，用被动。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:65": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "it",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "its",
+      "role": null,
+      "similarityProfile": {
+        "route": "possessive-determiner",
+        "features": []
+      },
+      "reason": "空格修饰名词「全球意义」（global significance），要用形容词性物主代词。它指的是被列入名录的良渚遗址（the Liangzhu ruins）这一处遗产，按一处整体看作单数，用（its）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "global significance",
+          "signalSide": "passage",
+          "relation": "名词前要用形容词性物主代词。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "the Liangzhu ruins",
+          "signalSide": "passage",
+          "relation": "所指的是良渚遗址这一处遗产。"
+        }
+      ]
+    }
+  }
+}

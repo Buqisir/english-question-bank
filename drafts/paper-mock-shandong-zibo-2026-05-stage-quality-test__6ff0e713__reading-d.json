@@ -1,0 +1,773 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d": {
+      "overview": "文章介绍研究意识的结构化方法：让人比较感觉的相似度并绘成几何“地图”。研究发现颜色的含义取决于它在关系网络中的位置，还探究了无意识加工，为破解意识“难题”提供了新途径。",
+      "fullTranslationZh": "意识的“难题”——内在感受与可测量的大脑信号之间有何关联——依然极具挑战。为了解决这个问题，神经科学家正在做更精细的区分，这或许能彻底破解这个谜团；他们借助结构化方法，探索我们是否都以同样的方式体验颜色之类的感觉。\n这种方法由 Nao Tsuchiya 等研究人员首创，它把意识看作一张关系网络。在实验中，人们对颜色、声音或情绪进行两两比较，并为它们的相似度打分。这些数据被用来绘制体验“地图”，通常呈几何形状。通过几何分析，研究人员把数据浓缩成一个形状。这些地图在不同年龄和文化的人群中表现出高度一致，表明在我们各不相同的描述之下，存在一种普遍的感知结构。\n一项重要发现与颜色有关。人们比较色调时，他们的判断揭示出一个比传统的红、绿、蓝三维度更复杂的“颜色空间”。研究表明，我们感知到的颜色可能至少有七个维度。此外，色觉不同的人画出的地图形状也不同，这表明“红色”的含义由它在关系网络中的位置决定，而这个关系网络可能因人而异。因此，在感知结构相同的群体中，人们有理由说：“我的红色和你的红色是一样的。”\n这种方法还能探究无意识加工。在一项实验中，一个彩色圆圈闪现得太快，人们意识不到它，但它仍然影响了人们对随后出现的圆环的反应时间。这意味着大脑会无意识地比较各种感觉，不过这种无意识的比较显得杂乱无章，不像有意识体验那样结构有序。\n这些结构研究为探究所谓意识的“难题”——大脑中的物理过程为何以及如何产生主观感受——提供了一种新途径。尽管这项研究仍在发展之中，它标志着意识研究正转向一门更精确的科学，这门科学可能会重塑我们对感知、情感以及人之为人意味着什么的理解。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d-1",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3",
+          "sourceText": "Furthermore, individuals with different color vision produce differently shaped maps, showing that what “red” means is defined by its position within a relational network, which can vary between people.",
+          "displayText": "Furthermore, individuals with different color vision produce differently shaped maps, showing that what “red” means is defined by its position within a relational network, which can vary between people.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:33"
+          ],
+          "translationZh": "此外，色觉不同的人画出的地图形状也不同，这表明“红色”的含义由它在关系网络中的位置决定，而这个关系网络可能因人而异。",
+          "analysisZh": "主干是 individuals … produce differently shaped maps（人们画出形状不同的地图），with different color vision 修饰 individuals。逗号后的 showing that … 是现在分词短语，说明由此得出的结论。that 从句里，主语本身又是一个从句 what “red” means（“红色”的含义），谓语是 is defined by its position（由它的位置决定）。句末 which can vary between people 是非限制性定语从句，补充说明 a relational network：这个关系网络可能因人而异。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 84,
+              "quote": "individuals with different color vision produce differently shaped maps"
+            },
+            {
+              "start": 99,
+              "end": 142,
+              "quote": "what “red” means is defined by its position"
+            },
+            {
+              "start": 172,
+              "end": 201,
+              "quote": "which can vary between people"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d-2",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1",
+          "sourceText": "To address this, neuroscientists are making finer distinctions that might crack the mystery entirely, exploring via the structural method whether we all experience sensations like colour in the same way.",
+          "displayText": "To address this, neuroscientists are making finer distinctions that might crack the mystery entirely, exploring via the structural method whether we all experience sensations like colour in the same way.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:35"
+          ],
+          "translationZh": "为了解决这个问题，神经科学家正在做更精细的区分，这或许能彻底破解这个谜团；他们借助结构化方法，探索我们是否都以同样的方式体验颜色之类的感觉。",
+          "analysisZh": "主干是 neuroscientists are making finer distinctions（神经科学家正在做更精细的区分）。句首 To address this 是不定式，表示目的，this 指前一句说的意识“难题”。that might crack the mystery entirely 是定语从句，修饰 finer distinctions。逗号后的 exploring … 是现在分词短语，作伴随状语，说明他们同时在探索什么：via the structural method 插在 exploring 和它的宾语之间，交代手段；whether 引导的从句才是 exploring 的宾语，即我们是否都以同样的方式体验颜色之类的感觉。",
+          "underlineRanges": [
+            {
+              "start": 17,
+              "end": 62,
+              "quote": "neuroscientists are making finer distinctions"
+            },
+            {
+              "start": 102,
+              "end": 137,
+              "quote": "exploring via the structural method"
+            },
+            {
+              "start": 138,
+              "end": 202,
+              "quote": "whether we all experience sensations like colour in the same way"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1"
+              ],
+              "start": 0,
+              "end": 107,
+              "quote": "意识的“难题”——内在感受与可测量的大脑信号之间有何关联——依然极具挑战。为了解决这个问题，神经科学家正在做更精细的区分，这或许能彻底破解这个谜团；他们借助结构化方法，探索我们是否都以同样的方式体验颜色之类的感觉。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2"
+              ],
+              "start": 108,
+              "end": 279,
+              "quote": "这种方法由 Nao Tsuchiya 等研究人员首创，它把意识看作一张关系网络。在实验中，人们对颜色、声音或情绪进行两两比较，并为它们的相似度打分。这些数据被用来绘制体验“地图”，通常呈几何形状。通过几何分析，研究人员把数据浓缩成一个形状。这些地图在不同年龄和文化的人群中表现出高度一致，表明在我们各不相同的描述之下，存在一种普遍的感知结构。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3"
+              ],
+              "start": 280,
+              "end": 452,
+              "quote": "一项重要发现与颜色有关。人们比较色调时，他们的判断揭示出一个比传统的红、绿、蓝三维度更复杂的“颜色空间”。研究表明，我们感知到的颜色可能至少有七个维度。此外，色觉不同的人画出的地图形状也不同，这表明“红色”的含义由它在关系网络中的位置决定，而这个关系网络可能因人而异。因此，在感知结构相同的群体中，人们有理由说：“我的红色和你的红色是一样的。”"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4"
+              ],
+              "start": 453,
+              "end": 566,
+              "quote": "这种方法还能探究无意识加工。在一项实验中，一个彩色圆圈闪现得太快，人们意识不到它，但它仍然影响了人们对随后出现的圆环的反应时间。这意味着大脑会无意识地比较各种感觉，不过这种无意识的比较显得杂乱无章，不像有意识体验那样结构有序。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:5"
+              ],
+              "start": 567,
+              "end": 683,
+              "quote": "这些结构研究为探究所谓意识的“难题”——大脑中的物理过程为何以及如何产生主观感受——提供了一种新途径。尽管这项研究仍在发展之中，它标志着意识研究正转向一门更精确的科学，这门科学可能会重塑我们对感知、情感以及人之为人意味着什么的理解。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-d-q32-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2",
+                "start": 99,
+                "end": 280,
+                "quote": "In experiments, people compare pairs of colours, sounds, or emotions and rate their similarities. These data are used to create experiential “maps”, often as geometric (几何的) shapes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 40,
+                "end": 98,
+                "quote": "在实验中，人们对颜色、声音或情绪进行两两比较，并为它们的相似度打分。这些数据被用来绘制体验“地图”，通常呈几何形状。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q33-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3",
+                "start": 332,
+                "end": 416,
+                "quote": "showing that what “red” means is defined by its position within a relational network"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 96,
+                "end": 119,
+                "quote": "这表明“红色”的含义由它在关系网络中的位置决定"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q34-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4",
+                "start": 0,
+                "end": 46,
+                "quote": "The method also probes unconscious processing."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4",
+                "start": 194,
+                "end": 250,
+                "quote": "This implies the brain unconsciously compares sensations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 0,
+                "end": 14,
+                "quote": "这种方法还能探究无意识加工。"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 64,
+                "end": 81,
+                "quote": "这意味着大脑会无意识地比较各种感觉"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-q35-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:5",
+                "start": 0,
+                "end": 101,
+                "quote": "These structural studies offer a new way to investigate the so-called “hard problem” of consciousness"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 0,
+                "end": 51,
+                "quote": "这些结构研究为探究所谓意识的“难题”——大脑中的物理过程为何以及如何产生主观感受——提供了一种新途径。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3",
+                "start": 246,
+                "end": 448,
+                "quote": "Furthermore, individuals with different color vision produce differently shaped maps, showing that what “red” means is defined by its position within a relational network, which can vary between people."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 76,
+                "end": 134,
+                "quote": "此外，色觉不同的人画出的地图形状也不同，这表明“红色”的含义由它在关系网络中的位置决定，而这个关系网络可能因人而异。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-d-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1",
+                "start": 117,
+                "end": 320,
+                "quote": "To address this, neuroscientists are making finer distinctions that might crack the mystery entirely, exploring via the structural method whether we all experience sensations like colour in the same way."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 37,
+                "end": 107,
+                "quote": "为了解决这个问题，神经科学家正在做更精细的区分，这或许能彻底破解这个谜团；他们借助结构化方法，探索我们是否都以同样的方式体验颜色之类的感觉。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先提出意识的“难题”，引出结构化方法；再介绍这种方法的做法和跨年龄、跨文化的一致发现；接着讲它在颜色感知上的重要发现，以及对无意识加工的探究；最后总结这类研究为破解意识难题提供了新途径。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1",
+            "summary": "意识难题仍待破解，神经科学家借助结构化方法探索人们的感觉体验是否相同",
+            "function": "提出问题，引出研究方法"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2",
+            "summary": "结构化方法让人比较感觉并给相似度打分，数据绘成几何地图，地图跨年龄和文化高度一致",
+            "function": "介绍方法的做法和总体发现"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3",
+            "summary": "颜色空间比红绿蓝三维更复杂，红色的含义由它在关系网络中的位置决定，可能因人而异",
+            "function": "介绍颜色方面的重要发现"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4",
+            "summary": "彩色圆圈闪现实验显示大脑会无意识地比较感觉，但这种比较杂乱无序",
+            "function": "介绍方法对无意识加工的探究"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:5",
+            "summary": "结构研究为探究意识难题提供了新途径，可能重塑我们对感知、情感和人性的理解",
+            "function": "总结全文，评价研究意义"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出结构化方法的实验是怎样做的。",
+      "stemTranslationZh": "结构化方法的实验是如何进行的？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看评分数据拿去做什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过分析描述来构建感知结构。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "descriptions",
+            "optionText": "descriptions",
+            "matchType": "exact",
+            "relationNote": "descriptions 出自 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2|beneath our varied descriptions]]，说的是感知结构藏在人们各不相同的描述之下；实验靠打分建图，并不分析描述。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "suggesting a universal perceptual (感知的) structure beneath our varied descriptions",
+              "anchor": "描述之下的结构",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过比较不同年龄和文化的体验地图。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The maps show high consistency across ages and cultures",
+            "sourceEntity": "The maps show high consistency",
+            "optionText": "By comparing experiential maps across ages and cultures.",
+            "optionEntity": "comparing experiential maps",
+            "explanation": "跨年龄、跨文化的一致是地图画出来以后的发现（show high consistency），不是做实验的方法。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "The maps show high consistency across ages and cultures",
+              "anchor": "地图高度一致",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过给感觉的相似度打分来构建几何地图。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "In experiments, people compare pairs of colours, sounds, or emotions and rate their similarities. These data are used to create experiential “maps”, often as geometric (几何的) shapes.",
+              "anchor": "实验做法",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过测量大脑信号来匹配普遍的关系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "brain signals",
+            "optionText": "brain signals",
+            "matchType": "exact",
+            "relationNote": "brain signals 出自 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1]] 对意识难题的说明，指的是感受和大脑信号有何关联这一难题；实验让人比较、打分，没有测量大脑信号。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "how inner sensations relate to measurable brain signals",
+              "anchor": "意识难题",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "experiments",
+          "sourceRole": "stem",
+          "targetText": "In experiments, people compare pairs of colours, sounds, or emotions and rate their similarities.",
+          "relationType": "locationCue",
+          "answerText": "colours, sounds, or emotions and rate their similarities. These data are used to create experiential “maps”, often as geometric (几何的) shapes",
+          "bridgeZh": "These data 指受试者打出的相似度分数",
+          "note": "题干 experiments 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2"
+        },
+        {
+          "sourceText": "rating sensory similarities to construct geometric maps",
+          "sourceRole": "correctOption",
+          "targetText": "rate their similarities",
+          "relationType": "paraphrase",
+          "note": "选项两步各有着落：“给感觉的相似度打分”是比较颜色、声音或情绪后打分（rate their similarities），“构建几何地图”是用这些分数画出几何形状的体验地图（geometric … shapes），选 C。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出颜色感知研究得出的结论。",
+      "stemTranslationZh": "颜色感知研究表明了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "传统的颜色空间已经过时。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "their judgments reveal a more complex “color space” than the traditional three dimensions of red, green, and blue",
+            "sourceHighlight": "a more complex “color space”",
+            "optionText": "Traditional color space is out of date.",
+            "optionHighlight": "out of date",
+            "explanation": "原文只说人们的判断揭示出比传统红绿蓝三维更复杂的颜色空间（more complex），没说传统说法已经过时。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "their judgments reveal a more complex “color space” than the traditional three dimensions of red, green, and blue",
+              "anchor": "更复杂的颜色空间",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "七个颜色维度已得到证实。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Studies suggest we may perceive at least seven dimensions of color.",
+            "sourceHighlight": "suggest we may perceive",
+            "optionText": "Seven color dimensions are confirmed.",
+            "optionHighlight": "confirmed",
+            "explanation": "原文用 suggest 和 may，只是研究提示“可能至少有七个维度”，选项把推测写成了定论。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "Studies suggest we may perceive at least seven dimensions of color.",
+              "anchor": "可能有七个维度",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "颜色的含义在于它在关系中的位置。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "showing that what “red” means is defined by its position within a relational network",
+              "anchor": "红色的含义由位置决定",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "每个人体验到的红色完全相同。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "So, people within a group with shared perceptual structures are entitled to say, “My red is the same as your red.”",
+            "sourceHighlight": "within a group with shared perceptual structures",
+            "optionText": "Individuals share identical red experience.",
+            "optionHighlight": "Individuals share identical red experience",
+            "explanation": "只有感知结构相同的同一群体内的人（within a group with shared perceptual structures）才能说红色一样；原文还说关系网络可能因人而异，选项去掉了这个条件。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "So, people within a group with shared perceptual structures are entitled to say, “My red is the same as your red.”",
+              "anchor": "群体内才相同",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "color perception",
+          "sourceRole": "stem",
+          "targetText": "Furthermore, individuals with different color vision produce differently shaped maps, showing that what “red” means is defined by its position within a relational network, which can vary between people.",
+          "relationType": "locationCue",
+          "targetCue": "color vision",
+          "sourceZh": "颜色感知",
+          "targetCueZh": "色觉",
+          "answerText": "what “red” means is defined by its position within a relational network",
+          "note": "题干 color perception 对应原文 color vision。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3"
+        },
+        {
+          "sourceText": "Color meaning lies in relational position",
+          "sourceRole": "correctOption",
+          "targetText": "what “red” means is defined by its position within a relational network",
+          "relationType": "paraphrase",
+          "note": "选项的“颜色的含义”是原文“红色”的含义（what “red” means），“在于关系位置”是由它在关系网络中的位置决定（defined by its position within a relational network），以红色为例说的就是颜色，选 C。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:34": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看这一段先提出什么、再用什么实验说明，判断它的写作目的。",
+      "stemTranslationZh": "第4段的目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "看 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4|The method also probes unconscious processing]] 提出什么，再看后面的实验说明了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "描述彩色圆圈实验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "In one experiment, a colored circle flashed too briefly for conscious awareness, yet it still influenced reaction time to a subsequent (随后的) ring.",
+            "sourceHighlight": "In one experiment",
+            "optionText": "To describe the colored circle experiment.",
+            "optionHighlight": "describe the colored circle experiment",
+            "explanation": "彩色圆圈实验只是这一段举的例子（In one experiment），写它是为了引出大脑会无意识地比较感觉，描述实验本身不是目的。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "In one experiment, a colored circle flashed too briefly for conscious awareness, yet it still influenced reaction time to a subsequent (随后的) ring.",
+              "anchor": "彩色圆圈实验",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "展示对无意识的探索。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "The method also probes unconscious processing.",
+              "anchor": "探究无意识加工",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4"
+            },
+            {
+              "role": "supporting",
+              "quote": "This implies the brain unconsciously compares sensations",
+              "anchor": "无意识比较",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "说明无意识的结构。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "though the unconscious comparisons appear disorganized, unlike the orderly structure of conscious experience",
+            "sourceEntity": "the orderly structure of conscious experience",
+            "optionText": "To illustrate the structure of unconsciousness.",
+            "optionEntity": "the structure of unconsciousness",
+            "explanation": "有序的结构（orderly structure）说的是有意识的体验；无意识的比较反而显得杂乱（disorganized），这一段并没有去说明无意识有什么结构。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "though the unconscious comparisons appear disorganized, unlike the orderly structure of conscious experience",
+              "anchor": "无意识比较杂乱",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "总结结构研究的主要发现。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "These structural studies offer a new way to investigate the so-called “hard problem” of consciousness",
+            "sourceEntity": "These structural studies",
+            "optionText": "To summarize the key findings of structural studies.",
+            "optionEntity": "summarize the key findings",
+            "explanation": "这一段只写无意识加工这一项探索，用 also 接在颜色发现之后；对结构研究的总体评价在 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:5]]。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "These structural studies offer a new way to investigate the so-called “hard problem” of consciousness",
+              "anchor": "总结段",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:5"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To show the exploration of unconsciousness",
+          "sourceRole": "correctOption",
+          "targetText": "The method also probes unconscious processing.",
+          "relationType": "paraphrase",
+          "note": "这一段先点明方法还用来探究无意识加工（probes unconscious processing），再举闪现彩色圆圈的实验，最后推出大脑会无意识地比较感觉。几句都围绕探究无意识展开，选项的 exploration 对应 probes，选 B。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:35": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把各段内容合起来，概括全文主要讲什么。",
+      "stemTranslationZh": "本文主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1]] 的意识难题和结构化方法读起，看后面各段都在讲这种方法的什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "研究意识的一种新方法。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "These structural studies offer a new way to investigate the so-called “hard problem” of consciousness",
+              "anchor": "新途径",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:5"
+            },
+            {
+              "role": "supporting",
+              "quote": "exploring via the structural method whether we all experience sensations like colour in the same way",
+              "anchor": "引出结构化方法",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "意识的一个难题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "The “hard problem” of consciousness – how inner sensations relate to measurable brain signals – remains challenging.",
+            "sourceHighlight": "The “hard problem” of consciousness",
+            "optionText": "A hard problem of consciousness.",
+            "optionHighlight": "A hard problem",
+            "explanation": "意识难题只是文章的出发点，全文讲的是用结构化方法去研究它，不是难题本身。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "The “hard problem” of consciousness – how inner sensations relate to measurable brain signals – remains challenging.",
+              "anchor": "意识难题",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "颜色感知的结构。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "One key finding concerns color.",
+            "sourceHighlight": "One key finding",
+            "optionText": "The structure of color perception.",
+            "optionHighlight": "color perception",
+            "explanation": "颜色感知只是 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3]] 写的一项发现（One key finding），[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4]] 还写了无意识加工，它概括不了全文。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "One key finding concerns color.",
+              "anchor": "一项发现",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "神经科学面临的重大挑战。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "The “hard problem” of consciousness – how inner sensations relate to measurable brain signals – remains challenging.",
+            "sourceHighlight": "remains challenging",
+            "optionText": "The big challenge of neuroscience.",
+            "optionHighlight": "The big challenge of neuroscience",
+            "explanation": "原文只说意识难题仍有挑战（remains challenging），选项扩大成整个神经科学的大挑战，而全文写的是应对难题的新方法。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "The “hard problem” of consciousness – how inner sensations relate to measurable brain signals – remains challenging.",
+              "anchor": "意识难题",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A new way to study consciousness",
+          "sourceRole": "correctOption",
+          "targetText": "These structural studies offer a new way to investigate the so-called “hard problem” of consciousness",
+          "relationType": "paraphrase",
+          "note": "先是 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1]] 提出意识难题、引出结构化方法，接着 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2]] 讲这种方法怎么做，[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3]] 和 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4]] 讲它在颜色和无意识加工上的发现，最后 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:5]] 说它提供了研究意识的新途径（a new way）。各段都围绕这种新方法，选 A。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:5"
+        }
+      ]
+    }
+  }
+}

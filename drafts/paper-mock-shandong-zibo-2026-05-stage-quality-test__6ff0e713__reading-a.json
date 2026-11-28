@@ -1,0 +1,827 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a": {
+      "overview": "文章介绍四个面向高中生的线上暑期项目，逐一列出课程内容、申请要求和截止日期，最后用一张表列出各项目的费用，方便学生比较选择。",
+      "fullTranslationZh": "2026年顶尖线上暑期项目\n研究表明，设计精良的暑期项目能增强高中生的学业能力。线上项目也有类似的好处，让学生能够探索大学水平的学科、获得实践经验，并为申请大学打造更有竞争力的履历。以下是四个值得关注的线上暑期项目。\n斯坦福大学预科暑期学院（SPCS）\n这是一个面向8至11年级学生、选拔严格的两周线上项目，专注于深入学习单一学科。学生每天参加直播课程，并与来自世界各地、积极上进的同伴合作。课程涵盖理工科、人文、工程等领域，具有大学水平的深度（不计学分）。\n• 主要要求：全程参与，开启摄像头和麦克风；年龄13至18岁。\n• 申请截止日期：2026年3月13日\n康奈尔大学预科暑期线上项目（CPSO）\n允许高中生远程修读康奈尔大学本科课程，获得3至12个学分和一份正式成绩单。课程为期3周或6周，涵盖建筑、商科和医学等领域。\n• 主要要求：年龄15至19岁；至少已读完10年级；须满足课程的先修要求。\n• 申请截止日期：最早为2026年4月28日（因课程期次而异）\n宾夕法尼亚大学预科线上项目（PPOP）\n学生修读由宾大教职人员讲授、可获学分的本科课程，遵循大学的标准课程安排、作业和考试。顺利完成课程者将获得宾夕法尼亚大学的正式成绩单。\n• 主要要求：绩点不低于3.5；写作能力强；须提供推荐信；国际申请者必须精通英语。\n• 申请截止日期：2026年4月15日\n加州大学伯克利分校预科学者暑期线上项目（UCBPSV）\n为高中生提供在线修读伯克利低年级课程并获得大学学分的机会。理工科、社会科学和人文学科领域共有数百门课程可选，还有一个线上学习社区，成员包括伯克利在校生和访问本科生。\n• 主要要求：2026年夏季前读完10年级或11年级；2026年6月21日前年满16岁；绩点不低于3.0。\n• 申请截止日期：2026年5月10日\n各项目费用",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a-1",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:2",
+          "sourceText": "Online options provide similar benefits, allowing students to explore college-level subjects, gain hands-on experience, and build a stronger profile for college applications.",
+          "displayText": "Online options provide similar benefits, allowing students to explore college-level subjects, gain hands-on experience, and build a stronger profile for college applications.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:23"
+          ],
+          "translationZh": "线上项目也有类似的好处，让学生能够探索大学水平的学科、获得实践经验，并为申请大学打造更有竞争力的履历。",
+          "analysisZh": "主干是 Online options provide similar benefits（线上项目带来类似的好处）。逗号后的 allowing students to … 是现在分词短语，补充说明这些好处具体是什么。allow sb to do 后面接了三个并列的动词短语：explore college-level subjects、gain hands-on experience、build a stronger profile for college applications，最后一个前用 and 连接。三件事里“探索大学水平的学科”正是后面四个项目共有的一点。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 39,
+              "quote": "Online options provide similar benefits"
+            },
+            {
+              "start": 41,
+              "end": 61,
+              "quote": "allowing students to"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a-2",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:12",
+          "sourceText": "Students enroll in credit-bearing undergraduate courses taught by Penn staff, following standard university schedules, assignments, and exams.",
+          "displayText": "Students enroll in credit-bearing undergraduate courses taught by Penn staff, following standard university schedules, assignments, and exams.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:23"
+          ],
+          "translationZh": "学生修读由宾大教职人员讲授、可获学分的本科课程，遵循大学的标准课程安排、作业和考试。",
+          "analysisZh": "主干是 Students enroll in … courses（学生修读……课程）。credit-bearing（可获学分的）和 undergraduate（本科的）从前面修饰 courses；taught by Penn staff 是过去分词短语，从后面修饰 courses，表示课程由宾大教职人员讲授。逗号后的 following … 是现在分词短语，说明学生上课要遵循什么，它带三个并列宾语 schedules、assignments 和 exams，前面的 standard university 同时修饰这三个词。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "Students enroll in"
+            },
+            {
+              "start": 56,
+              "end": 76,
+              "quote": "taught by Penn staff"
+            },
+            {
+              "start": 78,
+              "end": 141,
+              "quote": "following standard university schedules, assignments, and exams"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:1"
+              ],
+              "start": 0,
+              "end": 13,
+              "quote": "2026年顶尖线上暑期项目"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:2"
+              ],
+              "start": 14,
+              "end": 108,
+              "quote": "研究表明，设计精良的暑期项目能增强高中生的学业能力。线上项目也有类似的好处，让学生能够探索大学水平的学科、获得实践经验，并为申请大学打造更有竞争力的履历。以下是四个值得关注的线上暑期项目。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:3"
+              ],
+              "start": 109,
+              "end": 126,
+              "quote": "斯坦福大学预科暑期学院（SPCS）"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:4"
+              ],
+              "start": 127,
+              "end": 229,
+              "quote": "这是一个面向8至11年级学生、选拔严格的两周线上项目，专注于深入学习单一学科。学生每天参加直播课程，并与来自世界各地、积极上进的同伴合作。课程涵盖理工科、人文、工程等领域，具有大学水平的深度（不计学分）。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:5"
+              ],
+              "start": 230,
+              "end": 261,
+              "quote": "• 主要要求：全程参与，开启摄像头和麦克风；年龄13至18岁。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:6"
+              ],
+              "start": 262,
+              "end": 281,
+              "quote": "• 申请截止日期：2026年3月13日"
+            },
+            {
+              "paragraphId": "zh-reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:7"
+              ],
+              "start": 282,
+              "end": 301,
+              "quote": "康奈尔大学预科暑期线上项目（CPSO）"
+            },
+            {
+              "paragraphId": "zh-reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:8"
+              ],
+              "start": 302,
+              "end": 363,
+              "quote": "允许高中生远程修读康奈尔大学本科课程，获得3至12个学分和一份正式成绩单。课程为期3周或6周，涵盖建筑、商科和医学等领域。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:9"
+              ],
+              "start": 364,
+              "end": 401,
+              "quote": "• 主要要求：年龄15至19岁；至少已读完10年级；须满足课程的先修要求。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:10"
+              ],
+              "start": 402,
+              "end": 433,
+              "quote": "• 申请截止日期：最早为2026年4月28日（因课程期次而异）"
+            },
+            {
+              "paragraphId": "zh-reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:11"
+              ],
+              "start": 434,
+              "end": 453,
+              "quote": "宾夕法尼亚大学预科线上项目（PPOP）"
+            },
+            {
+              "paragraphId": "zh-reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:12"
+              ],
+              "start": 454,
+              "end": 520,
+              "quote": "学生修读由宾大教职人员讲授、可获学分的本科课程，遵循大学的标准课程安排、作业和考试。顺利完成课程者将获得宾夕法尼亚大学的正式成绩单。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13"
+              ],
+              "start": 521,
+              "end": 562,
+              "quote": "• 主要要求：绩点不低于3.5；写作能力强；须提供推荐信；国际申请者必须精通英语。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:14"
+              ],
+              "start": 563,
+              "end": 582,
+              "quote": "• 申请截止日期：2026年4月15日"
+            },
+            {
+              "paragraphId": "zh-reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:15"
+              ],
+              "start": 583,
+              "end": 610,
+              "quote": "加州大学伯克利分校预科学者暑期线上项目（UCBPSV）"
+            },
+            {
+              "paragraphId": "zh-reading-a-p16",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:16"
+              ],
+              "start": 611,
+              "end": 693,
+              "quote": "为高中生提供在线修读伯克利低年级课程并获得大学学分的机会。理工科、社会科学和人文学科领域共有数百门课程可选，还有一个线上学习社区，成员包括伯克利在校生和访问本科生。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p17",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:17"
+              ],
+              "start": 694,
+              "end": 747,
+              "quote": "• 主要要求：2026年夏季前读完10年级或11年级；2026年6月21日前年满16岁；绩点不低于3.0。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p18",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:18"
+              ],
+              "start": 748,
+              "end": 767,
+              "quote": "• 申请截止日期：2026年5月10日"
+            },
+            {
+              "paragraphId": "zh-reading-a-p19",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:19"
+              ],
+              "start": 768,
+              "end": 773,
+              "quote": "各项目费用"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-a-q21-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13",
+                "start": 86,
+                "end": 147,
+                "quote": "English proficiency is essential for international candidates"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "zh-reading-a-p13",
+                "start": 29,
+                "end": 40,
+                "quote": "国际申请者必须精通英语"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-q22-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:19",
+                "start": 0,
+                "end": 22,
+                "quote": "Costs for each program"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "zh-reading-a-p19",
+                "start": 0,
+                "end": 5,
+                "quote": "各项目费用"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-q23-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:4",
+                "start": 183,
+                "end": 216,
+                "quote": "Courses offer college-level depth"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:8",
+                "start": 31,
+                "end": 74,
+                "quote": "take Cornell undergraduate courses remotely"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:12",
+                "start": 19,
+                "end": 55,
+                "quote": "credit-bearing undergraduate courses"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:16",
+                "start": 41,
+                "end": 106,
+                "quote": "take lower-division UC Berkeley courses online for college credit"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "zh-reading-a-p4",
+                "start": 86,
+                "end": 95,
+                "quote": "具有大学水平的深度"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "zh-reading-a-p8",
+                "start": 5,
+                "end": 18,
+                "quote": "远程修读康奈尔大学本科课程"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "zh-reading-a-p12",
+                "start": 14,
+                "end": 23,
+                "quote": "可获学分的本科课程"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "zh-reading-a-p16",
+                "start": 6,
+                "end": 25,
+                "quote": "在线修读伯克利低年级课程并获得大学学分"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:2",
+                "start": 104,
+                "end": 278,
+                "quote": "Online options provide similar benefits, allowing students to explore college-level subjects, gain hands-on experience, and build a stronger profile for college applications."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "zh-reading-a-p2",
+                "start": 26,
+                "end": 77,
+                "quote": "线上项目也有类似的好处，让学生能够探索大学水平的学科、获得实践经验，并为申请大学打造更有竞争力的履历。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-a-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:12",
+                "start": 0,
+                "end": 142,
+                "quote": "Students enroll in credit-bearing undergraduate courses taught by Penn staff, following standard university schedules, assignments, and exams."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+                "paragraphId": "zh-reading-a-p12",
+                "start": 0,
+                "end": 42,
+                "quote": "学生修读由宾大教职人员讲授、可获学分的本科课程，遵循大学的标准课程安排、作业和考试。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "标题点明主题；引言说明线上暑期项目的好处并引出下文；接着依次介绍斯坦福、康奈尔、宾大、伯克利四个项目的课程特点、申请要求和截止日期；最后用费用表列出各项目的开销。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:1",
+            "summary": "2026年顶尖线上暑期项目",
+            "function": "标题，点明全文介绍的对象"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:2",
+            "summary": "暑期项目能增强学业能力，线上项目同样能让学生接触大学课程、积累经验、充实申请履历",
+            "function": "引言，说明好处并引出四个项目"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:3",
+            "summary": "斯坦福 SPCS 项目名称",
+            "function": "引出第一个项目"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:4",
+            "summary": "两周的单科深入学习，每天直播上课，与各国同伴合作，课程有大学水平深度但不计学分",
+            "function": "介绍 SPCS 的课程特点"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:5",
+            "summary": "须全程开摄像头和麦克风，年龄13至18岁",
+            "function": "列出 SPCS 的申请要求"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:6",
+            "summary": "截止日期为3月13日",
+            "function": "列出 SPCS 的截止日期"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:7",
+            "summary": "康奈尔 CPSO 项目名称",
+            "function": "引出第二个项目"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:8",
+            "summary": "远程修读康奈尔本科课程，可获3至12学分和正式成绩单，课程3周或6周",
+            "function": "介绍 CPSO 的课程特点"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:9",
+            "summary": "年龄15至19岁，至少读完10年级，须满足先修要求",
+            "function": "列出 CPSO 的申请要求"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:10",
+            "summary": "最早4月28日截止，因期次而异",
+            "function": "列出 CPSO 的截止日期"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:11",
+            "summary": "宾大 PPOP 项目名称",
+            "function": "引出第三个项目"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:12",
+            "summary": "修读宾大可获学分的本科课程，按大学标准安排学习，完成后得到正式成绩单",
+            "function": "介绍 PPOP 的课程特点"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13",
+            "summary": "绩点不低于3.5，写作能力强，要推荐信，国际申请者须精通英语",
+            "function": "列出 PPOP 的申请要求"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:14",
+            "summary": "截止日期为4月15日",
+            "function": "列出 PPOP 的截止日期"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:15",
+            "summary": "伯克利 UCBPSV 项目名称",
+            "function": "引出第四个项目"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:16",
+            "summary": "在线修读伯克利低年级课程并获大学学分，课程数百门，有在校生参与的线上学习社区",
+            "function": "介绍 UCBPSV 的课程特点"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:17",
+            "summary": "2026年夏前读完10或11年级，6月21日前满16岁，绩点不低于3.0",
+            "function": "列出 UCBPSV 的申请要求"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:18",
+            "summary": "截止日期为5月10日",
+            "function": "列出 UCBPSV 的截止日期"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:19",
+            "summary": "各项目费用表的标题",
+            "function": "引出费用表"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "在 PPOP 的申请要求里找出专门针对国际申请者的那一条。",
+      "stemTranslationZh": "PPOP 对国际申请者有什么要求？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "英语水平证明。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "English proficiency is essential for international candidates",
+              "anchor": "PPOP 主要要求",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "至少读完10年级。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "completion of at least 10th grade",
+            "optionText": "Completion of at least 10th grade",
+            "matchType": "exact",
+            "relationNote": "这几个词原样搬自 CPSO 的要求（[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:9]]），PPOP 的要求里没有年级这一条。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "completion of at least 10th grade",
+              "anchor": "CPSO 主要要求",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:9"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "绩点不低于3.0。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Minimum 3.5 GPA",
+            "sourceEntity": "3.5",
+            "optionText": "A minimum 3.0 GPA.",
+            "optionEntity": "3.0",
+            "explanation": "PPOP 要求绩点不低于 3.5（Minimum 3.5 GPA）；3.0 是 UCBPSV 的门槛，见 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:17]]。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "Minimum 3.5 GPA",
+              "anchor": "PPOP 绩点要求",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "年满16岁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "at least 16 years old",
+            "optionText": "at least 16 years old",
+            "matchType": "exact",
+            "relationNote": "年满16岁出自 UCBPSV 的要求（[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:17]]），PPOP 的要求里没有年龄限制。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "at least 16 years old by June 21, 2026",
+              "anchor": "UCBPSV 年龄要求",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:17"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "international applicants",
+          "sourceRole": "stem",
+          "targetText": "• Key requirements: Minimum 3.5 GPA（绩点）; strong writing skills; recommendation letter;English proficiency is essential for international candidates.",
+          "relationType": "locationCue",
+          "targetCue": "international candidates",
+          "sourceZh": "国际申请者",
+          "targetCueZh": "国际申请人",
+          "answerText": "English proficiency is essential",
+          "note": "题干 international applicants 对应原文 international candidates。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13"
+        },
+        {
+          "sourceText": "English proficiency",
+          "sourceRole": "correctOption",
+          "targetText": "English proficiency is essential",
+          "relationType": "paraphrase",
+          "note": "选项沿用原文的 English proficiency：PPOP 写明这一条对国际申请人必不可少（essential），申请时要能证明英语过关，选 A。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "按费用表把 UCBPSV 修 2 个学分单元要交的各项费用加起来。",
+      "stemTranslationZh": "学生在 UCBPSV 修读一门 2 个学分单元的课程，需要支付多少钱？",
+      "locateBy": "options",
+      "locateFindZh": "在费用表 UCBPSV 一行把各项费用相加，再和四个总数比对",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "1,293美元",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "$1,293",
+            "explanation": "这是 1 个单元学费加注册费和文件费（635 + 585 + 73）的结果，学费少算了一个单元，也漏了 $25 申请费。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "1,855美元",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "$1,855",
+            "explanation": "只算了 2 个单元学费和注册费（1,270 + 585），漏了 $73 文件费和 $25 申请费。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "1,928美元",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "$1,928",
+            "explanation": "学费、注册费、文件费都算上了（1,270 + 585 + 73），只漏了 $25 申请费（Application）。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "1,953美元",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "Costs for each program",
+              "anchor": "费用表",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:19"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "$1,953",
+          "sourceRole": "correctOption",
+          "targetText": "Costs for each program",
+          "relationType": "calculation",
+          "note": "费用表 UCBPSV 一行：申请费 $25；学费每单元 $635，2 个单元是 $1,270；另有注册费 $585 和文件费 $73，每个夏季各收一次。合计 25 + 1,270 + 585 + 73 = 1,953 美元，选 D。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:19"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "把四个项目的介绍放在一起比较，找出四个项目都具备的一点。",
+      "stemTranslationZh": "这四个项目有什么共同点？",
+      "locateBy": "options",
+      "locateFindZh": "看每个项目上的是什么课，再比对绩点、学分和同学",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们的绩点和年级要求相同。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Minimum 3.5 GPA",
+            "sourceHighlight": "3.5",
+            "optionText": "They have the same GPA and grades requirements.",
+            "optionHighlight": "the same GPA and grades requirements",
+            "explanation": "绩点要求各不相同：PPOP 要 3.5（[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13]]），UCBPSV 要 3.0（[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:17]]），另两个项目没提绩点；年级要求也从 8—11 年级到读完 10 年级不等。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "Minimum 3.5 GPA",
+              "anchor": "PPOP 绩点要求",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13"
+            },
+            {
+              "quote": "minimum 3.0 GPA",
+              "anchor": "UCBPSV 绩点要求",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:17"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们都有与大学生的互动。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "with a virtual learning community that includes Berkeley students and visiting undergraduates",
+            "sourceEntity": "Berkeley students and visiting undergraduates",
+            "optionText": "They involve interaction with university students.",
+            "optionEntity": "university students",
+            "explanation": "只有 UCBPSV 提到学习社区里有伯克利在校生和访问本科生（[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:16]]）；SPCS 合作的是各国的同龄同伴（motivated peers），另两个项目没提。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "with a virtual learning community that includes Berkeley students and visiting undergraduates",
+              "anchor": "UCBPSV 学习社区",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:16"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们都给参与者足够的大学学分。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Courses offer college-level depth in STEM, humanities, engineering, and more (non-credit).",
+            "sourceHighlight": "non-credit",
+            "optionText": "They award sufficient college credits to participants.",
+            "optionHighlight": "award sufficient college credits",
+            "explanation": "SPCS 的课程注明不计学分（non-credit，[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:4]]），四个项目并不都给学分，“足够的学分”更无从谈起。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "Courses offer college-level depth in STEM, humanities, engineering, and more (non-credit).",
+              "anchor": "SPCS 不计学分",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:4"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们都让高中生修读大学水平的课程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "Courses offer college-level depth in STEM, humanities, engineering, and more (non-credit).",
+              "anchor": "SPCS 课程",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:4"
+            },
+            {
+              "role": "supporting",
+              "quote": "Students enroll in credit-bearing undergraduate courses taught by Penn staff",
+              "anchor": "PPOP 课程",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:12"
+            },
+            {
+              "role": "supporting",
+              "quote": "Offer high school students the chance to take lower-division UC Berkeley courses online for college credit.",
+              "anchor": "UCBPSV 课程",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:16"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "take college-level classes",
+          "sourceRole": "correctOption",
+          "targetText": "college-level depth",
+          "relationType": "paraphrase",
+          "note": "选项的“大学水平的课”把四处合在一起：先是 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:4]] 的课程有大学水平的深度（college-level depth），接着 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:8]] 和 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:12]] 开的都是本科课程（undergraduate courses），[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:16]] 是伯克利低年级课程（lower-division … courses），选 D。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:4"
+        }
+      ]
+    }
+  }
+}

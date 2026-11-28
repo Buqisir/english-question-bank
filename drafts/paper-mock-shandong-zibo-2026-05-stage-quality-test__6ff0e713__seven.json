@@ -1,0 +1,1014 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices": {
+      "overview": "文章谈大学校园安全：学校靠紧急电话、巡逻和警报等措施保障安全，学生普遍感到放心；但设备之外还要靠学生互相照应，很低的事故率证明两方结合有效，校园安全要靠共同努力。",
+      "fullTranslationZh": "无论白天还是夜晚，走在大学校园里，学生们都能轻易看到遍布各个功能区、闪着蓝光的紧急求助电话。这些设备能迅速把使用者接通到紧急救助。各高校还提供专业的安保巡逻和实时警报。高校采取多种切实可行的安全措施，为校园里的师生筑起一道可靠的安全屏障。\n大多数低年级学生说，他们在校园里时时刻刻都能感到强烈的安全感。他们提到，如果在去教室和宿舍楼的路上遇到突发危险或意外麻烦，马上就能得到及时的帮助。规范的校园布局和完善的配套安全设施大大减少了学生对日常人身安全的担忧。学生们普遍对校园现有的安全安排感到放心。\n然而，仅靠学校配置的安全设备，无法实现全天候的全面保护。学生的主动作为和相互关照大大增强了校园的整体防护。许多学生会好心提醒同伴，深夜返回时避开僻静、昏暗、少有人走的小路。课后户外活动时，他们互相照应；天黑以后，他们选择结伴而行，不独自走路。\n校园安全记录证明了多方共同预防的成效。校园安全风险一直保持在很低的水平。人身安全事故和公共财产损失在校园里全年都很少发生。这些数据进一步表明，学校管理与学生自身的警惕相结合，效果非常好。\n总之，校园安全要靠共同努力。院校和个人的积极参与能够实现长久的安全。只有密切合作，人们才能让校园保持稳定、有序、安全，让大家安心学习、平静生活。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:seven:1",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1",
+          "sourceText": "Walking around university campuses day and night, students can easily see glowing blue emergency phones spread over every functional area.",
+          "displayText": "Walking around university campuses day and night, students can easily see glowing blue emergency phones spread over every functional area.",
+          "relatedQuestionIds": [],
+          "translationZh": "无论白天还是夜晚，走在大学校园里，学生们都能轻易看到遍布各个功能区、闪着蓝光的紧急求助电话。",
+          "analysisZh": "主干是 students can easily see glowing blue emergency phones（学生能轻易看到闪着蓝光的紧急电话）。句首 Walking around university campuses day and night 是现在分词短语作状语，它的逻辑主语就是主句的 students，表示“学生走在校园里时”。句末 spread over every functional area 中的 spread 是过去分词，作宾语 phones 的补足语，构成 see sth done，说明电话被分布在各个功能区。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 48,
+              "quote": "Walking around university campuses day and night"
+            },
+            {
+              "start": 50,
+              "end": 73,
+              "quote": "students can easily see"
+            },
+            {
+              "start": 104,
+              "end": 137,
+              "quote": "spread over every functional area"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:seven:2",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3",
+          "sourceText": "They look out for one another during after-school outdoor activities and choose to move in groups instead of walking alone after dark.",
+          "displayText": "They look out for one another during after-school outdoor activities and choose to move in groups instead of walking alone after dark.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:38"
+          ],
+          "translationZh": "课后户外活动时，他们互相照应；天黑以后，他们选择结伴而行，不独自走路。",
+          "analysisZh": "主语 They 指上一句的 Many students，后面由 and 连接两个并列谓语：look out for one another（互相照应）和 choose to move in groups（选择结伴走）。during after-school outdoor activities 是时间状语，修饰第一个谓语；instead of walking alone after dark 修饰第二个谓语，介词 of 后接动名词 walking，意思是“而不是天黑后独自走路”。这两个做法正是第 38 题答案里 mutual care 的具体表现。",
+          "underlineRanges": [
+            {
+              "start": 5,
+              "end": 29,
+              "quote": "look out for one another"
+            },
+            {
+              "start": 73,
+              "end": 97,
+              "quote": "choose to move in groups"
+            },
+            {
+              "start": 98,
+              "end": 133,
+              "quote": "instead of walking alone after dark"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "先写学校提供的安全设施和措施，再写学生对现有安排的感受；接着转折，说设备不够，还要靠学生互相照应；然后用安全记录证明两方结合有效，最后总结校园安全要靠学校和个人合作。",
+        "units": [
+          {
+            "unitId": "unit:seven:1",
+            "paragraphIds": [
+              "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1"
+            ],
+            "summary": "从随处可见的紧急电话写起，说明学校还提供巡逻和警报，用多种措施为师生筑起安全屏障。"
+          },
+          {
+            "unitId": "unit:seven:2",
+            "paragraphIds": [
+              "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:2"
+            ],
+            "summary": "低年级学生说在校园里有安全感，遇到危险能及时得到帮助，设施减少了他们的担忧。"
+          },
+          {
+            "unitId": "unit:seven:3",
+            "paragraphIds": [
+              "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3"
+            ],
+            "summary": "转折：只靠学校设备不够，学生互相提醒、结伴而行，主动参与保护。"
+          },
+          {
+            "unitId": "unit:seven:4",
+            "paragraphIds": [
+              "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:4"
+            ],
+            "summary": "用风险低、事故少的记录说明学校管理和学生警惕相结合很有效。"
+          },
+          {
+            "unitId": "unit:seven:5",
+            "paragraphIds": [
+              "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:5"
+            ],
+            "summary": "总结：校园安全靠学校和个人共同努力，只有密切合作才能长久安全。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 39,
+          "secondary": 37,
+          "kind": "shadow",
+          "shadowOf": "C",
+          "shared": [
+            "current"
+          ],
+          "text": "选项的 promising results 像在概括第 39 题空后风险很低这类成效。但空后 The data further indicates 要求前面先有数据，选项没提记录；While challenges remain 说还有难题，全段也没写任何难题。放进第 37 题也接不上：所在段只讲学生 feel a strong sense of safety，没提任何难题，While challenges remain 无从让步。",
+          "quotes": [
+            "promising results",
+            "The data further indicates",
+            "While challenges remain",
+            "feel a strong sense of safety"
+          ]
+        },
+        "B": {
+          "target": 36,
+          "secondary": 38,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项借用首段的 emergency phones，像在接第 36 题空前的这些设备。但 Though 让步后转向 high-tech systems，空后 various practical safety measures 并不是高科技系统，全文也没再提。放进第 38 题也接不上：空后 remind their peers 讲学生互相提醒，不是技术设备。",
+          "quotes": [
+            "emergency phones",
+            "Though",
+            "high-tech systems",
+            "various practical safety measures",
+            "remind their peers"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:seven",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:seven",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:seven:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 119,
+              "quote": "无论白天还是夜晚，走在大学校园里，学生们都能轻易看到遍布各个功能区、闪着蓝光的紧急求助电话。这些设备能迅速把使用者接通到紧急救助。各高校还提供专业的安保巡逻和实时警报。高校采取多种切实可行的安全措施，为校园里的师生筑起一道可靠的安全屏障。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:2"
+              ],
+              "start": 120,
+              "end": 248,
+              "quote": "大多数低年级学生说，他们在校园里时时刻刻都能感到强烈的安全感。他们提到，如果在去教室和宿舍楼的路上遇到突发危险或意外麻烦，马上就能得到及时的帮助。规范的校园布局和完善的配套安全设施大大减少了学生对日常人身安全的担忧。学生们普遍对校园现有的安全安排感到放心。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3"
+              ],
+              "start": 249,
+              "end": 370,
+              "quote": "然而，仅靠学校配置的安全设备，无法实现全天候的全面保护。学生的主动作为和相互关照大大增强了校园的整体防护。许多学生会好心提醒同伴，深夜返回时避开僻静、昏暗、少有人走的小路。课后户外活动时，他们互相照应；天黑以后，他们选择结伴而行，不独自走路。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:4"
+              ],
+              "start": 371,
+              "end": 464,
+              "quote": "校园安全记录证明了多方共同预防的成效。校园安全风险一直保持在很低的水平。人身安全事故和公共财产损失在校园里全年都很少发生。这些数据进一步表明，学校管理与学生自身的警惕相结合，效果非常好。"
+            },
+            {
+              "paragraphId": "translation-paragraph:seven:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:5"
+              ],
+              "start": 465,
+              "end": 537,
+              "quote": "总之，校园安全要靠共同努力。院校和个人的积极参与能够实现长久的安全。只有密切合作，人们才能让校园保持稳定、有序、安全，让大家安心学习、平静生活。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:seven:1",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1",
+            "text": "Walking around university campuses day and night, students can easily see glowing blue emergency phones spread over every functional area. These devices can quickly connect users to emergency help. Professional security patrols and real-time alerts are also provided by colleges. Universities carry out various practical safety measures to build a reliable safety barrier for teachers and students on campus."
+          },
+          {
+            "textId": "completed:seven:2",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:2",
+            "text": "Most young students in lower grades say they can feel a strong sense of safety on campus all the time. They mention that they can get timely help right away if they run into sudden risks or unexpected troubles on the way to classrooms and dorm buildings. Standard campus layout and complete supporting safety facilities greatly reduce students’ worries about daily personal safety. Students generally feel secure with current safety arrangements on campus:"
+          },
+          {
+            "textId": "completed:seven:3",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3",
+            "text": "However, safety equipment arranged by schools alone cannot achieve full protection around the clock. Student initiative and mutual care significantly enhance overall campus protection. Many students will kindly remind their peers to avoid quiet, dimly-lit lonely paths when walking back late at night. They look out for one another during after-school outdoor activities and choose to move in groups instead of walking alone after dark."
+          },
+          {
+            "textId": "completed:seven:4",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:4",
+            "text": "Campus safety records demonstrate the success of combined preventive efforts. Campus safety risks have stayed at a very low level. Personal safety accidents and public property loss rarely take place on campus all year round. The data further indicates that the combination of school management and student caution is highly effective."
+          },
+          {
+            "textId": "completed:seven:5",
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:5",
+            "text": "In a word, campus safety relies on joint efforts. Active participation from institutions and individuals can achieve long-term security. Only with close cooperation can people keep the campus stable, orderly and safe for daily study and peaceful-life."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:seven:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1",
+                "start": 228,
+                "end": 261,
+                "quote": "various practical safety measures"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:1",
+                "start": 88,
+                "end": 99,
+                "quote": "多种切实可行的安全措施"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:seven:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:2",
+                "start": 328,
+                "end": 380,
+                "quote": "reduce students’ worries about daily personal safety"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:2",
+                "start": 92,
+                "end": 107,
+                "quote": "减少了学生对日常人身安全的担忧"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:seven:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3",
+                "start": 134,
+                "end": 152,
+                "quote": "remind their peers"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:3",
+                "start": 60,
+                "end": 64,
+                "quote": "提醒同伴"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:seven:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:4",
+                "start": 155,
+                "end": 181,
+                "quote": "The data further indicates"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:4",
+                "start": 61,
+                "end": 70,
+                "quote": "这些数据进一步表明"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:seven:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:seven",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:5",
+                "start": 35,
+                "end": 48,
+                "quote": "joint efforts"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:5",
+                "start": 9,
+                "end": 13,
+                "quote": "共同努力"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:36"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:1",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1",
+                "start": 198,
+                "end": 279,
+                "quote": "Professional security patrols and real-time alerts are also provided by colleges."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:1",
+                "start": 65,
+                "end": 84,
+                "quote": "各高校还提供专业的安保巡逻和实时警报。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:37"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:2",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:2",
+                "start": 382,
+                "end": 456,
+                "quote": "Students generally feel secure with current safety arrangements on campus:"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:2",
+                "start": 108,
+                "end": 128,
+                "quote": "学生们普遍对校园现有的安全安排感到放心。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:38"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:3",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3",
+                "start": 101,
+                "end": 184,
+                "quote": "Student initiative and mutual care significantly enhance overall campus protection."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:3",
+                "start": 28,
+                "end": 53,
+                "quote": "学生的主动作为和相互关照大大增强了校园的整体防护。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:39"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:4",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:4",
+                "start": 0,
+                "end": 77,
+                "quote": "Campus safety records demonstrate the success of combined preventive efforts."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:4",
+                "start": 0,
+                "end": 19,
+                "quote": "校园安全记录证明了多方共同预防的成效。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:seven:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:40"
+            ],
+            "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:seven:5",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:5",
+                "start": 50,
+                "end": 136,
+                "quote": "Active participation from institutions and individuals can achieve long-term security."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:5",
+                "start": 14,
+                "end": 34,
+                "quote": "院校和个人的积极参与能够实现长久的安全。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:seven:1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence:seven:1",
+            "sourceRanges": [
+              {
+                "textId": "source:seven",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1",
+                "start": 0,
+                "end": 138,
+                "quote": "Walking around university campuses day and night, students can easily see glowing blue emergency phones spread over every functional area."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:1",
+                "start": 0,
+                "end": 46,
+                "quote": "无论白天还是夜晚，走在大学校园里，学生们都能轻易看到遍布各个功能区、闪着蓝光的紧急求助电话。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:seven:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:38"
+            ],
+            "selectedSentenceId": "sentence:seven:2",
+            "sourceRanges": [
+              {
+                "textId": "source:seven",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3",
+                "start": 225,
+                "end": 359,
+                "quote": "They look out for one another during after-school outdoor activities and choose to move in groups instead of walking alone after dark."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:seven",
+                "paragraphId": "translation-paragraph:seven:3",
+                "start": 86,
+                "end": 121,
+                "quote": "课后户外活动时，他们互相照应；天黑以后，他们选择结伴而行，不独自走路。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:36": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "emergency phones",
+        "These devices",
+        "emergency help",
+        "various practical safety measures",
+        "reliable safety barrier"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1",
+        "beforeQuote": "These devices can quickly connect users to emergency help.",
+        "afterQuote": "Universities carry out various practical safety measures"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "option",
+          "targetText": "emergency phones",
+          "relation": "also 表示在前面讲的紧急电话之外再添一项措施。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "These devices",
+          "signalSide": "context-before",
+          "targetText": "emergency phones",
+          "relation": "空前 These devices 还在说紧急电话，这是第一项措施。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "various practical safety measures",
+          "signalSide": "context-after",
+          "targetText": "emergency phones / security patrols / real-time alerts",
+          "relation": "空后 various 把电话和巡逻、警报几项合起来说。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "colleges",
+          "signalSide": "option",
+          "targetText": "Universities",
+          "relation": "colleges 与空后的 Universities 说的是同一类学校。"
+        }
+      ],
+      "lock": [
+        "also",
+        "various practical safety measures"
+      ],
+      "find": {
+        "text": "先看空后 \"various practical safety measures\"：说明前面不止一项措施。空前只讲了电话，D 用 \"also\" 再补巡逻和警报，七项里只有它在添措施。",
+        "quotes": [
+          "various practical safety measures",
+          "also"
+        ]
+      },
+      "explain": "空前说紧急电话能接通求助，这句再添一类人力和预警手段，空后 Universities carry out 一句把几项合起来，点明学校在搭安全屏障。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "emergency phones / These devices",
+            "optionSide": "Professional security patrols and real-time alerts",
+            "relation": "空前是电话这一项设施，选项补上巡逻和警报，两者都是学校提供的保护手段。"
+          },
+          {
+            "contextSide": "various practical safety measures",
+            "optionSide": "also provided by colleges",
+            "relation": "空后 various 需要前面已列出几项措施，also 正好把措施从一项变成几项。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "空前说紧急电话能接通求助，这句再添一类人力和预警手段，空后 Universities carry out 一句把几项合起来，点明学校在搭安全屏障。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "选项借用首段的 emergency phones，像在接第 36 题空前的这些设备。但 Though 让步后转向 high-tech systems，空后 various practical safety measures 并不是高科技系统，全文也没再提。放进第 38 题也接不上：空后 remind their peers 讲学生互相提醒，不是技术设备。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:37": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:37",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "a strong sense of safety",
+        "timely help",
+        "supporting safety facilities",
+        "students’ worries",
+        "daily personal safety"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:2",
+        "beforeQuote": "Standard campus layout and complete supporting safety facilities greatly reduce students’ worries about daily personal safety.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "feel secure",
+          "signalSide": "option",
+          "targetText": "reduce students’ worries",
+          "relation": "feel secure 是担忧减少之后学生的感受。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "students’ worries",
+          "signalSide": "context-before",
+          "targetText": "feel secure",
+          "relation": "空前说设施减少了学生的担忧，引出学生放心。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "supporting safety facilities",
+          "signalSide": "context-before",
+          "targetText": "current safety arrangements",
+          "relation": "空前的布局和配套设施，在选项里收成 current safety arrangements。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "current safety arrangements",
+          "signalSide": "option",
+          "targetText": "Standard campus layout and complete supporting safety facilities",
+          "relation": "选项用 arrangements 概括空前提到的布局和设施。"
+        }
+      ],
+      "lock": [
+        "supporting safety facilities",
+        "students’ worries",
+        "feel secure"
+      ],
+      "find": {
+        "text": "空在段尾，往前看：空前 \"supporting safety facilities\" 减少了 \"students’ worries\"，C 的 \"feel secure\" 正是担忧减少后的感受，七项里只有它讲学生感受。",
+        "quotes": [
+          "supporting safety facilities",
+          "students’ worries",
+          "feel secure"
+        ]
+      },
+      "explain": "本段先转述学生自己说有安全感，再讲布局和设施让他们少了担忧；这句在段尾把两层收成总的评价，下一段的 However 才有可转折的对象。",
+      "distractors": [
+        {
+          "label": "F",
+          "text": "F 也以学生开头，但空前讲的是设施让学生少担忧，F 讲学生主动互助，是下一段 However 转折后才讲的内容。",
+          "quotes": [
+            "However"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "a strong sense of safety / reduce students’ worries",
+            "optionSide": "feel secure",
+            "relation": "段首学生说有安全感，段中说担忧减少，选项用 feel secure 把这份感受收住。"
+          },
+          {
+            "contextSide": "Standard campus layout and complete supporting safety facilities",
+            "optionSide": "current safety arrangements",
+            "relation": "选项把空前列出的布局和设施概括为现有的安全安排。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "本段先转述学生自己说有安全感，再讲布局和设施让他们少了担忧；这句在段尾把两层收成总的评价，下一段的 However 才有可转折的对象。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 也以学生开头，但空前讲的是设施让学生少担忧，F 讲学生主动互助，是下一段 However 转折后才讲的内容。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:38": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "safety equipment arranged by schools alone",
+        "full protection",
+        "remind their peers",
+        "walking back late at night"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3",
+        "beforeQuote": "However, safety equipment arranged by schools alone cannot achieve full protection around the clock.",
+        "afterQuote": "Many students will kindly remind their peers to avoid quiet, dimly-lit lonely paths when walking back late at night."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "alone",
+          "signalSide": "context-before",
+          "targetText": "Student initiative",
+          "relation": "空前说光靠学校设备不够，需要另一方出力，选项给出学生这一方。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "mutual care",
+          "signalSide": "option",
+          "targetText": "remind their peers",
+          "relation": "mutual care 概括空后学生互相提醒的做法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "remind their peers",
+          "signalSide": "context-after",
+          "targetText": "mutual care",
+          "relation": "空后提醒同伴是相互关照的具体例子。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Student initiative",
+          "signalSide": "option",
+          "targetText": "Many students will kindly remind",
+          "relation": "选项的学生主动，对应空后 Many students 主动提醒。"
+        }
+      ],
+      "lock": [
+        "alone",
+        "mutual care",
+        "remind their peers"
+      ],
+      "find": {
+        "text": "空前 \"alone\" 说光靠学校设备不够，得有另一方；空后 \"remind their peers\" 是学生互相提醒，F 的 \"mutual care\" 正好概括它。",
+        "quotes": [
+          "alone",
+          "remind their peers",
+          "mutual care"
+        ]
+      },
+      "explain": "空前用 However 指出设备有局限，这句提出学生这一方的作用，空后用提醒同伴避开小路、结伴而行两个例子把它坐实。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 的 also 会再添一项学校措施，可空前刚说 schools alone 做不到，空后讲的是学生提醒同伴。",
+          "quotes": [
+            "also",
+            "schools alone"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "safety equipment arranged by schools alone cannot achieve full protection",
+            "optionSide": "Student initiative",
+            "relation": "学校设备不够，选项补上学生自己的作用。"
+          },
+          {
+            "contextSide": "remind their peers",
+            "optionSide": "mutual care",
+            "relation": "空后提醒同伴、互相照应，是选项 mutual care 的具体表现。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前用 However 指出设备有局限，这句提出学生这一方的作用，空后用提醒同伴避开小路、结伴而行两个例子把它坐实。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 的 also 会再添一项学校措施，可空前刚说 schools alone 做不到，空后讲的是学生提醒同伴。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:39": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:39",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "very low level",
+        "rarely take place",
+        "The data further indicates",
+        "combination of school management and student caution",
+        "highly effective"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "Campus safety risks have stayed at a very low level. Personal safety accidents and public property loss rarely take place on campus all year round. The data further indicates that the combination of school management and student caution is highly effective."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "The data",
+          "signalSide": "context-after",
+          "targetText": "Campus safety records",
+          "relation": "空后 The data 回指选项里的安全记录。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "records",
+          "signalSide": "option",
+          "targetText": "The data",
+          "relation": "records 给后文的 The data 提供了所指对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "combined",
+          "signalSide": "option",
+          "targetText": "combination",
+          "relation": "combined 与空后 combination 同根复现。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "combination",
+          "signalSide": "context-after",
+          "targetText": "combined preventive efforts",
+          "relation": "空后 combination 具体说出是学校管理和学生警惕的结合。"
+        }
+      ],
+      "lock": [
+        "records",
+        "The data",
+        "combination"
+      ],
+      "find": {
+        "text": "空在段首，先看空后 \"The data further indicates\"：further 要求前面已出现数据，E 的 \"records\" 就是这份数据，\"combined\" 又对上 \"combination\"。",
+        "quotes": [
+          "The data further indicates",
+          "records",
+          "combined",
+          "combination"
+        ]
+      },
+      "explain": "这句先下结论说多方预防见效，空后用风险很低、事故很少两条事实支撑，再用 The data 回指记录，点明成效来自管理和警惕的结合。",
+      "distractors": [
+        {
+          "label": "G",
+          "text": "G 的 institutions and individuals 对得上空后学校和学生两方，但 can achieve 是展望，空后 have stayed 讲的是已有结果。",
+          "quotes": [
+            "institutions and individuals",
+            "can achieve",
+            "have stayed"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "The data further indicates",
+            "optionSide": "Campus safety records",
+            "relation": "空后的数据要有来处，选项的安全记录就是来处。"
+          },
+          {
+            "contextSide": "the combination of school management and student caution is highly effective",
+            "optionSide": "the success of combined preventive efforts",
+            "relation": "选项先说联合预防成功，空后具体说是学校管理和学生警惕的结合。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "这句先下结论说多方预防见效，空后用风险很低、事故很少两条事实支撑，再用 The data 回指记录，点明成效来自管理和警惕的结合。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 的 institutions and individuals 对得上空后学校和学生两方，但 can achieve 是展望，空后 have stayed 讲的是已有结果。"
+        },
+        {
+          "optionLabel": "A",
+          "reason": "选项的 promising results 像在概括第 39 题空后风险很低这类成效。但空后 The data further indicates 要求前面先有数据，选项没提记录；While challenges remain 说还有难题，全段也没写任何难题。放进第 37 题也接不上：所在段只讲学生 feel a strong sense of safety，没提任何难题，While challenges remain 无从让步。"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:40": {
+      "blankId": "blank:paper-mock-shandong-zibo-2026-05-stage-quality-test:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "In a word",
+        "joint efforts",
+        "close cooperation",
+        "stable, orderly and safe"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:5",
+        "beforeQuote": "In a word, campus safety relies on joint efforts.",
+        "afterQuote": "Only with close cooperation can people keep the campus stable, orderly and safe for daily study and peaceful-life."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "joint efforts",
+          "signalSide": "context-before",
+          "targetText": "institutions and individuals",
+          "relation": "空前只说共同努力，选项点出是哪两方一起出力。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "institutions and individuals",
+          "signalSide": "option",
+          "targetText": "joint efforts / close cooperation",
+          "relation": "学校和个人两方，把共同努力、密切合作说实。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "close cooperation",
+          "signalSide": "context-after",
+          "targetText": "Active participation from institutions and individuals",
+          "relation": "空后的密切合作，指的就是两方的积极参与。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "long-term security",
+          "signalSide": "option",
+          "targetText": "stable, orderly and safe",
+          "relation": "long-term security 与空后让校园保持安全稳定意思一致。"
+        }
+      ],
+      "lock": [
+        "joint efforts",
+        "institutions and individuals",
+        "close cooperation"
+      ],
+      "find": {
+        "text": "空前 \"joint efforts\" 只说要共同努力，空后 \"close cooperation\" 也没说谁合作；G 点出 \"institutions and individuals\" 两方，正好补上。",
+        "quotes": [
+          "joint efforts",
+          "close cooperation",
+          "institutions and individuals"
+        ]
+      },
+      "explain": "空前 In a word 开始收束全文，这句把共同努力落到学校和个人两方，并说出长久安全的结果；空后再用 Only with 强调合作是前提。",
+      "distractors": [
+        {
+          "label": "E",
+          "text": "E 的 combined 也贴近 joint efforts，但 records 是拿已有记录说成效，接不上空后 Only with close cooperation 讲的条件。",
+          "quotes": [
+            "combined",
+            "joint efforts",
+            "Only with close cooperation"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "joint efforts / close cooperation",
+            "optionSide": "Active participation from institutions and individuals",
+            "relation": "空前空后都讲合作，选项说出合作的双方。"
+          },
+          {
+            "contextSide": "keep the campus stable, orderly and safe",
+            "optionSide": "achieve long-term security",
+            "relation": "选项说长久安全，空后说保持校园稳定安全，两句说的是同一个结果。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "空前 In a word 开始收束全文，这句把共同努力落到学校和个人两方，并说出长久安全的结果；空后再用 Only with 强调合作是前提。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 的 combined 也贴近 joint efforts，但 records 是拿已有记录说成效，接不上空后 Only with close cooperation 讲的条件。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,800 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b": {
+      "overview": "作者是一名害怕当众讲话的教师。她不再硬装镇定，而是在给害羞学生的回复中坦白自己也害怕，学生因此敞开心扉、变得勇敢。她由此提出应坦然面对不足，并把不足看作长处。",
+      "fullTranslationZh": "据估计，每4个人中就有3个人害怕当众讲话，我就是其中之一。每个学年开始时，一批新的15岁学生涌进我的线上教室。不管他们是什么态度，我总是羞于承认自己很害怕。\n“先装着，装到真行了为止。”同事们这样劝我。可是不管我怎么装，不管我把同样的课程教了多少年，恐惧始终还在。人们也许会以为，这会让我感到羞愧，让我更加刻苦地练习，去钻研当众讲话的方法。但我学会了另一种办法。\n开学第一天，超过一半的学生在自我介绍的段落里说，自己性格害羞，不敢在课堂上发言。对任何老师来说，这都是普遍现象，但学生们自己清楚这一点，这让我能立刻抓住时机，从他们的实际状态出发去接近他们。我在他们作业上的回复都很个人化：每年开学第一天，陌生人的目光直直地盯着我，我也在那样的处境里。我懂你的害羞，因为它和我的一样。\n慢慢地，但也确确实实地，学生们开始敞开心扉，说出自己恐惧的根源。看到我这个经验丰富的老师也在发抖，他们在展示中身体发抖时，便觉得勇敢了一点。听到我说话结巴、找不着词，他们也就接受了自己为找合适的词而出现的停顿。\n恐惧很少会完全消失，对当众讲话的恐惧也是如此。很多学生在课堂上被这种恐惧束缚着，但我们有机会以共情为先去鼓励他们。这首先要鼓起勇气照照镜子，坦然面对自己的不足。然后，我们必须教会自己——进而教会学生——把这些不足重新看作长处，而不是弱点。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b-1",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3",
+          "sourceText": "This is a widespread phenomenon for any teacher, but my students’ awareness of it allowed me to step into the moment immediately to meet them where they were.",
+          "displayText": "This is a widespread phenomenon for any teacher, but my students’ awareness of it allowed me to step into the moment immediately to meet them where they were.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:25",
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:26"
+          ],
+          "translationZh": "对任何老师来说，这都是普遍现象，但学生们自己清楚这一点，这让我能立刻抓住时机，从他们的实际状态出发去接近他们。",
+          "analysisZh": "but 连接两个分句。前一句主干是 This is a widespread phenomenon，This 指上一句说的学生害羞、不敢发言。后一句主干是 my students’ awareness of it allowed me to step into the moment，用的是 allow sb to do（让某人能做某事），主语是 awareness（意识到这一点），it 仍指害羞这件事；step into the moment 意为“抓住这个时机”。句末 to meet them where they were 是不定式，表示目的；where they were 字面是“他们所在的地方”，这里指学生当时的状态，meet them where they were 就是从学生的实际情况出发去接近他们。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 31,
+              "quote": "This is a widespread phenomenon"
+            },
+            {
+              "start": 53,
+              "end": 116,
+              "quote": "my students’ awareness of it allowed me to step into the moment"
+            },
+            {
+              "start": 129,
+              "end": 157,
+              "quote": "to meet them where they were"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b-2",
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:4",
+          "sourceText": "When they saw me, their experienced teacher, trembling, they felt a little braver when their body trembled during a presentation.",
+          "displayText": "When they saw me, their experienced teacher, trembling, they felt a little braver when their body trembled during a presentation.",
+          "relatedQuestionIds": [
+            "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:27"
+          ],
+          "translationZh": "看到我这个经验丰富的老师也在发抖，他们在展示中身体发抖时，便觉得勇敢了一点。",
+          "analysisZh": "主干是 they felt a little braver（他们觉得勇敢了一点）。句首 When they saw me … trembling 是时间状语从句，用 see sb doing（看到某人正在做某事）；夹在中间的 their experienced teacher 是 me 的同位语，强调发抖的是经验丰富的老师。句末 when their body trembled during a presentation 是另一个时间状语从句，说明他们在什么时候觉得更勇敢：自己在展示中身体发抖的时候。前面的 trembling 和后面的 trembled 呼应：老师也发抖，学生就不再为自己发抖而慌张。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 16,
+              "quote": "When they saw me"
+            },
+            {
+              "start": 45,
+              "end": 54,
+              "quote": "trembling"
+            },
+            {
+              "start": 56,
+              "end": 81,
+              "quote": "they felt a little braver"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1"
+              ],
+              "start": 0,
+              "end": 78,
+              "quote": "据估计，每4个人中就有3个人害怕当众讲话，我就是其中之一。每个学年开始时，一批新的15岁学生涌进我的线上教室。不管他们是什么态度，我总是羞于承认自己很害怕。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2"
+              ],
+              "start": 79,
+              "end": 181,
+              "quote": "“先装着，装到真行了为止。”同事们这样劝我。可是不管我怎么装，不管我把同样的课程教了多少年，恐惧始终还在。人们也许会以为，这会让我感到羞愧，让我更加刻苦地练习，去钻研当众讲话的方法。但我学会了另一种办法。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+              ],
+              "start": 182,
+              "end": 340,
+              "quote": "开学第一天，超过一半的学生在自我介绍的段落里说，自己性格害羞，不敢在课堂上发言。对任何老师来说，这都是普遍现象，但学生们自己清楚这一点，这让我能立刻抓住时机，从他们的实际状态出发去接近他们。我在他们作业上的回复都很个人化：每年开学第一天，陌生人的目光直直地盯着我，我也在那样的处境里。我懂你的害羞，因为它和我的一样。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:4"
+              ],
+              "start": 341,
+              "end": 446,
+              "quote": "慢慢地，但也确确实实地，学生们开始敞开心扉，说出自己恐惧的根源。看到我这个经验丰富的老师也在发抖，他们在展示中身体发抖时，便觉得勇敢了一点。听到我说话结巴、找不着词，他们也就接受了自己为找合适的词而出现的停顿。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:5"
+              ],
+              "start": 447,
+              "end": 566,
+              "quote": "恐惧很少会完全消失，对当众讲话的恐惧也是如此。很多学生在课堂上被这种恐惧束缚着，但我们有机会以共情为先去鼓励他们。这首先要鼓起勇气照照镜子，坦然面对自己的不足。然后，我们必须教会自己——进而教会学生——把这些不足重新看作长处，而不是弱点。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-reading-b-q24-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2",
+                "start": 50,
+                "end": 164,
+                "quote": "But no matter how much I faked it, and how many years I spent teaching the same curriculum, the fear has remained."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 22,
+                "end": 53,
+                "quote": "可是不管我怎么装，不管我把同样的课程教了多少年，恐惧始终还在。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q25-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3",
+                "start": 334,
+                "end": 466,
+                "quote": "I’m there on the first day of class every year, when strangers’ eyes stare right at me. I know your shyness because it matches mine."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 111,
+                "end": 158,
+                "quote": "每年开学第一天，陌生人的目光直直地盯着我，我也在那样的处境里。我懂你的害羞，因为它和我的一样。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q26-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1",
+                "start": 0,
+                "end": 62,
+                "quote": "An estimated 3 out of 4 people have a fear of public speaking."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3",
+                "start": 133,
+                "end": 180,
+                "quote": "This is a widespread phenomenon for any teacher"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 0,
+                "end": 20,
+                "quote": "据估计，每4个人中就有3个人害怕当众讲话"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 40,
+                "end": 55,
+                "quote": "对任何老师来说，这都是普遍现象"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-q27-evidence",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3",
+                "start": 422,
+                "end": 466,
+                "quote": "I know your shyness because it matches mine."
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:4",
+                "start": 23,
+                "end": 81,
+                "quote": "my students began to open up about the root of their fears"
+              },
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:5",
+                "start": 198,
+                "end": 295,
+                "quote": "That starts with finding the courage to look in the mirror and be honest about our own flaws（不足）."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 142,
+                "end": 158,
+                "quote": "我懂你的害羞，因为它和我的一样。"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 12,
+                "end": 31,
+                "quote": "学生们开始敞开心扉，说出自己恐惧的根源"
+              },
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "zh-reading-b-p5",
+                "start": 57,
+                "end": 80,
+                "quote": "这首先要鼓起勇气照照镜子，坦然面对自己的不足。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:25",
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3",
+                "start": 133,
+                "end": 291,
+                "quote": "This is a widespread phenomenon for any teacher, but my students’ awareness of it allowed me to step into the moment immediately to meet them where they were."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 40,
+                "end": 95,
+                "quote": "对任何老师来说，这都是普遍现象，但学生们自己清楚这一点，这让我能立刻抓住时机，从他们的实际状态出发去接近他们。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-reading-b-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:27"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:4",
+                "start": 83,
+                "end": 212,
+                "quote": "When they saw me, their experienced teacher, trembling, they felt a little braver when their body trembled during a presentation."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 32,
+                "end": 70,
+                "quote": "看到我这个经验丰富的老师也在发抖，他们在展示中身体发抖时，便觉得勇敢了一点。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者先承认自己和多数人一样害怕当众讲话；再说“装下去”的建议没用，恐惧一直都在，她找到了另一种办法；接着讲她在回复中向害羞的学生坦白自己也害怕，学生因此敞开心扉、更加勇敢；最后总结：以共情引导学生，先正视自己的不足，再把不足看作长处。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1",
+            "summary": "多数人害怕当众讲话，作者也是，每年开学都羞于承认自己害怕",
+            "function": "引出话题，交代作者的处境"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2",
+            "summary": "同事劝她装下去，可她装了多年恐惧仍在；她没有更刻苦地练，而是找到了另一种办法",
+            "function": "转折，引出作者的新做法"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3",
+            "summary": "过半学生说自己害羞，作者在回复中坦白自己每年开学也紧张，害羞和他们一样",
+            "function": "讲作者的具体做法"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:4",
+            "summary": "学生看到老师也发抖、结巴，开始说出恐惧的根源，也更能接受自己的紧张",
+            "function": "讲这种做法的效果"
+          },
+          {
+            "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:5",
+            "summary": "恐惧很少完全消失，教师应以共情引导，正视自己的不足，并把不足看作长处",
+            "function": "总结全文，点明道理"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:24": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "sentence",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "结合作者的处境和下文的结果，推断划线句的意思。",
+      "stemTranslationZh": "第2段中划线的 “Just fake it until you make it” 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看她照做的结果",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "练习当众讲话，直到克服恐惧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "practice",
+            "optionText": "Practice",
+            "matchType": "exact",
+            "relationNote": "practice 出自 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2|to practice even harder]]，那是别人以为她会做的事，不是同事的建议；fake 是“装”，不是“练”。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "One might expect that this would cause me to be ashamed, to practice even harder, to study public speaking methods.",
+              "anchor": "别人的料想",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "掩饰紧张，直到能流利地讲话。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the fear has remained",
+            "sourceEntity": "the fear",
+            "optionText": "Hide your nervousness until you can talk fluently.",
+            "optionEntity": "talk fluently",
+            "explanation": "前半“掩饰紧张”贴近 fake，后半却把 make it 说成“说得流利”；作者要摆脱的是恐惧（the fear has remained），不是口才问题。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "But no matter how much I faked it, and how many years I spent teaching the same curriculum, the fear has remained.",
+              "anchor": "恐惧仍在",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "培养当众讲话的技能，直到熟练掌握。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Develop public speaking skills until you master them.",
+            "explanation": "fake 是“装样子”，选项变成踏实练技能，丢了“装”这层意思；同事的建议里也没有学技能。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "装作自信，直到真正变得自信。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "But no matter how much I faked it, and how many years I spent teaching the same curriculum, the fear has remained.",
+              "anchor": "装了多年恐惧仍在",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2"
+            },
+            {
+              "role": "supporting",
+              "quote": "I’m always embarrassed to admit I am terrified",
+              "anchor": "羞于承认害怕",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "fake it",
+          "sourceRole": "stem",
+          "targetText": "Just fake it until you make it, my peers advised.",
+          "relationType": "locationCue",
+          "answerText": "no matter how much I faked it, and how many years I spent teaching the same curriculum, the fear has remained",
+          "bridgeZh": "faked it 就是照同事的话去装，装了多年怕还在",
+          "note": "题干划线句原样出现在原文。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2"
+        },
+        {
+          "sourceText": "Pretend to be confident",
+          "sourceRole": "correctOption",
+          "targetText": "no matter how much I faked it",
+          "relationType": "paraphrase",
+          "note": "从 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1|embarrassed to admit I am terrified]] 看，作者怕当众讲话又羞于承认，所以 fake it 装的只能是“不怕、有自信”，make it 指真的做到。放回去：先装出自信，装到真有自信为止，选 D。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:25": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从作者回复的内容推出她这样写的用意。",
+      "stemTranslationZh": "作者为什么在学生的作业上写个人化的回复？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句冒号后她写了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了鼓励他们专心写作业。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "papers",
+            "optionText": "papers",
+            "matchType": "exact",
+            "relationNote": "papers 借自 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3|My replies on their papers]]：回复写在作业上，内容却是她自己的紧张经历，不是要学生把心思放在作业上。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "My replies on their papers were personal",
+              "anchor": "回复写在作业上",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了教他们如何掩饰害羞。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "I know your shyness because it matches mine.",
+            "sourceHighlight": "it matches mine",
+            "optionText": "To give them tips on how to hide their shyness.",
+            "optionHighlight": "hide their shyness",
+            "explanation": "她在回复里公开说自己也害羞（it matches mine），做的恰恰是不遮掩；回复里也没有教学生任何掩饰的办法。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "I know your shyness because it matches mine.",
+              "anchor": "害羞和我的一样",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了让他们知道她也有过同样的经历。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "I’m there on the first day of class every year, when strangers’ eyes stare right at me.",
+              "anchor": "每年开学也被盯着",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+            },
+            {
+              "role": "supporting",
+              "quote": "I know your shyness because it matches mine.",
+              "anchor": "害羞和我的一样",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了让他们相信她的恐惧比他们的更严重。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "I know your shyness because it matches mine.",
+            "sourceHighlight": "matches mine",
+            "optionText": "To convince them that her fear was worse than theirs.",
+            "optionHighlight": "worse than theirs",
+            "explanation": "matches mine 是“和我的一样”，她说的是彼此相当，没有比谁更严重。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "I know your shyness because it matches mine.",
+              "anchor": "害羞和我的一样",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "personal",
+          "sourceRole": "stem",
+          "targetText": "My replies on their papers were personal: I’m there on the first day of class every year, when strangers’ eyes stare right at me.",
+          "relationType": "locationCue",
+          "answerText": "I’m there on the first day of class every year, when strangers’ eyes stare right at me",
+          "note": "题干 personal 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+        },
+        {
+          "sourceText": "had walked a mile in their shoes",
+          "sourceRole": "correctOption",
+          "targetText": "I’m there on the first day of class every year",
+          "relationType": "paraphrase",
+          "note": "选项的 walked a mile in their shoes 是“有过同样的处境”：她写自己每年开学也被陌生目光盯着，又说你的害羞和我的一样（matches mine），用意是让学生知道老师也经历过，选 C。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:26": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据作者对这种恐惧的描述，判断她认为它是什么样的。",
+      "stemTranslationZh": "作者如何看待对当众讲话的恐惧？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "压倒一切的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Overwhelming.",
+            "explanation": "原文说恐惧很少完全消失，但作者带着它教了多年书，还把它变成和学生共情的起点，没说它压倒一切、让人无力应对。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "常见的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "An estimated 3 out of 4 people have a fear of public speaking.",
+              "anchor": "四人中三人害怕",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1"
+            },
+            {
+              "role": "supporting",
+              "quote": "This is a widespread phenomenon for any teacher",
+              "anchor": "普遍现象",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "令人恐惧的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "terrified",
+            "optionText": "Terrifying",
+            "matchType": "wordFamily",
+            "relationNote": "terrifying 和 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1|I am terrified]] 同词根，但那是作者说自己害怕；题目问她怎样看待这种恐惧本身，她用“四人中有三人”说明的是它很常见。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "I’m always embarrassed to admit I am terrified",
+              "anchor": "作者自己害怕",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "无法忍受的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "But no matter how much I faked it, and how many years I spent teaching the same curriculum, the fear has remained.",
+            "sourceHighlight": "the fear has remained",
+            "optionText": "Unbearable.",
+            "optionHighlight": "Unbearable",
+            "explanation": "恐惧一直都在（the fear has remained），作者却带着它年年站上讲台，还学会了用它鼓励学生，说不上无法忍受。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "But no matter how much I faked it, and how many years I spent teaching the same curriculum, the fear has remained.",
+              "anchor": "恐惧仍在",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "fear of public speaking",
+          "sourceRole": "stem",
+          "targetText": "An estimated 3 out of 4 people have a fear of public speaking.",
+          "relationType": "locationCue",
+          "answerText": "An estimated 3 out of 4 people",
+          "note": "题干 fear of public speaking 原词出现在原文。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1"
+        },
+        {
+          "sourceText": "Common",
+          "sourceRole": "correctOption",
+          "targetText": "An estimated 3 out of 4 people",
+          "relationType": "paraphrase",
+          "note": "原文给出比例：估计每 4 人中就有 3 人怕当众讲话（3 out of 4），由此可见这种恐惧很普遍；[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3|This is a widespread phenomenon]] 也说学生不敢发言是常见现象（widespread），选 B。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1"
+        }
+      ]
+    },
+    "question:paper-mock-shandong-zibo-2026-05-stage-quality-test:27": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从作者面对恐惧的经历中提炼道理，再和四句格言对照。",
+      "stemTranslationZh": "作者的经历传达了什么道理？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2|But I have learned another way]] 读起，看她不再硬装之后怎样面对恐惧、换来了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "努力或许能战胜生活中的恐惧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "One might expect that this would cause me to be ashamed, to practice even harder, to study public speaking methods.",
+            "sourceHighlight": "to practice even harder",
+            "optionText": "Hard work might defeat fears in our life.",
+            "optionHighlight": "Hard work",
+            "explanation": "更刻苦地练只是别人以为她会走的路，她紧接着说自己学会了另一种办法（another way）；她教了多年，恐惧也没被打败。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "One might expect that this would cause me to be ashamed, to practice even harder, to study public speaking methods.",
+              "anchor": "别人的料想",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2"
+            },
+            {
+              "quote": "But I have learned another way.",
+              "anchor": "另一种办法",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "敢于无视恐惧，恐惧就会消失。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Fear rarely goes away completely, and that includes the fear of public speaking.",
+            "sourceHighlight": "rarely goes away completely",
+            "optionText": "Fear disappears when we dare to ignore it.",
+            "optionHighlight": "Fear disappears",
+            "explanation": "原文说恐惧很少会彻底消失（rarely goes away），作者也没有无视它，而是向学生坦白、正视它。"
+          },
+          "trapEvidence": [
+            {
+              "quote": "Fear rarely goes away completely, and that includes the fear of public speaking.",
+              "anchor": "恐惧很少消失",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:5"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "我们唯一需要恐惧的就是恐惧本身。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The only thing we have to fear is fear itself.",
+            "explanation": "这句名言劝人别被恐惧吓住；作者讲的是承认恐惧一直都在，坦然说出来，反倒换来学生的勇气，重点在直面恐惧。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "你害怕进入的山洞里，藏着你要找的宝藏。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "quote": "I know your shyness because it matches mine.",
+              "anchor": "坦白自己也害羞",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+            },
+            {
+              "role": "supporting",
+              "quote": "my students began to open up about the root of their fears",
+              "anchor": "学生敞开心扉",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:4"
+            },
+            {
+              "role": "supporting",
+              "quote": "That starts with finding the courage to look in the mirror and be honest about our own flaws（不足）.",
+              "anchor": "直面不足",
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:5"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The cave you fear to enter holds the treasure you seek",
+          "sourceRole": "correctOption",
+          "targetText": "I know your shyness because it matches mine.",
+          "relationType": "paraphrase",
+          "note": "格言里“怕进的山洞”是作者最不愿面对的恐惧，“宝藏”是她的收获：她向学生坦白自己也害羞（[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3|it matches mine]]），学生反而敞开心扉、更勇敢了（[[block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:4|began to open up]]）。直面所怕的事，才换来想要的结果，选 D。",
+          "targetParagraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3"
+        }
+      ]
+    }
+  }
+}
