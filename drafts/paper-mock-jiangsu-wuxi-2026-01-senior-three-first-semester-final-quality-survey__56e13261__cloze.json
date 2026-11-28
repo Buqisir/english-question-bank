@@ -1,0 +1,2062 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze": {
+      "overview": "作者在小镇杂货店打工时，因一件印满猫的外套和老顾客朱迪丝熟络起来。作者随口提到生日要请假，她说要烤饼干，作者很快忘了；生日过后她真的送来饼干，作者深受感动。",
+      "fullTranslationZh": "我先后三次在镇上一家小杂货店打过工。\n第一次在那里工作时，我和一位老太太熟了起来，因为天冷的时候，她来店里总穿着一件毛茸茸的大外套，上面印满了猫。我喜欢猫，所以第一次看到她穿这件外套时，我立刻夸了它。她是店里的常客，我们后来养成了习惯，她每次来都要聊上几句。我得知她叫朱迪丝，她很爱称自己是个“疯狂的猫女士”。\n第二次回去打工时，她很高兴看到我回来。三月里，我有一次提到，当月晚些时候我要请一天假过20岁生日。她对我说：“那好，到时候我得给你烤些饼干过生日。”我是几周前跟她说的，所以这件事没多久就从我脑子里溜走了。\n可是生日过后我回去上班的第一天，我正从后面的洗手间出来，就听到有人在叫我。是朱迪丝。她走到我跟前，递给我一袋饼干，补祝我生日快乐。我用尽了全力，才没在她面前掉下眼泪。我更加感激了，因为我不仅从没从一个几乎不认识的人那里收到过这样的东西，甚至还忘了她说过要为我这么做。\n她走后，我给妈妈打电话，讲着讲着就哽咽了。我真希望自己知道她的生日是哪天，这样我也能为她做点好事。",
+      "mainLine": {
+        "theme": {
+          "text": "不太熟的顾客记着作者的生日送来饼干，这份善意让作者也想为她做点好事（do something nice for her）。",
+          "quote": "do something nice for her"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:1",
+            "text": "作者先后三次在镇上一家小杂货店打工。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+            "text": "第一次打工时，作者因一件猫外套和老顾客朱迪丝熟络起来。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+            "text": "再次回店时她很高兴，听说作者要过生日便说烤饼干，作者很快忘了。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+            "text": "生日后朱迪丝送来饼干，作者强忍泪水，更加感激。"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+            "text": "作者哽咽着向妈妈讲述，也想为朱迪丝做点好事。"
+          }
+        ],
+        "emotion": "亲近→淡忘→意外感动→感激哽咽→想回报"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-cloze-1",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+          "sourceText": "I was even more __53__ because not only had I never got anything like that from someone I __54__ knew, but I’d even forgotten she said she’d do that for me.",
+          "displayText": "I was even more grateful because not only had I never got anything like that from someone I barely knew, but I’d even forgotten she said she’d do that for me.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:53",
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:54"
+          ],
+          "translationZh": "我更加感激了，因为我不仅从没从一个几乎不认识的人那里收到过这样的东西，甚至还忘了她说过要为我这么做。",
+          "analysisZh": "主干是 I was even more grateful（我更加感激）。because 引出原因，原因里用 not only … but … 连接两个并列分句：not only 放在句首，第一个分句要部分倒装，写成 had I never got，意思是从没收到过；someone I barely knew 是省去关系代词的定语从句，修饰 someone。第二个分句 I’d even forgotten 后面是宾语从句 she said …，she said 后面又带一层宾语从句 she’d do that for me。两个原因一个是对方几乎不认识，一个是自己早忘了，所以感激更深。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 24,
+              "quote": "I was even more grateful"
+            },
+            {
+              "start": 33,
+              "end": 57,
+              "quote": "not only had I never got"
+            },
+            {
+              "start": 105,
+              "end": 127,
+              "quote": "but I’d even forgotten"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-cloze-2",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+          "sourceText": "The first time I worked there, I became __41__ with an old lady because on cold days, she’d wear a big fluffy jacket with __42__ all over it when she came to the store.",
+          "displayText": "The first time I worked there, I became familiar with an old lady because on cold days, she’d wear a big fluffy jacket with cats all over it when she came to the store.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:41",
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:42"
+          ],
+          "translationZh": "第一次在那里工作时，我和一位老太太熟了起来，因为天冷的时候，她来店里总穿着一件毛茸茸的大外套，上面印满了猫。",
+          "analysisZh": "主干是 I became familiar with an old lady（我和一位老太太熟了起来）。句首 The first time 在这里相当于连词，引导时间状语从句 The first time I worked there。because 引出原因从句，从句主干是 she’d wear a big fluffy jacket，she’d 是 she would，表示过去常常这样做；on cold days 和 when she came to the store 都说明她什么时候穿；with cats all over it 是 with 加名词再加介词短语的结构，修饰 jacket，说外套上满是猫。",
+          "underlineRanges": [
+            {
+              "start": 31,
+              "end": 65,
+              "quote": "I became familiar with an old lady"
+            },
+            {
+              "start": 88,
+              "end": 118,
+              "quote": "she’d wear a big fluffy jacket"
+            },
+            {
+              "start": 119,
+              "end": 140,
+              "quote": "with cats all over it"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:1"
+              ],
+              "start": 0,
+              "end": 18,
+              "quote": "我先后三次在镇上一家小杂货店打过工。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2"
+              ],
+              "start": 19,
+              "end": 155,
+              "quote": "第一次在那里工作时，我和一位老太太熟了起来，因为天冷的时候，她来店里总穿着一件毛茸茸的大外套，上面印满了猫。我喜欢猫，所以第一次看到她穿这件外套时，我立刻夸了它。她是店里的常客，我们后来养成了习惯，她每次来都要聊上几句。我得知她叫朱迪丝，她很爱称自己是个“疯狂的猫女士”。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3"
+              ],
+              "start": 156,
+              "end": 258,
+              "quote": "第二次回去打工时，她很高兴看到我回来。三月里，我有一次提到，当月晚些时候我要请一天假过20岁生日。她对我说：“那好，到时候我得给你烤些饼干过生日。”我是几周前跟她说的，所以这件事没多久就从我脑子里溜走了。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4"
+              ],
+              "start": 259,
+              "end": 392,
+              "quote": "可是生日过后我回去上班的第一天，我正从后面的洗手间出来，就听到有人在叫我。是朱迪丝。她走到我跟前，递给我一袋饼干，补祝我生日快乐。我用尽了全力，才没在她面前掉下眼泪。我更加感激了，因为我不仅从没从一个几乎不认识的人那里收到过这样的东西，甚至还忘了她说过要为我这么做。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5"
+              ],
+              "start": 393,
+              "end": 442,
+              "quote": "她走后，我给妈妈打电话，讲着讲着就哽咽了。我真希望自己知道她的生日是哪天，这样我也能为她做点好事。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+            "text": "The first time I worked there, I became familiar with an old lady because on cold days, she’d wear a big fluffy jacket with cats all over it when she came to the store. I love cats, so the first time I saw her with this jacket, I immediately complimented（赞美）it. As she was a regular customer, we ended up getting in the habit of chatting whenever she visited. I learned her name was Judith, and she loved to refer to herself as a crazy cat lady."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+            "text": "The second time, she was glad to see me back. In March, I once mentioned I’d take a day off for my 20th birthday later that month. She told me, “Well, I’ll have to bake you some cookies for your birthday then.” I’d told her a couple weeks earlier, and so the moment had slipped my mind soon."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+            "text": "But the first day I worked again after my birthday, I was coming out of the restroom in the back when I heard someone calling me. It was Judith. She came up to me and handed me a bag of cookies and wished me a happy late birthday. It took all I had to hold back my tears in front of her. I was even more grateful because not only had I never got anything like that from someone I barely knew, but I’d even forgotten she said she’d do that for me."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+            "text": "After she left, I called my mom and choked up while telling her what happened. I just wish I knew when her birthday was so I could do something nice for her."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 47,
+                "end": 63,
+                "quote": "with an old lady"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 299,
+                "end": 322,
+                "quote": "getting in the habit of"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 12,
+                "end": 17,
+                "quote": "一位老太太"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 93,
+                "end": 98,
+                "quote": "养成了习惯"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 169,
+                "end": 180,
+                "quote": "I love cats"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 423,
+                "end": 437,
+                "quote": "crazy cat lady"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 54,
+                "end": 58,
+                "quote": "我喜欢猫"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 128,
+                "end": 134,
+                "quote": "疯狂的猫女士"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 169,
+                "end": 184,
+                "quote": "I love cats, so"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 185,
+                "end": 209,
+                "quote": "the first time I saw her"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 54,
+                "end": 61,
+                "quote": "我喜欢猫，所以"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 61,
+                "end": 67,
+                "quote": "第一次看到她"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 277,
+                "end": 285,
+                "quote": "customer"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 330,
+                "end": 350,
+                "quote": "whenever she visited"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 99,
+                "end": 103,
+                "quote": "她每次来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 330,
+                "end": 350,
+                "quote": "whenever she visited"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 352,
+                "end": 381,
+                "quote": "I learned her name was Judith"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 99,
+                "end": 103,
+                "quote": "她每次来"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 110,
+                "end": 118,
+                "quote": "我得知她叫朱迪丝"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 99,
+                "end": 116,
+                "quote": "big fluffy jacket"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 423,
+                "end": 437,
+                "quote": "crazy cat lady"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 39,
+                "end": 46,
+                "quote": "毛茸茸的大外套"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 128,
+                "end": 134,
+                "quote": "疯狂的猫女士"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 32,
+                "end": 46,
+                "quote": "to see me back"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 163,
+                "end": 184,
+                "quote": "bake you some cookies"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 13,
+                "end": 18,
+                "quote": "看到我回来"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 63,
+                "end": 69,
+                "quote": "给你烤些饼干"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 72,
+                "end": 90,
+                "quote": "I’d take a day off"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 130,
+                "end": 141,
+                "quote": "She told me"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 36,
+                "end": 42,
+                "quote": "我要请一天假"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 49,
+                "end": 53,
+                "quote": "她对我说"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 276,
+                "end": 283,
+                "quote": "my mind"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 395,
+                "end": 413,
+                "quote": "I’d even forgotten"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 93,
+                "end": 98,
+                "quote": "从我脑子里"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 118,
+                "end": 123,
+                "quote": "甚至还忘了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 104,
+                "end": 117,
+                "quote": "heard someone"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 148,
+                "end": 161,
+                "quote": "came up to me"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 29,
+                "end": 33,
+                "quote": "听到有人"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 42,
+                "end": 48,
+                "quote": "她走到我跟前"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 173,
+                "end": 192,
+                "quote": "me a bag of cookies"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 163,
+                "end": 184,
+                "quote": "bake you some cookies"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 52,
+                "end": 56,
+                "quote": "一袋饼干"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 63,
+                "end": 69,
+                "quote": "给你烤些饼干"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 251,
+                "end": 263,
+                "quote": "hold back my"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 197,
+                "end": 228,
+                "quote": "wished me a happy late birthday"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 72,
+                "end": 80,
+                "quote": "才没在她面前掉下"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 57,
+                "end": 64,
+                "quote": "补祝我生日快乐"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 294,
+                "end": 303,
+                "quote": "even more"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 334,
+                "end": 362,
+                "quote": "never got anything like that"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 84,
+                "end": 86,
+                "quote": "更加"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 95,
+                "end": 117,
+                "quote": "从没从一个几乎不认识的人那里收到过这样的东西"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 385,
+                "end": 389,
+                "quote": "knew"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+                "start": 76,
+                "end": 116,
+                "quote": "I just wish I knew when her birthday was"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 103,
+                "end": 107,
+                "quote": "认识的人"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+                "start": 21,
+                "end": 36,
+                "quote": "我真希望自己知道她的生日是哪天"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 251,
+                "end": 263,
+                "quote": "hold back my"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+                "start": 0,
+                "end": 14,
+                "quote": "After she left"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+                "start": 43,
+                "end": 60,
+                "quote": "while telling her"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+                "start": 0,
+                "end": 3,
+                "quote": "她走后"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+                "start": 12,
+                "end": 16,
+                "quote": "讲着讲着"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:41"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 40,
+                "end": 48,
+                "quote": "familiar"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 17,
+                "end": 21,
+                "quote": "熟了起来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:42"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 124,
+                "end": 128,
+                "quote": "cats"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 52,
+                "end": 53,
+                "quote": "猫"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:43"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 230,
+                "end": 241,
+                "quote": "immediately"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 75,
+                "end": 77,
+                "quote": "立刻"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:44"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 275,
+                "end": 282,
+                "quote": "regular"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 86,
+                "end": 88,
+                "quote": "常客"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:45"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 329,
+                "end": 337,
+                "quote": "chatting"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 105,
+                "end": 109,
+                "quote": "聊上几句"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:46"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 399,
+                "end": 404,
+                "quote": "loved"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 120,
+                "end": 122,
+                "quote": "很爱"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:47"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 25,
+                "end": 29,
+                "quote": "glad"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 10,
+                "end": 13,
+                "quote": "很高兴"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:48"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 63,
+                "end": 72,
+                "quote": "mentioned"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 27,
+                "end": 29,
+                "quote": "提到"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:49"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 270,
+                "end": 277,
+                "quote": "slipped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:3",
+                "start": 98,
+                "end": 101,
+                "quote": "溜走了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:50"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 118,
+                "end": 125,
+                "quote": "calling"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 34,
+                "end": 36,
+                "quote": "叫我"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:51"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 167,
+                "end": 173,
+                "quote": "handed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 49,
+                "end": 51,
+                "quote": "递给"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:52"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 265,
+                "end": 270,
+                "quote": "tears"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 80,
+                "end": 82,
+                "quote": "眼泪"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:53"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 304,
+                "end": 312,
+                "quote": "grateful"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 86,
+                "end": 88,
+                "quote": "感激"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:54"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 380,
+                "end": 386,
+                "quote": "barely"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 100,
+                "end": 103,
+                "quote": "几乎不"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:55"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+                "start": 36,
+                "end": 45,
+                "quote": "choked up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:5",
+                "start": 17,
+                "end": 19,
+                "quote": "哽咽"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:53",
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:54"
+            ],
+            "selectedSentenceId": "ls-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 288,
+                "end": 446,
+                "quote": "I was even more grateful because not only had I never got anything like that from someone I barely knew, but I’d even forgotten she said she’d do that for me."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:4",
+                "start": 83,
+                "end": 133,
+                "quote": "我更加感激了，因为我不仅从没从一个几乎不认识的人那里收到过这样的东西，甚至还忘了她说过要为我这么做。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:41",
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:42"
+            ],
+            "selectedSentenceId": "ls-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 0,
+                "end": 168,
+                "quote": "The first time I worked there, I became familiar with an old lady because on cold days, she’d wear a big fluffy jacket with cats all over it when she came to the store."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:cloze:2",
+                "start": 0,
+                "end": 54,
+                "quote": "第一次在那里工作时，我和一位老太太熟了起来，因为天冷的时候，她来店里总穿着一件毛茸茸的大外套，上面印满了猫。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:41": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:41",
+      "blankNo": 41,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者和这位老太太从陌生到相熟，这是两人交往的起点，要表示熟悉起来。",
+      "find": {
+        "check": "collocation",
+        "text": "空格后接和老太太（with an old lady），表示和某人熟起来；后文两人养成了见面就聊的习惯（getting in the habit of）。",
+        "quotes": [
+          "with an old lady",
+          "getting in the habit of"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "熟悉的",
+        "reason": "作者和这位老太太从陌生到相熟，这是两人交往的起点，要表示熟悉起来。形容词看搭配：空格后接和老太太（with an old lady），表示和某人熟起来；后文两人养成了见面就聊的习惯（getting in the habit of）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "popular",
+          "meaning": "受欢迎的；放进句中是作者受她欢迎，可后文写的是两人渐渐熟了、见面就聊（getting in the habit of）。",
+          "quote": "getting in the habit of"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "satisfied",
+          "meaning": "满意的；作者是因为她那件外套（big fluffy jacket）才和她搭话交往，不是对她满意。",
+          "quote": "big fluffy jacket"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "patient",
+          "meaning": "有耐心的；后文写作者主动夸她的外套（complimented），是在和她交朋友，没有需要忍耐的事。",
+          "quote": "complimented"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with an old lady",
+          "signalSide": "context-after",
+          "targetText": "became familiar with an old lady",
+          "relation": "和老太太（with an old lady）搭配，说作者和她熟起来。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "getting in the habit of",
+          "signalSide": "context-after",
+          "relation": "后文养成见面就聊的习惯，印证两人越来越熟。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:42": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "detail",
+      "context": "外套上满是某种动物图案，要和作者爱的动物、她的自称对上。",
+      "find": {
+        "check": "echo",
+        "text": "后文作者说自己爱猫（I love cats）所以夸外套，她又自称疯狂的猫女士（crazy cat lady）。",
+        "quotes": [
+          "I love cats",
+          "crazy cat lady"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "猫",
+        "meaning": "外套上的猫图案",
+        "reason": "外套上满是某种动物图案，要和作者爱的动物、她的自称对上。名词看复现：后文作者说自己爱猫（I love cats）所以夸外套，她又自称疯狂的猫女士（crazy cat lady）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "dogs",
+          "meaning": "狗；下一句作者说因为自己爱猫（I love cats）才夸这件外套，狗的图案接不上这个理由。",
+          "quote": "I love cats"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "chickens",
+          "meaning": "鸡；她自称疯狂的猫女士（crazy cat lady），外套上满是的应是猫。",
+          "quote": "crazy cat lady"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "bears",
+          "meaning": "熊；作者是因为爱猫（I love cats）才一见面就夸这件外套，熊的图案对不上。",
+          "quote": "I love cats"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "all over it",
+          "signalSide": "context-after",
+          "targetText": "with cats all over it",
+          "relation": "满外套都是（all over it）的就是空格里的东西。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I love cats",
+          "signalSide": "context-after",
+          "relation": "作者爱猫，所以一见这件外套就夸。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "crazy cat lady",
+          "signalSide": "context-after",
+          "relation": "她自称猫女士，外套图案也是猫。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:43": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:43",
+      "blankNo": 43,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "作者爱猫，第一次看到猫外套就开口夸，要表示毫不迟疑。",
+      "find": {
+        "check": "direction",
+        "text": "前面因为爱猫（I love cats, so），第一次看到（the first time I saw her）就夸，动作紧跟着发生。",
+        "quotes": [
+          "I love cats, so",
+          "the first time I saw her"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "立即",
+        "reason": "作者爱猫，第一次看到猫外套就开口夸，要表示毫不迟疑。副词看走向：前面因为爱猫（I love cats, so），第一次看到（the first time I saw her）就夸，动作紧跟着发生。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gradually",
+          "meaning": "逐渐地；夸奖是第一次看到她（the first time I saw her）时开口说的一句话，不是慢慢形成的。",
+          "quote": "the first time I saw her"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "finally",
+          "meaning": "终于；第一次看到（the first time I saw her）就夸了，前面没有犹豫或等待的过程。",
+          "quote": "the first time I saw her"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "suddenly",
+          "meaning": "突然地；夸奖是爱猫（I love cats, so）带来的自然反应，前后没有出人意料的转折。",
+          "quote": "I love cats, so"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "complimented",
+          "signalSide": "context-after",
+          "targetText": "immediately complimented",
+          "relation": "修饰夸奖（complimented）这个动作，说明夸得有多快。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "I love cats, so",
+          "signalSide": "context-before",
+          "relation": "因为爱猫，所以一见就夸。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the first time I saw her",
+          "signalSide": "context-before",
+          "relation": "第一次看到就夸，说明毫不迟疑。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:44": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:44",
+      "blankNo": 44,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "她经常来店里，两人才能养成每次来都聊天的习惯，要表示经常光顾。",
+      "find": {
+        "check": "collocation",
+        "text": "空格修饰顾客（customer），结果是养成习惯（getting in the habit of），每次她来（whenever she visited）都聊。",
+        "quotes": [
+          "customer",
+          "getting in the habit of",
+          "whenever she visited"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "经常的",
+        "meaning": "常来光顾的",
+        "reason": "她经常来店里，两人才能养成每次来都聊天的习惯，要表示经常光顾。形容词看搭配：空格修饰顾客（customer），结果是养成习惯（getting in the habit of），每次她来（whenever she visited）都聊。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "generous",
+          "meaning": "慷慨的；能养成每次来都聊的习惯（getting in the habit of），靠的是她常来，不是她出手大方。",
+          "quote": "getting in the habit of"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "strange",
+          "meaning": "奇怪的；作者对她的外套是夸奖，两人每次见面都聊（whenever she visited），靠的是她常来。",
+          "quote": "whenever she visited"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reliable",
+          "meaning": "可靠的；可靠说的是人品，养成每次来都聊的习惯（getting in the habit of）要靠她常来店里。",
+          "quote": "getting in the habit of"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "customer",
+          "signalSide": "context-after",
+          "targetText": "a regular customer",
+          "relation": "修饰顾客，常来的顾客就是常客。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "whenever she visited",
+          "signalSide": "context-after",
+          "relation": "每次她来都聊，说明她常来。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:45": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:45",
+      "blankNo": 45,
+      "pos": "verb",
+      "role": "main",
+      "context": "店员和常客每次见面都做的事，要是一种交流，作者由此得知了她的名字。",
+      "find": {
+        "check": "action-sequence",
+        "text": "每次她来（whenever she visited）都做这件事，接着作者就得知她的名字（I learned her name was Judith）。",
+        "quotes": [
+          "whenever she visited",
+          "I learned her name was Judith"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "聊天",
+        "reason": "店员和常客每次见面都做的事，要是一种交流，作者由此得知了她的名字。动词看动作顺序：每次她来（whenever she visited）都做这件事，接着作者就得知她的名字（I learned her name was Judith）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "laughing",
+          "meaning": "大笑；每次见面只是笑，作者无从知道她叫朱迪丝（I learned her name was Judith）。",
+          "quote": "I learned her name was Judith"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "jogging",
+          "meaning": "慢跑；她是来店里购物的顾客（customer），店员不会每次都和她去跑步。",
+          "quote": "customer"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "singing",
+          "meaning": "唱歌；作者是通过交谈才知道她的名字（I learned her name was Judith），唱歌做不到这一点。",
+          "quote": "I learned her name was Judith"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "getting in the habit of",
+          "signalSide": "context-before",
+          "targetText": "getting in the habit of chatting",
+          "relation": "养成某种习惯（getting in the habit of）后接动名词。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I learned her name was Judith",
+          "signalSide": "context-after",
+          "relation": "聊天之后作者才知道她叫朱迪丝。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:46": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "detail",
+      "context": "她怎样对待“疯狂猫女士”这个自称，要表示乐于这样说。",
+      "find": {
+        "check": "affect",
+        "text": "她天冷就穿满是猫的外套（big fluffy jacket），自称疯狂的猫女士（crazy cat lady）是她乐在其中的事。",
+        "quotes": [
+          "big fluffy jacket",
+          "crazy cat lady"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "喜爱",
+        "reason": "她怎样对待“疯狂猫女士”这个自称，要表示乐于这样说。动词看情感：她天冷就穿满是猫的外套（big fluffy jacket），自称疯狂的猫女士（crazy cat lady）是她乐在其中的事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "decided",
+          "meaning": "决定；她天冷就穿满是猫的外套（big fluffy jacket），自称猫女士是一贯的爱好，不是某次作出的决定。",
+          "quote": "big fluffy jacket"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "planned",
+          "meaning": "计划；自称疯狂的猫女士（crazy cat lady）是她随口就说的话，用不着事先计划。",
+          "quote": "crazy cat lady"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "pretended",
+          "meaning": "假装；她真心爱猫，天冷就穿满是猫的外套（big fluffy jacket），不是假装自称猫女士。",
+          "quote": "big fluffy jacket"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to refer to herself as",
+          "signalSide": "context-after",
+          "targetText": "loved to refer to herself as",
+          "relation": "后接不定式 to refer to herself as，表示喜欢这样称呼自己。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "crazy cat lady",
+          "signalSide": "context-after",
+          "relation": "她爱猫，乐于自称猫女士。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:47": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者第二次回店里打工，朱迪丝见到他的反应要是正面的，显出两人关系亲近。",
+      "find": {
+        "check": "affect",
+        "text": "两人以前见面就聊（getting in the habit of），这次她又主动说要给作者烤饼干（bake you some cookies）。",
+        "quotes": [
+          "getting in the habit of",
+          "bake you some cookies"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "高兴的",
+        "reason": "作者第二次回店里打工，朱迪丝见到他的反应要是正面的，显出两人关系亲近。形容词看情感：两人以前见面就聊（getting in the habit of），这次她又主动说要给作者烤饼干（bake you some cookies）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "surprised",
+          "meaning": "惊讶的；后文她亲切地主动说要给作者烤饼干（bake you some cookies），显出的是欢迎，不只是意外。",
+          "quote": "bake you some cookies"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "curious",
+          "meaning": "好奇的；好奇后面应接打听原因，后文接的是她说要给作者烤饼干（bake you some cookies）。",
+          "quote": "bake you some cookies"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "eager",
+          "meaning": "渴望的；放进句中是盼着见到作者，这里写的是已经见到作者回来（to see me back）时的心情。",
+          "quote": "to see me back"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to see me back",
+          "signalSide": "context-after",
+          "targetText": "glad to see me back",
+          "relation": "be glad to see 表示见到某人很高兴。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "bake you some cookies",
+          "signalSide": "context-after",
+          "relation": "她主动说要烤饼干，可见她对作者很亲切。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:48": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:48",
+      "blankNo": 48,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者随口说起生日要请假，引出朱迪丝烤饼干的承诺，要是一个说话的动作。",
+      "find": {
+        "check": "collocation",
+        "text": "空格后接宾语从句，说出要请一天假（I’d take a day off）；她紧接着回话（She told me）。",
+        "quotes": [
+          "I’d take a day off",
+          "She told me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "提到",
+        "reason": "作者随口说起生日要请假，引出朱迪丝烤饼干的承诺，要是一个说话的动作。动词看搭配：空格后接宾语从句，说出要请一天假（I’d take a day off）；她紧接着回话（She told me）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "promised",
+          "meaning": "答应；请一天假（take a day off）是作者自己的安排，告诉她而已，不是向她作出的承诺。",
+          "quote": "take a day off"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "recalled",
+          "meaning": "回想起；请假是当月晚些时候（later that month）的事，还没发生，谈不上回想。",
+          "quote": "later that month"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "remembered",
+          "meaning": "记得；这句话是说给朱迪丝听的，她随即接话（She told me），要的是说出口的动作。",
+          "quote": "She told me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I’d take a day off",
+          "signalSide": "context-after",
+          "targetText": "mentioned I’d take a day off",
+          "relation": "提到的内容是自己要请一天假。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "She told me",
+          "signalSide": "context-after",
+          "relation": "她听到后接话，说明作者是说给她听的。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:49": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者几周前说过这件事，很快就忘了，这为后面收到饼干的意外埋下伏笔。",
+      "find": {
+        "check": "echo",
+        "text": "空格和我的脑子（my mind）连用，后文作者说自己甚至忘了她说过要这么做（I’d even forgotten）。",
+        "quotes": [
+          "my mind",
+          "I’d even forgotten"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "溜走",
+        "meaning": "被忘掉",
+        "reason": "作者几周前说过这件事，很快就忘了，这为后面收到饼干的意外埋下伏笔。动词看复现：空格和我的脑子（my mind）连用，后文作者说自己甚至忘了她说过要这么做（I’d even forgotten）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "crossed",
+          "meaning": "掠过；放进句中是这事忽然闪过脑海，与后文作者说自己忘了（I’d even forgotten）相反。",
+          "quote": "I’d even forgotten"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "changed",
+          "meaning": "改变；放进句中是改变主意，作者并没改请假的打算，后文说的是他忘了（I’d even forgotten）。",
+          "quote": "I’d even forgotten"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "filled",
+          "meaning": "充满；放进句中是这事一直萦绕心头，与后文作者说自己忘了（I’d even forgotten）相反。",
+          "quote": "I’d even forgotten"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my mind",
+          "signalSide": "context-after",
+          "targetText": "slipped my mind",
+          "relation": "slip one’s mind 表示某事被忘掉。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I’d even forgotten",
+          "signalSide": "context-after",
+          "relation": "后文直说自己忘了，与这里呼应。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:50": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "detail",
+      "context": "作者从洗手间出来，听到有人对他做出声音，要是“叫他”，好引出朱迪丝。",
+      "find": {
+        "check": "collocation",
+        "text": "听到有人（heard someone）冲作者出声，紧接着她就走到跟前（came up to me）。",
+        "quotes": [
+          "heard someone",
+          "came up to me"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "叫",
+        "meaning": "喊作者的名字",
+        "reason": "作者从洗手间出来，听到有人对他做出声音，要是“叫他”，好引出朱迪丝。动词看搭配：听到有人（heard someone）冲作者出声，紧接着她就走到跟前（came up to me）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reminding",
+          "meaning": "提醒；提醒得说出提醒的事，这里她只是喊作者，接着就走过来（came up to me）。",
+          "quote": "came up to me"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "thanking",
+          "meaning": "感谢；是朱迪丝给作者送饼干（a bag of cookies），她没有要感谢作者的事。",
+          "quote": "a bag of cookies"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "praising",
+          "meaning": "表扬；她走过来是为了送饼干、补祝生日快乐（wished me a happy late birthday），不是夸作者。",
+          "quote": "wished me a happy late birthday"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "heard someone",
+          "signalSide": "context-before",
+          "targetText": "heard someone calling me",
+          "relation": "hear sb doing 表示听到某人正在做某事，这里是听到有人叫我。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "came up to me",
+          "signalSide": "context-after",
+          "relation": "叫完作者后她走了过来。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:51": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "朱迪丝把饼干交到作者手里，这是她兑现承诺的关键动作。",
+      "find": {
+        "check": "collocation",
+        "text": "空格后接给我一袋饼干（me a bag of cookies），饼干正是她当初说要烤的（bake you some cookies），她当面交给作者。",
+        "quotes": [
+          "me a bag of cookies",
+          "bake you some cookies"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "递给",
+        "reason": "朱迪丝把饼干交到作者手里，这是她兑现承诺的关键动作。动词看搭配：空格后接给我一袋饼干（me a bag of cookies），饼干正是她当初说要烤的（bake you some cookies），她当面交给作者。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "rented",
+          "meaning": "租给；饼干是她答应为作者烤的（bake you some cookies），是送给作者，不是租给作者。",
+          "quote": "bake you some cookies"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "lent",
+          "meaning": "借给；她同时补祝生日快乐（wished me a happy late birthday），饼干是生日礼物，不是借的。",
+          "quote": "wished me a happy late birthday"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "bought",
+          "meaning": "买；饼干是她说过要亲手烤的（bake you some cookies），不是给作者买的。",
+          "quote": "bake you some cookies"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "me a bag of cookies",
+          "signalSide": "context-after",
+          "targetText": "handed me a bag of cookies",
+          "relation": "hand sb sth 表示把某物递给某人。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "bake you some cookies",
+          "signalSide": "context-before",
+          "relation": "这袋饼干就是她答应要烤的饼干。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:52": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:52",
+      "blankNo": 52,
+      "pos": "noun",
+      "role": "main",
+      "context": "收到饼干，作者感动得想哭，当着她的面强忍住的应是激动时流出的东西。",
+      "find": {
+        "check": "affect",
+        "text": "强忍（hold back）的是收到饼干、被补祝生日（wished me a happy late birthday）时的感动反应。",
+        "quotes": [
+          "hold back",
+          "wished me a happy late birthday"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "眼泪",
+        "reason": "收到饼干，作者感动得想哭，当着她的面强忍住的应是激动时流出的东西。名词看情感：强忍（hold back）的是收到饼干、被补祝生日（wished me a happy late birthday）时的感动反应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "anger",
+          "meaning": "愤怒；她送来饼干还补祝生日快乐（wished me a happy late birthday），作者没有理由生气。",
+          "quote": "wished me a happy late birthday"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sadness",
+          "meaning": "悲伤；收到一袋饼干（a bag of cookies）是暖心的事，作者强忍的是感动，不是难过。",
+          "quote": "a bag of cookies"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "disappointment",
+          "meaning": "失望；她兑现了作者早已忘掉的承诺（I’d even forgotten），作者是喜出望外，不是失望。",
+          "quote": "I’d even forgotten"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "hold back my",
+          "signalSide": "context-before",
+          "targetText": "hold back my tears",
+          "relation": "hold back one’s tears 表示忍住眼泪。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "wished me a happy late birthday",
+          "signalSide": "context-before",
+          "relation": "被补祝生日、收到饼干，作者感动得想哭。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:53": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:53",
+      "blankNo": 53,
+      "pos": "adjective",
+      "role": "main",
+      "context": "收到不太熟的人的礼物，又是自己忘掉的承诺，作者心里更加感激，这是情感的高点。",
+      "find": {
+        "check": "affect",
+        "text": "更加（even more）是在忍泪之上递进，原因（because）是从没从不熟的人那里收到这样的东西（never got anything like that）。",
+        "quotes": [
+          "even more",
+          "never got anything like that"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "感激的",
+        "reason": "收到不太熟的人的礼物，又是自己忘掉的承诺，作者心里更加感激，这是情感的高点。形容词看情感：更加（even more）是在忍泪之上递进，原因（because）是从没从不熟的人那里收到这样的东西（never got anything like that）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "powerful",
+          "meaning": "强大的；后面原因（because）讲的是意外收到礼物（never got anything like that），引不出作者觉得自己强大。",
+          "quote": "never got anything like that"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "painful",
+          "meaning": "痛苦的；从没收到过这样的东西（never got anything like that）说的是惊喜，前文忍住的也是感动的泪。",
+          "quote": "never got anything like that"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "helpful",
+          "meaning": "有帮助的；是朱迪丝在为作者做好事（do that for me），作者只是受到善意的一方。",
+          "quote": "do that for me"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I was even more",
+          "signalSide": "context-before",
+          "targetText": "I was even more grateful",
+          "relation": "作表语说作者的感受，even more 表示程度更深。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "never got anything like that",
+          "signalSide": "context-after",
+          "relation": "从没收到过这样的礼物，所以格外感激。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:54": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:54",
+      "blankNo": 54,
+      "pos": "adverb",
+      "role": "main",
+      "context": "朱迪丝只是店里的常客，作者对她了解很少，这正是这份礼物格外打动人的原因。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "结尾作者说真希望知道她的生日是哪天（I just wish I knew when her birthday was），可见对她了解很少。",
+        "quotes": [
+          "I just wish I knew when her birthday was"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "几乎不",
+        "reason": "朱迪丝只是店里的常客，作者对她了解很少，这正是这份礼物格外打动人的原因。副词看语境义：结尾作者说真希望知道她的生日是哪天（I just wish I knew when her birthday was），可见对她了解很少。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "secretly",
+          "meaning": "秘密地；两人是在店里每次见面都聊天（whenever she visited），没有偷偷认识的事。",
+          "quote": "whenever she visited"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "frequently",
+          "meaning": "频繁地；作者连她的生日都不知道（when her birthday was），说明并不熟，强调的是不熟的人也这样待他。",
+          "quote": "when her birthday was"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fully",
+          "meaning": "完全地；作者连她的生日都不知道（when her birthday was），谈不上完全了解她。",
+          "quote": "when her birthday was"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "knew",
+          "signalSide": "context-after",
+          "targetText": "someone I barely knew",
+          "relation": "修饰认识（knew），说作者和她并不熟。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I just wish I knew when her birthday was",
+          "signalSide": "context-after",
+          "relation": "连她的生日都不知道，说明了解很少。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:55": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:55",
+      "blankNo": 55,
+      "pos": "phrase",
+      "role": "main",
+      "context": "对妈妈讲这件事时，作者激动得说不出话，要接上前面强忍的眼泪。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "当面强忍住（hold back my），她走后（After she left）边讲边（while telling her）情绪涌上来，说话哽住。",
+        "quotes": [
+          "hold back my",
+          "After she left",
+          "while telling her"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "哽咽",
+        "meaning": "激动得说不出话",
+        "reason": "对妈妈讲这件事时，作者激动得说不出话，要接上前面强忍的眼泪。词组看语境义：当面强忍住（hold back my），她走后（After she left）边讲边（while telling her）情绪涌上来，说话哽住。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cheered up",
+          "meaning": "振作起来；作者此前并不低落，前文强忍的是感动的眼泪（hold back my）。",
+          "quote": "hold back my"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "cried out",
+          "meaning": "大声喊叫；作者是在电话里讲发生的事（telling her what happened），前文的忍泪说明这里是感动哽咽。",
+          "quote": "telling her what happened"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "yelled out",
+          "meaning": "大声叫嚷；作者讲的是被善待的经历（telling her what happened），心里是感动，不是要吼叫。",
+          "quote": "telling her what happened"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "while telling her what happened",
+          "signalSide": "context-after",
+          "targetText": "choked up while telling her what happened",
+          "relation": "边讲述发生的事边哽咽，说的是讲述时的情绪。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "hold back my",
+          "signalSide": "context-before",
+          "relation": "当面忍住了眼泪，人走后才忍不住。"
+        }
+      ]
+    }
+  }
+}

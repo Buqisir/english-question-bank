@@ -1,0 +1,980 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices": {
+      "overview": "本文谈怎样面对自己犯下的错误：在承担责任的同时接纳情绪，能补救就补救，不沉溺于懊悔，再从大局客观看待错误，把错误变成反思和成长的机会。",
+      "fullTranslationZh": "无论是伤害了别人的感情，还是把工作项目搞砸了，我们都可以把错误当作停下来、反思并重新振作的机会。毕竟，定义我们的不是我们犯的错误，而是我们对待错误的方式。\n在承担责任的同时接纳情绪。这意味着要为自己的所作所为负责。与此同时，不要责怪自己，也不要因为那些“本应该”而折磨自己。另外，让自己去感受所有的情绪，无论是一点点尴尬，还是深深的懊悔。\n如果可以，就去弥补。有时仅仅意识到错误还不够——它需要你作出回应。记住，真诚地去尝试永远不会太晚。目的不在于“把事情做对”，而只是减轻我们造成的伤痛，并尽己所能解决眼前的问题。\n不要困在自己的错误里。鉴于人脑天生倾向于关注负面情绪，要走出懊悔需要下定决心。当你发现自己的思绪又飘向那种糟糕的感受、飘向自己为什么没做得更好时，停一下，深吸一口气。之后，把注意力转到真正值得关注的事情上。\n着眼大局。有时，我们眼中的错误，恰恰是改变一段关系所必需的突破。又或许，从长远来看，让我们感到尴尬的事其实算不了什么。通过客观地看待事情，我们也许会发现，所谓的错误并没有我们起初以为的那么可怕的影响。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+          "sourceText": "Given the fact that the human brain is naturally programmed to focus on negative emotions, it takes commitment to walk away from our regrets.",
+          "displayText": "Given the fact that the human brain is naturally programmed to focus on negative emotions, it takes commitment to walk away from our regrets.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:39"
+          ],
+          "translationZh": "鉴于人脑天生倾向于关注负面情绪，要走出懊悔需要下定决心。",
+          "analysisZh": "主干是 it takes commitment to walk away from our regrets：it 是形式主语，真正的主语是后面的不定式 to walk away from our regrets，“it takes + 名词 + to do”表示“做某事需要……”。句首 Given the fact that … 作状语，given 在这里相当于介词，意为“考虑到”；that 引导同位语从句，说明 the fact 的内容，从句中 is programmed to focus on 是被动结构，意为“天生被设定成关注”。这句交代走出懊悔为什么难，为本段后面“停下、深呼吸、转移注意力”的具体做法作铺垫。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 19,
+              "quote": "Given the fact that"
+            },
+            {
+              "start": 91,
+              "end": 110,
+              "quote": "it takes commitment"
+            },
+            {
+              "start": 111,
+              "end": 140,
+              "quote": "to walk away from our regrets"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+          "sourceText": "By looking at things objectively, we might see that our so-called mistake doesn’t have the terrible impact we initially thought it did.",
+          "displayText": "By looking at things objectively, we might see that our so-called mistake doesn’t have the terrible impact we initially thought it did.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:40"
+          ],
+          "translationZh": "通过客观地看待事情，我们也许会发现，所谓的错误并没有我们起初以为的那么可怕的影响。",
+          "analysisZh": "主干是 we might see that …，that 引导宾语从句作 see 的宾语。句首 By looking at things objectively 是介词 by 加动名词，表示方式。宾语从句的主干是 our so-called mistake doesn’t have the terrible impact；后面的 we initially thought it did 是省略了关系词的定语从句，修饰 impact，其中 did 代替 had，整个从句意为“我们起初以为它会造成的（影响）”。这句把空前“错误也许并不严重”的说法落到“客观看待”的做法上。",
+          "underlineRanges": [
+            {
+              "start": 34,
+              "end": 51,
+              "quote": "we might see that"
+            },
+            {
+              "start": 74,
+              "end": 106,
+              "quote": "doesn’t have the terrible impact"
+            },
+            {
+              "start": 107,
+              "end": 134,
+              "quote": "we initially thought it did"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "首段提出观点：错误可以成为反思和振作的机会，关键在于怎样应对；后四段各以一句祈使句开头，依次给出四条做法：负责并接纳情绪、尽力补救、别困在懊悔里、着眼大局。",
+        "units": [
+          {
+            "unitId": "unit:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1"
+            ],
+            "summary": "以伤人感情、搞砸工作为例，提出错误可以成为停下、反思、振作的机会，重要的是怎样应对。"
+          },
+          {
+            "unitId": "unit:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+            "paragraphIds": [
+              "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+              "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+              "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+              "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5"
+            ],
+            "summary": "四条做法：承担责任又接纳情绪；能补救就补救，不求完美；察觉懊悔时停下深呼吸，转移注意力；放长远、客观地看待错误。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 37,
+          "secondary": 39,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "embarrassed"
+          ],
+          "text": "选项借了第 37 题空后的尴尬和懊悔（embarrassment、regret），又像其他段首句一样是祈使句。但空后明说 \"let yourself feel all your emotions\"，与 \"Avoid feeling\" 正相反。放进第 39 题也接不上：空前 \"take a deep breath\" 后要给注意力找去处，它只说回避感受。",
+          "quotes": [
+            "embarrassment",
+            "regret",
+            "let yourself feel all your emotions",
+            "Avoid feeling",
+            "take a deep breath"
+          ]
+        },
+        "C": {
+          "target": 36,
+          "secondary": 38,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "mistake"
+          ],
+          "text": "选项的 \"figure out why\" 像在接第 36 题空前的 \"reflect\"，\"mistake\" 也是全文话题词。但后文讲负责、补救、放下、看大局，没有一段分析犯错原因，第 39 题所在段还劝人别老想 \"why you didn’t do better\"。放进第 38 题也接不上：空前 \"awareness itself isn’t enough\" 已说光认识不够，它又退回去找原因。",
+          "quotes": [
+            "figure out why",
+            "reflect",
+            "mistake",
+            "why you didn’t do better",
+            "awareness itself isn’t enough"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 77,
+              "quote": "无论是伤害了别人的感情，还是把工作项目搞砸了，我们都可以把错误当作停下来、反思并重新振作的机会。毕竟，定义我们的不是我们犯的错误，而是我们对待错误的方式。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2"
+              ],
+              "start": 78,
+              "end": 169,
+              "quote": "在承担责任的同时接纳情绪。这意味着要为自己的所作所为负责。与此同时，不要责怪自己，也不要因为那些“本应该”而折磨自己。另外，让自己去感受所有的情绪，无论是一点点尴尬，还是深深的懊悔。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3"
+              ],
+              "start": 170,
+              "end": 258,
+              "quote": "如果可以，就去弥补。有时仅仅意识到错误还不够——它需要你作出回应。记住，真诚地去尝试永远不会太晚。目的不在于“把事情做对”，而只是减轻我们造成的伤痛，并尽己所能解决眼前的问题。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4"
+              ],
+              "start": 259,
+              "end": 362,
+              "quote": "不要困在自己的错误里。鉴于人脑天生倾向于关注负面情绪，要走出懊悔需要下定决心。当你发现自己的思绪又飘向那种糟糕的感受、飘向自己为什么没做得更好时，停一下，深吸一口气。之后，把注意力转到真正值得关注的事情上。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5"
+              ],
+              "start": 363,
+              "end": 463,
+              "quote": "着眼大局。有时，我们眼中的错误，恰恰是改变一段关系所必需的突破。又或许，从长远来看，让我们感到尴尬的事其实算不了什么。通过客观地看待事情，我们也许会发现，所谓的错误并没有我们起初以为的那么可怕的影响。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+            "text": "Whether we’ve hurt someone’s feelings, or messed up a work project, we can use our errors as opportunities to stop, reflect, and bounce back. After all, what defines us isn’t our mistakes but the way we react to them."
+          },
+          {
+            "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+            "text": "Accept emotions while taking responsibility. This means taking responsibility for what you did. At the same time, don’t blame yourself or beat yourself up over the “shoulds”. Also, let yourself feel all your emotions, whether it’s a little embarrassment or a lot of regret."
+          },
+          {
+            "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+            "text": "If you can, fix it. Sometimes awareness itself isn’t enough – it calls for a response. Remember, it’s never too late to make a genuine attempt. The purpose isn’t to “get it right,” but to simply ease whatever pain we’ve caused and do whatever is in our power to resolve the matter at hand."
+          },
+          {
+            "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+            "text": "Don’t get stuck in your mistakes. Given the fact that the human brain is naturally programmed to focus on negative emotions, it takes commitment to walk away from our regrets. When you find your thoughts wandering to how awful it feels and why you didn’t do better, stop for a moment and take a deep breath. After that, redirect your attention to something that truly deserves it."
+          },
+          {
+            "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+            "text": "Look at the big picture. Sometimes what we perceive as a mistake is the breakthrough that was necessary to change a relationship. Or maybe what we feel embarrassed about isn’t a big deal in the long run. By looking at things objectively, we might see that our so-called mistake doesn’t have the terrible impact we initially thought it did."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+                "start": 75,
+                "end": 140,
+                "quote": "use our errors as opportunities to stop, reflect, and bounce back"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+                "start": 28,
+                "end": 47,
+                "quote": "把错误当作停下来、反思并重新振作的机会"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+                "start": 7,
+                "end": 57,
+                "quote": "This means taking responsibility for what you did."
+              },
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+                "start": 143,
+                "end": 178,
+                "quote": "let yourself feel all your emotions"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+                "start": 13,
+                "end": 29,
+                "quote": "这意味着要为自己的所作所为负责。"
+              },
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+                "start": 62,
+                "end": 73,
+                "quote": "让自己去感受所有的情绪"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+                "start": 62,
+                "end": 85,
+                "quote": "it calls for a response"
+              },
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+                "start": 94,
+                "end": 130,
+                "quote": "The purpose isn’t to “get it right,”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+                "start": 24,
+                "end": 32,
+                "quote": "它需要你作出回应"
+              },
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+                "start": 49,
+                "end": 61,
+                "quote": "目的不在于“把事情做对”"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+                "start": 266,
+                "end": 306,
+                "quote": "stop for a moment and take a deep breath"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+                "start": 73,
+                "end": 82,
+                "quote": "停一下，深吸一口气"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+                "start": 25,
+                "end": 84,
+                "quote": "Sometimes what we perceive as a mistake is the breakthrough"
+              },
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+                "start": 211,
+                "end": 271,
+                "quote": "doesn’t have the terrible impact we initially thought it did"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+                "start": 5,
+                "end": 31,
+                "quote": "有时，我们眼中的错误，恰恰是改变一段关系所必需的突破"
+              },
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+                "start": 82,
+                "end": 99,
+                "quote": "并没有我们起初以为的那么可怕的影响"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:36"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+                "start": 142,
+                "end": 217,
+                "quote": "After all, what defines us isn’t our mistakes but the way we react to them."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+                "start": 48,
+                "end": 77,
+                "quote": "毕竟，定义我们的不是我们犯的错误，而是我们对待错误的方式。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:37"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+                "start": 0,
+                "end": 44,
+                "quote": "Accept emotions while taking responsibility."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+                "start": 0,
+                "end": 13,
+                "quote": "在承担责任的同时接纳情绪。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:38"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+                "start": 87,
+                "end": 143,
+                "quote": "Remember, it’s never too late to make a genuine attempt."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+                "start": 33,
+                "end": 49,
+                "quote": "记住，真诚地去尝试永远不会太晚。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:39"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+                "start": 308,
+                "end": 380,
+                "quote": "After that, redirect your attention to something that truly deserves it."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+                "start": 83,
+                "end": 103,
+                "quote": "之后，把注意力转到真正值得关注的事情上。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:40"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+                "start": 130,
+                "end": 203,
+                "quote": "Or maybe what we feel embarrassed about isn’t a big deal in the long run."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+                "start": 32,
+                "end": 59,
+                "quote": "又或许，从长远来看，让我们感到尴尬的事其实算不了什么。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:39"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+                "start": 34,
+                "end": 175,
+                "quote": "Given the fact that the human brain is naturally programmed to focus on negative emotions, it takes commitment to walk away from our regrets."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+                "start": 11,
+                "end": 39,
+                "quote": "鉴于人脑天生倾向于关注负面情绪，要走出懊悔需要下定决心。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:40"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+                "start": 137,
+                "end": 272,
+                "quote": "By looking at things objectively, we might see that our so-called mistake doesn’t have the terrible impact we initially thought it did."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+                "start": 59,
+                "end": 100,
+                "quote": "通过客观地看待事情，我们也许会发现，所谓的错误并没有我们起初以为的那么可怕的影响。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:36": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:36",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "hurt someone’s feelings",
+        "messed up a work project",
+        "our errors",
+        "reflect",
+        "bounce back"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:1",
+        "beforeQuote": "we can use our errors as opportunities to stop, reflect, and bounce back.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "After all",
+          "signalSide": "option",
+          "targetText": "we can use our errors as opportunities",
+          "relation": "After all 补出理由：错误之所以能成为机会，是因为看一个人要看他怎样回应错误。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "errors",
+          "signalSide": "context-before",
+          "targetText": "mistakes",
+          "relation": "空前的 errors 和选项的 mistakes 说的是同一件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "react to them",
+          "signalSide": "option",
+          "targetText": "stop, reflect, and bounce back",
+          "relation": "react to them 概括空前停下、反思、振作这一串应对动作。"
+        }
+      ],
+      "lock": [
+        "errors",
+        "After all",
+        "react to them"
+      ],
+      "find": {
+        "text": "先看空前 \"use our errors as opportunities\"：空在首段末，要给这个看法一个理由。F 用 \"After all\" 补理由，\"react to them\" 接住 \"bounce back\"。",
+        "quotes": [
+          "use our errors as opportunities",
+          "After all",
+          "react to them",
+          "bounce back"
+        ]
+      },
+      "explain": "首段先举伤人感情、搞砸项目两种错误，这句把话题从“犯了什么错”转到“怎样应对”，后面四段逐条给出的做法都从这里出发。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "use our errors as opportunities to stop, reflect, and bounce back",
+            "optionSide": "what defines us isn’t our mistakes but the way we react to them",
+            "relation": "空前说错误可以成为振作的机会，选项给出理由：决定我们是谁的是应对方式，不是错误本身。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "首段先举伤人感情、搞砸项目两种错误，这句把话题从“犯了什么错”转到“怎样应对”，后面四段逐条给出的做法都从这里出发。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "选项的 \"figure out why\" 像在接第 36 题空前的 \"reflect\"，\"mistake\" 也是全文话题词。但后文讲负责、补救、放下、看大局，没有一段分析犯错原因，第 39 题所在段还劝人别老想 \"why you didn’t do better\"。放进第 38 题也接不上：空前 \"awareness itself isn’t enough\" 已说光认识不够，它又退回去找原因。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:37": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:37",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "taking responsibility for what you did",
+        "don’t blame yourself",
+        "feel all your emotions",
+        "a little embarrassment",
+        "a lot of regret"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+        "beforeQuote": "",
+        "afterQuote": "This means taking responsibility for what you did. At the same time, don’t blame yourself or beat yourself up over the “shoulds”. Also, let yourself feel all your emotions, whether it’s a little embarrassment or a lot of regret."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "context-after",
+          "targetText": "taking responsibility",
+          "relation": "This 回指空里先提出的“承担责任”，空后 This means 接着解释它具体指什么。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "taking responsibility",
+          "signalSide": "option",
+          "targetText": "taking responsibility for what you did",
+          "relation": "选项和空后都用 taking responsibility，空后是对它的展开。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "emotions",
+          "signalSide": "option",
+          "targetText": "feel all your emotions",
+          "relation": "选项的 emotions 由段尾 feel all your emotions 展开，尴尬、懊悔都算在内。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "feel all your emotions",
+          "signalSide": "context-after",
+          "targetText": "Accept emotions",
+          "relation": "段尾让人感受全部情绪，正是选项 Accept emotions 的意思。"
+        }
+      ],
+      "lock": [
+        "This means",
+        "taking responsibility",
+        "emotions"
+      ],
+      "find": {
+        "text": "先看空后 \"This means taking responsibility\"：This 要指空里先提出的做法。A 有 \"taking responsibility\"，\"emotions\" 又对上 \"feel all your emotions\"。",
+        "quotes": [
+          "This means taking responsibility",
+          "taking responsibility",
+          "emotions",
+          "feel all your emotions"
+        ]
+      },
+      "explain": "这句是本段的总起，和下一段的 “If you can, fix it.” 一样用祈使句开段；后文先讲负责，再讲别苛责自己，最后讲接纳情绪，逐层展开它的两半。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "This means taking responsibility for what you did / let yourself feel all your emotions",
+            "optionSide": "Accept emotions while taking responsibility",
+            "relation": "本段两层意思一层讲负责、一层讲接纳情绪，选项正好把两层合成一句。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "这句是本段的总起，和下一段的 “If you can, fix it.” 一样用祈使句开段；后文先讲负责，再讲别苛责自己，最后讲接纳情绪，逐层展开它的两半。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "选项借了第 37 题空后的尴尬和懊悔（embarrassment、regret），又像其他段首句一样是祈使句。但空后明说 \"let yourself feel all your emotions\"，与 \"Avoid feeling\" 正相反。放进第 39 题也接不上：空前 \"take a deep breath\" 后要给注意力找去处，它只说回避感受。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:38": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "fix it",
+        "awareness itself isn’t enough",
+        "calls for a response",
+        "ease whatever pain we’ve caused",
+        "resolve the matter at hand"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:3",
+        "beforeQuote": "If you can, fix it. Sometimes awareness itself isn’t enough – it calls for a response.",
+        "afterQuote": "The purpose isn’t to “get it right,” but to simply ease whatever pain we’ve caused and do whatever is in our power to resolve the matter at hand."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a response",
+          "signalSide": "context-before",
+          "targetText": "a genuine attempt",
+          "relation": "空前说要有所回应，选项的 a genuine attempt 就是这个回应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "genuine attempt",
+          "signalSide": "option",
+          "targetText": "fix it / a response",
+          "relation": "真诚的尝试对应本段开头的 fix it。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "The purpose",
+          "signalSide": "context-after",
+          "targetText": "make a genuine attempt",
+          "relation": "The purpose 说的是这次尝试的目的，前面必须先出现“尝试”。"
+        }
+      ],
+      "lock": [
+        "a response",
+        "genuine attempt",
+        "The purpose"
+      ],
+      "find": {
+        "text": "先看空前 \"it calls for a response\"：光认识不够，要有回应。D 的 \"make a genuine attempt\" 正是这个回应，空后 \"The purpose\" 讲的是尝试的目的。",
+        "quotes": [
+          "it calls for a response",
+          "make a genuine attempt",
+          "The purpose"
+        ]
+      },
+      "explain": "本段开头说 “If you can, fix it.”，空前说光意识到错误不够；这句鼓励读者动手补救、别怕太晚，空后再说明补救不求完美，只求减轻伤害。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "fix it / it calls for a response",
+            "optionSide": "make a genuine attempt",
+            "relation": "空前要求作出回应，选项把回应具体化为一次真诚的尝试。"
+          },
+          {
+            "contextSide": "The purpose isn’t to “get it right,”",
+            "optionSide": "it’s never too late",
+            "relation": "空后说尝试不必做对，和选项“永远不晚”一起降低了动手补救的门槛。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "本段开头说 “If you can, fix it.”，空前说光意识到错误不够；这句鼓励读者动手补救、别怕太晚，空后再说明补救不求完美，只求减轻伤害。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:39": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:39",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Don’t get stuck in your mistakes",
+        "walk away from our regrets",
+        "thoughts wandering",
+        "stop for a moment",
+        "take a deep breath"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:4",
+        "beforeQuote": "Given the fact that the human brain is naturally programmed to focus on negative emotions, it takes commitment to walk away from our regrets. When you find your thoughts wandering to how awful it feels and why you didn’t do better, stop for a moment and take a deep breath.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "After that",
+          "signalSide": "option",
+          "targetText": "stop for a moment and take a deep breath",
+          "relation": "After that 接在“停下、深呼吸”之后，给出下一步。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "take a deep breath",
+          "signalSide": "context-before",
+          "targetText": "After that",
+          "relation": "深呼吸是第一步，选项是紧接着的第二步。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "thoughts wandering",
+          "signalSide": "context-before",
+          "targetText": "redirect your attention",
+          "relation": "思绪飘向懊悔，选项让人把注意力转走，两者方向相对。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "redirect your attention",
+          "signalSide": "option",
+          "targetText": "walk away from our regrets",
+          "relation": "转移注意力就是把空前 walk away from our regrets 落到做法上。"
+        }
+      ],
+      "lock": [
+        "take a deep breath",
+        "After that",
+        "thoughts wandering"
+      ],
+      "find": {
+        "text": "先看空前 \"take a deep breath\"：这是停下后的第一步，空里要说下一步。E 的 \"After that\" 接上它，\"redirect your attention\" 把 \"thoughts wandering\" 拉回来。",
+        "quotes": [
+          "take a deep breath",
+          "After that",
+          "redirect your attention",
+          "thoughts wandering"
+        ]
+      },
+      "explain": "本段讲别困在错误里：先察觉思绪又绕回懊悔，再停下深呼吸，这句给出最后一步，把注意力移开，空前“走出懊悔需要决心”的说法由此有了做法。",
+      "distractors": [
+        {
+          "label": "D",
+          "text": "D 的 \"Remember\" 也能跟在祈使句后，但本段要 \"walk away from our regrets\"，D 劝人再去补救，又把心思拉回错误上。",
+          "quotes": [
+            "Remember",
+            "walk away from our regrets"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "stop for a moment and take a deep breath",
+            "optionSide": "After that, redirect your attention",
+            "relation": "空前是先停下深呼吸，选项用 After that 接上下一步：转移注意力。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "本段讲别困在错误里：先察觉思绪又绕回懊悔，再停下深呼吸，这句给出最后一步，把注意力移开，空前“走出懊悔需要决心”的说法由此有了做法。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 的 \"Remember\" 也能跟在祈使句后，但本段要 \"walk away from our regrets\"，D 劝人再去补救，又把心思拉回错误上。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:40": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Look at the big picture",
+        "what we perceive as a mistake",
+        "the breakthrough",
+        "so-called mistake",
+        "terrible impact"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:5",
+        "beforeQuote": "Sometimes what we perceive as a mistake is the breakthrough that was necessary to change a relationship.",
+        "afterQuote": "By looking at things objectively, we might see that our so-called mistake doesn’t have the terrible impact we initially thought it did."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Or maybe",
+          "signalSide": "option",
+          "targetText": "Sometimes what we perceive as a mistake is the breakthrough",
+          "relation": "Sometimes 先给一种可能，Or maybe 接着给另一种可能，两句并列。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Sometimes",
+          "signalSide": "context-before",
+          "targetText": "Or maybe",
+          "relation": "空前用 Sometimes 提出第一种看法，等着后面补另一种。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "isn’t a big deal",
+          "signalSide": "option",
+          "targetText": "doesn’t have the terrible impact",
+          "relation": "选项说不算什么，空后说影响没那么可怕，意思一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "in the long run",
+          "signalSide": "option",
+          "targetText": "Look at the big picture",
+          "relation": "放长远看，就是本段开头说的着眼大局。"
+        }
+      ],
+      "lock": [
+        "Sometimes",
+        "Or maybe",
+        "doesn’t have the terrible impact"
+      ],
+      "find": {
+        "text": "先看空前 \"Sometimes\"：它给出一种可能，G 的 \"Or maybe\" 接着给另一种。空后 \"doesn’t have the terrible impact\" 又呼应 \"isn’t a big deal\"。",
+        "quotes": [
+          "Sometimes",
+          "Or maybe",
+          "doesn’t have the terrible impact",
+          "isn’t a big deal"
+        ]
+      },
+      "explain": "本段讲着眼大局。空前说错误有时反成突破，这句退一步说，就算算不上突破，放长远看也没那么严重；空后用“客观看待”把这两种看法收住。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Look at the big picture / doesn’t have the terrible impact",
+            "optionSide": "isn’t a big deal in the long run",
+            "relation": "选项从长远角度看错误，和段首着眼大局、空后影响没那么可怕前后一致。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "本段讲着眼大局。空前说错误有时反成突破，这句退一步说，就算算不上突破，放长远看也没那么严重；空后用“客观看待”把这两种看法收住。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

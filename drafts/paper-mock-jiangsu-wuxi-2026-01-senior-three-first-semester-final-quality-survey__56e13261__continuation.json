@@ -1,0 +1,186 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Soon enough it was show time, and we stepped out of the thick curtain onto the stage. I took a deep breath, counted us in, and we started with our loudest song. The drums pounded and the guitars screamed, just as we had practiced. When the last chord faded, I looked up, ready for the thundering applause. But the hall stayed silent. A few people nodded, and one old man smiled, yet not a single hand clapped. We played a second song, then a third, louder each time. Still nothing. My fingers grew heavy on the strings, and I saw the same question in my friends’ eyes: were we really that bad?\n\nParagraph 2: Since no one was applauding us, we cut our performance short and went backstage. We were packing up when Ms. Evans hurried in. “Why did you stop?” she asked. I told her the audience didn’t seem to like us. She shook her head gently. “Boys, many of them can’t clap. Some have no hands, and some can’t lift their arms. Look at their faces.” We peeked out from behind the curtain. A woman in a wheelchair was tapping her foot. A man without arms was nodding to a beat that was no longer there. The silence had never meant they didn’t enjoy the music. We went back out and played every song we had learned. This time nobody clapped either, but the whole room was smiling.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "“我”和乐队伙伴是一群认真练习、盼着掌声的少年；Ms. Evans 是康复医院的娱乐总监，了解病人，演出前特地来提醒乐队。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”回忆往事，一般过去时；句子中等长度，以叙述为主，直接引语集中在 Ms. Evans 的一段叮嘱里。续写接着用“我/我们”和过去时，人物的话只在 Ms. Evans 揭开原因时用几句短的直接引语。",
+          "evidence": [
+            "Like many other teenage boys, I was in a band.",
+            "Just play your regular show, and you’ll do fine."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在病人被扶进座位、安静地看着舞台，演出还没开始。乐队一心想要热烈的掌声，可观众里很多人缺了肢体；续写要解决的是：等不到掌声时乐队怎么理解，最后怎样看待这场演出。",
+          "evidence": [
+            "Many of them were missing limbs.",
+            "most were just sitting there, quietly watching the stage"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我（I）",
+          "role": "乐队成员，故事的叙述者",
+          "lines": [
+            {
+              "label": "想要",
+              "text": "第一次正式演出，盼着得到雷鸣般的掌声。",
+              "evidence": "expecting to receive thundering applause"
+            },
+            {
+              "label": "此刻",
+              "text": "站在台上看着台下的椅子，很紧张，躲到后台去平复心情。",
+              "evidence": "anything to calm our nerves"
+            }
+          ]
+        },
+        {
+          "name": "Ms. Evans",
+          "role": "康复医院的娱乐总监",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "提前把观众的情况告诉乐队，又安慰他们别被吓到。",
+              "evidence": "Don’t let that alarm you."
+            },
+            {
+              "label": "性格",
+              "text": "熟悉病人，知道他们难得看一次现场演出，会喜欢乐队带来的音乐。",
+              "evidence": "they enjoy any kind of musical talent that we can bring in"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "expecting to receive thundering applause",
+          "use": "第 1 段每首歌结束，“我”都在等这阵掌声，一次次落空，期待和现实的落差由此拉开。"
+        },
+        {
+          "sourceQuote": "Many of them were missing limbs.",
+          "use": "第 2 段 Ms. Evans 点破很多病人没有手、抬不起手臂，没法鼓掌，原因就埋在这句里。"
+        },
+        {
+          "sourceQuote": "they enjoy any kind of musical talent that we can bring in",
+          "use": "第 2 段乐队从幕后看到观众打拍子、点头，印证了 Ms. Evans 这句话：观众其实一直在享受音乐。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "第 1 段写乐队卖力演奏却一首接一首等不来掌声，越来越泄气；第 2 段由 Ms. Evans 点破很多病人没法鼓掌，乐队看见观众用点头、打拍子回应，回到台上唱完全部曲目。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "从走上舞台写起。第二段首句说“因为没人鼓掌，我们提前结束演出回了后台”，所以第 1 段结束时必须已经写出：演奏了一段时间，始终没有人鼓掌，乐队因此动摇。",
+          "draft": "乐队用最响的歌开场，等着掌声，大厅却一片安静；有人点头、微笑，但没人鼓掌。连唱几首仍是这样，“我”开始怀疑是不是演得太差。",
+          "bridgeQuote": "Since no one was applauding us",
+          "bridge": "回到后台后，谁来解开“没人鼓掌”的原因？乐队又怎样对待没唱完的演出？"
+        },
+        {
+          "paragraph": 2,
+          "must": "从提前收场、回到后台写起，并让“没人鼓掌”这件事有个交代；原因由谁说出、乐队回不回台上，由写作者选择。",
+          "draft": "Ms. Evans 赶到后台，说很多病人没有手或抬不起手臂，没法鼓掌；乐队从幕后看到观众在打拍子、点头，回到台上唱完全部歌曲，仍没有掌声，但满场是笑脸。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Soon enough it was show time, and we stepped out of the thick curtain onto the stage. I took a deep breath, counted us in, and we started with our loudest song. The drums pounded and the guitars screamed, just as we had practiced. When the last chord faded, I looked up, ready for the thundering applause. But the hall stayed silent. A few people nodded, and one old man smiled, yet not a single hand clapped. We played a second song, then a third, louder each time. Still nothing. My fingers grew heavy on the strings, and I saw the same question in my friends’ eyes: were we really that bad?\n\nParagraph 2: Since no one was applauding us, we cut our performance short and went backstage. We were packing up when Ms. Evans hurried in. “Why did you stop?” she asked. I told her the audience didn’t seem to like us. She shook her head gently. “Boys, many of them can’t clap. Some have no hands, and some can’t lift their arms. Look at their faces.” We peeked out from behind the curtain. A woman in a wheelchair was tapping her foot. A man without arms was nodding to a beat that was no longer there. The silence had never meant they didn’t enjoy the music. We went back out and played every song we had learned. This time nobody clapped either, but the whole room was smiling.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "写演出过程，把“盼掌声”和“没掌声”的落差一步步拉大，到段尾乐队已经泄了气，正好接上第二段首句。",
+          "items": [
+            {
+              "quote": "ready for the thundering applause",
+              "explain": "借回原文 expecting to receive thundering applause 的期待，第一首歌一结束就落空，落差有了起点。"
+            },
+            {
+              "quote": "A few people nodded, and one old man smiled, yet not a single hand clapped.",
+              "explain": "先写有人点头、微笑，再写没人鼓掌：读者已能察觉观众不是不喜欢，为第 2 段揭开原因埋下伏笔。"
+            },
+            {
+              "quote": "We played a second song, then a third, louder each time. Still nothing.",
+              "explain": "一首接一首加码，一首接一首落空；Still nothing 只有两个词，泄气感比长句更重。"
+            },
+            {
+              "quote": "were we really that bad?",
+              "explain": "用“我”心里的疑问收段，情绪落在一个具体的念头上，也给第二段的“提前收场”一个理由。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "回到后台后由 Ms. Evans 揭开原因，乐队亲眼看到观众的回应，回到台上唱完，收住“掌声”这条线。",
+          "items": [
+            {
+              "quote": "many of them can’t clap. Some have no hands, and some can’t lift their arms.",
+              "explain": "原因由原文里最了解病人的 Ms. Evans 说出，接上原文 Many of them were missing limbs；她开口叫 Boys，也和原文里的口气一致。"
+            },
+            {
+              "quote": "A man without arms was nodding to a beat that was no longer there.",
+              "explain": "不靠讲道理，靠一个看得见的动作证明观众在享受：歌已经停了，他还在跟着节拍点头。"
+            },
+            {
+              "quote": "This time nobody clapped either, but the whole room was smiling.",
+              "explain": "结尾依旧没有掌声，但满场笑脸，回应开头对掌声的期待；问题收在一个具体场面上，不另贴道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "Still nothing.",
+          "function": "两个词的短句，写期待一次又一次落空，适合放在几次尝试之后。"
+        },
+        {
+          "expression": "nod to a beat",
+          "function": "写观众跟着节拍点头，用动作代替掌声表现他们喜欢这场演出。"
+        },
+        {
+          "expression": "peek out from behind the curtain",
+          "function": "写乐队躲在幕后偷看台下，自然地把镜头从后台转到观众身上。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "把没有掌声写成观众不喜欢，乐队被冷落、愤而离场或被嘘下台。",
+          "why": "原文 Ms. Evans 说过 “they enjoy any kind of musical talent that we can bring in”，观众也一直安静地看着舞台；写成反感与原文矛盾，第 2 段要解开的是误会，不是冲突。"
+        },
+        {
+          "pitfall": "在第 1 段就写出病人没法鼓掌的原因。",
+          "why": "第二段首句说乐队“因为没人鼓掌”才提前回后台，说明第 1 段结束时他们还不知道原因；原因提前揭开，第二段首句就接不上。"
+        },
+        {
+          "pitfall": "让病人突然站起来鼓掌欢呼，用奇迹收尾。",
+          "why": "原文写明很多人 “missing limbs”，靠他们突然鼓掌制造高潮违背原文设定；结尾应落在他们本来就能做到的回应上，如微笑、点头、打拍子。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Soon enough it was show time, and we stepped out of the thick curtain onto the stage. I gave the guys a quick nod, and we crashed into our opening song, the one that had won us third place at the talent show. The drums thundered, the bass shook the floor, and for three minutes I forgot about my nerves. As the last chord rang out, I lifted my head, waiting for the roar we had imagined for two weeks. It never came. Rows of faces simply looked back at us. There was not a single clap. We pushed on through a second song and then a third, playing harder each time, as if volume could force a reaction. Still the hall stayed silent. By the fourth song my fingers felt clumsy, and our drummer kept glancing at me as if to ask, “What are we doing wrong?”\n\nParagraph 2: Since no one was applauding us, we cut our performance short and went backstage. I was shoving my guitar into its case when Ms. Evans came rushing in. “Why did you stop? They were loving it!” she said. I muttered that nobody had clapped at all. Her face softened. “Oh, boys, I should have told you. Many of them can’t clap. Some have lost their hands, and some can barely move their arms.” She led us to the curtain. Out in the auditorium, a woman in a wheelchair was tapping her foot. A man with no arms was nodding his head, still keeping time to a song that had already ended. My cheeks burned. We had been listening for a sound when the answer had been right in front of us. Without a word, we walked back out and played every song we knew. When we finished, the hall was as quiet as ever, but it no longer felt empty.",
+      "beyondStandard": [
+        {
+          "quote": "the one that had won us third place at the talent show",
+          "explain": "借回原文里乐队在校园才艺比赛得第三名的经历，他们的自信有了来由，后面的落空也更重。"
+        },
+        {
+          "quote": "as if volume could force a reaction",
+          "explain": "标准版只写 louder each time，这里写出少年们“以为声音够大就能换来反应”的心思，人物更像真人。"
+        },
+        {
+          "quote": "still keeping time to a song that had already ended",
+          "explain": "keep time 是“打拍子”的地道搭配；歌已经停了他还在跟，比标准版更具体地写出观众其实听得入迷。"
+        }
+      ]
+    }
+  }
+}

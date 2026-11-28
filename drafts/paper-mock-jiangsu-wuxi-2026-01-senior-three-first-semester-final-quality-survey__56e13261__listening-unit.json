@@ -1,0 +1,1067 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: I finally found something better than social media – going swimming instead.\nW: Nice! I replaced it with volunteering in the community.\nM: That's great!",
+      "translationZh": "男：我终于找到了比刷社交媒体更好的事——改去游泳。\n女：不错！我用参加社区志愿服务代替了它。\n男：太好了！",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "一男一女聊各自找到了什么事来代替刷社交媒体。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我终于找到了比刷社交媒体更好的事——改去游泳。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "不错！"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "我用参加社区志愿服务代替了它。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "太好了！"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Hey Mark, our canteen's new Meal Card gives a 10% bonus. I paid 100 yuan last week and got 110 yuan on the card.\nM: Cool! I'm going to add 150 yuan today. That extra ten percent really helps.",
+      "translationZh": "女：嘿，马克，咱们食堂的新饭卡充值送10%。我上周充了100元，卡里到账110元。\n男：真棒！我今天打算充150元。多送的这10%真挺有用。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "女士向马克介绍食堂新饭卡的充值优惠，马克打算今天去充值。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "嘿，马克，咱们食堂的新饭卡充值送10%。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "我上周充了100元，卡里到账110元。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "真棒！"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "我今天打算充150元。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "多送的这10%真挺有用。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: Paris! That's the capital of France. Give me another one – I love quick quizzes.\nW: OK, here's a tough one: Which big bay lies on the south coast of China?\nM: That's tricky. Give me a second!",
+      "translationZh": "男：巴黎！那是法国的首都。再来一道吧——我就喜欢快问快答。\n女：好，来道难的：哪个大海湾位于中国南部沿海？\n男：这题有点难。给我一秒钟！",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "自然生态",
+        "subtopic": "不同国家地理概况"
+      },
+      "summaryZh": "男士答完一道地理题后请女士再出一道，女士又出了一道难题。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "巴黎！"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "那是法国的首都。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "再来一道吧——我就喜欢快问快答。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "好，来道难的：哪个大海湾位于中国南部沿海？"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "这题有点难。"
+        },
+        {
+          "id": "listening-text-3:6",
+          "zh": "给我一秒钟！"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: That handbag looks nice, but it's a bit too expensive. I think I'll come back when it's on sale.\nM: Why don't you ask the seller if he can lower the price?\nW: I feel a little awkward.\nM: Don't worry. At street markets, you're expected to bargain. It's normal.",
+      "translationZh": "女：那个手提包看着不错，但有点太贵了。我想等它打折时再来。\n男：你为什么不问问摊主能不能便宜点呢？\n女：我有点不好意思。\n男：别担心。在街头市场，人们本来就默认你会讲价。这很正常。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士在街头市场看中一只手提包却嫌贵，男士给她出主意。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "那个手提包看着不错，但有点太贵了。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "我想等它打折时再来。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "你为什么不问问摊主能不能便宜点呢？"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "我有点不好意思。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "别担心。"
+        },
+        {
+          "id": "listening-text-4:6",
+          "zh": "在街头市场，人们本来就默认你会讲价。"
+        },
+        {
+          "id": "listening-text-4:7",
+          "zh": "这很正常。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: I'm thinking of rereading Harry Potter in English. It might be challenging but fun.\nM: Good idea! Reading in another language helps a lot. You can learn many new words.",
+      "translationZh": "女：我在考虑重读英文版的《哈利·波特》。可能有挑战，但会很有趣。\n男：好主意！用另一种语言阅读帮助很大。你能学到很多新单词。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "语言学习的方法"
+      },
+      "summaryZh": "女士说打算重读英文版《哈利·波特》，男士对此作出回应。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "我在考虑重读英文版的《哈利·波特》。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "可能有挑战，但会很有趣。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "好主意！"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "用另一种语言阅读帮助很大。"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "你能学到很多新单词。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Tom, you've been on your phone for three hours.\nM: But Mom, it's for my history project. I mostly use it for my studying.\nW: Well, I did see you playing games just now. Let's set a rule, okay?\nM: What kind of rule?\nW: You can use your phone for 60 minutes after you finish your homework, and phones must be out of bedrooms after 10 pm. I know you can stick to it.\nM: Fair enough. Thanks for trusting me.",
+      "translationZh": "女：汤姆，你已经玩了三个小时手机了。\n男：可是妈妈，这是为了我的历史课题。我主要用它来学习。\n女：嗯，我刚才确实看到你在玩游戏。咱们定个规矩，好吗？\n男：什么样的规矩？\n女：写完作业后你可以用60分钟手机，晚上10点以后手机不许放在卧室里。我知道你能做到。\n男：很公平。谢谢你信任我。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "妈妈发现汤姆玩了三小时手机，两人谈手机用途并商量使用规则。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "汤姆，你已经玩了三个小时手机了。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "可是妈妈，这是为了我的历史课题。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "我主要用它来学习。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "嗯，我刚才确实看到你在玩游戏。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "咱们定个规矩，好吗？"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "什么样的规矩？"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "写完作业后你可以用60分钟手机，晚上10点以后手机不许放在卧室里。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "我知道你能做到。"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "很公平。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "谢谢你信任我。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "M: Kate, you know tomorrow will be our busiest day of the year at our restaurant.\nW: Yeah, I've already got the shift list. But we're short of staff.\nM: True. Serving everyone will be a challenge. Luckily, we'll be able to seat everyone inside and outside.\nW: What if customers wait too long for food? I'm worried about it.\nM: Let's plan everything now. First, let's list out the details in my office. Then we'll go upstairs to set up everything at the bar and dining areas.\nW: Good idea.\nM: Remember, the key is communication. We must keep each other informed.\nW: Got it!",
+      "translationZh": "男：凯特，你知道明天是咱们餐馆一年里最忙的一天。\n女：是啊，我已经拿到排班表了。可我们人手不够。\n男：没错。要接待好每位客人会很难。好在室内外的座位够所有人坐。\n女：要是顾客等餐太久怎么办？我很担心这一点。\n男：咱们现在就把一切安排好。先在我办公室把细节列出来。然后我们上楼，把吧台和用餐区都布置好。\n女：好主意。\n男：记住，关键是沟通。我们必须随时互通消息。\n女：明白！",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "合作"
+      },
+      "summaryZh": "餐馆一年中最忙的一天前夕，男士和凯特商量难处并安排准备工作。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "凯特，你知道明天是咱们餐馆一年里最忙的一天。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "是啊，我已经拿到排班表了。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "可我们人手不够。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "没错。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "要接待好每位客人会很难。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "好在室内外的座位够所有人坐。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "要是顾客等餐太久怎么办？"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "我很担心这一点。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "咱们现在就把一切安排好。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "先在我办公室把细节列出来。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "然后我们上楼，把吧台和用餐区都布置好。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "好主意。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "记住，关键是沟通。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "我们必须随时互通消息。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "明白！"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "M: Hi, Nancy, glad to see you again! How did those tomato seeds you bought here work out?\nW: They were perfect, thanks! They made a great addition to my garden. But now I want something bigger for shade.\nM: A cherry tree would be ideal. Do you have enough space?\nW: Yes, my garden is pretty big. Do you have some?\nM: We sure do. They grow well here, and you know cherry trees usually need plenty of sunlight.\nW: That's fine. What kind of soil should I use?\nM: Fresh, rich soil. Follow me, I will show you our best soil for fruit trees.\nW: Great! And how long will it be before I get cherries?\nM: Usually three to four years. You just need patience.\nW: OK, I can't wait. Let's do it.",
+      "translationZh": "男：嗨，南希，很高兴又见到你！你在这儿买的那些番茄种子长得怎么样？\n女：好极了，谢谢！它们给我的花园添了不少彩。不过现在我想要个大一点的东西来遮阴。\n男：樱桃树就再合适不过了。你那儿地方够大吗？\n女：够，我的花园挺大的。你们有樱桃树吗？\n男：当然有。樱桃树在这儿长得很好，你也知道，樱桃树通常需要充足的阳光。\n女：那没问题。我该用什么样的土？\n男：新鲜肥沃的土。跟我来，我带你看看我们最适合果树的土。\n女：太好了！那要多久才能结樱桃？\n男：通常三到四年。你只需要耐心。\n女：好的，我都等不及了。就这么办吧。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "自然生态",
+        "subtopic": "人与动植物"
+      },
+      "summaryZh": "南希回到园艺店，和店员聊起番茄种子，又咨询种樱桃树的事。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "嗨，南希，很高兴又见到你！"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "你在这儿买的那些番茄种子长得怎么样？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "好极了，谢谢！"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "它们给我的花园添了不少彩。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "不过现在我想要个大一点的东西来遮阴。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "樱桃树就再合适不过了。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "你那儿地方够大吗？"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "够，我的花园挺大的。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "你们有樱桃树吗？"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "当然有。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "樱桃树在这儿长得很好，你也知道，樱桃树通常需要充足的阳光。"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "那没问题。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "我该用什么样的土？"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "新鲜肥沃的土。"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "跟我来，我带你看看我们最适合果树的土。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "太好了！"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "那要多久才能结樱桃？"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "通常三到四年。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "你只需要耐心。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "好的，我都等不及了。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "就这么办吧。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "M: Amy, thanks for introducing Mr. Jones to me. He helped me so much with my paper.\nW: You're welcome, David. What's your paper about?\nM: It's about how the weather affects people's farming habits. During the rainy season in South China, rice farming needs teamwork.\nW: So people there are more cooperative?\nM: Exactly! Everyone has to work together, or the crops would fail. But wheat farming in the North, for example, my hometown, Heilongjiang, is different.\nW: I see. So Northerners are more independent?\nM: Right. How are things in Norway?\nW: Well, in cold winters people have to help each other. But mountains mean villagers have to rely on themselves, too.\nM: So Norwegians are a mix of both? That's a good example for my paper!\nW: Yeah, that's it. Weather really influences how people farm.",
+      "translationZh": "男：埃米，谢谢你把琼斯先生介绍给我。他在论文上帮了我很多。\n女：不客气，戴维。你的论文是关于什么的？\n男：是关于天气如何影响人们的耕作习惯。在中国南方的雨季，种水稻需要团队合作。\n女：所以那里的人更善于合作？\n男：正是！大家必须一起干，不然庄稼就会歉收。但北方种小麦就不一样了，比如我的家乡黑龙江。\n女：我明白了。所以北方人更独立？\n男：对。挪威的情况怎么样？\n女：嗯，在寒冷的冬天，人们得互相帮助。但山多也意味着村民们还得靠自己。\n男：所以挪威人是两者兼有？这对我的论文是个好例子！\n女：对，就是这样。天气确实影响着人们的耕作方式。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "环境保护",
+        "subtopic": "人类生存与环境的关系"
+      },
+      "summaryZh": "戴维感谢埃米帮忙，两人谈他的论文，比较几个地区的耕作和民风。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "埃米，谢谢你把琼斯先生介绍给我。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "他在论文上帮了我很多。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "不客气，戴维。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "你的论文是关于什么的？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "是关于天气如何影响人们的耕作习惯。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "在中国南方的雨季，种水稻需要团队合作。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "所以那里的人更善于合作？"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "正是！"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "大家必须一起干，不然庄稼就会歉收。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "但北方种小麦就不一样了，比如我的家乡黑龙江。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "我明白了。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "所以北方人更独立？"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "对。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "挪威的情况怎么样？"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "嗯，在寒冷的冬天，人们得互相帮助。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "但山多也意味着村民们还得靠自己。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "所以挪威人是两者兼有？"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "这对我的论文是个好例子！"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "对，就是这样。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "天气确实影响着人们的耕作方式。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Good evening, and welcome to News Spin. I'm Sarah. Tonight, we're discussing lab-grown meat, a topic many of you requested. This isn't science fiction – it's already approved and served in several Australian restaurants. The technology could help reduce animal killing, feed more families worldwide, and most importantly, cut carbon emissions.\nLet me explain how it works. Scientists take a tiny sample of animal cells, feed them nutrients in a controlled environment, and grow them into real muscle tissue in about two weeks. And the result looks and tastes like real meat.\nTo learn more, we've invited Dr. Lisa Park from the National Institute of Agriculture and Food Science. She's been researching this technology for over eight years. We'll discuss three key points: safety, cost, and public acceptance.\nBefore we finish, we'll do a live taste test of lab-grown chicken and share our honest reviews. You can also vote online.\nStay with us. We'll be right back after a short break.",
+      "translationZh": "晚上好，欢迎收看《新闻旋风》。我是萨拉。今晚我们讨论实验室培育肉，这是很多观众点名要听的话题。这不是科幻——它已经获批，并在澳大利亚的几家餐馆供应。这项技术有望减少对动物的宰杀，让全世界更多家庭吃得上饭，最重要的是，减少碳排放。\n我来解释一下它的原理。科学家取一小份动物细胞样本，在受控环境中给它们提供养分，大约两周就能把它们培育成真正的肌肉组织。培育出来的肉看起来、吃起来都像真肉。\n为了进一步了解，我们请来了国家农业与食品科学研究所的莉萨·帕克博士。她研究这项技术已有八年多。我们将讨论三个要点：安全、成本和公众接受度。\n节目结束前，我们会现场试吃实验室培育的鸡肉，并分享我们真实的评价。您也可以在网上投票。\n请继续关注。短暂休息后马上回来。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "科学与技术",
+        "subtopic": "科技发展"
+      },
+      "summaryZh": "主持人萨拉在节目开头介绍实验室培育肉，以及当晚的嘉宾和节目安排。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "晚上好，欢迎收看《新闻旋风》。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "我是萨拉。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "今晚我们讨论实验室培育肉，这是很多观众点名要听的话题。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "这不是科幻——它已经获批，并在澳大利亚的几家餐馆供应。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "这项技术有望减少对动物的宰杀，让全世界更多家庭吃得上饭，最重要的是，减少碳排放。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "我来解释一下它的原理。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "科学家取一小份动物细胞样本，在受控环境中给它们提供养分，大约两周就能把它们培育成真正的肌肉组织。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "培育出来的肉看起来、吃起来都像真肉。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "为了进一步了解，我们请来了国家农业与食品科学研究所的莉萨·帕克博士。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "她研究这项技术已有八年多。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "我们将讨论三个要点：安全、成本和公众接受度。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "节目结束前，我们会现场试吃实验室培育的鸡肉，并分享我们真实的评价。"
+        },
+        {
+          "id": "listening-text-10:13",
+          "zh": "您也可以在网上投票。"
+        },
+        {
+          "id": "listening-text-10:14",
+          "zh": "请继续关注。"
+        },
+        {
+          "id": "listening-text-10:15",
+          "zh": "短暂休息后马上回来。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "什么帮助男士戒掉了社交媒体？",
+      "optionTranslationsZh": {
+        "A": "做运动。",
+        "B": "专注于工作。",
+        "C": "参加社区志愿服务。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I finally found something better than social media – going swimming instead."
+      },
+      "reasonZh": "男士说找到了比社交媒体更好的事，改去游泳（going swimming），游泳是一项运动，选项把它概括成“做运动”，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "参加社区志愿服务（volunteering in the community）是女士用来代替社交媒体的做法，不是男士的。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "马克今天充150元后，卡里马上会显示多少钱？",
+      "optionTranslationsZh": {
+        "A": "110元。",
+        "B": "150元。",
+        "C": "165元。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I'm going to add 150 yuan today."
+      },
+      "reasonZh": "女士说新饭卡充值送10%（10% bonus），马克今天充150元，150 + 150 × 10% = 150 + 15 = 165元，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "110元是女士上周充100元后卡里到账的钱（got 110 yuan on the card），说的是她自己。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "150元只是马克充进去的钱（add 150 yuan），没有加上多送的10%。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "两位说话人在做什么？",
+      "optionTranslationsZh": {
+        "A": "玩问答游戏。",
+        "B": "计划旅行。",
+        "C": "画地图。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Give me another one – I love quick quizzes."
+      },
+      "reasonZh": "男士答出巴黎是法国首都后说“再来一道，我就喜欢快问快答”（quick quizzes），女士接着出题，可见两人在玩问答游戏，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "巴黎（Paris）是男士答出的题目答案，两人没有谈要去哪里。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "男士建议女士做什么？",
+      "optionTranslationsZh": {
+        "A": "和摊主讲价。",
+        "B": "另找一只包。",
+        "C": "等下次打折。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "At street markets, you're expected to bargain."
+      },
+      "reasonZh": "男士先劝她问摊主能不能便宜点（lower the price），又说在街头市场讲价是常事（expected to bargain），就是劝她和摊主讲价，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "等打折再来（when it's on sale）是女士自己原来的打算，男士劝她的是现在就问摊主降价。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "女士认为重读英文版《哈利·波特》怎么样？",
+      "optionTranslationsZh": {
+        "A": "无聊的。",
+        "B": "实用的。",
+        "C": "有收获的。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "It might be challenging but fun."
+      },
+      "reasonZh": "女士说重读英文版可能有挑战但有趣（challenging but fun），虽然难却值得一读；“有收获的”是对这一看法的概括，男士说能学很多新词也印证了这一点，选 C。"
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男孩主要用手机做什么？",
+      "optionTranslationsZh": {
+        "A": "玩游戏。",
+        "B": "做学校的课题研究。",
+        "C": "和朋友聊天。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I mostly use it for my studying."
+      },
+      "reasonZh": "汤姆说手机是为了历史课题（history project），主要用来学习（mostly use it for my studying），选项把这两句说成“做学校的课题研究”，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "玩游戏（playing games）是妈妈说刚才看到他在玩，汤姆自己说主要用途是学习。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "汤姆认为妈妈定的规矩怎么样？",
+      "optionTranslationsZh": {
+        "A": "可靠的。",
+        "B": "令人担忧的。",
+        "C": "合理的。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Fair enough."
+      },
+      "reasonZh": "妈妈说完规矩，汤姆回答“很公平”（Fair enough），还谢谢妈妈信任他，可见他觉得规矩合理，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "信任（trusting me）说的是妈妈相信汤姆能遵守规矩，不是汤姆评价规矩可靠。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "说话人现在面临的主要困难是什么？",
+      "optionTranslationsZh": {
+        "A": "人手不够。",
+        "B": "缺少合适的食材供应。",
+        "C": "流失了一些老顾客。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "But we're short of staff."
+      },
+      "reasonZh": "凯特说他们人手不够（short of staff），选项换了说法，说成“没有足够的工人”，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "食物（food）出现在凯特担心顾客等餐太久（wait too long for food），担心的是上菜慢，不是缺食材。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "顾客（customers）指明天会来的客人可能等太久，男士还说室内外都坐得下，并没有说老顾客流失。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "说话人可能先去哪里？",
+      "optionTranslationsZh": {
+        "A": "去吧台。",
+        "B": "去办公室。",
+        "C": "去用餐区。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "First, let's list out the details in my office."
+      },
+      "reasonZh": "男士说先（First）在他的办公室把细节列出来，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "吧台（the bar）是列完细节之后（Then）才上楼布置的地方，不是先去的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "用餐区（dining areas）和吧台一样，是第二步（Then）上楼才去布置的地方。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "两位说话人可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "夫妻。",
+        "B": "同事。",
+        "C": "邻居。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Kate, you know tomorrow will be our busiest day of the year at our restaurant."
+      },
+      "reasonZh": "男士说明天是“我们餐馆”最忙的一天（our restaurant），两人一起看排班表、商量人手和布置，男士还提到“我的办公室”，可推知两人在同一家餐馆共事，选 B。"
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士为什么想要樱桃树？",
+      "optionTranslationsZh": {
+        "A": "让花园更漂亮。",
+        "B": "给花园遮阴。",
+        "C": "给家人提供新鲜水果。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "But now I want something bigger for shade."
+      },
+      "reasonZh": "南希说现在想要大一点的东西来遮阴（for shade），店员接着推荐樱桃树，所以她要樱桃树是为了遮阴，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "花园（garden）出现在她说番茄种子给花园添彩（a great addition to my garden），说的是番茄，要樱桃树是为了遮阴。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "新鲜（Fresh）说的是要用新鲜肥沃的土（Fresh, rich soil），果树（fruit trees）是店员介绍土时提到的，不是她要樱桃树的理由。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士说樱桃树需要什么？",
+      "optionTranslationsZh": {
+        "A": "足够的水。",
+        "B": "大量的土。",
+        "C": "充足的阳光。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "They grow well here, and you know cherry trees usually need plenty of sunlight."
+      },
+      "reasonZh": "男士直接说樱桃树通常需要充足的阳光（need plenty of sunlight），选项沿用原词，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "足够（enough）出现在男士问她有没有足够的地方（enough space），问的是花园大小，不是浇水。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "土（soil）是女士问该用哪种土时，男士答新鲜肥沃的土（Fresh, rich soil），讲的是土的种类，不是要很多土。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士接下来可能做什么？",
+      "optionTranslationsZh": {
+        "A": "买一些樱桃树和土。",
+        "B": "种樱桃树。",
+        "C": "摘一些番茄。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Follow me, I will show you our best soil for fruit trees."
+      },
+      "reasonZh": "南希在店里问有没有樱桃树（Do you have some?），店员说有，又要带她去看最适合果树的土，她最后说“就这么办”（Let's do it），接下来应是买樱桃树和土，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "樱桃树（cherry trees）得先买回去才能种，她此刻还在店里跟着店员去看土。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "番茄（tomato seeds）是她以前在这家店买的种子，已经种在花园里了（a great addition to my garden），这次来是要买樱桃树。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士的论文主要是关于什么的？",
+      "optionTranslationsZh": {
+        "A": "天气对耕作习惯的影响。",
+        "B": "中国收获的不同种类的庄稼。",
+        "C": "挪威农业的历史。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It's about how the weather affects people's farming habits."
+      },
+      "reasonZh": "男士直接说论文讲天气如何影响人们的耕作习惯（how the weather affects people's farming habits），选项沿用原词，只把 affects 换成名词 Effects，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "南方种水稻、北方种小麦（rice farming … wheat farming）是论文里的例子，用来说明天气怎样影响人们合作的方式，不是论文的主题。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "挪威（Norway）是男士请女士补充的例子，谈的是当地人互助还是靠自己，不是农业的历史。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士认为中国北方的小麦种植怎么样？",
+      "optionTranslationsZh": {
+        "A": "它不太需要团队合作。",
+        "B": "它鼓励大规模的集体合作。",
+        "C": "它深受寒冷冬天的影响。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "But wheat farming in the North, for example, my hometown, Heilongjiang, is different."
+      },
+      "reasonZh": "男士先说南方种水稻需要团队合作（needs teamwork），接着说北方种小麦不一样（is different），女士问北方人是不是更独立，他答“对”（Right），可见北方种小麦不太需要团队合作，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "更善于合作（more cooperative）说的是南方种水稻的人，男士说北方和南方不一样。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "寒冷的冬天（cold winters）是女士介绍挪威时说的，那里冬天人们要互相帮助，说的不是中国北方的小麦种植。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士来自哪里？",
+      "optionTranslationsZh": {
+        "A": "挪威北部。",
+        "B": "中国南方。",
+        "C": "中国北方。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "But wheat farming in the North, for example, my hometown, Heilongjiang, is different."
+      },
+      "reasonZh": "男士说北方的例子就是他的家乡黑龙江（my hometown, Heilongjiang），黑龙江在中国北方，所以他来自中国北方，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "挪威（Norway）是男士向女士打听的地方，介绍挪威情况的是女士。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "中国南方（South China）是男士讲种水稻需要合作时举的地区，不是他的家乡。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士为什么向女士问起挪威的情况？",
+      "optionTranslationsZh": {
+        "A": "为了制订去那里的旅行计划。",
+        "B": "为了给论文收集资料。",
+        "C": "为了了解挪威的天气。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "That's a good example for my paper!"
+      },
+      "reasonZh": "男士听完挪威人既互助又靠自己的情况，说这是论文的好例子（a good example for my paper），可见他问挪威是为论文收集资料，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "女士确实讲到挪威冬天寒冷（cold winters），但男士关心的是这种天气让当地人怎样耕作和相处，好放进论文，不是单纯了解天气。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "《新闻旋风》是一档什么类型的节目？",
+      "optionTranslationsZh": {
+        "A": "科学新闻节目。",
+        "B": "烹饪节目。",
+        "C": "食品纪录片。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Tonight, we're discussing lab-grown meat, a topic many of you requested."
+      },
+      "reasonZh": "节目名里有“新闻”（News），今晚讨论的是实验室培育肉这项技术，还请来研究这项技术的科学家（researching this technology），可见是科学新闻节目，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "现场试吃培育鸡肉（live taste test）只是节目结尾的一个环节，节目主要讨论这项技术，没有教人做菜。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "食品（Food）出现在嘉宾所在研究所的名字里（Agriculture and Food Science），节目是新闻节目，不是纪录片。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "莉萨·帕克博士主要会讨论什么？",
+      "optionTranslationsZh": {
+        "A": "关于这项新技术的三个要点。",
+        "B": "烹饪实验室培育鸡肉的方法。",
+        "C": "实验室培育肉的生产过程。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "We'll discuss three key points: safety, cost, and public acceptance."
+      },
+      "reasonZh": "主持人介绍帕克博士后说要讨论三个要点（three key points）：安全、成本和公众接受度，讲的都是这项新技术，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "实验室培育的鸡肉（lab-grown chicken）是节目结束前现场试吃的东西，没有说要讨论怎么烹饪。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "培育肉的生产过程是主持人萨拉在请出嘉宾之前自己讲的（Let me explain how it works），不是嘉宾要讨论的内容。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "在节目结束前，听众可能会做什么？",
+      "optionTranslationsZh": {
+        "A": "购买实验室培育肉产品。",
+        "B": "在网上就试吃投票。",
+        "C": "上网搜索澳大利亚的餐馆。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "You can also vote online."
+      },
+      "reasonZh": "主持人说节目结束前（Before we finish）会现场试吃培育鸡肉并分享评价，接着说听众也可以在网上投票（vote online），把两句合起来，听众是就试吃投票，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "实验室培育肉（lab-grown meat）是节目讨论的话题，主持人只说它已在澳大利亚几家餐馆供应，没有让听众去买。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "澳大利亚餐馆（Australian restaurants）是开头说培育肉已在那里供应，网上（online）是听众投票的方式，不是去搜餐馆。"
+        }
+      ]
+    }
+  }
+}

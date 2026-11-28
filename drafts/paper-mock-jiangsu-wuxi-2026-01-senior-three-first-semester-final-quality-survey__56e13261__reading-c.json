@@ -1,0 +1,834 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c": {
+      "overview": "文章指出，人们常担心青少年看屏幕太多，其实老年人才是看屏时间最长的群体。上网给老人带来便利和乐趣，也让他们面临网络诈骗和虚假信息的风险，作者呼吁冷静关注并支持老人的数字需求。",
+      "fullTranslationZh": "很少有什么东西能像看屏幕那样让孩子们开心，或让他们的父母恼火。父母们催促孩子放下电子设备，拿起一本书或一个足球。一些国家正在禁止16岁以下的人使用社交媒体。这种担忧也许针对错了年龄群体。尽管人们对青少年和屏幕有种种担心，盯着屏幕最多的一代人其实是老年人。\n老年人一直是看电视的冠军。如今有了智能手机和平板电脑，他们看屏幕的时间变得更长了。事实上，屏幕现在占据了他们清醒时间的一半以上。\n老年生活的数字化是件好事。老年人从智能设备中得到的好处或许比其他任何年龄群体都多。脸书每天带来老朋友和远方孙辈的消息。网购让他们不必再在商店里四处走动。连着网络的退休生活比离线的退休生活更令人满足、更有乐趣。\n虽然老年人有稳定的现实人际关系和成形的世界观，面临的网络风险比青少年少，但随着越来越多的老人上网，新的危险也出现了。与青少年的设备不同，他们的设备常常绑定了信用卡。长期以来一直盯上老年人的上门骗子，如今可以从一台平板电脑骗到另一台平板电脑。政府努力保护儿童免受网络骗子侵害，这是对的。他们必须认识到，还有另一个快速增长的脆弱群体需要照顾。\n第二个代价是错误信息。老年人使用新闻应用或网站的可能性是25岁以下人群的两倍。老年人似乎也比其他人更容易受网络骗术的影响。随着老一辈花在网上的时间越来越多，他们正在进入一个信息的“蛮荒西部”。而且经常有报道称老年人受到误导。\n政策制定者常常禁止年轻人的各种热潮，从摇滚乐到暴力电子游戏。如今，随着老年人越来越多地使用屏幕，我们也必须冷静地讨论他们的数字需求以及应给予的支持。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-1",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+          "sourceText": "While older people face fewer online risks than teenagers for they have stable real-life relationships and formed worldviews, new dangers emerge as more seniors go online.",
+          "displayText": "While older people face fewer online risks than teenagers for they have stable real-life relationships and formed worldviews, new dangers emerge as more seniors go online.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:29",
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:31"
+          ],
+          "translationZh": "虽然老年人有稳定的现实人际关系和成形的世界观，面临的网络风险比青少年少，但随着越来越多的老人上网，新的危险也出现了。",
+          "analysisZh": "主干在逗号后面：new dangers emerge（新的危险出现了），as more seniors go online 是状语从句，意为“随着越来越多的老人上网”。逗号前是 While 引导的让步状语从句，主干 older people face fewer online risks than teenagers，用 fewer … than 拿老人和青少年比较。for they have … 说明老人风险较少的原因，for 在这里是连词，相当于 because；规范写法一般在 for 前加逗号，或直接用 because。这个原因分句里 have 带两个并列宾语：stable real-life relationships 和 formed worldviews。让步之后才是作者的重点：新的危险。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 57,
+              "quote": "While older people face fewer online risks than teenagers"
+            },
+            {
+              "start": 126,
+              "end": 144,
+              "quote": "new dangers emerge"
+            },
+            {
+              "start": 145,
+              "end": 170,
+              "quote": "as more seniors go online"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-2",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+          "sourceText": "For all the fears around teens and screens, the most square-eyed generation is the elderly.",
+          "displayText": "For all the fears around teens and screens, the most square-eyed generation is the elderly.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:28"
+          ],
+          "translationZh": "尽管人们对青少年和屏幕有种种担心，盯着屏幕最多的一代人其实是老年人。",
+          "analysisZh": "主干是 the most square-eyed generation is the elderly（最“方眼睛”的一代是老年人），square-eyed 形容眼睛被屏幕看成了方形，指看屏幕太多。句首 For all … 是让步状语，for all 相当于 despite，意为“尽管”，around teens and screens 修饰 fears，说明担心的是什么。前半句承认人们担心青少年，后半句把重点转到老人身上，这正是全文的话题。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 17,
+              "quote": "For all the fears"
+            },
+            {
+              "start": 44,
+              "end": 90,
+              "quote": "the most square-eyed generation is the elderly"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1"
+              ],
+              "start": 0,
+              "end": 127,
+              "quote": "很少有什么东西能像看屏幕那样让孩子们开心，或让他们的父母恼火。父母们催促孩子放下电子设备，拿起一本书或一个足球。一些国家正在禁止16岁以下的人使用社交媒体。这种担忧也许针对错了年龄群体。尽管人们对青少年和屏幕有种种担心，盯着屏幕最多的一代人其实是老年人。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2"
+              ],
+              "start": 128,
+              "end": 192,
+              "quote": "老年人一直是看电视的冠军。如今有了智能手机和平板电脑，他们看屏幕的时间变得更长了。事实上，屏幕现在占据了他们清醒时间的一半以上。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:3"
+              ],
+              "start": 193,
+              "end": 297,
+              "quote": "老年生活的数字化是件好事。老年人从智能设备中得到的好处或许比其他任何年龄群体都多。脸书每天带来老朋友和远方孙辈的消息。网购让他们不必再在商店里四处走动。连着网络的退休生活比离线的退休生活更令人满足、更有乐趣。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4"
+              ],
+              "start": 298,
+              "end": 467,
+              "quote": "虽然老年人有稳定的现实人际关系和成形的世界观，面临的网络风险比青少年少，但随着越来越多的老人上网，新的危险也出现了。与青少年的设备不同，他们的设备常常绑定了信用卡。长期以来一直盯上老年人的上门骗子，如今可以从一台平板电脑骗到另一台平板电脑。政府努力保护儿童免受网络骗子侵害，这是对的。他们必须认识到，还有另一个快速增长的脆弱群体需要照顾。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5"
+              ],
+              "start": 468,
+              "end": 580,
+              "quote": "第二个代价是错误信息。老年人使用新闻应用或网站的可能性是25岁以下人群的两倍。老年人似乎也比其他人更容易受网络骗术的影响。随着老一辈花在网上的时间越来越多，他们正在进入一个信息的“蛮荒西部”。而且经常有报道称老年人受到误导。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:6"
+              ],
+              "start": 581,
+              "end": 655,
+              "quote": "政策制定者常常禁止年轻人的各种热潮，从摇滚乐到暴力电子游戏。如今，随着老年人越来越多地使用屏幕，我们也必须冷静地讨论他们的数字需求以及应给予的支持。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-q28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2",
+                "start": 125,
+                "end": 191,
+                "quote": "In fact, screens now take up more than half of their waking hours."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+                "start": 277,
+                "end": 368,
+                "quote": "For all the fears around teens and screens, the most square-eyed generation is the elderly."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p2",
+                "start": 41,
+                "end": 64,
+                "quote": "事实上，屏幕现在占据了他们清醒时间的一半以上。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p1",
+                "start": 93,
+                "end": 127,
+                "quote": "尽管人们对青少年和屏幕有种种担心，盯着屏幕最多的一代人其实是老年人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-q29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+                "start": 126,
+                "end": 170,
+                "quote": "new dangers emerge as more seniors go online"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5",
+                "start": 0,
+                "end": 32,
+                "quote": "A second cost is misinformation."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p4",
+                "start": 36,
+                "end": 57,
+                "quote": "但随着越来越多的老人上网，新的危险也出现了"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p5",
+                "start": 0,
+                "end": 11,
+                "quote": "第二个代价是错误信息。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-q30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+                "start": 398,
+                "end": 491,
+                "quote": "They must recognize that there is another, fast-growing vulnerable (脆弱的) group to look after."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:6",
+                "start": 125,
+                "end": 184,
+                "quote": "we must also calmly discuss their digital needs and support"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p4",
+                "start": 142,
+                "end": 169,
+                "quote": "他们必须认识到，还有另一个快速增长的脆弱群体需要照顾。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p6",
+                "start": 48,
+                "end": 73,
+                "quote": "我们也必须冷静地讨论他们的数字需求以及应给予的支持"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-q31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+                "start": 172,
+                "end": 246,
+                "quote": "Unlike those of teenagers, their devices are often linked to credit cards."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5",
+                "start": 33,
+                "end": 107,
+                "quote": "The elderly are twice as likely as under-25s to use news apps or websites."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:3",
+                "start": 45,
+                "end": 127,
+                "quote": "The elderly have perhaps more to gain from smart devices than any other age group."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p4",
+                "start": 58,
+                "end": 82,
+                "quote": "与青少年的设备不同，他们的设备常常绑定了信用卡。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p5",
+                "start": 11,
+                "end": 39,
+                "quote": "老年人使用新闻应用或网站的可能性是25岁以下人群的两倍。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p3",
+                "start": 13,
+                "end": 41,
+                "quote": "老年人从智能设备中得到的好处或许比其他任何年龄群体都多。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:29",
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:31"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+                "start": 0,
+                "end": 171,
+                "quote": "While older people face fewer online risks than teenagers for they have stable real-life relationships and formed worldviews, new dangers emerge as more seniors go online."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p4",
+                "start": 0,
+                "end": 58,
+                "quote": "虽然老年人有稳定的现实人际关系和成形的世界观，面临的网络风险比青少年少，但随着越来越多的老人上网，新的危险也出现了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:28"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+                "start": 277,
+                "end": 368,
+                "quote": "For all the fears around teens and screens, the most square-eyed generation is the elderly."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c-p1",
+                "start": 93,
+                "end": 127,
+                "quote": "尽管人们对青少年和屏幕有种种担心，盯着屏幕最多的一代人其实是老年人。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者先从人们担心青少年看屏幕说起，指出看屏最多的其实是老人；接着用数据说明老人看屏时间之长，并肯定上网给老人带来的好处；随后用两段分析老人上网的两种风险：骗子盯上和错误信息；最后呼吁像过去关注年轻人一样，冷静讨论老人的数字需求和支持。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+            "summary": "人们普遍担心青少年看屏幕太多，作者却指出看屏最多的其实是老年人。",
+            "function": "由常见看法引出话题，提出全文观点"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2",
+            "summary": "老人一直爱看电视，有了智能设备后看屏时间更长，已占清醒时间一半以上。",
+            "function": "用事实和数据支撑老人看屏最多"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:3",
+            "summary": "老年生活数字化是好事，社交软件和网购让老人的退休生活更满足、更有趣。",
+            "function": "肯定老人上网的好处"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+            "summary": "老人上网风险虽比青少年少，但设备绑定信用卡，骗子转到线上，政府应把老人也当作需照顾的群体。",
+            "function": "分析第一种风险：网络诈骗"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5",
+            "summary": "老人更常用新闻应用，也更易受骗，常被错误信息误导。",
+            "function": "分析第二种风险：错误信息"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:6",
+            "summary": "过去常禁止年轻人的热潮，如今也要冷静讨论老人的数字需求和支持。",
+            "function": "总结全文，提出呼吁"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:28": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "phrase",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据所在句的对比和下文老人看屏时长，猜出“square-eyed generation”指什么人。",
+      "stemTranslationZh": "第1段中的“square-eyed generation”可能指的是什么人？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一段看老人看屏多久",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "批评社交媒体的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "social media",
+            "optionText": "social media",
+            "matchType": "exact",
+            "relationNote": "选项借了 social media，原文说的是一些国家禁止16岁以下的人用社交媒体；放进去成了“最爱批评社交媒体的一代是老人”，接不上后文老人看屏越来越久。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+              "quote": "Some countries are banning social media for under-16s.",
+              "anchor": "禁止社交媒体"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "喜欢读书的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "book",
+            "optionText": "books",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了父母让孩子拿起书（pick up a book）里的 book；放进去成了“最爱读书的一代是老人”，而[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2]]说的是老人看屏幕的时间越来越长。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+              "quote": "Parents urge their children to put down their digital devices and pick up a book or a football.",
+              "anchor": "拿起书"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "在屏幕上花太多时间的人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2",
+              "quote": "In fact, screens now take up more than half of their waking hours.",
+              "anchor": "屏幕占清醒时间一半以上"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+              "quote": "For all the fears around teens and screens, the most square-eyed generation is the elderly.",
+              "anchor": "画线词所在句"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "担心孩子的父母。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Parents urge their children to put down their digital devices",
+            "sourceEntity": "Parents",
+            "optionText": "Parents worrying about their children.",
+            "optionEntity": "Parents",
+            "explanation": "为孩子看屏幕发愁的是父母，可句中直接说 square-eyed generation 是 the elderly（老人），不是这些父母。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+              "quote": "Parents urge their children to put down their digital devices",
+              "anchor": "父母的担心"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "square-eyed generation",
+          "sourceRole": "stem",
+          "targetText": "For all the fears around teens and screens, the most square-eyed generation is the elderly.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+          "relationType": "locationCue",
+          "answerText": "screens now take up more than half of their waking hours",
+          "bridgeZh": "老人看屏幕的时长正好解释 square-eyed 是什么样",
+          "note": "题干 square-eyed generation 原词出现在原文。"
+        },
+        {
+          "sourceText": "People spending too much time on screens.",
+          "sourceRole": "correctOption",
+          "targetText": "In fact, screens now take up more than half of their waking hours.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "句子拿老人和让人担心的青少年看屏（teens and screens）作对比，所以这个词说的必须是看屏幕多；[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2|screens now take up]]又说屏幕占了老人一半以上的清醒时间。放回去：尽管大家担心青少年看屏幕，看屏幕最多的一代其实是老人，选C。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:29": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括题目所问两段共同讲的内容，选出能同时盖住两段的说法。",
+      "stemTranslationZh": "第4段和第5段主要讲了什么？",
+      "locateBy": "options",
+      "locateFindZh": "看各项能否同时盖住[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4]]的骗子和[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5]]的假信息",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "老年人和青少年在网络风险上的差异。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "While older people face fewer online risks than teenagers",
+            "sourceHighlight": "fewer online risks than teenagers",
+            "optionText": "The differences in online risks between the elderly and teenagers.",
+            "optionHighlight": "differences in online risks",
+            "explanation": "只抓住[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4]]开头的让步：老人风险比青少年少只是铺垫，两段真正讲的是老人上网后出现的新危险。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+              "quote": "While older people face fewer online risks than teenagers",
+              "anchor": "让步部分"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "老年人在网上面临的坏事。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+              "quote": "new dangers emerge as more seniors go online",
+              "anchor": "新的危险"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5",
+              "quote": "A second cost is misinformation.",
+              "anchor": "第二个代价"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "使用新闻应用和网站方面的代沟。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "The elderly are twice as likely as under-25s to use news apps or websites.",
+            "sourceHighlight": "twice as likely as under-25s",
+            "optionText": "The generation gap in using news apps and websites.",
+            "optionHighlight": "generation gap",
+            "explanation": "只盖住[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5]]里老人用新闻应用是年轻人两倍这一个数据，它是用来说明老人更容易被错误信息误导的，不是两段的主题。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5",
+              "quote": "The elderly are twice as likely as under-25s to use news apps or websites.",
+              "anchor": "两倍"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "政府为在网上保护老年人应采取的措施。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Governments",
+            "optionText": "governments",
+            "matchType": "exact",
+            "relationNote": "选项借了[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4]]的 Governments，原文只说政府要认识到老人也是需要照顾的脆弱群体，没列出任何措施，[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5]]也没再提政府。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+              "quote": "Governments rightly try to protect children from online conmen.",
+              "anchor": "政府"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The bad things the elderly are facing online.",
+          "sourceRole": "correctOption",
+          "targetText": "new dangers emerge as more seniors go online",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "两段写的都是老人上网后的坏处：[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4]]讲新危险出现，设备绑定信用卡、骗子从上门转到线上；[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5]]用 A second cost 接着讲老人容易被错误信息误导。选项的“老人在网上面临的坏事”正好把这两种危险都包进去，选B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:30": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看清作者从哪里引出话题、最后呼吁什么，判断全文的写作目的。",
+      "stemTranslationZh": "作者写这篇文章的主要目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1]]的转向读起：担心找错了年龄群体，再看[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:6]]作者呼吁什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "让人们迫切关注青少年看屏幕的时间。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The worry may be focused on the wrong age group.",
+            "sourceEntity": "the wrong age group",
+            "optionText": "To draw urgent attention to teenagers’ screen time.",
+            "optionEntity": "teenagers’",
+            "explanation": "开头提青少年看屏，是为了说这种担心找错了对象（the wrong age group）；作者要人们关注的是老人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+              "quote": "The worry may be focused on the wrong age group.",
+              "anchor": "担心找错了对象"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "责怪老年人看屏幕时间太长。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "The digitization of old age is a good thing.",
+            "sourceHighlight": "a good thing",
+            "optionText": "To blame the elderly for their long screen time.",
+            "optionHighlight": "To blame the elderly",
+            "explanation": "作者认为老年生活数字化是好事（a good thing），还把老人看作需要照顾的脆弱群体，并没有责怪他们看屏太久。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:3",
+              "quote": "The digitization of old age is a good thing.",
+              "anchor": "是好事"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "建议禁止老年人使用智能设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Now, with seniors using screens more, we must also calmly discuss their digital needs and support.",
+            "sourceHighlight": "calmly discuss their digital needs and support",
+            "optionText": "To suggest banning the elderly from using smart devices.",
+            "optionHighlight": "banning",
+            "explanation": "[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:6]]先提过去常禁止年轻人的热潮，接着说对老人要冷静讨论他们的数字需求和支持（calmly discuss），不是禁止；作者还肯定老人上网是好事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:6",
+              "quote": "Now, with seniors using screens more, we must also calmly discuss their digital needs and support.",
+              "anchor": "冷静讨论"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "呼吁在数字世界为老年人提供更多保护。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+              "quote": "They must recognize that there is another, fast-growing vulnerable (脆弱的) group to look after.",
+              "anchor": "老人是需照顾的脆弱群体"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:6",
+              "quote": "we must also calmly discuss their digital needs and support",
+              "anchor": "讨论老人的数字需求和支持"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To call for more protection for the elderly in the digital world.",
+          "sourceRole": "correctOption",
+          "targetText": "They must recognize that there is another, fast-growing vulnerable (脆弱的) group to look after.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "选项的“呼吁保护”落在两处 must 上：[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4|They must recognize]]要政府把老人当作需要照顾的脆弱群体，[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:6|we must also calmly discuss]]要讨论老人的数字需求和支持。前文说老人看屏最多、上网会遇到骗子和错误信息，都在为这一呼吁铺路，选D。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:31": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "comparison"
+      },
+      "questionFocus": "看作者每讲老人时拿什么来对照，判断全文主要用的论证方法。",
+      "stemTranslationZh": "作者主要是怎样展开文章观点的？",
+      "locateBy": "passage",
+      "locateFindZh": "看作者每讲老人时拿谁来对照：[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1]]的青少年，[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4]][[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5]]里的 than 和 Unlike",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过引用专家的话。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By quoting experts.",
+            "explanation": "全文没有出现专家，也没有引用任何人的原话，观点都是作者自己陈述的。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过举例子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Facebook brings daily updates from old friends and faraway grandchildren.",
+            "sourceHighlight": "Facebook",
+            "optionText": "By giving examples.",
+            "optionHighlight": "giving examples",
+            "explanation": "脸书、网购确实是例子，但只出现在[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:3]]，用来说明上网的好处；贯穿全文的是老人和青少年等人群的对照。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:3",
+              "quote": "Facebook brings daily updates from old friends and faraway grandchildren.",
+              "anchor": "脸书的例子"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过提供统计数据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "screens now take up more than half of their waking hours",
+            "sourceHighlight": "more than half",
+            "optionText": "By providing statistics.",
+            "optionHighlight": "providing statistics",
+            "explanation": "全文只有[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2|more than half of their waking hours]]和[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5|twice as likely as under-25s]]两处数字，后一处本身也是在和年轻人比，撑不起全文的展开方式。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:2",
+              "quote": "screens now take up more than half of their waking hours",
+              "anchor": "一半以上"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过作对比。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+              "quote": "Unlike those of teenagers, their devices are often linked to credit cards.",
+              "anchor": "与青少年对比"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5",
+              "quote": "The elderly are twice as likely as under-25s to use news apps or websites.",
+              "anchor": "与25岁以下人群对比"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:3",
+              "quote": "The elderly have perhaps more to gain from smart devices than any other age group.",
+              "anchor": "与其他年龄群体对比"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "By making comparisons.",
+          "sourceRole": "correctOption",
+          "targetText": "Unlike those of teenagers, their devices are often linked to credit cards.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "全文一路拿老人和别的人群对照：[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1]]拿老人和青少年比看屏，[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:3|more to gain from smart devices]]说老人比其他年龄群体得益多，[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:4|Unlike those of teenagers]]和[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:5|twice as likely as under-25s]]再比风险。这样对照，把“该关心的其实是老人”突显了出来，选D。"
+        }
+      ]
+    }
+  }
+}

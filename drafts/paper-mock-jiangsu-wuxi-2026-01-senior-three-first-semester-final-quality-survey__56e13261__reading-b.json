@@ -1,0 +1,765 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b": {
+      "overview": "作者人到中年想培养新爱好，因妻子担心他踢足球受伤而改打篮球。起初他最怕在高手面前显得笨拙，球友却很包容；儿子加入后，父子一起学球成了最大的快乐，他由此体会到挑战自我的价值。",
+      "fullTranslationZh": "我眼看着十几岁的对手第二十次轻松地运球过我，手里的篮球显得那么别扭。他动作自然优雅，衬得我的种种尝试十分可笑。我这个从初中以后就没再碰过体育的人，怎么会被一个年纪只有我一半的人上了一课呢？\n这一切始于我决定找一个新爱好。我原本打算加入一支足球队，可妻子提醒我：“你可能会扭伤脚踝。我可不想周末都在医院里过。”于是我选定了篮球——一项我爱看却从没真正打过的运动。\n刚开始时，我最大的恐惧不是身体受伤，而是在人前难堪。头几个星期，我只穿最基本的运动服，希望自己看起来像个真正属于这项运动的人。我还担心会最后一个被挑中，或者被人嘲笑，就像初中体育课上那样。然而，社区球场上的每个人都非常支持我——哪怕我不小心把球传给了对方。这段经历让我深刻认识到一点：我最深的焦虑不在于投不进球，而在于在更有经验的球员身边觉得自己技不如人。\n几个月后，我的表现仍然远谈不上完美。我偶尔还会带球走步，在全场跑上三分钟仍会让我上气不接下气。然而，当我七岁的儿子加入青少年篮球项目后，所有的挫败感都被冲淡了。虽然他还在学规则，但他很喜欢和同伴一起练球。对他来说——因而对我来说也一样——真正重要的是我们在同一个地方一起学习的快乐。\n篮球没有把我变成一名技术娴熟的球员，但它让我收获了一样宝贵的东西：去尝试超出自己经验和天赋的事情很重要。你也许会对自己能学会的东西感到惊讶。当然，第一课应该是：如果脚踝受了伤，就别再接着打了。不过，那个关于“挑战自我”的道理绝对紧随其后。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-1",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+          "sourceText": "This experience drove home a point: my deepest anxiety wasn’t about missing shots, but about feeling unskilled around more experienced players.",
+          "displayText": "This experience drove home a point: my deepest anxiety wasn’t about missing shots, but about feeling unskilled around more experienced players.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:25"
+          ],
+          "translationZh": "这段经历让我深刻认识到一点：我最深的焦虑不在于投不进球，而在于在更有经验的球员身边觉得自己技不如人。",
+          "analysisZh": "主干是 This experience drove home a point（这段经历让我深刻认识到一点），drive home 意为“使……被深刻认识”，它的宾语 a point 放在后面。冒号后是一个完整的句子，具体说明这一点是什么：主语 my deepest anxiety，系动词 wasn’t，后面用 not … but … 连接两个并列的介词短语 about missing shots 和 about feeling unskilled，重点落在 but 之后。around more experienced players 说明他是在什么人身边觉得自己技不如人。",
+          "underlineRanges": [
+            {
+              "start": 16,
+              "end": 34,
+              "quote": "drove home a point"
+            },
+            {
+              "start": 55,
+              "end": 81,
+              "quote": "wasn’t about missing shots"
+            },
+            {
+              "start": 83,
+              "end": 110,
+              "quote": "but about feeling unskilled"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-2",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+          "sourceText": "What truly matters to him, and consequently to me, is the joy of us learning together in the same place.",
+          "displayText": "What truly matters to him, and consequently to me, is the joy of us learning together in the same place.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:26"
+          ],
+          "translationZh": "对他来说——因而对我来说也一样——真正重要的是我们在同一个地方一起学习的快乐。",
+          "analysisZh": "主语是 What 引导的主语从句 What truly matters to him（对他真正重要的东西），谓语是 is，表语是 the joy（快乐）。两个逗号之间的 and consequently to me 是插入成分，和 to him 并列，省去了 truly matters，意思是“因而对我也是如此”。of us learning together in the same place 修饰 joy，其中 us 是动名词 learning 的逻辑主语，说明是“我们一起学”的快乐。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 25,
+              "quote": "What truly matters to him"
+            },
+            {
+              "start": 27,
+              "end": 49,
+              "quote": "and consequently to me"
+            },
+            {
+              "start": 51,
+              "end": 61,
+              "quote": "is the joy"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:1"
+              ],
+              "start": 0,
+              "end": 94,
+              "quote": "我眼看着十几岁的对手第二十次轻松地运球过我，手里的篮球显得那么别扭。他动作自然优雅，衬得我的种种尝试十分可笑。我这个从初中以后就没再碰过体育的人，怎么会被一个年纪只有我一半的人上了一课呢？"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:2"
+              ],
+              "start": 95,
+              "end": 180,
+              "quote": "这一切始于我决定找一个新爱好。我原本打算加入一支足球队，可妻子提醒我：“你可能会扭伤脚踝。我可不想周末都在医院里过。”于是我选定了篮球——一项我爱看却从没真正打过的运动。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3"
+              ],
+              "start": 181,
+              "end": 359,
+              "quote": "刚开始时，我最大的恐惧不是身体受伤，而是在人前难堪。头几个星期，我只穿最基本的运动服，希望自己看起来像个真正属于这项运动的人。我还担心会最后一个被挑中，或者被人嘲笑，就像初中体育课上那样。然而，社区球场上的每个人都非常支持我——哪怕我不小心把球传给了对方。这段经历让我深刻认识到一点：我最深的焦虑不在于投不进球，而在于在更有经验的球员身边觉得自己技不如人。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4"
+              ],
+              "start": 360,
+              "end": 501,
+              "quote": "几个月后，我的表现仍然远谈不上完美。我偶尔还会带球走步，在全场跑上三分钟仍会让我上气不接下气。然而，当我七岁的儿子加入青少年篮球项目后，所有的挫败感都被冲淡了。虽然他还在学规则，但他很喜欢和同伴一起练球。对他来说——因而对我来说也一样——真正重要的是我们在同一个地方一起学习的快乐。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5"
+              ],
+              "start": 502,
+              "end": 621,
+              "quote": "篮球没有把我变成一名技术娴熟的球员，但它让我收获了一样宝贵的东西：去尝试超出自己经验和天赋的事情很重要。你也许会对自己能学会的东西感到惊讶。当然，第一课应该是：如果脚踝受了伤，就别再接着打了。不过，那个关于“挑战自我”的道理绝对紧随其后。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-q24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:2",
+                "start": 93,
+                "end": 187,
+                "quote": "but my wife warned, “You may twist your ankle. I’d rather not spend our weekends in hospital.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p2",
+                "start": 28,
+                "end": 59,
+                "quote": "可妻子提醒我：“你可能会扭伤脚踝。我可不想周末都在医院里过。”"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-q25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+                "start": 454,
+                "end": 560,
+                "quote": "my deepest anxiety wasn’t about missing shots, but about feeling unskilled around more experienced players"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p3",
+                "start": 142,
+                "end": 177,
+                "quote": "我最深的焦虑不在于投不进球，而在于在更有经验的球员身边觉得自己技不如人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-q26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+                "start": 169,
+                "end": 279,
+                "quote": "However, any frustration (挫败) was overshadowed when my seven-year-old son joined the youth basketball program."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+                "start": 354,
+                "end": 458,
+                "quote": "What truly matters to him, and consequently to me, is the joy of us learning together in the same place."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p4",
+                "start": 47,
+                "end": 80,
+                "quote": "然而，当我七岁的儿子加入青少年篮球项目后，所有的挫败感都被冲淡了。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p4",
+                "start": 102,
+                "end": 141,
+                "quote": "对他来说——因而对我来说也一样——真正重要的是我们在同一个地方一起学习的快乐。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-q27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5",
+                "start": 89,
+                "end": 165,
+                "quote": "the importance of trying things beyond your experience and natural abilities"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5",
+                "start": 323,
+                "end": 397,
+                "quote": "But that whole “challenging yourself” lesson is definitely a close second."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p5",
+                "start": 33,
+                "end": 51,
+                "quote": "去尝试超出自己经验和天赋的事情很重要"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p5",
+                "start": 96,
+                "end": 119,
+                "quote": "不过，那个关于“挑战自我”的道理绝对紧随其后。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:25"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+                "start": 418,
+                "end": 561,
+                "quote": "This experience drove home a point: my deepest anxiety wasn’t about missing shots, but about feeling unskilled around more experienced players."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p3",
+                "start": 128,
+                "end": 178,
+                "quote": "这段经历让我深刻认识到一点：我最深的焦虑不在于投不进球，而在于在更有经验的球员身边觉得自己技不如人。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+                "start": 354,
+                "end": 458,
+                "quote": "What truly matters to him, and consequently to me, is the joy of us learning together in the same place."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b-p4",
+                "start": 102,
+                "end": 141,
+                "quote": "对他来说——因而对我来说也一样——真正重要的是我们在同一个地方一起学习的快乐。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者先描写自己被少年对手轻松运球过人的尴尬场面，再倒叙改打篮球的经过：妻子担心踢足球受伤，他选了篮球；起初最怕的是技不如人的难堪，球友却很支持；儿子加入后，父子一起学球冲淡了挫败感；最后总结出挑战自我的道理。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:1",
+            "summary": "作者被一个十几岁的对手一次次运球过人，自问一个多年不运动的人怎么落到这一步。",
+            "function": "用尴尬场面开头，设问引出下文的经过"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:2",
+            "summary": "作者想找新爱好，原想踢足球，因妻子担心他扭伤脚踝，改选了爱看却没打过的篮球。",
+            "function": "交代开始打篮球的起因"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+            "summary": "作者起初最怕的不是受伤而是难堪，球友却十分包容，他由此认识到焦虑来自觉得自己技不如人。",
+            "function": "写起初的心理和对焦虑根源的认识"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+            "summary": "几个月后球技仍不完美，但七岁的儿子加入后，父子一起学球的快乐冲淡了挫败感。",
+            "function": "写打球带来的真正快乐"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5",
+            "summary": "篮球没让作者成为高手，却让他明白尝试超出经验和天赋的事很重要，并以玩笑口吻点出挑战自我这一课。",
+            "function": "总结全文，点明收获"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:24": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者放弃足球、改打篮球的原因。",
+      "stemTranslationZh": "是什么让作者选择了篮球而不是足球？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 but 后妻子的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他想找一个新爱好的强烈愿望。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "find a new hobby",
+            "optionText": "find a new hobby",
+            "matchType": "exact",
+            "relationNote": "选项照搬 find a new hobby。想找新爱好只是他开始运动的起因，踢足球和打篮球都能满足，解释不了他为什么放弃足球。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:2",
+              "quote": "It all began when I decided to find a new hobby.",
+              "anchor": "找新爱好"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他对篮球一辈子的热爱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "a sport I’d enjoyed watching but never actually played",
+            "sourceHighlight": "enjoyed watching",
+            "optionText": "His lifelong passion for basketball.",
+            "optionHighlight": "lifelong passion",
+            "explanation": "原文只说篮球是他爱看却从没打过的运动（enjoyed watching），说不上一生的热爱；何况他本来想踢足球。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:2",
+              "quote": "a sport I’d enjoyed watching but never actually played",
+              "anchor": "爱看但没打过"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他妻子对他安全的担心。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:2",
+              "quote": "but my wife warned, “You may twist your ankle. I’d rather not spend our weekends in hospital.”",
+              "anchor": "妻子担心他受伤"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:2",
+              "quote": "So I settled on basketball",
+              "anchor": "于是改选篮球"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他那位十几岁对手的推荐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "my teenage opponent effortlessly dribble (运球) past me for the twentieth time",
+            "sourceEntity": "my teenage opponent",
+            "optionText": "His teenage opponent’s recommendation.",
+            "optionEntity": "His teenage opponent’s",
+            "explanation": "少年对手是他开始打球之后在场上遇到的人，只是一次次运球过他；原文没说有谁向他推荐篮球。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:1",
+              "quote": "my teenage opponent effortlessly dribble (运球) past me for the twentieth time",
+              "anchor": "少年对手"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "soccer",
+          "sourceRole": "stem",
+          "targetText": "My original plan was to join a soccer team, but my wife warned, “You may twist your ankle.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:2",
+          "relationType": "locationCue",
+          "answerText": "my wife warned, “You may twist your ankle",
+          "note": "题干 soccer 原词出现在原文。"
+        },
+        {
+          "sourceText": "His wife’s concern about his safety.",
+          "sourceRole": "correctOption",
+          "targetText": "but my wife warned, “You may twist your ankle. I’d rather not spend our weekends in hospital.”",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:2",
+          "relationType": "paraphrase",
+          "note": "选项的“妻子担心他的安全”概括了妻子的两句话：怕他扭伤脚踝（twist your ankle），不想周末在医院度过（in hospital）；紧接着 So 引出他改选篮球，选C。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到作者总结自己焦虑来源的那句话，分清被否定的一半和真正的原因。",
+      "stemTranslationZh": "作者焦虑的真正根源是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看同句 but 后",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "觉得自己不够好。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+              "quote": "my deepest anxiety wasn’t about missing shots, but about feeling unskilled around more experienced players",
+              "anchor": "最深的焦虑"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "担心自己不能平平安安。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "My biggest fear starting out wasn’t physical injury, but social embarrassment.",
+            "sourceHighlight": "wasn’t physical injury",
+            "optionText": "The fear of not staying safe and sound.",
+            "optionHighlight": "not staying safe and sound",
+            "explanation": "作者明说最大的恐惧不是身体受伤（wasn’t physical injury），而是在人前难堪；选项把被否定的那一半当成了答案。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+              "quote": "My biggest fear starting out wasn’t physical injury, but social embarrassment.",
+              "anchor": "不是怕受伤"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "来自儿子过高期望的压力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The pressure from his son’s high expectations.",
+            "explanation": "儿子到[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4]]才出现，原文写他还在学规则、爱和同伴练球，带给作者的是快乐，没提对父亲有什么高期望。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "在体育课上投篮不中的经历。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "missing shots",
+            "optionText": "missing shots",
+            "matchType": "exact",
+            "relationNote": "选项拼了两处原词：missing shots 在原文里正是被否定的那一半（wasn’t about missing shots），PE classes 只是他回忆初中怕被嘲笑的场景。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+              "quote": "my deepest anxiety wasn’t about missing shots",
+              "anchor": "不在于投不进"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "anxiety",
+          "sourceRole": "stem",
+          "targetText": "This experience drove home a point: my deepest anxiety wasn’t about missing shots, but about feeling unskilled around more experienced players.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "but about feeling unskilled around more experienced players",
+          "note": "题干 anxiety 原词出现在原文。"
+        },
+        {
+          "sourceText": "The feeling of not being good enough.",
+          "sourceRole": "correctOption",
+          "targetText": "feeling unskilled around more experienced players",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“觉得自己不够好”（not being good enough）就是原文的“觉得自己技不如人”（feeling unskilled），not … but 把重点放在后半，选A。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:26": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "读完这一段，看作者的挫败感被什么冲淡、什么对他最重要，推出他快乐的来源。",
+      "stemTranslationZh": "从第4段可以推断出什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4]] 的 However 转折，看挫败感被什么冲淡、什么最重要",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "作者的篮球技术进步很大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "After months, my performance was still far from perfect.",
+            "sourceHighlight": "still far from perfect",
+            "optionText": "The author’s basketball skills improved a lot.",
+            "optionHighlight": "improved a lot",
+            "explanation": "原文说几个月后表现仍远谈不上完美（still far from perfect），还会带球走步、跑三分钟就喘，看不出球技大有长进。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+              "quote": "After months, my performance was still far from perfect.",
+              "anchor": "仍不完美"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "作者缺乏天赋，这让他深感遗憾。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "However, any frustration (挫败) was overshadowed when my seven-year-old son joined the youth basketball program.",
+            "sourceHighlight": "was overshadowed",
+            "optionText": "The author’s lack of talent brought him deep regret.",
+            "optionHighlight": "brought him deep regret",
+            "explanation": "原文说他的挫败感在儿子加入后被冲淡了（was overshadowed），段落落在一起学的快乐上，没有写他为缺乏天赋深感遗憾。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+              "quote": "However, any frustration (挫败) was overshadowed when my seven-year-old son joined the youth basketball program.",
+              "anchor": "挫败感被冲淡"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "作者的目标是把儿子培养成出色的球员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The author’s goal was to coach his son to be an outstanding player.",
+            "explanation": "原文说儿子还在学规则、喜欢和同伴一起练，作者看重的是两人一起学的快乐，没提要把儿子培养成出色球员。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "作者的快乐来自和儿子一起学篮球。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+              "quote": "What truly matters to him, and consequently to me, is the joy of us learning together in the same place.",
+              "anchor": "一起学习的快乐"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+              "quote": "However, any frustration (挫败) was overshadowed when my seven-year-old son joined the youth basketball program.",
+              "anchor": "儿子加入后挫败感被冲淡"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The author’s happiness came from learning basketball with his son.",
+          "sourceRole": "correctOption",
+          "targetText": "What truly matters to him, and consequently to me, is the joy of us learning together in the same place.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "这一段先说球技仍不完美，再用 However 一转：儿子加入后挫败感被冲淡，对父子俩真正重要的是一起学习的快乐（the joy of us learning together）。选项的“快乐”就是 the joy，“和儿子一起学篮球”对应 us learning together，选D。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到作者说篮球带给他的宝贵收获，分清认真的道理和打趣的话。",
+      "stemTranslationZh": "对作者来说，最宝贵的一课是什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看冒号后的内容",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "挑战自我的重要性。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5",
+              "quote": "there is something valuable: the importance of trying things beyond your experience and natural abilities",
+              "anchor": "宝贵的收获"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5",
+              "quote": "But that whole “challenging yourself” lesson is definitely a close second.",
+              "anchor": "挑战自我这一课"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "建立友谊的价值。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The value of building friendships.",
+            "explanation": "原文只说社区球场上的人都很支持他（incredibly supportive），没写他在球场交了朋友，更没把交友当成收获。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "避免受伤的好处。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "injured",
+            "optionText": "injuries",
+            "matchType": "wordFamily",
+            "relationNote": "选项借 injured 的同族词 injuries。作者说“第一课”是脚踝受伤就别再打，这是打趣，随即用 But 回到正题；他认真讲的收获是去尝试超出经验和天赋的事。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5",
+              "quote": "Of course, the first lesson should be that if you have your ankle injured, you shouldn’t keep playing.",
+              "anchor": "打趣的“第一课”"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "提高技能的意义。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "Basketball hasn’t transformed me into a skilled player",
+            "sourceHighlight": "hasn’t transformed me into a skilled player",
+            "optionText": "The significance of enhancing skills.",
+            "optionHighlight": "enhancing skills",
+            "explanation": "作者明说篮球没把他变成高手（hasn’t transformed me into a skilled player），他看重的收获不在球技提高上。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5",
+              "quote": "Basketball hasn’t transformed me into a skilled player",
+              "anchor": "没变成高手"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "valuable",
+          "sourceRole": "stem",
+          "targetText": "Basketball hasn’t transformed me into a skilled player, but there is something valuable: the importance of trying things beyond your experience and natural abilities.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5",
+          "relationType": "locationCue",
+          "answerText": "the importance of trying things beyond your experience and natural abilities",
+          "note": "题干 valuable 原词出现在原文。"
+        },
+        {
+          "sourceText": "The importance of challenging oneself.",
+          "sourceRole": "correctOption",
+          "targetText": "the importance of trying things beyond your experience and natural abilities",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "选项沿用 the importance of，“挑战自己”（challenging oneself）就是原文“尝试超出经验和天赋的事”（trying things beyond your experience），段末又直接点名[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:5|that whole “challenging yourself” lesson]]，选A。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Smart Study Week: A Journey of Discovery and Growth\n\nOur school’s Smart Study Week, themed “Smart Learning, Growth Through Exploration”, has just come to a successful close. It was truly an eye-opening week.\n\nDuring the week, we attended workshops on using AI tools wisely and planning our time. We also formed groups to carry out research projects on topics we chose ourselves. My group looked into food waste in our canteen and presented our findings on the last day.\n\nFor me, the greatest gain was learning how to learn. I used to wait for teachers to give me answers, but now I can ask good questions and find reliable information myself. Teamwork also taught me to listen before I speak. These habits will stay with me.",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "向校英文报投稿的短文，用题面给出的标题 “Smart Study Week: A Journey of Discovery and Growth”，标题下直接写正文",
+        "personTense": "用第一人称“我”“我们”叙述；活动已经结束，介绍活动用一般过去时，谈收获可用现在完成时和一般现在时",
+        "readerTone": "读者是全校师生，语气真诚、积极，像同学之间分享亲身经历，不写成官方通知",
+        "goal": "让读者知道慧学周做了哪些事，以及这些活动实实在在给学生带来了什么"
+      },
+      "taskRequires": [
+        "介绍慧学周的活动内容",
+        "谈自己在活动中的收获"
+      ],
+      "thisEssayChooses": "活动内容选了“AI 工具与时间管理讲座”和“自选课题小组研究”两项，用“调查学校食堂的食物浪费”这个具体课题撑起内容；收获落在从“等老师给答案”变成“自己提问、查资料”，再补一句合作中学会先听后说。"
+    },
+    "standard": {
+      "essay": "Smart Study Week: A Journey of Discovery and Growth\n\nOur school’s Smart Study Week, themed “Smart Learning, Growth Through Exploration”, has just come to a successful close. It was truly an eye-opening week.\n\nDuring the week, we attended workshops on using AI tools wisely and planning our time. We also formed groups to carry out research projects on topics we chose ourselves. My group looked into food waste in our canteen and presented our findings on the last day.\n\nFor me, the greatest gain was learning how to learn. I used to wait for teachers to give me answers, but now I can ask good questions and find reliable information myself. Teamwork also taught me to listen before I speak. These habits will stay with me.",
+      "pointMap": [
+        {
+          "point": "介绍活动内容",
+          "quote": "During the week, we attended workshops on using AI tools wisely and planning our time."
+        },
+        {
+          "point": "介绍活动内容",
+          "quote": "We also formed groups to carry out research projects on topics we chose ourselves."
+        },
+        {
+          "point": "谈自己的收获",
+          "quote": "For me, the greatest gain was learning how to learn."
+        },
+        {
+          "point": "谈自己的收获",
+          "quote": "I used to wait for teachers to give me answers, but now I can ask good questions and find reliable information myself."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "交代报道的事：哪项活动、主题是什么、已经结束，并用一句话点出它的意义。",
+          "items": [
+            {
+              "quote": "themed “Smart Learning, Growth Through Exploration”",
+              "explain": "把题面的主题“慧学赋能，探究成长”译成短语放进同位结构，读者一眼知道活动主题，又不用单写一句“主题是……”。"
+            },
+            {
+              "quote": "has just come to a successful close",
+              "explain": "题面说活动“已圆满结束”，用现在完成时报道刚结束的事，比 was over 更像新闻稿的开头。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成第一个要点：写活动内容，先概括两类活动，再落到一个具体课题。",
+          "items": [
+            {
+              "quote": "workshops on using AI tools wisely and planning our time",
+              "explain": "讲座内容写清楚“讲什么”，on 后面接两个并列的动名词短语，比只写 some lectures 具体。"
+            },
+            {
+              "quote": "carry out research projects on topics we chose ourselves",
+              "explain": "“自己选题”扣住主题里的“探究”；we chose ourselves 是省略关系词的定语从句，修饰 topics。"
+            },
+            {
+              "quote": "My group looked into food waste in our canteen",
+              "explain": "举自己组的课题作例子，读者能看到研究真的做了什么，内容段因此不空。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成第二个要点：写收获，用前后对比讲清变化，最后落到今后的学习上。",
+          "items": [
+            {
+              "quote": "the greatest gain was learning how to learn",
+              "explain": "开门见山点出收获，learning how to learn 和主题“慧学”对得上。"
+            },
+            {
+              "quote": "I used to wait for teachers to give me answers, but now I can ask good questions",
+              "explain": "used to … but now … 把过去和现在放在一起比，收获就有了看得见的变化，不是一句“我收获很大”。"
+            },
+            {
+              "quote": "Teamwork also taught me to listen before I speak.",
+              "explain": "再补一条合作中的收获，listen before I speak 是学生自己能做到的具体改变，比“学会了团队合作”实在。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "has just come to a successful close",
+          "function": "报道刚结束的活动时开头用，交代“已圆满结束”。"
+        },
+        {
+          "expression": "carry out research projects on …",
+          "function": "介绍研究性学习活动，说明大家具体做了什么课题。"
+        },
+        {
+          "expression": "I used to …, but now I …",
+          "function": "写收获时用前后对比，把变化讲具体。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Smart Study Week: A Journey of Discovery and Growth\n\nOur school’s Smart Study Week, themed “Smart Learning, Growth Through Exploration”, has just drawn to a successful close. For a whole week, classrooms became labs, and we changed from listeners into explorers.\n\nTeachers ran hands-on workshops on using AI tools responsibly and managing time, but the real highlight was the research projects. In groups of four, we picked our own topics, collected data and shared our results on the final day. My team surveyed food waste in the canteen, and our suggestion of smaller portions won warm applause.\n\nPersonally, the week changed the way I study. Instead of waiting for answers, I have learned to ask sharper questions, check my sources and test my own ideas. Arguing over data with teammates also showed me that a good idea grows stronger when shared. Smart study, I now believe, is not about studying longer but about studying with purpose.",
+      "pointMap": [
+        {
+          "point": "介绍活动内容",
+          "quote": "Teachers ran hands-on workshops on using AI tools responsibly and managing time, but the real highlight was the research projects."
+        },
+        {
+          "point": "介绍活动内容",
+          "quote": "In groups of four, we picked our own topics, collected data and shared our results on the final day."
+        },
+        {
+          "point": "谈自己的收获",
+          "quote": "Instead of waiting for answers, I have learned to ask sharper questions, check my sources and test my own ideas."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "classrooms became labs, and we changed from listeners into explorers",
+          "explain": "标准版只说“用新方式学习”，这里用教室变实验室、学生从听众变探究者两个画面，把主题里的“探究”写得看得见。"
+        },
+        {
+          "quote": "our suggestion of smaller portions won warm applause",
+          "explain": "标准版只写了“展示了调查结果”，这里写出建议内容和听众反应，研究的结果更具体。"
+        },
+        {
+          "quote": "Smart study, I now believe, is not about studying longer but about studying with purpose.",
+          "explain": "插入语 I now believe 让结论带着“我”的判断；not about … but about … 把“慧学”和“死学”区分开，比标准版的结尾多了一层对主题的理解。"
+        }
+      ]
+    }
+  }
+}

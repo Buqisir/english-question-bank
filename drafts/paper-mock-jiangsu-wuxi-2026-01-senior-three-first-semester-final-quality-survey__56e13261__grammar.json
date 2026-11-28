@@ -1,0 +1,1123 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill": {
+      "overview": "文章介绍蒙古族传统艺术呼麦：歌者能在喉咙里同时发出多个音，模仿自然之声。它2009年被列入人类非物质文化遗产，如今借助综艺和电影《哪吒2》吸引了越来越多年轻观众。",
+      "fullTranslationZh": "呼麦是一种来自蒙古的传统艺术形式，被称为一种喉音唱法。它是一种古老的发声传统，能让歌者在喉咙里同时发出多个音。它创造出一种呼应自然界的声音——从呼啸的风声到隆隆的河流声。\n呼麦在蒙古人中代代相传，与他们的精神和文化习俗紧密相连。它模仿自然声音的能力体现了与这片土地的深厚联系，展现出草原的辽阔与美丽。\n2009年，呼麦被联合国教科文组织列入人类非物质文化遗产，这凸显了它作为世界文化遗产重要组成部分的意义。这一认可不仅彰显了它的文化重要性，也让人们更加意识到持续保护这一古老艺术形式的必要。从那以后，这项认定一直推动着人们努力确保它在现代社会中继续发展。\n呼麦的一大非凡之处在于它能跨越世代。虽然它传统上由资深艺人表演，但这一艺术形式越来越吸引年轻一代的兴趣。\n呼麦出现在热门真人秀节目和电影中，帮助它在更广泛的观众中提高了知名度。例如，热门动画电影《哪吒2》就用了这种独特的声音，尤其是在神话场景中，比如天元鼎出现的时候。这段呼麦由年轻的蒙古族艺术家哈拉木吉演唱，极大地烘托了气氛。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-grammar-1",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+          "sourceText": "Its ability to mimic（模仿）the sounds of nature reflects a deep connection to the land, __59__ (demonstrate) the vastness and beauty of the grasslands.",
+          "displayText": "Its ability to mimic（模仿）the sounds of nature reflects a deep connection to the land, demonstrating the vastness and beauty of the grasslands.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:59"
+          ],
+          "translationZh": "它模仿自然声音的能力体现了与这片土地的深厚联系，展现出草原的辽阔与美丽。",
+          "analysisZh": "主干是 Its ability … reflects a deep connection（它的能力体现了一种深厚的联系）。不定式 to mimic the sounds of nature 作后置定语，说明是什么能力；to the land 修饰 connection，说明是与什么的联系。逗号后的 demonstrating 引出现在分词短语作状语，逻辑主语仍是 Its ability，补充说明这种能力还展现了什么；the vastness and beauty 是两个并列名词，共用 of the grasslands。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "Its ability to mimic"
+            },
+            {
+              "start": 45,
+              "end": 71,
+              "quote": "reflects a deep connection"
+            },
+            {
+              "start": 85,
+              "end": 122,
+              "quote": "demonstrating the vastness and beauty"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-grammar-2",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+          "sourceText": "This __61__ (acknowledge) not only honors its cultural importance but also raises awareness of the ongoing need to preserve the ancient art form.",
+          "displayText": "This acknowledgement not only honors its cultural importance but also raises awareness of the ongoing need to preserve the ancient art form.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:61"
+          ],
+          "translationZh": "这一认可不仅彰显了它的文化重要性，也让人们更加意识到持续保护这一古老艺术形式的必要。",
+          "analysisZh": "主语是 This acknowledgement（这一认可），后面由 not only … but also 连接两个并列谓语 honors 和 raises，都用第三人称单数，与单数主语一致。honors 的宾语是 its cultural importance；raises 的宾语是 awareness，of the ongoing need 修饰 awareness，不定式 to preserve the ancient art form 作后置定语，说明是什么需要。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "This acknowledgement"
+            },
+            {
+              "start": 21,
+              "end": 36,
+              "quote": "not only honors"
+            },
+            {
+              "start": 61,
+              "end": 76,
+              "quote": "but also raises"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 85,
+              "quote": "呼麦是一种来自蒙古的传统艺术形式，被称为一种喉音唱法。它是一种古老的发声传统，能让歌者在喉咙里同时发出多个音。它创造出一种呼应自然界的声音——从呼啸的风声到隆隆的河流声。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2"
+              ],
+              "start": 86,
+              "end": 150,
+              "quote": "呼麦在蒙古人中代代相传，与他们的精神和文化习俗紧密相连。它模仿自然声音的能力体现了与这片土地的深厚联系，展现出草原的辽阔与美丽。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3"
+              ],
+              "start": 151,
+              "end": 277,
+              "quote": "2009年，呼麦被联合国教科文组织列入人类非物质文化遗产，这凸显了它作为世界文化遗产重要组成部分的意义。这一认可不仅彰显了它的文化重要性，也让人们更加意识到持续保护这一古老艺术形式的必要。从那以后，这项认定一直推动着人们努力确保它在现代社会中继续发展。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4"
+              ],
+              "start": 278,
+              "end": 330,
+              "quote": "呼麦的一大非凡之处在于它能跨越世代。虽然它传统上由资深艺人表演，但这一艺术形式越来越吸引年轻一代的兴趣。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5"
+              ],
+              "start": 331,
+              "end": 442,
+              "quote": "呼麦出现在热门真人秀节目和电影中，帮助它在更广泛的观众中提高了知名度。例如，热门动画电影《哪吒2》就用了这种独特的声音，尤其是在神话场景中，比如天元鼎出现的时候。这段呼麦由年轻的蒙古族艺术家哈拉木吉演唱，极大地烘托了气氛。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+            "text": "Khoomei, a traditional art form from Mongolia, is known as a kind of throat singing. It’s an ancient vocal tradition which allows singers to produce the sounds of multiple notes simultaneously（同时地）in their throats. And it creates a sound that/ which echoes the natural world – from the howling wind to the rumbling river."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+            "text": "Khoomei has been passed down through generations of Mongolians and is closely tied to their spiritual and cultural practices. Its ability to mimic（模仿）the sounds of nature reflects a deep connection to the land, demonstrating the vastness and beauty of the grasslands."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+            "text": "In 2009, khoomei was recognized by UNESCO as an Intangible Cultural Heritage of Humanity, highlighting its significance as a vital part of the world’s cultural heritage. This acknowledgement not only honors its cultural importance but also raises awareness of the ongoing need to preserve the ancient art form. Ever since, the recognition has fuel(l) ed efforts to ensure it continues to develop in modern society."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+            "text": "One of khoomei’s remarkable qualities is its ability to transcend（超越）generations. While/ Though/ Although it has traditionally been performed by senior masters, the art form has increasingly captured the interest of younger generations."
+          },
+          {
+            "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+            "text": "The appearance of khoomei in popular reality shows and movies has helped raise its profile among a wider audience. The hit animated movie Ne Zha 2, for example, features the distinctive sound, especially during mythical moments, such as the appearance of the Tianyuan Ding. Sung by Halamuji, a young Mongolian artist, it contributes significantly to the atmosphere."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "start": 97,
+                "end": 120,
+                "quote": "ancient vocal tradition"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "start": 31,
+                "end": 38,
+                "quote": "古老的发声传统"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "start": 234,
+                "end": 241,
+                "quote": "a sound"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "start": 249,
+                "end": 273,
+                "quote": "echoes the natural world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "start": 61,
+                "end": 66,
+                "quote": "呼应自然界"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 108,
+                "end": 130,
+                "quote": "and cultural practices"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 18,
+                "end": 23,
+                "quote": "和文化习俗"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 132,
+                "end": 143,
+                "quote": "Its ability"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 177,
+                "end": 185,
+                "quote": "reflects"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 28,
+                "end": 38,
+                "quote": "它模仿自然声音的能力"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 38,
+                "end": 41,
+                "quote": "体现了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 0,
+                "end": 7,
+                "quote": "In 2009"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 36,
+                "end": 45,
+                "quote": "by UNESCO"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 0,
+                "end": 5,
+                "quote": "2009年"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 8,
+                "end": 17,
+                "quote": "被联合国教科文组织"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 174,
+                "end": 178,
+                "quote": "This"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 200,
+                "end": 215,
+                "quote": "not only honors"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 52,
+                "end": 54,
+                "quote": "这一"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 56,
+                "end": 61,
+                "quote": "不仅彰显了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 320,
+                "end": 330,
+                "quote": "Ever since"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 332,
+                "end": 347,
+                "quote": "the recognition"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 94,
+                "end": 98,
+                "quote": "从那以后"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 99,
+                "end": 103,
+                "quote": "这项认定"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+                "start": 89,
+                "end": 142,
+                "quote": "it has traditionally been performed by senior masters"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+                "start": 157,
+                "end": 218,
+                "quote": "has increasingly captured the interest of younger generations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+                "start": 20,
+                "end": 31,
+                "quote": "它传统上由资深艺人表演"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+                "start": 39,
+                "end": 51,
+                "quote": "越来越吸引年轻一代的兴趣"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 113,
+                "end": 121,
+                "quote": "audience"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 66,
+                "end": 90,
+                "quote": "helped raise its profile"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 25,
+                "end": 27,
+                "quote": "观众"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 28,
+                "end": 34,
+                "quote": "提高了知名度"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 329,
+                "end": 340,
+                "quote": "contributes"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 362,
+                "end": 379,
+                "quote": "to the atmosphere"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 105,
+                "end": 110,
+                "quote": "烘托了气氛"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:56"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "start": 90,
+                "end": 92,
+                "quote": "an"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "start": 29,
+                "end": 31,
+                "quote": "一种"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:57"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "start": 238,
+                "end": 249,
+                "quote": "that/ which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:1",
+                "start": 61,
+                "end": 67,
+                "quote": "呼应自然界的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:58"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 92,
+                "end": 101,
+                "quote": "spiritual"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 16,
+                "end": 18,
+                "quote": "精神"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:59"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 211,
+                "end": 224,
+                "quote": "demonstrating"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 52,
+                "end": 55,
+                "quote": "展现出"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:60"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 17,
+                "end": 31,
+                "quote": "was recognized"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 8,
+                "end": 19,
+                "quote": "被联合国教科文组织列入"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:61"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 175,
+                "end": 190,
+                "quote": "acknowledgement"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 54,
+                "end": 56,
+                "quote": "认可"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:62"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 339,
+                "end": 353,
+                "quote": "has fuel(l) ed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 103,
+                "end": 108,
+                "quote": "一直推动着"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:63"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+                "start": 82,
+                "end": 105,
+                "quote": "While/ Though/ Although"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:4",
+                "start": 18,
+                "end": 20,
+                "quote": "虽然"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:64"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 99,
+                "end": 104,
+                "quote": "wider"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 21,
+                "end": 25,
+                "quote": "更广泛的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:65"
+            ],
+            "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 333,
+                "end": 346,
+                "quote": "significantly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:5",
+                "start": 102,
+                "end": 105,
+                "quote": "极大地"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-grammar-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:59"
+            ],
+            "selectedSentenceId": "ls-grammar-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 126,
+                "end": 267,
+                "quote": "Its ability to mimic（模仿）the sounds of nature reflects a deep connection to the land, demonstrating the vastness and beauty of the grasslands."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:2",
+                "start": 28,
+                "end": 64,
+                "quote": "它模仿自然声音的能力体现了与这片土地的深厚联系，展现出草原的辽阔与美丽。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-grammar-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:61"
+            ],
+            "selectedSentenceId": "ls-grammar-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 170,
+                "end": 310,
+                "quote": "This acknowledgement not only honors its cultural importance but also raises awareness of the ongoing need to preserve the ancient art form."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:grammar-fill:3",
+                "start": 52,
+                "end": 94,
+                "quote": "这一认可不仅彰显了它的文化重要性，也让人们更加意识到持续保护这一古老艺术形式的必要。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:56": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "an",
+      "role": null,
+      "similarityProfile": {
+        "route": "indefinite-identity-category",
+        "features": [
+          "an-vowel-sound"
+        ]
+      },
+      "reason": "空格限定单数可数名词「传统」（tradition），说明呼麦属于古老发声传统中的一种，要用不定冠词。后面虽有定语从句（which allows …），但这里是在给呼麦归类，不是特指；紧跟的「古老的」（ancient）以元音音素开头，所以用（an）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "ancient vocal tradition",
+          "signalSide": "passage",
+          "relation": "空格限定的是单数可数名词 tradition，ancient 读音以元音音素开头。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "a kind of throat singing",
+          "signalSide": "passage",
+          "relation": "前一句也用不定冠词给呼麦归类，这里同样是说它属于哪一类。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:57": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:57",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "that/ which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "restrictive"
+        ]
+      },
+      "reason": "空格引导定语从句，修饰前面的「声音」（a sound）。从句里有谓语（echoes）和宾语（the natural world），只缺主语，先行词指物，所以用（that/which）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "a sound",
+          "signalSide": "passage",
+          "relation": "先行词是物 a sound，从句修饰它。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "echoes the natural world",
+          "signalSide": "passage",
+          "relation": "从句有谓语和宾语，缺的是主语。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:58": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "spirit",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "spiritual",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格和形容词「文化的」（cultural）由 and 并列，一起修饰名词「习俗」（practices），所以要把名词（spirit）变成形容词（spiritual）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "and cultural practices",
+          "signalSide": "passage",
+          "relation": "与形容词 cultural 并列，共同修饰 practices。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "their",
+          "signalSide": "passage",
+          "relation": "物主代词 their 后面是被修饰的名词短语。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:59": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "demonstrate",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "demonstrating",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "句子已有谓语「体现」（reflects），逗号后的空格不能再作谓语，要用非谓语作状语，补充这种模仿能力还展现了什么。它的逻辑主语是句子主语「它的能力」（Its ability），能力主动展现草原的辽阔与美丽，所以用现在分词（demonstrating）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Its ability",
+          "signalSide": "passage",
+          "relation": "逻辑主语是 Its ability，与 demonstrate 是主动关系。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "reflects",
+          "signalSide": "passage",
+          "relation": "句子谓语已由 reflects 担任，空格只能用非谓语。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:60": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "recognize",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was recognized",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-explicit-time",
+        "features": []
+      },
+      "reason": "空格是句子的谓语，逗号后的（highlighting）是非谓语。主语「呼麦」（khoomei）是被联合国教科文组织认定的对象，后面有（by UNESCO），要用被动；时间状语（In 2009）表示过去，主语是单数，所以用（was recognized）。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "In 2009",
+          "signalSide": "passage",
+          "relation": "明确的过去时间，用一般过去时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "khoomei",
+          "signalSide": "passage",
+          "relation": "主语 khoomei 是单数，又是被认定的对象。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "by UNESCO",
+          "signalSide": "passage",
+          "relation": "by 引出动作的执行者，说明是被动。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:61": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "acknowledge",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "acknowledgement",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格跟在限定词「这」（This）之后，作句子的主语，后面的谓语是（not only honors … but also raises），所以要名词。它指前一句教科文组织认定这件事；This 和单数谓语（honors、raises）都说明要用单数名词，填（acknowledgement）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "This",
+          "signalSide": "passage",
+          "relation": "This 后面接名词，共同作主语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "not only honors",
+          "signalSide": "passage",
+          "relation": "谓语 honors 和 raises 都用单数，主语名词也是单数。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:62": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "fuel",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "has fuel(l) ed",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-perfect-explicit-marker",
+        "features": []
+      },
+      "reason": "空格作主语「这项认定」（the recognition）的谓语，后面带宾语（efforts），用主动。句首（Ever since）表示从2009年那时起一直到现在，用现在完成时；主语是单数，所以填（has fuelled），美式拼写也可写作（has fueled）。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "Ever since",
+          "signalSide": "passage",
+          "relation": "从过去某时起一直到现在，用现在完成时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "the recognition",
+          "signalSide": "passage",
+          "relation": "主语单数，用 has。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:63": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:63",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.adverbial-clause",
+      "answer": "While/ Though/ Although",
+      "role": null,
+      "similarityProfile": {
+        "route": "concession",
+        "features": []
+      },
+      "reason": "空格连接两个完整的分句，引导让步状语从句。前句说呼麦过去一直由资深艺人表演（traditionally … senior masters），主句说它越来越吸引年轻一代（increasingly … younger generations），前后形成让步对比，所以用（While/Though/Although）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "it has traditionally been performed by senior masters",
+          "signalSide": "passage",
+          "relation": "从句本身完整，空格只起连接作用。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "has increasingly captured the interest of younger generations",
+          "signalSide": "passage",
+          "relation": "主句也完整，内容与从句相对，表示让步。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:64": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "wide",
+      "facetKey": "grammar-fill.given.adjective.comparison",
+      "answer": "wider",
+      "role": null,
+      "similarityProfile": {
+        "route": "comparative",
+        "features": [
+          "semantic-comparison"
+        ]
+      },
+      "reason": "空格修饰名词「观众」（audience），用形容词。综艺和电影让呼麦被更多人知道，比的是和过去相比观众面更广，要用比较级；前面是不定冠词（a），不能用最高级，所以填（wider）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "audience",
+          "signalSide": "passage",
+          "relation": "空格修饰名词 audience。"
+        },
+        {
+          "type": "comparison",
+          "signalText": "helped raise its profile",
+          "signalSide": "passage",
+          "relation": "提高知名度意味着观众比以前更广，是隐含的比较。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "among a",
+          "signalSide": "passage",
+          "relation": "不定冠词 a 排除最高级。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:65": {
+      "blankId": "blank:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "significant",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "significantly",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "空格修饰谓语动词「有助于」（contributes … to），说明贡献的程度。（contributes）在这里不带宾语，后面直接接（to the atmosphere），修饰动词要用副词，所以把（significant）变成（significantly）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "contributes",
+          "signalSide": "passage",
+          "relation": "空格修饰谓语动词 contributes。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "to the atmosphere",
+          "signalSide": "passage",
+          "relation": "contribute to 表示有助于，空格夹在动词和 to 之间作状语。"
+        }
+      ]
+    }
+  }
+}

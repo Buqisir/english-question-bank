@@ -1,0 +1,686 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a": {
+      "overview": "文章介绍美国路易莎县学校推广AI教学的情况：教师使用率远高于全国，学区配套了指南、平台和培训；但仍有教师不用AI，学生看法不一，学区又推出AI“红绿灯”规范学生用AI。",
+      "fullTranslationZh": "路易莎县学校的人工智能教学：喜忧参半\n尽管全国只有不到一半的教师接受过人工智能培训，路易莎县的学校却在积极拥抱教育中的人工智能。据学区数据，70%的路易莎教师现在每周至少使用一次人工智能工具——远高于教育周刊研究中心近期一项调查所报告的全国平均水平。\n工具与指导落到实处\n学区积极支持这一增长。在教师反馈呼吁更明确的方向之后，路易莎制定了实用的人工智能指南，并采用了SchoolAI——一个专为备课和学生活动设计的平台。培训以及一个共享的人工智能资源中心帮助教师把技术融入了课堂。\n挑战依然存在\n不过，挑战依然存在。一些路易莎教师根本不使用人工智能。调查显示，主要原因包括缺少培训时间、担心其可靠性以及使用工具的渠道有限。正如特雷维利恩斯小学的一位教师所说，自己独自练习和带着学生使用人工智能大不相同。\n学生的反应也不一。有些学生担心人工智能会“接管世界”，另一些则欣赏它作为学习助手提供的帮助。像玛西娅·弗洛拉这样的教师正通过解释“人工智能只是一种工具”并鼓励批判性思维来消除学生的恐惧。\n展望未来\n路易莎还在不断调整做法。一个例子是人工智能“红绿灯”：教师可以把它分享给学生，帮助学生弄清楚某项作业的哪些部分可以求助于人工智能。\n绿灯表示学生可以使用人工智能，但要注明出处；黄灯表示有限使用；红灯表示不允许使用人工智能。这些工具在鼓励正确使用的同时，帮助把人工智能融入日常学习。\n随着技术不断发展，路易莎的经验为学校如何帮助学生为科技驱动的未来做好准备提供了一个实时的范例。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-1",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:10",
+          "sourceText": "One example is the AI “traffic light” that teachers could share with students to help make it clear on which parts of a particular assignment students could turn to AI for help.",
+          "displayText": "One example is the AI “traffic light” that teachers could share with students to help make it clear on which parts of a particular assignment students could turn to AI for help.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:23"
+          ],
+          "translationZh": "一个例子是人工智能“红绿灯”：教师可以把它分享给学生，帮助学生弄清楚某项作业的哪些部分可以求助于人工智能。",
+          "analysisZh": "主干很短：One example is the AI “traffic light”（一个例子是AI“红绿灯”）。that 引导定语从句修饰 traffic light，从句是 teachers could share（它）with students，that 在从句里作 share 的宾语。to help make it clear … 是不定式，说明分享它的目的；help 后直接跟动词原形 make。make it clear 里 it 是形式宾语，真正的宾语是后面的 on which parts of a particular assignment students could turn to AI for help，这个从句还原成陈述句就是 students could turn to AI for help on these parts（学生在这些部分可以求助AI），介词 on 提到了 which 前面。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 37,
+              "quote": "One example is the AI “traffic light”"
+            },
+            {
+              "start": 86,
+              "end": 99,
+              "quote": "make it clear"
+            },
+            {
+              "start": 100,
+              "end": 141,
+              "quote": "on which parts of a particular assignment"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-2",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7",
+          "sourceText": "Surveys show the main reasons include lack of training time, concerns about reliability, and limited access to tools.",
+          "displayText": "Surveys show the main reasons include lack of training time, concerns about reliability, and limited access to tools.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:22"
+          ],
+          "translationZh": "调查显示，主要原因包括缺少培训时间、担心其可靠性以及使用工具的渠道有限。",
+          "analysisZh": "主干是 Surveys show（调查显示），show 后面是省略了 that 的宾语从句。从句主干是 the main reasons include（主要原因包括），include 带三个并列宾语：lack of training time（缺少培训时间）、concerns about reliability（担心可靠性）、limited access to tools（使用工具的渠道有限），前两个用逗号隔开，最后一个前加 and。这里的 the main reasons 指的是上一句那些老师根本不用AI的原因。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "Surveys show"
+            },
+            {
+              "start": 13,
+              "end": 37,
+              "quote": "the main reasons include"
+            },
+            {
+              "start": 38,
+              "end": 59,
+              "quote": "lack of training time"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:1"
+              ],
+              "start": 0,
+              "end": 18,
+              "quote": "路易莎县学校的人工智能教学：喜忧参半"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:2"
+              ],
+              "start": 19,
+              "end": 125,
+              "quote": "尽管全国只有不到一半的教师接受过人工智能培训，路易莎县的学校却在积极拥抱教育中的人工智能。据学区数据，70%的路易莎教师现在每周至少使用一次人工智能工具——远高于教育周刊研究中心近期一项调查所报告的全国平均水平。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:4"
+              ],
+              "start": 126,
+              "end": 135,
+              "quote": "工具与指导落到实处"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:5"
+              ],
+              "start": 136,
+              "end": 240,
+              "quote": "学区积极支持这一增长。在教师反馈呼吁更明确的方向之后，路易莎制定了实用的人工智能指南，并采用了SchoolAI——一个专为备课和学生活动设计的平台。培训以及一个共享的人工智能资源中心帮助教师把技术融入了课堂。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:6"
+              ],
+              "start": 241,
+              "end": 247,
+              "quote": "挑战依然存在"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7"
+              ],
+              "start": 248,
+              "end": 351,
+              "quote": "不过，挑战依然存在。一些路易莎教师根本不使用人工智能。调查显示，主要原因包括缺少培训时间、担心其可靠性以及使用工具的渠道有限。正如特雷维利恩斯小学的一位教师所说，自己独自练习和带着学生使用人工智能大不相同。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:8"
+              ],
+              "start": 352,
+              "end": 445,
+              "quote": "学生的反应也不一。有些学生担心人工智能会“接管世界”，另一些则欣赏它作为学习助手提供的帮助。像玛西娅·弗洛拉这样的教师正通过解释“人工智能只是一种工具”并鼓励批判性思维来消除学生的恐惧。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:9"
+              ],
+              "start": 446,
+              "end": 450,
+              "quote": "展望未来"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:10"
+              ],
+              "start": 451,
+              "end": 516,
+              "quote": "路易莎还在不断调整做法。一个例子是人工智能“红绿灯”：教师可以把它分享给学生，帮助学生弄清楚某项作业的哪些部分可以求助于人工智能。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:11"
+              ],
+              "start": 517,
+              "end": 591,
+              "quote": "绿灯表示学生可以使用人工智能，但要注明出处；黄灯表示有限使用；红灯表示不允许使用人工智能。这些工具在鼓励正确使用的同时，帮助把人工智能融入日常学习。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:12"
+              ],
+              "start": 592,
+              "end": 639,
+              "quote": "随着技术不断发展，路易莎的经验为学校如何帮助学生为科技驱动的未来做好准备提供了一个实时的范例。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-q21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:2",
+                "start": 235,
+                "end": 265,
+                "quote": "far above the national average"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p2",
+                "start": 78,
+                "end": 105,
+                "quote": "远高于教育周刊研究中心近期一项调查所报告的全国平均水平"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-q22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7",
+                "start": 69,
+                "end": 186,
+                "quote": "Surveys show the main reasons include lack of training time, concerns about reliability, and limited access to tools."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7",
+                "start": 231,
+                "end": 293,
+                "quote": "practicing alone is very different from using AI with students"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p6",
+                "start": 27,
+                "end": 63,
+                "quote": "调查显示，主要原因包括缺少培训时间、担心其可靠性以及使用工具的渠道有限。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p6",
+                "start": 81,
+                "end": 102,
+                "quote": "自己独自练习和带着学生使用人工智能大不相同"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-q23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:10",
+                "start": 119,
+                "end": 217,
+                "quote": "to help make it clear on which parts of a particular assignment students could turn to AI for help"
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:11",
+                "start": 102,
+                "end": 181,
+                "quote": "These tools help integrate AI into daily learning while encouraging proper use."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p9",
+                "start": 39,
+                "end": 64,
+                "quote": "帮助学生弄清楚某项作业的哪些部分可以求助于人工智能"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p10",
+                "start": 45,
+                "end": 74,
+                "quote": "这些工具在鼓励正确使用的同时，帮助把人工智能融入日常学习。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:10",
+                "start": 41,
+                "end": 218,
+                "quote": "One example is the AI “traffic light” that teachers could share with students to help make it clear on which parts of a particular assignment students could turn to AI for help."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p9",
+                "start": 12,
+                "end": 65,
+                "quote": "一个例子是人工智能“红绿灯”：教师可以把它分享给学生，帮助学生弄清楚某项作业的哪些部分可以求助于人工智能。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:22"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7",
+                "start": 69,
+                "end": 186,
+                "quote": "Surveys show the main reasons include lack of training time, concerns about reliability, and limited access to tools."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a-p6",
+                "start": 27,
+                "end": 63,
+                "quote": "调查显示，主要原因包括缺少培训时间、担心其可靠性以及使用工具的渠道有限。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "标题点出路易莎县AI教学“喜忧参半”。开头用数据说明当地教师用AI远多于全国；接着介绍学区提供的指南、平台和培训；再写仍有教师不用AI、学生看法不一；最后介绍AI“红绿灯”等调整，并把路易莎的经验看作学校面向科技未来的范例。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:1",
+            "summary": "路易莎县学校的AI教学情况好坏参半。",
+            "function": "标题，点明话题和“喜忧参半”的基调"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:2",
+            "summary": "全国不到一半教师受过AI培训，而路易莎70%的教师每周至少用一次AI，远高于全国平均。",
+            "function": "用数据引出话题，形成本地与全国的对比"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:4",
+            "summary": "学区提供的工具和指导已经付诸实践。",
+            "function": "小标题，引出学区的支持措施"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:5",
+            "summary": "学区根据教师反馈制定AI指南、采用SchoolAI平台，并靠培训和资源中心帮教师把技术带进课堂。",
+            "function": "具体说明使用率高的背后有学区支持"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:6",
+            "summary": "推广中仍有困难。",
+            "function": "小标题，转入问题部分"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7",
+            "summary": "一些教师根本不用AI，原因包括缺少培训时间、担心可靠性、工具不够，独自练习也不同于带学生用。",
+            "function": "说明教师方面的困难"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:8",
+            "summary": "学生有的担心AI接管世界，有的欣赏它的帮助，教师通过解释和鼓励批判性思维消除恐惧。",
+            "function": "说明学生方面的不同反应"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:9",
+            "summary": "学区对今后的打算。",
+            "function": "小标题，转入后续调整"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:10",
+            "summary": "学区继续调整做法，例如推出AI“红绿灯”，让学生明白作业哪些部分可以求助AI。",
+            "function": "举例说明新的调整措施"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:11",
+            "summary": "解释绿、黄、红三色的含义，这些工具帮助学生在日常学习中正确使用AI。",
+            "function": "补充说明“红绿灯”的具体规则和作用"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:12",
+            "summary": "路易莎的经验为学校帮学生迎接科技驱动的未来提供了实时范例。",
+            "function": "总结全文，点明这些经验的意义"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读文中的全国教师调查图，把表示正在使用AI的几栏百分比相加。",
+      "stemTranslationZh": "全国有百分之多少的教师在课堂上使用人工智能？",
+      "locateBy": "options",
+      "locateFindZh": "带各项百分比回图表，核对全国教师里在用的几栏",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "24%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "optionText": "24%.",
+            "optionHighlight": "24%",
+            "explanation": "只加了图中“用得很多”的3%和“用得一些”的21%，漏掉了“用得很少”的37%；用得少也是在用。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "61%。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:2",
+              "quote": "far above the national average",
+              "anchor": "全国水平远低于路易莎的70%，具体比例看图表三栏“在用”"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "63%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "optionText": "63%.",
+            "optionHighlight": "63%",
+            "explanation": "把图中“用过但已停用”的2%也加了进去（61%+2%）；这些教师现在已经不用了，不能算在用。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "70%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "70% of Louisa teachers now use AI tools at least weekly",
+            "sourceEntity": "Louisa teachers",
+            "optionText": "70%.",
+            "optionEntity": "70%",
+            "explanation": "70%是路易莎县教师每周至少用一次AI的比例（Louisa teachers），原文还说它远高于全国平均，不是全国的数字。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:2",
+              "quote": "70% of Louisa teachers now use AI tools at least weekly",
+              "anchor": "路易莎县的数字"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "61%.",
+          "sourceRole": "correctOption",
+          "targetText": "far above the national average",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:2",
+          "relationType": "calculation",
+          "note": "选项的61%要从图里算：图下注明是全国性报告，教师回答里正在用的有三栏，“用得很多”3%、“用得一些”21%、“用得很少”37%，3%+21%+37%=61%；这也和[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:2|far above the national average]]一致，全国水平远低于路易莎的70%，选B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:22": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到部分路易莎教师不用AI的原因，并把原文列出的几点归结成选项的说法。",
+      "stemTranslationZh": "为什么一些路易莎的教师不用人工智能？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句找原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们认为人工智能会接管世界。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Student reactions are also mixed. Some worry AI could “take over the world,”",
+            "sourceEntity": "Student",
+            "optionText": "They believe it will take over the world.",
+            "optionEntity": "They",
+            "explanation": "担心AI会“接管世界”的是一部分学生（Student reactions），不是不用AI的老师；老师反而在帮学生消除这种恐惧。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:8",
+              "quote": "Some worry AI could “take over the world,”",
+              "anchor": "学生的担心"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们觉得自己还没准备好有效地融入人工智能。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7",
+              "quote": "Surveys show the main reasons include lack of training time, concerns about reliability, and limited access to tools.",
+              "anchor": "不用AI的主要原因"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7",
+              "quote": "practicing alone is very different from using AI with students",
+              "anchor": "独自练习不同于带学生用"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们对全面采用人工智能感到不自在。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They feel uncomfortable to adopt AI fully.",
+            "explanation": "原文说的是担心AI是否可靠（concerns about reliability），是对工具的疑虑，没说老师自己用着不自在；而且这些老师是完全不用（not use AI at all），谈不上“没有全面采用”。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们发现学生过于依赖人工智能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They find the students depend too much on AI.",
+            "explanation": "原文没说学生过分依赖AI；写到学生时只说有人担心、有人欣赏它的帮助，老师不用AI的原因也都在自身条件上。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "avoid using AI",
+          "sourceRole": "stem",
+          "targetText": "Some Louisa teachers do not use AI at all.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7",
+          "relationType": "locationCue",
+          "targetCue": "do not use AI",
+          "sourceZh": "回避使用人工智能",
+          "targetCueZh": "不用人工智能",
+          "answerText": "lack of training time",
+          "bridgeZh": "the main reasons 指的就是这些老师不用AI的原因",
+          "note": "题干 avoid using AI 对应原文 do not use AI。"
+        },
+        {
+          "sourceText": "They feel unprepared to integrate AI effectively.",
+          "sourceRole": "correctOption",
+          "targetText": "Surveys show the main reasons include lack of training time, concerns about reliability, and limited access to tools.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7",
+          "relationType": "paraphrase",
+          "note": "选项的“没准备好”（unprepared）把两处合在一起：先是调查列的原因里有培训时间不够（lack of training time），接着[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:7|As one Trevilians Elementary teacher noted]]说独自练习和带学生用大不一样（very different），可见他们还没把握在课堂上用好AI，选B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到介绍AI“红绿灯”的句子，看它帮学生弄清什么。",
+      "stemTranslationZh": "人工智能“红绿灯”系统有什么作用？",
+      "locateBy": "stem",
+      "locateFindZh": "看 to help 后的目的",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它限制教师在课堂上使用人工智能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "teachers could share with students",
+            "sourceEntity": "students",
+            "optionText": "It limits teachers’ use of AI in lessons.",
+            "optionEntity": "teachers’",
+            "explanation": "红绿灯是老师分享给学生的（share with students），标明的是学生做作业时哪些部分能用AI，管不到老师上课怎么用。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:10",
+              "quote": "teachers could share with students",
+              "anchor": "分享给学生"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它控制教室里的网速。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It controls the Internet speed in classrooms.",
+            "explanation": "原文没提网速；绿、黄、红三色分别表示可用AI但要注明出处、有限使用、不准使用，说的是能不能用AI。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它被用来教学生道路安全知识。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is used to teach students about road safety.",
+            "explanation": "选项把 traffic light 当成真的交通信号灯；原文里它只是借红绿灯的颜色给作业标出能否用AI，没讲交通安全。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它指导学生正确使用人工智能。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:10",
+              "quote": "to help make it clear on which parts of a particular assignment students could turn to AI for help",
+              "anchor": "让学生弄清哪些部分可用AI"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:11",
+              "quote": "These tools help integrate AI into daily learning while encouraging proper use.",
+              "anchor": "鼓励正确使用"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "traffic light",
+          "sourceRole": "stem",
+          "targetText": "One example is the AI “traffic light” that teachers could share with students to help make it clear on which parts of a particular assignment students could turn to AI for help.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:10",
+          "relationType": "locationCue",
+          "answerText": "help make it clear on which parts of a particular assignment students could turn to AI for help",
+          "note": "题干 traffic light 原词出现在原文。"
+        },
+        {
+          "sourceText": "It guides students on proper AI use.",
+          "sourceRole": "correctOption",
+          "targetText": "These tools help integrate AI into daily learning while encouraging proper use.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:11",
+          "relationType": "paraphrase",
+          "note": "选项把两处合起来：“指导学生”对应帮学生弄清作业哪些部分可以求助AI（make it clear），“正确使用”沿用[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:11|while encouraging proper use]]里的 proper use，选D。"
+        }
+      ]
+    }
+  }
+}

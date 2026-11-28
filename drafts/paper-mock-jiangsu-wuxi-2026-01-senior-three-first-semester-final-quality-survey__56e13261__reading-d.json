@@ -1,0 +1,735 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d": {
+      "overview": "细菌对抗生素的耐药性越来越强，威胁全球健康。美国研究人员借助人工智能筛查人体肠道微生物，找到数百种可能成为未来抗生素的物质，并指出肠道里候选物质多，是因为那里细菌竞争激烈。",
+      "fullTranslationZh": "100年前，一个小伤口就可能引起感染，而自20世纪中叶以来，我们有了青霉素等抗生素来对抗致病细菌。但随着时间推移，细菌已经发展出种种办法，对治疗的反应越来越弱。\n这种日益增强的抗生素耐药性对全球健康构成威胁。随着许多种类的细菌对我们使用的药物产生免疫，抗生素的效力正在减弱。最近的一项预测估计，到2050年，全球可能有3900万人因找不到对付细菌的新的有效武器而直接死亡。\n不过也有好消息：美国研究人员找到了一个寻找未来抗生素的有希望的地方——我们自己的身体内部。“我们的发现强调，人体微生物组是此前未被探索过的抗生素来源。”塞萨尔·德拉富恩特对《科学画报》说。他所在的宾夕法尼亚大学机器生物学小组的研究团队检测了1773人的肠道微生物样本，用人工智能筛查了数千种蛋白质。\n他们用这种方法找到了数百种可能的物质，塞萨尔·德拉富恩特说，这些物质有可能成为未来的抗生素。“我们有希望的候选物之一——从肠道微生物普雷沃氏菌中提取的prevotellin-2——在动物模型中显示出了效力。”塞萨尔·德拉富恩特说。\n根据发表在《细胞》杂志上的这项研究，肠道里能找到如此丰富的候选物质，可能是因为身体这一部位的环境竞争格外激烈。“为了生存，细菌一定产生了一些能杀死其他细菌的特殊物质。”塞萨尔·德拉富恩特说。研究人员在一项研究中发现，一些细菌产生的特殊物质要么能让与之竞争的细菌死亡，要么影响它们的重要活动，使它们停止运作而死亡。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-1",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2",
+          "sourceText": "One recent forecast estimates that by 2050, 39 million people worldwide could die as a direct consequence of not finding new and efficient weapons against bacteria.",
+          "displayText": "One recent forecast estimates that by 2050, 39 million people worldwide could die as a direct consequence of not finding new and efficient weapons against bacteria.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:32"
+          ],
+          "translationZh": "最近的一项预测估计，到2050年，全球可能有3900万人因找不到对付细菌的新的有效武器而直接死亡。",
+          "analysisZh": "主干是 One recent forecast estimates that …（最近一项预测估计……），that 引导宾语从句。从句里 by 2050 是时间状语，从句主干是 39 million people worldwide could die（全球可能有3900万人死亡）。as a direct consequence of … 说明死亡的原因，意为“作为……的直接后果”；of 后面接动名词短语 not finding new and efficient weapons against bacteria，not 否定 finding，new 和 efficient 并列修饰 weapons，against bacteria 说明是对付细菌的武器。全句用一个惊人的数字说明耐药问题有多严重。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 34,
+              "quote": "One recent forecast estimates that"
+            },
+            {
+              "start": 44,
+              "end": 81,
+              "quote": "39 million people worldwide could die"
+            },
+            {
+              "start": 82,
+              "end": 108,
+              "quote": "as a direct consequence of"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-2",
+          "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5",
+          "sourceText": "In a study, the researchers found the special substances produced by some bacteria can either make their competing bacteria die, or affect their important activities, causing them to stop working and die.",
+          "displayText": "In a study, the researchers found the special substances produced by some bacteria can either make their competing bacteria die, or affect their important activities, causing them to stop working and die.",
+          "relatedQuestionIds": [
+            "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:35"
+          ],
+          "translationZh": "研究人员在一项研究中发现，一些细菌产生的特殊物质要么能让与之竞争的细菌死亡，要么影响它们的重要活动，使它们停止运作而死亡。",
+          "analysisZh": "主干是 the researchers found（研究人员发现），found 后面是省略了 that 的宾语从句。从句主语是 the special substances，produced by some bacteria 是过去分词短语作后置定语，说明这些物质是一些细菌产生的。从句谓语是 can 后面用 either … or … 连接的两个并列动作：make their competing bacteria die（让竞争对手细菌死亡）和 affect their important activities（影响它们的重要活动）。causing them to stop working and die 是现在分词短语作结果状语，接在 affect 这一项后面，说明影响重要活动的结果；其中 stop working 和 die 是 to 后面并列的两个动作。",
+          "underlineRanges": [
+            {
+              "start": 83,
+              "end": 127,
+              "quote": "can either make their competing bacteria die"
+            },
+            {
+              "start": 129,
+              "end": 165,
+              "quote": "or affect their important activities"
+            },
+            {
+              "start": 167,
+              "end": 203,
+              "quote": "causing them to stop working and die"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:1"
+              ],
+              "start": 0,
+              "end": 80,
+              "quote": "100年前，一个小伤口就可能引起感染，而自20世纪中叶以来，我们有了青霉素等抗生素来对抗致病细菌。但随着时间推移，细菌已经发展出种种办法，对治疗的反应越来越弱。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2"
+              ],
+              "start": 81,
+              "end": 186,
+              "quote": "这种日益增强的抗生素耐药性对全球健康构成威胁。随着许多种类的细菌对我们使用的药物产生免疫，抗生素的效力正在减弱。最近的一项预测估计，到2050年，全球可能有3900万人因找不到对付细菌的新的有效武器而直接死亡。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3"
+              ],
+              "start": 187,
+              "end": 336,
+              "quote": "不过也有好消息：美国研究人员找到了一个寻找未来抗生素的有希望的地方——我们自己的身体内部。“我们的发现强调，人体微生物组是此前未被探索过的抗生素来源。”塞萨尔·德拉富恩特对《科学画报》说。他所在的宾夕法尼亚大学机器生物学小组的研究团队检测了1773人的肠道微生物样本，用人工智能筛查了数千种蛋白质。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:4"
+              ],
+              "start": 337,
+              "end": 452,
+              "quote": "他们用这种方法找到了数百种可能的物质，塞萨尔·德拉富恩特说，这些物质有可能成为未来的抗生素。“我们有希望的候选物之一——从肠道微生物普雷沃氏菌中提取的prevotellin-2——在动物模型中显示出了效力。”塞萨尔·德拉富恩特说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5"
+              ],
+              "start": 453,
+              "end": 609,
+              "quote": "根据发表在《细胞》杂志上的这项研究，肠道里能找到如此丰富的候选物质，可能是因为身体这一部位的环境竞争格外激烈。“为了生存，细菌一定产生了一些能杀死其他细菌的特殊物质。”塞萨尔·德拉富恩特说。研究人员在一项研究中发现，一些细菌产生的特殊物质要么能让与之竞争的细菌死亡，要么影响它们的重要活动，使它们停止运作而死亡。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-q32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2",
+                "start": 0,
+                "end": 71,
+                "quote": "This growing resistance to antibiotics poses a threat to global health."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:1",
+                "start": 184,
+                "end": 255,
+                "quote": "the bacteria have developed ways to become less responsive to treatment"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p2",
+                "start": 0,
+                "end": 23,
+                "quote": "这种日益增强的抗生素耐药性对全球健康构成威胁。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p1",
+                "start": 57,
+                "end": 79,
+                "quote": "细菌已经发展出种种办法，对治疗的反应越来越弱"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-q33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3",
+                "start": 32,
+                "end": 147,
+                "quote": "US researchers have found a promising place we could look for the antibiotics of the future: inside our own bodies."
+              },
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3",
+                "start": 148,
+                "end": 252,
+                "quote": "“Our discovery emphasizes the human microbiome (微生物组) as a previously unexplored source of antibiotics,”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p3",
+                "start": 8,
+                "end": 45,
+                "quote": "美国研究人员找到了一个寻找未来抗生素的有希望的地方——我们自己的身体内部。"
+              },
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p3",
+                "start": 45,
+                "end": 76,
+                "quote": "“我们的发现强调，人体微生物组是此前未被探索过的抗生素来源。”"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-q34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:4",
+                "start": 231,
+                "end": 265,
+                "quote": "showed efficiency in animal models"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p4",
+                "start": 90,
+                "end": 102,
+                "quote": "在动物模型中显示出了效力"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-q35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5",
+                "start": 68,
+                "end": 194,
+                "quote": "the wealth of candidates found in the gut may be due to a particularly highly competitive environment in that part of the body"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p5",
+                "start": 18,
+                "end": 54,
+                "quote": "肠道里能找到如此丰富的候选物质，可能是因为身体这一部位的环境竞争格外激烈"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-s1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:32"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2",
+                "start": 180,
+                "end": 344,
+                "quote": "One recent forecast estimates that by 2050, 39 million people worldwide could die as a direct consequence of not finding new and efficient weapons against bacteria."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p2",
+                "start": 56,
+                "end": 105,
+                "quote": "最近的一项预测估计，到2050年，全球可能有3900万人因找不到对付细菌的新的有效武器而直接死亡。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-s2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:35"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5",
+                "start": 318,
+                "end": 522,
+                "quote": "In a study, the researchers found the special substances produced by some bacteria can either make their competing bacteria die, or affect their important activities, causing them to stop working and die."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+                "paragraphId": "zh-group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d-p5",
+                "start": 95,
+                "end": 156,
+                "quote": "研究人员在一项研究中发现，一些细菌产生的特殊物质要么能让与之竞争的细菌死亡，要么影响它们的重要活动，使它们停止运作而死亡。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先回顾抗生素的作用，指出细菌越来越耐药；接着用预测数据说明耐药性对全球健康的威胁；然后转向好消息，介绍美国团队用人工智能在人体肠道微生物中找到数百种候选抗生素，其中一种在动物模型中有效；最后解释肠道中候选物丰富的原因是细菌竞争激烈。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:1",
+            "summary": "抗生素曾帮人类对抗致病细菌，但细菌渐渐对治疗不再敏感。",
+            "function": "交代背景，引出问题"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2",
+            "summary": "抗生素耐药性日益增强，威胁全球健康，预测到2050年可能导致3900万人死亡。",
+            "function": "用数据说明问题的严重性"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3",
+            "summary": "美国研究人员发现人体微生物组可能是未来抗生素的来源，他们用人工智能筛查了1773人的肠道微生物。",
+            "function": "转向好消息，介绍研究方向和方法"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:4",
+            "summary": "研究找到数百种可能的抗生素物质，其中 prevotellin-2 在动物模型中显示出效力。",
+            "function": "介绍研究成果"
+          },
+          {
+            "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5",
+            "summary": "肠道中候选物质丰富，可能是因为那里细菌竞争激烈，细菌会产生杀死竞争对手的特殊物质。",
+            "function": "解释肠道候选物丰富的原因"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:32": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "passage-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "找出文章开头提出、后文研究要应对的那个问题。",
+      "stemTranslationZh": "文中提到的主要问题是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:1]]的 But 读起，看[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2]]开头把什么称为威胁",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "治疗常常被耽误，而且效果不佳。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "treatment",
+            "optionText": "Treatment",
+            "matchType": "exact",
+            "relationNote": "选项借了 treatment，原文说的是细菌对治疗的反应变弱（less responsive to treatment），问题出在细菌身上；治疗被耽误原文没提。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:1",
+              "quote": "the bacteria have developed ways to become less responsive to treatment",
+              "anchor": "对治疗反应变弱"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "现有的抗生素会产生副作用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Existing antibiotics cause side effects.",
+            "explanation": "原文没提抗生素的副作用，说的是细菌对药物产生免疫、药效在减弱（strength … is weakening）。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "细菌的耐药性越来越强。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2",
+              "quote": "This growing resistance to antibiotics poses a threat to global health.",
+              "anchor": "耐药性威胁全球健康"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:1",
+              "quote": "the bacteria have developed ways to become less responsive to treatment",
+              "anchor": "细菌对治疗不再敏感"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "致病细菌正在增多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "disease-causing bacteria",
+            "optionText": "Disease-causing bacteria",
+            "matchType": "exact",
+            "relationNote": "选项借了[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:1]]的 disease-causing bacteria，原文说的是细菌越来越耐药、药效减弱，没说致病细菌的数量在增加。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:1",
+              "quote": "we have had antibiotics (抗生素) such as penicillin to fight disease-causing bacteria (细菌)",
+              "anchor": "致病细菌"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Bacteria are growing more resistant.",
+          "sourceRole": "correctOption",
+          "targetText": "This growing resistance to antibiotics poses a threat to global health.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "选项的“细菌越来越耐药”就是原文的 growing resistance to antibiotics：[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:1|But over time]]说细菌对治疗越来越不敏感，[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2]]直说这种耐药性威胁全球健康，后文去人体里找新抗生素也是为了应对它，选C。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找到研究人员说可以去哪里寻找未来的抗生素。",
+      "stemTranslationZh": "关于未来的抗生素，我们能了解到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看句末冒号后的地方",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们将由人工智能系统创造出来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "AI",
+            "optionText": "AI",
+            "matchType": "exact",
+            "relationNote": "选项借了 AI，原文里 AI 只是研究人员筛查蛋白质的工具（to screen thousands of proteins），候选物质来自肠道微生物，不是 AI 造出来的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3",
+              "quote": "using AI to screen thousands of proteins",
+              "anchor": "用AI筛查"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们可能来自人体微生物组。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3",
+              "quote": "US researchers have found a promising place we could look for the antibiotics of the future: inside our own bodies.",
+              "anchor": "去体内找"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3",
+              "quote": "“Our discovery emphasizes the human microbiome (微生物组) as a previously unexplored source of antibiotics,”",
+              "anchor": "人体微生物组是新来源"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们能阻止各种细菌之间的竞争。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "competitive",
+            "optionText": "competitions",
+            "matchType": "wordFamily",
+            "relationNote": "选项借 competitive 的同族词 competitions。原文说肠道里细菌竞争激烈，细菌为生存产生杀死对手的物质；这些物质是竞争的产物，不是去制止竞争。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5",
+              "quote": "a particularly highly competitive environment in that part of the body",
+              "anchor": "竞争激烈的环境"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们将在2050年前解决抗生素耐药问题。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "by 2050",
+            "optionText": "by 2050",
+            "matchType": "exact",
+            "relationNote": "选项借了 by 2050，原文是预测到那时可能有3900万人因找不到新武器而死，没说未来的抗生素能在那之前解决耐药问题；它们现在还只是候选物。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2",
+              "quote": "One recent forecast estimates that by 2050, 39 million people worldwide could die",
+              "anchor": "2050年的预测"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the antibiotics of the future",
+          "sourceRole": "stem",
+          "targetText": "But there is good news as well: US researchers have found a promising place we could look for the antibiotics of the future: inside our own bodies.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3",
+          "relationType": "locationCue",
+          "answerText": "a promising place we could look for the antibiotics of the future: inside our own bodies",
+          "note": "题干 the antibiotics of the future 原词出现在原文。"
+        },
+        {
+          "sourceText": "They may come from the human microbiome.",
+          "sourceRole": "correctOption",
+          "targetText": "US researchers have found a promising place we could look for the antibiotics of the future: inside our own bodies.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的“可能来自”对应 could look for … inside our own bodies；“人体微生物组”原样出自[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:3|the human microbiome]]，研究者称它是抗生素的新来源（source of antibiotics），选B。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:34": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "找到介绍 prevotellin-2 的句子，看它目前做到哪一步。",
+      "stemTranslationZh": "从文中可以推断出关于 prevotellin-2 的什么信息？",
+      "locateBy": "stem",
+      "locateFindZh": "读完破折号后的谓语",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它已经治愈了许多病人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "showed efficiency in animal models",
+            "sourceHighlight": "in animal models",
+            "optionText": "It has cured many patients.",
+            "optionHighlight": "cured many patients",
+            "explanation": "原文只说它在动物模型中显示出效力（in animal models），还没有用到病人身上，更谈不上治好许多病人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:4",
+              "quote": "showed efficiency in animal models",
+              "anchor": "动物模型"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它已经取代了现有的抗生素。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It has replaced existing antibiotics.",
+            "explanation": "原文只说它在动物身上有效，没把它和现有抗生素作比较，更没说已经取代了它们。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它现在是一种广泛使用的抗生素。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "One of our promising candidates",
+            "sourceHighlight": "promising candidates",
+            "optionText": "It is a widely-used antibiotic now.",
+            "optionHighlight": "widely-used antibiotic now",
+            "explanation": "研究者把它叫作“有希望的候选物”（promising candidates），只在动物模型里试过，还不是正在广泛使用的抗生素。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:4",
+              "quote": "One of our promising candidates",
+              "anchor": "候选物"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它在动物模型中被证明是有效的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:4",
+              "quote": "showed efficiency in animal models",
+              "anchor": "在动物模型中有效"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "prevotellin-2",
+          "sourceRole": "stem",
+          "targetText": "“One of our promising candidates – prevotellin-2, taken from the gut microbe Prevotella copri – showed efficiency in animal models,” says César de la Fuente.",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "showed efficiency in animal models",
+          "note": "题干 prevotellin-2 原词出现在原文。"
+        },
+        {
+          "sourceText": "It proves effective in animal models.",
+          "sourceRole": "correctOption",
+          "targetText": "showed efficiency in animal models",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“被证明有效”（proves effective）就是原文的“显示出效力”（showed efficiency），in animal models 原样保留，选D。"
+        }
+      ]
+    },
+    "question:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:35": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括题目所问这一段讲的内容：它在解释什么现象的原因。",
+      "stemTranslationZh": "最后一段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "看[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5]]开头 may be due to 交代的原因，再看后文怎样解释细菌竞争",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "测试新抗生素药物的方法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The method of testing new antibiotic drugs.",
+            "explanation": "这一段讲的是肠道里候选物质为什么多，最后的研究发现说的是这些物质怎样让对手死亡，没讲怎样测试新药。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "抗生素对全球健康的重要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "This growing resistance to antibiotics poses a threat to global health.",
+            "sourceEntity": "global health",
+            "optionText": "The importance of antibiotics for global health.",
+            "optionEntity": "global health",
+            "explanation": "全球健康出现在[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2]]，那里讲的是耐药性带来的威胁；[[block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5]]讲的是肠道候选物多的原因，没再谈抗生素对全球健康的意义。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2",
+              "quote": "This growing resistance to antibiotics poses a threat to global health.",
+              "anchor": "全球健康"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "肠道中候选抗生素丰富的原因。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5",
+              "quote": "the wealth of candidates found in the gut may be due to a particularly highly competitive environment in that part of the body",
+              "anchor": "候选物丰富的原因"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "饮食在产生抗菌物质中的作用。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The role of diet in producing antibacterial substances.",
+            "explanation": "这一段讲的是肠道里细菌之间的竞争促使它们产生特殊物质，原文没有提到饮食。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The cause of the gut’s rich antibiotic candidates.",
+          "sourceRole": "correctOption",
+          "targetText": "the wealth of candidates found in the gut may be due to a particularly highly competitive environment in that part of the body",
+          "targetParagraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“肠道候选物丰富”就是 the wealth of candidates found in the gut，“原因”对应 may be due to。后面的引语说细菌为生存要产生杀死别的细菌的物质，研究又说明这些物质怎样让对手死亡，都在解释竞争激烈这个原因，选C。"
+        }
+      ]
+    }
+  }
+}
