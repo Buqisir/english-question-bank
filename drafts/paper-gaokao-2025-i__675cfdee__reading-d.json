@@ -1,0 +1,744 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-i:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-i:reading-d": {
+      "overview": "文章介绍一项新研究：把自来水煮沸五分钟、冷却后过滤，可去除至少八成微塑料，但效果取决于水中碳酸钙含量；专家肯定研究，并建议升级饮用水处理厂。",
+      "fullTranslationZh": "微塑料已成为遍布地球的常见污染源——它们沉积在深海和喜马拉雅山上，卡在火山岩里，塞满了海鸟的胃，甚至落进了南极新降的雪中。它们甚至正出现在人体内。\n如今，新研究表明，一个简单、便宜的办法或许能显著降低自来水中的微塑料含量：把水烧开再过滤。在周三发表于《环境科学与技术快报》的一项研究中，来自中国的研究人员发现，把自来水煮沸仅五分钟，待其冷却后再过滤，就能去除至少80%的微塑料。\n关键在于，这个方法依赖水中含有足够的碳酸钙来困住塑料。研究中，煮沸含300毫克碳酸钙的硬水，塑料减少了近90%。但在碳酸钙含量不足60毫克的样本中，煮沸只让塑料含量下降了25%。此外，这项研究并未涵盖所有类型的塑料。研究团队只关注了三种常见类型——聚苯乙烯、聚乙烯和聚丙烯，也没有研究以前在水中发现过的其他化学物质，比如氯乙烯。\n尽管如此，这些发现为减少微塑料暴露指出了一条可能的出路，而这项任务正变得越来越难。科学家今年早些时候发现，就连瓶装水所含的微塑料也比原先以为的多10到1000倍。\n科学家们仍在努力确定微塑料的危害有多大，但他们已经了解到的情况已引起担忧。这项新研究表明，把自来水烧开可以成为限制摄入的一种手段。“他们展示微塑料如何在煮沸过程中被困住的方式很不错，”未参与这项研究的苏格兰格拉斯哥大学环境工程师卡罗琳·高肖特-林赛对《新科学家》说，“我们应该研究如何升级饮用水处理厂，让它们能去除微塑料。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-d-1",
+          "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+          "sourceText": "In a study published Wednesday in Environmental Science & Technology Letters, researchers from China found that boiling tap water for just five minutes – then filtering it after it cools – could remove at least 80 percent of its microplastics.",
+          "displayText": "In a study published Wednesday in Environmental Science & Technology Letters, researchers from China found that boiling tap water for just five minutes – then filtering it after it cools – could remove at least 80 percent of its microplastics.",
+          "relatedQuestionIds": [],
+          "translationZh": "在周三发表于《环境科学与技术快报》的一项研究中，来自中国的研究人员发现，把自来水煮沸仅五分钟，待其冷却后再过滤，就能去除至少80%的微塑料。",
+          "analysisZh": "主干是 researchers from China found that ...（来自中国的研究人员发现……）。句首 In a study published ... 是地点状语，published 是过去分词作后置定语，修饰 study。that 引导宾语从句，从句的主语是动名词短语 boiling tap water for just five minutes，两个破折号之间的 then filtering it after it cools 补充第二步，谓语是 could remove，宾语是 at least 80 percent of its microplastics。",
+          "underlineRanges": [
+            {
+              "start": 78,
+              "end": 111,
+              "quote": "researchers from China found that"
+            },
+            {
+              "start": 112,
+              "end": 151,
+              "quote": "boiling tap water for just five minutes"
+            },
+            {
+              "start": 189,
+              "end": 201,
+              "quote": "could remove"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-d-2",
+          "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+          "sourceText": "Still, the findings show a potential path forward for reducing microplastic exposure – a task that’s becoming increasingly difficult.",
+          "displayText": "Still, the findings show a potential path forward for reducing microplastic exposure – a task that’s becoming increasingly difficult.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:34"
+          ],
+          "translationZh": "尽管如此，这些发现为减少微塑料暴露指出了一条可能的出路，而这项任务正变得越来越难。",
+          "analysisZh": "主干是 the findings show a potential path（这些发现指出一条可能的出路），forward 修饰 path，for reducing microplastic exposure 说明出路通向哪里。Still 承接上一段的研究局限，意思是“尽管有这些不足”。破折号后 a task 是 reducing microplastic exposure 的同位语，that’s becoming increasingly difficult 是修饰 task 的定语从句，说明减少微塑料暴露越来越难，下一句的瓶装水正是这句的例证。",
+          "underlineRanges": [
+            {
+              "start": 7,
+              "end": 49,
+              "quote": "the findings show a potential path forward"
+            },
+            {
+              "start": 87,
+              "end": 93,
+              "quote": "a task"
+            },
+            {
+              "start": 101,
+              "end": 132,
+              "quote": "becoming increasingly difficult"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-d:1"
+              ],
+              "start": 0,
+              "end": 73,
+              "quote": "微塑料已成为遍布地球的常见污染源——它们沉积在深海和喜马拉雅山上，卡在火山岩里，塞满了海鸟的胃，甚至落进了南极新降的雪中。它们甚至正出现在人体内。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-d:2"
+              ],
+              "start": 74,
+              "end": 189,
+              "quote": "如今，新研究表明，一个简单、便宜的办法或许能显著降低自来水中的微塑料含量：把水烧开再过滤。在周三发表于《环境科学与技术快报》的一项研究中，来自中国的研究人员发现，把自来水煮沸仅五分钟，待其冷却后再过滤，就能去除至少80%的微塑料。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-d:3"
+              ],
+              "start": 190,
+              "end": 354,
+              "quote": "关键在于，这个方法依赖水中含有足够的碳酸钙来困住塑料。研究中，煮沸含300毫克碳酸钙的硬水，塑料减少了近90%。但在碳酸钙含量不足60毫克的样本中，煮沸只让塑料含量下降了25%。此外，这项研究并未涵盖所有类型的塑料。研究团队只关注了三种常见类型——聚苯乙烯、聚乙烯和聚丙烯，也没有研究以前在水中发现过的其他化学物质，比如氯乙烯。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-d:4"
+              ],
+              "start": 355,
+              "end": 436,
+              "quote": "尽管如此，这些发现为减少微塑料暴露指出了一条可能的出路，而这项任务正变得越来越难。科学家今年早些时候发现，就连瓶装水所含的微塑料也比原先以为的多10到1000倍。"
+            },
+            {
+              "paragraphId": "zh-reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-d:5"
+              ],
+              "start": 437,
+              "end": 599,
+              "quote": "科学家们仍在努力确定微塑料的危害有多大，但他们已经了解到的情况已引起担忧。这项新研究表明，把自来水烧开可以成为限制摄入的一种手段。“他们展示微塑料如何在煮沸过程中被困住的方式很不错，”未参与这项研究的苏格兰格拉斯哥大学环境工程师卡罗琳·高肖特-林赛对《新科学家》说，“我们应该研究如何升级饮用水处理厂，让它们能去除微塑料。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-d-evidence-32-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-d:1",
+                "start": 74,
+                "end": 230,
+                "quote": "they have settled in the deep sea and on the Himalayas, stuck inside volcanic rocks, filled the stomachs of seabirds and even fallen in fresh Antarctic snow"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p1",
+                "start": 18,
+                "end": 60,
+                "quote": "它们沉积在深海和喜马拉雅山上，卡在火山岩里，塞满了海鸟的胃，甚至落进了南极新降的雪中"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-33-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
+                "start": 24,
+                "end": 79,
+                "quote": "relies on the water containing enough calcium carbonate"
+              },
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
+                "start": 120,
+                "end": 185,
+                "quote": "boiling hard water containing 300 milligrams of calcium carbonate"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 5,
+                "end": 21,
+                "quote": "这个方法依赖水中含有足够的碳酸钙"
+              },
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p3",
+                "start": 31,
+                "end": 45,
+                "quote": "煮沸含300毫克碳酸钙的硬水"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-34-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+                "start": 190,
+                "end": 259,
+                "quote": "contains 10 to 1,000 times more microplastics than originally thought"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 53,
+                "end": 80,
+                "quote": "就连瓶装水所含的微塑料也比原先以为的多10到1000倍"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-evidence-35-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+                "start": 468,
+                "end": 538,
+                "quote": "upgrading drinking water treatment plants so they remove microplastics"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p5",
+                "start": 142,
+                "end": 160,
+                "quote": "升级饮用水处理厂，让它们能去除微塑料"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+                "start": 166,
+                "end": 409,
+                "quote": "In a study published Wednesday in Environmental Science & Technology Letters, researchers from China found that boiling tap water for just five minutes – then filtering it after it cools – could remove at least 80 percent of its microplastics."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p2",
+                "start": 45,
+                "end": 115,
+                "quote": "在周三发表于《环境科学与技术快报》的一项研究中，来自中国的研究人员发现，把自来水煮沸仅五分钟，待其冷却后再过滤，就能去除至少80%的微塑料。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-d-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:34"
+            ],
+            "selectedSentenceId": "sentence-reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-d",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+                "start": 0,
+                "end": 133,
+                "quote": "Still, the findings show a potential path forward for reducing microplastic exposure – a task that’s becoming increasingly difficult."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-d",
+                "paragraphId": "zh-reading-d-p4",
+                "start": 0,
+                "end": 41,
+                "quote": "尽管如此，这些发现为减少微塑料暴露指出了一条可能的出路，而这项任务正变得越来越难。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先说明微塑料污染无处不在，再介绍煮沸过滤自来水可去除大部分微塑料的新研究及其条件和局限，接着指出这一发现的意义，最后引用专家评价并提出升级水厂的建议。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-d:1",
+            "summary": "微塑料已遍布深海、高山、火山岩、海鸟体内和南极雪中，甚至进入人体",
+            "function": "举例提出问题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+            "summary": "中国研究人员发现，自来水煮沸五分钟、冷却后过滤可去除至少80%的微塑料",
+            "function": "介绍新研究及其发现"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
+            "summary": "效果取决于水中碳酸钙含量，且研究只涉及三种常见塑料",
+            "function": "说明方法的条件与研究局限"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+            "summary": "这些发现为减少微塑料暴露指出出路，而连瓶装水的微塑料都远超预想",
+            "function": "评价研究意义，举例说明问题严重"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+            "summary": "微塑料危害尚待确定，专家肯定研究并建议升级饮用水处理厂",
+            "function": "引用专家观点，收束全文"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-i:32": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "判断作者在第一段用什么方法呈现微塑料污染问题。",
+      "stemTranslationZh": "作者在第一段是怎样提出问题的？",
+      "locateBy": "options",
+      "locateFindZh": "对照 [[block:paper-gaokao-2025-i:reading-d:1]]：有没有人的话、定义、数字，还是一串地点",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "通过引用专家的话。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Caroline Gauchotte-Lindsay, an environmental engineer at the University of Glasgow in Scotland",
+            "sourceEntity": "Caroline Gauchotte-Lindsay",
+            "optionText": "By quoting an expert.",
+            "optionEntity": "an expert",
+            "explanation": "引用专家的话出现在[[block:paper-gaokao-2025-i:reading-d:5]]（Gauchotte-Lindsay 的评价），[[block:paper-gaokao-2025-i:reading-d:1]]里没有任何人的话。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+              "quote": "Caroline Gauchotte-Lindsay, an environmental engineer at the University of Glasgow in Scotland",
+              "anchor": "专家的评价"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "通过下定义。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By defining a concept.",
+            "explanation": "[[block:paper-gaokao-2025-i:reading-d:1]]没有解释微塑料是什么，只说它成了常见污染源，并列出它出现的地方。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "通过举例子。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:1",
+              "quote": "Microplastics have become a common source of pollution across the Earth – they have settled in the deep sea and on the Himalayas, stuck inside volcanic rocks, filled the stomachs of seabirds and even fallen in fresh Antarctic snow.",
+              "anchor": "列举微塑料出现的地方"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过提供统计数据。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "could remove at least 80 percent of its microplastics",
+            "sourceEntity": "80 percent",
+            "optionText": "By providing statistics.",
+            "optionEntity": "statistics",
+            "explanation": "数字（如 80 percent、300 milligrams）出现在后面介绍研究的段落，[[block:paper-gaokao-2025-i:reading-d:1]]里一个数字也没有。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+              "quote": "could remove at least 80 percent of its microplastics",
+              "anchor": "研究数据"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "By giving examples.",
+          "sourceRole": "correctOption",
+          "targetText": "Microplastics have become a common source of pollution across the Earth – they have settled in the deep sea and on the Himalayas, stuck inside volcanic rocks, filled the stomachs of seabirds and even fallen in fresh Antarctic snow.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-d:1",
+          "relationType": "paraphrase",
+          "note": "作者先说微塑料已成为遍布地球的常见污染源，接着一口气列出深海、喜马拉雅山、火山岩、海鸟的胃、南极新雪，最后连人体内也有；这些具体例子让“无处不在”看得见，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:33": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出煮沸过滤法去除微塑料效果好坏取决于什么。",
+      "stemTranslationZh": "什么决定了困住水中微塑料的效果？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "水的硬度。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
+              "quote": "Crucially, this process relies on the water containing enough calcium carbonate（碳酸钙）to trap the plastics.",
+              "anchor": "取决于碳酸钙是否足够"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
+              "quote": "In the study, boiling hard water containing 300 milligrams of calcium carbonate led to an almost 90 percent drop in plastics.",
+              "anchor": "硬水中塑料减少近九成"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
+              "quote": "But in samples with less than 60 milligrams of calcium carbonate, boiling reduced the level of plastics by just 25 percent.",
+              "anchor": "碳酸钙少时只减25%"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "冷却时间的长短。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "cools",
+            "optionText": "cooling",
+            "matchType": "wordFamily",
+            "relationNote": "cools 出自[[block:paper-gaokao-2025-i:reading-d:2|then filtering it after it cools]]，只是说等水凉了再过滤，原文没说冷却时间长短会影响效果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+              "quote": "In a study published Wednesday in Environmental Science & Technology Letters, researchers from China found that boiling tap water for just five minutes – then filtering it after it cools – could remove at least 80 percent of its microplastics.",
+              "anchor": "冷却后再过滤"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "过滤的次数。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "filtering",
+            "optionText": "filtering",
+            "matchType": "exact",
+            "relationNote": "filtering 在原文里只是烧开之后的一个步骤，原文没提过滤几次；效果高低随碳酸钙含量变化。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+              "quote": "In a study published Wednesday in Environmental Science & Technology Letters, researchers from China found that boiling tap water for just five minutes – then filtering it after it cools – could remove at least 80 percent of its microplastics.",
+              "anchor": "煮沸后过滤"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "水中塑料的类型。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "types of plastics",
+            "optionText": "type of plastic",
+            "matchType": "wordFamily",
+            "relationNote": "types of plastics 出自[[block:paper-gaokao-2025-i:reading-d:3|include all types of plastics]]，说的是研究只测了三种常见塑料，是研究范围有限，不是决定去除效果的条件。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
+              "quote": "Additionally, the research didn’t include all types of plastics.",
+              "anchor": "研究未涵盖所有塑料类型"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "determines",
+          "sourceRole": "stem",
+          "targetText": "Crucially, this process relies on the water containing enough calcium carbonate（碳酸钙）to trap the plastics.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-d:3",
+          "relationType": "locationCue",
+          "targetCue": "relies on",
+          "sourceZh": "决定",
+          "targetCueZh": "取决于",
+          "answerText": "relies on the water containing enough calcium carbonate",
+          "note": "题干 determines 对应原文 relies on。"
+        },
+        {
+          "sourceText": "The hardness of water.",
+          "sourceRole": "correctOption",
+          "targetText": "In the study, boiling hard water containing 300 milligrams of calcium carbonate led to an almost 90 percent drop in plastics.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的“水的硬度”就是水中碳酸钙的多少（enough calcium carbonate）：原文接着用硬水（hard water）举例，含300毫克碳酸钙时塑料减少近九成，不到60毫克时只减25%，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:34": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "example"
+      },
+      "questionFocus": "判断作者提到瓶装水是为了说明什么观点。",
+      "stemTranslationZh": "作者在第四段提到瓶装水是想说明什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 Even 强调了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "塑料回收的重要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The importance of plastic recycling.",
+            "explanation": "全文没谈塑料回收，瓶装水的例子讲的是水里微塑料含量之高。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "微塑料问题的严重性。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+              "quote": "Even bottled water, scientists found earlier this year, contains 10 to 1,000 times more microplastics than originally thought.",
+              "anchor": "瓶装水微塑料远超预想"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+              "quote": "Still, the findings show a potential path forward for reducing microplastic exposure – a task that’s becoming increasingly difficult.",
+              "anchor": "减少微塑料暴露越来越难"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "过量饮用纯净水的危险。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The danger in overusing pure water.",
+            "explanation": "原文说的是瓶装水里微塑料比想象的多，没说纯净水喝多了有危险。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "处理污水的难度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "increasingly difficult",
+            "optionText": "difficulty",
+            "matchType": "wordFamily",
+            "relationNote": "difficult 出自[[block:paper-gaokao-2025-i:reading-d:4|increasingly difficult]]，难的是减少人们接触微塑料（reducing microplastic exposure），不是处理污水。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+              "quote": "Still, the findings show a potential path forward for reducing microplastic exposure – a task that’s becoming increasingly difficult.",
+              "anchor": "减少微塑料暴露越来越难"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "bottled water",
+          "sourceRole": "stem",
+          "targetText": "Even bottled water, scientists found earlier this year, contains 10 to 1,000 times more microplastics than originally thought.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "contains 10 to 1,000 times more microplastics than originally thought",
+          "note": "题干 bottled water 原词出现在原文。"
+        },
+        {
+          "sourceText": "The severity of the microplastic problem.",
+          "sourceRole": "correctOption",
+          "targetText": "Even bottled water, scientists found earlier this year, contains 10 to 1,000 times more microplastics than originally thought.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "选项的“问题严重”是从例子推出的：连人们以为干净的瓶装水，微塑料都比原先以为的多10到1000倍（10 to 1,000 times more），可见微塑料污染已相当严重，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:35": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂高肖特-林赛建议的内容，概括它关于什么。",
+      "stemTranslationZh": "高肖特-林赛的建议是关于什么的？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句读她的建议",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "新研究方法的选择。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“The way they demonstrated how microplastics were trapped through the boiling process was nice,” Caroline Gauchotte-Lindsay, an environmental engineer at the University of Glasgow in Scotland who was not involved in the research, tells New Scientist.",
+            "sourceEntity": "The way they demonstrated",
+            "optionText": "Choice of new research methods.",
+            "optionEntity": "new research methods",
+            "explanation": "她夸研究展示截留过程的方式不错（was nice），这是评价已有的做法，她的建议并不涉及选用新的研究方法。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+              "quote": "“The way they demonstrated how microplastics were trapped through the boiling process was nice,” Caroline Gauchotte-Lindsay, an environmental engineer at the University of Glasgow in Scotland who was not involved in the research, tells New Scientist.",
+              "anchor": "评价研究的展示方式"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "进一步研究的可能方向。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“We should be looking into upgrading drinking water treatment plants so they remove microplastics.”",
+            "sourceEntity": "drinking water treatment plants",
+            "optionText": "Possible direction for further study.",
+            "optionEntity": "further study",
+            "explanation": "looking into 听上去像要继续做研究，但她说的是升级饮用水处理厂、去除微塑料，落在实际处理自来水上，不是给科研指下一步方向。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+              "quote": "“We should be looking into upgrading drinking water treatment plants so they remove microplastics.”",
+              "anchor": "建议升级水厂"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "需要更多研究者参与。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "was not involved in the research",
+            "optionText": "involve",
+            "matchType": "wordFamily",
+            "relationNote": "involved 出自[[block:paper-gaokao-2025-i:reading-d:5|who was not involved in the research]]，只是交代她没参与这项研究，并不是建议让更多研究者加入。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+              "quote": "“The way they demonstrated how microplastics were trapped through the boiling process was nice,” Caroline Gauchotte-Lindsay, an environmental engineer at the University of Glasgow in Scotland who was not involved in the research, tells New Scientist.",
+              "anchor": "她未参与这项研究"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "研究发现的可能应用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+              "quote": "“We should be looking into upgrading drinking water treatment plants so they remove microplastics.”",
+              "anchor": "建议升级饮用水处理厂"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Gauchotte-Lindsay",
+          "sourceRole": "stem",
+          "targetText": "“The way they demonstrated how microplastics were trapped through the boiling process was nice,” Caroline Gauchotte-Lindsay, an environmental engineer at the University of Glasgow in Scotland who was not involved in the research, tells New Scientist.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-d:5",
+          "relationType": "locationCue",
+          "answerText": "upgrading drinking water treatment plants so they remove microplastics",
+          "bridgeZh": "她先评价这项研究，接着用 should 提出建议",
+          "note": "题干 Gauchotte-Lindsay 原词出现在原文。"
+        },
+        {
+          "sourceText": "Potential application of the findings.",
+          "sourceRole": "correctOption",
+          "targetText": "“We should be looking into upgrading drinking water treatment plants so they remove microplastics.”",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“研究发现的可能应用”概括了她的建议：升级饮用水处理厂、让它们去除微塑料（upgrading drinking water treatment plants），是把这项发现指出的出路用到实际的饮用水处理上，选 D。"
+        }
+      ]
+    }
+  }
+}

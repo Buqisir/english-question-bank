@@ -1,0 +1,565 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-i:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-i:reading-a": {
+      "overview": "文章聚焦交通运输的去碳化：交通约占能源相关温室气体排放的四分之一，文中用图表给出各交通方式的排放占比和未来燃料方案，并借专家之口呼吁加快发展可再生能源。",
+      "fullTranslationZh": "飞机、火车和汽车的绿色转型\n在世界各地运送货物和人员，是全球二氧化碳排放的一大来源。在世界竞相让一切去碳化的过程中，交通运输尤其棘手——它约占我们与能源相关的温室气体排放的四分之一。以下是2018年各种交通方式的排放构成。\n（图表）道路车辆：道路（客运）45.1%，道路（货运）29.4%；飞机 11.6%；航运 10.6%；铁路 1%；其他 2.2%。\n交通燃料不仅要绿色、便宜、动力足，还要足够轻便、安全，便于随车携带。每种交通方式都有各自特定的燃料需求。许多问题仍有待解决，但下面这些方案能让我们走向绿色。\n（图表）未来燃料。飞机——合成碳氢化合物：最难去碳的领域是航空。飞机可持续燃料的一个长期选择，是用回收的空气制造碳氢化合物。汽车——电池：电池能效高，电动汽车可以接入现有的系统和服务。新型固态电池能让汽车充一次电跑得更远。火车——电力：有些火车已经通过铁轨或电线实现了电气化；其余的也能用相当简单的办法改成电动。卡车——氢燃料电池：对卡车来说，氢燃料电池是比电池更轻的选择，但制取绿色氢气成本很高。船舶——液氨：液氨便于储存和运输，但难以点燃，而且需要重新设计发动机。\n这场能源变革是全球性的，世界将需要的可再生能源数量“有点令人震惊”，美国国家可再生能源实验室的机械工程师基思·维普克说。据估计，到2050年，全球电力需求可能增长一倍以上。幸运的是，分析表明可再生能源足以胜任。“我们需要加快绿色能源的开发，而且这些能源都会被用上。”维普克说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-a-1",
+          "paragraphId": "block:paper-gaokao-2025-i:reading-a:2",
+          "sourceText": "As the world races to decarbonize everything, it faces particular problems with transportation – which accounts for about a quarter of our energy-related greenhouse gas emissions.",
+          "displayText": "As the world races to decarbonize everything, it faces particular problems with transportation – which accounts for about a quarter of our energy-related greenhouse gas emissions.",
+          "relatedQuestionIds": [],
+          "translationZh": "在世界竞相让一切去碳化的过程中，交通运输尤其棘手——它约占我们与能源相关的温室气体排放的四分之一。",
+          "analysisZh": "先找主干：it faces particular problems with transportation（它在交通运输上面临特别的难题），it 指 the world。句首 As 引导时间状语从句，说的是“在世界竞相去碳化的同时”。破折号后的 which 从句补充说明 transportation：它约占与能源相关的温室气体排放的四分之一，这正解释了交通为什么是难点。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 18,
+              "quote": "As the world races"
+            },
+            {
+              "start": 46,
+              "end": 74,
+              "quote": "it faces particular problems"
+            },
+            {
+              "start": 97,
+              "end": 131,
+              "quote": "which accounts for about a quarter"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-a-2",
+          "paragraphId": "block:paper-gaokao-2025-i:reading-a:4",
+          "sourceText": "The fuels for transport need to be not just green, cheap and powerful, but also lightweight and safe enough to be carried around.",
+          "displayText": "The fuels for transport need to be not just green, cheap and powerful, but also lightweight and safe enough to be carried around.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:22"
+          ],
+          "translationZh": "交通燃料不仅要绿色、便宜、动力足，还要足够轻便、安全，便于随车携带。",
+          "analysisZh": "主干是 The fuels need to be ...（燃料需要具备……）。not just ... but also ... 连接两组表语：前一组 green, cheap and powerful，后一组 lightweight and safe；enough to be carried around 修饰后一组，说明轻便安全到能随车带着走的程度。这句列出的几条标准，正是后面图表逐一比较各种燃料难易的依据。",
+          "underlineRanges": [
+            {
+              "start": 35,
+              "end": 69,
+              "quote": "not just green, cheap and powerful"
+            },
+            {
+              "start": 71,
+              "end": 100,
+              "quote": "but also lightweight and safe"
+            },
+            {
+              "start": 101,
+              "end": 128,
+              "quote": "enough to be carried around"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-a:1"
+              ],
+              "start": 0,
+              "end": 13,
+              "quote": "飞机、火车和汽车的绿色转型"
+            },
+            {
+              "paragraphId": "zh-reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-a:2"
+              ],
+              "start": 14,
+              "end": 111,
+              "quote": "在世界各地运送货物和人员，是全球二氧化碳排放的一大来源。在世界竞相让一切去碳化的过程中，交通运输尤其棘手——它约占我们与能源相关的温室气体排放的四分之一。以下是2018年各种交通方式的排放构成。"
+            },
+            {
+              "paragraphId": "zh-reading-a-fig1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-a:2"
+              ],
+              "start": 112,
+              "end": 177,
+              "quote": "（图表）道路车辆：道路（客运）45.1%，道路（货运）29.4%；飞机 11.6%；航运 10.6%；铁路 1%；其他 2.2%。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-a:4"
+              ],
+              "start": 178,
+              "end": 256,
+              "quote": "交通燃料不仅要绿色、便宜、动力足，还要足够轻便、安全，便于随车携带。每种交通方式都有各自特定的燃料需求。许多问题仍有待解决，但下面这些方案能让我们走向绿色。"
+            },
+            {
+              "paragraphId": "zh-reading-a-fig2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-a:4"
+              ],
+              "start": 257,
+              "end": 491,
+              "quote": "（图表）未来燃料。飞机——合成碳氢化合物：最难去碳的领域是航空。飞机可持续燃料的一个长期选择，是用回收的空气制造碳氢化合物。汽车——电池：电池能效高，电动汽车可以接入现有的系统和服务。新型固态电池能让汽车充一次电跑得更远。火车——电力：有些火车已经通过铁轨或电线实现了电气化；其余的也能用相当简单的办法改成电动。卡车——氢燃料电池：对卡车来说，氢燃料电池是比电池更轻的选择，但制取绿色氢气成本很高。船舶——液氨：液氨便于储存和运输，但难以点燃，而且需要重新设计发动机。"
+            },
+            {
+              "paragraphId": "zh-reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-a:6"
+              ],
+              "start": 492,
+              "end": 630,
+              "quote": "这场能源变革是全球性的，世界将需要的可再生能源数量“有点令人震惊”，美国国家可再生能源实验室的机械工程师基思·维普克说。据估计，到2050年，全球电力需求可能增长一倍以上。幸运的是，分析表明可再生能源足以胜任。“我们需要加快绿色能源的开发，而且这些能源都会被用上。”维普克说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-a-evidence-21-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:21"
+            ],
+            "sourceRanges": [
+              {
+                "figureId": "block:paper-gaokao-2025-i:reading-a:figure-998ae259ce38fcb6",
+                "regionId": "road-vehicles"
+              },
+              {
+                "figureId": "block:paper-gaokao-2025-i:reading-a:figure-998ae259ce38fcb6",
+                "regionId": "road-passenger"
+              },
+              {
+                "figureId": "block:paper-gaokao-2025-i:reading-a:figure-998ae259ce38fcb6",
+                "regionId": "road-goods"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-fig1",
+                "start": 4,
+                "end": 32,
+                "quote": "道路车辆：道路（客运）45.1%，道路（货运）29.4%"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-evidence-22-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:22"
+            ],
+            "sourceRanges": [
+              {
+                "figureId": "block:paper-gaokao-2025-i:reading-a:figure-84b9980d99863cf8",
+                "regionId": "trains-title"
+              },
+              {
+                "figureId": "block:paper-gaokao-2025-i:reading-a:figure-84b9980d99863cf8",
+                "regionId": "trains-body"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-fig2",
+                "start": 118,
+                "end": 155,
+                "quote": "有些火车已经通过铁轨或电线实现了电气化；其余的也能用相当简单的办法改成电动"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-evidence-23-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+                "start": 370,
+                "end": 410,
+                "quote": "speed up the development of green energy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p6",
+                "start": 110,
+                "end": 119,
+                "quote": "加快绿色能源的开发"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-a:2",
+                "start": 102,
+                "end": 281,
+                "quote": "As the world races to decarbonize everything, it faces particular problems with transportation – which accounts for about a quarter of our energy-related greenhouse gas emissions."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p2",
+                "start": 28,
+                "end": 77,
+                "quote": "在世界竞相让一切去碳化的过程中，交通运输尤其棘手——它约占我们与能源相关的温室气体排放的四分之一。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-a-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:22"
+            ],
+            "selectedSentenceId": "sentence-reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-a",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-a:4",
+                "start": 0,
+                "end": 129,
+                "quote": "The fuels for transport need to be not just green, cheap and powerful, but also lightweight and safe enough to be carried around."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-a",
+                "paragraphId": "zh-reading-a-p4",
+                "start": 0,
+                "end": 34,
+                "quote": "交通燃料不仅要绿色、便宜、动力足，还要足够轻便、安全，便于随车携带。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先指出交通是去碳化的难点并用饼图给出各交通方式的排放占比，再说明交通燃料的要求，用图表列出各类交通工具的未来燃料方案，最后借专家之口呼吁加快发展绿色能源。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-a:1",
+            "summary": "点出话题：飞机、火车和汽车的绿色转型",
+            "function": "标题，交代全文话题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-a:2",
+            "summary": "交通运输约占能源相关温室气体排放的四分之一，去碳化难度大，并引出2018年排放构成图",
+            "function": "提出问题，引出饼图数据"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-a:4",
+            "summary": "交通燃料既要绿色便宜，又要轻便安全，各交通方式需求不同，引出未来燃料方案",
+            "function": "承上启下，引出燃料方案图表"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+            "summary": "能源变革是全球性的，可再生能源需求巨大，专家认为应加快发展绿色能源",
+            "function": "收束全文，借专家观点表明态度"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-i:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "从排放饼图中找出属于道路车辆的两块，把百分比相加。",
+      "stemTranslationZh": "2018年，道路车辆的排放占全球交通排放的百分之多少？",
+      "locateBy": "options",
+      "locateFindZh": "在饼图中找出标着 ROAD 的两块，把百分比相加",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "11.6%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Here’s the breakdown of the emissions in 2018 for different modes of transport.",
+            "sourceEntity": "different modes of transport",
+            "optionText": "11.6%.",
+            "optionEntity": "11.6%",
+            "explanation": "11.6% 是图中飞机（AIRPLANES）那一块的比例，不是道路车辆的。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "45.1%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Here’s the breakdown of the emissions in 2018 for different modes of transport.",
+            "sourceHighlight": "different modes of transport",
+            "optionText": "45.1%.",
+            "optionHighlight": "45.1%",
+            "explanation": "45.1% 只是道路客运一块，漏加了道路货运（ROAD (GOODS)）的 29.4%。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "74.5%。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:2",
+              "quote": "Here’s the breakdown of the emissions in 2018 for different modes of transport.",
+              "anchor": "2018年各交通方式排放构成见图"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "86.1%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "Here’s the breakdown of the emissions in 2018 for different modes of transport.",
+            "sourceHighlight": "different modes of transport",
+            "optionText": "86.1%.",
+            "optionHighlight": "86.1%",
+            "explanation": "86.1% 是把飞机的 11.6% 也加了进去（45.1% + 29.4% + 11.6%），而飞机不属于道路车辆。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "74.5%",
+          "sourceRole": "correctOption",
+          "targetText": "ROAD (PASSENGER) 45.1%",
+          "relationType": "calculation",
+          "note": "选项的 74.5% 是图中两块道路扇区相加得来：道路客运（ROAD (PASSENGER)）45.1% 加道路货运（ROAD (GOODS)）29.4%，45.1% + 29.4% = 74.5%，选 C。"
+        },
+        {
+          "sourceText": "74.5%",
+          "sourceRole": "correctOption",
+          "targetText": "ROAD (GOODS) 29.4%",
+          "relationType": "calculation",
+          "note": "选项的 74.5% 是图中两块道路扇区相加得来：道路客运（ROAD (PASSENGER)）45.1% 加道路货运（ROAD (GOODS)）29.4%，45.1% + 29.4% = 74.5%，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "comparison-integration",
+        "detailScope": "multiple",
+        "technique": null
+      },
+      "questionFocus": "对照“未来燃料”图表中各交通方式的说明，比较哪一种改用绿色能源的难处最少。",
+      "stemTranslationZh": "哪种交通方式相对容易实现绿色化？",
+      "locateBy": "options",
+      "locateFindZh": "在 FUTURE FUELS 图表里按选项找到各栏，比较各自的难处",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "飞机。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Each mode of transport has its specific fuel needs.",
+            "sourceEntity": "Each mode of transport",
+            "optionText": "Planes.",
+            "optionEntity": "Planes",
+            "explanation": "图表飞机一栏开头就说航空是最难去碳的领域（The hardest sector to decarbonize），和“相对容易”正相反。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "卡车。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Each mode of transport has its specific fuel needs.",
+            "sourceEntity": "Each mode of transport",
+            "optionText": "Trucks.",
+            "optionEntity": "Trucks",
+            "explanation": "卡车一栏虽说氢燃料电池比电池轻，但制取绿色氢气很贵（expensive），转型并不轻松。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "火车。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:4",
+              "quote": "Much is still to be settled, but here are some of the solutions to get us going green.",
+              "anchor": "后面图表列出各交通方式的绿色方案"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "船舶。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Each mode of transport has its specific fuel needs.",
+            "sourceEntity": "Each mode of transport",
+            "optionText": "Ships.",
+            "optionEntity": "Ships",
+            "explanation": "船舶一栏说液氨便于储运，但难以点燃，还得重新设计发动机（requires an engine redesign）。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Trains.",
+          "sourceRole": "correctOption",
+          "targetText": "Some trains are already electrified through rails or wires; others can be made electric in pretty simple ways.",
+          "relationType": "paraphrase",
+          "note": "选项的“相对容易变绿”对应火车一栏的两点：有些火车已经电气化了（already electrified），其余的也能用相当简单的办法改成电动（in pretty simple ways）；其他几栏都写了难处，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出维普克在引语里对能源变革提出的建议。",
+      "stemTranslationZh": "关于能源变革，维普克建议什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "限制燃料消耗。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "“We need to speed up the development of green energy, and it will all get used,” says Wipke.",
+            "sourceHighlight": "it will all get used",
+            "optionText": "Limiting fuel consumption.",
+            "optionHighlight": "Limiting",
+            "explanation": "维普克主张多开发绿色能源，还说造出来的都会被用上（it will all get used），并没有让人少用燃料。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "quote": "“We need to speed up the development of green energy, and it will all get used,” says Wipke.",
+              "anchor": "维普克的建议"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "在可再生能源上投入更多努力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "quote": "“We need to speed up the development of green energy, and it will all get used,” says Wipke.",
+              "anchor": "维普克的建议"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "提高能源效率。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Improving energy efficiency.",
+            "explanation": "维普克只谈加快开发绿色能源，没提提高能效；图表里的 energy-efficient 是说电池，与他的建议无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "让电力更便宜。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "electricity",
+            "optionText": "electricity",
+            "matchType": "exact",
+            "relationNote": "electricity 出自[[block:paper-gaokao-2025-i:reading-a:6|global demand for electricity]]，说的是到 2050 年全球用电需求可能翻一番以上，讲需求量，没说要让电更便宜。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "quote": "It’s estimated that the global demand for electricity could more than double by 2050.",
+              "anchor": "全球用电需求预计翻番"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Wipke",
+          "sourceRole": "stem",
+          "targetText": "“We need to speed up the development of green energy, and it will all get used,” says Wipke.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-a:6",
+          "relationType": "locationCue",
+          "answerText": "speed up the development of green energy",
+          "note": "题干 Wipke 原词出现在原文，他的建议就在这句引语里。"
+        },
+        {
+          "sourceText": "Putting more effort into renewables.",
+          "sourceRole": "correctOption",
+          "targetText": "“We need to speed up the development of green energy, and it will all get used,” says Wipke.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-a:6",
+          "relationType": "paraphrase",
+          "note": "选项的“在可再生能源上多下功夫”就是原文的“加快绿色能源的开发”（speed up the development of green energy），绿色能源也就是前文的 renewables，选 B。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Jenny,\n\nI really like the idea of adding a new column to our English newspaper. Of the two options, I would choose “Guess who I am”.\n\nThe main reason is that it turns reading into a game. Each week, one student could describe themselves in English, mentioning a hobby, a funny habit or a dream, but leaving out their name. The rest of us would then search for clues and guess who it is. This way, even classmates who seldom speak English would want to read every line. Besides, we might discover surprising sides of the people we sit next to every day.\n\nI’m sure this column would make our newspaper something everyone looks forward to. If you agree, I’d be happy to write the first piece.\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "电子邮件，沿用题面给出的称呼、首句和落款",
+        "personTense": "以李华的第一人称表态，以一般现在时为主，设想栏目效果时用 would",
+        "readerTone": "写给熟悉的外教 Jenny，语气友好、直接，可以带一点学生的热情",
+        "goal": "告诉 Jenny 我选哪个栏目，并用理由让她觉得这个选择值得采纳"
+      },
+      "taskRequires": [
+        "说明自己在两个栏目中的选择",
+        "说明选择的理由"
+      ],
+      "thisEssayChooses": "选 “Guess who I am”。理由是它把读报变成猜人游戏，不爱说英语的同学也愿意读，还能让同学发现彼此的另一面；结尾主动提出写第一期。"
+    },
+    "standard": {
+      "essay": "Dear Jenny,\n\nI really like the idea of adding a new column to our English newspaper. Of the two options, I would choose “Guess who I am”.\n\nThe main reason is that it turns reading into a game. Each week, one student could describe themselves in English, mentioning a hobby, a funny habit or a dream, but leaving out their name. The rest of us would then search for clues and guess who it is. This way, even classmates who seldom speak English would want to read every line. Besides, we might discover surprising sides of the people we sit next to every day.\n\nI’m sure this column would make our newspaper something everyone looks forward to. If you agree, I’d be happy to write the first piece.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明自己的选择",
+          "quote": "Of the two options, I would choose “Guess who I am”."
+        },
+        {
+          "point": "说明选择的理由",
+          "quote": "The main reason is that it turns reading into a game."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接住给定首句，马上亮出选择",
+          "items": [
+            {
+              "quote": "Of the two options, I would choose “Guess who I am”.",
+              "explain": "题面给了两个选项，Of the two options 先把范围点明，再说选哪个，Jenny 读第一段就知道答案。不用重复“我喜欢加栏目”，给定首句已经说过。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "讲理由：先说核心好处，再说具体怎么玩、对谁有用",
+          "items": [
+            {
+              "quote": "it turns reading into a game",
+              "explain": "一句话说出这个栏目的特点：读报变成游戏。后面的内容都在解释这句话，理由有了中心。"
+            },
+            {
+              "quote": "mentioning a hobby, a funny habit or a dream, but leaving out their name",
+              "explain": "用三个具体例子说明“介绍自己”写什么，再用 but leaving out their name 点出猜的关键，Jenny 一读就知道栏目怎么办。"
+            },
+            {
+              "quote": "even classmates who seldom speak English would want to read every line",
+              "explain": "理由站在全班和外教的角度：连不爱说英语的同学都愿意读，这正是办英文报的目的，比只说“我喜欢”更能说服老师。"
+            },
+            {
+              "quote": "Besides, we might discover surprising sides of the people we sit next to every day.",
+              "explain": "Besides 补上第二个好处，用 the people we sit next to every day 这样的日常画面代替“增进友谊”这类空话。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "收住全文，给 Jenny 一个可以回应的下一步",
+          "items": [
+            {
+              "quote": "If you agree, I’d be happy to write the first piece.",
+              "explain": "结尾不喊口号，而是主动提出写第一期。Jenny 读完只需回答同不同意，交际有了落点。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "Of the two options, I would choose …",
+          "function": "在给定的几个选项中表态，先点范围再说选择，适合各类“二选一”应用文。"
+        },
+        {
+          "expression": "turn reading into a game",
+          "function": "把栏目的好处浓缩成一个动作，比 interesting 具体，说清它怎样吸引读者。"
+        },
+        {
+          "expression": "If you agree, I’d be happy to …",
+          "function": "礼貌地主动承担任务，把结尾落到对方可以回应的下一步。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Jenny,\n\nI really like the idea of adding a new column to our English newspaper. Of the two options, “Guess who I am” gets my vote, and here is why.\n\nFirst, it turns reading into a game. In each issue, one student could describe themselves, mentioning a hobby, a funny habit or an unusual dream, while keeping their name a secret. Everyone else would then hunt for clues and make a guess. Even those who usually skip English articles would read every line.\n\nMore importantly, it would bring our class closer. Although we sit in the same classroom every day, we know surprisingly little about one another. This column gives everyone a chance to be noticed, and the answer in the next issue would give us something to chat about.\n\nI’m confident it would make our newspaper the first thing people pick up each week. If you agree, I’d be glad to write the first piece myself.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明自己的选择",
+          "quote": "Of the two options, “Guess who I am” gets my vote, and here is why."
+        },
+        {
+          "point": "说明选择的理由",
+          "quote": "First, it turns reading into a game."
+        },
+        {
+          "point": "说明选择的理由",
+          "quote": "More importantly, it would bring our class closer."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "“Guess who I am” gets my vote, and here is why",
+          "explain": "用 gets my vote 回应 Jenny 让大家“选择”的做法，像真的在投票；and here is why 自然引出下文，比标准版的 I would choose 更有对话感。"
+        },
+        {
+          "quote": "Although we sit in the same classroom every day, we know surprisingly little about one another.",
+          "explain": "标准版把“发现同学另一面”作为附带好处一句带过，提高版单独成段，用 Although 先摆出天天见面却不了解的反差，让第二个理由更有分量。"
+        },
+        {
+          "quote": "the answer in the next issue would give us something to chat about",
+          "explain": "设想下一期公布答案，把栏目怎样连续运作也写出来了，理由更具体、更可行。"
+        }
+      ]
+    }
+  }
+}

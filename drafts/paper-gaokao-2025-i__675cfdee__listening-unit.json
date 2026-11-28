@@ -1,0 +1,1023 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-gaokao-2025-i",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "M: Excuse me. I just arrived on the flight from Melbourne, and my suitcase is missing.\nW: We’re very sorry Sir. Could you put down your information in this form? We’ll do everything we can to find your suitcase.\nM: Okay.",
+      "translationZh": "男：打扰一下。我刚坐从墨尔本来的航班到这儿，我的行李箱不见了。\n女：非常抱歉，先生。您能在这张表上写下您的信息吗？我们会尽一切努力找到您的行李箱。\n男：好的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "男士下飞机发现行李箱丢失，工作人员请他填表登记，以便查找行李。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "打扰一下。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "我刚坐从墨尔本来的航班到这儿，我的行李箱不见了。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "非常抱歉，先生。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "您能在这张表上写下您的信息吗？"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "我们会尽一切努力找到您的行李箱。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "好的。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "M: Have you talked over your future plans with your parents, Sarah?\nW: Well, my parents would like me to do my Masters after graduation, but I’m thinking of volunteering as a social worker for a year.\nM: Good for you.",
+      "translationZh": "男：萨拉，你和父母谈过你将来的打算吗？\n女：嗯，我父母希望我毕业后读硕士，但我在考虑先去当一年志愿社工。\n男：挺好的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "未来规划"
+      },
+      "summaryZh": "萨拉的父母希望她毕业后读硕士，她自己打算先做一年志愿社工。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "萨拉，你和父母谈过你将来的打算吗？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "嗯，我父母希望我毕业后读硕士，但我在考虑先去当一年志愿社工。"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "挺好的。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "W: We really need to move, Steve. So many cars go by every day and no sun comes through the windows.\nM: Yeah, this house is kind of old. What do you have in mind?\nW: Maybe we should have a look in the suburbs.",
+      "translationZh": "女：史蒂夫，我们真得搬家了。每天有那么多车经过，窗户里一点阳光都照不进来。\n男：是啊，这房子也有点旧了。你有什么想法？\n女：也许我们该去郊区看看。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "女士嫌房子临街吵闹、采光差，和史蒂夫商量搬家，打算去郊区看房。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "史蒂夫，我们真得搬家了。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "每天有那么多车经过，窗户里一点阳光都照不进来。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "是啊，这房子也有点旧了。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "你有什么想法？"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "也许我们该去郊区看看。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "M: Do you often ski here?\nW: No, this is my first time.\nM: So how do you like it so far?\nW: The snow is brilliant. It would be better if there were fewer people.",
+      "translationZh": "男：你常来这儿滑雪吗？\n女：不，这是我第一次来。\n男：那到目前为止你觉得怎么样？\n女：雪特别好。要是人少一点就更好了。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "日常体育活动"
+      },
+      "summaryZh": "女士第一次来这个滑雪场，觉得雪质很好，只是嫌人太多。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "你常来这儿滑雪吗？"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "不，这是我第一次来。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "那到目前为止你觉得怎么样？"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "雪特别好。"
+        },
+        {
+          "id": "listening-text-4:5",
+          "zh": "要是人少一点就更好了。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: Now we’ve crossed the stone bridge. Turn right again. Look! here’s the Art Center. The Grand Theater is two blocks away.\nM: Nearly there. We won’t be late then.",
+      "translationZh": "女：我们已经过了石桥。再右转。看！艺术中心到了。大剧院就在两个街区以外。\n男：快到了。那我们不会迟到了。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "社区生活"
+      },
+      "summaryZh": "两人过了石桥、经过艺术中心，大剧院只剩两个街区，不会迟到。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "我们已经过了石桥。"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "再右转。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "看！"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "艺术中心到了。"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "大剧院就在两个街区以外。"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "快到了。"
+        },
+        {
+          "id": "listening-text-5:7",
+          "zh": "那我们不会迟到了。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "M: Miss, I’ll need to see your driver’s license.\nW: Was I doing something wrong?\nM: You’re driving in a school zone around the time school lets out. The speed limit is 15(fifteen) miles an hour and you were going 35(thirty-five).\nW: But it’s only 2:10 P.M. the students aren’t dismissed until 3:30.\nM: Today is Wednesday. Students are dismissed an hour and a half early on Wednesdays.\nW: Oh, no! You’re right. I just forgot that.",
+      "translationZh": "男：女士，我需要看一下您的驾照。\n女：我做错什么了吗？\n男：您正在放学时段驶过学校区域。这里限速每小时15英里，您却开到了35英里。\n女：可现在才下午2:10，学生要到3:30才放学啊。\n男：今天是星期三。每周三学生提前一个半小时放学。\n女：哦，糟了！您说得对。我把这事忘了。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "历史、社会与文化",
+        "subtopic": "法治意识"
+      },
+      "summaryZh": "女士在学校区域超速被拦下，她忘了周三学生提前一个半小时放学。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "女士，我需要看一下您的驾照。"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "我做错什么了吗？"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "您正在放学时段驶过学校区域。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "这里限速每小时15英里，您却开到了35英里。"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "可现在才下午2:10，学生要到3:30才放学啊。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "今天是星期三。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "每周三学生提前一个半小时放学。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "哦，糟了！"
+        },
+        {
+          "id": "listening-text-6:9",
+          "zh": "您说得对。"
+        },
+        {
+          "id": "listening-text-6:10",
+          "zh": "我把这事忘了。"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "M: Hi Grace. Haven’t seen you for some time!\nW: Oh Kevin. nice to see you. Are you also here for dinner?\nM: Yes, my cousin Fiona is in town and this is her favorite Steakhouse. You met her last year, right?\nW: Yes, at Jennifer’s wedding.\nM: Right, Look are you here alone? Would you like to join us?\nW: That’s very nice of you, but I’m meeting David and some other friends for dinner. You remember David? From class two.\nM: Of course. He was the captain of our school’s basketball team. I haven’t seen him since graduation.\nW: He worked abroad for three years and has just come back.\nM: Well, I’ll go and say a quick hello. We definitely should get together some time and have a drink.",
+      "translationZh": "男：嗨，格雷丝。好久不见！\n女：哦，凯文。见到你真高兴。你也是来吃晚饭的吗？\n男：是的，我表妹菲奥娜来城里了，这家牛排馆是她最喜欢的。你去年见过她，对吧？\n女：对，在詹妮弗的婚礼上。\n男：没错。对了，你是一个人来的吗？要不要和我们一起？\n女：你真好，不过我约了戴维和另外几个朋友吃晚饭。你还记得戴维吗？二班的。\n男：当然记得。他以前是我们学校篮球队的队长。毕业以后我就没见过他。\n女：他在国外工作了三年，刚回来。\n男：那我过去跟他打个招呼。我们真该找个时间聚一聚，喝一杯。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "老同学格雷丝和凯文在餐厅偶遇，格雷丝约了戴维吃饭，凯文要去打招呼。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "嗨，格雷丝。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "好久不见！"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "哦，凯文。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "见到你真高兴。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "你也是来吃晚饭的吗？"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "是的，我表妹菲奥娜来城里了，这家牛排馆是她最喜欢的。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "你去年见过她，对吧？"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "对，在詹妮弗的婚礼上。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "没错。对了，你是一个人来的吗？"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "要不要和我们一起？"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "你真好，不过我约了戴维和另外几个朋友吃晚饭。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "你还记得戴维吗？"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "二班的。"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "当然记得。"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "他以前是我们学校篮球队的队长。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "毕业以后我就没见过他。"
+        },
+        {
+          "id": "listening-text-7:17",
+          "zh": "他在国外工作了三年，刚回来。"
+        },
+        {
+          "id": "listening-text-7:18",
+          "zh": "那我过去跟他打个招呼。"
+        },
+        {
+          "id": "listening-text-7:19",
+          "zh": "我们真该找个时间聚一聚，喝一杯。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: There’s nothing decent to watch these days on TV.\nM: Nothing decent? There’re tons of stuff.\nW: They’ve cut down on the number of news programs and the number of documentaries. All have been replaced by these stupid reality shows and game shows. You know?\nM: Well, they often make me laugh. People want to watch that kind of thing. It’s good, you know? As long as there’s a balance, there’s a bit of this a bit of that.\nW: Should we be giving people what they want to watch? Or should we be... You know trying to educate them?\nM: Well, TV’s there for entertainment if you want an education you go to university or college or something, don’t you?\nW: No, I really don’t think so.",
+      "translationZh": "女：如今电视上没什么像样的节目可看。\n男：没什么像样的？节目多得是。\n女：新闻节目和纪录片的数量都减少了。全被这些愚蠢的真人秀和游戏节目取代了。你明白吗？\n男：嗯，它们常常让我发笑。人们就想看这类东西。这挺好的，不是吗？只要有个平衡，这个有一点、那个有一点就行。\n女：我们是该给人们想看的东西呢？还是该……你知道的，努力去教育他们？\n男：嗯，电视就是用来娱乐的，如果你想受教育，就去上大学或学院之类的，不是吗？\n女：不，我真不这么认为。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "影视领域的概况及其发展"
+      },
+      "summaryZh": "两人争论电视节目：女士不满新闻纪录片减少，希望电视育人；男士爱看真人秀，认为电视为娱乐。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "如今电视上没什么像样的节目可看。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "没什么像样的？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "节目多得是。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "新闻节目和纪录片的数量都减少了。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "全被这些愚蠢的真人秀和游戏节目取代了。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "你明白吗？"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "嗯，它们常常让我发笑。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "人们就想看这类东西。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "这挺好的，不是吗？"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "只要有个平衡，这个有一点、那个有一点就行。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "我们是该给人们想看的东西呢？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "还是该……"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "你知道的，努力去教育他们？"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "嗯，电视就是用来娱乐的，如果你想受教育，就去上大学或学院之类的，不是吗？"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "不，我真不这么认为。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "W: Welcome to Education Update, this is Kathy. We have Robert Hall from mountainside High School with us today.\nW: Hello, Mr. Hall, could you tell us about the service program in your school?\nM: Okay, it goes like this on certain days each month adults from the neighborhood sit in class with the students and see what’s going on in the school.\nW: That’s interesting. What else can they do?\nM: They can also take adult courses in the evenings for both fun and serious learning.\nW: What about the students? What can they do in the program?\nM: Well, they can change places with adults and go working on a farm or in a factory or taking care of the housework.\nW: Good. This helps them better understand the lives of their parents and know more about their neighborhood.\nM: Yes, students have a chance to work in hospitals, nursing homes, libraries and even in government offices.\nW: So the school is not only part of the students’ lives, but also part of the neighborhood.\nM: That’s exactly what our service program is for.\nW: Great. Thank you, Mr. Hall.",
+      "translationZh": "女：欢迎收听《教育动态》，我是凯西。今天我们请到了山边高中的罗伯特·霍尔。\n女：你好，霍尔先生，能给我们介绍一下贵校的服务项目吗？\n男：好的，是这样的：每个月的某几天，社区里的成年人会和学生一起坐在课堂里，看看学校里在做些什么。\n女：很有意思。他们还能做什么？\n男：他们还可以在晚上参加成人课程，既有兴趣类的，也有正经的学习。\n女：那学生呢？他们在这个项目里能做什么？\n男：嗯，他们可以和成年人互换位置，去农场或工厂干活，或者操持家务。\n女：好。这能帮助他们更好地理解父母的生活，更多地了解自己的社区。\n男：是的，学生还有机会到医院、养老院、图书馆，甚至政府机关工作。\n女：所以学校不仅是学生生活的一部分，也是社区的一部分。\n男：这正是我们服务项目的目的。\n女：很好。谢谢你，霍尔先生。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "主持人凯西采访霍尔，介绍学校让社区成人进校、学生走进社区的服务项目。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "欢迎收听《教育动态》，我是凯西。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "今天我们请到了山边高中的罗伯特·霍尔。"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "你好，霍尔先生，能给我们介绍一下贵校的服务项目吗？"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "好的，是这样的：每个月的某几天，社区里的成年人会和学生一起坐在课堂里，看看学校里在做些什么。"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "很有意思。"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "他们还能做什么？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "他们还可以在晚上参加成人课程，既有兴趣类的，也有正经的学习。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "那学生呢？"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "他们在这个项目里能做什么？"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "嗯，他们可以和成年人互换位置，去农场或工厂干活，或者操持家务。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "好。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "这能帮助他们更好地理解父母的生活，更多地了解自己的社区。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "是的，学生还有机会到医院、养老院、图书馆，甚至政府机关工作。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "所以学校不仅是学生生活的一部分，也是社区的一部分。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "这正是我们服务项目的目的。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "很好。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "谢谢你，霍尔先生。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Good evening. Tonight, I’ll continue to share how we can use art to spread the word about the changing climate. In our day to day lives Climate change can be hard to see, but some places will feel the changes sooner than others. The city I live in is very flat and close to the water line and rising sea levels are already creating floods. So I decided to do something to make it impossible to ignore. I started an art project called \"Underwater home owners association\" and painted numbers onto 1000(a thousand) large signs. Each number showed how high someone’s house was above sea level. A one would mean that if the sea level rose one foot the building would flood. I Gave the signs to homeowners who put them in their yards. Kids painted more signs and put them near their schools and along busy roads. The project has already had a real-world effect. The people who put the signs in their yards created a real homeowners association to address climate change in their communities.",
+      "translationZh": "晚上好。今晚我将继续分享我们如何用艺术来宣传气候变化。在日常生活中，气候变化可能不容易察觉，但有些地方会比别的地方更早感受到变化。我住的城市地势很平，离水位线很近，海平面上升已经在造成洪水。所以我决定做点什么，让人无法忽视这件事。我发起了一个名为“水下业主协会”的艺术项目，在1000块大牌子上画了数字。每个数字表示某户人家的房子高出海平面多少。数字1表示海平面只要上升一英尺，这栋房子就会被淹。我把牌子分给房主，他们把牌子立在自家院子里。孩子们又画了更多牌子，放在学校附近和繁忙的道路旁。这个项目已经产生了实际影响。在院子里立牌子的人们成立了一个真正的业主协会，来应对所在社区的气候变化问题。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "环境保护",
+        "subtopic": "人与环境"
+      },
+      "summaryZh": "演讲者在临海低地城市发起标注房屋海拔的艺术项目，促使居民成立协会应对气候变化。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "晚上好。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "今晚我将继续分享我们如何用艺术来宣传气候变化。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "在日常生活中，气候变化可能不容易察觉，但有些地方会比别的地方更早感受到变化。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "我住的城市地势很平，离水位线很近，海平面上升已经在造成洪水。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "所以我决定做点什么，让人无法忽视这件事。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "我发起了一个名为“水下业主协会”的艺术项目，在1000块大牌子上画了数字。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "每个数字表示某户人家的房子高出海平面多少。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "数字1表示海平面只要上升一英尺，这栋房子就会被淹。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "我把牌子分给房主，他们把牌子立在自家院子里。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "孩子们又画了更多牌子，放在学校附近和繁忙的道路旁。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "这个项目已经产生了实际影响。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "在院子里立牌子的人们成立了一个真正的业主协会，来应对所在社区的气候变化问题。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "男士接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "打开他的行李箱。",
+        "B": "登机。",
+        "C": "填一张表。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Could you put down your information in this form?"
+      },
+      "reasonZh": "女士请男士在表上写下信息（put down your information in this form），男士答应了（Okay），接下来就是填表，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "行李箱是男士丢了的东西（my suitcase is missing），箱子还没找到，谈不上打开。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "航班是男士刚坐完的（just arrived on the flight），他已经下了飞机，不是要去登机。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "萨拉打算毕业后做什么？",
+      "optionTranslationsZh": {
+        "A": "做志愿工作。",
+        "B": "攻读更高的学位。",
+        "C": "经营家族生意。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Well, my parents would like me to do my Masters after graduation, but I’m thinking of volunteering as a social worker for a year."
+      },
+      "reasonZh": "“做志愿工作”就是萨拉说的去当一年志愿社工（volunteering as a social worker），这是 but 后面她自己的打算，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "读硕士（do my Masters）是萨拉父母的希望，她用 but 转到了自己想做的事。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "买车。",
+        "B": "搬家。",
+        "C": "修窗户。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "We really need to move, Steve."
+      },
+      "reasonZh": "女士一开口就说他们真得搬家了（need to move），后面谈房子旧、去郊区看看，都围绕搬家，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "车是女士抱怨每天经过的车太多（So many cars go by），这是想搬家的理由，不是要买车。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "窗户是说阳光照不进窗户（no sun comes through the windows），也是搬家的理由，没人说要修窗户。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士觉得这个滑雪场怎么样？",
+      "optionTranslationsZh": {
+        "A": "有点拥挤。",
+        "B": "雪质差。",
+        "C": "太远了。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "It would be better if there were fewer people."
+      },
+      "reasonZh": "“有点拥挤”就是女士说的要是人少一点就更好了（fewer people），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "女士说雪特别好（The snow is brilliant），与雪质差正好相反。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音里的 far 出现在男士问的“到目前为止”（so far）里，说的是时间，不是距离远。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "说话人正要去哪里？",
+      "optionTranslationsZh": {
+        "A": "艺术中心。",
+        "B": "大剧院。",
+        "C": "石桥。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The Grand Theater is two blocks away."
+      },
+      "reasonZh": "女士说大剧院还有两个街区（two blocks away），男士接着说快到了、不会迟到（Nearly there），可见目的地是大剧院，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "艺术中心是路过时指给对方看的（here’s the Art Center），到了这里还要再走两个街区。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "石桥是他们已经过了的（we’ve crossed the stone bridge），不是要去的地方。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士做了什么？",
+      "optionTranslationsZh": {
+        "A": "她超速了。",
+        "B": "她把车停在了学校区域。",
+        "C": "她闯了红灯。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The speed limit is 15(fifteen) miles an hour and you were going 35(thirty-five)."
+      },
+      "reasonZh": "限速每小时 15 英里，女士开到了 35 英里（you were going 35），35 > 15，就是超速，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "学校区域是她开车经过的地方（You’re driving in a school zone），她在行驶，没有停车。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "周三学校几点放学？",
+      "optionTranslationsZh": {
+        "A": "下午2:00。",
+        "B": "下午2:30。",
+        "C": "下午3:30。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Students are dismissed an hour and a half early on Wednesdays."
+      },
+      "reasonZh": "女士说平时 3:30 放学，警察说周三提前一个半小时（an hour and a half early），3:30 − 1.5 小时 = 2:00，选 A。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "3:30 是女士说的平时放学时间（aren’t dismissed until 3:30），她忘了周三要提前一个半小时。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "两位说话人是什么关系？",
+      "optionTranslationsZh": {
+        "A": "同事。",
+        "B": "以前的校友。",
+        "C": "亲戚。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "He was the captain of our school’s basketball team."
+      },
+      "reasonZh": "凯文说戴维是“我们学校”的篮球队长（our school’s basketball team），还提到毕业后没见过他（since graduation），可见两人是老同学，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "在国外工作的是戴维（He worked abroad），两位说话人之间没有共事的关系。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "表妹菲奥娜是凯文的亲戚（my cousin Fiona），格雷丝只是去年在婚礼上见过她。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "格雷丝要和谁一起吃晚饭？",
+      "optionTranslationsZh": {
+        "A": "菲奥娜。",
+        "B": "詹妮弗。",
+        "C": "戴维。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "That’s very nice of you, but I’m meeting David and some other friends for dinner."
+      },
+      "reasonZh": "格雷丝谢绝了凯文的邀请，说自己约了戴维吃晚饭（meeting David … for dinner），选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "菲奥娜是凯文的表妹，和她吃饭的是凯文（my cousin Fiona is in town），格雷丝没答应加入。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "詹妮弗是格雷丝去年见到菲奥娜的那场婚礼的主人（Jennifer’s wedding），和今晚吃饭无关。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "凯文接下来要做什么？",
+      "optionTranslationsZh": {
+        "A": "买一杯饮料。",
+        "B": "打篮球。",
+        "C": "和朋友打招呼。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Well, I’ll go and say a quick hello."
+      },
+      "reasonZh": "凯文说要过去简单打个招呼（say a quick hello），对象是久没见的老同学戴维，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "喝一杯是凯文说改天找时间聚一聚时才做的事（some time and have a drink），不是接下来。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "篮球是凯文回忆戴维当年是校篮球队队长（captain of our school’s basketball team），不是他要去打球。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "关于新闻节目，女士说了什么？",
+      "optionTranslationsZh": {
+        "A": "它们被纪录片取代了。",
+        "B": "它们的数量减少了。",
+        "C": "它们聚焦名人的生活。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "They’ve cut down on the number of news programs and the number of documentaries."
+      },
+      "reasonZh": "“数量减少了”就是女士说的削减了新闻节目的数量（cut down on the number of news programs），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "纪录片和新闻节目一样被削减了，取代它们的是真人秀和游戏节目（replaced by these stupid reality shows and game shows）。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士对真人秀持什么态度？",
+      "optionTranslationsZh": {
+        "A": "赞同的。",
+        "B": "批评的。",
+        "C": "不确定的。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Well, they often make me laugh."
+      },
+      "reasonZh": "女士骂真人秀愚蠢，男士却说它们常让他发笑（make me laugh），还说这挺好的（It’s good），他是赞同的，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "说真人秀愚蠢（these stupid reality shows）的是女士，批评的态度属于她，不属于男士。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士希望电视节目是什么样的？",
+      "optionTranslationsZh": {
+        "A": "有教育意义的。",
+        "B": "多样的。",
+        "C": "有娱乐性的。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "You know trying to educate them?"
+      },
+      "reasonZh": "女士反问电视是否该去教育观众（trying to educate them），男士说电视为了娱乐，她回答不这么认为（I really don’t think so），可见她希望节目有教育意义，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "这个有一点、那个有一点（a bit of this a bit of that）是男士主张的平衡，不是女士的期待。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "电视为娱乐（TV’s there for entertainment）是男士的看法，女士随即说不这么认为（No, I really don’t think so）。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "凯西是谁？",
+      "optionTranslationsZh": {
+        "A": "学校老师。",
+        "B": "电台主持人。",
+        "C": "政府官员。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Welcome to Education Update, this is Kathy."
+      },
+      "reasonZh": "凯西开场说欢迎收听《教育动态》并自报姓名（Welcome to Education Update），接着介绍嘉宾、向他提问，可见她是节目主持人，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "学校是嘉宾霍尔所在的山边高中（from mountainside High School），老师身份属于嘉宾一方，不是凯西。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "政府机关是学生可以去工作的地方之一（even in government offices），与凯西的身份无关。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "来访的成年人在学校里可以做什么？",
+      "optionTranslationsZh": {
+        "A": "发表演讲。",
+        "B": "旁听课程。",
+        "C": "组织活动。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Okay, it goes like this on certain days each month adults from the neighborhood sit in class with the students and see what’s going on in the school."
+      },
+      "reasonZh": "“旁听课程”就是霍尔说的成年人和学生一起坐在课堂里，看看学校在做什么（sit in class with the students），选 B。"
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "学生能从这个学校项目中得到什么好处？",
+      "optionTranslationsZh": {
+        "A": "多挣学分。",
+        "B": "找到工作机会。",
+        "C": "了解成年人的生活。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "This helps them better understand the lives of their parents and know more about their neighborhood."
+      },
+      "reasonZh": "霍尔说学生和成年人互换位置去干活，凯西总结这能帮他们理解父母的生活（understand the lives of their parents），父母就是成年人，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "学生去医院、图书馆等地工作（a chance to work in hospitals）是项目里的体验，不是去找工作机会。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "这个学校项目的目标是什么？",
+      "optionTranslationsZh": {
+        "A": "改善师生关系。",
+        "B": "推广工作与生活平衡的理念。",
+        "C": "加强学校与社区的互动。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "So the school is not only part of the students’ lives, but also part of the neighborhood."
+      },
+      "reasonZh": "凯西总结学校不仅属于学生，也是社区的一部分（also part of the neighborhood），霍尔说这正是项目的目的（exactly what our service program is for），选 C。"
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "说话人的城市位于哪里？",
+      "optionTranslationsZh": {
+        "A": "湖边。",
+        "B": "海边。",
+        "C": "山谷里。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The city I live in is very flat and close to the water line and rising sea levels are already creating floods."
+      },
+      "reasonZh": "城市离水位线很近，海平面上升已经造成洪水（rising sea levels … creating floods），可见城市在海边，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "录音里的水是海水（sea levels），城市受海平面上升威胁，没有说到湖。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "牌子上的数字代表什么？",
+      "optionTranslationsZh": {
+        "A": "洪水持续的时间。",
+        "B": "气温上升的幅度。",
+        "C": "高出海平面的高度。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Each number showed how high someone’s house was above sea level."
+      },
+      "reasonZh": "演讲者说每个数字表示房子高出海平面多少（how high … above sea level），选项沿用这个意思，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "洪水是说数字 1 表示海平面升一英尺房子就会被淹（the building would flood），数字标的是高度，不是被淹多久。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "这个项目的成功说明了什么？",
+      "optionTranslationsZh": {
+        "A": "艺术能带来改变。",
+        "B": "房主们很有创造力。",
+        "C": "气候变化是可以控制的。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "The project has already had a real-world effect."
+      },
+      "reasonZh": "演讲开头说要用艺术宣传气候变化，这个艺术项目已产生实际影响（a real-world effect），居民还成立了协会，可见艺术能带来改变，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "房主们只是把牌子立在院子里（homeowners who put them in their yards），画牌子的是演讲者和孩子们。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "居民成立协会是为了应对气候变化（to address climate change），没有说气候变化能被控制。"
+        }
+      ]
+    }
+  }
+}

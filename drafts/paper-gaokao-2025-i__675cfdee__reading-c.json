@@ -1,0 +1,732 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-i:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-i:reading-c": {
+      "overview": "文章借两位荷兰作者的新书，反思城市街道只为汽车和赶路服务：行人尤其孩子出行减少，昔日反对修路的运动收效甚微，作者呼吁重新看待门前的街道。",
+      "fullTranslationZh": "尽管近年来我们的街道在安全方面或许有所改善，但交通研究同时显示，行人的出行在减少，幼童尤其如此。许多家长说，路上车太多，孩子没法安全步行上学，于是就把他们塞进汽车里送去。\n荷兰作家塔莉娅·维尔卡德和马可·特·布罗梅尔斯特鲁特为这样的事实感到困扰。在他们的新书《出行：如何夺回我们的街道、改变我们的生活》中，他们呼吁重新思考我们的街道以及街道在我们生活中扮演的角色。\n城市街道上的生活几十年前就开始改变了。整片整片的街区被拆毁，为新的道路网络让路，孩子们只好到别处玩耍。一些社区奋起反抗。最有名的是，一位在20世纪50年代初举家搬到曼哈顿的加拿大记者领导了一场运动，阻止当地公园被毁。简·雅各布斯描述了她对用高速公路取代公园这一提议的担忧，呼吁市长捍卫“纽约作为一个体面的宜居之地，而不只是让人匆匆穿过的地方”。20世纪60年代末和70年代，澳大利亚也发生过类似的运动。\n尽管这些运动范围很广，现实却是，大多数西方城市已完全围绕汽车的需要重新设计。路上的汽车数量一直在迅速增长。在澳大利亚，如今两千六百多万人拥有两千多万辆汽车，汽车拥有率位居世界前列。\n我们在帮助我们匆匆通行的道路上投入巨大，却没有算清真正的代价。当孩子们无法在社区里安全地走动时，我们真的认识到这让整个社会付出了什么代价吗？《出行》的作者说得对：是时候换一种眼光看待你家门前的那条街了。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-c-1",
+          "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+          "sourceText": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”",
+          "displayText": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:29"
+          ],
+          "translationZh": "简·雅各布斯描述了她对用高速公路取代公园这一提议的担忧，呼吁市长捍卫“纽约作为一个体面的宜居之地，而不只是让人匆匆穿过的地方”。",
+          "analysisZh": "主干是 Jane Jacobs called on her mayor to champion ...（简·雅各布斯呼吁市长捍卫……），call on sb to do 意为“号召某人做某事”。句首 Describing her alarm ... 是现在分词短语作伴随状语，主语也是 Jane Jacobs；its 指前句的 her local park，proposed replacement with an expressway 即“拟用高速公路取代它”。引号里 a decent place to live 与 not just rush through 相对：城市应当让人住，而不只是让人赶路。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 20,
+              "quote": "Describing her alarm"
+            },
+            {
+              "start": 69,
+              "end": 100,
+              "quote": "Jane Jacobs called on her mayor"
+            },
+            {
+              "start": 157,
+              "end": 178,
+              "quote": "not just rush through"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-c-2",
+          "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+          "sourceText": "Although these campaigns were widespread, the reality is that the majority of the western cities were completely redesigned around the needs of the motor car.",
+          "displayText": "Although these campaigns were widespread, the reality is that the majority of the western cities were completely redesigned around the needs of the motor car.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:30"
+          ],
+          "translationZh": "尽管这些运动范围很广，现实却是，大多数西方城市已完全围绕汽车的需要重新设计。",
+          "analysisZh": "主干是 the reality is that ...（现实是……），that 引导表语从句，从句主干是 the majority of the western cities were redesigned（大多数西方城市被重新设计），around the needs of the motor car 说明围绕什么来设计。句首 Although 引导让步状语从句，these campaigns 回指前文纽约和澳大利亚的运动。让步之后的主句才是作者的重点：运动虽多，城市还是为汽车改了样。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 40,
+              "quote": "Although these campaigns were widespread"
+            },
+            {
+              "start": 42,
+              "end": 61,
+              "quote": "the reality is that"
+            },
+            {
+              "start": 102,
+              "end": 157,
+              "quote": "completely redesigned around the needs of the motor car"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-c:1"
+              ],
+              "start": 0,
+              "end": 85,
+              "quote": "尽管近年来我们的街道在安全方面或许有所改善，但交通研究同时显示，行人的出行在减少，幼童尤其如此。许多家长说，路上车太多，孩子没法安全步行上学，于是就把他们塞进汽车里送去。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-c:2"
+              ],
+              "start": 86,
+              "end": 182,
+              "quote": "荷兰作家塔莉娅·维尔卡德和马可·特·布罗梅尔斯特鲁特为这样的事实感到困扰。在他们的新书《出行：如何夺回我们的街道、改变我们的生活》中，他们呼吁重新思考我们的街道以及街道在我们生活中扮演的角色。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-c:3"
+              ],
+              "start": 183,
+              "end": 384,
+              "quote": "城市街道上的生活几十年前就开始改变了。整片整片的街区被拆毁，为新的道路网络让路，孩子们只好到别处玩耍。一些社区奋起反抗。最有名的是，一位在20世纪50年代初举家搬到曼哈顿的加拿大记者领导了一场运动，阻止当地公园被毁。简·雅各布斯描述了她对用高速公路取代公园这一提议的担忧，呼吁市长捍卫“纽约作为一个体面的宜居之地，而不只是让人匆匆穿过的地方”。20世纪60年代末和70年代，澳大利亚也发生过类似的运动。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-c:4"
+              ],
+              "start": 385,
+              "end": 475,
+              "quote": "尽管这些运动范围很广，现实却是，大多数西方城市已完全围绕汽车的需要重新设计。路上的汽车数量一直在迅速增长。在澳大利亚，如今两千六百多万人拥有两千多万辆汽车，汽车拥有率位居世界前列。"
+            },
+            {
+              "paragraphId": "zh-reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-c:5",
+                "block:paper-gaokao-2025-i:reading-c:6"
+              ],
+              "start": 476,
+              "end": 577,
+              "quote": "我们在帮助我们匆匆通行的道路上投入巨大，却没有算清真正的代价。当孩子们无法在社区里安全地走动时，我们真的认识到这让整个社会付出了什么代价吗？《出行》的作者说得对：是时候换一种眼光看待你家门前的那条街了。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-c-evidence-28-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-c:1",
+                "start": 107,
+                "end": 141,
+                "quote": "declines in pedestrian（行人）mobility"
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-c:1",
+                "start": 279,
+                "end": 314,
+                "quote": "they pack them into the car instead"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 32,
+                "end": 40,
+                "quote": "行人的出行在减少"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p1",
+                "start": 73,
+                "end": 84,
+                "quote": "就把他们塞进汽车里送去"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-29-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+                "start": 453,
+                "end": 515,
+                "quote": "New York as a decent place to live, and not just rush through."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 143,
+                "end": 170,
+                "quote": "纽约作为一个体面的宜居之地，而不只是让人匆匆穿过的地方"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-30-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+                "start": 62,
+                "end": 157,
+                "quote": "the majority of the western cities were completely redesigned around the needs of the motor car"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 16,
+                "end": 37,
+                "quote": "大多数西方城市已完全围绕汽车的需要重新设计"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-evidence-31-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+                "start": 493,
+                "end": 514,
+                "quote": "not just rush through"
+              },
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-c:5",
+                "start": 0,
+                "end": 50,
+                "quote": "We invest a lot in roads that help us rush through"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 157,
+                "end": 170,
+                "quote": "而不只是让人匆匆穿过的地方"
+              },
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p5",
+                "start": 0,
+                "end": 19,
+                "quote": "我们在帮助我们匆匆通行的道路上投入巨大"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:29"
+            ],
+            "selectedSentenceId": "sentence-reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+                "start": 336,
+                "end": 516,
+                "quote": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p3",
+                "start": 108,
+                "end": 172,
+                "quote": "简·雅各布斯描述了她对用高速公路取代公园这一提议的担忧，呼吁市长捍卫“纽约作为一个体面的宜居之地，而不只是让人匆匆穿过的地方”。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-c-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:30"
+            ],
+            "selectedSentenceId": "sentence-reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-c",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+                "start": 0,
+                "end": 158,
+                "quote": "Although these campaigns were widespread, the reality is that the majority of the western cities were completely redesigned around the needs of the motor car."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-c",
+                "paragraphId": "zh-reading-c-p4",
+                "start": 0,
+                "end": 38,
+                "quote": "尽管这些运动范围很广，现实却是，大多数西方城市已完全围绕汽车的需要重新设计。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章由行人出行减少的现象引出新书对街道角色的反思，回顾城市为修路而改变以及民间的抗争，指出城市最终仍围绕汽车而建，最后追问只顾通行的道路让社会付出的代价。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-c:1",
+            "summary": "街道虽更安全，行人出行却在减少，家长因车多改用汽车送孩子上学",
+            "function": "提出现象，引出话题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-c:2",
+            "summary": "两位荷兰作者在新书中呼吁重新思考街道及其在生活中的作用",
+            "function": "引出新书观点，点明主题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+            "summary": "几十年前城市为修路拆毁街区，纽约的 Jane Jacobs 和澳大利亚等地的人发起运动反对",
+            "function": "回顾历史，举例说明民间抗争"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+            "summary": "尽管运动广泛，西方城市仍围绕汽车重新设计，澳大利亚汽车拥有率极高",
+            "function": "转折，交代抗争的结果"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-c:5",
+            "summary": "我们大力投资让人匆匆通过的道路却不计代价，应重新看待门前的街道",
+            "function": "总结全文，发出呼吁"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-i:28": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把第一段的研究发现和家长的做法合起来，概括作者指出的现象。",
+      "stemTranslationZh": "作者在第一段中指出了什么现象？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-gaokao-2025-i:reading-c:1]] 的两句：先看研究显示什么在减少，再看家长改用什么送孩子",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "汽车经常在路上被堵住。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Cars often get stuck on the road.",
+            "explanation": "原文说路上车太多（too much traffic），这是家长不敢让孩子走路的理由，没说汽车常被堵住。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "交通事故频繁发生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "While safety improvements might have been made to our streets in recent years, transport studies also show declines in pedestrian（行人）mobility, especially among young children.",
+            "sourceHighlight": "safety improvements",
+            "optionText": "Traffic accidents occur frequently.",
+            "optionHighlight": "Traffic accidents occur frequently",
+            "explanation": "原文开头反而说近年来街道安全或许有所改善（safety improvements），家长担心的是车多，没提事故频发。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:1",
+              "quote": "While safety improvements might have been made to our streets in recent years, transport studies also show declines in pedestrian（行人）mobility, especially among young children.",
+              "anchor": "街道安全有所改善"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "人们走路少了，开车多了。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:1",
+              "quote": "While safety improvements might have been made to our streets in recent years, transport studies also show declines in pedestrian（行人）mobility, especially among young children.",
+              "anchor": "行人出行减少"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:1",
+              "quote": "Many parents say there’s too much traffic on the roads for their children to walk safely to school, so they pack them into the car instead.",
+              "anchor": "家长改用汽车送孩子"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "行人不遵守交通规则。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "pedestrian",
+            "optionText": "Pedestrians",
+            "matchType": "wordFamily",
+            "relationNote": "pedestrian 出自[[block:paper-gaokao-2025-i:reading-c:1|declines in pedestrian]]，说的是行人出行减少，原文没说行人不守规则。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:1",
+              "quote": "While safety improvements might have been made to our streets in recent years, transport studies also show declines in pedestrian（行人）mobility, especially among young children.",
+              "anchor": "行人出行减少"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "People walk less and drive more.",
+          "sourceRole": "correctOption",
+          "targetText": "While safety improvements might have been made to our streets in recent years, transport studies also show declines in pedestrian（行人）mobility, especially among young children.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-c:1",
+          "relationType": "paraphrase",
+          "note": "“走得少”出自[[block:paper-gaokao-2025-i:reading-c:1|declines in pedestrian]]（declines in pedestrian mobility）；“开车多”出自[[block:paper-gaokao-2025-i:reading-c:1|pack them into the car instead]]（pack them into the car）。两处合起来，就是人们走路少了、开车多了，选 C。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出加拿大记者等人发起运动想要达到的目的。",
+      "stemTranslationZh": "这位加拿大记者和其他发起运动的人想要做什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看她向市长提了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "让他们的城市保持宜居。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "quote": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”",
+              "anchor": "呼吁让纽约成为宜居之地"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "quote": "Most famously, a Canadian journalist who had moved her family to Manhattan in the early 1950s led a campaign to stop the destruction of her local park.",
+              "anchor": "阻止公园被毁"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "促进文化多样性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Promote cultural diversity.",
+            "explanation": "这些运动是为了保住社区和公园，原文没提文化多样性。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "帮助贫困家庭。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "family",
+            "optionText": "families",
+            "matchType": "wordFamily",
+            "relationNote": "family 出自[[block:paper-gaokao-2025-i:reading-c:3|moved her family to Manhattan]]，只是交代这位记者举家搬到曼哈顿，运动并不是为了帮助贫困家庭。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "quote": "Most famously, a Canadian journalist who had moved her family to Manhattan in the early 1950s led a campaign to stop the destruction of her local park.",
+              "anchor": "记者举家搬到曼哈顿"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "让高速公路便于通行。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”",
+            "sourceHighlight": "her alarm at its proposed replacement with an expressway",
+            "optionText": "Make expressways accessible.",
+            "optionHighlight": "Make expressways accessible",
+            "explanation": "她对用高速公路取代公园的计划感到担忧（her alarm），是反对修高速，不是让高速路更方便通行。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "quote": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”",
+              "anchor": "担忧高速公路取代公园"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Canadian journalist",
+          "sourceRole": "stem",
+          "targetText": "Most famously, a Canadian journalist who had moved her family to Manhattan in the early 1950s led a campaign to stop the destruction of her local park.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "New York as a decent place to live",
+          "bridgeZh": "Jane Jacobs 就是这位记者，她向市长说出了诉求",
+          "note": "题干 Canadian journalist 原词出现在原文。"
+        },
+        {
+          "sourceText": "Keep their cities livable.",
+          "sourceRole": "correctOption",
+          "targetText": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-c:3",
+          "relationType": "paraphrase",
+          "note": "选项的“让城市宜居”（livable）就是原文的“让纽约成为体面的宜居之地”（a decent place to live）；她阻止拆公园修高速，其他地方的类似运动（Similar campaigns）目标相同，选 A。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:30": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据运动之后城市仍围绕汽车改造的现实，推断澳大利亚那些运动的结果。",
+      "stemTranslationZh": "关于20世纪60年代末和70年代澳大利亚的运动，可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找这些运动的结局",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们推动了汽车销量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They boosted the sales of cars.",
+            "explanation": "汽车数量猛增（increasing rapidly）是城市围着汽车改造的现实，原文没说这是运动带来的；运动本来是反对拆社区修路的。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们基本上没有成效。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+              "quote": "Although these campaigns were widespread, the reality is that the majority of the western cities were completely redesigned around the needs of the motor car.",
+              "anchor": "城市仍围绕汽车重新设计"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+              "quote": "In Australia we now have over twenty million cars for just over twenty-six million people, among the highest rates of car ownership in the world.",
+              "anchor": "澳大利亚汽车拥有率极高"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们赢得了政府的支持。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”",
+            "sourceEntity": "her mayor",
+            "optionText": "They won government support.",
+            "optionEntity": "government support",
+            "explanation": "向市长呼吁的是纽约的 Jane Jacobs，而且原文只说她提出了呼吁（called on her mayor），没说哪场运动得到了政府支持。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "quote": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”",
+              "anchor": "向市长呼吁"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们倡导修建新公园。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "park",
+            "optionText": "parks",
+            "matchType": "wordFamily",
+            "relationNote": "park 出自纽约的那场运动：Jane Jacobs 要阻止当地公园被毁（stop the destruction of her local park），是保住已有的公园，不是新建公园。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "quote": "Most famously, a Canadian journalist who had moved her family to Manhattan in the early 1950s led a campaign to stop the destruction of her local park.",
+              "anchor": "阻止公园被毁"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the late 1960s",
+          "sourceRole": "stem",
+          "targetText": "Similar campaigns occurred in Australia in the late 1960s and 1970s as well.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "the majority of the western cities were completely redesigned around the needs of the motor car",
+          "bridgeZh": "these campaigns 包括澳大利亚的运动，Although 后是现实结果",
+          "note": "题干 the late 1960s 原词出现在原文。"
+        },
+        {
+          "sourceText": "They turned out largely ineffective.",
+          "sourceRole": "correctOption",
+          "targetText": "Although these campaigns were widespread, the reality is that the majority of the western cities were completely redesigned around the needs of the motor car.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-c:4",
+          "relationType": "paraphrase",
+          "note": "原文没直说运动失败，只说这些运动虽然普遍，现实却是大多数西方城市仍完全围着汽车重新设计（redesigned around … the motor car），澳大利亚汽车拥有率也位居世界前列；由此推出运动基本没起作用，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "抓住贯穿全文的“只顾赶路”的街道问题，选出最合适的标题。",
+      "stemTranslationZh": "哪一项可以作为本文的合适标题？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-gaokao-2025-i:reading-c:1]] 孩子不能安全步行说起，看各段怎样解释街道变成这样，再看 [[block:paper-gaokao-2025-i:reading-c:5]] 作者的追问",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为何如此匆忙？",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:5",
+              "quote": "We invest a lot in roads that help us rush through, but we fail to account for the true costs.",
+              "anchor": "道路只为匆匆通行"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "quote": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.”",
+              "anchor": "不只是让人匆匆穿过"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "接下来会怎样？",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "What’s Next?",
+            "explanation": "文章结尾虽呼吁重新看待门前的街道，但没有展望今后会怎样，全文重点是批评只顾赶路的街道设计。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "住在哪里？",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Where to Stay?",
+            "explanation": "原文的 a decent place to live 说的是让城市宜居，全文没讨论该住在哪里。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "该怪谁？",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Who to Blame?",
+            "explanation": "文章批评道路投入只图快、不算代价，但没有追究哪个人或机构的责任。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Why the Rush?",
+          "sourceRole": "correctOption",
+          "targetText": "We invest a lot in roads that help us rush through, but we fail to account for the true costs.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "几段写的都是街道向汽车和赶路让位：孩子不能步行上学，街区被拆修路，城市围着汽车改造，道路只为让人匆匆通过（rush through）而不计代价。“为何如此匆忙？”用反问把这些都包进去，选 A。"
+        }
+      ]
+    }
+  }
+}

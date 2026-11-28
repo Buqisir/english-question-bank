@@ -1,0 +1,984 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-gaokao-2025-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-i:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-i:seven-choices": {
+      "overview": "文章介绍大学咖啡馆员工 Catherine Murphy：她做饮品时细心又热情，每天早起为学生服务，笑容感染着常来的学生，她热爱这份工作并打算一直做下去。",
+      "fullTranslationZh": "无名英雄\n\n课间想歇一歇，或是早上想快速提提神？学院咖啡馆正好能满足你，而且不止这些。这家咖啡馆不仅供应饮品，还送上微笑。\n\nCatherine Murphy 是咖啡馆的员工，穿着绿衬衫，戴着黑帽子，她确保每位顾客拿到的正是自己点的东西。她在几台机器之间来回忙着做饮品。做好一单后，她会喊出杯子上的名字。顾客从她手里接过饮品时，她会微笑着说：“你好，今天过得怎么样？”即使队伍越排越长，她也不让这耽误她和顾客真诚地聊上几句。\n\nMurphy 每天四点四十五分起床，开车三十分钟，准时赶来上班。有时她会提早到，好早点为学生服务。“我这样做，是因为我喜欢给学生们做咖啡。我知道他们早上需要它。”Murphy 说。为人母、为人妻的经历，让她成为了今天的自己。她相信自己来这里就是为了服务大家。\n\nMurphy 也许不知道，她的微笑很有感染力，可能让一个学生见到她之后，比之前过得好得多。政治学专业大四学生 Joanna Wright 很爱喝咖啡，每周至少去这家咖啡馆六天。去咖啡馆让她的一天有个好开头，也让她为上课做好准备。“Catherine 脸上总是挂着大大的笑容，总能让我心情愉快。”Wright 说。\n\n“我喜欢在咖啡馆工作。”Murphy 说。她已经在这里干了 17 年，无法想象去别的地方工作。她一心打算留下来，继续做自己热爱的事。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:paper-gaokao-2025-i:seven-choices:1",
+          "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+          "sourceText": "One thing Murphy may not know is that her smile is contagious（有感染力）and can be the difference in a student having a much better day than they were having before seeing her.",
+          "displayText": "One thing Murphy may not know is that her smile is contagious（有感染力）and can be the difference in a student having a much better day than they were having before seeing her.",
+          "relatedQuestionIds": [],
+          "translationZh": "Murphy 也许不知道，她的微笑很有感染力，可能让一个学生见到她之后，比之前过得好得多。",
+          "analysisZh": "主干是 One thing is that…，主语 One thing 后面跟着省略了 that 的定语从句 Murphy may not know，所以“一件 Murphy 也许不知道的事”整体作主语。is 后面的 that 从句是表语，交代这件事的内容：her smile 带两个并列谓语 is contagious 和 can be the difference。difference in a student having… 里 having 的逻辑主语是 a student，than they were having before seeing her 把见到她之前和之后作比较。全句意思是：她的笑能让学生的一天变好。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 9,
+              "quote": "One thing"
+            },
+            {
+              "start": 30,
+              "end": 47,
+              "quote": "is that her smile"
+            },
+            {
+              "start": 71,
+              "end": 92,
+              "quote": "can be the difference"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:paper-gaokao-2025-i:seven-choices:2",
+          "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+          "sourceText": "“Catherine always has a huge smile on her face, which always puts me in a cheerful mood,” Wright said.",
+          "displayText": "“Catherine always has a huge smile on her face, which always puts me in a cheerful mood,” Wright said.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:39"
+          ],
+          "translationZh": "“Catherine 脸上总是挂着大大的笑容，总能让我心情愉快。”Wright 说。",
+          "analysisZh": "引号里的主干是 Catherine always has a huge smile on her face。逗号后的 which 引导非限制性定语从句，指代前面整件事（她总是满脸笑容），puts me in a cheerful mood 是 put sb. in a … mood 的搭配，意思是让人进入某种心情。这句交代了 Wright 每天心情变好的原因，正好解释空前她为什么天天去咖啡馆。",
+          "underlineRanges": [
+            {
+              "start": 1,
+              "end": 34,
+              "quote": "Catherine always has a huge smile"
+            },
+            {
+              "start": 48,
+              "end": 87,
+              "quote": "which always puts me in a cheerful mood"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-gaokao-2025-i:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-seven-choices-1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 4,
+              "quote": "无名英雄"
+            },
+            {
+              "paragraphId": "zh-seven-choices-2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:seven-choices:2"
+              ],
+              "start": 6,
+              "end": 61,
+              "quote": "课间想歇一歇，或是早上想快速提提神？学院咖啡馆正好能满足你，而且不止这些。这家咖啡馆不仅供应饮品，还送上微笑。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:seven-choices:3"
+              ],
+              "start": 63,
+              "end": 212,
+              "quote": "Catherine Murphy 是咖啡馆的员工，穿着绿衬衫，戴着黑帽子，她确保每位顾客拿到的正是自己点的东西。她在几台机器之间来回忙着做饮品。做好一单后，她会喊出杯子上的名字。顾客从她手里接过饮品时，她会微笑着说：“你好，今天过得怎么样？”即使队伍越排越长，她也不让这耽误她和顾客真诚地聊上几句。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:seven-choices:4"
+              ],
+              "start": 214,
+              "end": 343,
+              "quote": "Murphy 每天四点四十五分起床，开车三十分钟，准时赶来上班。有时她会提早到，好早点为学生服务。“我这样做，是因为我喜欢给学生们做咖啡。我知道他们早上需要它。”Murphy 说。为人母、为人妻的经历，让她成为了今天的自己。她相信自己来这里就是为了服务大家。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:seven-choices:5"
+              ],
+              "start": 345,
+              "end": 501,
+              "quote": "Murphy 也许不知道，她的微笑很有感染力，可能让一个学生见到她之后，比之前过得好得多。政治学专业大四学生 Joanna Wright 很爱喝咖啡，每周至少去这家咖啡馆六天。去咖啡馆让她的一天有个好开头，也让她为上课做好准备。“Catherine 脸上总是挂着大大的笑容，总能让我心情愉快。”Wright 说。"
+            },
+            {
+              "paragraphId": "zh-seven-choices-6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:seven-choices:6"
+              ],
+              "start": 503,
+              "end": 569,
+              "quote": "“我喜欢在咖啡馆工作。”Murphy 说。她已经在这里干了 17 年，无法想象去别的地方工作。她一心打算留下来，继续做自己热爱的事。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed-block:paper-gaokao-2025-i:seven-choices:2",
+            "paragraphId": "block:paper-gaokao-2025-i:seven-choices:2",
+            "text": "Need a break between classes or just a quick pick-me-up in the morning? The College Cafe has just that, and more. Not only does this cafe serve up drinks, it also serves up smiles."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-i:seven-choices:3",
+            "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+            "text": "Catherine Murphy, a cafe worker in a green shirt and black hat, makes sure that each customer gets exactly what they order. She goes back and forth between machines to make the drinks. After finishing an order, she calls out the name on the cup. As the customer grabs the drink from her hand, she smiles and says, “Hello, how is your day?” Even when the line is getting longer, she doesn’t let it get in the way of her genuine conversations."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-i:seven-choices:4",
+            "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
+            "text": "Murphy gets up at a quarter to five and drives thirty minutes every day to get to work on time. Sometimes she arrives early to serve the students early. “I do so because I like to make coffee for the students. I know they need it in the morning,” Murphy said. Being a mother and wife has helped her become the woman she is. She believes she is here to serve."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-i:seven-choices:5",
+            "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+            "text": "One thing Murphy may not know is that her smile is contagious（有感染力）and can be the difference in a student having a much better day than they were having before seeing her. Joanna Wright, a senior political science major, loves coffee and goes to the cafe at least six days a week. Going to the cafe starts her day off good and gets her ready for class. “Catherine always has a huge smile on her face, which always puts me in a cheerful mood,” Wright said."
+          },
+          {
+            "textId": "completed-block:paper-gaokao-2025-i:seven-choices:6",
+            "paragraphId": "block:paper-gaokao-2025-i:seven-choices:6",
+            "text": "“I enjoy working in the cafe,” Murphy said. She has served here for 17 years and can’t imagine working anywhere else. She has every intention of staying and continuing doing what she loves."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-gaokao-2025-i:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:2",
+                "start": 104,
+                "end": 112,
+                "quote": "and more"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-2",
+                "start": 30,
+                "end": 36,
+                "quote": "而且不止这些"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2025-i:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+                "start": 168,
+                "end": 183,
+                "quote": "make the drinks"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+                "start": 195,
+                "end": 237,
+                "quote": "the customer grabs the drink from her hand"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "start": 66,
+                "end": 71,
+                "quote": "忙着做饮品"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "start": 89,
+                "end": 99,
+                "quote": "顾客从她手里接过饮品"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2025-i:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
+                "start": 104,
+                "end": 158,
+                "quote": "I do so because I like to make coffee for the students"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-4",
+                "start": 50,
+                "end": 68,
+                "quote": "我这样做，是因为我喜欢给学生们做咖啡"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2025-i:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+                "start": 238,
+                "end": 279,
+                "quote": "goes to the cafe at least six days a week"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "start": 75,
+                "end": 87,
+                "quote": "每周至少去这家咖啡馆六天"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-gaokao-2025-i:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:6",
+                "start": 1,
+                "end": 28,
+                "quote": "I enjoy working in the cafe"
+              },
+              {
+                "textId": "source-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:6",
+                "start": 51,
+                "end": 85,
+                "quote": "She has every intention of staying"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "start": 1,
+                "end": 10,
+                "quote": "我喜欢在咖啡馆工作"
+              },
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "start": 47,
+                "end": 55,
+                "quote": "她一心打算留下来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2025-i:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:36"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:36",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-i:seven-choices:2",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:2",
+                "start": 114,
+                "end": 180,
+                "quote": "Not only does this cafe serve up drinks, it also serves up smiles."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-2",
+                "start": 37,
+                "end": 55,
+                "quote": "这家咖啡馆不仅供应饮品，还送上微笑。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2025-i:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:37"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:37",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-i:seven-choices:3",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+                "start": 185,
+                "end": 245,
+                "quote": "After finishing an order, she calls out the name on the cup."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-3",
+                "start": 72,
+                "end": 89,
+                "quote": "做好一单后，她会喊出杯子上的名字。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2025-i:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:38"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:38",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-i:seven-choices:4",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
+                "start": 96,
+                "end": 152,
+                "quote": "Sometimes she arrives early to serve the students early."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-4",
+                "start": 32,
+                "end": 49,
+                "quote": "有时她会提早到，好早点为学生服务。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2025-i:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:39"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:39",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-i:seven-choices:5",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+                "start": 281,
+                "end": 352,
+                "quote": "Going to the cafe starts her day off good and gets her ready for class."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "start": 88,
+                "end": 114,
+                "quote": "去咖啡馆让她的一天有个好开头，也让她为上课做好准备。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-gaokao-2025-i:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:40"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:40",
+            "sourceRanges": [
+              {
+                "textId": "completed-block:paper-gaokao-2025-i:seven-choices:6",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:6",
+                "start": 44,
+                "end": 117,
+                "quote": "She has served here for 17 years and can’t imagine working anywhere else."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-6",
+                "start": 21,
+                "end": 47,
+                "quote": "她已经在这里干了 17 年，无法想象去别的地方工作。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:paper-gaokao-2025-i:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence:paper-gaokao-2025-i:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+                "start": 0,
+                "end": 171,
+                "quote": "One thing Murphy may not know is that her smile is contagious（有感染力）and can be the difference in a student having a much better day than they were having before seeing her."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "start": 0,
+                "end": 45,
+                "quote": "Murphy 也许不知道，她的微笑很有感染力，可能让一个学生见到她之后，比之前过得好得多。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:paper-gaokao-2025-i:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:39"
+            ],
+            "selectedSentenceId": "sentence:paper-gaokao-2025-i:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+                "start": 288,
+                "end": 390,
+                "quote": "“Catherine always has a huge smile on her face, which always puts me in a cheerful mood,” Wright said."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-gaokao-2025-i:seven-choices",
+                "paragraphId": "zh-seven-choices-5",
+                "start": 114,
+                "end": 156,
+                "quote": "“Catherine 脸上总是挂着大大的笑容，总能让我心情愉快。”Wright 说。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "标题称 Murphy 为“无名英雄”。首段从学生需要提神写起，引出咖啡馆不只卖饮品、还送微笑；中间三段分别写她服务时的细心热情、早起为学生的付出、她的笑容对学生的影响；末段写她热爱工作、愿意留下。",
+        "units": [
+          {
+            "unitId": "unit-seven-1",
+            "heading": "An Unsung Hero",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-i:seven-choices:1",
+              "block:paper-gaokao-2025-i:seven-choices:2"
+            ],
+            "summary": "标题点出人物身份；首段从学生课间、早晨需要提神说起，引出咖啡馆既供应饮品也送上微笑。"
+          },
+          {
+            "unitId": "unit-seven-2",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-i:seven-choices:3"
+            ],
+            "summary": "Murphy 做饮品、喊名字、递饮品时笑着问候，队伍再长也和顾客真诚交谈。"
+          },
+          {
+            "unitId": "unit-seven-3",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-i:seven-choices:4"
+            ],
+            "summary": "她每天早起开车上班，有时提前到，只因知道学生早上需要咖啡。"
+          },
+          {
+            "unitId": "unit-seven-4",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-i:seven-choices:5"
+            ],
+            "summary": "她的笑容有感染力，以常客 Joanna Wright 为例说明她让学生一天心情变好。"
+          },
+          {
+            "unitId": "unit-seven-5",
+            "paragraphIds": [
+              "block:paper-gaokao-2025-i:seven-choices:6"
+            ],
+            "summary": "她喜欢这份工作，在这里干了多年，打算继续做下去。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "A": {
+          "target": 36,
+          "secondary": 38,
+          "kind": "shadow",
+          "shadowOf": "E",
+          "shared": [
+            "cafe"
+          ],
+          "text": "选项和第 36 题空前都在说咖啡馆本身（The College Cafe）。但 and more 预告的是饮品之外的东西，下一段写的是店员怎样服务，营业时间接不上。第 38 题空前有起床时刻，它也像在讲时间，可空后 I do so 要的是她做的事。",
+          "quotes": [
+            "The College Cafe",
+            "and more",
+            "I do so"
+          ]
+        },
+        "B": {
+          "target": 38,
+          "secondary": 40,
+          "kind": "shadow",
+          "shadowOf": "G",
+          "shared": [
+            "She has"
+          ],
+          "text": "第 38 题所在段后面有 Being a mother and wife，两个孩子像能接上。但空后 I do so 要指一个她做的动作，孩子年龄没法被“这样做”指代。第 40 题它和答案同样以 She has 开头，可空后 staying 说的是留在店里，和家里孩子无关。",
+          "quotes": [
+            "Being a mother and wife",
+            "I do so",
+            "She has",
+            "staying"
+          ]
+        }
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-i:36": {
+      "blankId": "blank:paper-gaokao-2025-i:36",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Need a break between classes",
+        "a quick pick-me-up",
+        "The College Cafe",
+        "and more"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-i:seven-choices:2",
+        "beforeQuote": "The College Cafe has just that, and more.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Not only",
+          "signalSide": "option",
+          "targetText": "serve up drinks / serves up smiles",
+          "relation": "Not only … also 先认下饮品，再补出饮品之外的微笑。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "and more",
+          "signalSide": "context-before",
+          "targetText": "it also serves up smiles",
+          "relation": "and more 说还有别的，选项用 also 把这“别的”说成微笑。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this cafe",
+          "signalSide": "option",
+          "targetText": "The College Cafe",
+          "relation": "this cafe 回指空前的 The College Cafe。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "pick-me-up",
+          "signalSide": "context-before",
+          "targetText": "drinks",
+          "relation": "提神的 pick-me-up 就是选项里的 drinks。"
+        }
+      ],
+      "lock": [
+        "and more",
+        "Not only",
+        "serves up smiles"
+      ],
+      "find": {
+        "text": "先看空前 \"and more\"：咖啡馆不止提神饮品。E 用 \"Not only\" 先认下饮品，再用 \"serves up smiles\" 说出多出来的那样东西。",
+        "quotes": [
+          "and more",
+          "Not only",
+          "serves up smiles"
+        ]
+      },
+      "explain": "首段用提问引出学生要提神，这句把话题从饮品转到微笑。下一段起写店员 Murphy 笑着服务、她的笑感染学生，全文写的正是这份“微笑”。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "a quick pick-me-up",
+            "optionSide": "serve up drinks",
+            "relation": "提神的东西就是饮品，选项先承认这一点。"
+          },
+          {
+            "contextSide": "and more",
+            "optionSide": "it also serves up smiles",
+            "relation": "“还有更多”具体落到微笑上，引出下文写人。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "首段用提问引出学生要提神，这句把话题从饮品转到微笑。下一段起写店员 Murphy 笑着服务、她的笑感染学生，全文写的正是这份“微笑”。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "选项和第 36 题空前都在说咖啡馆本身（The College Cafe）。但 and more 预告的是饮品之外的东西，下一段写的是店员怎样服务，营业时间接不上。第 38 题空前有起床时刻，它也像在讲时间，可空后 I do so 要的是她做的事。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:37": {
+      "blankId": "blank:paper-gaokao-2025-i:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "goes back and forth between machines",
+        "make the drinks",
+        "the customer grabs the drink",
+        "each customer gets exactly what they order"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+        "beforeQuote": "She goes back and forth between machines to make the drinks.",
+        "afterQuote": "As the customer grabs the drink from her hand"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "After finishing an order",
+          "signalSide": "option",
+          "targetText": "make the drinks",
+          "relation": "After 把动作排在做完饮品之后。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "make the drinks",
+          "signalSide": "context-before",
+          "targetText": "After finishing an order",
+          "relation": "空前在做饮品，选项接着写做完以后。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "calls out the name on the cup",
+          "signalSide": "option",
+          "targetText": "the customer grabs the drink",
+          "relation": "喊了杯上的名字，顾客才上前取走饮品。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "grabs the drink from her hand",
+          "signalSide": "context-after",
+          "targetText": "calls out the name on the cup",
+          "relation": "空后顾客已拿到饮品，前面要有交付这一步。"
+        }
+      ],
+      "lock": [
+        "make the drinks",
+        "After finishing an order",
+        "grabs the drink"
+      ],
+      "find": {
+        "text": "空前在 \"make the drinks\"，空后顾客已经 \"grabs the drink\"，中间缺交付这一步。D 用 \"After finishing an order\" 正好排在两者之间。",
+        "quotes": [
+          "make the drinks",
+          "grabs the drink",
+          "After finishing an order"
+        ]
+      },
+      "explain": "这句把做饮品、喊名字、顾客取走排成一串动作。名字一喊，空后的 the customer 才知道是哪一杯，她的问候也就落在这位顾客身上。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "make the drinks",
+            "optionSide": "After finishing an order",
+            "relation": "做完饮品之后，按时间顺序接下一步。"
+          },
+          {
+            "contextSide": "the customer grabs the drink from her hand",
+            "optionSide": "calls out the name on the cup",
+            "relation": "喊名字后顾客上前取饮品。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "这句把做饮品、喊名字、顾客取走排成一串动作。名字一喊，空后的 the customer 才知道是哪一杯，她的问候也就落在这位顾客身上。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2025-i:38": {
+      "blankId": "blank:paper-gaokao-2025-i:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "gets up at a quarter to five",
+        "get to work on time",
+        "make coffee for the students",
+        "need it in the morning"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
+        "beforeQuote": "Murphy gets up at a quarter to five and drives thirty minutes every day to get to work on time.",
+        "afterQuote": "“I do so because I like to make coffee for the students. I know they need it in the morning,”"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "do so",
+          "signalSide": "context-after",
+          "targetText": "arrives early to serve the students early",
+          "relation": "do so 回指一个她做的动作，就是提前到店。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "arrives early",
+          "signalSide": "option",
+          "targetText": "I do so",
+          "relation": "arrives early 是 do so 所指的动作。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "serve the students early",
+          "signalSide": "option",
+          "targetText": "make coffee for the students / in the morning",
+          "relation": "早点为学生服务，对上空后为学生做咖啡、他们早上需要。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "get to work on time",
+          "signalSide": "context-before",
+          "targetText": "arrives early",
+          "relation": "空前说准时到，选项再进一步说有时提前到。"
+        }
+      ],
+      "lock": [
+        "do so",
+        "arrives early",
+        "in the morning"
+      ],
+      "find": {
+        "text": "先看空后 \"I do so\"：它要指她做的一件事，又说因为学生 \"in the morning\" 要喝咖啡。只有 C 的 \"arrives early\" 能被它这样解释。",
+        "quotes": [
+          "I do so",
+          "in the morning",
+          "arrives early"
+        ]
+      },
+      "explain": "空前说她天不亮起床、准时上班，这句再进一步：有时还提前到。空后她亲口交代原因，是学生早上需要咖啡，把她的辛苦落到为学生着想上。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "get to work on time",
+            "optionSide": "arrives early",
+            "relation": "从准时到提前，付出又多一层。"
+          },
+          {
+            "contextSide": "I do so because I like to make coffee for the students",
+            "optionSide": "to serve the students early",
+            "relation": "空后的原因正好解释选项里提前到的目的。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "空前说她天不亮起床、准时上班，这句再进一步：有时还提前到。空后她亲口交代原因，是学生早上需要咖啡，把她的辛苦落到为学生着想上。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "第 38 题所在段后面有 Being a mother and wife，两个孩子像能接上。但空后 I do so 要指一个她做的动作，孩子年龄没法被“这样做”指代。第 40 题它和答案同样以 She has 开头，可空后 staying 说的是留在店里，和家里孩子无关。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:39": {
+      "blankId": "blank:paper-gaokao-2025-i:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Joanna Wright",
+        "a senior political science major",
+        "goes to the cafe at least six days a week",
+        "a much better day",
+        "cheerful mood"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+        "beforeQuote": "Joanna Wright, a senior political science major, loves coffee and goes to the cafe at least six days a week.",
+        "afterQuote": "“Catherine always has a huge smile on her face, which always puts me in a cheerful mood,” Wright said."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "her",
+          "signalSide": "option",
+          "targetText": "Joanna Wright",
+          "relation": "选项里要上课的 her 只能是学生 Joanna Wright。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Joanna Wright",
+          "signalSide": "context-before",
+          "targetText": "her day / ready for class",
+          "relation": "空前刚介绍这位学生，选项接着写她。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Going to the cafe",
+          "signalSide": "option",
+          "targetText": "goes to the cafe",
+          "relation": "选项接住空前她常去咖啡馆这件事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "goes to the cafe",
+          "signalSide": "context-before",
+          "targetText": "Going to the cafe",
+          "relation": "空前说她常去，选项说去了有什么好处。"
+        }
+      ],
+      "lock": [
+        "goes to the cafe",
+        "ready for class",
+        "cheerful mood"
+      ],
+      "find": {
+        "text": "空前写学生 Wright \"goes to the cafe\" 很勤，F 接着说去了让她一天开个好头、\"ready for class\"。要上课的只能是学生，所以选 F。",
+        "quotes": [
+          "goes to the cafe",
+          "ready for class"
+        ]
+      },
+      "explain": "本段先说 Murphy 的笑能让学生的一天变好，Wright 是例子：空前说她常去，这句说去了以后状态变好，空后 cheerful mood 一句由她亲口说出原因在笑容。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "goes to the cafe at least six days a week",
+            "optionSide": "Going to the cafe",
+            "relation": "承接她常去咖啡馆。"
+          },
+          {
+            "contextSide": "a much better day / cheerful mood",
+            "optionSide": "starts her day off good",
+            "relation": "一天有好开头，正对应段首说的过得更好和空后的好心情。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "本段先说 Murphy 的笑能让学生的一天变好，Wright 是例子：空前说她常去，这句说去了以后状态变好，空后 cheerful mood 一句由她亲口说出原因在笑容。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-gaokao-2025-i:40": {
+      "blankId": "blank:paper-gaokao-2025-i:40",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "I enjoy working in the cafe",
+        "every intention of staying",
+        "continuing doing what she loves"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-gaokao-2025-i:seven-choices:6",
+        "beforeQuote": "“I enjoy working in the cafe,” Murphy said.",
+        "afterQuote": "She has every intention of staying and continuing doing what she loves."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "working in the cafe",
+          "signalSide": "context-before",
+          "targetText": "working anywhere else",
+          "relation": "空前说喜欢在这里工作，选项说不想去别处工作。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "working anywhere else",
+          "signalSide": "option",
+          "targetText": "working in the cafe",
+          "relation": "和空前的 working in the cafe 正反呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "staying",
+          "signalSide": "context-after",
+          "targetText": "can’t imagine working anywhere else",
+          "relation": "不想去别处，所以打算留下。"
+        }
+      ],
+      "lock": [
+        "enjoy working in the cafe",
+        "working anywhere else",
+        "staying"
+      ],
+      "find": {
+        "text": "空前她说 \"I enjoy working in the cafe\"，空后她打算 \"staying\"。G 的 \"working anywhere else\" 前接喜欢这里，后接要留下，两头都对上。",
+        "quotes": [
+          "I enjoy working in the cafe",
+          "staying",
+          "working anywhere else"
+        ]
+      },
+      "explain": "末段收束全文：先引她说喜欢这份工作，这句用干了多年、不愿换地方把喜欢落成事实，空后再说她打算留下，一层层推到继续做热爱的事。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "I enjoy working in the cafe",
+            "optionSide": "can’t imagine working anywhere else",
+            "relation": "喜欢这里，所以想不到去别处。"
+          },
+          {
+            "contextSide": "every intention of staying",
+            "optionSide": "has served here for 17 years",
+            "relation": "已经干了很久，还打算接着干。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "末段收束全文：先引她说喜欢这份工作，这句用干了多年、不愿换地方把喜欢落成事实，空后再说她打算留下，一层层推到继续做热爱的事。"
+      },
+      "keyDistractors": []
+    }
+  }
+}

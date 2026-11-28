@@ -1,0 +1,201 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: I realized it was me who was at fault. That night, I had cared only about my party and the little ones, never thinking about what Toby meant to my brother. To him, Toby was not just a noisy dog but the friend who helped him through his lonely days. Keeping Toby out in the rain had made him feel unwanted. My face burned with shame. I told my wife I would say sorry in person, not by text. The next morning, she smiled and handed me a box of warm biscuits.\n\nParagraph 2: With the biscuits my wife had made, I arrived at my brother’s door. I took a deep breath and knocked. Toby barked, and the door opened slowly. My brother looked thinner, and he did not smile. I held out the box and apologized for the way I had treated him and Toby. For a long moment he said nothing. Then Toby pushed past him, jumped on me and sniffed at the biscuits. My brother finally laughed. “He forgives you faster than I do,” he said, but he stepped aside to let me in. We sat in his kitchen, sharing biscuits and stories, with Toby at our feet. Before I left, I invited them to our next gathering, and this time Toby could come inside.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写要动笔的是“我”和我的兄弟，妻子在背后推了一把，Toby 是两人矛盾的焦点，也是和好的关键。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "“我”用第一人称、一般过去时回忆，句子短而口语化，几乎全是叙述和心理活动，引号里的话只有一句 “Not a chance.”。续写照样用“我”的口吻边叙边想，人物的话以转述为主，只在和好的关键处留一两句短的直接引语。",
+          "evidence": [
+            "His reply came as a surprise – a shock, actually: “Not a chance.”",
+            "Well, he’ll get over it, I reasoned."
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在“我”设身处地想到 Toby 对兄弟有多重要。兄弟因为那晚被逼离开而生气，两个月没有来往，续写要解决的是“我”怎样认错、两人怎样和好。",
+          "evidence": [
+            "Clearly, he was unhappy over the way we had parted.",
+            "After all, I had left him little choice."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "我",
+          "role": "叙述者，聚会的主人",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "起初觉得该由兄弟先低头，不肯主动联系。",
+              "evidence": "but I resisted, thinking he should call first"
+            },
+            {
+              "label": "此刻",
+              "text": "良心不安，开始站在兄弟的角度想问题。",
+              "evidence": "I tried to put myself in my brother’s shoes."
+            }
+          ]
+        },
+        {
+          "name": "我的兄弟",
+          "role": "Toby 的主人",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "身体不好，相伴多年的妻子几个月前去世。",
+              "evidence": "his wife of thirty-five years had passed away a few months earlier"
+            },
+            {
+              "label": "想要",
+              "text": "不愿被冷落，也不肯丢下 Toby，所以宁可离开、拒绝再来。",
+              "evidence": "my brother decided to leave rather than force the issue"
+            }
+          ]
+        },
+        {
+          "name": "妻子",
+          "role": "“我”的妻子",
+          "lines": [
+            {
+              "label": "表现",
+              "text": "为聚会准备点心，也主动劝“我”和兄弟联系。",
+              "evidence": "My wife suggested I get in touch with my brother"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "Toby was his constant companion, the one who kept him going.",
+          "use": "第 1 段用它写“我”终于想明白：赶走 Toby 等于冷落了兄弟最重要的陪伴，认错才有具体原因。"
+        },
+        {
+          "sourceQuote": "My wife suggested I get in touch with my brother",
+          "use": "第 1 段让妻子接着支持“我”，由她烤好饼干，第二段首句的 the biscuits my wife had made 才有来处。"
+        },
+        {
+          "sourceQuote": "I didn’t want Toby to be running around in the house",
+          "use": "第 2 段结尾反过来用：“我”邀请兄弟带 Toby 再来，这次让它进屋，正好收住聚会那晚的矛盾。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "“我”想通 Toby 对兄弟意味着什么，决定登门道歉，妻子烤好饼干；到了兄弟家，道歉之后 Toby 一闹，两人笑着和好，“我”邀请他们下次一起进屋做客。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "从段首句“错在我”出发，写清“我”错在哪里，并写到“我”决定去兄弟家、手里有了妻子做的饼干，第二段一开头才能带着饼干站到门口。",
+          "draft": "“我”想起雨夜只顾聚会和孩子，没想到 Toby 是兄弟熬过孤单日子的伙伴；羞愧之下决定当面道歉，妻子第二天早上递来一盒饼干。",
+          "bridgeQuote": "With the biscuits my wife had made",
+          "bridge": "这盒饼干是怎么来的，“我”又为什么要带着它上门？"
+        },
+        {
+          "paragraph": 2,
+          "must": "从“我”带着饼干到兄弟门口写起，写出见面时兄弟的反应和两人关系的变化，收住“不再来往”这个问题。",
+          "draft": "兄弟开门时还冷着脸，“我”递上饼干道歉；Toby 扑上来闻饼干，兄弟笑了，让“我”进屋。两人边吃边聊，临走时“我”邀请他和 Toby 下次来聚会，并让 Toby 进屋。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: I realized it was me who was at fault. That night, I had cared only about my party and the little ones, never thinking about what Toby meant to my brother. To him, Toby was not just a noisy dog but the friend who helped him through his lonely days. Keeping Toby out in the rain had made him feel unwanted. My face burned with shame. I told my wife I would say sorry in person, not by text. The next morning, she smiled and handed me a box of warm biscuits.\n\nParagraph 2: With the biscuits my wife had made, I arrived at my brother’s door. I took a deep breath and knocked. Toby barked, and the door opened slowly. My brother looked thinner, and he did not smile. I held out the box and apologized for the way I had treated him and Toby. For a long moment he said nothing. Then Toby pushed past him, jumped on me and sniffed at the biscuits. My brother finally laughed. “He forgives you faster than I do,” he said, but he stepped aside to let me in. We sat in his kitchen, sharing biscuits and stories, with Toby at our feet. Before I left, I invited them to our next gathering, and this time Toby could come inside.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "把“错在我”讲具体，并为上门道歉准备好饼干",
+          "items": [
+            {
+              "quote": "never thinking about what Toby meant to my brother",
+              "explain": "直接回答“错在哪”：那晚只顾自己，没考虑 Toby 对兄弟的意义。这句接住原文最后 put myself in my brother’s shoes 的思考。"
+            },
+            {
+              "quote": "To him, Toby was not just a noisy dog but the friend who helped him through his lonely days.",
+              "explain": "用 not just … but … 把原文的 constant companion 换成自己的话，交代 Toby 在兄弟丧妻之后的分量，认错的理由立了起来。"
+            },
+            {
+              "quote": "say sorry in person, not by text",
+              "explain": "原文是“我”发短信邀请被拒，这里特意写“当面、不发短信”，说明“我”换了做法，也引出必须上门。"
+            },
+            {
+              "quote": "The next morning, she smiled and handed me a box of warm biscuits.",
+              "explain": "妻子原本就劝“我”联系兄弟，此时用烤饼干表示支持。饼干在这一段做好，第二段首句的 the biscuits my wife had made 就接上了。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写见面、道歉和和好，回收聚会那晚“不让 Toby 进屋”的矛盾",
+          "items": [
+            {
+              "quote": "My brother looked thinner, and he did not smile.",
+              "explain": "一个外貌细节对应原文的 health issues，“不笑”说明他还在生气，和好不是一敲门就成。"
+            },
+            {
+              "quote": "Then Toby pushed past him, jumped on me and sniffed at the biscuits.",
+              "explain": "让原文的 ball of fire 再闹一次，这次闹出的是笑声。转折由原文就有的 Toby 和手里的饼干推动，不靠新人物。"
+            },
+            {
+              "quote": "“He forgives you faster than I do,”",
+              "explain": "全段唯一一句直接引语，放在关系变化的那一刻；半开玩笑的话说明他已经松口，又不显得突然。"
+            },
+            {
+              "quote": "and this time Toby could come inside",
+              "explain": "结尾落在一个具体安排上：这次让 Toby 进屋。它正好反转聚会那晚“不让狗进屋”的做法，问题在原文的线索上收住。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "My face burned with shame.",
+          "function": "用身体反应写羞愧，比 I felt very sorry 更具体，紧跟在“我”想明白之后，情绪有触发。"
+        },
+        {
+          "expression": "say sorry in person",
+          "function": "说明道歉的方式，把认错落到“上门”这个动作上，引出第二段。"
+        },
+        {
+          "expression": "stepped aside to let me in",
+          "function": "用一个让路的动作表示兄弟原谅了“我”，不必再写“他原谅了我”。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段写成兄弟先打来电话或主动上门",
+          "why": "第二段首句是“我”带着饼干到他门口，第一段结束时必须是“我”决定主动去，而且饼干已经做好。"
+        },
+        {
+          "pitfall": "认错只写一句“我很后悔”，不说错在哪",
+          "why": "原文最后两句已经铺好 Toby 是兄弟丧妻后的依靠，不用上这条线索，段首句“错在我”就落不到实处。"
+        },
+        {
+          "pitfall": "一见面就抱头痛哭、立刻和好",
+          "why": "原文中兄弟回了一句 “Not a chance.”，两个月没有来往，和好需要一个触发点，比如 Toby 的举动或“我”的具体道歉。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: I realized it was me who was at fault. All along I had blamed him for being stubborn, yet I was the one who had shut the door on him that rainy night. I had been so busy protecting the little ones that I never stopped to think what Toby meant to him. Since his wife’s death, that clumsy dog had been the one waiting for him at home. Asking him to keep Toby out in the rain must have felt like asking him to leave part of himself behind. My face burned at the thought. That evening I told my wife I would apologize face to face. Without a word, she pulled out her baking tray, and soon the house smelled of butter and sugar.\n\nParagraph 2: With the biscuits my wife had made, I arrived at my brother’s door. I hesitated before I knocked. A deep bark answered, followed by slow footsteps. My brother opened the door, one hand on Toby’s collar, his eyes cool. I held out the tin and told him I was sorry, sorry for putting my party before his feelings and for not seeing how hard this year had been. He looked at the biscuits, then at me, and his shoulders relaxed. Just then Toby broke free, buried his nose in the tin and knocked half the biscuits onto the floor. We both burst out laughing. “Well, I guess you’d better come in,” my brother said, stepping aside. We spent the afternoon at his kitchen table, talking about his wife and the old days, with Toby snoring under our chairs. As I left, I asked him to bring Toby to our next family dinner. “Inside?” he asked. “Inside,” I said with a smile.",
+      "beyondStandard": [
+        {
+          "quote": "All along I had blamed him for being stubborn, yet I was the one who had shut the door on him that rainy night.",
+          "explain": "先承认自己一直怪兄弟固执，再用 yet 转回“关门的其实是我”，接住原文 he should call first 和 he’ll get over it 的心态，认错更有层次。"
+        },
+        {
+          "quote": "must have felt like asking him to leave part of himself behind",
+          "explain": "用 must have felt like 推测兄弟当晚的感受，把 Toby 和他本人连在一起，比标准版的 made him feel unwanted 更贴近兄弟的处境。"
+        },
+        {
+          "quote": "“Inside?” he asked. “Inside,” I said with a smile.",
+          "explain": "用两个词的一问一答收尾，重复 Inside 直接回应聚会那晚的矛盾，比标准版的叙述更简洁，也更像真人说话。"
+        }
+      ]
+    }
+  }
+}

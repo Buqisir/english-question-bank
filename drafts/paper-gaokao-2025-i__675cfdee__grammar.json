@@ -1,0 +1,1115 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-gaokao-2025-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-i:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-i:grammar-fill": {
+      "overview": "上海久事美术馆举办以围棋为灵感的艺术展。策展人介绍围棋体现的东方哲学和展览理念，棋手谈对局之道与赢棋的风度，黑白平衡与行棋之美启发艺术家创作了多种作品。",
+      "fullTranslationZh": "上海久事美术馆正在举办一场展览，展出受围棋启发创作的艺术作品。围棋起源于中国，距今已有4000多年的历史。\n围棋是最早的基于二元的游戏之一。展览负责人 Tu Ningning 表示，黑白棋子的行棋体现了东方哲学的基本思想。\n“这次展览把围棋文化、前沿科技和当代艺术汇集在一起，”Tu Ningning 说，“我们希望在视觉语境中呈现颇为抽象的围棋和人工智能，并与极简主义艺术、观念艺术和表现主义展开对话。”\n“在围棋对局中，每一步棋都应服务于长远目标。你要设法把对手引入你的圈套，迫使他们一直顺着你的‘引导’走，直到落败，”观展者中的一位棋手 Wang Wei 解释道。\n“下棋时，棋手的性格会显露出来，一个人的弱点也会暴露在对手面前，”她补充说，“有风度的赢家总是设法只赢对手不超过一两目，以此表示对对方的尊重。”\nTu Ningning 说，黑白棋子之间的平衡、棋子富有策略的布局之美，以及每一步棋之后的能量流动，启发艺术家们为这次展览创作了油画、雕塑、数字生成的图片和丝网版画。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+          "sourceText": "Tu says that the balance between the black and white pieces, the beauty in the __63__ (strategy) placement of the pieces, __64__ the energy flow following each move inspired artists to create oil paintings, sculptures, __65__ (digital) generated pictures and silk-screen prints for the exhibition.",
+          "displayText": "Tu says that the balance between the black and white pieces, the beauty in the strategic placement of the pieces, and the energy flow following each move inspired artists to create oil paintings, sculptures, digitally generated pictures and silk-screen prints for the exhibition.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:63",
+            "question:paper-gaokao-2025-i:64",
+            "question:paper-gaokao-2025-i:65"
+          ],
+          "translationZh": "Tu Ningning 说，黑白棋子之间的平衡、棋子富有策略的布局之美，以及每一步棋之后的能量流动，启发艺术家们为这次展览创作了油画、雕塑、数字生成的图片和丝网版画。",
+          "analysisZh": "主干是 Tu says that…：Tu Ningning 说了一件事。that 从句的主干是“三个名词短语 inspired artists to create…”：the balance、the beauty、the energy flow 由逗号和 and 并列作主语，共同启发艺术家创作。各项后面都带修饰：between…、in the strategic placement of the pieces、following each move。to create 后的宾语又是四项并列：油画、雕塑、数字生成的图片和丝网版画。",
+          "underlineRanges": [
+            {
+              "start": 13,
+              "end": 24,
+              "quote": "the balance"
+            },
+            {
+              "start": 61,
+              "end": 71,
+              "quote": "the beauty"
+            },
+            {
+              "start": 114,
+              "end": 133,
+              "quote": "and the energy flow"
+            },
+            {
+              "start": 154,
+              "end": 180,
+              "quote": "inspired artists to create"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+          "sourceText": "A decent winner always __61__ (try) to beat the opponent __62__ no more than one or two points as a gesture（姿态）of respect for the other side.",
+          "displayText": "A decent winner always tries to beat the opponent by no more than one or two points as a gesture（姿态）of respect for the other side.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:61",
+            "question:paper-gaokao-2025-i:62"
+          ],
+          "translationZh": "有风度的赢家总是设法只赢对手不超过一两目，以此表示对对方的尊重。",
+          "analysisZh": "主干是 A decent winner always tries to beat the opponent：有风度的赢家总是设法打败对手。by no more than one or two points 说明赢的幅度，只多一两目；as a gesture of respect for the other side 说明这样做的用意，是对对方表示尊重。",
+          "underlineRanges": [
+            {
+              "start": 16,
+              "end": 49,
+              "quote": "always tries to beat the opponent"
+            },
+            {
+              "start": 50,
+              "end": 83,
+              "quote": "by no more than one or two points"
+            },
+            {
+              "start": 84,
+              "end": 96,
+              "quote": "as a gesture"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 53,
+              "quote": "上海久事美术馆正在举办一场展览，展出受围棋启发创作的艺术作品。围棋起源于中国，距今已有4000多年的历史。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:grammar-fill:2"
+              ],
+              "start": 54,
+              "end": 111,
+              "quote": "围棋是最早的基于二元的游戏之一。展览负责人 Tu Ningning 表示，黑白棋子的行棋体现了东方哲学的基本思想。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:grammar-fill:3"
+              ],
+              "start": 112,
+              "end": 203,
+              "quote": "“这次展览把围棋文化、前沿科技和当代艺术汇集在一起，”Tu Ningning 说，“我们希望在视觉语境中呈现颇为抽象的围棋和人工智能，并与极简主义艺术、观念艺术和表现主义展开对话。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:grammar-fill:4"
+              ],
+              "start": 204,
+              "end": 285,
+              "quote": "“在围棋对局中，每一步棋都应服务于长远目标。你要设法把对手引入你的圈套，迫使他们一直顺着你的‘引导’走，直到落败，”观展者中的一位棋手 Wang Wei 解释道。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:grammar-fill:5"
+              ],
+              "start": 286,
+              "end": 358,
+              "quote": "“下棋时，棋手的性格会显露出来，一个人的弱点也会暴露在对手面前，”她补充说，“有风度的赢家总是设法只赢对手不超过一两目，以此表示对对方的尊重。”"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:grammar-fill:6"
+              ],
+              "start": 359,
+              "end": 442,
+              "quote": "Tu Ningning 说，黑白棋子之间的平衡、棋子富有策略的布局之美，以及每一步棋之后的能量流动，启发艺术家们为这次展览创作了油画、雕塑、数字生成的图片和丝网版画。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-gaokao-2025-i:grammar-fill:1",
+            "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:1",
+            "text": "An exhibition at the Jiushi Art Museum in Shanghai is featuring artwork inspired by Go, or weiqi in Chinese, which originated in China more than 4,000 years ago."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-i:grammar-fill:2",
+            "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:2",
+            "text": "Go is one of the earliest binary-based（基于二元的）games. The movements of the black and white pieces reflect the basic ideas of Eastern philosophy, according to Tu Ningning, who is in charge of the exhibition."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-i:grammar-fill:3",
+            "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:3",
+            "text": "“The exhibition brings together Go culture, cutting-edge technology and contemporary art,” says Tu. “We hope to present the rather abstract Go game and AI in a visual context, and initiate dialogues with minimalist art, conceptual art and expressionism.”"
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-i:grammar-fill:4",
+            "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:4",
+            "text": "“In a Go game, each move should serve a long-term goal. You try to lead the opponent into your trap and force them to follow your ‘ guidance ’ till they lose,” explains Wang Wei, a Go player among the visitors to the exhibition."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-i:grammar-fill:5",
+            "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+            "text": "“The players’ personalities are revealed during the game, and one’s weaknesses are exposed to the opponent,” she adds. “A decent winner always tries to beat the opponent by no more than one or two points as a gesture（姿态）of respect for the other side.”"
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-i:grammar-fill:6",
+            "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+            "text": "Tu says that the balance between the black and white pieces, the beauty in the strategic placement of the pieces, and the energy flow following each move inspired artists to create oil paintings, sculptures, digitally generated pictures and silk-screen prints for the exhibition."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:1",
+                "start": 84,
+                "end": 107,
+                "quote": "Go, or weiqi in Chinese"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:1",
+                "start": 116,
+                "end": 135,
+                "quote": "originated in China"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:1",
+                "start": 31,
+                "end": 38,
+                "quote": "围棋起源于中国"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:56"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:1",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:1",
+                "start": 109,
+                "end": 114,
+                "quote": "which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:1",
+                "start": 31,
+                "end": 38,
+                "quote": "围棋起源于中国"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:2",
+                "start": 20,
+                "end": 41,
+                "quote": "earliest binary-based"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:2",
+                "start": 3,
+                "end": 6,
+                "quote": "最早的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:57"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:2",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:2",
+                "start": 13,
+                "end": 16,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:2",
+                "start": 3,
+                "end": 6,
+                "quote": "最早的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:3",
+                "start": 101,
+                "end": 108,
+                "quote": "We hope"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:3",
+                "start": 42,
+                "end": 46,
+                "quote": "我们希望"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:58"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:3",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:3",
+                "start": 109,
+                "end": 119,
+                "quote": "to present"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:3",
+                "start": 52,
+                "end": 54,
+                "quote": "呈现"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:4",
+                "start": 104,
+                "end": 129,
+                "quote": "force them to follow your"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:4",
+                "start": 36,
+                "end": 46,
+                "quote": "迫使他们一直顺着你的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:59"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:4",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:4",
+                "start": 132,
+                "end": 140,
+                "quote": "guidance"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:4",
+                "start": 47,
+                "end": 49,
+                "quote": "引导"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 1,
+                "end": 27,
+                "quote": "The players’ personalities"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 82,
+                "end": 93,
+                "quote": "are exposed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 5,
+                "end": 10,
+                "quote": "棋手的性格"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:60"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 28,
+                "end": 40,
+                "quote": "are revealed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 11,
+                "end": 15,
+                "quote": "显露出来"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 123,
+                "end": 145,
+                "quote": "A decent winner always"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 39,
+                "end": 47,
+                "quote": "有风度的赢家总是"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:61"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 143,
+                "end": 148,
+                "quote": "tries"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 47,
+                "end": 49,
+                "quote": "设法"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 187,
+                "end": 217,
+                "quote": "no more than one or two points"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 53,
+                "end": 59,
+                "quote": "不超过一两目"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:62"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 170,
+                "end": 172,
+                "quote": "by"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 49,
+                "end": 59,
+                "quote": "只赢对手不超过一两目"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 97,
+                "end": 120,
+                "quote": "placement of the pieces"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 31,
+                "end": 33,
+                "quote": "布局"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:63"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 79,
+                "end": 88,
+                "quote": "strategic"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 26,
+                "end": 31,
+                "quote": "富有策略的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 129,
+                "end": 164,
+                "quote": "the energy flow following each move"
+              },
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 165,
+                "end": 181,
+                "quote": "inspired artists"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 38,
+                "end": 49,
+                "quote": "每一步棋之后的能量流动"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:64"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 114,
+                "end": 117,
+                "quote": "and"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 36,
+                "end": 38,
+                "quote": "以及"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 236,
+                "end": 254,
+                "quote": "generated pictures"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 72,
+                "end": 77,
+                "quote": "生成的图片"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:65"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 208,
+                "end": 217,
+                "quote": "digitally"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 70,
+                "end": 72,
+                "quote": "数字"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:63",
+              "question:paper-gaokao-2025-i:64",
+              "question:paper-gaokao-2025-i:65"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 13,
+                "end": 24,
+                "quote": "the balance"
+              },
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 61,
+                "end": 71,
+                "quote": "the beauty"
+              },
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 114,
+                "end": 133,
+                "quote": "and the energy flow"
+              },
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:6",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 154,
+                "end": 180,
+                "quote": "inspired artists to create"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 21,
+                "end": 23,
+                "quote": "平衡"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 31,
+                "end": 35,
+                "quote": "布局之美"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 36,
+                "end": 49,
+                "quote": "以及每一步棋之后的能量流动"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:6",
+                "start": 50,
+                "end": 56,
+                "quote": "启发艺术家们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:61",
+              "question:paper-gaokao-2025-i:62"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 136,
+                "end": 169,
+                "quote": "always tries to beat the opponent"
+              },
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 170,
+                "end": 203,
+                "quote": "by no more than one or two points"
+              },
+              {
+                "textId": "done-block:paper-gaokao-2025-i:grammar-fill:5",
+                "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 204,
+                "end": 216,
+                "quote": "as a gesture"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 45,
+                "end": 49,
+                "quote": "总是设法"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 53,
+                "end": 59,
+                "quote": "不超过一两目"
+              },
+              {
+                "textId": "tr-grammar",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:grammar-fill:5",
+                "start": 60,
+                "end": 70,
+                "quote": "以此表示对对方的尊重"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2025-i:56": {
+      "blankId": "blank:paper-gaokao-2025-i:56",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导非限制性定语从句，修饰逗号前的围棋（Go, or weiqi in Chinese），并在从句里作起源于（originated）的主语。先行词指物，逗号后不能用（that），所以填（which）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "Go, or weiqi in Chinese",
+          "signalSide": "passage",
+          "relation": "先行词是围棋这种棋类，指物。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "originated in China",
+          "signalSide": "passage",
+          "relation": "从句只有谓语，缺主语，关系词要在从句里作主语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:57": {
+      "blankId": "blank:paper-gaokao-2025-i:57",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-structural",
+        "features": [
+          "superlative"
+        ]
+      },
+      "reason": "空格限定名词短语（earliest binary-based games）。最早的（earliest）是最高级，前面要用定冠词，构成“最早的……之一”，所以填（the）。",
+      "evidence": [
+        {
+          "type": "comparison",
+          "signalText": "earliest",
+          "signalSide": "passage",
+          "relation": "最高级前用定冠词。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "one of",
+          "signalSide": "passage",
+          "relation": "“……之一”后接最高级加复数名词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:58": {
+      "blankId": "blank:paper-gaokao-2025-i:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "present",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to present",
+      "role": "object",
+      "similarityProfile": {
+        "route": "object-verb-to-infinitive",
+        "features": []
+      },
+      "reason": "空格作谓语希望（hope）的宾语，说明希望做的事。希望后接不定式，所以填（to present）；后面并列的发起（initiate）省去了（to），与它共用。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "We hope",
+          "signalSide": "passage",
+          "relation": "希望（hope）后接不定式作宾语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "and initiate dialogues",
+          "signalSide": "passage",
+          "relation": "并列的第二个动作用原形，说明前面是共用（to）的不定式。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:59": {
+      "blankId": "blank:paper-gaokao-2025-i:59",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "guide",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "guidance",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作跟随（follow）的宾语，前有物主代词（your）限定，要用名词。这里指让对手顺着你的引导走，用抽象名词（guidance）；填原形（guide）会变成“你的向导”。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "follow your",
+          "signalSide": "passage",
+          "relation": "跟随（follow）后要宾语，物主代词后接名词。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "your",
+          "signalSide": "passage",
+          "relation": "物主代词限定的是名词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:60": {
+      "blankId": "blank:paper-gaokao-2025-i:60",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "reveal",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "are revealed",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-stable-description",
+        "features": []
+      },
+      "reason": "空格是主语性格（personalities）的谓语。性格是被展现出来的，要用被动；讲的是下棋时一般会发生的情况，与并列分句的被暴露（are exposed）一致，用一般现在时，主语是复数，所以填（are revealed）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The players’ personalities",
+          "signalSide": "passage",
+          "relation": "主语是复数，且是被展现的对象。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "are exposed",
+          "signalSide": "passage",
+          "relation": "并列分句用一般现在时被动，两处时态语态一致。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:61": {
+      "blankId": "blank:paper-gaokao-2025-i:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "try",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "tries",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-frequency-marker",
+        "features": []
+      },
+      "reason": "空格是主语赢家（A decent winner）的谓语。总是（always）说明这是一贯的做法，用一般现在时；主语是第三人称单数，所以填（tries）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "A decent winner",
+          "signalSide": "passage",
+          "relation": "主语是第三人称单数。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "always",
+          "signalSide": "passage",
+          "relation": "频度副词表示一贯做法，用一般现在时。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:62": {
+      "blankId": "blank:paper-gaokao-2025-i:62",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "by",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-relation",
+        "features": []
+      },
+      "reason": "空格要把差距不超过一两目（no more than one or two points）接到打败对手（beat the opponent）上，说明赢了多少。表示相差的幅度用介词（by）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "beat the opponent",
+          "signalSide": "passage",
+          "relation": "打败对手，后面说明赢的幅度。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "no more than one or two points",
+          "signalSide": "passage",
+          "relation": "分数差距由介词引出，表示相差多少。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:63": {
+      "blankId": "blank:paper-gaokao-2025-i:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "strategy",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "strategic",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格修饰名词布局（placement），说明是什么样的布局，要用形容词。策略（strategy）的形容词是（strategic），意为“有策略的”。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "placement of the pieces",
+          "signalSide": "passage",
+          "relation": "被修饰的名词是布局，前面要形容词。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:64": {
+      "blankId": "blank:paper-gaokao-2025-i:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "similarityProfile": {
+        "route": "addition-sequence",
+        "features": []
+      },
+      "reason": "空格连接三个并列主语：平衡（the balance）、美（the beauty）和能量流动（the energy flow），三者一起作谓语启发（inspired）的主语。列举到最后一项前用（and）。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "the balance between the black and white pieces",
+          "signalSide": "passage",
+          "relation": "第一项并列主语，与后两项用逗号和连词连起。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "inspired artists",
+          "signalSide": "passage",
+          "relation": "三个名词短语共用一个谓语，是并列主语。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:65": {
+      "blankId": "blank:paper-gaokao-2025-i:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "digital",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "digitally",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-non-finite",
+        "features": []
+      },
+      "reason": "空格修饰过去分词生成的（generated），说明图片是怎样生成的。修饰分词要用副词，所以把（digital）变为（digitally）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "generated pictures",
+          "signalSide": "passage",
+          "relation": "被修饰的是分词生成的，用副词修饰。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1913 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-gaokao-2025-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-i:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-i:cloze": {
+      "overview": "作者卖房搬家，屋里仍堆满不值钱却不该扔的旧物。她把花瓶配上自嘲的描述免费送出，立刻被人取走；受此鼓舞，她天天在网上送东西，既减少了浪费，又给陌生人带去快乐。",
+      "fullTranslationZh": "八月的一个下午，我坐在厨房里，盯着一只玻璃花瓶——自从我结婚以后，它就再没见过天日。\n我和丈夫刚卖掉房子，正忙着清空这个心爱的家——我们一家人花了23年才把它填满。我们已经为要搬去的城里那套公寓选定了必需品，能捐的都捐了，还租了个地方存放那些我们自认为重要的东西。这样一来，房子里仍塞满了各种东西，它们虽然并不怎么值钱，却也不该被扔进垃圾填埋场。\n我给花瓶拍了张照片，以10美元的价格发到网上。来了几条消息，一条想要更多照片，另一条要求降价。随着搬家的日子临近，我定了个新价格（0美元），重新发布了它。商品描述写道：“我讨厌这个花瓶。也许你不会。”转眼间，一位女士就冲进我家，高高兴兴地带走了花瓶。\n受到鼓舞，我又发布了更多东西。每天的帖子和收到的上门来访，成了我家一片混乱中一束珍贵的光。每一次交换都让我有机会不让东西进垃圾填埋场，也让我能取悦一个原本可能永远不会遇见的人。\n如今我坐在公寓里，喜爱着与我们共处这个小空间的每一件物品。想到附近某个地方，有人正珍惜着那些没能跟我们一起走的东西，我便感到快乐。",
+      "mainLine": {
+        "theme": {
+          "text": "带不走的旧物（something that couldn’t come with us）有人珍惜，送出去也能带来快乐。",
+          "quote": "something that couldn’t come with us"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:1",
+            "text": "八月午后，作者盯着一只婚后从未用过的玻璃花瓶发愁。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+            "text": "卖房搬家，清空旧屋后仍剩满屋不值钱却不该扔的东西。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
+            "text": "花瓶标价十美元少人问津，搬家日临近她改为免费。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:4",
+            "text": "配上自嘲的描述重发，一位女士立刻高兴地取走花瓶。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+            "text": "受到鼓舞她天天送物，既少扔垃圾又结识了新的人。"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+            "text": "住进小公寓，想到旧物有人珍惜，作者心里快乐。"
+          }
+        ],
+        "emotion": "对着旧物发愁→受到鼓舞→欣慰快乐"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-1",
+          "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+          "sourceText": "That left a house still __44__ with things that, while not particularly __45__, didn’t belong in a landfill（垃圾填埋场）.",
+          "displayText": "That left a house still stuffed with things that, while not particularly valuable, didn’t belong in a landfill（垃圾填埋场）.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:44",
+            "question:paper-gaokao-2025-i:45"
+          ],
+          "translationZh": "这样一来，房子里仍塞满了各种东西，它们虽然并不怎么值钱，却也不该被扔进垃圾填埋场。",
+          "analysisZh": "主干是 That left a house still stuffed with things：前面清理、捐赠、存放这些事，留下了一座仍塞满东西的房子。that 引导定语从句修饰 things，从句主干是 things didn’t belong in a landfill；中间插入的 while not particularly valuable 是让步状语，先承认这些东西不值钱，再转到它们也不该被扔掉。",
+          "underlineRanges": [
+            {
+              "start": 5,
+              "end": 43,
+              "quote": "left a house still stuffed with things"
+            },
+            {
+              "start": 50,
+              "end": 81,
+              "quote": "while not particularly valuable"
+            },
+            {
+              "start": 83,
+              "end": 110,
+              "quote": "didn’t belong in a landfill"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-2",
+          "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+          "sourceText": "Each exchange provided a chance to __51__ the landfill and to please another person I might not otherwise have __52__.",
+          "displayText": "Each exchange provided a chance to spare the landfill and to please another person I might not otherwise have encountered.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:51",
+            "question:paper-gaokao-2025-i:52"
+          ],
+          "translationZh": "每一次交换都让我有机会不让东西进垃圾填埋场，也让我能取悦一个原本可能永远不会遇见的人。",
+          "analysisZh": "主干是 Each exchange provided a chance：每次交换都提供了一个机会。后面两个不定式 to spare the landfill 和 to please another person 由 and 并列，一起说明这个机会是什么。I might not otherwise have encountered 是省略关系词的定语从句，修饰 another person，otherwise 指“要不是送东西”。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 31,
+              "quote": "provided a chance"
+            },
+            {
+              "start": 32,
+              "end": 53,
+              "quote": "to spare the landfill"
+            },
+            {
+              "start": 58,
+              "end": 82,
+              "quote": "to please another person"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:cloze:1"
+              ],
+              "start": 0,
+              "end": 42,
+              "quote": "八月的一个下午，我坐在厨房里，盯着一只玻璃花瓶——自从我结婚以后，它就再没见过天日。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:cloze:2"
+              ],
+              "start": 43,
+              "end": 173,
+              "quote": "我和丈夫刚卖掉房子，正忙着清空这个心爱的家——我们一家人花了23年才把它填满。我们已经为要搬去的城里那套公寓选定了必需品，能捐的都捐了，还租了个地方存放那些我们自认为重要的东西。这样一来，房子里仍塞满了各种东西，它们虽然并不怎么值钱，却也不该被扔进垃圾填埋场。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:cloze:3",
+                "block:paper-gaokao-2025-i:cloze:4"
+              ],
+              "start": 174,
+              "end": 299,
+              "quote": "我给花瓶拍了张照片，以10美元的价格发到网上。来了几条消息，一条想要更多照片，另一条要求降价。随着搬家的日子临近，我定了个新价格（0美元），重新发布了它。商品描述写道：“我讨厌这个花瓶。也许你不会。”转眼间，一位女士就冲进我家，高高兴兴地带走了花瓶。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:5",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:cloze:5"
+              ],
+              "start": 300,
+              "end": 388,
+              "quote": "受到鼓舞，我又发布了更多东西。每天的帖子和收到的上门来访，成了我家一片混乱中一束珍贵的光。每一次交换都让我有机会不让东西进垃圾填埋场，也让我能取悦一个原本可能永远不会遇见的人。"
+            },
+            {
+              "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:6",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:cloze:6"
+              ],
+              "start": 389,
+              "end": 454,
+              "quote": "如今我坐在公寓里，喜爱着与我们共处这个小空间的每一件物品。想到附近某个地方，有人正珍惜着那些没能跟我们一起走的东西，我便感到快乐。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-gaokao-2025-i:cloze:2",
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+            "text": "My husband and I had just sold our house and we were busy emptying out the beloved home our family had spent 23 years filling up. We had decided on key items for the apartment we were moving to in town, donated what we could, and rented a place to store our supposedly important objects. That left a house still stuffed with things that, while not particularly valuable, didn’t belong in a landfill（垃圾填埋场）."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-i:cloze:3",
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
+            "text": "I took a picture of the vase and posted it online, for $10. A couple of messages came in, one wanting additional photos, another asking for a price cut. As our move day drew near, I settled on a new price ($0) and"
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-i:cloze:4",
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:4",
+            "text": "reposted it. The description: “I hate this vase. Maybe you won’t.” In an instant, a woman raced into my house and left happily with the vase."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-i:cloze:5",
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+            "text": "Encouraged, I posted more. My daily posts and the visits I received became a precious ray of light in the chaos of my house. Each exchange provided a chance to spare the landfill and to please another person I might not otherwise have encountered."
+          },
+          {
+            "textId": "done-block:paper-gaokao-2025-i:cloze:6",
+            "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+            "text": "I sit in my apartment today, loving each of the belongings that share our small space. I take joy in knowing that, somewhere nearby, someone is appreciating something that couldn’t come with us."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 97,
+                "end": 122,
+                "quote": "spent 23 years filling up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 28,
+                "end": 38,
+                "quote": "花了23年才把它填满"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:41"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 58,
+                "end": 70,
+                "quote": "emptying out"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 13,
+                "end": 15,
+                "quote": "清空"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+                "start": 0,
+                "end": 27,
+                "quote": "I sit in my apartment today"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:6",
+                "start": 0,
+                "end": 8,
+                "quote": "如今我坐在公寓里"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:42"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 166,
+                "end": 175,
+                "quote": "apartment"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 52,
+                "end": 54,
+                "quote": "公寓"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 221,
+                "end": 235,
+                "quote": "rented a place"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 69,
+                "end": 74,
+                "quote": "租了个地方"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:43"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 248,
+                "end": 253,
+                "quote": "store"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 74,
+                "end": 76,
+                "quote": "存放"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 112,
+                "end": 122,
+                "quote": "filling up"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 298,
+                "end": 303,
+                "quote": "still"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 97,
+                "end": 98,
+                "quote": "仍"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:44"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 312,
+                "end": 319,
+                "quote": "stuffed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 98,
+                "end": 100,
+                "quote": "塞满"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 360,
+                "end": 387,
+                "quote": "didn’t belong in a landfill"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 117,
+                "end": 129,
+                "quote": "却也不该被扔进垃圾填埋场"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:45"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 361,
+                "end": 369,
+                "quote": "valuable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 114,
+                "end": 116,
+                "quote": "值钱"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
+                "start": 2,
+                "end": 28,
+                "quote": "took a picture of the vase"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:3",
+                "start": 0,
+                "end": 9,
+                "quote": "我给花瓶拍了张照片"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:46"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
+                "start": 113,
+                "end": 119,
+                "quote": "photos"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:3",
+                "start": 36,
+                "end": 38,
+                "quote": "照片"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 167,
+                "end": 184,
+                "quote": "we were moving to"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 44,
+                "end": 48,
+                "quote": "要搬去的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:47"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:3",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
+                "start": 160,
+                "end": 164,
+                "quote": "move"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:3",
+                "start": 49,
+                "end": 51,
+                "quote": "搬家"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:4",
+                "start": 26,
+                "end": 60,
+                "quote": "I hate this vase. Maybe you won’t."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:3",
+                "start": 85,
+                "end": 99,
+                "quote": "我讨厌这个花瓶。也许你不会。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:48"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:4",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:4",
+                "start": 17,
+                "end": 28,
+                "quote": "description"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:3",
+                "start": 77,
+                "end": 81,
+                "quote": "商品描述"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:4",
+                "start": 109,
+                "end": 135,
+                "quote": "left happily with the vase"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:3",
+                "start": 114,
+                "end": 124,
+                "quote": "高高兴兴地带走了花瓶"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:49"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+                "start": 0,
+                "end": 10,
+                "quote": "Encouraged"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:5",
+                "start": 0,
+                "end": 4,
+                "quote": "受到鼓舞"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:4",
+                "start": 85,
+                "end": 104,
+                "quote": "raced into my house"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:3",
+                "start": 109,
+                "end": 113,
+                "quote": "冲进我家"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:50"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+                "start": 50,
+                "end": 56,
+                "quote": "visits"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:5",
+                "start": 24,
+                "end": 28,
+                "quote": "上门来访"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 360,
+                "end": 387,
+                "quote": "didn’t belong in a landfill"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 117,
+                "end": 129,
+                "quote": "却也不该被扔进垃圾填埋场"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:51"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+                "start": 160,
+                "end": 165,
+                "quote": "spare"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:5",
+                "start": 56,
+                "end": 66,
+                "quote": "不让东西进垃圾填埋场"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+                "start": 207,
+                "end": 231,
+                "quote": "might not otherwise have"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:5",
+                "start": 75,
+                "end": 83,
+                "quote": "原本可能永远不会"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:52"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+                "start": 235,
+                "end": 246,
+                "quote": "encountered"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:5",
+                "start": 83,
+                "end": 85,
+                "quote": "遇见"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+                "start": 60,
+                "end": 81,
+                "quote": "share our small space"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:6",
+                "start": 12,
+                "end": 22,
+                "quote": "与我们共处这个小空间"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:53"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:6",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+                "start": 48,
+                "end": 58,
+                "quote": "belongings"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:6",
+                "start": 26,
+                "end": 28,
+                "quote": "物品"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+                "start": 29,
+                "end": 47,
+                "quote": "loving each of the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:6",
+                "start": 9,
+                "end": 12,
+                "quote": "喜爱着"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:54"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:6",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+                "start": 94,
+                "end": 97,
+                "quote": "joy"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:6",
+                "start": 62,
+                "end": 64,
+                "quote": "快乐"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+                "start": 150,
+                "end": 186,
+                "quote": "something that couldn’t come with us"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:6",
+                "start": 44,
+                "end": 57,
+                "quote": "那些没能跟我们一起走的东西"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:55"
+            ],
+            "blankId": "blank:paper-gaokao-2025-i:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:6",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+                "start": 144,
+                "end": 156,
+                "quote": "appreciating"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:6",
+                "start": 41,
+                "end": 43,
+                "quote": "珍惜"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:44",
+              "question:paper-gaokao-2025-i:45"
+            ],
+            "selectedSentenceId": "ls-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 293,
+                "end": 331,
+                "quote": "left a house still stuffed with things"
+              },
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 338,
+                "end": 369,
+                "quote": "while not particularly valuable"
+              },
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:2",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+                "start": 371,
+                "end": 398,
+                "quote": "didn’t belong in a landfill"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 94,
+                "end": 105,
+                "quote": "房子里仍塞满了各种东西"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 108,
+                "end": 116,
+                "quote": "虽然并不怎么值钱"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:2",
+                "start": 117,
+                "end": 129,
+                "quote": "却也不该被扔进垃圾填埋场"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:51",
+              "question:paper-gaokao-2025-i:52"
+            ],
+            "selectedSentenceId": "ls-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+                "start": 139,
+                "end": 156,
+                "quote": "provided a chance"
+              },
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+                "start": 157,
+                "end": 178,
+                "quote": "to spare the landfill"
+              },
+              {
+                "textId": "done-block:paper-gaokao-2025-i:cloze:5",
+                "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+                "start": 183,
+                "end": 207,
+                "quote": "to please another person"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:5",
+                "start": 56,
+                "end": 66,
+                "quote": "不让东西进垃圾填埋场"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-gaokao-2025-i:cloze:5",
+                "start": 70,
+                "end": 87,
+                "quote": "能取悦一个原本可能永远不会遇见的人"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "对着旧物发愁→受到鼓舞→欣慰快乐"
+    }
+  },
+  "blanks": {
+    "question:paper-gaokao-2025-i:41": {
+      "blankId": "blank:paper-gaokao-2025-i:41",
+      "blankNo": 41,
+      "pos": "phrase",
+      "role": "main",
+      "context": "刚卖掉房子要搬走，这里要说正忙着把住了多年的家清出来。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "后文说一家人花了23年把家填满（spent 23 years filling up），搬家时正好反过来，要把它清空。",
+        "quotes": [
+          "spent 23 years filling up"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "清空",
+        "meaning": "把家里东西清出去",
+        "reason": "刚卖掉房子要搬走，这里要说正忙着把住了多年的家清出来。词组看语境义：后文说一家人花了23年把家填满（spent 23 years filling up），搬家时正好反过来，要把它清空。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "painting over",
+          "meaning": "用油漆盖住；他们刚卖掉房子（just sold our house）要搬走，忙的是清东西，不是粉刷。",
+          "quote": "just sold our house"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "looking around",
+          "meaning": "四处看看；这是住了多年、早已填满（spent 23 years filling up）的家，不用再四处打量。",
+          "quote": "spent 23 years filling up"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "pulling down",
+          "meaning": "拆毁；房子已经卖给别人（just sold our house），后文还说屋里仍堆着东西，不是在拆房。",
+          "quote": "just sold our house"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the beloved home",
+          "signalSide": "context-after",
+          "targetText": "emptying out the beloved home",
+          "relation": "清空的对象是一家人住了多年的家。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "filling up",
+          "signalSide": "context-after",
+          "relation": "装满（filling up）与清空意思相反，前后呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "out",
+          "signalSide": "option",
+          "targetText": "emptying out",
+          "relation": "小品词（out）表示把东西从屋里弄出去。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-gaokao-2025-i:42": {
+      "blankId": "blank:paper-gaokao-2025-i:42",
+      "blankNo": 42,
+      "pos": "noun",
+      "role": "detail",
+      "context": "要一个他们准备搬进城里去住的住处。",
+      "find": {
+        "check": "echo",
+        "text": "末段说作者如今坐在自己的公寓里（I sit in my apartment today），搬去的住处就是公寓。",
+        "quotes": [
+          "I sit in my apartment today"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "公寓",
+        "reason": "要一个他们准备搬进城里去住的住处。名词看复现：末段说作者如今坐在自己的公寓里（I sit in my apartment today），搬去的住处就是公寓。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hotel",
+          "meaning": "旅馆；他们是搬去长住（we were moving to），末段也写如今住在公寓里。",
+          "quote": "we were moving to"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "office",
+          "meaning": "办公室；为要搬去住的地方（we were moving to）挑生活必需品，不是去上班的地方。",
+          "quote": "we were moving to"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cottage",
+          "meaning": "乡间小屋；新住处在城里（in town），末段又写明是公寓。",
+          "quote": "in town"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "we were moving to",
+          "signalSide": "context-after",
+          "targetText": "the apartment we were moving to",
+          "relation": "空格是他们要搬去住的地方。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "my apartment",
+          "signalSide": "context-after",
+          "relation": "末段的公寓（my apartment）复现了这里的住处。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:43": {
+      "blankId": "blank:paper-gaokao-2025-i:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "detail",
+      "context": "要说租个地方用来放那些自认为重要的东西。",
+      "find": {
+        "check": "collocation",
+        "text": "租了一个地方（rented a place），宾语是自认为重要的物品（our supposedly important objects），要的是存放。",
+        "quotes": [
+          "rented a place",
+          "our supposedly important objects"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "储存",
+        "meaning": "存放",
+        "reason": "要说租个地方用来放那些自认为重要的东西。动词看搭配：租了一个地方（rented a place），宾语是自认为重要的物品（our supposedly important objects），要的是存放。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "display",
+          "meaning": "展示；租地方（rented a place）是因为新家放不下这些东西，不是要办展览。",
+          "quote": "rented a place"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sell",
+          "meaning": "出售；这些是他们自认为重要的东西（our supposedly important objects），要留着，所以才租地方。",
+          "quote": "our supposedly important objects"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "repair",
+          "meaning": "修理；租来的地方（rented a place）用来安置物品，搬家时要解决的是东西放哪儿。",
+          "quote": "rented a place"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "rented a place to",
+          "signalSide": "context-before",
+          "targetText": "rented a place to store",
+          "relation": "租个地方来做某事，空格说这个地方的用途。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "our supposedly important objects",
+          "signalSide": "context-after",
+          "targetText": "store our supposedly important objects",
+          "relation": "存放的对象是那些自认为重要的东西。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:44": {
+      "blankId": "blank:paper-gaokao-2025-i:44",
+      "blankNo": 44,
+      "pos": "adjective",
+      "role": "main",
+      "context": "清理、捐赠之后，房子里仍然满是东西，这是作者要解决的难题。",
+      "find": {
+        "check": "echo",
+        "text": "前文说一家人23年把家填满（filling up），清了一轮后仍（still）剩很多，房子还是塞满了东西。",
+        "quotes": [
+          "filling up",
+          "still"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "塞满的",
+        "reason": "清理、捐赠之后，房子里仍然满是东西，这是作者要解决的难题。形容词看复现：前文说一家人23年把家填满（filling up），清了一轮后仍（still）剩很多，房子还是塞满了东西。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "covered",
+          "meaning": "覆盖着的；后面接的是一件件剩下的物品（with things that），说的是屋里有多满，不是表面盖着什么。",
+          "quote": "with things that"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "decorated",
+          "meaning": "装饰过的；这些东西是不该进垃圾场的旧物（didn’t belong in a landfill），不是装饰。",
+          "quote": "didn’t belong in a landfill"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "equipped",
+          "meaning": "配备有的；剩下的是待处理的旧物（didn’t belong in a landfill），不是房子配好的设施。",
+          "quote": "didn’t belong in a landfill"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a house still",
+          "signalSide": "context-before",
+          "targetText": "a house still stuffed with things",
+          "relation": "清过一轮后房子仍被东西塞满。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "filling up",
+          "signalSide": "context-before",
+          "relation": "多年填满（filling up）的家，清理后仍是满的。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:45": {
+      "blankId": "blank:paper-gaokao-2025-i:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "这里是让步（while）部分，要说这些东西算不上贵重。",
+      "find": {
+        "check": "affect",
+        "text": "后半句说它们不该进垃圾场（didn’t belong in a landfill），让步部分（while）要的是不怎么值钱，后文花瓶也只标价（for $10）。",
+        "quotes": [
+          "didn’t belong in a landfill",
+          "for $10"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "贵重的",
+        "reason": "这里是让步（while）部分，要说这些东西算不上贵重。形容词看情感：后半句说它们不该进垃圾场（didn’t belong in a landfill），让步部分（while）要的是不怎么值钱，后文花瓶也只标价（for $10）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "conventional",
+          "meaning": "传统的；让步句要的是与“不该进垃圾场”（didn’t belong in a landfill）相对的价值判断，传统与否接不上。",
+          "quote": "didn’t belong in a landfill"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "complicated",
+          "meaning": "复杂的；作者要决定的是这些东西扔不扔（didn’t belong in a landfill），与复杂不复杂接不上。",
+          "quote": "didn’t belong in a landfill"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tolerable",
+          "meaning": "可容忍的；不太能容忍的东西正该扔掉，与后面“不该进垃圾场”（didn’t belong in a landfill）矛盾。",
+          "quote": "didn’t belong in a landfill"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "while not particularly",
+          "signalSide": "context-before",
+          "targetText": "while not particularly valuable",
+          "relation": "让步从句承认这些东西不太值钱。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "while",
+          "signalSide": "context-before",
+          "relation": "让步连词（while）连起相反的两层：不值钱，却也不该扔。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2025-i:46": {
+      "blankId": "blank:paper-gaokao-2025-i:46",
+      "blankNo": 46,
+      "pos": "noun",
+      "role": "detail",
+      "context": "要说一位买家想多看一些花瓶的什么。",
+      "find": {
+        "check": "echo",
+        "text": "作者先给花瓶拍了照片（took a picture of the vase）挂到网上，买家想要更多（additional）的就是照片。",
+        "quotes": [
+          "took a picture of the vase",
+          "additional"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "照片",
+        "reason": "要说一位买家想多看一些花瓶的什么。名词看复现：作者先给花瓶拍了照片（took a picture of the vase）挂到网上，买家想要更多（additional）的就是照片。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fees",
+          "meaning": "费用；买家不会主动要求多付钱，另一条消息还在要求降价（asking for a price cut）。",
+          "quote": "asking for a price cut"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "receipts",
+          "meaning": "收据；花瓶还挂在网上待售（posted it online, for $10），没成交谈不上收据。",
+          "quote": "posted it online, for $10"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "models",
+          "meaning": "模型；作者发的是花瓶的照片（took a picture of the vase），买家想多看几张，与模型对不上。",
+          "quote": "took a picture of the vase"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "wanting additional",
+          "signalSide": "context-before",
+          "targetText": "wanting additional photos",
+          "relation": "买家想要更多的东西，接在线卖货时常要的照片。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "took a picture",
+          "signalSide": "context-before",
+          "relation": "前面拍的照片（a picture）在这里复现。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:47": {
+      "blankId": "blank:paper-gaokao-2025-i:47",
+      "blankNo": 47,
+      "pos": "noun",
+      "role": "main",
+      "context": "要说哪一天临近，这一天的压力让作者把价格降到零。",
+      "find": {
+        "check": "echo",
+        "text": "第二段说他们正要搬去城里（we were moving to），临近的就是搬家那一天。",
+        "quotes": [
+          "we were moving to"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "搬家",
+        "reason": "要说哪一天临近，这一天的压力让作者把价格降到零。名词看复现：第二段说他们正要搬去城里（we were moving to），临近的就是搬家那一天。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "pay",
+          "meaning": "发薪；临近的日子逼她把价格降到零（a new price ($0)），发工资不会带来这种压力。",
+          "quote": "a new price ($0)"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "market",
+          "meaning": "集市；她是在网上卖（posted it online），不用等集市那天。",
+          "quote": "posted it online"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "work",
+          "meaning": "工作；全文讲的是要搬去城里（we were moving to），临近的不是上班日。",
+          "quote": "we were moving to"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "day drew near",
+          "signalSide": "context-after",
+          "targetText": "move day drew near",
+          "relation": "某一天临近，空格说是哪一天。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "we were moving to",
+          "signalSide": "context-before",
+          "relation": "前文的搬家（moving）在这里复现。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:48": {
+      "blankId": "blank:paper-gaokao-2025-i:48",
+      "blankNo": 48,
+      "pos": "noun",
+      "role": "main",
+      "context": "要一个词概括重发时配上的那两句话，这两句让花瓶立刻送出。",
+      "find": {
+        "check": "echo",
+        "text": "冒号后是作者写的两句介绍（I hate this vase. Maybe you won’t.），用一个名词概括就是商品描述。",
+        "quotes": [
+          "I hate this vase. Maybe you won’t."
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "描述",
+        "meaning": "商品介绍文字",
+        "reason": "要一个词概括重发时配上的那两句话，这两句让花瓶立刻送出。名词看复现：冒号后是作者写的两句介绍（I hate this vase. Maybe you won’t.），用一个名词概括就是商品描述。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "warming",
+          "meaning": "变暖；冒号后是作者写的花瓶介绍（I hate this vase），与天气变暖接不上。",
+          "quote": "I hate this vase"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "request",
+          "meaning": "请求；冒号后的话（Maybe you won’t.）没有要别人做什么，只是在介绍花瓶。",
+          "quote": "Maybe you won’t."
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reply",
+          "meaning": "回复；这是作者重发（reposted it）时自己配的话，不是回复哪条消息。",
+          "quote": "reposted it"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "reposted it",
+          "signalSide": "context-before",
+          "targetText": "reposted it. The description",
+          "relation": "重发花瓶时配的文字，空格是这段文字的名称。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I hate this vase",
+          "signalSide": "context-after",
+          "relation": "冒号后的原话就是这份描述的内容。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:49": {
+      "blankId": "blank:paper-gaokao-2025-i:49",
+      "blankNo": 49,
+      "pos": "adjective",
+      "role": "main",
+      "context": "花瓶一发就被人开心取走，这是情绪转折，作者受此推动才接着发更多。",
+      "find": {
+        "check": "affect",
+        "text": "前面女士开心地带走花瓶（left happily with the vase），后面作者接着发了更多（I posted more），情绪是正面的。",
+        "quotes": [
+          "left happily with the vase",
+          "I posted more"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "受到鼓舞的",
+        "reason": "花瓶一发就被人开心取走，这是情绪转折，作者受此推动才接着发更多。形容词看情感：前面女士开心地带走花瓶（left happily with the vase），后面作者接着发了更多（I posted more），情绪是正面的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Confused",
+          "meaning": "困惑的；花瓶一免费就被人开心带走（left happily with the vase），结果很明确，没什么可困惑的。",
+          "quote": "left happily with the vase"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Interested",
+          "meaning": "感兴趣的；作者早就在网上发东西，接着发更多（I posted more）是因为刚成功一次，受了鼓舞。",
+          "quote": "I posted more"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Disappointed",
+          "meaning": "失望的；花瓶被人开心带走（left happily with the vase），作者没有理由失望，失望也不会接着发更多。",
+          "quote": "left happily with the vase"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I posted more",
+          "signalSide": "context-after",
+          "targetText": "Encouraged, I posted more",
+          "relation": "受到鼓舞是接着发帖的原因。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "left happily with the vase",
+          "signalSide": "context-before",
+          "relation": "女士高兴地带走花瓶，作者因此受到鼓舞。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-gaokao-2025-i:50": {
+      "blankId": "blank:paper-gaokao-2025-i:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "detail",
+      "context": "要一个表示别人上门来取东西的词，与每天的帖子并列。",
+      "find": {
+        "check": "echo",
+        "text": "前面那位女士冲进作者家（raced into my house）取走花瓶，帖子发出后收到的就是这样的上门来访。",
+        "quotes": [
+          "raced into my house"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "拜访",
+        "meaning": "上门取东西",
+        "reason": "要一个表示别人上门来取东西的词，与每天的帖子并列。名词看复现：前面那位女士冲进作者家（raced into my house）取走花瓶，帖子发出后收到的就是这样的上门来访。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "reports",
+          "meaning": "报告；送出旧物后有人冲进家里来取（raced into my house），收到的是来客，不是报告。",
+          "quote": "raced into my house"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "advice",
+          "meaning": "建议；上门的人是来取东西的（raced into my house），不是来提建议的。",
+          "quote": "raced into my house"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "money",
+          "meaning": "钱；作者已把价格定为零（a new price ($0)），送东西收不到钱。",
+          "quote": "a new price ($0)"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I received",
+          "signalSide": "context-after",
+          "targetText": "the visits I received",
+          "relation": "作者收到的东西，与每天发的帖子并列。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "raced into my house",
+          "signalSide": "context-before",
+          "relation": "女士上门取花瓶就是一次来访。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:51": {
+      "blankId": "blank:paper-gaokao-2025-i:51",
+      "blankNo": 51,
+      "pos": "verb",
+      "role": "main",
+      "context": "每送出一件，就少一件进垃圾场，要“使免于”的意思。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是垃圾场（the landfill），前文说这些东西不该进垃圾场（didn’t belong in a landfill），送出去就让垃圾场免收一件。",
+        "quotes": [
+          "the landfill",
+          "didn’t belong in a landfill"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "使免受",
+        "meaning": "不让旧物进垃圾场",
+        "reason": "每送出一件，就少一件进垃圾场，要“使免于”的意思。动词看搭配：宾语是垃圾场（the landfill），前文说这些东西不该进垃圾场（didn’t belong in a landfill），送出去就让垃圾场免收一件。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "remove",
+          "meaning": "移走；垃圾场本身搬不走，作者做的是让旧物别进去（didn’t belong in a landfill）。",
+          "quote": "didn’t belong in a landfill"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "find",
+          "meaning": "找到；垃圾场不用找，作者想的是旧物不该进垃圾场（didn’t belong in a landfill）。",
+          "quote": "didn’t belong in a landfill"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "check",
+          "meaning": "检查；作者送东西不是去检查垃圾场（the landfill），而是让旧物别被扔进去。",
+          "quote": "the landfill"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the landfill",
+          "signalSide": "context-after",
+          "targetText": "spare the landfill",
+          "relation": "让垃圾场免于再接收旧物。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "didn’t belong in a landfill",
+          "signalSide": "context-before",
+          "relation": "第二段说这些东西不该进垃圾场，这里送出正好做到。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:52": {
+      "blankId": "blank:paper-gaokao-2025-i:52",
+      "blankNo": 52,
+      "pos": "verb",
+      "role": "detail",
+      "context": "要说如果不送东西，原本可能碰不上这个人。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是另一个人（another person），要不是送东西，原本可能碰不上（might not otherwise have），要的是遇见。",
+        "quotes": [
+          "another person",
+          "might not otherwise have"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "遇到",
+        "reason": "要说如果不送东西，原本可能碰不上这个人。动词看搭配：宾语是另一个人（another person），要不是送东西，原本可能碰不上（might not otherwise have），要的是遇见。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "investigated",
+          "meaning": "调查；这个人（another person）是作者想让对方高兴的人，不是调查对象。",
+          "quote": "another person"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "recognized",
+          "meaning": "认出；这些人原本互不相识（might not otherwise have），谈不上认出谁。",
+          "quote": "might not otherwise have"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recommended",
+          "meaning": "推荐；作者要取悦的这个人（another person）是送东西时才碰上的，不是被推荐的人。",
+          "quote": "another person"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "another person",
+          "signalSide": "context-before",
+          "targetText": "another person I might not otherwise have encountered",
+          "relation": "这个人是作者因送东西才遇见的。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "otherwise",
+          "signalSide": "context-before",
+          "relation": "要不是（otherwise）送东西，就不会碰上这个人。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:53": {
+      "blankId": "blank:paper-gaokao-2025-i:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "要指跟着搬进小公寓、和他们共处的物品，与送出去的东西相对。",
+      "find": {
+        "check": "echo",
+        "text": "与带不走的东西（something that couldn’t come with us）相对，这里是和他们共处小空间（share our small space）的家当。",
+        "quotes": [
+          "something that couldn’t come with us",
+          "share our small space"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "所有物",
+        "meaning": "留在身边的家当",
+        "reason": "要指跟着搬进小公寓、和他们共处的物品，与送出去的东西相对。名词看复现：与带不走的东西（something that couldn’t come with us）相对，这里是和他们共处小空间（share our small space）的家当。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "giveaways",
+          "meaning": "赠品；送出去的东西已离开，不会和他们共处小空间（share our small space）。",
+          "quote": "share our small space"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "posts",
+          "meaning": "帖子；和他们共处一室（share our small space）的是实物，不是网上的帖子。",
+          "quote": "share our small space"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "contributions",
+          "meaning": "捐献物；捐出的东西（donated what we could）早已送走，不在小公寓里。",
+          "quote": "donated what we could"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "share our small space",
+          "signalSide": "context-after",
+          "targetText": "belongings that share our small space",
+          "relation": "能和他们共用小空间的是一件件物品。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "something that couldn’t come with us",
+          "signalSide": "context-after",
+          "relation": "带不走的东西与留下的家当相对。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:54": {
+      "blankId": "blank:paper-gaokao-2025-i:54",
+      "blankNo": 54,
+      "pos": "noun",
+      "role": "main",
+      "context": "要一种积极的感受，承接作者对现有物品的喜爱，收住全文情感。",
+      "find": {
+        "check": "collocation",
+        "text": "空格与动词（take）、介词（in）搭成从中得到乐趣，前句作者正喜爱眼前的物品（loving each of the），情绪同向。",
+        "quotes": [
+          "loving each of the"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "快乐",
+        "reason": "要一种积极的感受，承接作者对现有物品的喜爱，收住全文情感。名词看搭配：空格与动词（take）、介词（in）搭成从中得到乐趣，前句作者正喜爱眼前的物品（loving each of the），情绪同向。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "part",
+          "meaning": "参与；放进去成了参加某项活动，可后面接的是一份心里的认知（in knowing that）。",
+          "quote": "in knowing that"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "care",
+          "meaning": "用心；放进去成了做事很小心，作者此刻是想到有人珍惜旧物（in knowing that），说的是心情。",
+          "quote": "in knowing that"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "time",
+          "meaning": "时间；放进去成了慢慢花时间，与前句喜爱眼前物品（loving each of the）的满足心情对不上。",
+          "quote": "loving each of the"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in knowing that",
+          "signalSide": "context-after",
+          "targetText": "take joy in knowing that",
+          "relation": "从知道某事中得到乐趣。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "loving each of the",
+          "signalSide": "context-before",
+          "relation": "前句的喜爱与这里的快乐同向。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:55": {
+      "blankId": "blank:paper-gaokao-2025-i:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "要说附近有人正珍视那些带不走的旧物，这是作者快乐的来源。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是附近某个人（someone），宾语是带不走的东西（something that couldn’t come with us），要的是珍惜地用着。",
+        "quotes": [
+          "someone",
+          "something that couldn’t come with us"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "欣赏",
+        "meaning": "珍惜地用着",
+        "reason": "要说附近有人正珍视那些带不走的旧物，这是作者快乐的来源。动词看搭配：主语是附近某个人（someone），宾语是带不走的东西（something that couldn’t come with us），要的是珍惜地用着。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "anticipating",
+          "meaning": "期待；旧物已经送到对方手里（something that couldn’t come with us），不必再期待。",
+          "quote": "something that couldn’t come with us"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "delivering",
+          "meaning": "递送；东西是别人上门取走的（left happily with the vase），对方是在享用，不是在送货。",
+          "quote": "left happily with the vase"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "withdrawing",
+          "meaning": "撤回；这些是作者送出、带不走的东西（something that couldn’t come with us），对方没有撤回什么。",
+          "quote": "something that couldn’t come with us"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "something that couldn’t come with us",
+          "signalSide": "context-after",
+          "targetText": "appreciating something that couldn’t come with us",
+          "relation": "珍惜的对象是没能带走的旧物。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "left happily with the vase",
+          "signalSide": "context-before",
+          "relation": "女士高兴地带走花瓶，说明拿到旧物的人会珍惜它。"
+        }
+      ]
+    }
+  }
+}

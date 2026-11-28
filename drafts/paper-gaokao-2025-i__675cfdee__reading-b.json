@@ -1,0 +1,701 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-gaokao-2025-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-gaokao-2025-i:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-gaokao-2025-i:reading-b": {
+      "overview": "一位九年级写作老师回顾一年的教学：学生起初对“写作为什么重要”提不起兴趣，调整作业后写出了动人的长篇作品，老师也从学生身上认识到写作连接人心的意义。",
+      "fullTranslationZh": "去年在我的九年级写作课上，我遇到了一个拯救了小镇的牛仔、一位要求儿子门门功课都得 A 的严父，还有一个在父母拒绝了她年少时的挚爱后心碎而死的现代朱丽叶。不止一次，我发现自己在想：创造出这些人物的学生们，怎么会对自己笔下的对象了解得这么透彻。\n但他们的第一篇作文就不一样了，作文题目是：“写作为什么重要？”大多数作文写了不到一页，几乎没有哪篇有一句能算作论点的话。我很震惊。后来我意识到，问题出在题目本身。他们本可以就电脑的必要性写上好几页，但写作这件事本身，在他们看来根本算不上重要。这种情况必须改变。\n新单元开始时，我让每个人就自选的健康话题写一篇议论文。这一次，他们觉得这个练习有趣多了。接下来的两次作业，先是一个个人叙事单元，然后是一个创意写作工作坊，我只要求作品符合其体裁的规范，并且有一个论点。结果令人惊叹。学生们选了各种各样的话题，交上来的故事每篇 10 到 20 页，其中的人物开阔了我的视野，打动了我的心。\n我走进课堂时，相信写作之所以重要，是因为它是一种交流手段。然而，我的学生们让我看到了对我来说更重要的东西。六月最后一次下课铃响起时，我带着一本写满留言的毕业纪念册离开，这些留言讲的都是写作最强大的意义——它能把人们连接起来，让我们设身处地体会他人的处境，教会我们做人意味着什么。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-reading-b-1",
+          "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+          "sourceText": "When the final bell rang in June, I walked away with a yearbook full of messages about writing’s most powerful significance – the ability to connect people, to put us in another’s skin, to teach us what it means to be human.",
+          "displayText": "When the final bell rang in June, I walked away with a yearbook full of messages about writing’s most powerful significance – the ability to connect people, to put us in another’s skin, to teach us what it means to be human.",
+          "relatedQuestionIds": [
+            "question:paper-gaokao-2025-i:27"
+          ],
+          "translationZh": "六月最后一次下课铃响起时，我带着一本写满留言的毕业纪念册离开，这些留言讲的都是写作最强大的意义——它能把人们连接起来，让我们设身处地体会他人的处境，教会我们做人意味着什么。",
+          "analysisZh": "主干是 I walked away with a yearbook（我带着一本纪念册离开）。When 引导时间状语从句；full of messages about ... 是后置定语，修饰 yearbook；破折号后三个并列的不定式 to connect ..., to put ..., to teach ... 解释 writing’s most powerful significance 的具体内容。put us in another’s skin 字面是“把我们放进别人的皮肤”，意思是设身处地为他人着想。这就是作者从学生身上学到的写作意义。",
+          "underlineRanges": [
+            {
+              "start": 34,
+              "end": 63,
+              "quote": "I walked away with a yearbook"
+            },
+            {
+              "start": 87,
+              "end": 123,
+              "quote": "writing’s most powerful significance"
+            },
+            {
+              "start": 157,
+              "end": 184,
+              "quote": "to put us in another’s skin"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-reading-b-2",
+          "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
+          "sourceText": "For the next two assignments, a personal-narrative unit followed by a creative-writing workshop, I only required that the piece meet the specifications of its genre（体裁）and that it contain a thesis.",
+          "displayText": "For the next two assignments, a personal-narrative unit followed by a creative-writing workshop, I only required that the piece meet the specifications of its genre（体裁）and that it contain a thesis.",
+          "relatedQuestionIds": [],
+          "translationZh": "接下来的两次作业，先是一个个人叙事单元，然后是一个创意写作工作坊，我只要求作品符合其体裁的规范，并且有一个论点。",
+          "analysisZh": "主干是 I only required that ... and that ...（我只要求……并且……）。句首 For the next two assignments 是状语，后面逗号间的 a personal-narrative unit followed by a creative-writing workshop 是同位语，说明这两次作业是什么。required 后接两个 that 宾语从句，从句用 meet、contain 这样的动词原形，是 require 后的虚拟语气（should 省略）。only 说明要求很少，学生可以自由发挥。",
+          "underlineRanges": [
+            {
+              "start": 97,
+              "end": 112,
+              "quote": "I only required"
+            },
+            {
+              "start": 113,
+              "end": 132,
+              "quote": "that the piece meet"
+            },
+            {
+              "start": 172,
+              "end": 196,
+              "quote": "that it contain a thesis"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-b:1",
+                "block:paper-gaokao-2025-i:reading-b:2"
+              ],
+              "start": 0,
+              "end": 120,
+              "quote": "去年在我的九年级写作课上，我遇到了一个拯救了小镇的牛仔、一位要求儿子门门功课都得 A 的严父，还有一个在父母拒绝了她年少时的挚爱后心碎而死的现代朱丽叶。不止一次，我发现自己在想：创造出这些人物的学生们，怎么会对自己笔下的对象了解得这么透彻。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-b:3"
+              ],
+              "start": 121,
+              "end": 251,
+              "quote": "但他们的第一篇作文就不一样了，作文题目是：“写作为什么重要？”大多数作文写了不到一页，几乎没有哪篇有一句能算作论点的话。我很震惊。后来我意识到，问题出在题目本身。他们本可以就电脑的必要性写上好几页，但写作这件事本身，在他们看来根本算不上重要。这种情况必须改变。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-b:4"
+              ],
+              "start": 252,
+              "end": 411,
+              "quote": "新单元开始时，我让每个人就自选的健康话题写一篇议论文。这一次，他们觉得这个练习有趣多了。接下来的两次作业，先是一个个人叙事单元，然后是一个创意写作工作坊，我只要求作品符合其体裁的规范，并且有一个论点。结果令人惊叹。学生们选了各种各样的话题，交上来的故事每篇 10 到 20 页，其中的人物开阔了我的视野，打动了我的心。"
+            },
+            {
+              "paragraphId": "zh-reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-gaokao-2025-i:reading-b:5"
+              ],
+              "start": 412,
+              "end": 551,
+              "quote": "我走进课堂时，相信写作之所以重要，是因为它是一种交流手段。然而，我的学生们让我看到了对我来说更重要的东西。六月最后一次下课铃响起时，我带着一本写满留言的毕业纪念册离开，这些留言讲的都是写作最强大的意义——它能把人们连接起来，让我们设身处地体会他人的处境，教会我们做人意味着什么。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "reading-b-evidence-24-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+                "start": 286,
+                "end": 325,
+                "quote": "my students, who’d created these people"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p1",
+                "start": 89,
+                "end": 100,
+                "quote": "创造出这些人物的学生们"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-25-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
+                "start": 372,
+                "end": 437,
+                "quote": "writing, in and of itself, simply didn’t strike them as important"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p2",
+                "start": 99,
+                "end": 120,
+                "quote": "但写作这件事本身，在他们看来根本算不上重要"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-26-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
+                "start": 435,
+                "end": 534,
+                "quote": "turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 120,
+                "end": 158,
+                "quote": "交上来的故事每篇 10 到 20 页，其中的人物开阔了我的视野，打动了我的心"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-evidence-27-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+                "start": 0,
+                "end": 84,
+                "quote": "I walked into class believing that writing is important as a means of communication."
+              },
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+                "start": 85,
+                "end": 150,
+                "quote": "However, my students demonstrated something more important to me."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 0,
+                "end": 53,
+                "quote": "我走进课堂时，相信写作之所以重要，是因为它是一种交流手段。然而，我的学生们让我看到了对我来说更重要的东西。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-gaokao-2025-i:27"
+            ],
+            "selectedSentenceId": "sentence-reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+                "start": 151,
+                "end": 375,
+                "quote": "When the final bell rang in June, I walked away with a yearbook full of messages about writing’s most powerful significance – the ability to connect people, to put us in another’s skin, to teach us what it means to be human."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p4",
+                "start": 53,
+                "end": 139,
+                "quote": "六月最后一次下课铃响起时，我带着一本写满留言的毕业纪念册离开，这些留言讲的都是写作最强大的意义——它能把人们连接起来，让我们设身处地体会他人的处境，教会我们做人意味着什么。"
+              }
+            ]
+          },
+          {
+            "annotationId": "reading-b-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-reading-b",
+                "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
+                "start": 168,
+                "end": 365,
+                "quote": "For the next two assignments, a personal-narrative unit followed by a creative-writing workshop, I only required that the piece meet the specifications of its genre（体裁）and that it contain a thesis."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-reading-b",
+                "paragraphId": "zh-reading-b-p3",
+                "start": 44,
+                "end": 100,
+                "quote": "接下来的两次作业，先是一个个人叙事单元，然后是一个创意写作工作坊，我只要求作品符合其体裁的规范，并且有一个论点。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "作者先写学生作品中鲜活的人物，再回顾第一篇作文的失败及原因，接着写调整作业后学生的惊人表现，最后说出自己从学生身上学到的写作意义。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+            "summary": "作者在九年级写作课上读到学生塑造的牛仔、严父、现代朱丽叶等人物，惊叹学生对笔下人物的了解",
+            "function": "以学生作品开篇，引出话题"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
+            "summary": "第一篇作文“写作为什么重要”写得很差，作者意识到问题在题目本身，学生不觉得写作重要",
+            "function": "转折，写最初的失败及原因"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
+            "summary": "作者改为让学生自选话题、只提体裁和论点要求，学生交出了长篇佳作",
+            "function": "写调整作业后的转变"
+          },
+          {
+            "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+            "summary": "作者原以为写作重在交流，学生却让作者认识到写作能连接人、让人设身处地、懂得何以为人",
+            "function": "收束全文，点明作者的收获"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-gaokao-2025-i:24": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据“学生创造了这些人”推断开头提到的牛仔、严父和朱丽叶是什么人。",
+      "stemTranslationZh": "第一段开头提到的人是谁？",
+      "locateBy": "stem",
+      "locateFindZh": "看 who’d 从句交代的来历",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "九年级学生。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "ninth-grade",
+            "optionText": "Ninth graders",
+            "matchType": "wordFamily",
+            "relationNote": "ninth-grade 说的是这堂课是九年级写作课；九年级学生是创造这些人物的作者，不是人物本身。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+              "quote": "In my ninth-grade writing class last year, I met a cowboy who saved his town",
+              "anchor": "九年级写作课"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "学生的父母。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "parents",
+            "optionText": "parents",
+            "matchType": "exact",
+            "relationNote": "parents 指的是故事里朱丽叶的父母（her parents rejected），严父也是故事里的父亲，都是学生笔下的角色，不是学生的真实父母。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+              "quote": "a modern-day Juliet who died of heartbreak after her parents rejected the love of her young life",
+              "anchor": "朱丽叶的父母"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "现代作家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "modern-day",
+            "optionText": "Modern",
+            "matchType": "wordFamily",
+            "relationNote": "modern-day 只是说这是现代版的朱丽叶；写出这些人物的是作者的学生，不是现代作家。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+              "quote": "a modern-day Juliet",
+              "anchor": "现代朱丽叶"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "虚构的人物。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+              "quote": "More than once, I found myself wondering just how my students, who’d created these people, knew",
+              "anchor": "这些人是学生创造的"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+              "quote": "In my ninth-grade writing class last year, I met a cowboy who saved his town",
+              "anchor": "在写作课上遇到这些人"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "people",
+          "sourceRole": "stem",
+          "targetText": "More than once, I found myself wondering just how my students, who’d created these people, knew",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "my students, who’d created these people",
+          "note": "题干 people 原词出现在原文 these people 里。"
+        },
+        {
+          "sourceText": "Fictional characters.",
+          "sourceRole": "correctOption",
+          "targetText": "More than once, I found myself wondering just how my students, who’d created these people, knew",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "原文没直说这些人是虚构的，只说他们是学生创造出来的（who’d created these people），又是在写作课上“遇到”的；由此推出牛仔、严父和朱丽叶都是学生作文里的人物，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出学生第一篇作文写得差的原因。",
+      "stemTranslationZh": "学生们第一篇作文为什么写得很差？",
+      "locateBy": "stem",
+      "locateFindZh": "往后找作者意识到的问题",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们没有得到足够的时间。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They were not given enough time.",
+            "explanation": "原文没提写作时间，作者把原因归到题目本身（the problem was the question itself）。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们的词汇量非常有限。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They had a very limited vocabulary.",
+            "explanation": "原文没说学生词汇不够；他们写电脑的必要性能写上好几页（could have written pages），可见不是语言能力的问题。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们误解了题目。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the question itself",
+            "optionText": "the question",
+            "matchType": "exact",
+            "relationNote": "原文说问题出在题目本身（the problem was the question itself），意思是这个题目引不起学生的兴趣，不是学生把题目理解错了。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
+              "quote": "Then I realized that the problem was the question itself.",
+              "anchor": "问题出在题目本身"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们对这个话题没什么兴趣。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
+              "quote": "They could have written pages on the necessity of computers, but writing, in and of itself, simply didn’t strike them as important.",
+              "anchor": "写作本身在他们看来不重要"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
+              "quote": "Then I realized that the problem was the question itself.",
+              "anchor": "问题出在题目本身"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "first essay",
+          "sourceRole": "stem",
+          "targetText": "But things were different for their first essay, which was about the question: “Why is writing important?”",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-b:3",
+          "relationType": "locationCue",
+          "answerText": "writing, in and of itself, simply didn’t strike them as important",
+          "bridgeZh": "先写作文很差，再说毛病出在题目上，接着讲清原因",
+          "note": "题干 first essay 原词出现在原文。"
+        },
+        {
+          "sourceText": "They had little interest in the topic.",
+          "sourceRole": "correctOption",
+          "targetText": "They could have written pages on the necessity of computers, but writing, in and of itself, simply didn’t strike them as important.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“对话题没什么兴趣”就是原文的“写作本身在他们看来根本不重要”（didn’t strike them as important）：他们能就电脑写好几页，却对“写作为什么重要”提不起劲，选 D。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:26": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据 staggering 后一句对结果的具体描写，判断这个词的意思。",
+      "stemTranslationZh": "第三段中画线词 staggering 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "往后一句看结果具体怎样",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "好坏参半的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Mixed.",
+            "explanation": "放进去就成了“结果好坏参半”，可后一句写的全是长篇佳作，原文没提有写得差的。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "令人惊叹的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
+              "quote": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
+              "anchor": "学生交上长篇佳作"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
+              "quote": "Most of the essays filled less than one page, and few contained a sentence that could be interpreted as a thesis（论点）statement.",
+              "anchor": "第一篇作文不到一页"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "相似的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
+            "sourceHighlight": "diverse topics",
+            "optionText": "Similar.",
+            "optionHighlight": "Similar",
+            "explanation": "放进去就成了“结果大同小异”，可后一句说学生选了各种各样的话题（diverse topics），正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
+              "quote": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
+              "anchor": "话题各不相同"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "令人不安的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
+            "sourceHighlight": "touched my heart",
+            "optionText": "Disturbing.",
+            "optionHighlight": "Disturbing",
+            "explanation": "放进去就成了“结果令人不安”，可后一句说这些故事打动了作者（touched my heart），是让人欣喜的结果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
+              "quote": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
+              "anchor": "故事打动了作者"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "staggering",
+          "sourceRole": "stem",
+          "targetText": "The results were staggering.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-b:4",
+          "relationType": "locationCue",
+          "answerText": "turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart",
+          "bridgeZh": "后句把结果写具体：篇幅长，人物打动人",
+          "note": "题干 staggering 原词出现在原文。"
+        },
+        {
+          "sourceText": "Amazing.",
+          "sourceRole": "correctOption",
+          "targetText": "The students took on diverse topics and turned in stories, 10 to 20 pages each, with characters that broadened my view and touched my heart.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-b:4",
+          "relationType": "paraphrase",
+          "note": "第一篇作文大多不到一页，这次每篇 10 到 20 页（10 to 20 pages each），人物还打动了作者，所以 staggering 必须是表示惊喜的褒义词。放回去：结果令人惊叹，选 B。"
+        }
+      ]
+    },
+    "question:paper-gaokao-2025-i:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括作者这段教学经历说明的道理，并与选项中的谚语对应。",
+      "stemTranslationZh": "作者的经历说明了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "读 [[block:paper-gaokao-2025-i:reading-b:5]]：作者原先怎么看写作，后来又从学生身上看到了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "教学相长。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "quote": "However, my students demonstrated something more important to me.",
+              "anchor": "学生让作者看到更重要的东西"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "quote": "I walked into class believing that writing is important as a means of communication.",
+              "anchor": "作者原先的看法"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "静水流深（大智若愚）。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Still waters run deep.",
+            "explanation": "原文没写哪个学生表面沉默、内里深刻；学生起初写得差是因为对题目没兴趣，后来作业改了才写出好作品。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "知识就是力量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Knowledge is power.",
+            "explanation": "全文讲的不是知识带来力量，而是作者从学生的作品里重新认识了写作的意义。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "熟能生巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Practice makes perfect.",
+            "explanation": "学生进步不是靠反复练习，而是作业改成自选话题后来了兴趣（much more interesting）；文章落脚在作者自己学到了什么。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Teaching is learning.",
+          "sourceRole": "correctOption",
+          "targetText": "However, my students demonstrated something more important to me.",
+          "targetParagraphId": "block:paper-gaokao-2025-i:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "作者是来教写作的，原以为写作的重要在于交流；可学生的作品让作者看到了更重要的意义：连接人、设身处地、懂得何以为人。教学生的过程也是作者学习的过程，正是“教学相长”，选 A。"
+        }
+      ]
+    }
+  }
+}
