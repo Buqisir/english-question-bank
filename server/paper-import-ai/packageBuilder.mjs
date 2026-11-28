@@ -126,7 +126,8 @@ function examCodeFromPaperId(paperId) {
 function groupLetter(group) {
   const match = String(group?.groupId || '').match(/reading-([abcd])$/i)
   if (match) return match[1].toUpperCase()
-  const titleMatch = String(group?.title || '').match(/Reading\s*([A-D])/i)
+  const title = String(group?.title || '')
+  const titleMatch = title.match(/Reading\s*([A-D])/i) || title.match(/^reading\.([a-d])$/i)
   if (titleMatch) return titleMatch[1].toUpperCase()
   return ''
 }

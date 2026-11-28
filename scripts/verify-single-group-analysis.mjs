@@ -294,6 +294,9 @@ try {
     return [g.slotId, g.family, ...range]
   })
   const zhejiang = makeFixture({ listening: true, slotRanges })
+  for (const group of zhejiang.groups.filter(({ family }) => family === 'reading')) {
+    group.groupId = `group:${zhejiang.paperId}:${group.slotId}`
+  }
   rmSync(path.join(root, 'analysis-reading-d.json'))
   writeStagedAnalyses(root, zhejiang)
   const paperAsset = buildNck1CompatibilityPaperAsset({
