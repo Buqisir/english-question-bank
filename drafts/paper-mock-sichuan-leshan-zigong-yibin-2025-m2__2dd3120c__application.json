@@ -1,0 +1,130 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Allan,\n\nHow are you doing? Last Saturday I went to the Science and Technology Museum to watch a robot show, and I can't wait to tell you about it.\n\nThe show was full of surprises. First, a group of robots danced to music in perfect step. Then one robot played the piano, and another drew a portrait of a girl from the audience in just three minutes. The best part came at the end, when a robot answered our questions in both Chinese and English.\n\nWatching the show, I was amazed at how much robots can already do. It also made me want to learn more about science. Have you ever seen a robot show in the UK?\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给朋友的电子邮件，沿用题面给出的称呼 Dear Allan、结束语 Yours 和署名 Li Hua",
+        "personTense": "用第一人称讲自己的经历，看表演部分用一般过去时，谈感想时可用现在时",
+        "readerTone": "写给英国好友，语气亲切、轻松，像聊天一样分享",
+        "goal": "让 Allan 知道上周六在科技馆看到的机器人表演有哪些内容，以及我看完后的感受"
+      },
+      "taskRequires": [
+        "介绍机器人表演的内容",
+        "谈自己看完表演的感想"
+      ],
+      "thisEssayChooses": "标准版挑了跳舞、弹钢琴、现场画像、中英文问答四个节目，按出场顺序讲；感想落在“惊讶于机器人已经能做这么多”和“想多学科学”两点，最后问 Allan 在英国有没有看过类似表演，把话头交给对方。"
+    },
+    "standard": {
+      "essay": "Dear Allan,\n\nHow are you doing? Last Saturday I went to the Science and Technology Museum to watch a robot show, and I can't wait to tell you about it.\n\nThe show was full of surprises. First, a group of robots danced to music in perfect step. Then one robot played the piano, and another drew a portrait of a girl from the audience in just three minutes. The best part came at the end, when a robot answered our questions in both Chinese and English.\n\nWatching the show, I was amazed at how much robots can already do. It also made me want to learn more about science. Have you ever seen a robot show in the UK?\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "介绍机器人表演的内容",
+          "quote": "First, a group of robots danced to music in perfect step."
+        },
+        {
+          "point": "谈自己看完表演的感想",
+          "quote": "Watching the show, I was amazed at how much robots can already do."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "开头交代时间、地点和这封信要分享什么",
+          "items": [
+            {
+              "quote": "Last Saturday I went to the Science and Technology Museum to watch a robot show",
+              "explain": "一句话把题面给的时间（上周六）、地点（科技馆）、事件（看机器人表演）交代清楚，Allan 一读就知道这封信要讲什么。"
+            },
+            {
+              "quote": "I can't wait to tell you about it",
+              "explain": "朋友之间分享好消息的口吻，用迫不及待的心情带出下文，比 I am writing to tell you 更像和好友聊天。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成第一个要点：按顺序介绍表演内容",
+          "items": [
+            {
+              "quote": "The show was full of surprises.",
+              "explain": "先用一句话概括整场表演给人的感觉，后面的节目都是在证明这句话。"
+            },
+            {
+              "quote": "First, a group of robots danced to music in perfect step.",
+              "explain": "First、Then、at the end 按出场顺序排节目，读者跟得上；in perfect step 写出动作整齐，比只说 danced well 具体。"
+            },
+            {
+              "quote": "another drew a portrait of a girl from the audience in just three minutes",
+              "explain": "给出“观众里的一个女孩”“三分钟”这样的细节，让节目可以想象；just 点出速度之快。"
+            },
+            {
+              "quote": "The best part came at the end, when a robot answered our questions in both Chinese and English.",
+              "explain": "用 The best part 把最精彩的节目放在最后，when 引导的从句交代具体内容，也为下一段的惊讶做铺垫。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成第二个要点：谈感想，并把话题交给对方",
+          "items": [
+            {
+              "quote": "I was amazed at how much robots can already do",
+              "explain": "感想紧扣上一段的节目，说的是“机器人已经能做这么多”，而不是一句换到哪篇都能用的 It was meaningful。"
+            },
+            {
+              "quote": "It also made me want to learn more about science.",
+              "explain": "从看到的东西落到自己身上，感想多了一层，符合中学生的身份。"
+            },
+            {
+              "quote": "Have you ever seen a robot show in the UK?",
+              "explain": "结尾向朋友提问，Allan 读完知道可以怎么回信，分享就有了来回。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I can't wait to tell you about ...",
+          "function": "给朋友写信时表达迫不及待想分享的心情，引出要讲的经历。"
+        },
+        {
+          "expression": "The best part came at the end, when ...",
+          "function": "介绍活动时把最精彩的环节单独拎出来，让内容有主次。"
+        },
+        {
+          "expression": "I was amazed at how much ... can already do",
+          "function": "谈感想时把惊讶落到具体对象上，紧扣前面讲过的内容。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Allan,\n\nHow's everything going? Last Saturday I watched a robot show at the Science and Technology Museum, and I can't wait to share it with you.\n\nThe show opened with a dozen robots dancing to pop music, moving so smoothly that they looked like a dance team. Next, a robot sat down at the piano and played a piece without missing a single note. What impressed the audience most was a robot artist, which drew a lively portrait of a girl in only three minutes. Finally, a robot chatted with us in Chinese and English, answering our questions with humour.\n\nThe show opened my eyes. I used to think robots could only do boring jobs, but now I see how much they can bring to our lives. It has also made me determined to work harder at science. Have you ever seen anything like this in the UK?\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "介绍机器人表演的内容",
+          "quote": "The show opened with a dozen robots dancing to pop music, moving so smoothly that they looked like a dance team."
+        },
+        {
+          "point": "谈自己看完表演的感想",
+          "quote": "I used to think robots could only do boring jobs, but now I see how much they can bring to our lives."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "moving so smoothly that they looked like a dance team",
+          "explain": "标准版只说动作整齐，这里用 so ... that 写出动作流畅到像真的舞团，画面更清楚。"
+        },
+        {
+          "quote": "What impressed the audience most was a robot artist",
+          "explain": "用主语从句把“最打动观众的节目”放在句首强调，比标准版的 another drew 更突出这个节目。"
+        },
+        {
+          "quote": "I used to think robots could only do boring jobs, but now I see how much they can bring to our lives",
+          "explain": "用 used to 和 but now 对比看表演前后的想法，感想有了变化的过程，比标准版只说惊讶更有说服力。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,736 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-sichuan-leshan-zigong-yibin-2025-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a": {
+      "overview": "一篇给牛津来访者的出行指南：先推荐游客来牛津，再说明城区限行、车位紧张，建议使用郊区的停车换乘，并列出停车费和换乘巴士往返票的价格与付款方式。",
+      "fullTranslationZh": "牛津是一座美丽的城市，能为游客提供的东西非常多。我们强烈推荐您来参观，尤其是当您考虑申请牛津大学的时候。\n驾车出行\n牛津是一座小城，交通限制多，停车位有限。如有可能，请不要驾车进入市中心。我们建议您使用“停车换乘”系统。\n如果实在无法避免驾车进入牛津，请查阅最新交通信息了解详情。请注意，各学院和大学建筑均不提供访客停车位（持有蓝色徽章者除外）。\n停车换乘\n我们推荐使用以下几处停车换乘点，它们位于牛津郊区，交通便利。\n请注意，由于牛津其他地方正在进行维修，各停车换乘点可能会非常拥挤。\n停车费的支付：\n在停车换乘点停车需要支付停车费。标准停车费为每辆车 2 英镑（最多停 16 小时）和每辆车 4 英镑（最多停 24 小时）。您可以在指定的停车售票机用现金支付。\n停车换乘巴士车费的支付：\n您需要购买往返牛津市中心的巴士往返票。您可以在车上用现金或非接触方式支付。高峰时段成人当日往返票两名成人同行共 5 英镑。在至少一名付费成人的陪同下，最多 3 名 16 岁以下的儿童可以免费乘车。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-1",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1",
+          "sourceText": "Oxford is a beautiful city with a huge amount to offer visitors and we strongly recommend a visit, especially when you are considering applying to the University of Oxford.",
+          "displayText": "Oxford is a beautiful city with a huge amount to offer visitors and we strongly recommend a visit, especially when you are considering applying to the University of Oxford.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:23"
+          ],
+          "translationZh": "牛津是一座美丽的城市，能为游客提供的东西非常多，我们强烈推荐您来参观，尤其是当您考虑申请牛津大学的时候。",
+          "analysisZh": "这是 and 连接的两个分句。前一分句主干是 Oxford is a beautiful city，with a huge amount to offer visitors 修饰 city，不定式 to offer 说明“能给游客提供的东西”很多；后一分句主干是 we strongly recommend a visit，直接向读者发出邀请。最后的 especially when … 是状语，补充“尤其在考虑申请牛津大学时”更该来。整句先夸城市、再推荐来访，点明这篇文字是写给来访者的。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 26,
+              "quote": "Oxford is a beautiful city"
+            },
+            {
+              "start": 68,
+              "end": 97,
+              "quote": "we strongly recommend a visit"
+            },
+            {
+              "start": 99,
+              "end": 114,
+              "quote": "especially when"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-2",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:4",
+          "sourceText": "Please note that there is no visitors’ parking available at colleges or University buildings (unless you are a Blue Badge holder).",
+          "displayText": "Please note that there is no visitors’ parking available at colleges or University buildings (unless you are a Blue Badge holder).",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:21"
+          ],
+          "translationZh": "请注意，各学院和大学建筑均不提供访客停车位（持有蓝色徽章者除外）。",
+          "analysisZh": "主干是祈使句 Please note，that 引导宾语从句，说明要注意的内容：there is no visitors’ parking，即“没有访客停车位”。available at colleges or University buildings 是后置定语，限定在哪里没有车位。括号里的 unless you are a Blue Badge holder 是条件状语，意为“除非你持有蓝色徽章”，给“没有车位”留了唯一的例外。读时要看清：例外只是“可以停”，句中并没说停车免费。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 16,
+              "quote": "Please note that"
+            },
+            {
+              "start": 17,
+              "end": 46,
+              "quote": "there is no visitors’ parking"
+            },
+            {
+              "start": 94,
+              "end": 100,
+              "quote": "unless"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1"
+              ],
+              "start": 0,
+              "end": 52,
+              "quote": "牛津是一座美丽的城市，能为游客提供的东西非常多。我们强烈推荐您来参观，尤其是当您考虑申请牛津大学的时候。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:2"
+              ],
+              "start": 53,
+              "end": 57,
+              "quote": "驾车出行"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3"
+              ],
+              "start": 58,
+              "end": 110,
+              "quote": "牛津是一座小城，交通限制多，停车位有限。如有可能，请不要驾车进入市中心。我们建议您使用“停车换乘”系统。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:4"
+              ],
+              "start": 111,
+              "end": 173,
+              "quote": "如果实在无法避免驾车进入牛津，请查阅最新交通信息了解详情。请注意，各学院和大学建筑均不提供访客停车位（持有蓝色徽章者除外）。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:5"
+              ],
+              "start": 174,
+              "end": 178,
+              "quote": "停车换乘"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:6"
+              ],
+              "start": 179,
+              "end": 209,
+              "quote": "我们推荐使用以下几处停车换乘点，它们位于牛津郊区，交通便利。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:7"
+              ],
+              "start": 210,
+              "end": 243,
+              "quote": "请注意，由于牛津其他地方正在进行维修，各停车换乘点可能会非常拥挤。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:8"
+              ],
+              "start": 244,
+              "end": 251,
+              "quote": "停车费的支付："
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:9"
+              ],
+              "start": 252,
+              "end": 332,
+              "quote": "在停车换乘点停车需要支付停车费。标准停车费为每辆车 2 英镑（最多停 16 小时）和每辆车 4 英镑（最多停 24 小时）。您可以在指定的停车售票机用现金支付。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:10"
+              ],
+              "start": 333,
+              "end": 345,
+              "quote": "停车换乘巴士车费的支付："
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11"
+              ],
+              "start": 346,
+              "end": 444,
+              "quote": "您需要购买往返牛津市中心的巴士往返票。您可以在车上用现金或非接触方式支付。高峰时段成人当日往返票两名成人同行共 5 英镑。在至少一名付费成人的陪同下，最多 3 名 16 岁以下的儿童可以免费乘车。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:23"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1",
+                "start": 0,
+                "end": 172,
+                "quote": "Oxford is a beautiful city with a huge amount to offer visitors and we strongly recommend a visit, especially when you are considering applying to the University of Oxford."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p1",
+                "start": 0,
+                "end": 52,
+                "quote": "牛津是一座美丽的城市，能为游客提供的东西非常多。我们强烈推荐您来参观，尤其是当您考虑申请牛津大学的时候。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:4",
+                "start": 102,
+                "end": 232,
+                "quote": "Please note that there is no visitors’ parking available at colleges or University buildings (unless you are a Blue Badge holder)."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p4",
+                "start": 29,
+                "end": 62,
+                "quote": "请注意，各学院和大学建筑均不提供访客停车位（持有蓝色徽章者除外）。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-evidence-21",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3",
+                "start": 0,
+                "end": 77,
+                "quote": "Oxford is a small city with many traffic restrictions and parking is limited."
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3",
+                "start": 78,
+                "end": 139,
+                "quote": "If at all possible, please do not drive into the city centre."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p3",
+                "start": 0,
+                "end": 20,
+                "quote": "牛津是一座小城，交通限制多，停车位有限。"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p3",
+                "start": 20,
+                "end": 36,
+                "quote": "如有可能，请不要驾车进入市中心。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-evidence-22",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11",
+                "start": 120,
+                "end": 195,
+                "quote": "A peak adult day return ticket costs £5 for two adults travelling together."
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11",
+                "start": 196,
+                "end": 280,
+                "quote": "Up to 3under 16s can travel free when accompanied by at least one fare paying adult."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p11",
+                "start": 37,
+                "end": 61,
+                "quote": "高峰时段成人当日往返票两名成人同行共 5 英镑。"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p11",
+                "start": 61,
+                "end": 98,
+                "quote": "在至少一名付费成人的陪同下，最多 3 名 16 岁以下的儿童可以免费乘车。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-evidence-23",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1",
+                "start": 68,
+                "end": 97,
+                "quote": "we strongly recommend a visit"
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3",
+                "start": 78,
+                "end": 189,
+                "quote": "If at all possible, please do not drive into the city centre. We recommend that you use the Park & Ride system."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p1",
+                "start": 24,
+                "end": 34,
+                "quote": "我们强烈推荐您来参观"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a-p3",
+                "start": 20,
+                "end": 52,
+                "quote": "如有可能，请不要驾车进入市中心。我们建议您使用“停车换乘”系统。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "开头推荐游客来牛津，接着用“驾车出行”“停车换乘”两个小标题说明城区不宜开车、宜用郊区停车换乘，最后分两项列出停车费和换乘巴士往返票的价格与付款方式。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1",
+            "summary": "牛津美丽、值得一游，尤其推荐有意申请牛津大学的人来看看。",
+            "function": "开篇点明读者是来访者，引出出行指南。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:2",
+            "summary": "“驾车出行”部分开始。",
+            "function": "小标题，引出开车进城的注意事项。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3",
+            "summary": "牛津城小、限行多、车位少，劝人别开车进市中心，改用停车换乘。",
+            "function": "给出不宜开车的原因和替代方案。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:4",
+            "summary": "非开车不可时要查最新路况；学院和大学建筑不给访客停车，蓝色徽章持有者除外。",
+            "function": "补充必须开车时的提醒。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:5",
+            "summary": "“停车换乘”部分开始。",
+            "function": "小标题，引出停车换乘的具体说明。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:6",
+            "summary": "推荐使用位于牛津郊区、交通便利的停车换乘点。",
+            "function": "介绍停车换乘点的位置。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:7",
+            "summary": "牛津别处在维修，换乘点可能非常拥挤。",
+            "function": "提醒可能遇到的拥挤情况。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:8",
+            "summary": "“停车费的支付”一项开始。",
+            "function": "小标题，引出停车收费。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:9",
+            "summary": "停车换乘点按车收费：16 小时以内 2 英镑，24 小时以内 4 英镑，可在指定售票机付现金。",
+            "function": "列出停车费标准和付款方式。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:10",
+            "summary": "“换乘巴士车费的支付”一项开始。",
+            "function": "小标题，引出巴士票价。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11",
+            "summary": "需买往返市中心的巴士票，可付现金或非接触支付；两名成人同行共 5 英镑，有付费成人陪同时最多 3 名 16 岁以下儿童免费。",
+            "function": "列出巴士票价、付款方式和儿童免费规定。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:21": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出文章不建议开车进入牛津市中心的原因。",
+      "stemTranslationZh": "为什么不提倡开车进入牛津市中心？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一句找原因",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "只有持蓝色徽章者停车免费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Blue Badge holder",
+            "optionText": "Blue Badge holder",
+            "matchType": "exact",
+            "relationNote": "Blue Badge holder（蓝色徽章持有者）借自[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:4]]的括号，那里只说持证者可以在学院停车，没说免费，也不是劝人别开车进城的理由。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:4",
+              "quote": "Please note that there is no visitors’ parking available at colleges or University buildings (unless you are a Blue Badge holder).",
+              "anchor": "持证者例外"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "停车换乘系统需要维修。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "maintenance",
+            "optionText": "maintaining",
+            "matchType": "wordFamily",
+            "relationNote": "maintaining 与[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:7]]的 maintenance（维修）同词族。原文说维修在牛津别处进行，所以换乘点会很挤，不是换乘系统本身要维修。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:7",
+              "quote": "due to maintenance taking place elsewhere in Oxford, the Park & Rides are likely to be extremely busy",
+              "anchor": "别处维修"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "市中心只允许人们步行进入。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is only available for people to walk inside.",
+            "explanation": "原文只说市中心限行、车位少，建议改用停车换乘巴士进城，没说只许步行。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "那里交通受限，停车位有限。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3",
+              "quote": "Oxford is a small city with many traffic restrictions and parking is limited.",
+              "anchor": "限行多、车位少"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3",
+              "quote": "If at all possible, please do not drive into the city centre.",
+              "anchor": "劝别开车进城"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "city centre",
+          "sourceRole": "stem",
+          "targetText": "If at all possible, please do not drive into the city centre.",
+          "relationType": "locationCue",
+          "answerText": "many traffic restrictions and parking is limited",
+          "bridgeZh": "这句劝告正是由城里的交通和停车状况引出的",
+          "note": "题干 city centre 原词出现在原文，这句正是“别开车进城”的劝告。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3"
+        },
+        {
+          "sourceText": "Traffic there is restricted and parking is limited.",
+          "sourceRole": "correctOption",
+          "targetText": "many traffic restrictions and parking is limited",
+          "relationType": "paraphrase",
+          "note": "选项的“交通受限”（is restricted）就是原文的“交通限制多”（traffic restrictions），“车位有限”沿用原词（parking is limited），选 D。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "按票价规定算出一对夫妇带一对双胞胎婴儿买往返票要花多少钱。",
+      "stemTranslationZh": "一对带着双胞胎婴儿的夫妇买往返票要花多少钱？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "2 英镑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The standard parking charge is £2 per vehicle (up to 16 hours)",
+            "sourceEntity": "parking charge",
+            "optionText": "£2.",
+            "optionEntity": "£2",
+            "explanation": "£2 是[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:9]]里每辆车停 16 小时以内的停车费（parking charge），不是巴士往返票价。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:9",
+              "quote": "The standard parking charge is £2 per vehicle (up to 16 hours)",
+              "anchor": "16 小时停车费"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "4 英镑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "£4 per vehicle (up to 24 hours)",
+            "sourceEntity": "£4 per vehicle",
+            "optionText": "£4.",
+            "optionEntity": "£4",
+            "explanation": "£4 是[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:9]]里每辆车停 24 小时以内的停车费，问的却是坐换乘巴士的往返票。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:9",
+              "quote": "£4 per vehicle (up to 24 hours)",
+              "anchor": "24 小时停车费"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "5 英镑。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11",
+              "quote": "A peak adult day return ticket costs £5 for two adults travelling together.",
+              "anchor": "两名成人共 5 英镑"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11",
+              "quote": "Up to 3under 16s can travel free when accompanied by at least one fare paying adult.",
+              "anchor": "16 岁以下免费"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "10 英镑。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "A peak adult day return ticket costs £5 for two adults travelling together.",
+            "sourceEntity": "£5 for two adults travelling together",
+            "optionText": "£10.",
+            "optionEntity": "£10",
+            "explanation": "把 £5 当成每人票价、两人算成 10 英镑；原文的 £5 是两名成人同行的合计（for two adults travelling together）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11",
+              "quote": "A peak adult day return ticket costs £5 for two adults travelling together.",
+              "anchor": "两人合计 5 英镑"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "return ticket",
+          "sourceRole": "stem",
+          "targetText": "A peak adult day return ticket costs £5 for two adults travelling together.",
+          "relationType": "locationCue",
+          "answerText": "£5 for two adults travelling together",
+          "note": "题干 return ticket 原词出现在原文，这句给出成人往返票价。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11"
+        },
+        {
+          "sourceText": "£5.",
+          "sourceRole": "correctOption",
+          "targetText": "Up to 3under 16s can travel free when accompanied by at least one fare paying adult.",
+          "relationType": "calculation",
+          "note": "夫妇俩是两名同行成人，往返共 £5（for two adults travelling together）；双胞胎婴儿未满 16 岁、人数在 3 名以内，又有付费成人陪同，按[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11|can travel free]]免费。合计 5 + 0 = 5 英镑，选 C。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:11"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:23": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "看清全文写给谁、各部分在讲什么，判断这篇文字的写作目的。",
+      "stemTranslationZh": "这篇短文的写作目的是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1]]的 recommend a visit 看写给谁，再看各小标题下讲了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "简要介绍牛津的历史。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Telling the history of Oxford briefly.",
+            "explanation": "全文没讲牛津的历史，开头只称赞牛津美丽、值得一游，后面都是交通和付费信息。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为牛津大学做宣传。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "University of Oxford",
+            "optionText": "University of Oxford",
+            "matchType": "exact",
+            "relationNote": "University of Oxford 出自[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1]]，只是说打算申请牛津大学的人尤其值得来看看；全文讲的是来访交通，不是给大学做宣传。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1",
+              "quote": "especially when you are considering applying to the University of Oxford",
+              "anchor": "提到牛津大学"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "提供有关公共交通的信息。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "We recommend that you use the Park & Ride system.",
+            "sourceHighlight": "Park & Ride system",
+            "optionText": "Offering information about public transport.",
+            "optionHighlight": "public transport",
+            "explanation": "换乘巴士只是其中一块，文中还讲了开车进城的限制和停车费；选项只盖住坐公交这一部分。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3",
+              "quote": "We recommend that you use the Park & Ride system.",
+              "anchor": "推荐停车换乘"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为来牛津的游客提供出行建议。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1",
+              "quote": "we strongly recommend a visit",
+              "anchor": "推荐来访"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:3",
+              "quote": "If at all possible, please do not drive into the city centre. We recommend that you use the Park & Ride system.",
+              "anchor": "出行建议"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Providing travel advice for visitors to Oxford.",
+          "sourceRole": "correctOption",
+          "targetText": "we strongly recommend a visit",
+          "relationType": "paraphrase",
+          "note": "开头向读者推荐来牛津（recommend a visit），后面按驾车、停车换乘、停车费、巴士票几个小标题，告诉来访者别开车进城、改用停车换乘、怎样付费。选项的“给来牛津的游客出行建议”把这几部分都包进去了，选 D。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-a:1"
+        }
+      ]
+    }
+  }
+}

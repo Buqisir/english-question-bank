@@ -1,0 +1,751 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-sichuan-leshan-zigong-yibin-2025-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c": {
+      "overview": "现有直接空气捕集（DAC）技术成本高、捕碳少。伯克利科学家研制的黄色粉末 COF-999 靠胺抓取二氧化碳，测试中把空气里的二氧化碳清除干净，而且捕得快、耗能低、成本低、可反复使用。",
+      "fullTranslationZh": "目前，世界各地的人们都在研究从空气中去除碳并将其储存起来的方法，这通常被称为直接空气捕集（DAC）。DAC 技术仍在发展之中。不过通常在这一过程中，空气会被抽送着流过一种能从中去除二氧化碳（CO₂）的材料。一种常见的材料是石灰石。之后，这种材料被加热，以便小心地释放出 CO₂，这样就能把它安全地储存在地下。但目前这样做的方法成本高昂，而且捕集的 CO₂ 不多。\n然而，加州大学伯克利分校的科学家研制出的一种新型黄色粉末 COF-999 却是另一番情形。在显微镜下，它看起来像是由许多微小的球体构成的。每个小球上都有数量惊人的孔洞。这些孔洞能让空气穿过小球。这些小球上附着着大量“胺”。胺是一种与氨有关的特殊化学混合物。胺非常善于从空气中抓取 CO₂ 分子并牢牢抓住它们。\n为了测试 COF-999，科学家们在一根小管中装满了这种粉末。然后，他们把实验室外的空气通过这根管子输送了 20 天。然而，尽管室外空气中含有 CO₂，从管中出来的空气却完全没有二氧化碳！这一发现令科学家们兴奋不已。“我看到气候问题的解决办法就在那里，就在我们手中。”科学家之一奥马尔·亚吉博士说。\nCOF-999 捕集 CO₂ 的速度是其他 DAC 材料的 10 倍。研究人员说，半磅这种粉末从空气中吸取的 CO₂ 能和一棵树一样多。但与树不同的是，即使外面天黑，COF-999 也能捕集 CO₂。要让 COF-999 释放碳，只需把它加热到 60°C 左右，这比大多数其他 DAC 材料所需的温度低得多，这意味着收集 CO₂ 将耗费更少的能量。制造 COF-999 所需的材料并不贵。最重要的是，科学家们已经测试过将这种材料重复使用多达 300 次。他们认为它很可能可以重复使用数千次。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-1",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4",
+          "sourceText": "To get COF-999 to release the carbon, it just needs heating to around 60°C, much cooler than most other DAC materials, meaning it will take less energy to collect the CO₂.",
+          "displayText": "To get COF-999 to release the carbon, it just needs heating to around 60°C, much cooler than most other DAC materials, meaning it will take less energy to collect the CO₂.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:30"
+          ],
+          "translationZh": "要让 COF-999 释放碳，只需把它加热到 60°C 左右，这比大多数其他 DAC 材料所需的温度低得多，这意味着收集 CO₂ 将耗费更少的能量。",
+          "analysisZh": "主干是 it just needs heating，“它只需要加热”，need doing 表示被动意义，等于 needs to be heated。句首 To get COF-999 to release the carbon 是目的状语，get sth. to do 意为“让某物做某事”。to around 60°C 说明加热到的温度，much cooler than most other DAC materials 是比较，补充这个温度比其他材料低得多。句末现在分词短语 meaning … 承接前面整件事，说明它带来的结果：收集 CO₂ 更省能量。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 36,
+              "quote": "To get COF-999 to release the carbon"
+            },
+            {
+              "start": 38,
+              "end": 59,
+              "quote": "it just needs heating"
+            },
+            {
+              "start": 119,
+              "end": 151,
+              "quote": "meaning it will take less energy"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-2",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1",
+          "sourceText": "Currently, people around the world are working on ways of removing carbon from the air and storing it, which is often called Direct Air Capture (DAC).",
+          "displayText": "Currently, people around the world are working on ways of removing carbon from the air and storing it, which is often called Direct Air Capture (DAC).",
+          "relatedQuestionIds": [],
+          "translationZh": "目前，世界各地的人们都在研究从空气中去除碳并将其储存起来的方法，这通常被称为直接空气捕集（DAC）。",
+          "analysisZh": "主干是 people … are working on ways，“人们正在研究方法”，around the world 修饰 people。of removing carbon from the air and storing it 是 ways 的定语，两个动名词 removing 和 storing 并列，说明是“去除并储存碳”的方法。逗号后 which 引导非限制性定语从句，指代前面这种去除并储存碳的做法，给它一个名称：直接空气捕集（DAC）。这句为全文引出话题。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 54,
+              "quote": "people around the world are working on ways"
+            },
+            {
+              "start": 58,
+              "end": 101,
+              "quote": "removing carbon from the air and storing it"
+            },
+            {
+              "start": 103,
+              "end": 124,
+              "quote": "which is often called"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1"
+              ],
+              "start": 0,
+              "end": 181,
+              "quote": "目前，世界各地的人们都在研究从空气中去除碳并将其储存起来的方法，这通常被称为直接空气捕集（DAC）。DAC 技术仍在发展之中。不过通常在这一过程中，空气会被抽送着流过一种能从中去除二氧化碳（CO₂）的材料。一种常见的材料是石灰石。之后，这种材料被加热，以便小心地释放出 CO₂，这样就能把它安全地储存在地下。但目前这样做的方法成本高昂，而且捕集的 CO₂ 不多。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2"
+              ],
+              "start": 182,
+              "end": 336,
+              "quote": "然而，加州大学伯克利分校的科学家研制出的一种新型黄色粉末 COF-999 却是另一番情形。在显微镜下，它看起来像是由许多微小的球体构成的。每个小球上都有数量惊人的孔洞。这些孔洞能让空气穿过小球。这些小球上附着着大量“胺”。胺是一种与氨有关的特殊化学混合物。胺非常善于从空气中抓取 CO₂ 分子并牢牢抓住它们。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:3"
+              ],
+              "start": 337,
+              "end": 486,
+              "quote": "为了测试 COF-999，科学家们在一根小管中装满了这种粉末。然后，他们把实验室外的空气通过这根管子输送了 20 天。然而，尽管室外空气中含有 CO₂，从管中出来的空气却完全没有二氧化碳！这一发现令科学家们兴奋不已。“我看到气候问题的解决办法就在那里，就在我们手中。”科学家之一奥马尔·亚吉博士说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4"
+              ],
+              "start": 487,
+              "end": 732,
+              "quote": "COF-999 捕集 CO₂ 的速度是其他 DAC 材料的 10 倍。研究人员说，半磅这种粉末从空气中吸取的 CO₂ 能和一棵树一样多。但与树不同的是，即使外面天黑，COF-999 也能捕集 CO₂。要让 COF-999 释放碳，只需把它加热到 60°C 左右，这比大多数其他 DAC 材料所需的温度低得多，这意味着收集 CO₂ 将耗费更少的能量。制造 COF-999 所需的材料并不贵。最重要的是，科学家们已经测试过将这种材料重复使用多达 300 次。他们认为它很可能可以重复使用数千次。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:30"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4",
+                "start": 235,
+                "end": 406,
+                "quote": "To get COF-999 to release the carbon, it just needs heating to around 60°C, much cooler than most other DAC materials, meaning it will take less energy to collect the CO₂."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p4",
+                "start": 100,
+                "end": 174,
+                "quote": "要让 COF-999 释放碳，只需把它加热到 60°C 左右，这比大多数其他 DAC 材料所需的温度低得多，这意味着收集 CO₂ 将耗费更少的能量。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1",
+                "start": 0,
+                "end": 150,
+                "quote": "Currently, people around the world are working on ways of removing carbon from the air and storing it, which is often called Direct Air Capture (DAC)."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p1",
+                "start": 0,
+                "end": 50,
+                "quote": "目前，世界各地的人们都在研究从空气中去除碳并将其储存起来的方法，这通常被称为直接空气捕集（DAC）。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-evidence-28",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1",
+                "start": 436,
+                "end": 515,
+                "quote": "But the current methods of doing this are expensive and don’t capture much CO₂."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p1",
+                "start": 154,
+                "end": 181,
+                "quote": "但目前这样做的方法成本高昂，而且捕集的 CO₂ 不多。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-evidence-29",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2",
+                "start": 373,
+                "end": 459,
+                "quote": "The amines are great at grabbing CO₂ molecules(分子) from the air and holding onto them."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p2",
+                "start": 128,
+                "end": 154,
+                "quote": "胺非常善于从空气中抓取 CO₂ 分子并牢牢抓住它们。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-evidence-30",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:3",
+                "start": 280,
+                "end": 347,
+                "quote": "I see the solution to the climate problem right there, in our hands"
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:3",
+                "start": 180,
+                "end": 230,
+                "quote": "the air from the tube had no carbon dioxide at all"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p3",
+                "start": 109,
+                "end": 132,
+                "quote": "我看到气候问题的解决办法就在那里，就在我们手中"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p3",
+                "start": 76,
+                "end": 93,
+                "quote": "从管中出来的空气却完全没有二氧化碳"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-evidence-31",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2",
+                "start": 0,
+                "end": 100,
+                "quote": "However, COF-999, a novel yellow powder, created by scientists at UC Berkeley, is a different story."
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4",
+                "start": 0,
+                "end": 62,
+                "quote": "COF-999 captures CO₂ 10 times faster than other DAC materials."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p2",
+                "start": 0,
+                "end": 45,
+                "quote": "然而，加州大学伯克利分校的科学家研制出的一种新型黄色粉末 COF-999 却是另一番情形。"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c-p4",
+                "start": 0,
+                "end": 35,
+                "quote": "COF-999 捕集 CO₂ 的速度是其他 DAC 材料的 10 倍。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先介绍 DAC 技术及现有方法贵、捕碳少的问题，再用 However 引出新材料 COF-999 及其结构原理，接着写测试结果和科学家的期待，最后列举它快、省能、便宜、可重复使用的优势。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1",
+            "summary": "DAC 技术用石灰石等材料吸附空气中的 CO₂，再加热释放并埋存，但现有方法贵、捕集量少。",
+            "function": "交代背景，提出现有技术的问题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2",
+            "summary": "伯克利研制的黄色粉末 COF-999 由多孔小球构成，球上附着的胺能抓住 CO₂。",
+            "function": "用转折引出新材料，说明其结构和原理。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:3",
+            "summary": "科学家把室外空气通过装有 COF-999 的小管 20 天，流出的空气完全不含 CO₂，令他们看到解决气候问题的希望。",
+            "function": "用测试结果证明新材料的效果。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4",
+            "summary": "COF-999 捕碳快 10 倍、天黑也能工作、只需 60°C 释放、原料便宜，还能重复使用数百上千次。",
+            "function": "逐项列出新材料的优势，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:28": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出现有常用 DAC 方法的缺点。",
+      "stemTranslationZh": "常用的 DAC 方法有什么缺点？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它的安全性尚不明确。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Later, the material is heated to carefully release CO₂, so it can be stored safely underground.",
+            "sourceHighlight": "stored safely",
+            "optionText": "Its safety turns out unclear.",
+            "optionHighlight": "safety turns out unclear",
+            "explanation": "原文说释放出的 CO₂ 能安全地（safely）埋存在地下，没说安全性存疑；它批评的是贵和捕得少。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1",
+              "quote": "so it can be stored safely underground",
+              "anchor": "安全埋存"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "成本高，效果较差。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1",
+              "quote": "But the current methods of doing this are expensive and don’t capture much CO₂.",
+              "anchor": "贵且捕得少"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它的材料很难获得。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Its materials are hard to obtain.",
+            "explanation": "原文只举了常用材料石灰石（limestone），没说材料难以获得；指出的缺点是贵和捕得少。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它操作起来很复杂。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It’s complicated to carry out.",
+            "explanation": "原文按步骤介绍了抽气、吸附、加热释放、埋存，没说操作复杂；它批评的只有成本和捕集量。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "common DAC method",
+          "sourceRole": "stem",
+          "targetText": "But the current methods of doing this are expensive and don’t capture much CO₂.",
+          "relationType": "locationCue",
+          "targetCue": "the current methods",
+          "sourceZh": "常用的捕碳方法",
+          "targetCueZh": "现有的方法",
+          "answerText": "expensive and don’t capture much CO₂",
+          "note": "题干“常用的 DAC 方法”对应原文“现有的方法”（the current methods）。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1"
+        },
+        {
+          "sourceText": "It’s costly and less effective.",
+          "sourceRole": "correctOption",
+          "targetText": "expensive and don’t capture much CO₂",
+          "relationType": "paraphrase",
+          "note": "“成本高”（costly）就是原文的 expensive；“效果较差”（less effective）对应捕集的 CO₂ 不多（don’t capture much），捕得少就是效果不好，选 B。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:29": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "弄清 COF-999 靠什么处理空气中的 CO₂。",
+      "stemTranslationZh": "COF-999 是如何处理 CO₂ 的？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "把它转化为氨。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "ammonia",
+            "optionText": "ammonia",
+            "matchType": "exact",
+            "relationNote": "ammonia（氨）出自[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2|related to ammonia]]，那里只说胺是一种与氨有关的化学物质，没说把 CO₂ 变成氨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2",
+              "quote": "An amine is a special chemical mixture related to ammonia.",
+              "anchor": "胺与氨有关"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "利用胺吸收 CO₂。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2",
+              "quote": "The amines are great at grabbing CO₂ molecules(分子) from the air and holding onto them.",
+              "anchor": "胺抓住 CO₂"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "把它释放回空气中。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "The amines are great at grabbing CO₂ molecules(分子) from the air and holding onto them.",
+            "sourceHighlight": "holding onto them",
+            "optionText": "By releasing it back into the air.",
+            "optionHighlight": "releasing it back into the air",
+            "explanation": "胺把 CO₂ 从空气中抓住、留住（holding onto）；[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4]]说加热释放是为了收集（collect）CO₂，不是放回空气。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2",
+              "quote": "grabbing CO₂ molecules(分子) from the air and holding onto them",
+              "anchor": "抓住不放"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "通过孔洞分解 CO₂。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "These holes allow air to pass through the balls.",
+            "sourceEntity": "air",
+            "optionText": "By resolving CO₂ through holes.",
+            "optionEntity": "resolving CO₂",
+            "explanation": "孔洞（holes）的作用是让空气穿过小球；抓住 CO₂ 的是附在球上的胺，原文也没说把 CO₂ 分解掉。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2",
+              "quote": "These holes allow air to pass through the balls.",
+              "anchor": "孔洞让空气通过"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "process CO₂",
+          "sourceRole": "stem",
+          "targetText": "The amines are great at grabbing CO₂ molecules(分子) from the air and holding onto them.",
+          "relationType": "locationCue",
+          "targetCue": "grabbing CO₂ molecules",
+          "sourceZh": "处理二氧化碳",
+          "targetCueZh": "抓取二氧化碳分子",
+          "answerText": "The amines are great at grabbing CO₂ molecules",
+          "note": "题干“处理 CO₂”落在原文“抓取 CO₂ 分子”（grabbing CO₂ molecules）。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2"
+        },
+        {
+          "sourceText": "By absorbing CO₂ with amines.",
+          "sourceRole": "correctOption",
+          "targetText": "grabbing CO₂ molecules(分子) from the air and holding onto them",
+          "relationType": "paraphrase",
+          "note": "选项的“吸收”（absorbing）对应原文的抓取并留住（grabbing … holding onto），“靠胺”沿用原词 amines，选 B。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:30": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据 COF-999 的测试结果和科学家的反应，推断这项研究意味着什么。",
+      "stemTranslationZh": "从 COF-999 的测试中可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读测试结果和科学家的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "DAC 技术很快会被取代。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "COF-999 captures CO₂ 10 times faster than other DAC materials.",
+            "sourceEntity": "other DAC materials",
+            "optionText": "DAC technology will be replaced soon.",
+            "optionEntity": "DAC technology",
+            "explanation": "COF-999 本身就是一种 DAC 材料，只是比其他 DAC 材料快（10 times faster），原文没说 DAC 技术会被取代。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4",
+              "quote": "COF-999 captures CO₂ 10 times faster than other DAC materials.",
+              "anchor": "比其他 DAC 材料快"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "这一过程会消耗更多能量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "To get COF-999 to release the carbon, it just needs heating to around 60°C, much cooler than most other DAC materials, meaning it will take less energy to collect the CO₂.",
+            "sourceHighlight": "less energy",
+            "optionText": "More energy is consumed during the procedure.",
+            "optionHighlight": "More energy",
+            "explanation": "COF-999 只需加热到 60°C 左右，比其他材料低得多，收集 CO₂ 耗能更少（less energy），选项说成了更多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4",
+              "quote": "meaning it will take less energy to collect the CO₂",
+              "anchor": "耗能更少"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "只有在有阳光时才能捕集 CO₂。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "But unlike trees, COF-999 can capture CO₂ even when it’s dark outside.",
+            "sourceHighlight": "even when it’s dark outside",
+            "optionText": "CO₂ is captured merely in the presence of sunlight.",
+            "optionHighlight": "merely in the presence of sunlight",
+            "explanation": "原文说和树不同，COF-999 天黑时也能捕集 CO₂（even when it’s dark），选项却说只在有阳光时才行。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4",
+              "quote": "But unlike trees, COF-999 can capture CO₂ even when it’s dark outside.",
+              "anchor": "天黑也能捕"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一个充满希望的环保前景即将到来。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:3",
+              "quote": "I see the solution to the climate problem right there, in our hands",
+              "anchor": "解决办法在手中"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:3",
+              "quote": "the air from the tube had no carbon dioxide at all",
+              "anchor": "出管空气无 CO₂"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "test",
+          "sourceRole": "stem",
+          "targetText": "To test COF-999, the scientists filled a small tube with the powder.",
+          "relationType": "locationCue",
+          "answerText": "I see the solution to the climate problem right there",
+          "bridgeZh": "管中出来的空气完全不含碳，科学家才说出这番话",
+          "note": "题干 test 原词出现在原文，这句开始介绍测试过程。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:3"
+        },
+        {
+          "sourceText": "A promising environmental prospect is on the way.",
+          "sourceRole": "correctOption",
+          "targetText": "I see the solution to the climate problem right there, in our hands",
+          "relationType": "paraphrase",
+          "note": "选项是由测试结果推出来的：出管的空气完全不含 CO₂（no carbon dioxide at all），亚吉博士说解决气候问题的办法就在手中（in our hands），可见这种材料让环保前景很有希望，选 D。原文只说看到希望，推不出问题已经解决。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:3"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:31": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "抓住全文围绕的对象和中心，选出最合适的标题。",
+      "stemTranslationZh": "哪一项是本文最好的标题？",
+      "locateBy": "passage",
+      "locateFindZh": "从[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2|However, COF-999]]的转折找全文主角，再看后文怎样写它的效果",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "胺：捕集 CO₂ 的好材料",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "The amines are great at grabbing CO₂ molecules(分子) from the air and holding onto them.",
+            "sourceHighlight": "The amines",
+            "optionText": "Amines: Great Materials for Capturing CO₂",
+            "optionHighlight": "Amines",
+            "explanation": "胺只在[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2]]介绍 COF-999 结构时出现，是它的一部分；全文的主角是 COF-999 这种粉末。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2",
+              "quote": "Attached to these balls are lots of “amines(胺)”.",
+              "anchor": "胺附在小球上"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "去除 CO₂ 的重要性",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The Importance of Removing CO₂",
+            "explanation": "全文没论证去除 CO₂ 为什么重要，开头直接介绍捕碳方法，篇幅都放在新材料 COF-999 上。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "COF-999：CO₂ 处理领域的颠覆者",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2",
+              "quote": "However, COF-999, a novel yellow powder, created by scientists at UC Berkeley, is a different story.",
+              "anchor": "新材料登场"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:4",
+              "quote": "COF-999 captures CO₂ 10 times faster than other DAC materials.",
+              "anchor": "快 10 倍"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "DAC 技术的发展",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "DAC technology is still being developed.",
+            "sourceHighlight": "DAC technology is still being developed",
+            "optionText": "The Development of DAC Technology",
+            "optionHighlight": "Development of DAC Technology",
+            "explanation": "“DAC 技术仍在发展”（still being developed）只是[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1]]的背景，文章没有梳理 DAC 的发展历程，主体写的是 COF-999。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1",
+              "quote": "DAC technology is still being developed.",
+              "anchor": "背景介绍"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Game-Changer in CO₂ Processing",
+          "sourceRole": "correctOption",
+          "targetText": "is a different story",
+          "relationType": "paraphrase",
+          "note": "[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:1]]先说现有方法又贵又捕得少，[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2]]用 However 转到新材料 COF-999，后面写它的测试结果和快、省能、便宜、可反复用等优点。全文都在写 COF-999 怎样改变捕碳的局面，选项的“颠覆者”（Game-Changer）正好概括这种突破，选 C。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-c:2"
+        }
+      ]
+    }
+  }
+}

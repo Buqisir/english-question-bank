@@ -1,0 +1,1857 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-sichuan-leshan-zigong-yibin-2025-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze": {
+      "overview": "朋友捡到一只重伤的小浣熊，作者带回家照料，几近绝望时它挣扎着活了下来；后来发现它又聋又盲，视力同样衰退的作者决定收留它，如今它成了宣讲尊重生命的野生动物大使。",
+      "fullTranslationZh": "一个炎热的早上，一位朋友给我打来电话。他发现了一只受了重伤的浣熊幼崽，它才大约八周大，情况非常糟糕。作为工作的一部分，我被要求照料受伤的动物，直到它们能被放归野外。我有些怀疑它能否熬过这一夜。尽管如此，我还是把它带回了家，给它取名特鲁珀，清理了它的伤口，盼着出现奇迹。\n整整四天，小浣熊一动不动。第五天早上，我几乎失去了希望。我抱着它，轻声说：“对不起。”突然，它伸了伸腿，虚弱地动了动嘴，又抖了抖身子——仿佛在说：“我还在战斗！”那一刻让我有了信心，相信它也许能康复。\n几周后，我正帮它练习走路，一阵突如其来的风猛地把门关上了。我吓了一跳，特鲁珀却没有任何反应。我的心一沉：它聋了。更糟的是，它既闻不到气味，也看不见东西。我自己的视力也在衰退，所以我理解它的艰难。我决定不把它送走。我和我的狗，还有它，一起开始了新的生活。\n如今特鲁珀十岁了，是一名持证的野生动物大使。我带它去学校和社区中心，宣讲尊重生命。多年来，它的故事一直是一个持续不断的提醒：每个生命都值得拥有一次机会。",
+      "mainLine": {
+        "theme": {
+          "text": "每个生命都值得一次机会，我们应当尊重生命（respecting life）。",
+          "quote": "respecting life"
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+            "text": "朋友捡到重伤的小浣熊，作者虽怀疑它能否活下来，仍带回家照料。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+            "text": "小浣熊四天不动，作者几近绝望时它挣扎着动了，作者重燃信心。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+            "text": "作者发现它又聋又盲，同病相怜，决定留下它一起生活。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+            "text": "它成了野生动物大使，用自己的故事宣讲尊重生命。"
+          }
+        ],
+        "emotion": "怀疑→几近绝望→重燃信心→心头一沉→理解接纳→欣慰"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:cloze:1",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+          "sourceText": "He had found a __41__ injured baby raccoon（浣熊）, which, just about eight weeks old, was in terrible shape.",
+          "displayText": "He had found a seriously injured baby raccoon（浣熊）, which, just about eight weeks old, was in terrible shape.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:41"
+          ],
+          "translationZh": "他发现了一只受了重伤的浣熊幼崽，它才大约八周大，情况非常糟糕。",
+          "analysisZh": "主干是 He had found a seriously injured baby raccoon，他发现了一只重伤的浣熊幼崽。逗号后 which 引导非限制性定语从句，指代这只浣熊，从句主干是 which was in terrible shape；中间插入的 just about eight weeks old 补充它的年龄。过去完成时 had found 表示朋友打电话之前就已经发现了它。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "He had found"
+            },
+            {
+              "start": 51,
+              "end": 56,
+              "quote": "which"
+            },
+            {
+              "start": 86,
+              "end": 107,
+              "quote": "was in terrible shape"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:cloze:2",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+          "sourceText": "Still, I took him home, named him Trouper, and cleaned his __44__, hoping for a miracle.",
+          "displayText": "Still, I took him home, named him Trouper, and cleaned his wounds, hoping for a miracle.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:44"
+          ],
+          "translationZh": "尽管如此，我还是把它带回了家，给它取名特鲁珀，清理了它的伤口，盼着出现奇迹。",
+          "analysisZh": "主语 I 后面并列三个谓语：took him home、named him Trouper、cleaned his wounds，按先后写出作者做的三件事。句末 hoping for a miracle 是现在分词短语作伴随状语，说明做这些事时的心情。句首 Still 表示让步，承接前句的怀疑：虽然担心它活不过今晚，作者还是收留了它。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 5,
+              "quote": "Still"
+            },
+            {
+              "start": 67,
+              "end": 87,
+              "quote": "hoping for a miracle"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1"
+              ],
+              "start": 0,
+              "end": 134,
+              "quote": "一个炎热的早上，一位朋友给我打来电话。他发现了一只受了重伤的浣熊幼崽，它才大约八周大，情况非常糟糕。作为工作的一部分，我被要求照料受伤的动物，直到它们能被放归野外。我有些怀疑它能否熬过这一夜。尽管如此，我还是把它带回了家，给它取名特鲁珀，清理了它的伤口，盼着出现奇迹。"
+            },
+            {
+              "paragraphId": "translation-paragraph:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2"
+              ],
+              "start": 135,
+              "end": 235,
+              "quote": "整整四天，小浣熊一动不动。第五天早上，我几乎失去了希望。我抱着它，轻声说：“对不起。”突然，它伸了伸腿，虚弱地动了动嘴，又抖了抖身子——仿佛在说：“我还在战斗！”那一刻让我有了信心，相信它也许能康复。"
+            },
+            {
+              "paragraphId": "translation-paragraph:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3"
+              ],
+              "start": 236,
+              "end": 362,
+              "quote": "几周后，我正帮它练习走路，一阵突如其来的风猛地把门关上了。我吓了一跳，特鲁珀却没有任何反应。我的心一沉：它聋了。更糟的是，它既闻不到气味，也看不见东西。我自己的视力也在衰退，所以我理解它的艰难。我决定不把它送走。我和我的狗，还有它，一起开始了新的生活。"
+            },
+            {
+              "paragraphId": "translation-paragraph:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4"
+              ],
+              "start": 363,
+              "end": 439,
+              "quote": "如今特鲁珀十岁了，是一名持证的野生动物大使。我带它去学校和社区中心，宣讲尊重生命。多年来，它的故事一直是一个持续不断的提醒：每个生命都值得拥有一次机会。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+            "text": "On a hot morning, a friend called me. He had found a seriously injured baby raccoon（浣熊）, which, just about eight weeks old, was in terrible shape. As part of my job, I was required to care for injured animals until they could be released into the wild. I had some doubt whether he would survive the night. Still, I took him home, named him Trouper, and cleaned his wounds, hoping for a miracle."
+          },
+          {
+            "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+            "text": "For four days, the raccoon didn’t move. On the fifth morning, I nearly lost hope. Holding him, I whispered, “Sorry.” Suddenly, he stretched his legs, moved his mouth weakly and shook himself – as if saying, “I’m still fighting!” That moment gave me confidence that he might recover."
+          },
+          {
+            "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+            "text": "Weeks later, while I was helping him practice walking, a sudden wind shut the door violently. I jumped, but Trouper didn’t react. My heart sank: he was deaf. Worse, he couldn’t smell or see. As someone with fading vision myself, I understood his struggle. I decided not to send him away. Together with my dog, we started a new life."
+          },
+          {
+            "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+            "text": "Now 10 years old, Trouper works as a licensed wildlife ambassador. I take him to schools and community centers to teach about respecting life. His story has been a(n) constant reminder for many years: every creature deserves a chance."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 125,
+                "end": 142,
+                "quote": "in terrible shape"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 43,
+                "end": 49,
+                "quote": "情况非常糟糕"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:41"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:41",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 53,
+                "end": 62,
+                "quote": "seriously"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 27,
+                "end": 29,
+                "quote": "重伤"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 144,
+                "end": 161,
+                "quote": "As part of my job"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 50,
+                "end": 58,
+                "quote": "作为工作的一部分"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:42"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:42",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 172,
+                "end": 180,
+                "quote": "required"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 60,
+                "end": 63,
+                "quote": "被要求"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 248,
+                "end": 264,
+                "quote": "I had some doubt"
+              },
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 367,
+                "end": 387,
+                "quote": "hoping for a miracle"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 127,
+                "end": 133,
+                "quote": "盼着出现奇迹"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:43"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:43",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 287,
+                "end": 294,
+                "quote": "survive"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 90,
+                "end": 92,
+                "quote": "熬过"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 60,
+                "end": 80,
+                "quote": "injured baby raccoon"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 25,
+                "end": 34,
+                "quote": "受了重伤的浣熊幼崽"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:44"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:44",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 365,
+                "end": 371,
+                "quote": "wounds"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 124,
+                "end": 126,
+                "quote": "伤口"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "start": 27,
+                "end": 38,
+                "quote": "didn’t move"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:2",
+                "start": 8,
+                "end": 12,
+                "quote": "一动不动"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:45"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:45",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "start": 76,
+                "end": 80,
+                "quote": "hope"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:2",
+                "start": 25,
+                "end": 27,
+                "quote": "希望"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "start": 149,
+                "end": 171,
+                "quote": "moved his mouth weakly"
+              },
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "start": 207,
+                "end": 226,
+                "quote": "I’m still fighting!"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:2",
+                "start": 74,
+                "end": 80,
+                "quote": "我还在战斗！"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:46"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:46",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "start": 130,
+                "end": 139,
+                "quote": "stretched"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:2",
+                "start": 47,
+                "end": 50,
+                "quote": "伸了伸"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "start": 260,
+                "end": 276,
+                "quote": "he might recover"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:2",
+                "start": 91,
+                "end": 99,
+                "quote": "相信它也许能康复"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:47"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:47",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:2",
+                "start": 249,
+                "end": 259,
+                "quote": "confidence"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:2",
+                "start": 88,
+                "end": 90,
+                "quote": "信心"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 55,
+                "end": 68,
+                "quote": "a sudden wind"
+              },
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 91,
+                "end": 99,
+                "quote": "I jumped"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 29,
+                "end": 34,
+                "quote": "我吓了一跳"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:48"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:48",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 83,
+                "end": 92,
+                "quote": "violently"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 21,
+                "end": 23,
+                "quote": "猛地"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 91,
+                "end": 119,
+                "quote": "I jumped, but Trouper didn’t"
+              },
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 143,
+                "end": 154,
+                "quote": "he was deaf"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 52,
+                "end": 55,
+                "quote": "它聋了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:49"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:49",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 123,
+                "end": 128,
+                "quote": "react"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 43,
+                "end": 45,
+                "quote": "反应"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 208,
+                "end": 221,
+                "quote": "fading vision"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 76,
+                "end": 86,
+                "quote": "我自己的视力也在衰退"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:50"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:50",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 186,
+                "end": 189,
+                "quote": "see"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 70,
+                "end": 73,
+                "quote": "看不见"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 230,
+                "end": 255,
+                "quote": "I understood his struggle"
+              },
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 291,
+                "end": 311,
+                "quote": "Together with my dog"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 89,
+                "end": 96,
+                "quote": "我理解它的艰难"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:51"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:51",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 273,
+                "end": 277,
+                "quote": "send"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 103,
+                "end": 105,
+                "quote": "送走"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 291,
+                "end": 325,
+                "quote": "Together with my dog, we started a"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 116,
+                "end": 121,
+                "quote": "一起开始了"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:52"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:52",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:3",
+                "start": 323,
+                "end": 326,
+                "quote": "new"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:3",
+                "start": 121,
+                "end": 123,
+                "quote": "新的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+                "start": 110,
+                "end": 137,
+                "quote": "teach about respecting life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:4",
+                "start": 34,
+                "end": 40,
+                "quote": "宣讲尊重生命"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:53"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:53",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+                "start": 55,
+                "end": 65,
+                "quote": "ambassador"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:4",
+                "start": 19,
+                "end": 21,
+                "quote": "大使"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+                "start": 179,
+                "end": 193,
+                "quote": "for many years"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:4",
+                "start": 41,
+                "end": 44,
+                "quote": "多年来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:54"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:54",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+                "start": 167,
+                "end": 175,
+                "quote": "constant"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:4",
+                "start": 54,
+                "end": 59,
+                "quote": "持续不断的"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+                "start": 122,
+                "end": 137,
+                "quote": "respecting life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:4",
+                "start": 36,
+                "end": 40,
+                "quote": "尊重生命"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:55"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:55",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:4",
+                "start": 216,
+                "end": 224,
+                "quote": "deserves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:4",
+                "start": 67,
+                "end": 69,
+                "quote": "值得"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:cloze:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:41"
+            ],
+            "selectedSentenceId": "sentence:cloze:1",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 38,
+                "end": 146,
+                "quote": "He had found a seriously injured baby raccoon（浣熊）, which, just about eight weeks old, was in terrible shape."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 19,
+                "end": 50,
+                "quote": "他发现了一只受了重伤的浣熊幼崽，它才大约八周大，情况非常糟糕。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:cloze:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:44"
+            ],
+            "selectedSentenceId": "sentence:cloze:2",
+            "sourceRanges": [
+              {
+                "textId": "completed:block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze:1",
+                "start": 306,
+                "end": 394,
+                "quote": "Still, I took him home, named him Trouper, and cleaned his wounds, hoping for a miracle."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:cloze",
+                "paragraphId": "translation-paragraph:1",
+                "start": 96,
+                "end": 134,
+                "quote": "尽管如此，我还是把它带回了家，给它取名特鲁珀，清理了它的伤口，盼着出现奇迹。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "怀疑→几近绝望→重燃信心→心头一沉→理解接纳→欣慰"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:41": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:41",
+      "blankNo": 41,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "这里说小浣熊伤得有多重，要一个表示伤势重的程度副词。",
+      "find": {
+        "check": "echo",
+        "text": "同句后面说它情况糟糕（in terrible shape），作者还怀疑它能否熬过这一夜，伤势一定很重。",
+        "quotes": [
+          "in terrible shape"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "严重地",
+        "reason": "这里说小浣熊伤得有多重，要一个表示伤势重的程度副词。副词看复现：同句后面说它情况糟糕（in terrible shape），作者还怀疑它能否熬过这一夜，伤势一定很重。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "slightly",
+          "meaning": "轻微地；与同句的情况糟糕（in terrible shape）矛盾，轻伤不会让人担心它活不过当晚。",
+          "quote": "in terrible shape"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "frequently",
+          "meaning": "频繁地；这里修饰受伤是要说伤得多重，后文情况糟糕（in terrible shape）讲的是伤势，不是次数。",
+          "quote": "in terrible shape"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "purposely",
+          "meaning": "故意地；朋友只是发现（had found）了它，句子接着讲的是它伤得多重，不是谁故意伤它。",
+          "quote": "had found"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "injured",
+          "signalSide": "context-after",
+          "targetText": "seriously injured",
+          "relation": "修饰受伤（injured），说明伤势的轻重。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "in terrible shape",
+          "signalSide": "context-after",
+          "relation": "情况糟糕和伤得很重前后呼应。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:42": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "detail",
+      "context": "这里交代作者照料伤病动物是本职工作的要求。",
+      "find": {
+        "check": "collocation",
+        "text": "句首说这是我工作的一部分（As part of my job），照料伤病动物是职责上被要求做的事。",
+        "quotes": [
+          "As part of my job"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "要求",
+        "meaning": "按职责被要求",
+        "reason": "这里交代作者照料伤病动物是本职工作的要求。动词看搭配：句首说这是我工作的一部分（As part of my job），照料伤病动物是职责上被要求做的事。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "forced",
+          "meaning": "强迫；作为工作的一部分（As part of my job）是职责所在，不是被人逼着去照料动物。",
+          "quote": "As part of my job"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "ordered",
+          "meaning": "命令；指接到某一次具体命令，这里说的是工作本身的长期职责（As part of my job）。",
+          "quote": "As part of my job"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "guided",
+          "meaning": "引导；被人引导去照料伤病动物，接不上句首说明身份职责的作为工作的一部分（As part of my job）。",
+          "quote": "As part of my job"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to care for injured animals",
+          "signalSide": "context-after",
+          "targetText": "required to care for injured animals",
+          "relation": "被要求做某事，后接照料伤病动物（to care for injured animals）。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "As part of my job",
+          "signalSide": "context-before",
+          "relation": "工作的一部分说明这是职责上的要求。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:43": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:43",
+      "blankNo": 43,
+      "pos": "verb",
+      "role": "main",
+      "context": "伤势太重，作者担心的是小浣熊能不能活过这一夜。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是这一夜（the night），前面有怀疑（I had some doubt），后面盼奇迹（hoping for a miracle），说的是能否活下来。",
+        "quotes": [
+          "the night",
+          "I had some doubt",
+          "hoping for a miracle"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "从……中活下来",
+        "meaning": "熬过",
+        "reason": "伤势太重，作者担心的是小浣熊能不能活过这一夜。动词看搭配：宾语是这一夜（the night），前面有怀疑（I had some doubt），后面盼奇迹（hoping for a miracle），说的是能否活下来。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "enjoy",
+          "meaning": "享受；它状况糟糕（in terrible shape），作者担心的是生死，谈不上享受这一夜。",
+          "quote": "in terrible shape"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "suffer",
+          "meaning": "遭受；作者接着盼的是奇迹（hoping for a miracle），说明怀疑的是它能否活下来，而不是会不会受苦。",
+          "quote": "hoping for a miracle"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fear",
+          "meaning": "害怕；作者怀疑（I had some doubt）的是它的生死，后文盼奇迹，与它怕不怕黑夜无关。",
+          "quote": "I had some doubt"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the night",
+          "signalSide": "context-after",
+          "targetText": "survive the night",
+          "relation": "熬过这一夜（survive the night）。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "hoping for a miracle",
+          "signalSide": "context-after",
+          "relation": "只有生死难料才需要盼奇迹。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:44": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:44",
+      "blankNo": 44,
+      "pos": "noun",
+      "role": "detail",
+      "context": "作者把受伤的小浣熊带回家，先要处理它身上的伤。",
+      "find": {
+        "check": "echo",
+        "text": "前文说它受了伤（injured），又情况糟糕（in terrible shape），带回家后要清理的是伤口。",
+        "quotes": [
+          "injured",
+          "in terrible shape"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "伤口",
+        "reason": "作者把受伤的小浣熊带回家，先要处理它身上的伤。名词看复现：前文说它受了伤（injured），又情况糟糕（in terrible shape），带回家后要清理的是伤口。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fur",
+          "meaning": "毛皮；作者救的是受伤（injured）的小浣熊，急着清理的是伤处，不是毛发。",
+          "quote": "injured"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "face",
+          "meaning": "脸；作者是在照料受伤（injured）的动物，只洗脸处理不了它的伤。",
+          "quote": "injured"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "legs",
+          "meaning": "腿；后文它才伸了伸腿（his legs），此时作者处理的是受伤（injured）留下的伤处。",
+          "quote": "his legs"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "cleaned his",
+          "signalSide": "context-before",
+          "targetText": "cleaned his wounds",
+          "relation": "清理它的伤口（cleaned his wounds）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "injured",
+          "signalSide": "context-before",
+          "relation": "受伤和伤口前后复现。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:45": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:45",
+      "blankNo": 45,
+      "pos": "noun",
+      "role": "main",
+      "context": "小浣熊四天不动，这是作者情绪的最低点，几乎要放弃。",
+      "find": {
+        "check": "affect",
+        "text": "四天它都没动（didn’t move），作者抱着它低声说对不起（I whispered），几乎没了盼头。",
+        "quotes": [
+          "didn’t move",
+          "I whispered"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "希望",
+        "reason": "小浣熊四天不动，这是作者情绪的最低点，几乎要放弃。名词看情感：四天它都没动（didn’t move），作者抱着它低声说对不起（I whispered），几乎没了盼头。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "temper",
+          "meaning": "脾气；失去脾气即发火，作者此时是抱着它低声道歉（I whispered），是难过不是生气。",
+          "quote": "I whispered"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "interest",
+          "meaning": "兴趣；作者守了四天（For four days）还在道歉，是怕它挺不过去，不是对它没了兴趣。",
+          "quote": "For four days"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "courage",
+          "meaning": "勇气；作者面对的是它四天一动不动（didn’t move），心里是快要放弃，不是胆怯。",
+          "quote": "didn’t move"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "nearly lost",
+          "signalSide": "context-before",
+          "targetText": "nearly lost hope",
+          "relation": "几乎失去希望（nearly lost hope）。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "didn’t move",
+          "signalSide": "context-before",
+          "relation": "四天不动让作者近乎绝望。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:46": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:46",
+      "blankNo": 46,
+      "pos": "verb",
+      "role": "main",
+      "context": "转折出现：小浣熊突然有了动作，表明它还活着。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是它的腿（his legs），后面并列虚弱地动嘴（moved his mouth weakly）和抖身子，都是挣扎着活动身体。",
+        "quotes": [
+          "his legs",
+          "moved his mouth weakly"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "伸展",
+        "reason": "转折出现：小浣熊突然有了动作，表明它还活着。动词看搭配：宾语是它的腿（his legs），后面并列虚弱地动嘴（moved his mouth weakly）和抖身子，都是挣扎着活动身体。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "broke",
+          "meaning": "折断；后面它像在说“我还在战斗”（I’m still fighting），是挣扎求生，折断腿与此相反。",
+          "quote": "I’m still fighting"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "checked",
+          "meaning": "检查；主语是虚弱的浣熊（he），与后面的虚弱地动嘴（moved his mouth weakly）并列的应是身体动作。",
+          "quote": "moved his mouth weakly"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "treated",
+          "meaning": "治疗；给腿治疗是作者做的事，这里主语是浣熊（he）自己，后面接的是它自己抖了抖身子（shook himself）。",
+          "quote": "shook himself"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his legs",
+          "signalSide": "context-after",
+          "targetText": "stretched his legs",
+          "relation": "伸了伸腿（stretched his legs）。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "moved his mouth weakly",
+          "signalSide": "context-after",
+          "relation": "并列的几个动作都是身体在动。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:47": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:47",
+      "blankNo": 47,
+      "pos": "noun",
+      "role": "main",
+      "context": "小浣熊的挣扎让作者从几乎绝望转为相信它能好起来。",
+      "find": {
+        "check": "affect",
+        "text": "它像在说还在战斗（I’m still fighting），后面接它也许会康复（he might recover），作者重新有了把握。",
+        "quotes": [
+          "I’m still fighting",
+          "he might recover"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "信心",
+        "reason": "小浣熊的挣扎让作者从几乎绝望转为相信它能好起来。名词看情感：它像在说还在战斗（I’m still fighting），后面接它也许会康复（he might recover），作者重新有了把握。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "advice",
+          "meaning": "建议；那一刻是浣熊自己挣扎（I’m still fighting），没有人给作者出主意。",
+          "quote": "I’m still fighting"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "desperation",
+          "meaning": "绝望；前面它动了起来，后面是它也许会康复（he might recover），作者的情绪已经由绝望转好。",
+          "quote": "he might recover"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "resolution",
+          "meaning": "决心；后面接的是对它也许会康复（he might recover）的判断，这是信心的内容，不是决心。",
+          "quote": "he might recover"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that he might recover",
+          "signalSide": "context-after",
+          "targetText": "confidence that he might recover",
+          "relation": "对它也许能康复有了信心（confidence that he might recover）。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I’m still fighting",
+          "signalSide": "context-before",
+          "relation": "它的挣扎让作者重燃信心。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:48": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:48",
+      "blankNo": 48,
+      "pos": "adverb",
+      "role": "detail",
+      "context": "这里写风把门关上的方式，关门声大到让人吓一跳。",
+      "find": {
+        "check": "collocation",
+        "text": "主语是一阵突然的风（a sudden wind），后句作者吓了一跳（I jumped），门是被猛地撞上的。",
+        "quotes": [
+          "a sudden wind",
+          "I jumped"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "猛烈地",
+        "reason": "这里写风把门关上的方式，关门声大到让人吓一跳。副词看搭配：主语是一阵突然的风（a sudden wind），后句作者吓了一跳（I jumped），门是被猛地撞上的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gently",
+          "meaning": "轻轻地；轻轻关门不会让作者吓一跳（I jumped）。",
+          "quote": "I jumped"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "partly",
+          "meaning": "部分地；门只关上一部分不会发出巨响，作者吓一跳（I jumped）说明门被猛地撞上。",
+          "quote": "I jumped"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "gradually",
+          "meaning": "逐渐地；风是突然的（a sudden wind），与慢慢把门关上矛盾。",
+          "quote": "a sudden wind"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a sudden wind",
+          "signalSide": "context-before",
+          "targetText": "a sudden wind shut the door violently",
+          "relation": "突如其来的风猛地把门关上。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I jumped",
+          "signalSide": "context-after",
+          "relation": "作者吓了一跳，说明关门声很响。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:49": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "同样一声巨响，作者跳了起来，小浣熊却毫无动静，由此发现它聋了。",
+      "find": {
+        "check": "collocation",
+        "text": "作者吓得一跳（I jumped），转折（but）后说它却毫无动静，接着作者断定它聋了（he was deaf）。",
+        "quotes": [
+          "I jumped",
+          "he was deaf"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "作出反应",
+        "reason": "同样一声巨响，作者跳了起来，小浣熊却毫无动静，由此发现它聋了。动词看搭配：作者吓得一跳（I jumped），转折（but）后说它却毫无动静，接着作者断定它聋了（he was deaf）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "watch",
+          "meaning": "观看；没去看门推不出它聋了，后文作者断定它聋了（he was deaf），说的是对声音没反应。",
+          "quote": "he was deaf"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "mind",
+          "meaning": "介意；它不在乎关门声，推不出作者紧接着断定的它聋了（he was deaf）。",
+          "quote": "he was deaf"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fall",
+          "meaning": "摔倒；作者是吓得跳起（I jumped），它没摔倒说明不了它听不见。",
+          "quote": "I jumped"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Trouper didn’t",
+          "signalSide": "context-before",
+          "targetText": "Trouper didn’t react",
+          "relation": "主语特鲁珀，没有作出反应。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "he was deaf",
+          "signalSide": "context-after",
+          "relation": "对巨响没反应，作者才发现它聋了。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:50": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:50",
+      "blankNo": 50,
+      "pos": "verb",
+      "role": "main",
+      "context": "在聋之外又多一种缺陷，而且是作者自己也有的那一种。",
+      "find": {
+        "check": "echo",
+        "text": "后句作者说自己视力也在衰退（fading vision），所以理解它，可见它缺的是视觉。",
+        "quotes": [
+          "fading vision"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "看见",
+        "reason": "在聋之外又多一种缺陷，而且是作者自己也有的那一种。动词看复现：后句作者说自己视力也在衰退（fading vision），所以理解它，可见它缺的是视觉。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "touch",
+          "meaning": "触摸；作者凭自己视力衰退（fading vision）才理解它，缺的应是视觉，不是触觉。",
+          "quote": "fading vision"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hear",
+          "meaning": "听见；前句已说它聋了（he was deaf），更糟的是（Worse）引出的是新的缺陷。",
+          "quote": "he was deaf"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "taste",
+          "meaning": "品尝；作者是以自己视力衰退（fading vision）来体会它的难处，对应的是视觉。",
+          "quote": "fading vision"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "couldn’t smell or",
+          "signalSide": "context-before",
+          "targetText": "couldn’t smell or see",
+          "relation": "与闻（smell）并列，同为感官动作。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "fading vision",
+          "signalSide": "context-after",
+          "relation": "作者自己视力衰退，与它看不见呼应。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:51": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:51",
+      "blankNo": 51,
+      "pos": "phrase",
+      "role": "main",
+      "context": "作者理解小浣熊的难处，决定留下它，不再按惯例放走。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "前句我理解它的艰难（I understood his struggle），后句和我的狗一起（Together with my dog）生活，说明没送走它。",
+        "quotes": [
+          "I understood his struggle",
+          "Together with my dog"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "送走",
+        "meaning": "放走它",
+        "reason": "作者理解小浣熊的难处，决定留下它，不再按惯例放走。词组看语境义：前句我理解它的艰难（I understood his struggle），后句和我的狗一起（Together with my dog）生活，说明没送走它。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "put",
+          "meaning": "收起来；对象是活的浣熊，作者接着和它一起（Together with my dog）生活，谈不上把它收起。",
+          "quote": "Together with my dog"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "drive",
+          "meaning": "赶走；作者是因为理解它的艰难（I understood his struggle）才作决定，并不想驱赶它。",
+          "quote": "I understood his struggle"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "give",
+          "meaning": "送给别人；按工作惯例动物要放归野外（released into the wild），作者要决定的是放不放走它，不是送人。",
+          "quote": "released into the wild"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "away",
+          "signalSide": "context-after",
+          "targetText": "send him away",
+          "relation": "把它送走（send him away）。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "send",
+          "signalSide": "option",
+          "targetText": "send away",
+          "relation": "送（send）与离开（away）合起来是送走。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Together with my dog",
+          "signalSide": "context-after",
+          "relation": "后句一起生活，说明没有送走它。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:52": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:52",
+      "blankNo": 52,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者、狗和小浣熊组成一家，生活从这里重新开始。",
+      "find": {
+        "check": "collocation",
+        "text": "前面是开始（started），主语是和我的狗一起的我们（Together with my dog），开始的是新生活。",
+        "quotes": [
+          "started",
+          "Together with my dog"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "新的",
+        "reason": "作者、狗和小浣熊组成一家，生活从这里重新开始。形容词看搭配：前面是开始（started），主语是和我的狗一起的我们（Together with my dog），开始的是新生活。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "lonely",
+          "meaning": "孤独的；作者和狗、浣熊在一起（Together with my dog），谈不上孤独。",
+          "quote": "Together with my dog"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "plain",
+          "meaning": "平淡的；句子用开始（started）强调重新开始一种生活，说的不是生活简朴平淡。",
+          "quote": "started"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "luxury",
+          "meaning": "奢华；作者理解它的艰难（I understood his struggle）而收留它，这种生活谈不上奢华。",
+          "quote": "I understood his struggle"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "started a",
+          "signalSide": "context-before",
+          "targetText": "started a new life",
+          "relation": "开始新生活（started a new life）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Together with my dog",
+          "signalSide": "context-before",
+          "relation": "三个伙伴一起开始。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:53": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "故事的结果：小浣熊有了正式的工作身份，替野生动物发声。",
+      "find": {
+        "check": "echo",
+        "text": "后句作者带它去学校和社区中心宣讲尊重生命（teach about respecting life），这是代言宣传的身份。",
+        "quotes": [
+          "teach about respecting life"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "大使",
+        "meaning": "野生动物宣传代言者",
+        "reason": "故事的结果：小浣熊有了正式的工作身份，替野生动物发声。名词看复现：后句作者带它去学校和社区中心宣讲尊重生命（teach about respecting life），这是代言宣传的身份。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "student",
+          "meaning": "学生；它被带去学校是给别人宣讲（teach about respecting life），不是去上学。",
+          "quote": "teach about respecting life"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "agent",
+          "meaning": "代理人；代理人替人办事务，而它的工作是到学校和社区宣讲（teach about respecting life）。",
+          "quote": "teach about respecting life"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "rescuer",
+          "meaning": "救援者；它自己就是被救下的那只受伤幼崽（injured baby raccoon），工作是宣讲而不是救援。",
+          "quote": "injured baby raccoon"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "licensed wildlife",
+          "signalSide": "context-before",
+          "targetText": "licensed wildlife ambassador",
+          "relation": "持证的野生动物大使。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "teach about respecting life",
+          "signalSide": "context-after",
+          "relation": "去学校宣讲，正是大使的工作。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:54": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:54",
+      "blankNo": 54,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "这里说它的故事多年来一直在提醒人们，强调持续不断。",
+      "find": {
+        "check": "collocation",
+        "text": "后面是多年来（for many years），修饰提醒（reminder），说明这种提醒一直在持续。",
+        "quotes": [
+          "for many years",
+          "reminder"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "持续不断的",
+        "reason": "这里说它的故事多年来一直在提醒人们，强调持续不断。形容词看搭配：后面是多年来（for many years），修饰提醒（reminder），说明这种提醒一直在持续。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "general",
+          "meaning": "总体的；笼统的提醒接不上后面的多年来（for many years），这里强调的是时间上的持续。",
+          "quote": "for many years"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "distant",
+          "meaning": "遥远的；作者常带它去学校和社区（I take him to schools），这份提醒就在人们身边。",
+          "quote": "I take him to schools"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "occasional",
+          "meaning": "偶尔的；与后面的多年来（for many years）一直如此矛盾。",
+          "quote": "for many years"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "reminder",
+          "signalSide": "context-after",
+          "targetText": "constant reminder",
+          "relation": "持续不断的提醒。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "for many years",
+          "signalSide": "context-after",
+          "relation": "多年来一直如此。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:55": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:55",
+      "blankNo": 55,
+      "pos": "verb",
+      "role": "main",
+      "context": "全文点题：每个生命都值得被给予一次机会。",
+      "find": {
+        "check": "collocation",
+        "text": "宾语是一次机会（a chance），前句宣讲尊重生命（respecting life），特鲁珀被救的经历说明生命值得机会。",
+        "quotes": [
+          "a chance",
+          "respecting life"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "值得",
+        "reason": "全文点题：每个生命都值得被给予一次机会。动词看搭配：宾语是一次机会（a chance），前句宣讲尊重生命（respecting life），特鲁珀被救的经历说明生命值得机会。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "seizes",
+          "meaning": "抓住；本文讲的是作者给了重伤的它机会，并宣讲尊重生命（respecting life），不是生命自己去抓机会。",
+          "quote": "respecting life"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "loses",
+          "meaning": "失去；特鲁珀被救活并成了大使，宣讲的是尊重生命（respecting life），与失去机会相反。",
+          "quote": "respecting life"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understands",
+          "meaning": "理解；生命理解机会接不上前句的尊重生命（respecting life），这里说的是生命应得到怎样的对待。",
+          "quote": "respecting life"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a chance",
+          "signalSide": "context-after",
+          "targetText": "deserves a chance",
+          "relation": "值得一次机会（deserves a chance）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "respecting life",
+          "signalSide": "context-before",
+          "relation": "尊重生命就是给每个生命机会。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,809 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-sichuan-leshan-zigong-yibin-2025-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b": {
+      "overview": "作者本不爱早起，被爱鸟的朋友吉姆硬拉去公园听黎明鸟鸣合唱。从知更鸟领唱到满园齐鸣，作者由怀疑转为惊叹，吉姆还解释了鸟儿清晨鸣唱是为了守领地、找配偶。",
+      "fullTranslationZh": "真不敢相信我在做这件事！现在是凌晨四点半，天漆黑一片，冷得刺骨。尽管如此，我还是起了床、穿好了衣服。我正穿上厚外套、往身上围围巾时，汽车喇叭响了。我抓起一顶帽子，坐进了吉姆的车。他似乎一点也不在意天又冷又黑。事实上，他还面带微笑。“你会爱上这个的。”我们开车前往最近的公园时，他这样说。我可没那么肯定。\n一有机会，吉姆就会安静地、有时又很兴奋地用望远镜观察鸟儿。别误会，我喜欢鸟，只是不像吉姆那样为它们着迷。最近，他发现我从没听过黎明鸟鸣合唱，就坚持要我们在这个不合常理的时辰碰头，去当地的公园。\n于是我们就来了。幸好吉姆带了热咖啡和一块可以坐的暖和毯子。冻得发抖地过了十分钟后，公园东边出现了一丝非常微弱的光亮，预示着新的一天即将到来。\n“听。”吉姆低声说。我听了听，什么也没有。接着，一只鸟清晰而响亮地唱了起来。“那是知更鸟。它通常是第一个开唱的。”几秒钟后，又一只鸟加入进来——“一只乌鸫”，接着又是一只——“一只蓝鸲”。太神奇了。二十分钟后，整个公园都因鸟儿的合唱、呼叫和歌唱而生机勃勃！没错，真是美妙极了！那声音令人难以置信。天色越亮，鸟儿唱得越响，真是一场不可思议的鸟儿音乐会。\n“哇，那它们唱歌是因为开心吗？”我不敢相信地问。\n“不完全是，”吉姆笑着说，“其实它们饿了，但它们需要做两件事。一是保卫自己的领地，二是找到雌鸟——通过唱歌，两件事都能做到。”吉姆看到我一脸困惑，便解释了一番。\n我们一起听了一会儿，然后，随着太阳从树梢上升起，鸟儿们慢慢地、但确定无疑地停止了歌唱。“现在天够亮了，可以找吃的了，今天的演出就到此结束了。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-1",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2",
+          "sourceText": "Recently, when he found out that I had never heard the dawn chorus, he insisted that we meet at this unearthly hour and head for the local park.",
+          "displayText": "Recently, when he found out that I had never heard the dawn chorus, he insisted that we meet at this unearthly hour and head for the local park.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:25"
+          ],
+          "translationZh": "最近，他发现我从没听过黎明鸟鸣合唱，就坚持要我们在这个不合常理的时辰碰头，去当地的公园。",
+          "analysisZh": "主干是 he insisted that …，“他坚持要……”。前面 when 引导时间状语从句，交代起因：他发现我从没听过黎明合唱（that I had never heard … 是 found out 的宾语，用过去完成时表示“到那时为止从没听过”）。insist 表示“坚持要求”时，后面的 that 从句用 (should) + 动词原形，所以是 we meet … and head for …，两个动词原形并列，没有加 -s 或改过去式。整句说明作者是被吉姆坚持拉去的。",
+          "underlineRanges": [
+            {
+              "start": 68,
+              "end": 84,
+              "quote": "he insisted that"
+            },
+            {
+              "start": 85,
+              "end": 92,
+              "quote": "we meet"
+            },
+            {
+              "start": 120,
+              "end": 143,
+              "quote": "head for the local park"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-2",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4",
+          "sourceText": "The lighter the sky becomes, the louder the birds sing, an incredible birds’ concert.",
+          "displayText": "The lighter the sky becomes, the louder the birds sing, an incredible birds’ concert.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:26"
+          ],
+          "translationZh": "天色越亮，鸟儿唱得越响，真是一场不可思议的鸟儿音乐会。",
+          "analysisZh": "这是“the + 比较级 …, the + 比较级 …”结构，意为“越……就越……”：前半句 the lighter the sky becomes 是条件，后半句 the louder the birds sing 是随之而来的结果。句末 an incredible birds’ concert 是名词短语，对前面整个场面作补充说明，把鸟鸣比作一场音乐会。整句写出合唱随天色渐亮越来越热闹。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 11,
+              "quote": "The lighter"
+            },
+            {
+              "start": 29,
+              "end": 39,
+              "quote": "the louder"
+            },
+            {
+              "start": 56,
+              "end": 84,
+              "quote": "an incredible birds’ concert"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1"
+              ],
+              "start": 0,
+              "end": 151,
+              "quote": "真不敢相信我在做这件事！现在是凌晨四点半，天漆黑一片，冷得刺骨。尽管如此，我还是起了床、穿好了衣服。我正穿上厚外套、往身上围围巾时，汽车喇叭响了。我抓起一顶帽子，坐进了吉姆的车。他似乎一点也不在意天又冷又黑。事实上，他还面带微笑。“你会爱上这个的。”我们开车前往最近的公园时，他这样说。我可没那么肯定。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2"
+              ],
+              "start": 152,
+              "end": 248,
+              "quote": "一有机会，吉姆就会安静地、有时又很兴奋地用望远镜观察鸟儿。别误会，我喜欢鸟，只是不像吉姆那样为它们着迷。最近，他发现我从没听过黎明鸟鸣合唱，就坚持要我们在这个不合常理的时辰碰头，去当地的公园。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:3"
+              ],
+              "start": 249,
+              "end": 319,
+              "quote": "于是我们就来了。幸好吉姆带了热咖啡和一块可以坐的暖和毯子。冻得发抖地过了十分钟后，公园东边出现了一丝非常微弱的光亮，预示着新的一天即将到来。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4"
+              ],
+              "start": 320,
+              "end": 495,
+              "quote": "“听。”吉姆低声说。我听了听，什么也没有。接着，一只鸟清晰而响亮地唱了起来。“那是知更鸟。它通常是第一个开唱的。”几秒钟后，又一只鸟加入进来——“一只乌鸫”，接着又是一只——“一只蓝鸲”。太神奇了。二十分钟后，整个公园都因鸟儿的合唱、呼叫和歌唱而生机勃勃！没错，真是美妙极了！那声音令人难以置信。天色越亮，鸟儿唱得越响，真是一场不可思议的鸟儿音乐会。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:5"
+              ],
+              "start": 496,
+              "end": 520,
+              "quote": "“哇，那它们唱歌是因为开心吗？”我不敢相信地问。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:6"
+              ],
+              "start": 521,
+              "end": 601,
+              "quote": "“不完全是，”吉姆笑着说，“其实它们饿了，但它们需要做两件事。一是保卫自己的领地，二是找到雌鸟——通过唱歌，两件事都能做到。”吉姆看到我一脸困惑，便解释了一番。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:7"
+              ],
+              "start": 602,
+              "end": 673,
+              "quote": "我们一起听了一会儿，然后，随着太阳从树梢上升起，鸟儿们慢慢地、但确定无疑地停止了歌唱。“现在天够亮了，可以找吃的了，今天的演出就到此结束了。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:25"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2",
+                "start": 190,
+                "end": 334,
+                "quote": "Recently, when he found out that I had never heard the dawn chorus, he insisted that we meet at this unearthly hour and head for the local park."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p2",
+                "start": 52,
+                "end": 96,
+                "quote": "最近，他发现我从没听过黎明鸟鸣合唱，就坚持要我们在这个不合常理的时辰碰头，去当地的公园。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:26"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4",
+                "start": 380,
+                "end": 465,
+                "quote": "The lighter the sky becomes, the louder the birds sing, an incredible birds’ concert."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p4",
+                "start": 148,
+                "end": 175,
+                "quote": "天色越亮，鸟儿唱得越响，真是一场不可思议的鸟儿音乐会。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-evidence-24",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1",
+                "start": 89,
+                "end": 155,
+                "quote": "Nevertheless I find myself getting out of bed and getting dressed."
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1",
+                "start": 0,
+                "end": 31,
+                "quote": "I can’t believe I’m doing this!"
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1",
+                "start": 416,
+                "end": 432,
+                "quote": "I’m not so sure."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p1",
+                "start": 32,
+                "end": 50,
+                "quote": "尽管如此，我还是起了床、穿好了衣服。"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p1",
+                "start": 0,
+                "end": 12,
+                "quote": "真不敢相信我在做这件事！"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p1",
+                "start": 143,
+                "end": 151,
+                "quote": "我可没那么肯定。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-evidence-25",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2",
+                "start": 258,
+                "end": 333,
+                "quote": "he insisted that we meet at this unearthly hour and head for the local park"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p2",
+                "start": 70,
+                "end": 95,
+                "quote": "就坚持要我们在这个不合常理的时辰碰头，去当地的公园"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-evidence-26",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4",
+                "start": 241,
+                "end": 329,
+                "quote": "Twenty minutes later the whole park is alive with the chorus, calling, singing of birds!"
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4",
+                "start": 380,
+                "end": 465,
+                "quote": "The lighter the sky becomes, the louder the birds sing, an incredible birds’ concert."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p4",
+                "start": 99,
+                "end": 128,
+                "quote": "二十分钟后，整个公园都因鸟儿的合唱、呼叫和歌唱而生机勃勃！"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p4",
+                "start": 148,
+                "end": 175,
+                "quote": "天色越亮，鸟儿唱得越响，真是一场不可思议的鸟儿音乐会。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-evidence-27",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:6",
+                "start": 82,
+                "end": 184,
+                "quote": "One is to defend their territory and the other is to find a female - by singing they can achieve both."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b-p6",
+                "start": 31,
+                "end": 62,
+                "quote": "一是保卫自己的领地，二是找到雌鸟——通过唱歌，两件事都能做到。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "先写作者凌晨被吉姆拉出门时的不情愿，再交代吉姆爱鸟、坚持带作者听黎明合唱，接着写等待、合唱由一只到满园的热闹场面，最后借吉姆的解释说明鸟儿为何鸣唱，并以日出后鸟声停止收尾。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1",
+            "summary": "凌晨四点半天黑又冷，作者不敢相信自己要出门，仍起床上了吉姆的车；吉姆兴致勃勃，作者却不确定自己会喜欢。",
+            "function": "开篇写场景和作者的勉强心态。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2",
+            "summary": "吉姆痴迷观鸟，作者喜欢鸟却没那么着迷；吉姆得知作者没听过黎明合唱，坚持一早带他去公园。",
+            "function": "倒叙交代这次出行的起因。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:3",
+            "summary": "两人到了公园，喝着热咖啡等了十分钟，东边天际出现微光。",
+            "function": "写等待，为合唱开场作铺垫。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4",
+            "summary": "知更鸟领唱，其他鸟陆续加入，二十分钟后满园鸟鸣，天越亮唱得越响。",
+            "function": "写黎明合唱的热闹场面，是全文高潮。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:5",
+            "summary": "作者惊讶地问鸟唱歌是不是因为开心。",
+            "function": "提出疑问，引出吉姆的解释。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:6",
+            "summary": "吉姆说鸟虽饿，却要靠鸣唱保卫领地、吸引雌鸟。",
+            "function": "解释鸟儿清晨鸣唱的原因。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:7",
+            "summary": "太阳升过树梢，鸟声渐停，吉姆说天亮能觅食了，演出结束。",
+            "function": "收尾，交代合唱结束的原因。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:24": {
+      "skill": {
+        "primary": "attitude",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从作者凌晨出门前的言行推断他一开始对这次早起出行的态度。",
+      "stemTranslationZh": "作者起初对这次清早出行持什么态度？",
+      "locateBy": "stem",
+      "locateFindZh": "往后看 Nevertheless 后作者怎么做",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "谨慎的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Cautious.",
+            "explanation": "原文没写作者提防危险或小心行事；他说“没那么肯定”（not so sure），是怀疑自己会不会喜欢，不是谨慎。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "不情愿的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1",
+              "quote": "Nevertheless I find myself getting out of bed and getting dressed.",
+              "anchor": "仍然起了床"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1",
+              "quote": "I can’t believe I’m doing this!",
+              "anchor": "不敢相信"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1",
+              "quote": "I’m not so sure.",
+              "anchor": "没那么肯定"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "热情的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "I’m not so sure.",
+            "sourceHighlight": "not so sure",
+            "optionText": "Passionate.",
+            "optionHighlight": "Passionate",
+            "explanation": "满怀热情的是吉姆，他笑着说“你会爱上这个的”；作者的回答却是“我可没那么肯定”（not so sure）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1",
+              "quote": "I’m not so sure.",
+              "anchor": "作者的回答"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "漠不关心的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "He doesn’t seem to mind it’s cold and dark.",
+            "sourceEntity": "He",
+            "optionText": "Indifferent.",
+            "optionEntity": "Indifferent",
+            "explanation": "不在乎（doesn’t seem to mind）的是吉姆，而且他不在乎的是冷和黑；作者对凌晨出门又惊又疑，并非无所谓。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1",
+              "quote": "He doesn’t seem to mind it’s cold and dark.",
+              "anchor": "吉姆不在意"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "early outing",
+          "sourceRole": "stem",
+          "targetText": "It’s 4:30 in the morning, pitch black and freezing cold.",
+          "relationType": "locationCue",
+          "targetCue": "4:30 in the morning",
+          "sourceZh": "清早出行",
+          "targetCueZh": "凌晨四点半",
+          "answerText": "Nevertheless I find myself getting out of bed",
+          "bridgeZh": "Nevertheless 前是不想起的理由，后面才是作者实际怎么做",
+          "note": "题干的 early outing 落在原文的凌晨四点半（4:30 in the morning）。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1"
+        },
+        {
+          "sourceText": "Reluctant.",
+          "sourceRole": "correctOption",
+          "targetText": "Nevertheless I find myself getting out of bed and getting dressed.",
+          "relationType": "paraphrase",
+          "note": "选项的“不情愿”是由几处合起来推出的：作者先感叹不敢相信自己在做这事（I can’t believe），天又黑又冷却“还是”起了床（Nevertheless），吉姆说他会喜欢，他回“没那么肯定”（not so sure）。心里不想去、人还是去了，就是不情愿，选 B。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:1"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:25": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者参加这次清晨听鸟活动的原因。",
+      "stemTranslationZh": "是什么让作者参加了这次活动？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "吉姆的坚持。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2",
+              "quote": "he insisted that we meet at this unearthly hour and head for the local park",
+              "anchor": "吉姆坚持"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "吉姆对鸟的热情。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "At any opportunity Jim will be watching quietly, and sometimes excitedly, through his telescope at a bird.",
+            "sourceEntity": "Jim",
+            "optionText": "Jim’s enthusiasm for birds.",
+            "optionEntity": "Jim’s enthusiasm",
+            "explanation": "吉姆爱鸟是真的（sometimes excitedly），但这只说明他自己常观鸟；让作者跟去的是他坚持要作者来（insisted）。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2",
+              "quote": "At any opportunity Jim will be watching quietly, and sometimes excitedly, through his telescope at a bird.",
+              "anchor": "吉姆爱观鸟"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "作者对合唱的兴趣。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "dawn chorus",
+            "optionText": "chorus",
+            "matchType": "exact",
+            "relationNote": "chorus 借自[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2|never heard the dawn chorus]]。原文只说作者从没听过黎明合唱，没说他对合唱感兴趣；是吉姆知道后坚持带他去。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2",
+              "quote": "when he found out that I had never heard the dawn chorus",
+              "anchor": "从没听过"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "作者对鸟的好奇。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "I like birds, but I just don’t get as crazy about them as Jim.",
+            "sourceHighlight": "I like birds",
+            "optionText": "The author’s curiosity about birds.",
+            "optionHighlight": "curiosity about birds",
+            "explanation": "作者只说喜欢鸟，还特意说不像吉姆那样着迷（don’t get as crazy），谈不上好奇到要去看；他是被吉姆拉去的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2",
+              "quote": "I like birds, but I just don’t get as crazy about them as Jim.",
+              "anchor": "没那么着迷"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "involved in the activity",
+          "sourceRole": "stem",
+          "targetText": "Recently, when he found out that I had never heard the dawn chorus, he insisted that we meet at this unearthly hour and head for the local park.",
+          "relationType": "locationCue",
+          "targetCue": "head for the local park",
+          "sourceZh": "参加这次活动",
+          "targetCueZh": "去当地公园",
+          "answerText": "he insisted that we meet at this unearthly hour",
+          "note": "题干“参加活动”对应原文约着去公园（head for the local park）。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2"
+        },
+        {
+          "sourceText": "Jim’s insistence on it.",
+          "sourceRole": "correctOption",
+          "targetText": "he insisted that we meet at this unearthly hour",
+          "relationType": "wordFamily",
+          "note": "选项的 insistence（坚持）就是原文 insisted 的名词形式：吉姆得知作者没听过黎明合唱，就坚持要他这个时辰一起去公园，选 A。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:2"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:26": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括描写黎明合唱开场这一段的主要内容。",
+      "stemTranslationZh": "第 4 段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4]]的 Listen 读起，看鸟声从一只到整个公园怎样变化",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "鸟儿的歌唱技巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The singing skills of birds.",
+            "explanation": "这段只写鸟一只接一只开唱、越唱越响，没讲鸟怎样唱、有什么技巧。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "鸟类丰富的多样性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "After a few seconds another bird joins in “A blackbird” and then another “A blue bird”.",
+            "sourceHighlight": "another bird joins in",
+            "optionText": "The abundant diversity of birds.",
+            "optionHighlight": "abundant diversity",
+            "explanation": "这段只点了知更鸟、乌鸫、蓝鸲几种鸟，用来写一只接一只加入合唱，重点不在鸟的种类多。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4",
+              "quote": "After a few seconds another bird joins in “A blackbird” and then another “A blue bird”.",
+              "anchor": "几种鸟加入"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "“黎明合唱”的各种曲调。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Various tunes of the “dawn chorus”.",
+            "explanation": "这段写的是鸟声越来越多、越来越响（the louder），没有比较各种鸟唱的曲调有什么不同。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "“黎明合唱”的热闹场面。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4",
+              "quote": "Twenty minutes later the whole park is alive with the chorus, calling, singing of birds!",
+              "anchor": "满园鸟鸣"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4",
+              "quote": "The lighter the sky becomes, the louder the birds sing, an incredible birds’ concert.",
+              "anchor": "越亮越响"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Lively scenes",
+          "sourceRole": "correctOption",
+          "targetText": "the whole park is alive with the chorus",
+          "relationType": "paraphrase",
+          "note": "这段按时间写合唱怎样热闹起来：先是知更鸟独唱，接着乌鸫、蓝鸲加入，二十分钟后满园鸟鸣（the whole park is alive），天越亮唱得越响。选项的“热闹场面”（lively scenes）正好概括这一路的场面，选 D。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:4"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:27": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "根据吉姆的解释找出鸟儿黎明鸣唱的原因。",
+      "stemTranslationZh": "根据吉姆的说法，鸟儿为什么在黎明时鸣唱？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了守护领地、吸引配偶。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:6",
+              "quote": "One is to defend their territory and the other is to find a female - by singing they can achieve both.",
+              "anchor": "守领地、找雌鸟"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了炫耀自己美妙的嗓音。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To show off their beautiful voices.",
+            "explanation": "吉姆没说鸟在炫耀嗓音；作者问是不是因为开心，吉姆答“不完全是”，给的理由是守领地和找雌鸟。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了迎接日出。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "We listen together for a while and then slowly but surely, as the sun emerges above the trees, the birds stop singing.",
+            "sourceHighlight": "the birds stop singing",
+            "optionText": "To extend welcome to the sunrise.",
+            "optionHighlight": "extend welcome to the sunrise",
+            "explanation": "天越亮鸟唱得越响，让人联想到迎接日出；可太阳升过树梢时鸟反而停唱（stop singing），吉姆也没说唱歌和日出有关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:7",
+              "quote": "as the sun emerges above the trees, the birds stop singing",
+              "anchor": "日出停唱"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了激烈争抢早起的虫子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "“Now it’s light enough to find food, and that’s the end of the show today.”",
+            "sourceEntity": "find food",
+            "optionText": "To fight fiercely for early worms.",
+            "optionEntity": "fight fiercely for early worms",
+            "explanation": "吉姆提到鸟饿了（hungry），但又说天亮能找食物时合唱就结束了；找食物在唱歌之后，唱歌是为了领地和雌鸟。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:7",
+              "quote": "Now it’s light enough to find food, and that’s the end of the show today.",
+              "anchor": "天亮去觅食"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "sing",
+          "sourceRole": "stem",
+          "targetText": "One is to defend their territory and the other is to find a female - by singing they can achieve both.",
+          "relationType": "locationCue",
+          "targetCue": "singing",
+          "sourceZh": "鸣唱",
+          "targetCueZh": "唱歌",
+          "answerText": "to defend their territory and the other is to find a female",
+          "note": "题干 sing 对应吉姆话里的 by singing，这句说唱歌能办成哪两件事。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:6"
+        },
+        {
+          "sourceText": "To guard the land and attract mates.",
+          "sourceRole": "correctOption",
+          "targetText": "to defend their territory and the other is to find a female",
+          "relationType": "paraphrase",
+          "note": "选项两半都换了近义的词：“守护领地”（guard the land）就是保卫领地（defend their territory），“吸引配偶”（attract mates）对应找到雌鸟（find a female），选 A。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-b:6"
+        }
+      ]
+    }
+  }
+}

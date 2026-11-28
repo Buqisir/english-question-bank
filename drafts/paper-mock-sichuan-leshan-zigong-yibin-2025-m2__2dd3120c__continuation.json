@@ -1,0 +1,187 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Suddenly, she saw a little boy sitting sadly in the corner who couldn’t walk. He was watching some children play football across the street, a pair of crutches beside him. Jenny held the purple petal tightly. She had planned to wish for a pretty dress. But when she saw the boy’s eyes, she remembered how frightened and lonely she had felt when she was lost in the woods. The old woman had helped her then, asking for nothing in return. Jenny looked down at the toy-bear in her arms. The balloons and the cakes had only brought her trouble. Maybe this time, the wish should not be for herself. She walked over and sat down quietly next to the boy.\n\nParagraph 2: “I wish he could walk,” Jenny murmured to the last petal. She pulled the petal off gently, and it floated down onto the boy’s legs. For a moment, nothing happened. Then the boy moved his toes. Slowly, holding on to the wall, he stood up. He took one step, and then another. “I can walk!” he cried, his face shining with joy. He ran off to join the other children, turning to wave at Jenny. Jenny looked at the empty stem in her hand. All seven petals were gone, but she did not feel sorry at all. Smiling, she walked home.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写要动笔的是 Jenny 和段首句里新出现的小男孩；Jenny 前几个愿望都给了自己，男孩不能走路，独自坐在角落里。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第三人称、一般过去时的童话叙述，句子短而直白，几乎全是叙述，带引号的直接引语只有一句。续写照样用短句叙述为主，只在愿望成真那一刻留一句短的直接引语。",
+          "evidence": [
+            "She pulled off the first red petal and said, “I want to go home.”"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在只剩最后一片紫色花瓣、Jenny 开始认真想该许什么愿。续写要回答这片花瓣用在哪里，以及前几次愿望落空之后她想明白了什么。",
+          "evidence": [
+            "At this point, Jenny had only one purple petal left."
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "Jenny",
+          "role": "在树林里迷路、从老妇人那里得到七色花的小女孩",
+          "lines": [
+            {
+              "label": "性格",
+              "text": "好奇，爱试新鲜东西，想看看花到底有多大魔力。",
+              "evidence": "However, Jenny was a curious girl."
+            },
+            {
+              "label": "表现",
+              "text": "橙、绿、蓝三片花瓣许给了自己想要的东西，结果不是出乱子就是不合心意，黄、青两片只好用来收拾残局。",
+              "evidence": "But it was not what Jenny wanted."
+            },
+            {
+              "label": "此刻",
+              "text": "手里只剩一片花瓣，第一次停下来认真想。",
+              "evidence": "She began to think seriously about what to wish for."
+            }
+          ]
+        },
+        {
+          "name": "小男孩",
+          "role": "段首句里出现的陌生男孩，坐在角落，不能走路",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "难过地坐在角落里，原文没交代他的名字和来历，续写也不必补。"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "She was so scared and started to cry.",
+          "use": "第 1 段让 Jenny 想起自己迷路时的害怕和孤单，由此体会到男孩的难过，给她改主意一个理由。"
+        },
+        {
+          "sourceQuote": "The old woman, seeing Jenny’s distress, decided to help her.",
+          "use": "第 1 段让 Jenny 想起老妇人不求回报地帮过她，她这次也愿意把愿望让给别人。"
+        },
+        {
+          "sourceQuote": "A toy-bear appeared in front of Jenny.",
+          "use": "第 1 段让 Jenny 低头看见怀里这只不合心意的玩具熊，想到前面几个愿望都没让她开心，于是决定这次不为自己许愿。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "Jenny 看到男孩，想起自己迷路时的无助和老妇人的帮助，决定把最后一片花瓣用在他身上；男孩站起来跑向小伙伴，Jenny 握着空花茎，满足地回家。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "从看到男孩写起，第 1 段结束时 Jenny 必须已经决定把最后一个愿望给男孩，因为第 2 段一开头她就说出了这个愿望。愿望本身和它的结果留给第 2 段。",
+          "draft": "Jenny 看到男孩在望着别的孩子踢球，身边放着拐杖；她想起迷路时的害怕和老妇人的帮助，又看看怀里不合心意的玩具熊，决定这次不为自己许愿，走过去坐在男孩身边。",
+          "bridgeQuote": "a little boy sitting sadly in the corner who couldn’t walk",
+          "bridge": "最后一片花瓣原本可以留给自己，Jenny 为什么愿意把它用在一个陌生男孩身上？"
+        },
+        {
+          "paragraph": 2,
+          "must": "以 Jenny 对最后一片花瓣许愿开头，写出这个愿望带来的结果，并收住七片花瓣全部用完这件事。",
+          "draft": "花瓣落在男孩腿上，他慢慢站起来、迈步，喊出“我能走了”，跑去和孩子们一起玩；Jenny 看着空花茎一点也不后悔，笑着回家。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Suddenly, she saw a little boy sitting sadly in the corner who couldn’t walk. He was watching some children play football across the street, a pair of crutches beside him. Jenny held the purple petal tightly. She had planned to wish for a pretty dress. But when she saw the boy’s eyes, she remembered how frightened and lonely she had felt when she was lost in the woods. The old woman had helped her then, asking for nothing in return. Jenny looked down at the toy-bear in her arms. The balloons and the cakes had only brought her trouble. Maybe this time, the wish should not be for herself. She walked over and sat down quietly next to the boy.\n\nParagraph 2: “I wish he could walk,” Jenny murmured to the last petal. She pulled the petal off gently, and it floated down onto the boy’s legs. For a moment, nothing happened. Then the boy moved his toes. Slowly, holding on to the wall, he stood up. He took one step, and then another. “I can walk!” he cried, his face shining with joy. He ran off to join the other children, turning to wave at Jenny. Jenny looked at the empty stem in her hand. All seven petals were gone, but she did not feel sorry at all. Smiling, she walked home.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "让 Jenny 从“为自己许愿”转到“把愿望给男孩”，并给出这样转变的理由",
+          "items": [
+            {
+              "quote": "He was watching some children play football across the street, a pair of crutches beside him.",
+              "explain": "不写“他很可怜”，而是写他看着别人踢球、身边放着拐杖，读者自己就看出他想跑却跑不了，也为第 2 段他跑去踢球埋下伏笔。"
+            },
+            {
+              "quote": "she remembered how frightened and lonely she had felt when she was lost in the woods",
+              "explain": "借原文开头迷路的经历，让 Jenny 的转变有了触发点：她懂得无助是什么滋味，所以愿意帮男孩。用过去完成时 had felt 交代这是更早的经历。"
+            },
+            {
+              "quote": "Jenny looked down at the toy-bear in her arms. The balloons and the cakes had only brought her trouble.",
+              "explain": "用手边的玩具熊带出前面三次愿望，让她自己意识到为自己许愿没带来快乐，不用旁白讲道理。"
+            },
+            {
+              "quote": "She walked over and sat down quietly next to the boy.",
+              "explain": "段尾用一个动作表示她已经拿定主意，正好接上第 2 段首句她对花瓣说的愿望。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写愿望成真的过程和结果，并收住花瓣用完这件事",
+          "items": [
+            {
+              "quote": "For a moment, nothing happened. Then the boy moved his toes.",
+              "explain": "先停一下再写变化，制造短暂的悬念；从动脚趾写起，比直接写“他马上站起来”更真实。"
+            },
+            {
+              "quote": "Slowly, holding on to the wall, he stood up. He took one step, and then another.",
+              "explain": "站起来、迈一步、再迈一步，用一串短动作写出他一点点找回走路的能力，句子短，节奏和原文一致。"
+            },
+            {
+              "quote": "“I can walk!” he cried, his face shining with joy.",
+              "explain": "全段唯一一句直接引语，放在最关键的时刻；his face shining with joy 用独立主格补出他的表情。"
+            },
+            {
+              "quote": "Jenny looked at the empty stem in her hand. All seven petals were gone, but she did not feel sorry at all.",
+              "explain": "结尾落在空花茎这个具体物件上，呼应原文的七片花瓣，用不后悔写出她的满足，不另贴一句大道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "held the purple petal tightly",
+          "function": "用握紧花瓣这个动作写出 Jenny 犹豫、舍不得的心情，不用直接说她很纠结。"
+        },
+        {
+          "expression": "For a moment, nothing happened. Then ...",
+          "function": "写魔法生效前的短暂停顿，让愿望成真的一刻更有分量。"
+        },
+        {
+          "expression": "his face shining with joy",
+          "function": "在人物说话之后补一个表情，把高兴写得看得见。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第 1 段就写 Jenny 许愿、男孩站起来",
+          "why": "第 2 段首句才是她对花瓣说出愿望，第 1 段写掉愿望和结果，第 2 段就没东西可写，两段也接不上。"
+        },
+        {
+          "pitfall": "让老妇人再次出现，替 Jenny 出主意或施魔法",
+          "why": "转变应当由 Jenny 自己完成；靠别人来解决问题，Jenny 想明白的过程就没了，原文“认真想该许什么愿”也落空了。"
+        },
+        {
+          "pitfall": "结尾大段抒发“帮助别人最快乐”之类的道理",
+          "why": "原文是简单的童话叙述，空喊道理和原文不是一种写法；落在空花茎、男孩奔跑这类具体画面上更好。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Suddenly, she saw a little boy sitting sadly in the corner who couldn’t walk. He was watching a group of children chase a football across the street, his hands resting on a pair of old crutches. Every time the ball rolled near him, he leaned forward, then sank back against the wall. Jenny’s fingers closed around the purple petal. She had been picturing a pretty new dress, but now that wish seemed small. She remembered the dark woods, how scared and alone she had felt, and how the old woman had helped her without asking for anything back. She glanced at the toy-bear in her arms. The balloons had nearly carried her away, and the cakes had ended up in a sticky mess. Each wish after the first had been just for fun, and none had turned out as she hoped. Taking a deep breath, Jenny walked over and sat down beside the boy.\n\nParagraph 2: “I wish he could walk,” Jenny murmured to the last petal. She pulled the petal off as gently as she could. It drifted down, glowing softly, and settled on the boy’s knees. For a moment, nothing happened. Then his toes began to wiggle. Gripping the wall, he pushed himself up, wobbled, and took one careful step, then another. “I can walk!” he shouted, and a huge smile spread across his face. He dropped the crutches and ran across the street, where the other children waved him into their game. Halfway there, he turned back and called, “Thank you!” Jenny waved back, holding the bare stem in her hand. All seven petals were gone now, but she didn’t feel sorry at all. She tucked the toy-bear beside the crutches for the boy to find and walked home, lighter than the balloons had ever made her feel.",
+      "beyondStandard": [
+        {
+          "quote": "Every time the ball rolled near him, he leaned forward, then sank back against the wall.",
+          "explain": "标准版只说他在看别人踢球，这里用身子前倾又靠回去的动作，写出他想加入又做不到，男孩的失落更具体。"
+        },
+        {
+          "quote": "The balloons had nearly carried her away, and the cakes had ended up in a sticky mess.",
+          "explain": "把原文气球、蛋糕两次出乱子具体回收，比标准版笼统的 only brought her trouble 更贴原文情节。"
+        },
+        {
+          "quote": "walked home, lighter than the balloons had ever made her feel",
+          "explain": "结尾借原文的气球做比较，写出她心里的轻松，不另造象征物，也没有空喊道理。"
+        }
+      ]
+    }
+  }
+}

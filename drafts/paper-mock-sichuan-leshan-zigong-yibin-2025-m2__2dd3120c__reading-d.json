@@ -1,0 +1,811 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-sichuan-leshan-zigong-yibin-2025-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d": {
+      "overview": "文章由 TikTok 上热议的“眉毛盲区”引出人们追随潮流的话题，借心理学家帕梅拉·拉特利奇的观点说明：追潮流源于人对社会联系的需要，是正常的天生反应；青少年为表现个性、证明归属，更容易跟风。",
+      "fullTranslationZh": "最近，日益普遍的“眉毛盲区”现象让许多 TikTok 用户在平台上抱怨：美妆爱好者能分清自己是在盲目追逐化妆潮流，还是真的在化适合自己脸的妆吗？虽然“眉毛盲区”和其他形式的“美妆盲区”并没有被正式认定为心理健康问题，但人们追随潮流的倾向——哪怕会让自己显得可笑或去冒险——无疑是真实存在的。\n那么，心理学对追随潮流有什么看法呢？心理学家帕梅拉·拉特利奇说，追随潮流并不表明性格软弱或有心理健康问题，它完全正常。其根源在于人类对社会联系的基本需求。多种心理学理论表明，人与人之间的社会联系和食物、住所等基本必需品同样重要，因为人类在进化中一直依靠彼此生存。\n但为什么潮流有如此强大的吸引力呢？“我们的大脑天生就会注意不寻常的东西。”拉特利奇解释道。因此，我们会关注那些与众不同、引人注目的人，这使得潮流对那些敢于接受它们的人更具诱惑力。\n没有人能不追随时尚、不留意潮流、不展示自己对社会群体的真正归属。然而，有一个特定群体更容易追随潮流，甚至是有风险的潮流：十来岁的少年、青少年和年轻人。当孩子们开始走向成年人的独立时，他们会寻找表达个性的方式。这有时会使他们拼命证明自己属于社会上有声望的群体，也会激起他们借潮流脱颖而出的愿望。\n所以，下次你化妆、穿衣、在公共场合点餐或买车时，请记住，你的决定可能并不像你想象的那样个性化。“这本质上是一种天生的反应，可以用我们想要融入人群或在人群中脱颖而出的需要来解释。”帕梅拉说。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-1",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:2",
+          "sourceText": "While “eyebrow blindness” and other forms of “beauty blindness” aren’t officially regarded as mental health issues, the tendency of people to follow trends, even making them look foolish or taking risks, is undeniably a real thing.",
+          "displayText": "While “eyebrow blindness” and other forms of “beauty blindness” aren’t officially regarded as mental health issues, the tendency of people to follow trends, even making them look foolish or taking risks, is undeniably a real thing.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:32"
+          ],
+          "translationZh": "虽然“眉毛盲区”和其他形式的“美妆盲区”并没有被正式认定为心理健康问题，但人们追随潮流的倾向——哪怕会让自己显得可笑或去冒险——无疑是真实存在的。",
+          "analysisZh": "先找主句：the tendency … is undeniably a real thing，“这种倾向无疑真实存在”。主语 the tendency 后面跟不定式 of people to follow trends 说明是什么倾向；两个逗号之间的 even making them look foolish or taking risks 是插入的分词短语，补充“哪怕显得可笑或去冒险”。句首 While 引导让步状语从句，意为“虽然”：先承认这些“盲区”不算心理疾病，主句再强调跟风现象确实存在。作者的重点在主句。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 5,
+              "quote": "While"
+            },
+            {
+              "start": 116,
+              "end": 155,
+              "quote": "the tendency of people to follow trends"
+            },
+            {
+              "start": 204,
+              "end": 230,
+              "quote": "is undeniably a real thing"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-2",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4",
+          "sourceText": "Consequently, we pay attention to those who stand out and attract attention, making trends even more enticing for those brave enough to embrace them.",
+          "displayText": "Consequently, we pay attention to those who stand out and attract attention, making trends even more enticing for those brave enough to embrace them.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:33"
+          ],
+          "translationZh": "因此，我们会关注那些与众不同、引人注目的人，这使得潮流对那些敢于接受它们的人更具诱惑力。",
+          "analysisZh": "主干是 we pay attention to those，“我们关注那些人”。who stand out and attract attention 是定语从句，说明是哪些人：与众不同、吸引目光的人。句末现在分词短语 making trends even more enticing … 表示结果，make + 宾语 + 形容词，即“使潮流更诱人”；for those brave enough to embrace them 说明对谁更诱人，brave enough to do 意为“足够勇敢去做”。句首 Consequently 承接上一句“大脑天生注意不寻常的东西”。",
+          "underlineRanges": [
+            {
+              "start": 14,
+              "end": 39,
+              "quote": "we pay attention to those"
+            },
+            {
+              "start": 40,
+              "end": 75,
+              "quote": "who stand out and attract attention"
+            },
+            {
+              "start": 77,
+              "end": 109,
+              "quote": "making trends even more enticing"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:1",
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:2"
+              ],
+              "start": 0,
+              "end": 145,
+              "quote": "最近，日益普遍的“眉毛盲区”现象让许多 TikTok 用户在平台上抱怨：美妆爱好者能分清自己是在盲目追逐化妆潮流，还是真的在化适合自己脸的妆吗？虽然“眉毛盲区”和其他形式的“美妆盲区”并没有被正式认定为心理健康问题，但人们追随潮流的倾向——哪怕会让自己显得可笑或去冒险——无疑是真实存在的。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3"
+              ],
+              "start": 146,
+              "end": 277,
+              "quote": "那么，心理学对追随潮流有什么看法呢？心理学家帕梅拉·拉特利奇说，追随潮流并不表明性格软弱或有心理健康问题，它完全正常。其根源在于人类对社会联系的基本需求。多种心理学理论表明，人与人之间的社会联系和食物、住所等基本必需品同样重要，因为人类在进化中一直依靠彼此生存。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4"
+              ],
+              "start": 278,
+              "end": 367,
+              "quote": "但为什么潮流有如此强大的吸引力呢？“我们的大脑天生就会注意不寻常的东西。”拉特利奇解释道。因此，我们会关注那些与众不同、引人注目的人，这使得潮流对那些敢于接受它们的人更具诱惑力。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5"
+              ],
+              "start": 368,
+              "end": 514,
+              "quote": "没有人能不追随时尚、不留意潮流、不展示自己对社会群体的真正归属。然而，有一个特定群体更容易追随潮流，甚至是有风险的潮流：十来岁的少年、青少年和年轻人。当孩子们开始走向成年人的独立时，他们会寻找表达个性的方式。这有时会使他们拼命证明自己属于社会上有声望的群体，也会激起他们借潮流脱颖而出的愿望。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:6"
+              ],
+              "start": 515,
+              "end": 609,
+              "quote": "所以，下次你化妆、穿衣、在公共场合点餐或买车时，请记住，你的决定可能并不像你想象的那样个性化。“这本质上是一种天生的反应，可以用我们想要融入人群或在人群中脱颖而出的需要来解释。”帕梅拉说。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:32"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:2",
+                "start": 132,
+                "end": 363,
+                "quote": "While “eyebrow blindness” and other forms of “beauty blindness” aren’t officially regarded as mental health issues, the tendency of people to follow trends, even making them look foolish or taking risks, is undeniably a real thing."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p1",
+                "start": 72,
+                "end": 145,
+                "quote": "虽然“眉毛盲区”和其他形式的“美妆盲区”并没有被正式认定为心理健康问题，但人们追随潮流的倾向——哪怕会让自己显得可笑或去冒险——无疑是真实存在的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:33"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4",
+                "start": 113,
+                "end": 262,
+                "quote": "Consequently, we pay attention to those who stand out and attract attention, making trends even more enticing for those brave enough to embrace them."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p3",
+                "start": 45,
+                "end": 89,
+                "quote": "因此，我们会关注那些与众不同、引人注目的人，这使得潮流对那些敢于接受它们的人更具诱惑力。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-evidence-32",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:2",
+                "start": 248,
+                "end": 362,
+                "quote": "the tendency of people to follow trends, even making them look foolish or taking risks, is undeniably a real thing"
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3",
+                "start": 0,
+                "end": 51,
+                "quote": "So, what does psychology say about trend-following?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p1",
+                "start": 109,
+                "end": 144,
+                "quote": "人们追随潮流的倾向——哪怕会让自己显得可笑或去冒险——无疑是真实存在的"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p2",
+                "start": 0,
+                "end": 18,
+                "quote": "那么，心理学对追随潮流有什么看法呢？"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-evidence-33",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4",
+                "start": 113,
+                "end": 262,
+                "quote": "Consequently, we pay attention to those who stand out and attract attention, making trends even more enticing for those brave enough to embrace them."
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4",
+                "start": 0,
+                "end": 42,
+                "quote": "But why do trends hold such a strong pull?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p3",
+                "start": 45,
+                "end": 89,
+                "quote": "因此，我们会关注那些与众不同、引人注目的人，这使得潮流对那些敢于接受它们的人更具诱惑力。"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p3",
+                "start": 0,
+                "end": 17,
+                "quote": "但为什么潮流有如此强大的吸引力呢？"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-evidence-34",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5",
+                "start": 338,
+                "end": 508,
+                "quote": "This can sometimes lead to desperate efforts to prove their affiliation（从属关系） with socially credible groups and can fuel desire to stand out by riding the wave of trends."
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5",
+                "start": 291,
+                "end": 336,
+                "quote": "they seek ways to express their individuality"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p4",
+                "start": 104,
+                "end": 146,
+                "quote": "这有时会使他们拼命证明自己属于社会上有声望的群体，也会激起他们借潮流脱颖而出的愿望。"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p4",
+                "start": 91,
+                "end": 103,
+                "quote": "他们会寻找表达个性的方式"
+              }
+            ]
+          },
+          {
+            "annotationId": "ann-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-evidence-35",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:6",
+                "start": 154,
+                "end": 189,
+                "quote": "It’s essentially an inborn response"
+              },
+              {
+                "textId": "source-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3",
+                "start": 172,
+                "end": 194,
+                "quote": "it’s completely normal"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p5",
+                "start": 48,
+                "end": 60,
+                "quote": "这本质上是一种天生的反应"
+              },
+              {
+                "textId": "translation-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d",
+                "paragraphId": "zh-group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d-p2",
+                "start": 53,
+                "end": 58,
+                "quote": "它完全正常"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "由 TikTok 上的“眉毛盲区”引出跟风现象，接着借心理学家的话说明跟风正常、源于社会联系的需要，再解释潮流为何有吸引力、青少年为何更易跟风，最后提醒读者自己的选择未必个性化，并以“跟风是天生反应”收束。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:1",
+            "summary": "“眉毛盲区”让 TikTok 用户质疑美妆爱好者是否在盲目跟风；这类“盲区”虽不算心理问题，但人们跟风的倾向确实存在。",
+            "function": "由热点现象引出跟风这一话题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3",
+            "summary": "心理学家帕梅拉·拉特利奇认为跟风正常，根源是人对社会联系的基本需要，这种联系和衣食住所一样重要。",
+            "function": "用心理学解释跟风的根源。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4",
+            "summary": "大脑天生注意不寻常的东西，人们关注出众的人，潮流因此更诱人。",
+            "function": "解释潮流为何有强大吸引力。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5",
+            "summary": "人人都会跟风，而少年、青少年和青年更容易，因为他们想表现个性、证明归属、借潮流出众。",
+            "function": "分析最易跟风的群体及原因。"
+          },
+          {
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:6",
+            "summary": "你的日常选择未必像想象中那样个性化；帕梅拉说跟风是天生反应，源于融入或出众的需要。",
+            "function": "提醒读者并重申观点，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:32": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "topic-introduction"
+      },
+      "questionFocus": "判断作者开头提到“眉毛盲区”起什么作用。",
+      "stemTranslationZh": "文中为什么提到“眉毛盲区”？",
+      "locateBy": "stem",
+      "locateFindZh": "看 While 让步后的主句",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它与“美妆盲区”形成对比。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "beauty blindness",
+            "optionText": "beauty blindness",
+            "matchType": "exact",
+            "relationNote": "beauty blindness 就在同一句，但原文说“眉毛盲区和其他形式的美妆盲区”（other forms of），两者是同类并列，不是对比。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:2",
+              "quote": "While “eyebrow blindness” and other forms of “beauty blindness” aren’t officially regarded as mental health issues",
+              "anchor": "同类并列"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它说明一种化妆方式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "makeup enthusiasts able to tell if they’re blindly chasing makeup trends or actually wearing what really looks good on their faces.",
+            "sourceEntity": "blindly chasing makeup trends",
+            "optionText": "It illustrates a kind of makeup.",
+            "optionEntity": "a kind of makeup",
+            "explanation": "“眉毛盲区”指盲目追妆容潮流、分不清什么适合自己（blindly chasing makeup trends），是一种现象，不是一种化妆方式。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:2",
+              "quote": "blindly chasing makeup trends",
+              "anchor": "盲目追潮流"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它引出文章的核心论点。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:2",
+              "quote": "the tendency of people to follow trends, even making them look foolish or taking risks, is undeniably a real thing",
+              "anchor": "引出跟风话题"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3",
+              "quote": "So, what does psychology say about trend-following?",
+              "anchor": "转入心理学解释"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它突出美的重要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It highlights the importance of beauty.",
+            "explanation": "文章没谈美有多重要，它借美妆现象引出的是人为什么追随潮流。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "eyebrow blindness",
+          "sourceRole": "stem",
+          "targetText": "While “eyebrow blindness” and other forms of “beauty blindness” aren’t officially regarded as mental health issues, the tendency of people to follow trends, even making them look foolish or taking risks, is undeniably a real thing.",
+          "relationType": "locationCue",
+          "answerText": "the tendency of people to follow trends",
+          "note": "题干 eyebrow blindness 原词出现在这句的让步从句里。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:2"
+        },
+        {
+          "sourceText": "It brings out the text’s core argument.",
+          "sourceRole": "correctOption",
+          "targetText": "the tendency of people to follow trends, even making them look foolish or taking risks, is undeniably a real thing",
+          "relationType": "paraphrase",
+          "note": "作者先用 TikTok 上热议的“眉毛盲区”开头，再由主句落到真正要谈的跟风倾向（tendency … to follow trends），接着[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3|what does psychology say]]就转入心理学对跟风的解释。可见提它是为了引出全文的核心话题，选 C。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:2"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:33": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "word",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据上下文推测划线词 enticing 在句中的意思。",
+      "stemTranslationZh": "第 3 段中划线词 enticing 是什么意思？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "至关重要的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Multiple psychological theories indicate that human social connections are as crucial as basic necessities like food and shelter, as humans have evolved to depend on one another for survival.",
+            "sourceEntity": "human social connections",
+            "optionText": "Vital.",
+            "optionEntity": "Vital",
+            "explanation": "“至关重要”（crucial）是[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3]]形容社会联系的；放进这句成了“潮流对敢于接受的人更加至关重要”，和前面讲的吸引目光不相干。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3",
+              "quote": "human social connections are as crucial as basic necessities like food and shelter",
+              "anchor": "社会联系很重要"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有吸引力的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4",
+              "quote": "Consequently, we pay attention to those who stand out and attract attention, making trends even more enticing for those brave enough to embrace them.",
+              "anchor": "引人注目"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4",
+              "quote": "But why do trends hold such a strong pull?",
+              "anchor": "强大吸引力"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "要求高的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Demanding.",
+            "explanation": "放进去成了“潮流对敢于接受的人要求更高”，可前文讲的是出众的人吸引目光，没提潮流对人有什么要求。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "有风险的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "risky",
+            "optionText": "Risky",
+            "matchType": "exact",
+            "relationNote": "risky 借自[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5|even risky ones]]，句中 brave enough（足够勇敢）也让人想到冒险；可放进去成了“大家关注出众的人，所以潮流更危险”，前因推不出这个结果。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5",
+              "quote": "However, there is one specific group that is even easier to follow trends, even risky ones: Tweens, teens and young adults.",
+              "anchor": "有风险的潮流"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "enticing",
+          "sourceRole": "stem",
+          "targetText": "Consequently, we pay attention to those who stand out and attract attention, making trends even more enticing for those brave enough to embrace them.",
+          "relationType": "locationCue",
+          "answerText": "stand out and attract attention",
+          "note": "题干 enticing 原词出现在原文这句里。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4"
+        },
+        {
+          "sourceText": "Appealing.",
+          "sourceRole": "correctOption",
+          "targetText": "stand out and attract attention",
+          "relationType": "paraphrase",
+          "note": "enticing 所在句说，我们会关注出众、吸引目光的人（attract attention），[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4|why do trends hold such a strong pull]]又问潮流为何有这么强的吸引力（strong pull），所以 enticing 必须是褒义的“诱人的、有吸引力的”。放回去：大家关注出众的人，于是潮流对敢于尝试的人更有吸引力。选 B。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:4"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "behavior-reason",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出年轻人更容易追随潮流的原因。",
+      "stemTranslationZh": "为什么年轻人更容易追随潮流？",
+      "locateBy": "stem",
+      "locateFindZh": "往后两句看这群人想要什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们追求独特和社会认可。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5",
+              "quote": "This can sometimes lead to desperate efforts to prove their affiliation（从属关系） with socially credible groups and can fuel desire to stand out by riding the wave of trends.",
+              "anchor": "想证明归属、想出众"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5",
+              "quote": "they seek ways to express their individuality",
+              "anchor": "表现个性"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们容易受社会压力影响。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are easily affected by social pressure.",
+            "explanation": "原文说年轻人是自己想表现个性、证明归属，没说他们受到外界的社会压力。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们倾向于炫耀自己的社会地位。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "socially",
+            "optionText": "social",
+            "matchType": "wordFamily",
+            "relationNote": "social 借自 socially credible groups（有声望的群体）；原文说年轻人想证明自己属于这类群体，不是炫耀自己的地位。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5",
+              "quote": "prove their affiliation（从属关系） with socially credible groups",
+              "anchor": "证明归属"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们总是在寻求冒险。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "However, there is one specific group that is even easier to follow trends, even risky ones: Tweens, teens and young adults.",
+            "sourceHighlight": "even risky ones",
+            "optionText": "They are always seeking adventures.",
+            "optionHighlight": "always seeking adventures",
+            "explanation": "原文只说年轻人连有风险的潮流（risky ones）也会追，说的是跟风的程度，不是说他们总在寻求冒险。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5",
+              "quote": "even risky ones",
+              "anchor": "有风险的潮流"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "youngsters",
+          "sourceRole": "stem",
+          "targetText": "However, there is one specific group that is even easier to follow trends, even risky ones: Tweens, teens and young adults.",
+          "relationType": "locationCue",
+          "targetCue": "Tweens, teens and young adults",
+          "sourceZh": "年轻人",
+          "targetCueZh": "少年、青少年和青年",
+          "answerText": "prove their affiliation（从属关系） with socially credible groups and can fuel desire to stand out",
+          "bridgeZh": "This 指他们走向独立时想表现个性，由此生出两种渴望",
+          "note": "题干 youngsters 对应原文列出的少年、青少年和青年。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5"
+        },
+        {
+          "sourceText": "They pursue uniqueness and social recognition.",
+          "sourceRole": "correctOption",
+          "targetText": "prove their affiliation（从属关系） with socially credible groups and can fuel desire to stand out",
+          "relationType": "paraphrase",
+          "note": "选项两半各有落点：“追求独特”（uniqueness）落在[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5|express their individuality]]（express their individuality）和想脱颖而出（stand out）；“社会认可”（social recognition）落在想证明自己属于有声望的群体（affiliation … socially credible groups），选 A。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:35": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "抓住帕梅拉在文末强调的观点。",
+      "stemTranslationZh": "帕梅拉在文末强调了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "追随潮流是一种自然的行为。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:6",
+              "quote": "It’s essentially an inborn response",
+              "anchor": "天生的反应"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3",
+              "quote": "it’s completely normal",
+              "anchor": "完全正常"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "个性比潮流更突出。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "stand out",
+            "optionText": "stands out",
+            "matchType": "wordFamily",
+            "relationNote": "stands out 借自帕梅拉话里的 stand out。她说跟风可以用想融入或想出众的需要来解释，没说个性比潮流重要；[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:6|might not be as personalized]]还提醒你的选择未必那么有个性。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:6",
+              "quote": "our need to fit in with or stand out from the crowd",
+              "anchor": "融入或出众"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "十来岁的少年和青少年是潮流引领者。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "However, there is one specific group that is even easier to follow trends, even risky ones: Tweens, teens and young adults.",
+            "sourceHighlight": "easier to follow trends",
+            "optionText": "Tweens and teens are trend-setters.",
+            "optionHighlight": "trend-setters",
+            "explanation": "[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5]]说少年和青少年更容易追随潮流（follow trends），是跟风的人，不是引领潮流的人；而且文末帕梅拉谈的是所有人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:5",
+              "quote": "even easier to follow trends",
+              "anchor": "更易跟风"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "社会群体决定我们的行为。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "“It’s essentially an inborn response, which can be explained by our need to fit in with or stand out from the crowd,” says Pamela.",
+            "sourceHighlight": "can be explained by our need",
+            "optionText": "Social groups decide our behavior.",
+            "optionHighlight": "decide our behavior",
+            "explanation": "帕梅拉说跟风可以用我们想融入或出众的需要来解释（can be explained by），说的是人自身的需要，没说社会群体决定我们的行为。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:6",
+              "quote": "which can be explained by our need to fit in with or stand out from the crowd",
+              "anchor": "用需要来解释"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Pamela",
+          "sourceRole": "stem",
+          "targetText": "“It’s essentially an inborn response, which can be explained by our need to fit in with or stand out from the crowd,” says Pamela.",
+          "relationType": "locationCue",
+          "answerText": "It’s essentially an inborn response",
+          "note": "题干 Pamela 原词出现在文末这句引语后。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:6"
+        },
+        {
+          "sourceText": "Trend-following is a natural behavior.",
+          "sourceRole": "correctOption",
+          "targetText": "It’s essentially an inborn response",
+          "relationType": "paraphrase",
+          "note": "选项的“自然的行为”（natural behavior）对应原文的“天生的反应”（inborn response）：生来就有，就是自然的。她在[[block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:3|it’s completely normal]]也说过跟风完全正常，文末再次强调这一点，选 A。",
+          "targetParagraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:reading-d:6"
+        }
+      ]
+    }
+  }
+}

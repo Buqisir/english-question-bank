@@ -1,0 +1,1039 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-sichuan-leshan-zigong-yibin-2025-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill": {
+      "overview": "文章介绍中国动画电影《哪吒2》席卷海外影院、跻身全球票房前十的成就，分析其在文化取材、动画技术和主题表达上的成功，并指出这反映了中国电影产业的转变。",
+      "fullTranslationZh": "最近几天，中国电影《哪吒2》席卷海外影院，以令人惊叹的视觉效果、震撼人心的故事讲述和深刻的文化主题吸引了全球观众。\n《哪吒2》是第一部跻身全球票房前十的中国电影。这一里程碑是在1月29日上映后仅20天达成的，为《哪吒2》不断增加的纪录再添一笔。\n这部电影植根于中国文化，取材于经典的哪吒故事，融合了奇幻、冒险以及深受不同代际和不同文化观众喜爱的道德寓意。它创新的动画风格和视觉效果也发挥了关键作用，生动呈现了一个充满神话生物、史诗般战斗和壮丽风景的鲜活世界。\n除了技术上的卓越，这部电影还探讨了身份、命运和选择等深刻主题。哪吒这个角色是一个勇敢挑战命运的叛逆少年，展现了人类共通的挣扎与追求。他自我发现的旅程鼓励观众反思自己的道路以及蜕变的潜力。\n这部电影的崛起反映了中国电影产业的转变。国产电影曾经被好莱坞主导，如今各类题材的国产片在日益增强的文化自豪感、不断提升的叙事水平和技术的快速进步推动下，正在超越西方电影。这一趋势标志着全球电影格局正在发生变化。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "grammar-sentence-1",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+          "sourceText": "Its innovative animation style and visual effects also play a crucial role, __61__ (bring) to life a lively world filled with mythical creatures, epic battles, and breathtaking landscapes.",
+          "displayText": "Its innovative animation style and visual effects also play a crucial role, bringing to life a lively world filled with mythical creatures, epic battles, and breathtaking landscapes.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:61"
+          ],
+          "translationZh": "它创新的动画风格和视觉效果也发挥了关键作用，生动呈现了一个充满神话生物、史诗般战斗和壮丽风景的鲜活世界。",
+          "analysisZh": "主干是 Its innovative animation style and visual effects also play a crucial role，主语是并列的动画风格和视觉效果，谓语是发挥关键作用。逗号后 bringing to life a lively world 是现在分词短语作状语，补充说明这种作用；bring sth to life 的宾语 a lively world 较长，被移到 to life 之后。filled with ... 是过去分词短语作后置定语，修饰 world，后面并列三个名词短语说明这个世界里有什么。",
+          "underlineRanges": [
+            {
+              "start": 55,
+              "end": 74,
+              "quote": "play a crucial role"
+            },
+            {
+              "start": 76,
+              "end": 92,
+              "quote": "bringing to life"
+            },
+            {
+              "start": 108,
+              "end": 119,
+              "quote": "filled with"
+            }
+          ]
+        },
+        {
+          "sentenceId": "grammar-sentence-2",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+          "sourceText": "Once __64__ (dominate) by Hollywood, domestic productions across genres are now surpassing Western films, driven by growing cultural pride, enhanced storytelling, and rapid __65__ (technology) advancements.",
+          "displayText": "Once dominated by Hollywood, domestic productions across genres are now surpassing Western films, driven by growing cultural pride, enhanced storytelling, and rapid technological advancements.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:64",
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:65"
+          ],
+          "translationZh": "国产电影曾经被好莱坞主导，如今各类题材的国产片在日益增强的文化自豪感、不断提升的叙事水平和技术的快速进步推动下，正在超越西方电影。",
+          "analysisZh": "主干是 domestic productions are now surpassing Western films，国产影片正在超越西方电影。句首 Once dominated by Hollywood 是过去分词短语作状语，说明国产片过去的处境，Once 与 now 一前一后形成今昔对比。句末 driven by ... 也是过去分词短语作状语，说明推动这一变化的原因，by 后并列三个名词短语：文化自豪感、叙事水平和技术进步。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 27,
+              "quote": "Once dominated by Hollywood"
+            },
+            {
+              "start": 64,
+              "end": 82,
+              "quote": "are now surpassing"
+            },
+            {
+              "start": 98,
+              "end": 107,
+              "quote": "driven by"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 57,
+              "quote": "最近几天，中国电影《哪吒2》席卷海外影院，以令人惊叹的视觉效果、震撼人心的故事讲述和深刻的文化主题吸引了全球观众。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2"
+              ],
+              "start": 58,
+              "end": 122,
+              "quote": "《哪吒2》是第一部跻身全球票房前十的中国电影。这一里程碑是在1月29日上映后仅20天达成的，为《哪吒2》不断增加的纪录再添一笔。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3"
+              ],
+              "start": 123,
+              "end": 229,
+              "quote": "这部电影植根于中国文化，取材于经典的哪吒故事，融合了奇幻、冒险以及深受不同代际和不同文化观众喜爱的道德寓意。它创新的动画风格和视觉效果也发挥了关键作用，生动呈现了一个充满神话生物、史诗般战斗和壮丽风景的鲜活世界。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4"
+              ],
+              "start": 230,
+              "end": 323,
+              "quote": "除了技术上的卓越，这部电影还探讨了身份、命运和选择等深刻主题。哪吒这个角色是一个勇敢挑战命运的叛逆少年，展现了人类共通的挣扎与追求。他自我发现的旅程鼓励观众反思自己的道路以及蜕变的潜力。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5"
+              ],
+              "start": 324,
+              "end": 429,
+              "quote": "这部电影的崛起反映了中国电影产业的转变。国产电影曾经被好莱坞主导，如今各类题材的国产片在日益增强的文化自豪感、不断提升的叙事水平和技术的快速进步推动下，正在超越西方电影。这一趋势标志着全球电影格局正在发生变化。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:1",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:1",
+            "text": "In recent days, the Chinese movie Ne Zha 2 has stormed/ has been storming overseas cinemas, capturing global audiences with its amazing visuals, awe-inspiring storytelling, and profound cultural themes."
+          },
+          {
+            "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+            "text": "Ne Zha 2 is the first Chinese movie to rank among the 10 highest-grossing movies in the world. Achieved just 20 days after its release on January 29, this milestone adds to Ne Zha 2’s growing list of records."
+          },
+          {
+            "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+            "text": "The movie, rooted in Chinese culture, draws from the classic tale of Ne Zha, combining fantasy, adventure and moral lessons that/ which are well received across generations and cultures. Its innovative animation style and visual effects also play a crucial role, bringing to life a lively world filled with mythical creatures, epic battles, and breathtaking landscapes."
+          },
+          {
+            "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+            "text": "Beyond technical excellence, it explores profound themes like identity, destiny, and choice. The character of Ne Zha, a rebellious boy who challenges fate bravely, showcases universal struggles and aspirations. His journey of self-discovery encourages viewers to reflect on their own paths and potential for transformation."
+          },
+          {
+            "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+            "text": "The movie’s rise reflects a shift in China’s film industry. Once dominated by Hollywood, domestic productions across genres are now surpassing Western films, driven by growing cultural pride, enhanced storytelling, and rapid technological advancements. This trend signals a changing global film landscape."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:1",
+                "start": 0,
+                "end": 14,
+                "quote": "In recent days"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:1",
+                "start": 0,
+                "end": 4,
+                "quote": "最近几天"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:56"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:1",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:1",
+                "start": 43,
+                "end": 73,
+                "quote": "has stormed/ has been storming"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:1",
+                "start": 14,
+                "end": 16,
+                "quote": "席卷"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "start": 12,
+                "end": 35,
+                "quote": "the first Chinese movie"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "start": 6,
+                "end": 9,
+                "quote": "第一部"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:57"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "start": 36,
+                "end": 43,
+                "quote": "to rank"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "start": 9,
+                "end": 11,
+                "quote": "跻身"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "start": 110,
+                "end": 122,
+                "quote": "just 20 days"
+              },
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "start": 130,
+                "end": 155,
+                "quote": "its release on January 29"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "start": 35,
+                "end": 42,
+                "quote": "上映后仅20天"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:58"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "start": 117,
+                "end": 122,
+                "quote": "after"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:2",
+                "start": 35,
+                "end": 38,
+                "quote": "上映后"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 56,
+                "end": 78,
+                "quote": "classic tale of Ne Zha"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 15,
+                "end": 22,
+                "quote": "经典的哪吒故事"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:59"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 49,
+                "end": 52,
+                "quote": "the"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 15,
+                "end": 22,
+                "quote": "经典的哪吒故事"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 113,
+                "end": 126,
+                "quote": "moral lessons"
+              },
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 134,
+                "end": 151,
+                "quote": "are well received"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 49,
+                "end": 53,
+                "quote": "道德寓意"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:60"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 124,
+                "end": 135,
+                "quote": "that/ which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 33,
+                "end": 49,
+                "quote": "深受不同代际和不同文化观众喜爱的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 185,
+                "end": 234,
+                "quote": "Its innovative animation style and visual effects"
+              },
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 276,
+                "end": 283,
+                "quote": "to life"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 76,
+                "end": 81,
+                "quote": "生动呈现了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:61"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 263,
+                "end": 271,
+                "quote": "bringing"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 76,
+                "end": 81,
+                "quote": "生动呈现了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "start": 139,
+                "end": 154,
+                "quote": "challenges fate"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "start": 42,
+                "end": 46,
+                "quote": "挑战命运"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:62"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "start": 155,
+                "end": 162,
+                "quote": "bravely"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "start": 40,
+                "end": 42,
+                "quote": "勇敢"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "start": 301,
+                "end": 314,
+                "quote": "potential for"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "start": 90,
+                "end": 92,
+                "quote": "潜力"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:63"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "start": 308,
+                "end": 322,
+                "quote": "transformation"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:4",
+                "start": 87,
+                "end": 89,
+                "quote": "蜕变"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 97,
+                "end": 117,
+                "quote": "domestic productions"
+              },
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 83,
+                "end": 95,
+                "quote": "by Hollywood"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 26,
+                "end": 32,
+                "quote": "被好莱坞主导"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:64"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 65,
+                "end": 74,
+                "quote": "dominated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 26,
+                "end": 32,
+                "quote": "被好莱坞主导"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 253,
+                "end": 265,
+                "quote": "advancements"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 65,
+                "end": 72,
+                "quote": "技术的快速进步"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:65"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 225,
+                "end": 238,
+                "quote": "technological"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 65,
+                "end": 68,
+                "quote": "技术的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-grammar-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:61"
+            ],
+            "selectedSentenceId": "grammar-sentence-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 187,
+                "end": 369,
+                "quote": "Its innovative animation style and visual effects also play a crucial role, bringing to life a lively world filled with mythical creatures, epic battles, and breathtaking landscapes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:3",
+                "start": 54,
+                "end": 106,
+                "quote": "它创新的动画风格和视觉效果也发挥了关键作用，生动呈现了一个充满神话生物、史诗般战斗和壮丽风景的鲜活世界。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-grammar-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:64",
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:65"
+            ],
+            "selectedSentenceId": "grammar-sentence-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 60,
+                "end": 252,
+                "quote": "Once dominated by Hollywood, domestic productions across genres are now surpassing Western films, driven by growing cultural pride, enhanced storytelling, and rapid technological advancements."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill",
+                "paragraphId": "tr-block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:grammar-fill:5",
+                "start": 20,
+                "end": 85,
+                "quote": "国产电影曾经被好莱坞主导，如今各类题材的国产片在日益增强的文化自豪感、不断提升的叙事水平和技术的快速进步推动下，正在超越西方电影。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:56": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "storm",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "has stormed/ has been storming",
+      "role": null,
+      "similarityProfile": {
+        "route": "present-perfect-explicit-marker",
+        "features": []
+      },
+      "reason": "空格作主语《哪吒2》（the Chinese movie Ne Zha 2）的谓语，逗号后的（capturing）是非谓语，句子只缺这一个谓语。时间状语「最近几天」（In recent days）表示从过去延续到现在的动作，用现在完成时（has stormed）或现在完成进行时（has been storming）；主语是一部电影，助动词用（has）。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "In recent days",
+          "signalSide": "passage",
+          "relation": "「最近几天」表示从不久前延续到现在，谓语用现在完成时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "the Chinese movie Ne Zha 2",
+          "signalSide": "passage",
+          "relation": "主语是单数的一部电影，助动词用 has。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:57": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "rank",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to rank",
+      "role": "attributive",
+      "similarityProfile": {
+        "route": "attributive-special-limiter",
+        "features": []
+      },
+      "reason": "句子已有谓语（is），空格引出的短语作定语，修饰名词「电影」（movie），说明是哪一部电影。名词前有序数词「第一」（the first）限定，后置定语用不定式（to rank），相当于（that ranks）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "the first Chinese movie",
+          "signalSide": "passage",
+          "relation": "序数词 the first 修饰的名词，后面接不定式作定语。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "is",
+          "signalSide": "passage",
+          "relation": "句子谓语已是 is，空格只能用非谓语。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:58": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:58",
+      "blankNo": 58,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "after",
+      "role": null,
+      "similarityProfile": {
+        "route": "contextual-relation",
+        "features": []
+      },
+      "reason": "空格要把「它的上映」（its release）接到「仅 20 天」（just 20 days）后面，说明这一里程碑是上映之后多少天达成的。表示「在……之后」，用介词（after）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "just 20 days",
+          "signalSide": "passage",
+          "relation": "时间段放在介词前，表示上映之后过了多少天。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "its release on January 29",
+          "signalSide": "passage",
+          "relation": "上映日期在前，达成里程碑在后。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:59": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "similarityProfile": {
+        "route": "the-postmodified-specific",
+        "features": []
+      },
+      "reason": "空格限定名词「故事」（tale），后面的「哪吒的」（of Ne Zha）把它限定为特定的那个经典故事，用定冠词（the）。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "of Ne Zha",
+          "signalSide": "passage",
+          "relation": "of 短语把故事限定为哪吒的那一个。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "classic tale",
+          "signalSide": "passage",
+          "relation": "可数名词单数前需要限定词。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:60": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "that/ which",
+      "role": null,
+      "similarityProfile": {
+        "route": "missing-subject",
+        "features": [
+          "thing",
+          "restrictive"
+        ]
+      },
+      "reason": "空格引导定语从句，修饰前面的事物名词（moral lessons），并在从句中作主语，后面直接接谓语（are well received）。指物、限制性，用（that）或（which）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "moral lessons",
+          "signalSide": "passage",
+          "relation": "先行词是事物，关系词用 that 或 which。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "are well received",
+          "signalSide": "passage",
+          "relation": "从句缺主语，由关系词充当。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:61": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "bring",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "bringing",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "句子谓语是（play），逗号后没有连词，空格引出的短语作状语，补充说明主语动画风格和视效（animation style and visual effects）怎样发挥作用。它们主动把一个鲜活世界呈现出来（bring … to life），用现在分词（bringing）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Its innovative animation style and visual effects",
+          "signalSide": "passage",
+          "relation": "逻辑主语是主句主语，与 bring 是主动关系。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "play a crucial role",
+          "signalSide": "passage",
+          "relation": "主句谓语已齐，逗号后用非谓语作状语。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "to life",
+          "signalSide": "passage",
+          "relation": "bring ... to life 表示使生动呈现，宾语较长被后置。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:62": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "brave",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "bravely",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-predicate",
+        "features": []
+      },
+      "reason": "空格修饰定语从句中的谓语「挑战命运」（challenges fate），说明哪吒怎样挑战命运。修饰动词要用副词，把（brave）变为（bravely）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "challenges fate",
+          "signalSide": "passage",
+          "relation": "被修饰的是动作 challenges，需用副词。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:63": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "transform",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "transformation",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作介词（for）的宾语，说明「潜力」（potential）指向什么。介词后要用名词，把动词（transform）变为名词（transformation）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "potential for",
+          "signalSide": "passage",
+          "relation": "介词 for 后接名词作宾语。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:64": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:64",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "dominate",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "dominated",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-passive",
+        "features": []
+      },
+      "reason": "句子谓语是（are now surpassing），空格引出的短语作状语，逻辑主语是主句主语「国产影片」（domestic productions）。国产片曾经是被好莱坞主导的，后面有（by Hollywood），是被动关系，用过去分词（dominated）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "domestic productions",
+          "signalSide": "passage",
+          "relation": "逻辑主语是国产影片，它们是被主导的一方。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "by Hollywood",
+          "signalSide": "passage",
+          "relation": "by 引出动作的发出者，说明是被动关系。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "Once",
+          "signalSide": "passage",
+          "relation": "曾经，与后面的 now 形成对比。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:65": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:65",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "technology",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
+      "answer": "technological",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-adjective",
+        "features": []
+      },
+      "reason": "空格和前面的「快速的」（rapid）一起修饰名词「进步」（advancements），作定语要用形容词，把名词（technology）变为（technological）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "advancements",
+          "signalSide": "passage",
+          "relation": "被修饰的名词，前面需要形容词作定语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "rapid",
+          "signalSide": "passage",
+          "relation": "与 rapid 一起修饰 advancements。"
+        }
+      ]
+    }
+  }
+}

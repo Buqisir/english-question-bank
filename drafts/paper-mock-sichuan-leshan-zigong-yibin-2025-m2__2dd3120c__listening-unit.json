@@ -1,0 +1,1013 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-sichuan-leshan-zigong-yibin-2025-m2",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "W: I was up all night throwing up, and I hardly slept. M: Let’s have a look. Open your mouth and stick your tongue out, and take a deep breath. Again, breathe in and out. Just lie down. I’m going to press quite hard on your stomach.",
+      "translationZh": "我一整夜都在呕吐，几乎没睡着。我们来看看。张开嘴，把舌头伸出来，深吸一口气。再来一次，吸气，呼气。躺下就好。我要用力按一下你的肚子。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "女士说自己整夜呕吐、几乎没睡，男士让她张嘴、深呼吸、躺下，并按压她的腹部。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "我一整夜都在呕吐，几乎没睡着。"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "我们来看看。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "张开嘴，把舌头伸出来，深吸一口气。"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "再来一次，吸气，呼气。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "躺下就好。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "我要用力按一下你的肚子。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "W: Peter, were you all right last night? M: Oh, what a night! The trees in my garden were blown down. It rained 8 centimeters in one hour. It’s the worst weather I have ever experienced.",
+      "translationZh": "彼得，你昨晚还好吗？哎，真是个可怕的夜晚！我花园里的树都被刮倒了。一小时就下了 8 厘米的雨。这是我经历过的最糟糕的天气。",
+      "topic": {
+        "theme": "人与自然",
+        "themeGroup": "灾害防范",
+        "subtopic": "自然灾害与防范"
+      },
+      "summaryZh": "女士问彼得昨晚是否安好，彼得讲述昨夜自家花园的遭遇和雨势。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "彼得，你昨晚还好吗？"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "哎，真是个可怕的夜晚！"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我花园里的树都被刮倒了。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "一小时就下了 8 厘米的雨。"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "这是我经历过的最糟糕的天气。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "M: What time is my tennis class, Mum? W: At four. Even if we are walking fast now, … we’d better call a taxi or … Look, there’s a bus stop over there. Let’s go, then.",
+      "translationZh": "妈妈，我的网球课几点？四点。就算我们现在走得快……我们最好打辆出租车，或者……看，那边有个公交车站。那我们走吧。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "家庭生活"
+      },
+      "summaryZh": "男孩问妈妈网球课的时间，妈妈担心赶不上，边走边考虑怎么去上课。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "妈妈，我的网球课几点？"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "四点。"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "就算我们现在走得快……我们最好打辆出租车，或者……看，那边有个公交车站。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "那我们走吧。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "W: I need to get a new passport before we go on holiday. Where can I get my photo taken? M: There is a machine in the bookshop around the corner, but I’m not sure if it’s working. W: OK, I guess I will go into town.",
+      "translationZh": "我们去度假之前，我得办一本新护照。我能在哪儿拍照片？拐角那家书店里有一台机器，不过我不确定它能不能用。好吧，我想我还是进城去吧。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士度假前要办新护照，向男士打听哪里能拍照，男士提到街角书店的机器。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "我们去度假之前，我得办一本新护照。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "我能在哪儿拍照片？"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "拐角那家书店里有一台机器，不过我不确定它能不能用。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "好吧，我想我还是进城去吧。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "W: Have you been to the new swimming pool? It’s really cool. I went there on Saturday. M: Why don’t we go there together next Tuesday afternoon, Cathy? W: I’d love to, but I have a guitar lesson on that day. We could go with Katie on Thursday if she doesn’t have her dance class.",
+      "translationZh": "你去过新开的游泳池吗？那里真的很棒。我星期六去过。凯茜，我们下周二下午一起去那儿怎么样？我很想去，但那天我有吉他课。如果凯蒂没有舞蹈课，我们可以星期四和她一起去。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "女士介绍新开的游泳池，男士约凯茜下周二下午一起去，两人商量时间安排。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "你去过新开的游泳池吗？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "那里真的很棒。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我星期六去过。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "凯茜，我们下周二下午一起去那儿怎么样？"
+        },
+        {
+          "id": "listening-text-5:5",
+          "zh": "我很想去，但那天我有吉他课。"
+        },
+        {
+          "id": "listening-text-5:6",
+          "zh": "如果凯蒂没有舞蹈课，我们可以星期四和她一起去。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "W: Alan, what made you decide to take this cycling trip? M: Well, I’m a teacher in a big secondary school, and I felt stressed, so I decided to have a break. I had a chat with the head teacher, and she agreed to give me some time off work. W: And how’s your trip going? M: Really well. I’ve cycled through France, Italy, Austria, Hungary, then Serbia and Bulgaria. I arrived in Turkey yesterday. W: That’s really impressive!",
+      "translationZh": "艾伦，是什么让你决定进行这次骑行旅行的？嗯，我是一所大型中学的老师，我感到压力很大，所以决定休息一下。我和校长谈了谈，她同意给我一段时间的假。那你的旅行进展如何？非常顺利。我骑车穿过了法国、意大利、奥地利、匈牙利，然后是塞尔维亚和保加利亚。我昨天到了土耳其。真了不起！",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "健康的生活方式"
+      },
+      "summaryZh": "女士采访骑行旅行的教师艾伦，询问他出发的原因和一路的行程进展。",
+      "sentences": [
+        {
+          "id": "listening-text-6:1",
+          "zh": "艾伦，是什么让你决定进行这次骑行旅行的？"
+        },
+        {
+          "id": "listening-text-6:2",
+          "zh": "嗯，我是一所大型中学的老师，我感到压力很大，所以决定休息一下。"
+        },
+        {
+          "id": "listening-text-6:3",
+          "zh": "我和校长谈了谈，她同意给我一段时间的假。"
+        },
+        {
+          "id": "listening-text-6:4",
+          "zh": "那你的旅行进展如何？"
+        },
+        {
+          "id": "listening-text-6:5",
+          "zh": "非常顺利。"
+        },
+        {
+          "id": "listening-text-6:6",
+          "zh": "我骑车穿过了法国、意大利、奥地利、匈牙利，然后是塞尔维亚和保加利亚。"
+        },
+        {
+          "id": "listening-text-6:7",
+          "zh": "我昨天到了土耳其。"
+        },
+        {
+          "id": "listening-text-6:8",
+          "zh": "真了不起！"
+        }
+      ]
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9",
+        "question:listening:10"
+      ],
+      "transcript": "M: Zoe, I’m considering attending a music festival that’s scheduled from this Friday to Sunday. Would you be interested in joining me? W: Sure. However, I won’t be able to devote 3 days to the festival. I think I can only make it on the second day. M: It works for me as well. Let’s check the ticket sales online and see what shows are on. Ah, Adele is set to perform on that day. W: While I appreciate the recommendation, pop music isn’t my cup of tea. How do you feel about the East-West Players? They are known for their combination of classical and folk music. M: That’s a great choice. Should we invite anyone else? Maybe Jason? W: Good idea. I’ll reach out to him right away and see if he’s interested in coming along.",
+      "translationZh": "佐伊，我正考虑去参加一个音乐节，时间是从这周五到周日。你有兴趣和我一起去吗？当然。不过我没法在音乐节上花三天时间。我想我只能第二天去。我也可以。我们上网查查售票情况，看看有哪些演出吧。啊，阿黛尔那天要演出。谢谢你的推荐，不过流行音乐不是我的菜。你觉得东西方乐团怎么样？他们以融合古典音乐和民间音乐而闻名。这个选择太好了。我们还要邀请别人吗？也许叫上杰森？好主意。我马上联系他，看他有没有兴趣一起去。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "音乐领域的概况及其发展"
+      },
+      "summaryZh": "男士邀请佐伊参加周末的音乐节，两人商量哪天去、看哪场演出以及邀请谁同行。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "佐伊，我正考虑去参加一个音乐节，时间是从这周五到周日。"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "你有兴趣和我一起去吗？"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "当然。"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "不过我没法在音乐节上花三天时间。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "我想我只能第二天去。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "我也可以。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "我们上网查查售票情况，看看有哪些演出吧。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "啊，阿黛尔那天要演出。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "谢谢你的推荐，不过流行音乐不是我的菜。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "你觉得东西方乐团怎么样？"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "他们以融合古典音乐和民间音乐而闻名。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "这个选择太好了。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "我们还要邀请别人吗？"
+        },
+        {
+          "id": "listening-text-7:14",
+          "zh": "也许叫上杰森？"
+        },
+        {
+          "id": "listening-text-7:15",
+          "zh": "好主意。"
+        },
+        {
+          "id": "listening-text-7:16",
+          "zh": "我马上联系他，看他有没有兴趣一起去。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "W: Luke, you finished your business management studies five years ago, but decided to try acting as a career instead. So how did it all happen? M: I’d completed my university course and performed well on all my exams. I was planning a career as a manager in some kind of company. Anyway, during the summer following my graduation, I suddenly realized that it wasn’t what I wanted to do. W: What did you do then? M: I travelled across India. While I was there, I thought a lot about my life. Acting had always been something that I loved doing, and I wanted to see if I could do it professionally. So I applied to a drama school, and fortunately, I was accepted. W: How did your parents react to your decision? M: They acknowledged that it was a significant change, but they respected my right to choose my own path.",
+      "translationZh": "卢克，你五年前完成了商业管理专业的学业，却决定转而把表演作为职业。那这一切是怎么发生的？我完成了大学课程，所有考试都考得很好。我当时打算在某家公司做一名经理。不过，在毕业后的那个夏天，我突然意识到那不是我想做的事。那你后来做了什么？我去印度各地旅行了。在那里的时候，我对自己的人生想了很多。表演一直是我热爱的事，我想看看自己能不能把它当作职业。所以我申请了一所戏剧学校，幸运的是，我被录取了。你父母对你的决定有什么反应？他们承认这是一个很大的转变，但他们尊重我选择自己道路的权利。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "个人职业倾向"
+      },
+      "summaryZh": "女士采访卢克，请他讲述自己从商业管理专业毕业后转行演戏的经过和父母的反应。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "卢克，你五年前完成了商业管理专业的学业，却决定转而把表演作为职业。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "那这一切是怎么发生的？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "我完成了大学课程，所有考试都考得很好。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "我当时打算在某家公司做一名经理。"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "不过，在毕业后的那个夏天，我突然意识到那不是我想做的事。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "那你后来做了什么？"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "我去印度各地旅行了。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "在那里的时候，我对自己的人生想了很多。"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "表演一直是我热爱的事，我想看看自己能不能把它当作职业。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "所以我申请了一所戏剧学校，幸运的是，我被录取了。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "你父母对你的决定有什么反应？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "他们承认这是一个很大的转变，但他们尊重我选择自己道路的权利。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16"
+      ],
+      "transcript": "W: I’m sorry, Jason, but I couldn’t help noticing the long list of classes you’ve written down there. May I have a look? M: Oh, sure. W: Medical Science, Laboratory Techniques, Medicine, Maths, Computing? My, my, a bit of everything here! M: Is it too much? W: For your first term, yes. Like Professor Williams said before, the Medical Science course can wait. You might want to take it in your second year instead. I think you should put off Computing, too. I’d recommend taking Maths, though. It’ll make everything easier when the science lab opens next year. M: OK, you’ve got a point there. W: One more thing. Have you thought about applying for any financial aid? M: Do they have any? W: Yeah, in our department, there is funding available for 30 students each year. Every student gets $10,000 to cover their school fees and an additional $1,000 cash. M: $1,000 cash? W: Yes, you can use it for your living expenses. I can show you how to apply for it. M: Great, thanks!",
+      "translationZh": "抱歉，杰森，我忍不住注意到你在那儿写下的一长串课程。我能看看吗？哦，当然可以。医学、实验室技术、药学、数学、计算机？天哪，这里什么都有一点！是不是太多了？对第一学期来说，是的。就像威廉姆斯教授之前说的，医学课可以等等再上。你也许可以改到第二年再上。我觉得计算机课你也应该推迟。不过我建议你上数学课。明年科学实验室开放时，它会让一切都变得更容易。好吧，你说得有道理。还有一件事。你考虑过申请经济资助吗？他们有吗？有的，我们院系每年有供 30 名学生申请的资助。每个学生得到 10,000 美元来支付学费，另外还有 1,000 美元现金。1,000 美元现金？是的，你可以用它来支付生活费。我可以告诉你怎么申请。太好了，谢谢！",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "女士看到新生杰森列出的选课清单，就第一学期选什么课给出建议，并介绍院系的资助。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "抱歉，杰森，我忍不住注意到你在那儿写下的一长串课程。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "我能看看吗？"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "哦，当然可以。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "医学、实验室技术、药学、数学、计算机？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "天哪，这里什么都有一点！"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "是不是太多了？"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "对第一学期来说，是的。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "就像威廉姆斯教授之前说的，医学课可以等等再上。"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "你也许可以改到第二年再上。"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "我觉得计算机课你也应该推迟。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "不过我建议你上数学课。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "明年科学实验室开放时，它会让一切都变得更容易。"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "好吧，你说得有道理。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "还有一件事。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "你考虑过申请经济资助吗？"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "他们有吗？"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "有的，我们院系每年有供 30 名学生申请的资助。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "每个学生得到 10,000 美元来支付学费，另外还有 1,000 美元现金。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "1,000 美元现金？"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "是的，你可以用它来支付生活费。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "我可以告诉你怎么申请。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "太好了，谢谢！"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:17",
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "Jenny enjoyed exercising from a young age. When she heard a teacher at school talking about mountain biking, she wanted to try it herself. She persuaded her parents to get her a suitable bike. There were fields at the back of her house where she could have gone riding, but they were too flat. So instead, she went to a valley popular with local riders every weekend. After signing up for a training course, she realized that she needed a proper downhill bike to take her riding to another level. So, she spent 8 months doing jobs for her family to get enough money. Last month, Jenny took part in a race. The route was hard, but Jenny was amazed to come 17th out of 30 riders. All the finishers were given a certificate, and the 1st 10 received a water bottle and sunglasses. Helen, who came first, won a cash prize. Jenny was also presented with a medal for being the youngest rider.",
+      "translationZh": "珍妮从小就喜欢锻炼。她听到学校的一位老师谈论山地自行车，就想自己试一试。她说服父母给她买了一辆合适的自行车。她家后面有几片田野，她本可以去那里骑车，但那里太平坦了。所以她转而每个周末去一个当地骑手常去的山谷。报名参加一个培训课程后，她意识到自己需要一辆真正的速降自行车，才能把骑车水平提高到一个新层次。于是，她花了 8 个月给家里干活，攒够了钱。上个月，珍妮参加了一场比赛。赛道很难，但珍妮惊喜地在 30 名骑手中获得第 17 名。所有完赛者都获得了一张证书，前 10 名还得到了一个水瓶和一副太阳镜。获得第一名的海伦赢得了现金奖励。珍妮还因为是年龄最小的骑手而被授予一枚奖牌。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "日常体育活动"
+      },
+      "summaryZh": "独白讲述珍妮从小爱运动、开始练山地自行车、攒钱换车并参加比赛的经历。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "珍妮从小就喜欢锻炼。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "她听到学校的一位老师谈论山地自行车，就想自己试一试。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "她说服父母给她买了一辆合适的自行车。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "她家后面有几片田野，她本可以去那里骑车，但那里太平坦了。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "所以她转而每个周末去一个当地骑手常去的山谷。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "报名参加一个培训课程后，她意识到自己需要一辆真正的速降自行车，才能把骑车水平提高到一个新层次。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "于是，她花了 8 个月给家里干活，攒够了钱。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "上个月，珍妮参加了一场比赛。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "赛道很难，但珍妮惊喜地在 30 名骑手中获得第 17 名。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "所有完赛者都获得了一张证书，前 10 名还得到了一个水瓶和一副太阳镜。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "获得第一名的海伦赢得了现金奖励。"
+        },
+        {
+          "id": "listening-text-10:12",
+          "zh": "珍妮还因为是年龄最小的骑手而被授予一枚奖牌。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "两位说话人最可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "夫妻。",
+        "B": "师生。",
+        "C": "医生和病人。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Open your mouth and stick your tongue out, and take a deep breath."
+      },
+      "reasonZh": "女士说整夜呕吐、几乎没睡（throwing up … hardly slept），男士让她张嘴伸舌、深呼吸，又要按压她的腹部（press … on your stomach），这是看病时的检查，可见是医生和病人，选 C。"
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "说话人主要在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一位邻居。",
+        "B": "一场暴风雨。",
+        "C": "一个花园。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It rained 8 centimeters in one hour."
+      },
+      "reasonZh": "树被刮倒（blown down）、一小时下了 8 厘米的雨、经历过最糟的天气，几处都在说昨夜的狂风暴雨，概括起来就是一场暴风雨，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "花园（garden）只是彼得说树被刮倒的地点，整段对话谈的是昨夜的风雨。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "男士将怎样去上课？",
+      "optionTranslationsZh": {
+        "A": "乘出租车。",
+        "B": "步行。",
+        "C": "乘公交车。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Even if we are walking fast now, … we’d better call a taxi or … Look, there’s a bus stop over there."
+      },
+      "reasonZh": "妈妈说走得再快也来不及，正想打车时看到那边有公交车站（there’s a bus stop over there），接着说那就走吧（Let’s go, then），可见两人要去坐公交车，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "妈妈刚说到打车（call a taxi）就停住了，看到公交车站后改了主意。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "妈妈说的是就算现在走得快（walking fast）也赶不上，所以才另想办法。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "女士为什么要进城？",
+      "optionTranslationsZh": {
+        "A": "去拍照。",
+        "B": "去取护照。",
+        "C": "去买书。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Where can I get my photo taken?"
+      },
+      "reasonZh": "女士问哪里能拍照，男士说书店的机器不一定能用（not sure if it’s working），她就说那就进城（go into town），可见进城是为了拍照，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "护照（passport）是她要新办的，拍照是为办护照做准备，对话没说要去取护照。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "书店（bookshop）只是那台拍照机器所在的地方，她没提要买书。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "女士下周二要做什么？",
+      "optionTranslationsZh": {
+        "A": "去游泳。",
+        "B": "参加舞会。",
+        "C": "上吉他课。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I’d love to, but I have a guitar lesson on that day."
+      },
+      "reasonZh": "男士约凯茜下周二下午去游泳，凯茜回答那天有吉他课（a guitar lesson on that day），“那天”就是下周二，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "游泳是男士提议下周二去的，女士用 but 婉拒了，改提周四。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "舞蹈课（dance class）是凯蒂可能要上的，而且说的是周四，不是女士下周二的安排。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士为什么决定进行这次骑行旅行？",
+      "optionTranslationsZh": {
+        "A": "为了减轻工作压力。",
+        "B": "为了探索新的文化。",
+        "C": "为了寻求个人成长。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Well, I’m a teacher in a big secondary school, and I felt stressed, so I decided to have a break."
+      },
+      "reasonZh": "“减轻工作压力”就是艾伦说的当老师感到压力大、所以决定休息一下（felt stressed … have a break），选 A。"
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "男士现在在哪里？",
+      "optionTranslationsZh": {
+        "A": "在法国。",
+        "B": "在土耳其。",
+        "C": "在塞尔维亚。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I arrived in Turkey yesterday."
+      },
+      "reasonZh": "艾伦说昨天已经到了土耳其（arrived in Turkey yesterday），所以他现在在土耳其，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "法国（France）是他骑行经过的第一个国家，是已经走过的路线。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "塞尔维亚（Serbia）也是途经的国家，之后还经过保加利亚才到土耳其。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "说话人将在哪天去音乐节？",
+      "optionTranslationsZh": {
+        "A": "星期五。",
+        "B": "星期六。",
+        "C": "星期日。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "I think I can only make it on the second day."
+      },
+      "reasonZh": "音乐节从周五到周日（from this Friday to Sunday），佐伊说只能第二天去，男士也同意，周五往后数一天是周六，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "周五（Friday）是音乐节的第一天，佐伊没法三天都去，只选了第二天。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "周日（Sunday）是音乐节的最后一天，不是两人约定的第二天。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "阿黛尔演奏什么类型的音乐？",
+      "optionTranslationsZh": {
+        "A": "流行音乐。",
+        "B": "民间音乐。",
+        "C": "古典音乐。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "While I appreciate the recommendation, pop music isn’t my cup of tea."
+      },
+      "reasonZh": "男士推荐那天阿黛尔的演出，佐伊回应说流行音乐不合她口味（pop music isn’t my cup of tea），可见阿黛尔唱的是流行音乐，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "民间音乐（folk music）是佐伊介绍东西方乐团时说的，不是阿黛尔的风格。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "古典音乐（classical）同样是东西方乐团的特色，他们融合的是古典和民间音乐。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "女士首先要做什么？",
+      "optionTranslationsZh": {
+        "A": "联系杰森。",
+        "B": "订票。",
+        "C": "分享一个网站。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’ll reach out to him right away and see if he’s interested in coming along."
+      },
+      "reasonZh": "男士提议叫上杰森，佐伊说马上联系他（reach out to him right away），“马上”说明这是她要先做的事，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "票（ticket）出现在男士说上网查售票情况、看有哪些演出时，说的是查看，不是佐伊接下来要去订票。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士最初想做什么工作？",
+      "optionTranslationsZh": {
+        "A": "老师。",
+        "B": "演员。",
+        "C": "公司经理。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "I was planning a career as a manager in some kind of company."
+      },
+      "reasonZh": "卢克说大学毕业时打算在某家公司当经理（a manager in some kind of company），选项沿用，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "表演（acting）是他毕业后那个夏天才决定尝试的职业，不是最初的打算。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士刚完成大学课程后做了什么？",
+      "optionTranslationsZh": {
+        "A": "他去旅行了。",
+        "B": "他学习了戏剧。",
+        "C": "他开始做生意。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I travelled across India."
+      },
+      "reasonZh": "女士问他意识到不想当经理后做了什么，卢克说去印度各地旅行（travelled across India），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "申请戏剧学校（a drama school）是他在印度想清楚之后才做的事，排在旅行之后。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "生意（business）只出现在女士说他学的是商业管理（business management），他并没有去做生意。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "男士的父母对他的决定持什么态度？",
+      "optionTranslationsZh": {
+        "A": "不赞成的。",
+        "B": "支持的。",
+        "C": "怀疑的。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "They acknowledged that it was a significant change, but they respected my right to choose my own path."
+      },
+      "reasonZh": "“支持”就是卢克说的父母尊重他选择自己道路的权利（respected my right to choose my own path），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "父母只是承认这是很大的转变（a significant change），后面用 but 转到尊重他的选择，并不是反对。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "看到男士的选课清单，女士听起来怎么样？",
+      "optionTranslationsZh": {
+        "A": "尴尬的。",
+        "B": "宽慰的。",
+        "C": "惊讶的。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "My, my, a bit of everything here!"
+      },
+      "reasonZh": "女士念完一长串课程后感叹“天哪，什么都有一点”（My, my），这是看到课太多时的惊讶，选 C。"
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "女士建议男士现在上哪门课？",
+      "optionTranslationsZh": {
+        "A": "数学。",
+        "B": "计算机。",
+        "C": "医学。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I’d recommend taking Maths, though."
+      },
+      "reasonZh": "女士说建议他上数学课（recommend taking Maths），还说明年实验室开放时会更轻松，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "计算机课（Computing）女士说的是也应该推迟（put off）。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "医学课（Medical Science）女士说可以等一等，第二年再上（in your second year）。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "每个学生得到的学校资助总共是多少？",
+      "optionTranslationsZh": {
+        "A": "9,000 美元。",
+        "B": "10,000 美元。",
+        "C": "11,000 美元。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Every student gets $10,000 to cover their school fees and an additional $1,000 cash."
+      },
+      "reasonZh": "每人有 10,000 美元学费资助，另加 1,000 美元现金（an additional $1,000 cash），10,000 + 1,000 = 11,000 美元，选 C。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "10,000 美元只是交学费的那部分，还要加上另外的 1,000 美元现金。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "9,000 是把额外的 1,000 美元减掉了，additional 是另外加上。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "珍妮最初在哪里练习山地自行车？",
+      "optionTranslationsZh": {
+        "A": "在学校。",
+        "B": "在她家后面。",
+        "C": "在一个山谷里。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "So instead, she went to a valley popular with local riders every weekend."
+      },
+      "reasonZh": "家后面的田野太平，珍妮于是每个周末去当地骑手常去的山谷（a valley … every weekend）骑车，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "学校（school）是她听老师谈起山地自行车的地方，不是练车的地方。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "她家后面（at the back of her house）的田野太平坦（too flat），所以她没在那里骑。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "珍妮为什么攒钱？",
+      "optionTranslationsZh": {
+        "A": "为了参加比赛。",
+        "B": "为了买一辆新自行车。",
+        "C": "为了参加培训课程。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "After signing up for a training course, she realized that she needed a proper downhill bike to take her riding to another level."
+      },
+      "reasonZh": "珍妮意识到需要一辆真正的速降自行车（a proper downhill bike），接着说于是花 8 个月干活攒够钱（So … to get enough money），可见攒钱是为了买新车，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "比赛（race）是上个月才参加的，录音没把攒钱和比赛联系起来。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "培训课程（training course）她已经报了名，正是上课后才发现需要新车。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "珍妮在比赛中获得第几名？",
+      "optionTranslationsZh": {
+        "A": "第 10 名。",
+        "B": "第 17 名。",
+        "C": "第 30 名。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "The route was hard, but Jenny was amazed to come 17th out of 30 riders."
+      },
+      "reasonZh": "珍妮在 30 名骑手中得了第 17 名（come 17th），选项沿用这个名次，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "10 说的是前 10 名（the 1st 10）能得到水瓶和太阳镜，不是珍妮的名次。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "30 是参赛骑手的总人数（out of 30 riders）。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "比赛后珍妮得到了什么？",
+      "optionTranslationsZh": {
+        "A": "一张证书和一枚奖牌。",
+        "B": "一枚奖牌和一笔现金奖励。",
+        "C": "一个水瓶和一副太阳镜。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Jenny was also presented with a medal for being the youngest rider."
+      },
+      "reasonZh": "所有完赛者都得到证书（a certificate），珍妮又因年龄最小获得奖牌（a medal），两处合起来是证书和奖牌，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "奖牌没错，但现金奖（a cash prize）是第一名海伦赢得的。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "水瓶和太阳镜只发给前 10 名（the 1st 10），珍妮是第 17 名。"
+        }
+      ]
+    }
+  }
+}

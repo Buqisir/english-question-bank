@@ -1,0 +1,970 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-sichuan-leshan-zigong-yibin-2025-m2",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices": {
+      "overview": "文章谈缺乏动力时怎么办：先弄清自己为何卡住，再定计划；随后给出四条办法：奖励自己、装作有动力先行动、反过来列出成功的理由、精简待办清单。",
+      "fullTranslationZh": "没有动力时该怎么办\n缺乏动力可能是实现目标的最大障碍。当你没有动力去完成一项任务（甚至连开始都没有动力）时，想一想自己为什么会这样举步维艰。然后，制定一个计划，帮助自己行动起来。\n为努力奖励自己。给自己设一个小奖励，让自己靠努力去赢得它。把心思放在这份奖励上，让动力一直保持下去。想一想，是更小、更频繁的奖励，还是完成整项工作后的一份大奖励，更可能让你充满干劲。你也许要试几种不同的办法，直到找到最适合自己的那一种。\n装作自己有动力。你可以通过改变行为来“骗”自己产生动力。例如，与其整天坐在沙发上等着动力降临，不如穿好衣服动起来。你的行动会增强你的动力，这让你更容易坚持下去。\n反过来论证。在为动力发愁时，你很可能会想出种种自己不该采取行动的理由。这些理由会让你停滞不前。相反，把你可能成功的所有理由都摆出来。反过来论证能帮你看到事情的两面，也能提醒你：过于悲观的结局并不完全准确。事情有可能比你预想的更顺利。\n管理好你的待办清单。待办清单多得让人喘不过气时，很难有动力。看看你的清单，判断它是不是太长了。如果是，就删掉那些并非必需的任务。把最重要的事排在前面，移到清单顶部。你可能会发现，对待办清单稍作改动——或者稍微改变你看待它的方式——就能让你觉得这些任务更好应付。最终，你会更有劲头继续前进。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:1",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+          "sourceText": "You might find a slight change in your to-do list – or the way you view your to-do list – will help you to see your tasks as more manageable.",
+          "displayText": "You might find a slight change in your to-do list – or the way you view your to-do list – will help you to see your tasks as more manageable.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40"
+          ],
+          "translationZh": "你可能会发现，对待办清单稍作改动——或者稍微改变你看待它的方式——就能让你觉得这些任务更好应付。",
+          "analysisZh": "主干是 You might find + 宾语从句，从句省略了 that。从句的主语是 a slight change in your to-do list，两个破折号之间的 or the way you view your to-do list 是与它并列的另一个主语，其中 you view your to-do list 修饰 the way；从句谓语是 will help you to see your tasks as more manageable，see A as B 意为把 A 看作 B。读的时候先跳过破折号里的插入部分，就能看出“改动会帮你把任务看得更好应付”这条主线。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 14,
+              "quote": "You might find"
+            },
+            {
+              "start": 52,
+              "end": 87,
+              "quote": "or the way you view your to-do list"
+            },
+            {
+              "start": 90,
+              "end": 110,
+              "quote": "will help you to see"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+          "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+          "sourceText": "Struggling with motivation, you’ll likely come up with reasons why you shouldn’t take any action.",
+          "displayText": "Struggling with motivation, you’ll likely come up with reasons why you shouldn’t take any action.",
+          "relatedQuestionIds": [
+            "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39"
+          ],
+          "translationZh": "在为动力发愁时，你很可能会想出种种自己不该采取行动的理由。",
+          "analysisZh": "主干是 you’ll likely come up with reasons（你很可能会想出理由）。句首 Struggling with motivation 是现在分词短语作状语，逻辑主语就是 you，交代想出这些理由时的处境；why you shouldn’t take any action 是定语从句，修饰 reasons，说明是哪种理由。这串“不该行动的理由”正是下一句 These 回指的对象。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 26,
+              "quote": "Struggling with motivation"
+            },
+            {
+              "start": 28,
+              "end": 62,
+              "quote": "you’ll likely come up with reasons"
+            },
+            {
+              "start": 63,
+              "end": 96,
+              "quote": "why you shouldn’t take any action"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "标题提出问题；开头一段指出缺乏动力是实现目标的障碍，给出先找原因、再定计划的思路；后四段各以一句祈使句开头，分别介绍一种找回动力的办法。",
+        "units": [
+          {
+            "unitId": "unit-title",
+            "paragraphIds": [
+              "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:1"
+            ],
+            "summary": "提出话题：没有动力时该怎么办。"
+          },
+          {
+            "unitId": "unit-intro",
+            "paragraphIds": [
+              "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2"
+            ],
+            "summary": "缺乏动力是实现目标的最大障碍，先想清为什么做不下去，再定计划。"
+          },
+          {
+            "unitId": "unit-reward",
+            "paragraphIds": [
+              "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:3"
+            ],
+            "summary": "办法一：为努力设奖励，并试出适合自己的奖励方式。"
+          },
+          {
+            "unitId": "unit-act",
+            "paragraphIds": [
+              "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:4"
+            ],
+            "summary": "办法二：装作有动力，先动起来，行动会带出动力。"
+          },
+          {
+            "unitId": "unit-argue",
+            "paragraphIds": [
+              "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5"
+            ],
+            "summary": "办法三：不再给自己找不行动的理由，改为列出可能成功的理由。"
+          },
+          {
+            "unitId": "unit-list",
+            "paragraphIds": [
+              "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6"
+            ],
+            "summary": "办法四：精简并排序待办清单，任务好应付了，干劲也就回来了。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "C": {
+          "target": 36,
+          "secondary": 38,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项的 \"a tough task\" 复现第 36 题空后的 \"complete a task\"。但空后 \"Then, develop a plan\" 要的是定计划前的第一步，它已是一个办法，而且 Pair 缺了和什么搭配。放到第 38 题也不行，空后讲的是 \"trick yourself into feeling motivated\"。",
+          "quotes": [
+            "a tough task",
+            "complete a task",
+            "Then, develop a plan",
+            "trick yourself into feeling motivated"
+          ]
+        },
+        "F": {
+          "target": 39,
+          "secondary": 38,
+          "kind": "context",
+          "shadowOf": null,
+          "shared": [],
+          "text": "选项的 \"successes\" 和第 39 题空后的 \"you might succeed\" 同根，像在讲积极的一面。但空后 \"Instead\" 要求空里是消极的说法才转得过来，F 本身已是积极做法。放到第 38 题，空后 \"changing your behavior\" 讲的是行动，不是回想过去。",
+          "quotes": [
+            "successes",
+            "you might succeed",
+            "Instead",
+            "changing your behavior"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 9,
+              "quote": "没有动力时该怎么办"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2"
+              ],
+              "start": 10,
+              "end": 89,
+              "quote": "缺乏动力可能是实现目标的最大障碍。当你没有动力去完成一项任务（甚至连开始都没有动力）时，想一想自己为什么会这样举步维艰。然后，制定一个计划，帮助自己行动起来。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:3"
+              ],
+              "start": 90,
+              "end": 208,
+              "quote": "为努力奖励自己。给自己设一个小奖励，让自己靠努力去赢得它。把心思放在这份奖励上，让动力一直保持下去。想一想，是更小、更频繁的奖励，还是完成整项工作后的一份大奖励，更可能让你充满干劲。你也许要试几种不同的办法，直到找到最适合自己的那一种。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:4"
+              ],
+              "start": 209,
+              "end": 289,
+              "quote": "装作自己有动力。你可以通过改变行为来“骗”自己产生动力。例如，与其整天坐在沙发上等着动力降临，不如穿好衣服动起来。你的行动会增强你的动力，这让你更容易坚持下去。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5"
+              ],
+              "start": 290,
+              "end": 406,
+              "quote": "反过来论证。在为动力发愁时，你很可能会想出种种自己不该采取行动的理由。这些理由会让你停滞不前。相反，把你可能成功的所有理由都摆出来。反过来论证能帮你看到事情的两面，也能提醒你：过于悲观的结局并不完全准确。事情有可能比你预想的更顺利。"
+            },
+            {
+              "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+              "sourceParagraphIds": [
+                "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6"
+              ],
+              "start": 407,
+              "end": 551,
+              "quote": "管理好你的待办清单。待办清单多得让人喘不过气时，很难有动力。看看你的清单，判断它是不是太长了。如果是，就删掉那些并非必需的任务。把最重要的事排在前面，移到清单顶部。你可能会发现，对待办清单稍作改动——或者稍微改变你看待它的方式——就能让你觉得这些任务更好应付。最终，你会更有劲头继续前进。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:36",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+            "text": "Lack of motivation can be the biggest obstacle to reaching your goals. Consider why you are struggling, when you have no motivation to complete a task (or even start one). Then, develop a plan to help motivate yourself to get going."
+          },
+          {
+            "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:37",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:3",
+            "text": "Reward yourself for working. Create a small reward for yourself that you can earn for your hard work. Focus on the reward to keep your motivation alive. Consider whether you are likely to be more motivated by smaller, more frequent rewards or a bigger reward for a complete job. You may want to experiment with a few different strategies until you discover an approach that works best for you."
+          },
+          {
+            "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:38",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:4",
+            "text": "Act as if you feel motivated. You can trick yourself into feeling motivated by changing your behavior. For example, rather than sit on the couch all day waiting for motivation to strike, get dressed and get moving. Your action will increase your motivation, which makes it easier to keep going."
+          },
+          {
+            "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+            "text": "Argue the opposite. Struggling with motivation, you’ll likely come up with reasons why you shouldn’t take any action. These will keep you stuck. Instead, argue all the reasons why you might succeed. Arguing the opposite can help you see both sides of the coin. It can also remind you that an overly pessimistic outcome isn’t completely accurate. There’s a chance that things might work out better than you expect."
+          },
+          {
+            "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40",
+            "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+            "text": "Manage your to-do list. It’s tough to feel motivated when your to-do list is overwhelming. Take a look at your list, and determine if it’s too long. If so, get rid of tasks that aren’t essential. Prioritize the most important things, and move those to the top. You might find a slight change in your to-do list – or the way you view your to-do list – will help you to see your tasks as more manageable. Eventually, you feel more driven to move on."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+                "start": 147,
+                "end": 167,
+                "quote": "Then, develop a plan"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+                "start": 60,
+                "end": 69,
+                "quote": "然后，制定一个计划"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:3",
+                "start": 29,
+                "end": 63,
+                "quote": "Create a small reward for yourself"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:3",
+                "start": 8,
+                "end": 17,
+                "quote": "给自己设一个小奖励"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:4",
+                "start": 8,
+                "end": 79,
+                "quote": "You can trick yourself into feeling motivated by changing your behavior"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:4",
+                "start": 8,
+                "end": 27,
+                "quote": "你可以通过改变行为来“骗”自己产生动力"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+                "start": 75,
+                "end": 116,
+                "quote": "reasons why you shouldn’t take any action"
+              },
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+                "start": 126,
+                "end": 133,
+                "quote": "Instead"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+                "start": 21,
+                "end": 34,
+                "quote": "种种自己不该采取行动的理由"
+              },
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+                "start": 47,
+                "end": 49,
+                "quote": "相反"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+                "start": 351,
+                "end": 401,
+                "quote": "will help you to see your tasks as more manageable"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+                "start": 115,
+                "end": 129,
+                "quote": "就能让你觉得这些任务更好应付"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:36"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:36",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+                "start": 71,
+                "end": 102,
+                "quote": "Consider why you are struggling"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+                "start": 44,
+                "end": 59,
+                "quote": "想一想自己为什么会这样举步维艰"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:37"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:37",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:3",
+                "start": 102,
+                "end": 151,
+                "quote": "Focus on the reward to keep your motivation alive"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:3",
+                "start": 29,
+                "end": 49,
+                "quote": "把心思放在这份奖励上，让动力一直保持下去"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:38"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:38",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:4",
+                "start": 0,
+                "end": 28,
+                "quote": "Act as if you feel motivated"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:4",
+                "start": 0,
+                "end": 7,
+                "quote": "装作自己有动力"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+                "start": 118,
+                "end": 143,
+                "quote": "These will keep you stuck"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+                "start": 35,
+                "end": 46,
+                "quote": "这些理由会让你停滞不前"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion:question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40"
+            ],
+            "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+                "start": 403,
+                "end": 446,
+                "quote": "Eventually, you feel more driven to move on"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+                "start": 130,
+                "end": 143,
+                "quote": "最终，你会更有劲头继续前进"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:1",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+                "start": 261,
+                "end": 402,
+                "quote": "You might find a slight change in your to-do list – or the way you view your to-do list – will help you to see your tasks as more manageable."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+                "start": 82,
+                "end": 129,
+                "quote": "你可能会发现，对待办清单稍作改动——或者稍微改变你看待它的方式——就能让你觉得这些任务更好应付"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure:sentence:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39"
+            ],
+            "selectedSentenceId": "sentence:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+            "sourceRanges": [
+              {
+                "textId": "source:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+                "start": 20,
+                "end": 117,
+                "quote": "Struggling with motivation, you’ll likely come up with reasons why you shouldn’t take any action."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices",
+                "paragraphId": "translation-paragraph:group:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+                "start": 6,
+                "end": 34,
+                "quote": "在为动力发愁时，你很可能会想出种种自己不该采取行动的理由"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:36": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Lack of motivation",
+        "biggest obstacle",
+        "no motivation to complete a task",
+        "develop a plan"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:2",
+        "beforeQuote": "Lack of motivation can be the biggest obstacle to reaching your goals.",
+        "afterQuote": "when you have no motivation to complete a task (or even start one). Then, develop a plan to help motivate yourself to get going."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Then",
+          "signalSide": "context-after",
+          "targetText": "Consider why you are struggling",
+          "relation": "Then 标出第二步是定计划，空里要放排在它前面的第一步。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Consider why",
+          "signalSide": "option",
+          "targetText": "Then, develop a plan",
+          "relation": "先想清原因，才轮到定计划，两句排成先后两步。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "struggling",
+          "signalSide": "option",
+          "targetText": "no motivation",
+          "relation": "struggling 说的就是空后 no motivation 时做不下去的状态。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "no motivation",
+          "signalSide": "context-after",
+          "targetText": "struggling",
+          "relation": "空后交代的困境，正是选项要你去想原因的对象。"
+        }
+      ],
+      "lock": [
+        "Then",
+        "struggling"
+      ],
+      "find": {
+        "text": "空后 \"Then, develop a plan\" 是第二步，空里要放定计划之前的一步；只有 \"Consider why you are struggling\" 是先找原因，其余祈使句都已是具体办法。",
+        "quotes": [
+          "Then, develop a plan",
+          "Consider why you are struggling"
+        ]
+      },
+      "explain": "空前说缺乏动力是大障碍，这句给出第一步：先弄清自己卡在哪；空后 Then 接上第二步定计划，后面几段再逐条给出具体办法。",
+      "distractors": [
+        {
+          "label": "B",
+          "text": "\"Act as if you feel motivated\" 能接空后的没有动力，但它本身就是办法，放在 \"Then, develop a plan\" 前面就重复了。",
+          "quotes": [
+            "Act as if you feel motivated",
+            "Then, develop a plan"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Then, develop a plan",
+            "optionSide": "Consider why you are struggling",
+            "relation": "先想清为什么做不下去，再定计划，两句构成先后两步。"
+          }
+        ],
+        "correctOptionLabel": "D",
+        "fitSummary": "空前说缺乏动力是大障碍，这句给出第一步：先弄清自己卡在哪；空后 Then 接上第二步定计划，后面几段再逐条给出具体办法。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "\"Act as if you feel motivated\" 能接空后的没有动力，但它本身就是办法，放在 \"Then, develop a plan\" 前面就重复了。"
+        },
+        {
+          "optionLabel": "C",
+          "reason": "选项的 \"a tough task\" 复现第 36 题空后的 \"complete a task\"。但空后 \"Then, develop a plan\" 要的是定计划前的第一步，它已是一个办法，而且 Pair 缺了和什么搭配。放到第 38 题也不行，空后讲的是 \"trick yourself into feeling motivated\"。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:37": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Reward yourself for working",
+        "a small reward",
+        "your hard work",
+        "more motivated",
+        "more frequent rewards"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:3",
+        "beforeQuote": "Create a small reward for yourself that you can earn for your hard work.",
+        "afterQuote": "Consider whether you are likely to be more motivated by smaller, more frequent rewards or a bigger reward for a complete job."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the reward",
+          "signalSide": "option",
+          "targetText": "a small reward",
+          "relation": "the reward 用定冠词回指空前刚设下的 a small reward。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "a small reward",
+          "signalSide": "context-before",
+          "targetText": "the reward",
+          "relation": "空前先引出奖励，选项才能用 the 来指它。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "keep your motivation alive",
+          "signalSide": "option",
+          "targetText": "more motivated",
+          "relation": "用奖励维持动力，空后接着比较哪种奖励更能激励人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "more motivated",
+          "signalSide": "context-after",
+          "targetText": "keep your motivation alive",
+          "relation": "空后谈奖励激励效果的大小，承接选项说的靠奖励保持动力。"
+        }
+      ],
+      "lock": [
+        "a small reward",
+        "the reward"
+      ],
+      "find": {
+        "text": "空前刚提出 \"a small reward\"，选项用 \"the reward\" 回指它；七个选项里只有这一句提到奖励。",
+        "quotes": [
+          "a small reward",
+          "the reward"
+        ]
+      },
+      "explain": "空前教你设奖励，这句说设了之后怎么用：盯住它来撑住干劲；空后接着比较小而频繁的奖励和完工后的大奖励哪种更管用，三句都围着奖励推进。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "a small reward",
+            "optionSide": "the reward",
+            "relation": "定冠词回指空前的小奖励。"
+          },
+          {
+            "contextSide": "more motivated",
+            "optionSide": "keep your motivation alive",
+            "relation": "都在说奖励怎样带来动力。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "空前教你设奖励，这句说设了之后怎么用：盯住它来撑住干劲；空后接着比较小而频繁的奖励和完工后的大奖励哪种更管用，三句都围着奖励推进。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:38": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:38",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "trick yourself into feeling motivated",
+        "changing your behavior",
+        "get dressed and get moving",
+        "Your action will increase your motivation"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:4",
+        "beforeQuote": "",
+        "afterQuote": "You can trick yourself into feeling motivated by changing your behavior."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Act as if",
+          "signalSide": "option",
+          "targetText": "trick yourself",
+          "relation": "装作有动力，就是空后说的“骗”自己。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "feel motivated",
+          "signalSide": "option",
+          "targetText": "feeling motivated",
+          "relation": "选项和空后都落在“感到有动力”上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "trick yourself into feeling motivated",
+          "signalSide": "context-after",
+          "targetText": "Act as if you feel motivated",
+          "relation": "空后解释这条建议的原理：先装出来，动力随后就来。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "changing your behavior",
+          "signalSide": "context-after",
+          "targetText": "Act",
+          "relation": "改变行为对应选项里的 Act，即先动起来。"
+        }
+      ],
+      "lock": [
+        "trick yourself",
+        "feeling motivated"
+      ],
+      "find": {
+        "text": "先看空后 \"trick yourself into feeling motivated\"：骗自己有动力，就是 \"Act as if you feel motivated\"；\"changing your behavior\" 也对上 Act。",
+        "quotes": [
+          "trick yourself into feeling motivated",
+          "Act as if you feel motivated",
+          "changing your behavior"
+        ]
+      },
+      "explain": "和其他几段一样，本段用一句祈使句开头给出办法；后文先讲原理，靠改变行为带出动力，再举起身穿衣的例子，最后说行动会让动力越来越足。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "trick yourself into feeling motivated",
+            "optionSide": "Act as if you feel motivated",
+            "relation": "装作有动力就是“骗”自己产生动力。"
+          }
+        ],
+        "correctOptionLabel": "B",
+        "fitSummary": "和其他几段一样，本段用一句祈使句开头给出办法；后文先讲原理，靠改变行为带出动力，再举起身穿衣的例子，最后说行动会让动力越来越足。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "Struggling with motivation",
+        "reasons why you shouldn’t take any action",
+        "argue all the reasons",
+        "you might succeed"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:5",
+        "beforeQuote": "Struggling with motivation, you’ll likely come up with reasons why you shouldn’t take any action.",
+        "afterQuote": "Instead, argue all the reasons why you might succeed."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "These",
+          "signalSide": "option",
+          "targetText": "reasons why you shouldn’t take any action",
+          "relation": "These 是复数指代，回指空前那些不该行动的理由。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "reasons why you shouldn’t take any action",
+          "signalSide": "context-before",
+          "targetText": "These",
+          "relation": "空前给出复数先行词，These 才有着落。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Instead",
+          "signalSide": "context-after",
+          "targetText": "keep you stuck",
+          "relation": "Instead 引出相反的做法：不再列不行动的理由，改列能成功的理由。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "stuck",
+          "signalSide": "option",
+          "targetText": "shouldn’t take any action",
+          "relation": "stuck 写出不行动带来的后果：原地不动。"
+        }
+      ],
+      "lock": [
+        "These",
+        "reasons why you shouldn’t take any action",
+        "Instead"
+      ],
+      "find": {
+        "text": "\"These\" 要有复数先行词，空前 \"reasons why you shouldn’t take any action\" 正好；空后 \"Instead\" 再转去列成功的理由。",
+        "quotes": [
+          "These",
+          "reasons why you shouldn’t take any action",
+          "Instead"
+        ]
+      },
+      "explain": "空前说动力不足时人会给自己找不行动的理由，这句点出这样做的后果：越找越动不了；空后 Instead 给出对策，改为列出可能成功的理由。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "reasons why you shouldn’t take any action",
+            "optionSide": "These",
+            "relation": "复数指代回指空前的理由。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "空前说动力不足时人会给自己找不行动的理由，这句点出这样做的后果：越找越动不了；空后 Instead 给出对策，改为列出可能成功的理由。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "选项的 \"successes\" 和第 39 题空后的 \"you might succeed\" 同根，像在讲积极的一面。但空后 \"Instead\" 要求空里是消极的说法才转得过来，F 本身已是积极做法。放到第 38 题，空后 \"changing your behavior\" 讲的是行动，不是回想过去。"
+        }
+      ]
+    },
+    "question:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40": {
+      "blankId": "blank:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:40",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "It’s tough to feel motivated",
+        "overwhelming",
+        "get rid of tasks",
+        "Prioritize the most important things",
+        "more manageable"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-sichuan-leshan-zigong-yibin-2025-m2:seven-choices:6",
+        "beforeQuote": "You might find a slight change in your to-do list – or the way you view your to-do list – will help you to see your tasks as more manageable.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Eventually",
+          "signalSide": "option",
+          "targetText": "will help you to see your tasks as more manageable",
+          "relation": "Eventually 引出调整清单之后最终得到的结果。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "more driven",
+          "signalSide": "option",
+          "targetText": "It’s tough to feel motivated",
+          "relation": "更有劲头，回应本段开头说的清单太满就难有动力。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "more manageable",
+          "signalSide": "context-before",
+          "targetText": "more driven to move on",
+          "relation": "任务显得好应付了，人才更愿意往下做。"
+        }
+      ],
+      "lock": [
+        "Eventually",
+        "more manageable"
+      ],
+      "find": {
+        "text": "空前说调整后任务显得 \"more manageable\"，空里要接它带来的结果；\"Eventually\" 正好引出最终更有劲头往前走。",
+        "quotes": [
+          "more manageable",
+          "Eventually"
+        ]
+      },
+      "explain": "本段从清单太长讲到删减和排序，空前说调整后任务显得好应付，这句落在最终结果上：动力回来了，和段首说的清单太满难有动力首尾呼应。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "more manageable",
+            "optionSide": "Eventually, you feel more driven to move on",
+            "relation": "任务好应付是因，更有劲头是最终的果。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "本段从清单太长讲到删减和排序，空前说调整后任务显得好应付，这句落在最终结果上：动力回来了，和段首说的清单太满难有动力首尾呼应。"
+      },
+      "keyDistractors": []
+    }
+  }
+}
