@@ -1,0 +1,1063 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-hebei-tangshan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-tangshan-2025-01:grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-tangshan-2025-01:grammar-fill": {
+      "overview": "文章介绍中国古典文学的地位和价值：它植根于数千年历史，蕴含智慧、行为规范和真挚情感，记录朝代更替，在快速变化的世界里仍维系着中国人的文化认同和代际联系。",
+      "fullTranslationZh": "中国古典文学在中国的文化肌理中占有重要地位。这些文学瑰宝植根于数千年的历史，传达着中国思想的精髓，为了解世界上最古老的文明之一的文化变迁提供了一扇窗口。\n中国古典文学就像一个百宝箱，装满了智慧、良言和深刻的思想。儒家经典，如《论语》和《孟子》，就像重要的基石，长久以来帮助确立了中国人应当如何为人处世的规范。诗歌，尤其是李白等唐代诗人的诗作，就像永恒的歌，诗人借助它们表达中国人对生活、自然的感受以及他们强烈的情感。\n古典文学就像一部讲述朝代更替的大型史书。《史记》和《三国演义》等书不只是故事，更是一扇扇特别的窗口，让我们看到那个时代许多人所经历的事。\n在一个快速变化的世界里，中国古典文学就像一块文化基石，增进了中国人的联结感和认同感。它的特别之处在于它不会过时。这使它成为一个绝佳的媒介，让不同代际的人都能与构成中国人思维方式的价值观和梦想紧密相连。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-grammar-1",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+          "sourceText": "This makes __64__ a great medium for different generations to feel a strong link to the values and dreams that make __65__ the Chinese way of thinking.",
+          "displayText": "This makes it a great medium for different generations to feel a strong link to the values and dreams that make up the Chinese way of thinking.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:64",
+            "question:paper-mock-hebei-tangshan-2025-01:65"
+          ],
+          "translationZh": "这使它成为一个绝佳的媒介，让不同代际的人都能与构成中国人思维方式的价值观和梦想紧密相连。",
+          "analysisZh": "主干是“这使它成为一个绝佳的媒介”（This makes it a great medium），它（it）作宾语，名词短语（a great medium）补充说明宾语。“让不同代际的人感受到……”（for different generations to feel …）是带逻辑主语的不定式，修饰媒介，说明它的用途。关系词（that）引导定语从句修饰“价值观和梦想”（the values and dreams），从句谓语是“构成”（make up）。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 28,
+              "quote": "This makes it a great medium"
+            },
+            {
+              "start": 29,
+              "end": 76,
+              "quote": "for different generations to feel a strong link"
+            },
+            {
+              "start": 102,
+              "end": 142,
+              "quote": "that make up the Chinese way of thinking"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-grammar-2",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+          "sourceText": "The poems, particularly those by Tang poets like Li Bai, are like timeless songs, through __60__ the poets express the Chinese feelings towards life, nature, and their intense emotions.",
+          "displayText": "The poems, particularly those by Tang poets like Li Bai, are like timeless songs, through which the poets express the Chinese feelings towards life, nature, and their intense emotions.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:60"
+          ],
+          "translationZh": "诗歌，尤其是李白等唐代诗人的诗作，就像永恒的歌，诗人借助它们表达中国人对生活、自然的感受以及他们强烈的情感。",
+          "analysisZh": "主干是“诗歌就像永恒的歌”（The poems … are like timeless songs）。两个逗号之间的插入语（particularly those by Tang poets like Li Bai）举例说明是哪些诗，其中那些（those）指诗歌。“介词加关系词”（through which）引导定语从句修饰“永恒的歌”，从句主干是“诗人表达……”（the poets express …），宾语是感受（feelings）和情感（emotions）。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 9,
+              "quote": "The poems"
+            },
+            {
+              "start": 57,
+              "end": 80,
+              "quote": "are like timeless songs"
+            },
+            {
+              "start": 82,
+              "end": 113,
+              "quote": "through which the poets express"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-grammar-fill",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-grammar-fill",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1"
+              ],
+              "start": 0,
+              "end": 76,
+              "quote": "中国古典文学在中国的文化肌理中占有重要地位。这些文学瑰宝植根于数千年的历史，传达着中国思想的精髓，为了解世界上最古老的文明之一的文化变迁提供了一扇窗口。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2"
+              ],
+              "start": 77,
+              "end": 208,
+              "quote": "中国古典文学就像一个百宝箱，装满了智慧、良言和深刻的思想。儒家经典，如《论语》和《孟子》，就像重要的基石，长久以来帮助确立了中国人应当如何为人处世的规范。诗歌，尤其是李白等唐代诗人的诗作，就像永恒的歌，诗人借助它们表达中国人对生活、自然的感受以及他们强烈的情感。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3"
+              ],
+              "start": 209,
+              "end": 277,
+              "quote": "古典文学就像一部讲述朝代更替的大型史书。《史记》和《三国演义》等书不只是故事，更是一扇扇特别的窗口，让我们看到那个时代许多人所经历的事。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4"
+              ],
+              "start": 278,
+              "end": 378,
+              "quote": "在一个快速变化的世界里，中国古典文学就像一块文化基石，增进了中国人的联结感和认同感。它的特别之处在于它不会过时。这使它成为一个绝佳的媒介，让不同代际的人都能与构成中国人思维方式的价值观和梦想紧密相连。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+            "text": "Chinese classical literature holds a vital position in the cultural fabric of China. Rooted in a history extending for thousands of years, these literary treasures convey the core of Chinese thought, providing a window into the cultural transition of one of the world’s oldest civilizations."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+            "text": "Chinese classical literature is like a treasure chest filled with wisdom, good advice, and deep thoughts. The Confucian classics, such as The Analects and Mencius, are like the important building blocks that have helped create the rules for how people should behave in China for a very long time. The poems, particularly those by Tang poets like Li Bai, are like timeless songs, through which the poets express the Chinese feelings towards life, nature, and their intense emotions."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3",
+            "text": "Classical literature is like a large history book that narrates the transition of dynasties. Books like Records of the Grand Historian and Romance of the Three Kingdoms are not just stories, but special windows that let us see what many people were experiencing/experienced during those times."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+            "text": "In a rapidly changing world, Chinese classical literature is like a cultural cornerstone, encouraging a sense of connection and identity for the Chinese people. The special thing about it is that it doesn’t get old. This makes it a great medium for different generations to feel a strong link to the values and dreams that make up the Chinese way of thinking."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-56",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:56"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 146,
+                "end": 170,
+                "quote": "these literary treasures"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 99,
+                "end": 111,
+                "quote": "in a history"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 22,
+                "end": 28,
+                "quote": "这些文学瑰宝"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 31,
+                "end": 37,
+                "quote": "数千年的历史"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-56",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:56"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:56",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 85,
+                "end": 91,
+                "quote": "Rooted"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 28,
+                "end": 31,
+                "quote": "植根于"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-57",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:57"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 258,
+                "end": 283,
+                "quote": "one of the world’s oldest"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 52,
+                "end": 59,
+                "quote": "世界上最古老的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-57",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:57"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:57",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 277,
+                "end": 290,
+                "quote": "civilizations"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:1",
+                "start": 59,
+                "end": 61,
+                "quote": "文明"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-58",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:58"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 54,
+                "end": 65,
+                "quote": "filled with"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 81,
+                "end": 111,
+                "quote": "good advice, and deep thoughts"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 14,
+                "end": 17,
+                "quote": "装满了"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 20,
+                "end": 28,
+                "quote": "良言和深刻的思想"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-58",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:58"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:58",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 66,
+                "end": 72,
+                "quote": "wisdom"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 17,
+                "end": 19,
+                "quote": "智慧"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-59",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:59"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 234,
+                "end": 247,
+                "quote": "the rules for"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 255,
+                "end": 275,
+                "quote": "people should behave"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 69,
+                "end": 76,
+                "quote": "为人处世的规范"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-59",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:59"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:59",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 241,
+                "end": 244,
+                "quote": "how"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 67,
+                "end": 69,
+                "quote": "如何"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-60",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:60"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 373,
+                "end": 387,
+                "quote": "timeless songs"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 96,
+                "end": 100,
+                "quote": "永恒的歌"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-60",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:60"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:60",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 387,
+                "end": 392,
+                "quote": "which"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 103,
+                "end": 107,
+                "quote": "借助它们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-61",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:61"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3",
+                "start": 232,
+                "end": 243,
+                "quote": "many people"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3",
+                "start": 264,
+                "end": 282,
+                "quote": "during those times"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3",
+                "start": 55,
+                "end": 62,
+                "quote": "那个时代许多人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-61",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:61"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:61",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3",
+                "start": 244,
+                "end": 273,
+                "quote": "were experiencing/experienced"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:3",
+                "start": 62,
+                "end": 66,
+                "quote": "所经历的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-62",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:62"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 20,
+                "end": 34,
+                "quote": "changing world"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 5,
+                "end": 10,
+                "quote": "变化的世界"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-62",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:62"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:62",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 5,
+                "end": 12,
+                "quote": "rapidly"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 3,
+                "end": 5,
+                "quote": "快速"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-63",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:63"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 36,
+                "end": 95,
+                "quote": "Chinese classical literature is like a cultural cornerstone"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 12,
+                "end": 26,
+                "quote": "中国古典文学就像一块文化基石"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-63",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:63"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:63",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 90,
+                "end": 101,
+                "quote": "encouraging"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 27,
+                "end": 30,
+                "quote": "增进了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-64",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:64"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 210,
+                "end": 228,
+                "quote": "it doesn’t get old"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 230,
+                "end": 240,
+                "quote": "This makes"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 50,
+                "end": 55,
+                "quote": "它不会过时"
+              },
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 56,
+                "end": 58,
+                "quote": "这使"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-64",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:64"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:64",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 227,
+                "end": 229,
+                "quote": "it"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 58,
+                "end": 59,
+                "quote": "它"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-65",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:65"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 314,
+                "end": 335,
+                "quote": "the values and dreams"
+              },
+              {
+                "textId": "src-grammar-fill",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 353,
+                "end": 380,
+                "quote": "the Chinese way of thinking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 81,
+                "end": 95,
+                "quote": "中国人思维方式的价值观和梦想"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-65",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:65"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:65",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 328,
+                "end": 330,
+                "quote": "up"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 79,
+                "end": 81,
+                "quote": "构成"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-grammar-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:64",
+              "question:paper-mock-hebei-tangshan-2025-01:65"
+            ],
+            "selectedSentenceId": "ls-grammar-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 216,
+                "end": 244,
+                "quote": "This makes it a great medium"
+              },
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 318,
+                "end": 358,
+                "quote": "that make up the Chinese way of thinking"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:4",
+                "start": 56,
+                "end": 100,
+                "quote": "这使它成为一个绝佳的媒介，让不同代际的人都能与构成中国人思维方式的价值观和梦想紧密相连。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-grammar-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:60"
+            ],
+            "selectedSentenceId": "ls-grammar-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 354,
+                "end": 410,
+                "quote": "are like timeless songs, through which the poets express"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-grammar-fill",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:grammar-fill:2",
+                "start": 77,
+                "end": 131,
+                "quote": "诗歌，尤其是李白等唐代诗人的诗作，就像永恒的歌，诗人借助它们表达中国人对生活、自然的感受以及他们强烈的情感。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "blanks": {
+    "question:paper-mock-hebei-tangshan-2025-01:56": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:56",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "root",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "Rooted",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-passive",
+        "features": []
+      },
+      "reason": "句中已有谓语（convey），空格引出的短语放在句首作状语，补充说明主语“这些文学瑰宝”（these literary treasures）。瑰宝是被“扎根”于历史之中的（be rooted in），与动词是被动关系，用过去分词，句首大写为（Rooted）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "these literary treasures",
+          "signalSide": "passage",
+          "relation": "短语的逻辑主语是这些文学瑰宝，它们是被扎根于历史的。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "convey",
+          "signalSide": "passage",
+          "relation": "主句谓语已经是“传达”（convey），句首的空格只能用非谓语。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "in a history",
+          "signalSide": "passage",
+          "relation": "“扎根于”（be rooted in）中的介词（in）与过去分词相接。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:57": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:57",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "civilization",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "civilizations",
+      "role": null,
+      "similarityProfile": {
+        "route": "quantity-determiner",
+        "features": []
+      },
+      "reason": "空格是“……之一”（one of）后面的中心名词，表示世界上最古老的文明之一；“……之一”后接可数名词复数，所以用（civilizations）。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "one of the world’s oldest",
+          "signalSide": "passage",
+          "relation": "“……之一”（one of）后接可数名词复数。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:58": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:58",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "wise",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
+      "answer": "wisdom",
+      "role": null,
+      "similarityProfile": {
+        "route": "derived-noun",
+        "features": []
+      },
+      "reason": "空格作介词（with）的宾语，与“好建议”（good advice）、“深刻思想”（deep thoughts）并列，需要名词；形容词（wise）对应的名词是（wisdom）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "filled with",
+          "signalSide": "passage",
+          "relation": "介词（with）后要接名词作宾语。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "good advice, and deep thoughts",
+          "signalSide": "passage",
+          "relation": "与两个名词短语并列，空格也要是名词。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:59": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:59",
+      "blankNo": 59,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "how",
+      "role": null,
+      "similarityProfile": {
+        "route": "when-where-why-how",
+        "features": [
+          "object-clause"
+        ]
+      },
+      "reason": "空格引导的从句作介词（for）的宾语，说明是关于什么的规范；从句“人们应当举止”（people should behave）主谓齐全，缺的是方式，即人们应当怎样为人处世，所以用（how）。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "people should behave",
+          "signalSide": "passage",
+          "relation": "从句主谓完整，不缺主宾，缺的是方式状语。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "the rules for",
+          "signalSide": "passage",
+          "relation": "介词（for）后接宾语从句，说明规范的内容。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:60": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:60",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "similarityProfile": {
+        "route": "preposition-relative",
+        "features": [
+          "thing",
+          "non-restrictive"
+        ]
+      },
+      "reason": "空格引导定语从句修饰先行词“永恒的歌”（timeless songs），关系词放在介词（through）后作宾语，指物，所以用（which），意思是诗人借助这些歌来表达情感。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "timeless songs",
+          "signalSide": "passage",
+          "relation": "先行词是物，介词后的关系词用（which）。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "the poets express",
+          "signalSide": "passage",
+          "relation": "从句主谓宾齐全，关系词只作介词（through）的宾语。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:61": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:61",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "experience",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "were experiencing/experienced",
+      "role": null,
+      "similarityProfile": {
+        "route": "past-progressive-background",
+        "features": []
+      },
+      "reason": "空格是宾语从句（what many people …）的谓语，主语是“许多人”（many people）；“在那些时代”（during those times）指过去，强调当时正在经历的事用过去进行时（were experiencing），只说经历过的事用一般过去时（experienced）也可以。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "during those times",
+          "signalSide": "passage",
+          "relation": "指过去的朝代，谓语用过去的时态。"
+        },
+        {
+          "type": "subject",
+          "signalText": "many people",
+          "signalSide": "passage",
+          "relation": "从句主语是复数，过去进行时的助动词用（were）。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:62": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:62",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "rapid",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "rapidly",
+      "role": null,
+      "similarityProfile": {
+        "route": "modify-non-finite",
+        "features": []
+      },
+      "reason": "空格修饰现在分词（changing），说明世界变化得快；修饰分词要用副词，形容词（rapid）变副词为（rapidly）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "changing world",
+          "signalSide": "passage",
+          "relation": "空格修饰现在分词（changing），要用副词。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:63": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:63",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "encourage",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "encouraging",
+      "role": "adverbial",
+      "similarityProfile": {
+        "route": "adverbial-active",
+        "features": []
+      },
+      "reason": "句中已有谓语（is like），空格引出的短语用逗号隔开作状语，补充说明主语“中国古典文学”（Chinese classical literature）起的作用；文学主动增进联结感和认同感，与动词是主动关系，用现在分词（encouraging）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "Chinese classical literature",
+          "signalSide": "passage",
+          "relation": "分词的逻辑主语是中国古典文学，它主动增进联结感。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "is like a cultural cornerstone",
+          "signalSide": "passage",
+          "relation": "主句谓语已有“就像”（is like），空格只能用非谓语。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:64": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:64",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.pronoun",
+      "answer": "it",
+      "role": null,
+      "similarityProfile": {
+        "route": "referential-it",
+        "features": []
+      },
+      "reason": "空格作动词（makes）的宾语，后面的“一个绝佳的媒介”（a great medium）补充说明它；它指的就是前句说的不会过时的中国古典文学（it doesn’t get old），单数指物，用（it）。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "it doesn’t get old",
+          "signalSide": "passage",
+          "relation": "前句的“它”（it）指中国古典文学，这里沿用同一个代词。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "This makes",
+          "signalSide": "passage",
+          "relation": "动词（makes）后缺宾语，宾语后接名词短语作补足语。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:65": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:65",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "up",
+      "role": null,
+      "similarityProfile": {
+        "route": "fixed-collocation",
+        "features": []
+      },
+      "reason": "空格接在定语从句的谓语（make）后面，宾语是“中国人的思维方式”（the Chinese way of thinking）；价值观和梦想“构成”这种思维方式，构成要用（make up），所以填（up）。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "that make",
+          "signalSide": "passage",
+          "relation": "“构成”（make up）要补出小品词（up）。"
+        },
+        {
+          "type": "antecedent",
+          "signalText": "the values and dreams",
+          "signalSide": "passage",
+          "relation": "先行词是价值观和梦想，它们构成中国人的思维方式。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1928 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-hebei-tangshan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-tangshan-2025-01:cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-tangshan-2025-01:cloze": {
+      "overview": "作者在饭桌上挖苦朋友发的励志图片，被十七岁的女儿批评爱取笑一切。她反思后定下新年决心不再挖苦人，几天后对冷淡的超市收银员报以微笑，对方也回以微笑，她心里轻松了许多。",
+      "fullTranslationZh": "海豚。我就是因为它惹上了麻烦。家人正在吃晚饭，我提起了这件事。我说起一位朋友总发些过分励志的语录，配着彩虹、日落、心形云朵的照片，凡是你想得到的都有。“现在她又改发海豚了，不知道下一个会不会轮到虎鲸。”家里人都笑了，只有我 17 岁的女儿玛吉没笑。“妈妈，你太爱挖苦人了。你什么都要取笑。”我想争辩，可玛吉摆出青少年那副冷冰冰的样子，不理我。\n我整夜都在想玛吉说的话。她说得对吗？我是不是太爱挖苦人了？其实我并不是个刻薄的人。可在相处自在的人身边，我确实爱拿各种事情开玩笑。\n于是今年的新年决心，我决定不再挖苦人。头几天，我嘴上不再说挖苦话，可那些评论还是在脑子里不停地冒出来。不过，我控制住了它们。渐渐地，我不仅做到了不再挖苦人，还能善待他人。\n几天后，我去了常去的那家超市。收银员是个冷淡的女人，除了那句按规定要说的“欢迎”，几乎什么都不说。我注意到她似乎不开心，就没有像往常那样回应她。相反，我只是同情她。我做了一件以前从没做过的事：我对她笑了笑。她也回了我一个微笑。离开商店时，不知怎么的，我觉得心里轻松了许多。",
+      "mainLine": {
+        "theme": {
+          "text": "收起挖苦、真心善待别人，善意会得到回应，自己也更轻松（She smiled back.）。",
+          "quote": "She smiled back."
+        },
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+            "text": "作者饭桌上挖苦朋友发的图，女儿说她爱挖苦人。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+            "text": "作者整夜反思，承认自己在熟人面前爱取笑别人。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+            "text": "作者定下新年决心不再挖苦，渐渐学会善待他人。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+            "text": "作者对冷淡的收银员微笑，对方回以微笑，她感到轻松。"
+          }
+        ],
+        "emotion": "得意→被批评不服→反思→下决心改变→轻松"
+      },
+      "selectedLongSentences": [
+        {
+          "sentenceId": "ls-cloze-1",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+          "sourceText": "The check-out clerk was a sour woman who rarely said anything apart from the __52__ “welcome”.",
+          "displayText": "The check-out clerk was a sour woman who rarely said anything apart from the required “welcome”.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:52"
+          ],
+          "translationZh": "收银员是个冷淡的女人，除了那句按规定要说的“欢迎”，几乎什么都不说。",
+          "analysisZh": "主干是“收银员是个冷淡的女人”（The check-out clerk was a sour woman）。关系词（who）引导定语从句修饰“女人”（woman），说明她冷淡在哪里：几乎什么都不说（rarely said anything）。“除了”（apart from）引出唯一的例外，那句按规定要说的“欢迎”（the required “welcome”）。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 36,
+              "quote": "The check-out clerk was a sour woman"
+            },
+            {
+              "start": 37,
+              "end": 61,
+              "quote": "who rarely said anything"
+            },
+            {
+              "start": 62,
+              "end": 95,
+              "quote": "apart from the required “welcome”"
+            }
+          ]
+        },
+        {
+          "sentenceId": "ls-cloze-2",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+          "sourceText": "Gradually, I managed not only to stop being snarky, but to be __51__ to others.",
+          "displayText": "Gradually, I managed not only to stop being snarky, but to be kind to others.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:51"
+          ],
+          "translationZh": "渐渐地，我不仅做到了不再挖苦人，还能善待他人。",
+          "analysisZh": "主干是“我做到了……”（I managed to do）。“不仅……而且”（not only … but）连接两个不定式，“不再挖苦人”（to stop being snarky）和“善待他人”（to be kind to others），后一项在前一项基础上更进一步。句首的“渐渐地”（Gradually）说明这个变化是一点点完成的。",
+          "underlineRanges": [
+            {
+              "start": 11,
+              "end": 20,
+              "quote": "I managed"
+            },
+            {
+              "start": 21,
+              "end": 50,
+              "quote": "not only to stop being snarky"
+            },
+            {
+              "start": 52,
+              "end": 76,
+              "quote": "but to be kind to others"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "src-cloze",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "tr-cloze",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:cloze:1"
+              ],
+              "start": 0,
+              "end": 171,
+              "quote": "海豚。我就是因为它惹上了麻烦。家人正在吃晚饭，我提起了这件事。我说起一位朋友总发些过分励志的语录，配着彩虹、日落、心形云朵的照片，凡是你想得到的都有。“现在她又改发海豚了，不知道下一个会不会轮到虎鲸。”家里人都笑了，只有我 17 岁的女儿玛吉没笑。“妈妈，你太爱挖苦人了。你什么都要取笑。”我想争辩，可玛吉摆出青少年那副冷冰冰的样子，不理我。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:cloze:2"
+              ],
+              "start": 172,
+              "end": 237,
+              "quote": "我整夜都在想玛吉说的话。她说得对吗？我是不是太爱挖苦人了？其实我并不是个刻薄的人。可在相处自在的人身边，我确实爱拿各种事情开玩笑。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:cloze:3"
+              ],
+              "start": 238,
+              "end": 323,
+              "quote": "于是今年的新年决心，我决定不再挖苦人。头几天，我嘴上不再说挖苦话，可那些评论还是在脑子里不停地冒出来。不过，我控制住了它们。渐渐地，我不仅做到了不再挖苦人，还能善待他人。"
+            },
+            {
+              "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:cloze:4"
+              ],
+              "start": 324,
+              "end": 460,
+              "quote": "几天后，我去了常去的那家超市。收银员是个冷淡的女人，除了那句按规定要说的“欢迎”，几乎什么都不说。我注意到她似乎不开心，就没有像往常那样回应她。相反，我只是同情她。我做了一件以前从没做过的事：我对她笑了笑。她也回了我一个微笑。离开商店时，不知怎么的，我觉得心里轻松了许多。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+            "text": "Dolphins. That’s how I got into trouble. My family were eating dinner when I brought it up. I mentioned a friend posting overly inspirational quotes accompanied by photos of rainbows, sunsets, heart-shaped clouds, you name it. “Now she’s moved on to dolphins, I wonder if killer whales are next.” Everyone in my family laughed, except my 17-year-old daughter, Maggie. “You’re snarky(爱挖苦的), Mom. You make fun of everything.” I wanted to argue, but Maggie gave me the teenage cold shoulder."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+            "text": "All night I thought about what Maggie had said. Was she right? Was I too snarky? Actually, I wasn’t a mean person. But around people I was comfortable with, I did tend to make fun of things."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+            "text": "So for this New Year’s Resolution, I decided I’d stop being snarky. The first few days, I wasn’t expressing the snark, but the comments kept running in my head. I, however, controlled them. Gradually, I managed not only to stop being snarky, but to be kind to others."
+          },
+          {
+            "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+            "text": "Several days later, I was in the regular supermarket. The check-out clerk was a sour woman who rarely said anything apart from the required “welcome”. Noticing she seemed sad, I didn’t give the response in my usual way. Instead, I just felt for her. I did something I’d never done before. I smiled at her. She smiled back. I left the store feeling lighter somehow."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "ev-41",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:41"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 84,
+                "end": 89,
+                "quote": "it up"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 91,
+                "end": 102,
+                "quote": "I mentioned"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 24,
+                "end": 30,
+                "quote": "提起了这件事"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 31,
+                "end": 34,
+                "quote": "我说起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-41",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:41"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:41",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 77,
+                "end": 84,
+                "quote": "brought"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 24,
+                "end": 26,
+                "quote": "提起"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-42",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:42"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 173,
+                "end": 211,
+                "quote": "rainbows, sunsets, heart-shaped clouds"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 51,
+                "end": 61,
+                "quote": "彩虹、日落、心形云朵"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-42",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:42"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:42",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 218,
+                "end": 222,
+                "quote": "name"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 65,
+                "end": 74,
+                "quote": "凡是你想得到的都有"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-43",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:43"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 239,
+                "end": 259,
+                "quote": "moved on to dolphins"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 79,
+                "end": 85,
+                "quote": "又改发海豚了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-43",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:43"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:43",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 290,
+                "end": 294,
+                "quote": "next"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 89,
+                "end": 92,
+                "quote": "下一个"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-44",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:44"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 330,
+                "end": 360,
+                "quote": "except my 17-year-old daughter"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 401,
+                "end": 423,
+                "quote": "make fun of everything"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 108,
+                "end": 123,
+                "quote": "只有我 17 岁的女儿玛吉没笑"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 136,
+                "end": 143,
+                "quote": "你什么都要取笑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-44",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:44"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:44",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 319,
+                "end": 326,
+                "quote": "laughed"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 105,
+                "end": 107,
+                "quote": "笑了"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-45",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:45"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 426,
+                "end": 448,
+                "quote": "I wanted to argue, but"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 483,
+                "end": 491,
+                "quote": "shoulder"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 145,
+                "end": 151,
+                "quote": "我想争辩，可"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-45",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:45"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:45",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 474,
+                "end": 478,
+                "quote": "cold"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 160,
+                "end": 163,
+                "quote": "冷冰冰"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-46",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:46"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 64,
+                "end": 81,
+                "quote": "Was I too snarky?"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 18,
+                "end": 29,
+                "quote": "我是不是太爱挖苦人了？"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-46",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:46"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:46",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 56,
+                "end": 61,
+                "quote": "right"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 13,
+                "end": 16,
+                "quote": "说得对"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-47",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:47"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 118,
+                "end": 158,
+                "quote": "But around people I was comfortable with"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 41,
+                "end": 51,
+                "quote": "可在相处自在的人身边"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-47",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:47"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:47",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 102,
+                "end": 106,
+                "quote": "mean"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 36,
+                "end": 38,
+                "quote": "刻薄"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-48",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:48"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 397,
+                "end": 424,
+                "quote": "You make fun of everything."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:1",
+                "start": 136,
+                "end": 144,
+                "quote": "你什么都要取笑。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-48",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:48"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:48",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 171,
+                "end": 182,
+                "quote": "make fun of"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:2",
+                "start": 56,
+                "end": 64,
+                "quote": "拿各种事情开玩笑"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-49",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:49"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 12,
+                "end": 33,
+                "quote": "New Year’s Resolution"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 44,
+                "end": 65,
+                "quote": "I’d stop being snarky"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 5,
+                "end": 9,
+                "quote": "新年决心"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 13,
+                "end": 18,
+                "quote": "不再挖苦人"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-49",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:49"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:49",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 37,
+                "end": 44,
+                "quote": "decided"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 11,
+                "end": 13,
+                "quote": "决定"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-50",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:50"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 89,
+                "end": 116,
+                "quote": "wasn’t expressing the snark"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 170,
+                "end": 185,
+                "quote": "controlled them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 24,
+                "end": 32,
+                "quote": "嘴上不再说挖苦话"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 55,
+                "end": 61,
+                "quote": "控制住了它们"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-50",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:50"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:50",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 127,
+                "end": 135,
+                "quote": "comments"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 36,
+                "end": 38,
+                "quote": "评论"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-51",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:51"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 208,
+                "end": 245,
+                "quote": "not only to stop being snarky, but to"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 256,
+                "end": 265,
+                "quote": "to others"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 67,
+                "end": 80,
+                "quote": "不仅做到了不再挖苦人，还能"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-51",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:51"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:51",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 252,
+                "end": 256,
+                "quote": "kind"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 80,
+                "end": 82,
+                "quote": "善待"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-52",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:52"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 78,
+                "end": 90,
+                "quote": "a sour woman"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 95,
+                "end": 126,
+                "quote": "rarely said anything apart from"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 20,
+                "end": 25,
+                "quote": "冷淡的女人"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 41,
+                "end": 48,
+                "quote": "几乎什么都不说"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-52",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:52"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:52",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 131,
+                "end": 139,
+                "quote": "required"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 30,
+                "end": 36,
+                "quote": "按规定要说的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-53",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:53"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 199,
+                "end": 214,
+                "quote": "in my usual way"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 63,
+                "end": 68,
+                "quote": "像往常那样"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-53",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:53"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:53",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 194,
+                "end": 202,
+                "quote": "response"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 68,
+                "end": 70,
+                "quote": "回应"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-54",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:54"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 149,
+                "end": 172,
+                "quote": "Noticing she seemed sad"
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 216,
+                "end": 223,
+                "quote": "Instead"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 49,
+                "end": 59,
+                "quote": "我注意到她似乎不开心"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 72,
+                "end": 74,
+                "quote": "相反"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-54",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:54"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:54",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 236,
+                "end": 240,
+                "quote": "felt"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 78,
+                "end": 80,
+                "quote": "同情"
+              }
+            ]
+          },
+          {
+            "annotationId": "ev-55",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:55"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 304,
+                "end": 320,
+                "quote": "She smiled back."
+              },
+              {
+                "textId": "src-cloze",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 353,
+                "end": 360,
+                "quote": "somehow"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 103,
+                "end": 113,
+                "quote": "她也回了我一个微笑。"
+              },
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 119,
+                "end": 124,
+                "quote": "不知怎么的"
+              }
+            ]
+          },
+          {
+            "annotationId": "ins-55",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:55"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:55",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 348,
+                "end": 355,
+                "quote": "lighter"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 130,
+                "end": 132,
+                "quote": "轻松"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:52"
+            ],
+            "selectedSentenceId": "ls-cloze-1",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 54,
+                "end": 90,
+                "quote": "The check-out clerk was a sour woman"
+              },
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 116,
+                "end": 149,
+                "quote": "apart from the required “welcome”"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:4",
+                "start": 15,
+                "end": 49,
+                "quote": "收银员是个冷淡的女人，除了那句按规定要说的“欢迎”，几乎什么都不说。"
+              }
+            ]
+          },
+          {
+            "annotationId": "ss-ls-cloze-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:51"
+            ],
+            "selectedSentenceId": "ls-cloze-2",
+            "sourceRanges": [
+              {
+                "textId": "done-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 201,
+                "end": 266,
+                "quote": "I managed not only to stop being snarky, but to be kind to others"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "tr-cloze",
+                "paragraphId": "tr-block:paper-mock-hebei-tangshan-2025-01:cloze:3",
+                "start": 62,
+                "end": 85,
+                "quote": "渐渐地，我不仅做到了不再挖苦人，还能善待他人。"
+              }
+            ]
+          }
+        ]
+      },
+      "affectiveArc": "得意→被批评不服→反思→下决心改变→轻松"
+    }
+  },
+  "blanks": {
+    "question:paper-mock-hebei-tangshan-2025-01:41": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:41",
+      "blankNo": 41,
+      "pos": "phrase",
+      "role": "detail",
+      "context": "晚饭时作者说起了朋友发海豚图这件事，空格要表示把话题提出来。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "空后的宾语和小品词（it up）与空格合成提起话题，下一句我说起（I mentioned）证实是在讲话。",
+        "quotes": [
+          "it up",
+          "I mentioned"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "提起",
+        "meaning": "说起海豚这个话题",
+        "reason": "晚饭时作者说起了朋友发海豚图这件事，空格要表示把话题提出来。词组看语境义：空后的宾语和小品词（it up）与空格合成提起话题，下一句我说起（I mentioned）证实是在讲话。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "tore",
+          "meaning": "撕碎；下一句我说起（I mentioned）表明作者是在讲这件事，不是撕东西。",
+          "quote": "I mentioned"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "put",
+          "meaning": "张贴、举起；作者在饭桌上说起（I mentioned）朋友发的图，不是把什么贴出来。",
+          "quote": "I mentioned"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "picked",
+          "meaning": "捡起、学会；作者只是开口说起（I mentioned）这件事，没有拾起什么东西。",
+          "quote": "I mentioned"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "it up",
+          "signalSide": "context-after",
+          "targetText": "brought it up",
+          "relation": "宾语和小品词（it up）与空格合成提起话题（bring it up）。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:42": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:42",
+      "blankNo": 42,
+      "pos": "verb",
+      "role": "detail",
+      "context": "空格接在一串照片内容后面，说这类图还有很多，不必一一列举。",
+      "find": {
+        "check": "collocation",
+        "text": "前面已列出彩虹、日落、心形云朵（rainbows, sunsets, heart-shaped clouds），再接一句“凡是你说得出的”（you name it），表示还有很多。",
+        "quotes": [
+          "rainbows, sunsets, heart-shaped clouds"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "说出名称",
+        "meaning": "凡是你想得到的",
+        "reason": "空格接在一串照片内容后面，说这类图还有很多，不必一一列举。动词看搭配：前面已列出彩虹、日落、心形云朵（rainbows, sunsets, heart-shaped clouds），再接一句“凡是你说得出的”（you name it），表示还有很多。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "like",
+          "meaning": "你喜欢它；作者正在挖苦这些过分励志的语录（overly inspirational quotes），不会接一句你喜欢它。",
+          "quote": "overly inspirational quotes"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "draw",
+          "meaning": "你画它；这些照片（photos of rainbows）是朋友发的，这里在列举内容，不是让人去画。",
+          "quote": "photos of rainbows"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "share",
+          "meaning": "你分享它；发帖分享的是那位朋友（a friend posting），这里是在列举她发的照片内容。",
+          "quote": "a friend posting"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "you",
+          "signalSide": "context-before",
+          "targetText": "you name it",
+          "relation": "空格与前后的词组成“凡是你说得出的”（you name it），放在列举之后表示还有很多。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:43": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:43",
+      "blankNo": 43,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "朋友发图的主题一换再换，作者挖苦地猜虎鲸会是接下来的那个。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "她又改发海豚了（moved on to dolphins）说明主题在一个接一个地换，作者猜虎鲸是下一个。",
+        "quotes": [
+          "moved on to dolphins"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "下一个的",
+        "meaning": "接下来要发的",
+        "reason": "朋友发图的主题一换再换，作者挖苦地猜虎鲸会是接下来的那个。形容词看语境义：她又改发海豚了（moved on to dolphins）说明主题在一个接一个地换，作者猜虎鲸是下一个。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "alive",
+          "meaning": "活着的；作者在猜朋友下次发什么（moved on to dolphins），不是关心虎鲸是死是活。",
+          "quote": "moved on to dolphins"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "dangerous",
+          "meaning": "危险的；这句接着改发海豚（moved on to dolphins）往下猜主题，与虎鲸危不危险无关。",
+          "quote": "moved on to dolphins"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "past",
+          "meaning": "过去的；改发海豚（moved on to dolphins）说明海豚是眼下的主题，虎鲸只可能在后面。",
+          "quote": "moved on to dolphins"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "killer whales are",
+          "signalSide": "context-before",
+          "targetText": "killer whales are next",
+          "relation": "空格接在系动词（are）后作表语，说虎鲸在主题顺序里排在哪里。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "moved on to",
+          "signalSide": "context-before",
+          "relation": "改发（moved on to）说明主题一个接一个，后面接的是下一个。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:44": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:44",
+      "blankNo": 44,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者的挖苦话一出口，家人的反应要和不买账的玛吉相反，是被逗笑了。",
+      "find": {
+        "check": "affect",
+        "text": "除了女儿（except my 17-year-old daughter）以外大家都一样，女儿说作者什么都取笑（make fun of everything），可见其他人是笑。",
+        "quotes": [
+          "except my 17-year-old daughter",
+          "make fun of everything"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "笑",
+        "reason": "作者的挖苦话一出口，家人的反应要和不买账的玛吉相反，是被逗笑了。动词看情感：除了女儿（except my 17-year-old daughter）以外大家都一样，女儿说作者什么都取笑（make fun of everything），可见其他人是笑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "screamed",
+          "meaning": "尖叫；作者只是开了句猜虎鲸的玩笑（I wonder if killer whales are），家人不会惊叫。",
+          "quote": "I wonder if killer whales are"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "rose",
+          "meaning": "起身；女儿接着批评作者什么都取笑（make fun of everything），衬出的是别人笑了，与起身无关。",
+          "quote": "make fun of everything"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "froze",
+          "meaning": "愣住；除了女儿（except my 17-year-old daughter）表明大家的反应和她相反，她不满，别人是被逗乐。",
+          "quote": "except my 17-year-old daughter"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Everyone in my family",
+          "signalSide": "context-before",
+          "relation": "主语是全家人，空格写他们听到玩笑后的反应。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "except my 17-year-old daughter",
+          "signalSide": "context-after",
+          "relation": "只有玛吉例外，她不觉得好笑，别人的反应是笑。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:45": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:45",
+      "blankNo": 45,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "作者想争辩，玛吉却不搭理她，空格和肩膀一词合成冷落之意。",
+      "find": {
+        "check": "collocation",
+        "text": "我想争辩，但（I wanted to argue, but）转出玛吉的态度，空格与肩膀（shoulder）搭配，只有冷淡合成冷落。",
+        "quotes": [
+          "I wanted to argue, but",
+          "shoulder"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "冷淡的",
+        "meaning": "不理睬",
+        "reason": "作者想争辩，玛吉却不搭理她，空格和肩膀一词合成冷落之意。形容词看搭配：我想争辩，但（I wanted to argue, but）转出玛吉的态度，空格与肩膀（shoulder）搭配，只有冷淡合成冷落。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "broad",
+          "meaning": "宽阔的；宽肩膀说身材，作者想争辩（I wanted to argue, but）时玛吉给的是不理睬的态度。",
+          "quote": "I wanted to argue, but"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bony",
+          "meaning": "瘦骨嶙峋的；这里讲玛吉对作者争辩（I wanted to argue, but）的回应，不是描写肩膀胖瘦。",
+          "quote": "I wanted to argue, but"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tense",
+          "meaning": "紧张的；玛吉给了作者（gave me the teenage）一个态度，是不理她，不是肩膀绷紧。",
+          "quote": "gave me the teenage"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "shoulder",
+          "signalSide": "context-after",
+          "targetText": "the cold shoulder",
+          "relation": "冷落某人（give sb the cold shoulder）是固定说法，空格修饰肩膀（shoulder）。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I wanted to argue, but",
+          "signalSide": "context-before",
+          "relation": "作者想争辩，但玛吉不接话，是冷落她。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:46": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:46",
+      "blankNo": 46,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者整夜琢磨女儿的话，开始反思，自问玛吉说得对不对。",
+      "find": {
+        "check": "echo",
+        "text": "后一问我是不是太爱挖苦人（Was I too snarky?）重提玛吉的指责，前一问就是她说得对不对。",
+        "quotes": [
+          "Was I too snarky?"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "正确的",
+        "meaning": "说得对",
+        "reason": "作者整夜琢磨女儿的话，开始反思，自问玛吉说得对不对。形容词看复现：后一问我是不是太爱挖苦人（Was I too snarky?）重提玛吉的指责，前一问就是她说得对不对。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "pessimistic",
+          "meaning": "悲观的；作者在想玛吉说的话（what Maggie had said），问的是她说得对不对，不是她心态悲观。",
+          "quote": "what Maggie had said"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "reliable",
+          "meaning": "可靠的；紧接着的我是不是太爱挖苦人（Was I too snarky?）是在核对玛吉的评价，不是看她为人。",
+          "quote": "Was I too snarky?"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "guilty",
+          "meaning": "内疚的；被批评爱挖苦的是作者（Was I too snarky?），不是玛吉做了错事。",
+          "quote": "Was I too snarky?"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Was she",
+          "signalSide": "context-before",
+          "targetText": "Was she right?",
+          "relation": "空格接在系动词（was）后作表语，判断玛吉的话对不对。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Was I too snarky?",
+          "signalSide": "context-after",
+          "relation": "这一问重提玛吉的指责，前一问就是在想她说得对不对。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:47": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:47",
+      "blankNo": 47,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "作者先替自己辩解，说自己本不是那种刻薄人，意思与挖苦人相近。",
+      "find": {
+        "check": "echo",
+        "text": "后一句但在熟人身边（But around people I was comfortable with）转回承认爱挖苦，前面否认的是和挖苦（snarky）相近的刻薄。",
+        "quotes": [
+          "But around people I was comfortable with",
+          "snarky"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "刻薄的",
+        "reason": "作者先替自己辩解，说自己本不是那种刻薄人，意思与挖苦人相近。形容词看复现：后一句但在熟人身边（But around people I was comfortable with）转回承认爱挖苦，前面否认的是和挖苦（snarky）相近的刻薄。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "greedy",
+          "meaning": "贪婪的；作者在辩解自己是不是太爱挖苦（Was I too snarky?），与贪不贪心无关。",
+          "quote": "Was I too snarky?"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ridiculous",
+          "meaning": "荒唐可笑的；后文承认的是自己爱取笑别人（I did tend to），对应刻薄，不是自己可笑。",
+          "quote": "I did tend to"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "rigid",
+          "meaning": "死板的；玛吉批评的是作者爱挖苦（You’re snarky），不是说她固执死板。",
+          "quote": "You’re snarky"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I wasn’t a",
+          "signalSide": "context-before",
+          "targetText": "I wasn’t a mean person",
+          "relation": "空格修饰“人”（person），说作者否认自己是哪种人。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Was I too snarky?",
+          "signalSide": "context-before",
+          "relation": "刻薄与爱挖苦意思相近，作者在回应这个问题。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:48": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:48",
+      "blankNo": 48,
+      "pos": "phrase",
+      "role": "main",
+      "context": "作者承认在熟人面前确实爱取笑各种事，正对上玛吉的批评。",
+      "find": {
+        "check": "echo",
+        "text": "玛吉说你什么都取笑（You make fun of everything.），作者用确实（did tend to）承认，空格重现这个词组。",
+        "quotes": [
+          "You make fun of everything.",
+          "did tend to"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "取笑",
+        "reason": "作者承认在熟人面前确实爱取笑各种事，正对上玛吉的批评。词组看复现：玛吉说你什么都取笑（You make fun of everything.），作者用确实（did tend to）承认，空格重现这个词组。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "set aside",
+          "meaning": "把事情搁置；作者承认的是玛吉那句你什么都取笑（You make fun of everything.），不是爱把事搁下。",
+          "quote": "You make fun of everything."
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "put up with",
+          "meaning": "忍受；玛吉批评作者爱取笑（make fun of everything），作者承认的是这一点，不是总在忍着。",
+          "quote": "make fun of everything"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "take down",
+          "meaning": "记下、拆除；作者承认的是玛吉说的爱取笑（You make fun of everything.），不是爱记录事情。",
+          "quote": "You make fun of everything."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I did tend to",
+          "signalSide": "context-before",
+          "targetText": "I did tend to make fun of things",
+          "relation": "倾向于（tend to）后接动词词组，宾语是各种事情（things）。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "You make fun of everything.",
+          "signalSide": "context-before",
+          "relation": "玛吉的原话在这里被作者承认，词组原样出现。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:49": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:49",
+      "blankNo": 49,
+      "pos": "verb",
+      "role": "main",
+      "context": "作者给自己定下新年目标，下决心不再挖苦人，这是改变的起点。",
+      "find": {
+        "check": "echo",
+        "text": "前面的新年决心（New Year’s Resolution）就是下决定，后接不再挖苦人（I’d stop being snarky）。",
+        "quotes": [
+          "New Year’s Resolution",
+          "I’d stop being snarky"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "决定",
+        "reason": "作者给自己定下新年目标，下决心不再挖苦人，这是改变的起点。动词看复现：前面的新年决心（New Year’s Resolution）就是下决定，后接不再挖苦人（I’d stop being snarky）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "agreed",
+          "meaning": "同意；新年决心（New Year’s Resolution）是作者自己给自己定的，不是答应别人的提议。",
+          "quote": "New Year’s Resolution"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pretended",
+          "meaning": "假装；后文她真的忍住不说（I wasn’t expressing the snark），不是假装要改。",
+          "quote": "I wasn’t expressing the snark"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "guessed",
+          "meaning": "猜测；新年决心（New Year’s Resolution）是要做到的事，不是猜出来的。",
+          "quote": "New Year’s Resolution"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I’d stop being snarky",
+          "signalSide": "context-after",
+          "targetText": "decided I’d stop being snarky",
+          "relation": "空格后接宾语从句，说作者决定了什么。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "New Year’s Resolution",
+          "signalSide": "context-before",
+          "relation": "新年决心与决定意思相应。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:50": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:50",
+      "blankNo": 50,
+      "pos": "noun",
+      "role": "main",
+      "context": "嘴上忍住了，脑子里那些想说的挖苦话还在不停冒出来。",
+      "find": {
+        "check": "echo",
+        "text": "前半句没说出口的是挖苦（wasn’t expressing the snark），后文控制住了它们（controlled them）回指脑中这些话。",
+        "quotes": [
+          "wasn’t expressing the snark",
+          "controlled them"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "评论",
+        "meaning": "想说的挖苦话",
+        "reason": "嘴上忍住了，脑子里那些想说的挖苦话还在不停冒出来。名词看复现：前半句没说出口的是挖苦（wasn’t expressing the snark），后文控制住了它们（controlled them）回指脑中这些话。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "arguments",
+          "meaning": "争论；作者忍住没说的是挖苦话（the snark），脑中打转的也是这些话，不是和谁吵架。",
+          "quote": "the snark"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "jokes",
+          "meaning": "笑话；作者要改掉的是挖苦（the snark），脑中冒出的是刻薄的评价，不是逗人笑的笑话。",
+          "quote": "the snark"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "plans",
+          "meaning": "计划；后面被压住的（controlled them）是想说出口的挖苦话，不是什么计划。",
+          "quote": "controlled them"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "kept running in my head",
+          "signalSide": "context-after",
+          "targetText": "the comments kept running in my head",
+          "relation": "空格作主语，在脑子里不停打转的是这些话。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "controlled them",
+          "signalSide": "context-after",
+          "relation": "代词（them）回指空格，被控制住的就是这些挖苦评论。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:51": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:51",
+      "blankNo": 51,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者不只停止挖苦，还更进一步，开始友善地对待别人。",
+      "find": {
+        "check": "affect",
+        "text": "不仅不再挖苦，而且（not only to stop being snarky, but to）表递进，空格要比不挖苦更好的态度，接对别人（to others）。",
+        "quotes": [
+          "not only to stop being snarky, but to",
+          "to others"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "友善的",
+        "reason": "作者不只停止挖苦，还更进一步，开始友善地对待别人。形容词看情感：不仅不再挖苦，而且（not only to stop being snarky, but to）表递进，空格要比不挖苦更好的态度，接对别人（to others）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "blind",
+          "meaning": "盲目的；对别人视而不见与递进（not only to stop being snarky, but to）方向相反，不是更进一步。",
+          "quote": "not only to stop being snarky, but to"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "humble",
+          "meaning": "谦虚的；作者改的是挖苦人（stop being snarky），后文对收银员微笑（I smiled at her）是善待，不是谦虚。",
+          "quote": "I smiled at her"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "plain",
+          "meaning": "朴素的；后文作者对收银员微笑（I smiled at her），讲的是善待别人，朴素接不上对别人。",
+          "quote": "I smiled at her"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to others",
+          "signalSide": "context-after",
+          "targetText": "be kind to others",
+          "relation": "对某人友善（be kind to sb）就是善待某人。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "not only to stop being snarky",
+          "signalSide": "context-before",
+          "relation": "递进结构，后面一项比停止挖苦更积极。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:52": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:52",
+      "blankNo": 52,
+      "pos": "adjective",
+      "role": "detail",
+      "context": "收银员几乎不说话，只说一句工作上非说不可的欢迎。",
+      "find": {
+        "check": "collocation",
+        "text": "冷淡的女人（a sour woman）除了（rarely said anything apart from）一句欢迎几乎不开口，这句是规定要说的。",
+        "quotes": [
+          "a sour woman",
+          "rarely said anything apart from"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "B",
+        "dictMeaning": "必需的",
+        "meaning": "按规定要说的",
+        "reason": "收银员几乎不说话，只说一句工作上非说不可的欢迎。形容词看搭配：冷淡的女人（a sour woman）除了（rarely said anything apart from）一句欢迎几乎不开口，这句是规定要说的。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "controlled",
+          "meaning": "受控制的；她除了欢迎几乎不开口（rarely said anything apart from），那句是规定要说的，谈不上被谁控制。",
+          "quote": "rarely said anything apart from"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "interrupted",
+          "meaning": "被打断的；她本来就很少说话（rarely said anything apart from），只说一句欢迎，这里不是在讲谁打断她。",
+          "quote": "rarely said anything apart from"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teased",
+          "meaning": "被取笑的；收银员是个冷淡的人（a sour woman），那句欢迎是例行公事，不是被人取笑的话。",
+          "quote": "a sour woman"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "welcome",
+          "signalSide": "context-after",
+          "targetText": "the required “welcome”",
+          "relation": "空格修饰那句欢迎，说明它是收银员必须说的话。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:53": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:53",
+      "blankNo": 53,
+      "pos": "noun",
+      "role": "main",
+      "context": "作者看出收银员不开心，就没有像往常那样回应她那句欢迎。",
+      "find": {
+        "check": "collocation",
+        "text": "收银员说了欢迎（welcome），作者要给的是对它的回应，像往常那样（in my usual way）指她惯有的挖苦式回话。",
+        "quotes": [
+          "welcome",
+          "in my usual way"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "C",
+        "dictMeaning": "回应",
+        "reason": "作者看出收银员不开心，就没有像往常那样回应她那句欢迎。名词看搭配：收银员说了欢迎（welcome），作者要给的是对它的回应，像往常那样（in my usual way）指她惯有的挖苦式回话。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "assistance",
+          "meaning": "帮助；收银员只说了句欢迎（welcome），作者对这句话作出的是回应，不是帮忙。",
+          "quote": "welcome"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "information",
+          "meaning": "信息；像往常那样（in my usual way）指作者对人的挖苦式回话，这里没给出的是那种回应。",
+          "quote": "in my usual way"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "suggestion",
+          "meaning": "建议；收银员只说了句欢迎（welcome），这里讲作者怎么回应她，不是给她出主意。",
+          "quote": "welcome"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I didn’t give the",
+          "signalSide": "context-before",
+          "targetText": "give the response",
+          "relation": "作出回应（give a response）与空前的动词搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "in my usual way",
+          "signalSide": "context-after",
+          "relation": "往常的方式就是作者惯有的挖苦式回话。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:54": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:54",
+      "blankNo": 54,
+      "pos": "phrase",
+      "role": "main",
+      "context": "作者不再挖苦，而是对看上去难过的收银员生出同情。",
+      "find": {
+        "check": "contextual-meaning",
+        "text": "前面她似乎不开心（Noticing she seemed sad），相反（Instead）转向善意，空格与为她（for her）合成同情她。",
+        "quotes": [
+          "Noticing she seemed sad",
+          "Instead",
+          "for her"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "A",
+        "dictMeaning": "同情",
+        "reason": "作者不再挖苦，而是对看上去难过的收银员生出同情。词组看语境义：前面她似乎不开心（Noticing she seemed sad），相反（Instead）转向善意，空格与为她（for her）合成同情她。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "behaved",
+          "meaning": "为她表现；作者是看到她难过（seemed sad）才心软，不是做样子给她看。",
+          "quote": "seemed sad"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "arose",
+          "meaning": "起身；作者看到她难过（seemed sad）后只是对她微笑，不是站起身来。",
+          "quote": "seemed sad"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fought",
+          "meaning": "为她而战；作者接下来只是对她微笑（I smiled at her），是同情和善意，不是替她争斗。",
+          "quote": "I smiled at her"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for her",
+          "signalSide": "context-after",
+          "targetText": "felt for her",
+          "relation": "空格与介词（for）合成同情某人（feel for sb）。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Noticing she seemed sad",
+          "signalSide": "context-before",
+          "relation": "她看上去难过，作者心生同情。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.phrase.contextual-composition"
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:55": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:55",
+      "blankNo": 55,
+      "pos": "adjective",
+      "role": "main",
+      "context": "作者的善意换来对方的微笑，她离开时心里轻松了，这是情感线的终点。",
+      "find": {
+        "check": "affect",
+        "text": "我对她笑，她也回以微笑（She smiled back.），善意得到回应，心情是正面的，说不清缘由（somehow）只觉轻松。",
+        "quotes": [
+          "She smiled back.",
+          "somehow"
+        ]
+      },
+      "correctFit": {
+        "optionLabel": "D",
+        "dictMeaning": "更轻松的",
+        "meaning": "心情更轻快",
+        "reason": "作者的善意换来对方的微笑，她离开时心里轻松了，这是情感线的终点。形容词看情感：我对她笑，她也回以微笑（She smiled back.），善意得到回应，心情是正面的，说不清缘由（somehow）只觉轻松。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "clearer",
+          "meaning": "更清楚的；她连原因都说不清（somehow），这里写的是对方回以微笑后心情变好，不是头脑清楚。",
+          "quote": "somehow"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "tougher",
+          "meaning": "更坚强的；对方回以微笑（She smiled back.）带来的是愉快，不是作者变得强硬。",
+          "quote": "She smiled back."
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "milder",
+          "meaning": "更温和的；温和说的是性情，这里写对方回以微笑（She smiled back.）后作者心情变轻松。",
+          "quote": "She smiled back."
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I left the store feeling",
+          "signalSide": "context-before",
+          "targetText": "feeling lighter",
+          "relation": "感觉（feeling）后接形容词作表语，写作者离开时的心情。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "She smiled back.",
+          "signalSide": "context-before",
+          "relation": "善意得到回应，作者心情变好。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.adjective.affective-consistency"
+    }
+  }
+}

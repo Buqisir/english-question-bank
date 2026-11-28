@@ -1,0 +1,196 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Paragraph 1: Shouldn’t we do something for her? The next morning, I asked Mom this question over breakfast. She put down her cup and thought for a while. “Your grandma took us to Disney, but she never really enjoyed it herself,” she said. “Then let’s take her back,” I said. “It could be an early Christmas present, and this time the fun will be hers.” For weeks we kept it a secret. When the day came, we only told Grandma that we were going on a family drive, and she got into the car without a single question.\n\nParagraph 2: We pulled over at Disney World, which surprised my grandma. She stared at the gates. “What are we doing here?” she asked. Mom took her hand and told her that this trip was for her, not for the children. Grandma laughed, though her eyes were wet. All day she rode the teacups with me and ate ice cream like a little girl. For once, nobody needed her to plan anything. That evening I photographed her in front of the castle. On the screen, her smile finally reached her eyes. Back home, I printed the photo, and for the first time I did not joke about her old-fashioned albums as she slipped it onto the last page. “This one is my favorite,” she whispered.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v3",
+    "reading": {
+      "questions": [
+        {
+          "question": "人物",
+          "answer": "续写要动笔的是“我”、妈妈和外婆：外婆一辈子把家人放在自己前面，“我”和妈妈刚知道当年那趟迪士尼之旅背后外婆的心事。"
+        },
+        {
+          "question": "视角与风格",
+          "answer": "第一人称“我”讲述，过去时；句子不长。外婆和妈妈的话多用直接引语，引号里的话占了原文三分之一以上，妈妈讲往事时先转述后直接说。续写也让人物用几句短的直接引语交谈，其余靠叙述推进。",
+          "evidence": [
+            "“Your mother and your uncle had such an amazing time,” she said.",
+            "She explained that my grandparents were constantly fighting"
+          ]
+        },
+        {
+          "question": "待解决问题",
+          "answer": "原文停在“我”夜里睡不着，想着外婆总把别人的需要放在自己前面。外婆当年没能真正开心，这份付出还没有人回报，续写要让家人为她做点什么。",
+          "evidence": [
+            "she continues to put the needs of everyone in our family above her own"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "name": "Grandma",
+          "role": "外婆，相册的主人",
+          "lines": [
+            {
+              "label": "性格",
+              "text": "再难过也先顾孩子，自己的心事不愿多提。",
+              "evidence": "she gently closed the album and said, “Oh, now enough of these old photos."
+            },
+            {
+              "label": "想要",
+              "text": "希望孩子能无忧无虑地玩一次。",
+              "evidence": "Every child should visit Disney at least once and just get to be a kid"
+            },
+            {
+              "label": "表现",
+              "text": "当年照片上的笑没有到达眼睛。",
+              "evidence": "her smile didn’t quite reach her eyes"
+            }
+          ]
+        },
+        {
+          "name": "Mom",
+          "role": "妈妈，外婆的女儿",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "向“我”说出当年父母闹矛盾、外婆强撑着陪他们玩的真相。",
+              "evidence": "I’m sure it was all physically and emotionally tiring for her."
+            }
+          ]
+        },
+        {
+          "name": "我",
+          "role": "外婆的外孙（女），讲述者",
+          "lines": [
+            {
+              "label": "此刻",
+              "text": "知道真相后整夜睡不着，想为外婆做点什么。",
+              "evidence": "That night I turned restlessly in my bed"
+            }
+          ]
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "Every child should visit Disney at least once and just get to be a kid... happy and carefree.",
+          "use": "第 1 段妈妈借外婆这句话想到带她重回迪士尼；第 2 段让外婆自己像孩子一样坐转转杯、吃冰淇淋，把“当一回孩子”还给她。"
+        },
+        {
+          "sourceQuote": "her smile didn’t quite reach her eyes",
+          "use": "第 2 段“我”给外婆拍照，屏幕上她的笑终于到了眼睛里，和旧照片形成对照，说明这次她是真开心。"
+        },
+        {
+          "sourceQuote": "Let’s talk about what we’re going to do for Christmas next month.",
+          "use": "第 1 段把这趟旅行定为提前的圣诞礼物，时间上接住原文，也让瞒着外婆出发顺理成章。"
+        }
+      ]
+    },
+    "taskCard": {
+      "route": "“我”和妈妈商量后，全家瞒着外婆把她带回迪士尼当圣诞礼物，让她这一次自己尽情玩，最后拍下一张真正开心的照片放进相册。",
+      "paragraphs": [
+        {
+          "paragraph": 1,
+          "must": "回应“我们该为她做点什么”，定下要做的事，并在段末把外婆带上车出发；第二段首句说到了迪士尼外婆才吃惊，所以第一段不能让外婆知道目的地。",
+          "draft": "第二天早上“我”问妈妈，妈妈说外婆当年没能真正享受那趟旅行；“我”提议带外婆重回迪士尼作提前的圣诞礼物；大家瞒了几周，出发那天只说是家庭兜风。",
+          "bridgeQuote": "which surprised my grandma",
+          "bridge": "外婆到了门口才吃惊，第一段怎样把她蒙在鼓里带上路？"
+        },
+        {
+          "paragraph": 2,
+          "must": "从外婆在迪士尼门口吃惊写起，让她明白这趟旅行是为她安排的，并收住原文“外婆总为别人付出”的问题。",
+          "draft": "外婆盯着大门问来这儿做什么，妈妈告诉她这次是为她；外婆笑着湿了眼眶，一整天像小女孩一样玩；“我”拍下她笑到眼里的照片，回家打印出来，看她贴进相册最后一页，她轻声说这张最喜欢。"
+        }
+      ]
+    },
+    "standard": {
+      "essay": "Paragraph 1: Shouldn’t we do something for her? The next morning, I asked Mom this question over breakfast. She put down her cup and thought for a while. “Your grandma took us to Disney, but she never really enjoyed it herself,” she said. “Then let’s take her back,” I said. “It could be an early Christmas present, and this time the fun will be hers.” For weeks we kept it a secret. When the day came, we only told Grandma that we were going on a family drive, and she got into the car without a single question.\n\nParagraph 2: We pulled over at Disney World, which surprised my grandma. She stared at the gates. “What are we doing here?” she asked. Mom took her hand and told her that this trip was for her, not for the children. Grandma laughed, though her eyes were wet. All day she rode the teacups with me and ate ice cream like a little girl. For once, nobody needed her to plan anything. That evening I photographed her in front of the castle. On the screen, her smile finally reached her eyes. Back home, I printed the photo, and for the first time I did not joke about her old-fashioned albums as she slipped it onto the last page. “This one is my favorite,” she whispered.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "回答段首句的问题：定下带外婆重回迪士尼的计划，并瞒着外婆出发，为第二段的吃惊做好准备。",
+          "items": [
+            {
+              "quote": "“Your grandma took us to Disney, but she never really enjoyed it herself,” she said.",
+              "explain": "妈妈一句话点出计划的理由：当年玩的是孩子，外婆自己没开心过。主意从这里来，不是凭空想出去旅行。"
+            },
+            {
+              "quote": "this time the fun will be hers",
+              "explain": "“我”用一句短的直接引语提出主意，和原文外婆为孩子们安排一切相对照，说清这次旅行和上次的不同。"
+            },
+            {
+              "quote": "we only told Grandma that we were going on a family drive",
+              "explain": "交代怎么瞒住外婆，第二段首句里外婆的吃惊才有来由。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写外婆在迪士尼从吃惊到真正开心，用一张新照片收住原文旧照片里的问题。",
+          "items": [
+            {
+              "quote": "Mom took her hand and told her that this trip was for her, not for the children.",
+              "explain": "妈妈的话用转述带过，把直接引语留给外婆的吃惊；not for the children 直接回应当年那趟为孩子安排的旅行。"
+            },
+            {
+              "quote": "ate ice cream like a little girl",
+              "explain": "外婆说过每个孩子都该来当一回孩子，这里让她自己像小女孩一样玩，把那句话还给了她。"
+            },
+            {
+              "quote": "On the screen, her smile finally reached her eyes.",
+              "explain": "借原文“笑没到眼睛”的细节写出变化，不用说“她很幸福”，读者也看得出这次是真开心。"
+            },
+            {
+              "quote": "I did not joke about her old-fashioned albums as she slipped it onto the last page",
+              "explain": "回到开头“我”爱拿老式相册开玩笑的细节，结尾落在把照片贴进相册这个动作上，相册这条线也收住了。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "put down her cup and thought for a while",
+          "function": "用一个停下来的动作写妈妈在思考，不必写“她很犹豫”。"
+        },
+        {
+          "expression": "got into the car without a single question",
+          "function": "写外婆毫不起疑，衬出下一段到门口时的吃惊。"
+        },
+        {
+          "expression": "her smile finally reached her eyes",
+          "function": "接住原文的笑容细节，用看得见的变化写出外婆真正的快乐。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就写到达迪士尼或外婆已经知道要去哪里",
+          "why": "第二段首句写到了迪士尼外婆才吃惊，第一段提前到达或说破目的地，两段就接不上。"
+        },
+        {
+          "pitfall": "让外婆在迪士尼又去照顾孙辈，或者只写“我”玩得开心",
+          "why": "原文的问题是外婆总把别人放在自己前面，续写要让这一次轮到她自己开心，否则问题没有解决。"
+        },
+        {
+          "pitfall": "结尾写一句“家人的爱最珍贵”之类的道理",
+          "why": "原文用相册和笑容讲故事，结尾落在照片和相册这样具体的东西上，比空喊道理更能收住全文。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Paragraph 1: Shouldn’t we do something for her? The next morning, I put the question to Mom over breakfast. She set down her coffee and gazed out of the window. “Your grandma gave your uncle and me the trip of our lives,” she said softly, “but I don’t think she enjoyed a single minute of it.” “Then let’s take her back,” I said. “As an early Christmas present. And this time, nobody needs looking after except her.” Mom’s face brightened. My uncle was thrilled and insisted on paying for the tickets. For the next few weeks, we whispered on the phone and hid the booking emails. On the big day, we simply told Grandma we were going for a drive, and she climbed into the back seat, humming, with no idea where we were heading.\n\nParagraph 2: We pulled over at Disney World, which surprised my grandma. She looked at the gates, then at us, and her hand flew to her mouth. “What on earth are we doing here?” she asked. Mom squeezed her hand and explained that this time the trip was for her, not for the children. Grandma let out a shaky laugh and wiped her eyes. All afternoon she spun in the teacups with me, screamed on a small roller coaster and licked melting ice cream off her fingers, with no list to check and no one to worry about. As the castle lights came on, I raised my phone and took her picture. This time, her smile reached all the way to her eyes. Later, I printed the photo and handed it to her, and without a word of teasing, I watched her press it carefully onto the last page of her newest album. “Now this is a photo worth keeping,” she whispered.",
+      "beyondStandard": [
+        {
+          "quote": "but I don’t think she enjoyed a single minute of it",
+          "explain": "not ... a single minute 比 never really enjoyed 更像妈妈心疼时真会说的话，也更贴原文妈妈那段直接引语的口吻。"
+        },
+        {
+          "quote": "nobody needs looking after except her",
+          "explain": "直接把“这次只照顾外婆”说出来，和原文外婆照顾所有人形成反转。"
+        },
+        {
+          "quote": "with no list to check and no one to worry about",
+          "explain": "点出外婆这次不用安排、不用操心，比标准版的 nobody needed her to plan anything 更具体地对上原文“她组织了整趟旅行”。"
+        }
+      ]
+    }
+  }
+}

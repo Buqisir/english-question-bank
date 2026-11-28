@@ -1,0 +1,787 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hebei-tangshan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-tangshan-2025-01:reading-b"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-tangshan-2025-01:reading-b": {
+      "overview": "中学科学教师巴里·吉约担忧家乡湿地消失，创办湿地守望者项目，带学生在湿地开展与数学、英语等课程挂钩的实践活动，学生收获很大，也很有成就感。",
+      "fullTranslationZh": "巴里·吉约在路易斯安那州长大，家在密西西比河对岸，与新奥尔良隔河相望。小时候，他喜欢和朋友们一起探索湿地。然而，随着年龄增长，他对湿地消失的担忧日益加深。“想象一下，如果我们的橄榄球队新奥尔良圣徒队在一块其实是湿地的场地上比赛，”巴里说，“到中场休息时，那块球场就没了。”\n1988 年，巴里成了一名中学科学教师。为了让学生们真切体会到湿地的重要性，他创办了“拉布兰奇湿地守望者服务学习项目”，“认领”了学校附近拉布兰奇湿地的一小块区域。\n湿地守望者的活动都与学科课程挂钩。例如，水质监测教学生用图表比较不同时期的数据，这是数学课程的一部分。卡特里娜飓风过后，水的盐度（水中的含盐量）是飓风前的四倍。学生们制作图表说明了这一点。作为英语写作课的一部分，他们写了看到水母的经历：水母以前从没游到过这么远的地方，因为水母只生活在咸水里。\n“我们收获的比只坐在课桌后面看书要多，因为你走到户外，浑身湿透、满身是泥，边学边玩，乐在其中。”七年级学生库尔特说。\n巴里为他的学生感到非常自豪。“中学生一旦有机会，能做成的事真让人惊叹。”他说。他的一名七年级学生写道：“如果动物和植物会说话，我想它们会说我们是它们的英雄。我们在湿地干活时，我就是这种感觉。”",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-b-1",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:2",
+          "sourceText": "With the intention of bringing home to his kids the importance of wetlands, he founded the LaBranche Wetland Watchers Service-Learning Project, “adopting” a small part of LaBranche Wetlands near their school.",
+          "displayText": "With the intention of bringing home to his kids the importance of wetlands, he founded the LaBranche Wetland Watchers Service-Learning Project, “adopting” a small part of LaBranche Wetlands near their school.",
+          "relatedQuestionIds": [],
+          "translationZh": "为了让学生们真切体会到湿地的重要性，他创办了“拉布兰奇湿地守望者服务学习项目”，“认领”了学校附近拉布兰奇湿地的一小块区域。",
+          "analysisZh": "主干是 he founded the … Project，“他创办了一个项目”。句首 With the intention of doing 说明目的，其中 bring home to sb sth 意为“让某人真切认识到某事”，因为宾语 the importance of wetlands 较长，被放到了 to his kids 后面。句末的现在分词短语 “adopting” a small part … 补充说明创办项目的具体做法：认领学校附近的一小块湿地。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 47,
+              "quote": "With the intention of bringing home to his kids"
+            },
+            {
+              "start": 76,
+              "end": 86,
+              "quote": "he founded"
+            },
+            {
+              "start": 144,
+              "end": 154,
+              "quote": "“adopting”"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-b-2",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:4",
+          "sourceText": "As part of English composition, they wrote about seeing jellyfish (水母), which had never come that far before because jellyfish live only in salty water.",
+          "displayText": "As part of English composition, they wrote about seeing jellyfish (水母), which had never come that far before because jellyfish live only in salty water.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:25"
+          ],
+          "translationZh": "作为英语写作课的一部分，他们写了看到水母的经历：水母以前从没游到过这么远的地方，因为水母只生活在咸水里。",
+          "analysisZh": "主干是 they wrote about seeing jellyfish，“他们写了看到水母的事”。句首 As part of English composition 交代这是英语写作课的内容，正好呼应本段“活动与课程挂钩”。which 引导非限制性定语从句，补充说明水母，过去完成时 had never come 表示在看到之前从没来过这么远；because 从句再解释原因：水母只生活在咸水里。言下之意是飓风后湿地变咸了。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 30,
+              "quote": "As part of English composition"
+            },
+            {
+              "start": 72,
+              "end": 108,
+              "quote": "which had never come that far before"
+            },
+            {
+              "start": 109,
+              "end": 151,
+              "quote": "because jellyfish live only in salty water"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-b:1"
+              ],
+              "start": 0,
+              "end": 136,
+              "quote": "巴里·吉约在路易斯安那州长大，家在密西西比河对岸，与新奥尔良隔河相望。小时候，他喜欢和朋友们一起探索湿地。然而，随着年龄增长，他对湿地消失的担忧日益加深。“想象一下，如果我们的橄榄球队新奥尔良圣徒队在一块其实是湿地的场地上比赛，”巴里说，“到中场休息时，那块球场就没了。”"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-b:2"
+              ],
+              "start": 137,
+              "end": 219,
+              "quote": "1988 年，巴里成了一名中学科学教师。为了让学生们真切体会到湿地的重要性，他创办了“拉布兰奇湿地守望者服务学习项目”，“认领”了学校附近拉布兰奇湿地的一小块区域。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-b:3",
+                "block:paper-mock-hebei-tangshan-2025-01:reading-b:4"
+              ],
+              "start": 220,
+              "end": 366,
+              "quote": "湿地守望者的活动都与学科课程挂钩。例如，水质监测教学生用图表比较不同时期的数据，这是数学课程的一部分。卡特里娜飓风过后，水的盐度（水中的含盐量）是飓风前的四倍。学生们制作图表说明了这一点。作为英语写作课的一部分，他们写了看到水母的经历：水母以前从没游到过这么远的地方，因为水母只生活在咸水里。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-b:5"
+              ],
+              "start": 367,
+              "end": 425,
+              "quote": "“我们收获的比只坐在课桌后面看书要多，因为你走到户外，浑身湿透、满身是泥，边学边玩，乐在其中。”七年级学生库尔特说。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-b:6"
+              ],
+              "start": 426,
+              "end": 522,
+              "quote": "巴里为他的学生感到非常自豪。“中学生一旦有机会，能做成的事真让人惊叹。”他说。他的一名七年级学生写道：“如果动物和植物会说话，我想它们会说我们是它们的英雄。我们在湿地干活时，我就是这种感觉。”"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-b-evidence-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:24"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:1",
+                "start": 180,
+                "end": 243,
+                "quote": "a growing concern about the disappearance of wetlands took root"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:1",
+                "start": 366,
+                "end": 413,
+                "quote": "By halftime, that football field would be gone."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p1",
+                "start": 63,
+                "end": 76,
+                "quote": "他对湿地消失的担忧日益加深"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p1",
+                "start": 120,
+                "end": 135,
+                "quote": "到中场休息时，那块球场就没了。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-b-evidence-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:25"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:3",
+                "start": 0,
+                "end": 58,
+                "quote": "Wetland Watchers activities are tied to academic subjects."
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:4",
+                "start": 67,
+                "end": 94,
+                "quote": "part of the math curriculum"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:4",
+                "start": 233,
+                "end": 263,
+                "quote": "As part of English composition"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p3",
+                "start": 0,
+                "end": 17,
+                "quote": "湿地守望者的活动都与学科课程挂钩。"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p3",
+                "start": 40,
+                "end": 50,
+                "quote": "这是数学课程的一部分"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p3",
+                "start": 94,
+                "end": 105,
+                "quote": "作为英语写作课的一部分"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-b-evidence-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:26"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:5",
+                "start": 1,
+                "end": 70,
+                "quote": "We obtained more than we would just sitting behind a desk with a book"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p4",
+                "start": 1,
+                "end": 18,
+                "quote": "我们收获的比只坐在课桌后面看书要多"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-b-evidence-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:27"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:6",
+                "start": 38,
+                "end": 114,
+                "quote": "It’s amazing what middle school kids can accomplish when they get the chance"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:6",
+                "start": 161,
+                "end": 300,
+                "quote": "If the animals and plants could talk, I think they would say we’re their heroes. That’s the way I feel when we do our work in the wetlands."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p5",
+                "start": 15,
+                "end": 34,
+                "quote": "中学生一旦有机会，能做成的事真让人惊叹"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p5",
+                "start": 52,
+                "end": 95,
+                "quote": "如果动物和植物会说话，我想它们会说我们是它们的英雄。我们在湿地干活时，我就是这种感觉。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-b-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-b-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:2",
+                "start": 55,
+                "end": 263,
+                "quote": "With the intention of bringing home to his kids the importance of wetlands, he founded the LaBranche Wetland Watchers Service-Learning Project, “adopting” a small part of LaBranche Wetlands near their school."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p2",
+                "start": 20,
+                "end": 82,
+                "quote": "为了让学生们真切体会到湿地的重要性，他创办了“拉布兰奇湿地守望者服务学习项目”，“认领”了学校附近拉布兰奇湿地的一小块区域。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-b-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:25"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-b-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:4",
+                "start": 233,
+                "end": 385,
+                "quote": "As part of English composition, they wrote about seeing jellyfish (水母), which had never come that far before because jellyfish live only in salty water."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-b",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-b-p3",
+                "start": 94,
+                "end": 146,
+                "quote": "作为英语写作课的一部分，他们写了看到水母的经历：水母以前从没游到过这么远的地方，因为水母只生活在咸水里。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先写巴里对湿地消失的担忧，再写他当上教师后创办湿地守望者项目，接着举例说明项目活动与各科课程挂钩，最后借学生库尔特和巴里师生的话写出活动带来的收获。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:1",
+            "summary": "巴里从小爱在湿地玩，长大后越来越担心湿地消失，并用“半场球场就没了”来比湿地消失之快。",
+            "function": "引出人物和他关心的问题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:2",
+            "summary": "巴里成为中学科学教师后，为让学生认识湿地的重要性，创办了湿地守望者项目。",
+            "function": "交代项目的由来和目的。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:3",
+            "summary": "项目活动与学科课程挂钩：水质监测和画图表属于数学课，写看到水母的经历属于英语写作课。",
+            "function": "用两个例子说明活动怎样结合课程。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:5",
+            "summary": "学生库尔特说在户外边玩边学，比坐在课桌后看书收获更多。",
+            "function": "从学生角度写活动的收获。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:6",
+            "summary": "巴里为学生骄傲，学生也觉得自己是动植物的英雄。",
+            "function": "写师生共同的成就感，收束全文。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-tangshan-2025-01:24": {
+      "skill": {
+        "primary": "structure"
+      },
+      "similarityProfile": {
+        "family": "writing-method",
+        "subtype": "writing-method",
+        "detailScope": null,
+        "technique": "comparison"
+      },
+      "questionFocus": "弄清作者借球场打比方是为了说明什么。",
+      "stemTranslationZh": "第一段为什么提到“橄榄球场”？",
+      "locateBy": "stem",
+      "locateFindZh": "往前找这个比方在说明什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了说明湿地数量有限。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To explain wetlands are limited.",
+            "explanation": "球场面积不大，选项由此联想到湿地有限；但比方的重点在“到中场就没了”（By halftime … gone），说的是消失得快，不是数量少。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了表达巴里对橄榄球的热爱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "football",
+            "optionText": "football",
+            "matchType": "exact",
+            "relationNote": "巴里提到自家球队（our football team），只是借大家熟悉的球场打比方；原文说他从小爱的是探索湿地，没说他爱橄榄球。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:1",
+              "quote": "“Imagine if the New Orleans Saints, our football team, were playing on a field that was actually wetlands,” Barry says.",
+              "anchor": "借球队打比方"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了强调保护湿地的紧迫性。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:1",
+              "quote": "a growing concern about the disappearance of wetlands took root",
+              "anchor": "担忧湿地消失"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:1",
+              "quote": "By halftime, that football field would be gone.",
+              "anchor": "半场就没了"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了表现巴里对他所在球队的担心。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "However, as he grew older, a growing concern about the disappearance of wetlands took root.",
+            "sourceEntity": "the disappearance of wetlands",
+            "optionText": "To show Barry’s worry about his football team.",
+            "optionEntity": "his football team",
+            "explanation": "巴里确实有担忧（concern），但担心的是湿地消失（the disappearance of wetlands）；球队只是比方里借来的，选项把担心的对象换成了球队。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:1",
+              "quote": "a growing concern about the disappearance of wetlands took root",
+              "anchor": "担忧的对象"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "football field",
+          "sourceRole": "stem",
+          "targetText": "By halftime, that football field would be gone.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:1",
+          "relationType": "locationCue",
+          "answerText": "a growing concern about the disappearance of wetlands took root",
+          "bridgeZh": "球场半场就没了，是在比湿地消失得有多快",
+          "note": "题干 football field 原词出现在原文。"
+        },
+        {
+          "sourceText": "To stress the urgency of saving wetlands",
+          "sourceRole": "correctOption",
+          "targetText": "a growing concern about the disappearance of wetlands took root",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:1",
+          "relationType": "paraphrase",
+          "note": "选项的“保护湿地很紧迫”是从比方再推一步：球赛才打到中场，球场就没了（By halftime … gone），湿地消失得这么快，再不保护就来不及了，选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:25": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "paragraph-main-idea",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "概括这一段几个例子共同说明的意思。",
+      "stemTranslationZh": "第三段主要讲了什么？",
+      "locateBy": "passage",
+      "locateFindZh": "先读 [[block:paper-mock-hebei-tangshan-2025-01:reading-b:3]] 开头的总说句，再看水质监测和写水母两个例子是不是在印证它",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "制作图表的必要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "graphs",
+            "optionText": "graphs",
+            "matchType": "exact",
+            "relationNote": "画图表（graphs）只是数学课这个例子里的做法，段中还写了英语写作；选项把一个例子里的细节当成了整段大意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:4",
+              "quote": "students to use graphs to compare data from different time periods-part of the math curriculum.",
+              "anchor": "用图表比较数据"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "动手实践学习的重要性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "because you’re out there and you’re getting all wet and muddy and having fun as you learn",
+            "sourceEntity": "you’re out there",
+            "optionText": "The importance of hands-on learning.",
+            "optionEntity": "hands-on learning",
+            "explanation": "到户外亲身动手学的好处出自 [[block:paper-mock-hebei-tangshan-2025-01:reading-b:5]] 库尔特的话（out there … wet and muddy）；[[block:paper-mock-hebei-tangshan-2025-01:reading-b:3]] 讲的是各项活动分别对应哪门功课。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:5",
+              "quote": "because you’re out there and you’re getting all wet and muddy and having fun as you learn",
+              "anchor": "库尔特谈户外学习"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "活动与学校课程之间的联系。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:3",
+              "quote": "Wetland Watchers activities are tied to academic subjects.",
+              "anchor": "活动与学科挂钩"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:4",
+              "quote": "part of the math curriculum",
+              "anchor": "数学课"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:4",
+              "quote": "As part of English composition",
+              "anchor": "英语写作课"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "师生之间的关系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Relationship between teachers and students.",
+            "explanation": "本段没写师生关系，只写活动与数学、英语课的对应；巴里为学生骄傲出自 [[block:paper-mock-hebei-tangshan-2025-01:reading-b:6]]。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The connection of the activities to schooling",
+          "sourceRole": "correctOption",
+          "targetText": "Wetland Watchers activities are tied to academic subjects.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:3",
+          "relationType": "paraphrase",
+          "note": "选项的“与学校课程相联系”就是段首的“与学科挂钩”（tied to academic subjects）。后面两个例子都在印证它：测水质、画图表属于数学课（math curriculum），写看到水母属于英语写作课（English composition），选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:26": {
+      "skill": {
+        "primary": "attitude",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "attitude",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从库尔特的原话判断他对湿地活动的感受。",
+      "stemTranslationZh": "库尔特觉得这些活动怎么样？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "活动很脏乱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "you’re getting all wet and muddy and having fun as you learn",
+            "sourceHighlight": "wet and muddy",
+            "optionText": "They are messy.",
+            "optionHighlight": "messy",
+            "explanation": "库尔特确实说浑身湿透、满身是泥（wet and muddy），但紧接着说玩得开心（having fun），他是在讲好处，不是抱怨活动脏乱。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:5",
+              "quote": "you’re getting all wet and muddy and having fun as you learn",
+              "anchor": "又湿又脏却开心"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "活动很有挑战性。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are challenging.",
+            "explanation": "库尔特只说收获多、玩得开心，没提活动难做或有挑战。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "活动很枯燥。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "you’re getting all wet and muddy and having fun as you learn",
+            "sourceHighlight": "having fun",
+            "optionText": "They are dull.",
+            "optionHighlight": "dull",
+            "explanation": "库尔特说边学边玩、乐在其中（having fun），选项说枯燥，态度正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:5",
+              "quote": "you’re getting all wet and muddy and having fun as you learn",
+              "anchor": "乐在其中"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "活动很有收获。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:5",
+              "quote": "We obtained more than we would just sitting behind a desk with a book",
+              "anchor": "收获更多"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Kurt",
+          "sourceRole": "stem",
+          "targetText": "“We obtained more than we would just sitting behind a desk with a book, because you’re out there and you’re getting all wet and muddy and having fun as you learn,” says Kurt, a seventh grader.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:5",
+          "relationType": "locationCue",
+          "answerText": "We obtained more than we would just sitting behind a desk with a book",
+          "note": "题干 Kurt 原词出现在原文。"
+        },
+        {
+          "sourceText": "They are rewarding.",
+          "sourceRole": "correctOption",
+          "targetText": "We obtained more than we would just sitting behind a desk with a book",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:5",
+          "relationType": "paraphrase",
+          "note": "选项的“有收获”（rewarding）就是库尔特说的“比坐在课桌后看书收获更多”（obtained more than …），选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:27": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据巴里和学生的话推断学生的感受。",
+      "stemTranslationZh": "关于巴里的学生，可以推断出什么？",
+      "locateBy": "stem",
+      "locateFindZh": "往后读学生自己写下的话",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们将来会像巴里一样当老师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They will teach like Barry.",
+            "explanation": "原文只写学生现在参加湿地活动，没提他们将来的职业；当老师的是巴里本人。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他们会要求更多机会。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "chance",
+            "optionText": "chances",
+            "matchType": "wordFamily",
+            "relationNote": "选项借了巴里话里的“机会”（chance）：他说孩子们一有机会就能做成大事，是在夸学生，没说学生要更多机会。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:6",
+              "quote": "“It’s amazing what middle school kids can accomplish when they get the chance,” he says.",
+              "anchor": "有机会就能做成"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他们充满成就感。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:6",
+              "quote": "If the animals and plants could talk, I think they would say we’re their heroes. That’s the way I feel when we do our work in the wetlands.",
+              "anchor": "学生觉得自己是英雄"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:6",
+              "quote": "It’s amazing what middle school kids can accomplish when they get the chance",
+              "anchor": "中学生能做成大事"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们被公认为伟大的英雄。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "conditionRemoved",
+            "sourceQuote": "If the animals and plants could talk, I think they would say we’re their heroes.",
+            "sourceHighlight": "If the animals and plants could talk",
+            "optionText": "They’re acknowledged as great heroes.",
+            "optionHighlight": "acknowledged as great heroes",
+            "explanation": "“英雄”只是学生的假设：动植物要是会说话（If … could talk），大概会这样说。选项去掉假设，说成他们已被公认为伟大的英雄。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:6",
+              "quote": "If the animals and plants could talk, I think they would say we’re their heroes.",
+              "anchor": "假设的说法"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "students",
+          "sourceRole": "stem",
+          "targetText": "Barry is very proud of his students.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:6",
+          "relationType": "locationCue",
+          "answerText": "I think they would say we’re their heroes. That’s the way I feel when we do our work in the wetlands",
+          "bridgeZh": "老师为学生骄傲，学生自己也觉得做的事了不起",
+          "note": "题干 students 原词出现在原文。"
+        },
+        {
+          "sourceText": "They’re full of a sense of achievement.",
+          "sourceRole": "correctOption",
+          "targetText": "That’s the way I feel when we do our work in the wetlands.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-b:6",
+          "relationType": "paraphrase",
+          "note": "原文没直接说“成就感”，是两处合起来推出的：巴里说中学生有机会就能做成了不起的事（can accomplish），学生说在湿地干活时就觉得自己是动植物的英雄（That’s the way I feel）。可见学生为自己做成的事自豪，选 C。"
+        }
+      ]
+    }
+  }
+}

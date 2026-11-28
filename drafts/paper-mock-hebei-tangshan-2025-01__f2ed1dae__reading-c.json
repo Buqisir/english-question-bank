@@ -1,0 +1,815 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hebei-tangshan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-tangshan-2025-01:reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-tangshan-2025-01:reading-c": {
+      "overview": "作者从小讨厌干院子活，17 岁离家时只觉解脱，二十多岁种花又被松鼠搅黄；婚后在布鲁克林开辟花园，才发现园艺的乐趣，并在种植中找到了对一个地方的归属感。",
+      "fullTranslationZh": "我在郊区长大，那时干院子里的活就是一种惩罚。换成别的什么活我几乎都愿意干。我不喜欢待在户外，尤其不喜欢虫子和泥土。\n17 岁那年，我背着一个装着全部家当的背包离开了家，心想自己干园艺活的日子总算过去了。那里没有院子可干活，只有水泥地！等着我的那片水泥丛林，看上去是一次求之不得的逃离，让我摆脱了那些曾经像服刑一样的户外杂活。\n直到二十五六岁，我觉得这是成年人该做的事，才带回家一小盆雏菊，放在消防梯上。不到 24 小时，一只松鼠就来了，连花带盆把它拖走了。这就是纽约！我把这当作一个信号，在那间公寓里再也没种过任何植物。\n结婚后，我和妻子在布鲁克林外围买了一栋房子。那里地方够大，想要的话可以开个花园。我们决定试试看能不能种出点什么，主要是图个新鲜。让我大吃一惊的是，在泥土里挖挖弄弄竟然很有趣，完全不是苦差事！清晨，我会弯下腰查看土壤，等着植物冒出来。黄昏浇水时，我对着幼苗低声说话，盼着它们一直长下去。这些植物喂饱了附近的松鼠，也给熊蜂提供了打盹的地方。我感到一股力量和兴奋涌上心头。\n花和蔬菜开花结果的时候，我发现自己内心也有什么在生长。自从十几岁离家出走，无论住在哪里，我总是尽力为自己营造一个安身之所。我在墙上挂画。我和朋友们一起创立新的节日传统。我把墙刷成鲜亮的颜色。但我总觉得，也许还缺少与某个特定空间之间的那种深厚联系。在园艺中，我终于找到了这一层新的深度。我想可以说，我正在扎根。\n种植、浇水，然后等啊等，看奇迹会不会发生，这其中花费的时间和精力里，有一种鼓舞人心的自我关爱。我觉得最美妙的，正是生长这件事本身。\n你在培育什么呢？",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-c-1",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+          "sourceText": "The concrete jungle that awaited me seemed like a welcome escape from the outdoor chores that had once felt like a sentence.",
+          "displayText": "The concrete jungle that awaited me seemed like a welcome escape from the outdoor chores that had once felt like a sentence.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:28"
+          ],
+          "translationZh": "等着我的那片水泥丛林，看上去是一次求之不得的逃离，让我摆脱了那些曾经像服刑一样的户外杂活。",
+          "analysisZh": "主干是 The concrete jungle … seemed like a welcome escape，“水泥丛林看上去像一次受欢迎的逃离”。主语后的 that awaited me 是定语从句，说明是等着“我”的那片城市。escape from 后接逃离的对象 the outdoor chores，又跟一个定语从句 that had once felt like a sentence，过去完成时说明这是离家以前的感受；sentence 在这里指“刑期”，和首段的 punishment 呼应。welcome 是形容词“受欢迎的”，正是作者对离家的态度。",
+          "underlineRanges": [
+            {
+              "start": 36,
+              "end": 64,
+              "quote": "seemed like a welcome escape"
+            },
+            {
+              "start": 89,
+              "end": 123,
+              "quote": "that had once felt like a sentence"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-c-2",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:3",
+          "sourceText": "It wasn’t until my mid-20s that I, thinking it was the adult thing to do, brought home a small daisy(雏菊) in a pot to put on my fire escape.",
+          "displayText": "It wasn’t until my mid-20s that I, thinking it was the adult thing to do, brought home a small daisy(雏菊) in a pot to put on my fire escape.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:29"
+          ],
+          "translationZh": "直到二十五六岁，我觉得这是成年人该做的事，才带回家一小盆雏菊，放在消防梯上。",
+          "analysisZh": "这是 It was not until … that … 的强调句，意思是“直到……才……”，强调时间 my mid-20s。that 后的主干是 I brought home a small daisy，“我带回一盆雏菊”。插在主谓之间的 thinking it was the adult thing to do 是现在分词短语，交代他这样做的想法；句末 to put on my fire escape 是不定式，说明买花的用途。“直到……才”说明这是他离家后第一次主动养植物。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 31,
+              "quote": "It wasn’t until my mid-20s that"
+            },
+            {
+              "start": 35,
+              "end": 72,
+              "quote": "thinking it was the adult thing to do"
+            },
+            {
+              "start": 74,
+              "end": 100,
+              "quote": "brought home a small daisy"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-c:1"
+              ],
+              "start": 0,
+              "end": 57,
+              "quote": "我在郊区长大，那时干院子里的活就是一种惩罚。换成别的什么活我几乎都愿意干。我不喜欢待在户外，尤其不喜欢虫子和泥土。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-c:2"
+              ],
+              "start": 58,
+              "end": 162,
+              "quote": "17 岁那年，我背着一个装着全部家当的背包离开了家，心想自己干园艺活的日子总算过去了。那里没有院子可干活，只有水泥地！等着我的那片水泥丛林，看上去是一次求之不得的逃离，让我摆脱了那些曾经像服刑一样的户外杂活。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-c:3"
+              ],
+              "start": 163,
+              "end": 260,
+              "quote": "直到二十五六岁，我觉得这是成年人该做的事，才带回家一小盆雏菊，放在消防梯上。不到 24 小时，一只松鼠就来了，连花带盆把它拖走了。这就是纽约！我把这当作一个信号，在那间公寓里再也没种过任何植物。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-c:4"
+              ],
+              "start": 261,
+              "end": 444,
+              "quote": "结婚后，我和妻子在布鲁克林外围买了一栋房子。那里地方够大，想要的话可以开个花园。我们决定试试看能不能种出点什么，主要是图个新鲜。让我大吃一惊的是，在泥土里挖挖弄弄竟然很有趣，完全不是苦差事！清晨，我会弯下腰查看土壤，等着植物冒出来。黄昏浇水时，我对着幼苗低声说话，盼着它们一直长下去。这些植物喂饱了附近的松鼠，也给熊蜂提供了打盹的地方。我感到一股力量和兴奋涌上心头。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-c:5"
+              ],
+              "start": 445,
+              "end": 599,
+              "quote": "花和蔬菜开花结果的时候，我发现自己内心也有什么在生长。自从十几岁离家出走，无论住在哪里，我总是尽力为自己营造一个安身之所。我在墙上挂画。我和朋友们一起创立新的节日传统。我把墙刷成鲜亮的颜色。但我总觉得，也许还缺少与某个特定空间之间的那种深厚联系。在园艺中，我终于找到了这一层新的深度。我想可以说，我正在扎根。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-c:6",
+                "block:paper-mock-hebei-tangshan-2025-01:reading-c:7"
+              ],
+              "start": 600,
+              "end": 665,
+              "quote": "种植、浇水，然后等啊等，看奇迹会不会发生，这其中花费的时间和精力里，有一种鼓舞人心的自我关爱。我觉得最美妙的，正是生长这件事本身。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-c:8"
+              ],
+              "start": 666,
+              "end": 674,
+              "quote": "你在培育什么呢？"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-c-evidence-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:28"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+                "start": 144,
+                "end": 268,
+                "quote": "The concrete jungle that awaited me seemed like a welcome escape from the outdoor chores that had once felt like a sentence."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p2",
+                "start": 59,
+                "end": 104,
+                "quote": "等着我的那片水泥丛林，看上去是一次求之不得的逃离，让我摆脱了那些曾经像服刑一样的户外杂活。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-c-evidence-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:29"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:3",
+                "start": 0,
+                "end": 139,
+                "quote": "It wasn’t until my mid-20s that I, thinking it was the adult thing to do, brought home a small daisy(雏菊) in a pot to put on my fire escape."
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+                "start": 54,
+                "end": 97,
+                "quote": "I figured my gardening days were behind me."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p3",
+                "start": 0,
+                "end": 38,
+                "quote": "直到二十五六岁，我觉得这是成年人该做的事，才带回家一小盆雏菊，放在消防梯上。"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p2",
+                "start": 26,
+                "end": 42,
+                "quote": "心想自己干园艺活的日子总算过去了"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-c-evidence-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:30"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+                "start": 318,
+                "end": 403,
+                "quote": "But it always felt like maybe that deep connection to a particular space was missing."
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+                "start": 459,
+                "end": 506,
+                "quote": "I guess you could say I was putting down roots."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p5",
+                "start": 95,
+                "end": 123,
+                "quote": "但我总觉得，也许还缺少与某个特定空间之间的那种深厚联系。"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p5",
+                "start": 142,
+                "end": 154,
+                "quote": "我想可以说，我正在扎根。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-c-evidence-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:31"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:8",
+                "start": 0,
+                "end": 21,
+                "quote": "What are you growing?"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+                "start": 39,
+                "end": 85,
+                "quote": "I noticed something in me was growing as well."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p7",
+                "start": 0,
+                "end": 8,
+                "quote": "你在培育什么呢？"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p5",
+                "start": 12,
+                "end": 26,
+                "quote": "我发现自己内心也有什么在生长"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-c-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:28"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-c-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+                "start": 144,
+                "end": 268,
+                "quote": "The concrete jungle that awaited me seemed like a welcome escape from the outdoor chores that had once felt like a sentence."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p2",
+                "start": 59,
+                "end": 104,
+                "quote": "等着我的那片水泥丛林，看上去是一次求之不得的逃离，让我摆脱了那些曾经像服刑一样的户外杂活。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-c-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:29"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-c-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:3",
+                "start": 0,
+                "end": 139,
+                "quote": "It wasn’t until my mid-20s that I, thinking it was the adult thing to do, brought home a small daisy(雏菊) in a pot to put on my fire escape."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-c",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-c-p3",
+                "start": 0,
+                "end": 38,
+                "quote": "直到二十五六岁，我觉得这是成年人该做的事，才带回家一小盆雏菊，放在消防梯上。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章按时间顺序写作者对园艺的态度变化：从小厌恶院子活，离家时如释重负，二十多岁第一次尝试养花失败，婚后开辟花园爱上种植，最后发现自己也在种植中扎下了根，并以一问引读者思考。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:1",
+            "summary": "作者在郊区长大，把干院子活当作惩罚，讨厌户外、虫子和泥土。",
+            "function": "交代作者最初对园艺的厌恶。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+            "summary": "17 岁离家时，他以为再也不用干园艺活，觉得城里的水泥丛林是一次解脱。",
+            "function": "写离家时的轻松心情。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:3",
+            "summary": "二十五六岁时他第一次买回一盆雏菊，第二天就被松鼠拖走，此后不再在那间公寓种花。",
+            "function": "写态度开始转变，但第一次尝试失败。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:4",
+            "summary": "婚后在布鲁克林有了花园，他意外发现种植很有趣，充满力量和兴奋。",
+            "function": "写他真正爱上园艺。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+            "summary": "他发现种植时自己内心也在成长，终于找到了以前一直缺少的与一个地方的深厚联系。",
+            "function": "点明园艺带给他的归属感，是全文的重心。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:6",
+            "summary": "种植和等待本身就是一种自我关爱，最美妙的是生长这件事。",
+            "function": "总结作者对“生长”的体会。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:8",
+            "summary": "作者问读者：你在培育什么？",
+            "function": "把话题引向读者，让读者想想自己的成长。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-tangshan-2025-01:28": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "从作者对离家后生活的描写推断他怎样看待 17 岁离家。",
+      "stemTranslationZh": "作者如何看待自己 17 岁离家这件事？",
+      "locateBy": "stem",
+      "locateFindZh": "往后两句看他对离家的感受",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "看作成长的必经一步。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "growing",
+            "optionText": "growth",
+            "matchType": "wordFamily",
+            "relationNote": "“成长”（growing）出自 [[block:paper-mock-hebei-tangshan-2025-01:reading-c:5]] 种花时内心的变化，和 17 岁离家无关；离家时他只觉得终于摆脱了院子活。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+              "quote": "I noticed something in me was growing as well.",
+              "anchor": "内心在成长"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "看作一种极大的解脱。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+              "quote": "The concrete jungle that awaited me seemed like a welcome escape from the outdoor chores that had once felt like a sentence.",
+              "anchor": "求之不得的逃离"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:1",
+              "quote": "yard work was punishment",
+              "anchor": "院子活像惩罚"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "看作对社会期望的逃避。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "escape",
+            "optionText": "escape",
+            "matchType": "exact",
+            "relationNote": "原文的“逃离”（escape）是逃开户外杂活（the outdoor chores），选项把逃离的对象换成了社会期望，原文没提。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+              "quote": "The concrete jungle that awaited me seemed like a welcome escape from the outdoor chores that had once felt like a sentence.",
+              "anchor": "逃离户外杂活"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "看作一次苦乐参半的转变。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "As a bittersweet transition.",
+            "explanation": "写离家只用了“求之不得”（welcome）这样的词，没有不舍或伤感，苦乐参半里的“苦”找不到依据。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "at 17",
+          "sourceRole": "stem",
+          "targetText": "When I left home at 17 with a backpack of belongings, I figured my gardening days were behind me.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+          "relationType": "locationCue",
+          "answerText": "seemed like a welcome escape from the outdoor chores",
+          "bridgeZh": "离家后满眼都是水泥地，再也不用干那些院子活了",
+          "note": "题干 at 17 原词出现在原文。"
+        },
+        {
+          "sourceText": "As a great relief.",
+          "sourceRole": "correctOption",
+          "targetText": "seemed like a welcome escape from the outdoor chores",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "选项的“极大的解脱”（great relief）对应原文“求之不得的逃离”（a welcome escape）：院子活从小就像受罚（punishment），离家后终于不用再干，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:29": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "detail-inference",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "对比作者前后对种植的态度，推断他二十五六岁时的变化。",
+      "stemTranslationZh": "关于作者二十五六岁时的情况，我们能了解到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看 until 后他头一回做了什么",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他的看法发生了转变。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:3",
+              "quote": "It wasn’t until my mid-20s that I, thinking it was the adult thing to do, brought home a small daisy(雏菊) in a pot to put on my fire escape.",
+              "anchor": "第一次买花"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+              "quote": "I figured my gardening days were behind me.",
+              "anchor": "以为园艺日子已过去"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "他把松鼠视为不祥之兆。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "sign",
+            "optionText": "sign",
+            "matchType": "exact",
+            "relationNote": "原文的“信号”（took it as a sign）是把雏菊连盆被拖走这件事当作别再在那间公寓种花的提示，没说松鼠本身是凶兆。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:3",
+              "quote": "I took it as a sign and didn’t try any more plants in that apartment.",
+              "anchor": "当作信号"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "他开始怀念 17 岁以前的日子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "He began to miss the days before 17.",
+            "explanation": "原文没写他怀念 17 岁以前；那时干院子活像受罚，他买花是觉得这是成年人该做的事。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他内心的责任感增强了。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "thinking it was the adult thing to do",
+            "sourceHighlight": "the adult thing to do",
+            "optionText": "A sense of responsibility grew in him.",
+            "optionHighlight": "A sense of responsibility grew",
+            "explanation": "他只是觉得养盆花是成年人该做的事（the adult thing to do），花被拖走后就不再种了，看不出责任感在增强。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:3",
+              "quote": "thinking it was the adult thing to do",
+              "anchor": "成年人该做的事"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "mid-20s",
+          "sourceRole": "stem",
+          "targetText": "It wasn’t until my mid-20s that I, thinking it was the adult thing to do, brought home a small daisy(雏菊) in a pot to put on my fire escape.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:3",
+          "relationType": "locationCue",
+          "answerText": "thinking it was the adult thing to do, brought home a small daisy",
+          "note": "题干 mid-20s 原词出现在原文。"
+        },
+        {
+          "sourceText": "There was a shift in his perspective.",
+          "sourceRole": "correctOption",
+          "targetText": "I figured my gardening days were behind me.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:2",
+          "relationType": "paraphrase",
+          "note": "“看法转变”是前后一比推出来的：17 岁离家时他以为园艺日子总算过去了（behind me），这时却觉得养花是成年人该做的事，主动买回一盆雏菊，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:30": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出作者从园艺中得到的收获，并看出原文描述对应的概括词。",
+      "stemTranslationZh": "作者从园艺中收获了什么？",
+      "locateBy": "stem",
+      "locateFindZh": "this 指什么，往前找",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "多姿多彩的生活。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "colors",
+            "optionText": "colorful",
+            "matchType": "wordFamily",
+            "relationNote": "把墙刷成鲜亮颜色（bright colors）是他种花以前布置住处的做法，他说这样做仍缺少对一个地方的深厚联系。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+              "quote": "I painted the walls bright colors.",
+              "anchor": "刷亮色的墙"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "朋友们的尊重。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "friends",
+            "optionText": "Friends",
+            "matchType": "exact",
+            "relationNote": "朋友（friends）只出现在他以前和朋友创立节日传统的事里，原文没提种花赢得朋友尊重。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+              "quote": "I built new holiday traditions with friends.",
+              "anchor": "和朋友过节"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "有创意的想法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Creative ideas.",
+            "explanation": "原文写种花带来的是乐趣、兴奋和扎根的感觉，没提产生了什么创意。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一种归属感。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+              "quote": "But it always felt like maybe that deep connection to a particular space was missing.",
+              "anchor": "缺少的深厚联系"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+              "quote": "I guess you could say I was putting down roots.",
+              "anchor": "扎根"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "gardening",
+          "sourceRole": "stem",
+          "targetText": "In gardening, I finally found this new layer of depth.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+          "relationType": "locationCue",
+          "answerText": "that deep connection to a particular space",
+          "bridgeZh": "this new layer of depth 指以前缺少的与一个地方的深厚联系",
+          "note": "题干 gardening 原词出现在原文。"
+        },
+        {
+          "sourceText": "A sense of belonging.",
+          "sourceRole": "correctOption",
+          "targetText": "I guess you could say I was putting down roots.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项用“归属感”概括这层联系；作者紧接着说自己在扎根（putting down roots），在一个地方扎下根，就是把这里当成了家，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:31": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "writing-purpose",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "结合全文“生长”的双重含义，推断结尾问句想让读者思考什么。",
+      "stemTranslationZh": "结尾的问题意在激发读者思考________。",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "他们自己的成长源泉",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:8",
+              "quote": "What are you growing?",
+              "anchor": "结尾问句"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+              "quote": "I noticed something in me was growing as well.",
+              "anchor": "内心也在成长"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:7",
+              "quote": "It’s the act of growing that I find the sweetest.",
+              "anchor": "生长最美妙"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "园艺的重要性",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "What are you growing?",
+            "sourceEntity": "you",
+            "optionText": "the importance of gardening",
+            "optionEntity": "gardening",
+            "explanation": "问句问的是读者自己（you）在培育什么，不是请读者评价园艺重不重要；作者讲园艺，是为了引出人的成长。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "所种植物的产量",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "growing",
+            "optionText": "growing",
+            "matchType": "exact",
+            "relationNote": "选项照搬“生长”（growing），把它理解成植物长了多少；作者在 [[block:paper-mock-hebei-tangshan-2025-01:reading-c:5]] 已把生长用到自己身上（something in me was growing），这一问问的是人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+              "quote": "I noticed something in me was growing as well.",
+              "anchor": "内心也在成长"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他们最喜欢的花和蔬菜",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "flowers and vegetables",
+            "optionText": "flowers and vegetables",
+            "matchType": "exact",
+            "relationNote": "花和蔬菜（flowers and vegetables）是作者种的东西；结尾问读者自己在培育什么，没问读者喜欢哪种花和菜。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+              "quote": "As the flowers and vegetables bloomed",
+              "anchor": "作者种的花和菜"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The question at the end",
+          "sourceRole": "stem",
+          "targetText": "What are you growing?",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:8",
+          "relationType": "locationCue",
+          "targetCue": "What are you growing",
+          "sourceZh": "结尾的问题",
+          "targetCueZh": "你在培育什么",
+          "answerText": "What are you growing",
+          "note": "题干 The question at the end（结尾的问题）对应原文结尾的问句 What are you growing（你在培育什么）。"
+        },
+        {
+          "sourceText": "their own sources of growth",
+          "sourceRole": "correctOption",
+          "targetText": "I noticed something in me was growing as well.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-c:5",
+          "relationType": "paraphrase",
+          "note": "选项扣住两点：问句问的是读者自己（you）；全文的“生长”早已不只是种花，作者说种花时自己内心也在成长（something in me was growing）。所以这一问是请读者想想，自己身上有什么在成长、靠什么成长，选 A。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,917 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hebei-tangshan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-tangshan-2025-01:reading-a"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-tangshan-2025-01:reading-a": {
+      "overview": "这是一门“公共演讲”课的课程说明，介绍授课教师和课程目标，列出四次演讲、面试指导和两项书面作业的要求，最后给出各项作业占总成绩的比例。",
+      "fullTranslationZh": "公共演讲\n授课教师：埃莉斯·莫里森博士\n课程目标：\n“公共演讲”课旨在加深你对交流过程的理解，培养你作为公共演讲者和公共演讲评论者的能力。\n作业：\n在整个课程中，你要做四次有准备的演讲，篇幅和难度逐次增加。你要为每次演讲准备提纲。你还要写两篇短文，分析口头表达和修辞的各个方面。\n演讲部分：\n自我介绍演讲：用 2 分钟介绍你自己，目标是让听众记住你的名字，并对你有所了解。\n教学型演讲：这篇 4 分钟的演讲要教给我们一个观点或某件事的做法，重点在于内容的组织，以及建立共同点和可信度。\n号召行动演讲：你有 6 分钟时间说服听众采取某项具体行动，重点在于激发动机和推动后续落实。\n改变态度演讲：你有 8 到 10 分钟时间，就一个事先测试过听众赞同与否的话题改变听众的态度，重点在于论证、可信度和说服力。\n面试：你将在课堂上接受指导，学习如何在求职面试中有说服力地展示自己的能力。\n书面部分：\n著名演讲修辞分析：任选一篇著名演讲，写一篇文章分析其中运用的修辞策略。\n自我评估/课程评价：这项作业的目的是评估你在本课程中的表现以及课程本身。\n评分\n口头演讲与书面作业 90%\n自我介绍演讲（5%）\n教学型演讲（10%）\n著名演讲修辞分析（20%）\n号召行动演讲（20%）\n提纲（10%）\n演讲（10%）\n改变态度演讲（30%）\n提纲（15%）\n演讲（15%）\n自我评估（5%）\n课堂参与 10%",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-a-1",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:4",
+          "sourceText": "Public Speaking is designed to improve your understanding of the communication process and to develop your skills as a public speaker and as a critic of public speech.",
+          "displayText": "Public Speaking is designed to improve your understanding of the communication process and to develop your skills as a public speaker and as a critic of public speech.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:21"
+          ],
+          "translationZh": "“公共演讲”课旨在加深你对交流过程的理解，培养你作为公共演讲者和公共演讲评论者的能力。",
+          "analysisZh": "主干是 Public Speaking is designed to do，“这门课旨在做……”，课程名在这里作主语，一开头就交代这是课程说明。designed 后面有两个并列的不定式：to improve your understanding of …（加深理解）和 to develop your skills（培养能力）。skills 后又用两个 as 短语并列，说明是哪两种身份的能力：作为演讲者（as a public speaker）和作为演讲评论者（as a critic of public speech）。",
+          "underlineRanges": [
+            {
+              "start": 16,
+              "end": 38,
+              "quote": "is designed to improve"
+            },
+            {
+              "start": 87,
+              "end": 101,
+              "quote": "and to develop"
+            },
+            {
+              "start": 114,
+              "end": 149,
+              "quote": "as a public speaker and as a critic"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-a-2",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:12",
+          "sourceText": "You have 8-10 minutes to change your audience’s attitudes on a topic that you will have pre-tested for agreement/ disagreement.",
+          "displayText": "You have 8-10 minutes to change your audience’s attitudes on a topic that you will have pre-tested for agreement/ disagreement.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:22"
+          ],
+          "translationZh": "你有 8 到 10 分钟时间，就一个你事先测试过听众赞同与否的话题改变听众的态度。",
+          "analysisZh": "主干是 You have 8-10 minutes，后面的不定式 to change your audience’s attitudes 说明这段时间用来做什么。on a topic 交代改变的是在哪个话题上的态度，that 引导的定语从句修饰 topic。从句用将来完成时 will have pre-tested，意思是到演讲时你已经事先测过听众对这个话题是赞同还是反对（for agreement/ disagreement）。",
+          "underlineRanges": [
+            {
+              "start": 22,
+              "end": 57,
+              "quote": "to change your audience’s attitudes"
+            },
+            {
+              "start": 69,
+              "end": 98,
+              "quote": "that you will have pre-tested"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:1"
+              ],
+              "start": 0,
+              "end": 4,
+              "quote": "公共演讲"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:2"
+              ],
+              "start": 5,
+              "end": 19,
+              "quote": "授课教师：埃莉斯·莫里森博士"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:3"
+              ],
+              "start": 20,
+              "end": 25,
+              "quote": "课程目标："
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:4"
+              ],
+              "start": 26,
+              "end": 69,
+              "quote": "“公共演讲”课旨在加深你对交流过程的理解，培养你作为公共演讲者和公共演讲评论者的能力。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:5"
+              ],
+              "start": 70,
+              "end": 73,
+              "quote": "作业："
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p6",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:6"
+              ],
+              "start": 74,
+              "end": 139,
+              "quote": "在整个课程中，你要做四次有准备的演讲，篇幅和难度逐次增加。你要为每次演讲准备提纲。你还要写两篇短文，分析口头表达和修辞的各个方面。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p7",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:7"
+              ],
+              "start": 140,
+              "end": 145,
+              "quote": "演讲部分："
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p8",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:8"
+              ],
+              "start": 146,
+              "end": 186,
+              "quote": "自我介绍演讲：用 2 分钟介绍你自己，目标是让听众记住你的名字，并对你有所了解。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p9",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:9",
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:10"
+              ],
+              "start": 187,
+              "end": 242,
+              "quote": "教学型演讲：这篇 4 分钟的演讲要教给我们一个观点或某件事的做法，重点在于内容的组织，以及建立共同点和可信度。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p10",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:11"
+              ],
+              "start": 243,
+              "end": 288,
+              "quote": "号召行动演讲：你有 6 分钟时间说服听众采取某项具体行动，重点在于激发动机和推动后续落实。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p11",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:12"
+              ],
+              "start": 289,
+              "end": 351,
+              "quote": "改变态度演讲：你有 8 到 10 分钟时间，就一个事先测试过听众赞同与否的话题改变听众的态度，重点在于论证、可信度和说服力。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p12",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:13"
+              ],
+              "start": 352,
+              "end": 389,
+              "quote": "面试：你将在课堂上接受指导，学习如何在求职面试中有说服力地展示自己的能力。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p13",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:14"
+              ],
+              "start": 390,
+              "end": 395,
+              "quote": "书面部分："
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p14",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:15"
+              ],
+              "start": 396,
+              "end": 431,
+              "quote": "著名演讲修辞分析：任选一篇著名演讲，写一篇文章分析其中运用的修辞策略。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p15",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:16"
+              ],
+              "start": 432,
+              "end": 468,
+              "quote": "自我评估/课程评价：这项作业的目的是评估你在本课程中的表现以及课程本身。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p16",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:17"
+              ],
+              "start": 469,
+              "end": 471,
+              "quote": "评分"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p17",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:18"
+              ],
+              "start": 472,
+              "end": 485,
+              "quote": "口头演讲与书面作业 90%"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p18",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:19"
+              ],
+              "start": 486,
+              "end": 496,
+              "quote": "自我介绍演讲（5%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p19",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:20"
+              ],
+              "start": 497,
+              "end": 507,
+              "quote": "教学型演讲（10%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p20",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:21"
+              ],
+              "start": 508,
+              "end": 521,
+              "quote": "著名演讲修辞分析（20%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p21",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:22"
+              ],
+              "start": 522,
+              "end": 533,
+              "quote": "号召行动演讲（20%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p22",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:23"
+              ],
+              "start": 534,
+              "end": 541,
+              "quote": "提纲（10%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p23",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:24"
+              ],
+              "start": 542,
+              "end": 549,
+              "quote": "演讲（10%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p24",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:25"
+              ],
+              "start": 550,
+              "end": 561,
+              "quote": "改变态度演讲（30%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p25",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:26"
+              ],
+              "start": 562,
+              "end": 569,
+              "quote": "提纲（15%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p26",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:27"
+              ],
+              "start": 570,
+              "end": 577,
+              "quote": "演讲（15%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p27",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:28"
+              ],
+              "start": 578,
+              "end": 586,
+              "quote": "自我评估（5%）"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p28",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-a:29"
+              ],
+              "start": 587,
+              "end": 595,
+              "quote": "课堂参与 10%"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-a-evidence-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:21"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:6",
+                "start": 0,
+                "end": 21,
+                "quote": "Throughout the course"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:2",
+                "start": 0,
+                "end": 30,
+                "quote": "INSTRUCTOR: Dr. Elise Morrison"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:18",
+                "start": 0,
+                "end": 45,
+                "quote": "Oral Presentations and Written Components 90%"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p6",
+                "start": 0,
+                "end": 6,
+                "quote": "在整个课程中"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p2",
+                "start": 0,
+                "end": 14,
+                "quote": "授课教师：埃莉斯·莫里森博士"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p17",
+                "start": 0,
+                "end": 13,
+                "quote": "口头演讲与书面作业 90%"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-a-evidence-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:22"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:9",
+                "start": 0,
+                "end": 15,
+                "quote": "Speech to Teach"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:10",
+                "start": 0,
+                "end": 15,
+                "quote": "on organization"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p9",
+                "start": 0,
+                "end": 5,
+                "quote": "教学型演讲"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p9",
+                "start": 33,
+                "end": 42,
+                "quote": "重点在于内容的组织"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-a-evidence-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:23"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:21",
+                "start": 0,
+                "end": 42,
+                "quote": "Rhetorical Analysis of Famous Speech (20%)"
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:28",
+                "start": 0,
+                "end": 19,
+                "quote": "Self-evaluation(5%)"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p20",
+                "start": 0,
+                "end": 13,
+                "quote": "著名演讲修辞分析（20%）"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p27",
+                "start": 0,
+                "end": 8,
+                "quote": "自我评估（5%）"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-a-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:21"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-a-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:4",
+                "start": 0,
+                "end": 167,
+                "quote": "Public Speaking is designed to improve your understanding of the communication process and to develop your skills as a public speaker and as a critic of public speech."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p4",
+                "start": 0,
+                "end": 43,
+                "quote": "“公共演讲”课旨在加深你对交流过程的理解，培养你作为公共演讲者和公共演讲评论者的能力。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-a-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:22"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-a-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:12",
+                "start": 30,
+                "end": 157,
+                "quote": "You have 8-10 minutes to change your audience’s attitudes on a topic that you will have pre-tested for agreement/ disagreement."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-a",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-a-p11",
+                "start": 7,
+                "end": 46,
+                "quote": "你有 8 到 10 分钟时间，就一个事先测试过听众赞同与否的话题改变听众的态度"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "全文按“授课教师—课程目标—作业—评分”的顺序排开：作业分演讲和书面两类，每项写明时长和重点；评分部分逐项列出所占比例。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:1",
+            "summary": "课程名称：公共演讲。",
+            "function": "点明这是一门课的说明。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:2",
+            "summary": "授课教师是埃莉斯·莫里森博士。",
+            "function": "交代谁来上这门课。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:4",
+            "summary": "课程旨在加深对交流过程的理解，培养演讲和评析演讲的能力。",
+            "function": "说明课程目标。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:6",
+            "summary": "整门课要做四次逐渐加长加难的演讲、写提纲，还要写两篇短文。",
+            "function": "总述作业，引出下面的分项说明。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:8",
+            "summary": "自我介绍演讲限时 2 分钟，目标是让听众记住你的名字、了解你。",
+            "function": "分项说明第一种演讲。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:9",
+            "summary": "教学型演讲限时 4 分钟，教一个观点或做法，重点在内容的组织以及建立共同点和可信度。",
+            "function": "分项说明第二种演讲。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:11",
+            "summary": "号召行动演讲限时 6 分钟，重点在激发动机和推动后续落实。",
+            "function": "分项说明第三种演讲。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:12",
+            "summary": "改变态度演讲限时 8 到 10 分钟，重点在论证、可信度和说服力。",
+            "function": "分项说明第四种演讲。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:13",
+            "summary": "课堂上会指导如何在求职面试中有说服力地展示能力。",
+            "function": "补充口头部分的面试训练。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:15",
+            "summary": "书面作业之一：分析一篇著名演讲的修辞策略。",
+            "function": "分项说明第一项书面作业。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:16",
+            "summary": "书面作业之二：自我评估与课程评价。",
+            "function": "分项说明第二项书面作业。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:17",
+            "summary": "评分部分的标题。",
+            "function": "引出各项成绩比例。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:18",
+            "summary": "口头演讲与书面作业共占 90%，下面逐项列出：两次较长的演讲还分提纲和演讲两部分计分。",
+            "function": "列出成绩构成。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:29",
+            "summary": "课堂参与占 10%。",
+            "function": "补齐其余 10% 的成绩。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-tangshan-2025-01:21": {
+      "skill": {
+        "primary": "inference"
+      },
+      "similarityProfile": {
+        "family": "inference",
+        "subtype": "source",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据全文的内容和排版判断文章出处。",
+      "stemTranslationZh": "这篇文章最可能选自哪里？",
+      "locateBy": "passage",
+      "locateFindZh": "看开头的课程名和授课教师，再看下面分项列出的作业要求和评分比例",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一则演讲通知。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "speeches",
+            "optionText": "speech",
+            "matchType": "wordFamily",
+            "relationNote": "文中反复出现演讲（speeches），但都是学生要完成的四次演讲作业，没有某一场演讲的时间、地点和主讲人。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:6",
+              "quote": "Throughout the course you will deliver four prepared speeches of increasing length and complexity.",
+              "anchor": "四次演讲作业"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一份教案。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Throughout the course you will deliver four prepared speeches of increasing length and complexity.",
+            "sourceHighlight": "Throughout the course",
+            "optionText": "A lesson design.",
+            "optionHighlight": "lesson",
+            "explanation": "教案安排一节课怎么上，原文交代的是整门课（Throughout the course）的作业和成绩，而且是写给学生（you）的。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一篇学术文章。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "An academic article.",
+            "explanation": "分析修辞策略（rhetorical strategies）是布置给学生的作业；全文只列安排和分数，没有提出观点或研究结论。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一份课程指南。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:6",
+              "quote": "Throughout the course you will deliver four prepared speeches of increasing length and complexity.",
+              "anchor": "整门课的作业"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:2",
+              "quote": "INSTRUCTOR: Dr. Elise Morrison",
+              "anchor": "授课教师"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:18",
+              "quote": "Oral Presentations and Written Components 90%",
+              "anchor": "成绩比例"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A course guide",
+          "sourceRole": "correctOption",
+          "targetText": "Throughout the course",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:6",
+          "relationType": "paraphrase",
+          "note": "选项的“课程指南”把全文几块都包进去了：授课教师（INSTRUCTOR）、课程目标、整门课（Throughout the course）的各项作业，再到成绩比例（GRADING），都是学生上这门课要知道的安排，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:22": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出哪一种演讲把重点放在内容结构上。",
+      "stemTranslationZh": "哪一种演讲侧重结构？",
+      "locateBy": "stem",
+      "locateFindZh": "往前一行看这是哪项演讲",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "教学型演讲。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:10",
+              "quote": "on organization as well as on establishing common ground and credibility.",
+              "anchor": "重点在组织"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:9",
+              "quote": "Speech to Teach: The 4-minute speech will teach us about an idea or how to do something. The emphasis is",
+              "anchor": "教学型演讲"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "自我介绍演讲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Speech of Introduction: Introduce yourself in 2 minutes: The goal is for your audience to remember your name and learn something about you.",
+            "sourceEntity": "remember your name",
+            "optionText": "Speech of Introduction.",
+            "optionEntity": "Speech of Introduction",
+            "explanation": "自我介绍演讲的目标是让听众记住你的名字、了解你（remember your name），讲的是给人留下印象，没提内容怎样组织。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:8",
+              "quote": "The goal is for your audience to remember your name and learn something about you.",
+              "anchor": "自我介绍的目标"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "号召行动演讲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The focus is on motivation and follow-through.",
+            "sourceEntity": "motivation and follow-through",
+            "optionText": "Speech to Initiate an Action.",
+            "optionEntity": "Speech to Initiate an Action",
+            "explanation": "这一项用了和题干相同的“侧重”（focus），但侧重的是激发动机和后续落实（motivation and follow-through），不是结构。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:11",
+              "quote": "The focus is on motivation and follow-through.",
+              "anchor": "号召行动的重点"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "改变态度演讲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The emphasis is on argumentation, credibility, and persuasion.",
+            "sourceEntity": "argumentation, credibility, and persuasion",
+            "optionText": "Speech to Change an Attitude.",
+            "optionEntity": "Speech to Change an Attitude",
+            "explanation": "这一项也用“重点是”（The emphasis is）引出要求，但列的是论证、可信度和说服力，没有内容的组织。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:12",
+              "quote": "The emphasis is on argumentation, credibility, and persuasion.",
+              "anchor": "改变态度的重点"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "structure",
+          "sourceRole": "stem",
+          "targetText": "on organization as well as on establishing common ground and credibility.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:10",
+          "relationType": "locationCue",
+          "targetCue": "organization",
+          "sourceZh": "结构",
+          "targetCueZh": "内容的组织",
+          "answerText": "Speech to Teach",
+          "bridgeZh": "这半行被换页隔开，接的是 The emphasis is，说的是同一项演讲",
+          "note": "题干 structure（结构）对应原文 organization（组织）。"
+        },
+        {
+          "sourceText": "Speech to Teach",
+          "sourceRole": "correctOption",
+          "targetText": "Speech to Teach: The 4-minute speech will teach us about an idea or how to do something.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:9",
+          "relationType": "paraphrase",
+          "note": "选项照搬原文的演讲名称。这项演讲的重点写着内容的组织（on organization），也就是题干说的结构，选 A。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:23": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "calculation",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "先认出哪几项算书面作业，再把它们在评分表里的比例相加。",
+      "stemTranslationZh": "书面作业占总成绩的多少？",
+      "locateBy": "stem",
+      "locateFindZh": "记下两项作业名，到 GRADING 里找分数",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "15%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "15%",
+            "optionText": "15%",
+            "matchType": "exact",
+            "relationNote": "15% 是改变态度演讲里提纲或演讲本身各占的分数（Outline 15%），属于口头演讲，不是书面作业的合计。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:26",
+              "quote": "Outline(15%)",
+              "anchor": "提纲 15%"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "25%。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:21",
+              "quote": "Rhetorical Analysis of Famous Speech (20%)",
+              "anchor": "修辞分析 20%"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:28",
+              "quote": "Self-evaluation(5%)",
+              "anchor": "自我评估 5%"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "30%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "30%",
+            "optionText": "30%",
+            "matchType": "exact",
+            "relationNote": "30% 是改变态度演讲的总分（Speech to Change an Attitude 30%），那是一项口头演讲，与书面作业无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:25",
+              "quote": "Speech to Change an Attitude (30%)",
+              "anchor": "改变态度演讲 30%"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "35%。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "35%.",
+            "explanation": "两项书面作业相加只有 25%；再算上课堂参与的 10%（Class Participation）才凑出 35%，可课堂参与不是书面作业。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "written",
+          "sourceRole": "stem",
+          "targetText": "Written:",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:14",
+          "relationType": "locationCue",
+          "answerText": "Rhetorical Analysis of Famous Speech (20%)",
+          "bridgeZh": "书面部分只列了修辞分析和自我评估两项，分数要相加",
+          "note": "题干 written 原词出现在原文。"
+        },
+        {
+          "sourceText": "25%",
+          "sourceRole": "correctOption",
+          "targetText": "Self-evaluation(5%)",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-a:28",
+          "relationType": "calculation",
+          "note": "书面作业在评分表里对应两项：修辞分析占 20%（Rhetorical Analysis … 20%），自我评估占 5%（Self-evaluation），20% + 5% = 25%，选 B。"
+        }
+      ]
+    }
+  }
+}

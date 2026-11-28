@@ -1,0 +1,148 @@
+{
+  "taskType": "application",
+  "modelAnswer": "Dear Sir or Madam,\n\nI’m Li Hua, a student representative from your sister school in China. I’m writing to invite your students to join an online exchange during our Technology and Learning Week.\n\nThe week will run from March 10 to 14. Its aim is to help students see how technology can make learning more effective, from AI study tools to online science lessons. Sharing ideas with friends abroad will make it far more meaningful.\n\nWe would like to hold the video call at 4 p.m. Beijing time on March 12. Students from both schools could talk about how they use apps and online courses for schoolwork, and what problems these tools bring.\n\nCould you let us know by March 1 whether this time works for you? We look forward to your reply.\n\nYours,\nLi Hua",
+  "applicationAnalysis": {
+    "schemaVersion": "application-analysis-v4",
+    "taskCard": {
+      "basics": {
+        "form": "写给姊妹学校的邀请邮件，沿用题面给出的称呼、首句和落款",
+        "personTense": "以第一人称“我/我们”代表学校发出邀请，活动安排用一般将来时，提议和请求用 would like、could",
+        "readerTone": "读者是对方学校的负责人，彼此不熟，语气礼貌、正式而热情",
+        "goal": "邀请对方学生参加线上互动，交代清楚活动和连线安排，并请对方确认时间"
+      },
+      "taskRequires": [
+        "说明“科技与学习”主题活动的时间和目的",
+        "说明两校连线的时间和交流话题"
+      ],
+      "thisEssayChooses": "标准版把活动定在 3 月 10 日到 14 日，目的写成让学生看到科技怎样让学习更有效；连线定在 3 月 12 日北京时间下午 4 点，话题是两校学生怎样用学习软件和网课、这些工具带来什么问题；结尾请对方在 3 月 1 日前回复。日期和话题都是范文自拟，可以换。"
+    },
+    "standard": {
+      "essay": "Dear Sir or Madam,\n\nI’m Li Hua, a student representative from your sister school in China. I’m writing to invite your students to join an online exchange during our Technology and Learning Week.\n\nThe week will run from March 10 to 14. Its aim is to help students see how technology can make learning more effective, from AI study tools to online science lessons. Sharing ideas with friends abroad will make it far more meaningful.\n\nWe would like to hold the video call at 4 p.m. Beijing time on March 12. Students from both schools could talk about how they use apps and online courses for schoolwork, and what problems these tools bring.\n\nCould you let us know by March 1 whether this time works for you? We look forward to your reply.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "活动的时间",
+          "quote": "The week will run from March 10 to 14."
+        },
+        {
+          "point": "活动的目的",
+          "quote": "Its aim is to help students see how technology can make learning more effective, from AI study tools to online science lessons."
+        },
+        {
+          "point": "连线的时间",
+          "quote": "We would like to hold the video call at 4 p.m. Beijing time on March 12."
+        },
+        {
+          "point": "连线的话题",
+          "quote": "Students from both schools could talk about how they use apps and online courses for schoolwork, and what problems these tools bring."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接在题面首句后面，直接说出写信目的：邀请对方参加线上交流。",
+          "items": [
+            {
+              "quote": "I’m writing to invite your students to join an online exchange",
+              "explain": "首句只介绍了身份，这句马上说明来意，对方读到第二句就知道这是一封邀请信。"
+            },
+            {
+              "quote": "during our Technology and Learning Week",
+              "explain": "把活动名称放进邀请里，顺带引出下一段要讲的活动本身，不另起一句空泛介绍。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成第一个要点：活动的时间和目的。",
+          "items": [
+            {
+              "quote": "The week will run from March 10 to 14.",
+              "explain": "run from ... to ... 是说活动持续时间的常用说法，一句交代清楚起止日期。"
+            },
+            {
+              "quote": "from AI study tools to online science lessons",
+              "explain": "用两个具体例子说明“科技怎样帮助学习”，目的就不只是一句口号。"
+            },
+            {
+              "quote": "Sharing ideas with friends abroad will make it far more meaningful.",
+              "explain": "从对方的角度说明为什么请他们来：两校交流能让活动更有意义，邀请就有了理由。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成第二个要点：连线的时间和话题。",
+          "items": [
+            {
+              "quote": "at 4 p.m. Beijing time on March 12",
+              "explain": "两校不在同一时区，写明 Beijing time，对方才能换算成自己的时间。"
+            },
+            {
+              "quote": "how they use apps and online courses for schoolwork, and what problems these tools bring",
+              "explain": "话题既有用法也有问题，两校学生都有话可说，交流不会冷场。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "请对方确认时间，给出回复期限，礼貌收尾。",
+          "items": [
+            {
+              "quote": "Could you let us know by March 1 whether this time works for you?",
+              "explain": "用 Could you 委婉提出请求，by March 1 给出期限，对方读完就知道下一步该做什么。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I’m writing to invite ... to join ...",
+          "function": "在邀请信开头直接点明来意，接在自我介绍之后最自然。"
+        },
+        {
+          "expression": "The week will run from ... to ...",
+          "function": "交代活动起止时间，比 will be held 更简洁。"
+        },
+        {
+          "expression": "Could you let us know by ... whether ...?",
+          "function": "礼貌地请对方在期限内答复，让邀请有回应的闭环。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Sir or Madam,\n\nI’m Li Hua, a student representative from your sister school in China. Our school is holding a Technology and Learning Week, and we would be delighted if your students could join us online for part of it.\n\nThe week will run from March 10 to 14. Its purpose is to let students explore how technology is changing the way we learn, from AI tutors to virtual science labs. Hearing how students in another country study would give us fresh ideas and, we hope, new friends.\n\nWe suggest a one-hour video call at 4 p.m. Beijing time on March 12. Students could compare the apps and online courses they rely on, and discuss a question that matters to all of us: does technology make us better learners or simply more distracted ones?\n\nCould you let us know by March 1 whether this time suits you? If not, we would be happy to rearrange it.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "活动的时间",
+          "quote": "The week will run from March 10 to 14."
+        },
+        {
+          "point": "活动的目的",
+          "quote": "Its purpose is to let students explore how technology is changing the way we learn, from AI tutors to virtual science labs."
+        },
+        {
+          "point": "连线的时间",
+          "quote": "We suggest a one-hour video call at 4 p.m. Beijing time on March 12."
+        },
+        {
+          "point": "连线的话题",
+          "quote": "Students could compare the apps and online courses they rely on, and discuss a question that matters to all of us: does technology make us better learners or simply more distracted ones?"
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "we would be delighted if your students could join us online for part of it",
+          "explain": "用 would be delighted if ... could 发出邀请，比 I’m writing to invite 更热情，也给了对方选择的余地。"
+        },
+        {
+          "quote": "does technology make us better learners or simply more distracted ones?",
+          "explain": "把话题写成一个真实的问题，两校学生可以各持看法，比只列话题更能激起讨论。"
+        },
+        {
+          "quote": "If not, we would be happy to rearrange it.",
+          "explain": "先替对方想到时间可能不合适，主动表示可以改，比标准版多了一层体贴。"
+        }
+      ]
+    }
+  }
+}

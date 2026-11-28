@@ -1,0 +1,958 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-hebei-tangshan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-tangshan-2025-01:seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-tangshan-2025-01:seven-choices": {
+      "overview": "文章借“情绪过冬”的说法，把人的情绪变化比作四季更替，指出低落情绪像冬天一样正常，人们应接受它、调整习惯并照顾好自己，安然度过低谷，迎来下一个“夏天”。",
+      "fullTranslationZh": "随着树木落叶、霜冻渐至，我们为冬季的几个月收拾好家，也让自己做好准备。厚袜子和舒适的毯子都被拿了出来。季节变换时，我们知道必须改变自己的行为，让自己既安全又温暖。我们的情绪也像季节一样变化：欢笑、快乐、积极，如同夏天；悲伤、愤怒、绝望，如同冬天。我们总期望自己一直生活在情绪的夏天里。然而，时时刻刻都感觉美好是不现实的。\n\n“情绪过冬”这一说法因凯瑟琳·梅而流行开来。她提到，情绪过冬要求我们把那些艰难或令人不适的感受看作冬天：我们可以为它做好准备，也能熬过它。它让我们为即将到来的春天做好准备。有时，情绪的冬天是由某件事引起的，这件事让我们觉得想把自己封闭起来。另一些时候，我们只是耗尽了自己储存的积极情绪。我们需要花时间把它们补充回来，同时接受自己很难过这一事实。无论原因是什么，情绪过冬都鼓励我们接受：情绪有季节变化是正常的，我们应当尽力去应对。\n\n情绪过冬要求我们做出改变。为了熬过艰难时期，我们需要调整习惯，重新评估对自己的期望，并确保以恰当的方式照顾好自己。这个过程给了我们空间，去体验让我们之所以为人的全部情绪，也让我们能在相对舒适的状态下，安然与某种感受共处，直到它过去。\n\n有了这样的应对，我们相信，到下一个夏天来临时，我们就会好起来。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-1",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+          "sourceText": "She mentions emotional wintering asks us to see our difficult or uncomfortable feelings as winters which we can get ready for and live through.",
+          "displayText": "She mentions emotional wintering asks us to see our difficult or uncomfortable feelings as winters which we can get ready for and live through.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:38"
+          ],
+          "translationZh": "她提到，情绪过冬要求我们把那些艰难或令人不适的感受看作冬天：我们可以为它做好准备，也能熬过它。",
+          "analysisZh": "主干是 She mentions，后面省略了 that 的宾语从句 emotional wintering asks us to see ... as winters 作 mentions 的宾语；从句里用 see A as B 结构，把 our difficult or uncomfortable feelings 看作 winters。which 引导的定语从句修饰 winters，get ready for 和 live through 两个短语动词共用宾语 which，一个讲事前准备，一个讲熬过去。正是这句“能准备、能熬过”，让后面一句说它为春天做准备有了依据。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 12,
+              "quote": "She mentions"
+            },
+            {
+              "start": 44,
+              "end": 98,
+              "quote": "see our difficult or uncomfortable feelings as winters"
+            },
+            {
+              "start": 99,
+              "end": 142,
+              "quote": "which we can get ready for and live through"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-2",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:3",
+          "sourceText": "This process gives us the space to explore the full range of emotions that make us human, and allows us to safely sit with a feeling, in relative comfort, until it passes.",
+          "displayText": "This process gives us the space to explore the full range of emotions that make us human, and allows us to safely sit with a feeling, in relative comfort, until it passes.",
+          "relatedQuestionIds": [],
+          "translationZh": "这个过程给了我们空间，去体验让我们之所以为人的全部情绪，也让我们能在相对舒适的状态下，安然与某种感受共处，直到它过去。",
+          "analysisZh": "主语 This process 指上一句调整习惯、重新评估期望、照顾自己这一整套做法，后接两个并列谓语 gives 和 allows。gives us the space 后的不定式 to explore 说明这份空间用来做什么，that make us human 是修饰 emotions 的定语从句。allows us to safely sit with a feeling 中插入 in relative comfort 说明状态，until it passes 交代与情绪共处要持续到它过去为止。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 31,
+              "quote": "This process gives us the space"
+            },
+            {
+              "start": 94,
+              "end": 132,
+              "quote": "allows us to safely sit with a feeling"
+            },
+            {
+              "start": 155,
+              "end": 170,
+              "quote": "until it passes"
+            }
+          ]
+        }
+      ],
+      "discourseStructure": {
+        "summary": "文章先由人们为冬天做准备引出情绪也有季节，指出人不可能一直开心；再介绍“情绪过冬”的含义和情绪冬天的两种来源；最后说明过冬要求我们改变做法，并以对下一个夏天的期待收尾。",
+        "units": [
+          {
+            "unitId": "unit-1",
+            "paragraphIds": [
+              "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1"
+            ],
+            "summary": "从秋冬换季时人们添衣保暖说起，把欢乐比作夏天、悲伤比作冬天，并指出一直感觉美好并不现实。"
+          },
+          {
+            "unitId": "unit-2",
+            "paragraphIds": [
+              "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2"
+            ],
+            "summary": "介绍 Katharine May 推广的“情绪过冬”：把难受的感受当作可以准备、可以熬过的冬天；情绪冬天有时因某件事而起，有时只是积极情绪耗尽。"
+          },
+          {
+            "unitId": "unit-3",
+            "paragraphIds": [
+              "block:paper-mock-hebei-tangshan-2025-01:seven-choices:3",
+              "block:paper-mock-hebei-tangshan-2025-01:seven-choices:4"
+            ],
+            "summary": "说明过冬要求我们调整习惯、重估期望、照顾好自己，在相对舒适中与情绪共处，相信下一个夏天到来时会好起来。"
+          }
+        ]
+      },
+      "extraOptions": {
+        "B": {
+          "target": 37,
+          "secondary": null,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "emotion"
+          ],
+          "text": "选项的 \"Different emotions\" 像是在概括第 37 题空前的 \"Laughing, joyful and positive\" 和 \"sad, angry, and hopeless\"。但空后 \"However\" 反驳的是 \"feel wonderful all the time\" 这种只想开心的期望，人人都有各种情绪这句话和它构不成转折。",
+          "quotes": [
+            "Different emotions",
+            "Laughing, joyful and positive",
+            "sad, angry, and hopeless",
+            "However",
+            "feel wonderful all the time"
+          ]
+        },
+        "D": {
+          "target": 40,
+          "secondary": 38,
+          "kind": "shadow",
+          "shadowOf": "F",
+          "shared": [
+            "We"
+          ],
+          "text": "选项的 \"challenging\" 复现第 40 题空后的 \"challenging times\"，像段首总起。但空后列的 \"adjust our habits\"、\"reassess our expectations\" 都是要做的改变，没有讲成长。也可能误填第 38 题：空前说冬天能 \"live through\"，可空后转去讲情绪冬天的起因，没有接成长的话题。",
+          "quotes": [
+            "challenging",
+            "challenging times",
+            "adjust our habits",
+            "reassess our expectations",
+            "live through"
+          ]
+        }
+      },
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "tr-1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1"
+              ],
+              "start": 0,
+              "end": 160,
+              "quote": "随着树木落叶、霜冻渐至，我们为冬季的几个月收拾好家，也让自己做好准备。厚袜子和舒适的毯子都被拿了出来。季节变换时，我们知道必须改变自己的行为，让自己既安全又温暖。我们的情绪也像季节一样变化：欢笑、快乐、积极，如同夏天；悲伤、愤怒、绝望，如同冬天。我们总期望自己一直生活在情绪的夏天里。然而，时时刻刻都感觉美好是不现实的。"
+            },
+            {
+              "paragraphId": "tr-2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2"
+              ],
+              "start": 162,
+              "end": 376,
+              "quote": "“情绪过冬”这一说法因凯瑟琳·梅而流行开来。她提到，情绪过冬要求我们把那些艰难或令人不适的感受看作冬天：我们可以为它做好准备，也能熬过它。它让我们为即将到来的春天做好准备。有时，情绪的冬天是由某件事引起的，这件事让我们觉得想把自己封闭起来。另一些时候，我们只是耗尽了自己储存的积极情绪。我们需要花时间把它们补充回来，同时接受自己很难过这一事实。无论原因是什么，情绪过冬都鼓励我们接受：情绪有季节变化是正常的，我们应当尽力去应对。"
+            },
+            {
+              "paragraphId": "tr-3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:seven-choices:3"
+              ],
+              "start": 378,
+              "end": 494,
+              "quote": "情绪过冬要求我们做出改变。为了熬过艰难时期，我们需要调整习惯，重新评估对自己的期望，并确保以恰当的方式照顾好自己。这个过程给了我们空间，去体验让我们之所以为人的全部情绪，也让我们能在相对舒适的状态下，安然与某种感受共处，直到它过去。"
+            },
+            {
+              "paragraphId": "tr-4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:seven-choices:4"
+              ],
+              "start": 496,
+              "end": 527,
+              "quote": "有了这样的应对，我们相信，到下一个夏天来临时，我们就会好起来。"
+            }
+          ]
+        },
+        "completedSourceTexts": [
+          {
+            "textId": "completed:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+            "text": "As the trees drop their leaves and frosts advance in, we prepare our homes and ourselves for the winter months. Thick socks and cosy blankets are brought out. When the seasons change, we know that we have to change our behavior to keep ourselves safe and warm. Our feelings change like the seasons. Laughing, joyful and positive like summer; sad, angry, and hopeless like winter. We expect to always live in our emotional summers. However, it would not be practical to feel wonderful all the time."
+          },
+          {
+            "textId": "completed:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+            "text": "The phrase “emotional wintering” was popularized by Katharine May. She mentions emotional wintering asks us to see our difficult or uncomfortable feelings as winters which we can get ready for and live through. It prepares us for the coming spring. Sometimes the emotional winters are caused by an event that makes us feel as though we want to withdraw into ourselves. At other times we simply use up our supplies of positivity. We need to take time to replenish (补充) them while accepting that we are sad. Whatever the cause, emotional wintering encourages us to accept that our emotional seasons are normal and we should manage them as best we can."
+          },
+          {
+            "textId": "completed:paper-mock-hebei-tangshan-2025-01:seven-choices:3",
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:3",
+            "text": "Emotional wintering asks us to change. To manage through challenging times, we need to adjust our habits, reassess our expectations of ourselves, and ensure that we sustain ourselves appropriately. This process gives us the space to explore the full range of emotions that make us human, and allows us to safely sit with a feeling, in relative comfort, until it passes."
+          }
+        ],
+        "annotations": [
+          {
+            "annotationId": "evidence-36",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:36"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+                "start": 54,
+                "end": 110,
+                "quote": "we prepare our homes and ourselves for the winter months"
+              },
+              {
+                "textId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+                "start": 188,
+                "end": 219,
+                "quote": "to keep ourselves safe and warm"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-1",
+                "start": 12,
+                "end": 34,
+                "quote": "我们为冬季的几个月收拾好家，也让自己做好准备"
+              },
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-1",
+                "start": 71,
+                "end": 80,
+                "quote": "让自己既安全又温暖"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-36",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:36"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:36",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+                "start": 112,
+                "end": 158,
+                "quote": "Thick socks and cosy blankets are brought out."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-1",
+                "start": 35,
+                "end": 51,
+                "quote": "厚袜子和舒适的毯子都被拿了出来。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-37",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:37"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+                "start": 347,
+                "end": 413,
+                "quote": "However, it would not be practical to feel wonderful all the time."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-1",
+                "start": 142,
+                "end": 160,
+                "quote": "然而，时时刻刻都感觉美好是不现实的。"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-37",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:37"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:37",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+                "start": 380,
+                "end": 430,
+                "quote": "We expect to always live in our emotional summers."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-1",
+                "start": 123,
+                "end": 142,
+                "quote": "我们总期望自己一直生活在情绪的夏天里。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-38",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:38"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+                "start": 158,
+                "end": 209,
+                "quote": "winters which we can get ready for and live through"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-2",
+                "start": 52,
+                "end": 68,
+                "quote": "我们可以为它做好准备，也能熬过它"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-38",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:38"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:38",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+                "start": 211,
+                "end": 248,
+                "quote": "It prepares us for the coming spring."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-2",
+                "start": 69,
+                "end": 86,
+                "quote": "它让我们为即将到来的春天做好准备。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-39",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:39"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+                "start": 218,
+                "end": 272,
+                "quote": "Sometimes the emotional winters are caused by an event"
+              },
+              {
+                "textId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+                "start": 345,
+                "end": 388,
+                "quote": "We need to take time to replenish (补充) them"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-2",
+                "start": 86,
+                "end": 102,
+                "quote": "有时，情绪的冬天是由某件事引起的"
+              },
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-2",
+                "start": 143,
+                "end": 157,
+                "quote": "我们需要花时间把它们补充回来"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-39",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:39"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:39",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+                "start": 369,
+                "end": 428,
+                "quote": "At other times we simply use up our supplies of positivity."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-2",
+                "start": 120,
+                "end": 143,
+                "quote": "另一些时候，我们只是耗尽了自己储存的积极情绪。"
+              }
+            ]
+          },
+          {
+            "annotationId": "evidence-40",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:40"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:3",
+                "start": 44,
+                "end": 112,
+                "quote": "we need to adjust our habits, reassess our expectations of ourselves"
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-3",
+                "start": 22,
+                "end": 41,
+                "quote": "我们需要调整习惯，重新评估对自己的期望"
+              }
+            ]
+          },
+          {
+            "annotationId": "insertion-40",
+            "kind": "answer-insertion",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:40"
+            ],
+            "blankId": "blank:paper-mock-hebei-tangshan-2025-01:40",
+            "sourceRanges": [
+              {
+                "textId": "completed:paper-mock-hebei-tangshan-2025-01:seven-choices:3",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:3",
+                "start": 0,
+                "end": 38,
+                "quote": "Emotional wintering asks us to change."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-3",
+                "start": 0,
+                "end": 13,
+                "quote": "情绪过冬要求我们做出改变。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:38"
+            ],
+            "selectedSentenceId": "sentence-1",
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+                "start": 67,
+                "end": 210,
+                "quote": "She mentions emotional wintering asks us to see our difficult or uncomfortable feelings as winters which we can get ready for and live through."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-2",
+                "start": 22,
+                "end": 69,
+                "quote": "她提到，情绪过冬要求我们把那些艰难或令人不适的感受看作冬天：我们可以为它做好准备，也能熬过它。"
+              }
+            ]
+          },
+          {
+            "annotationId": "structure-sentence-2",
+            "kind": "sentence-structure",
+            "questionIds": [],
+            "selectedSentenceId": "sentence-2",
+            "sourceRanges": [
+              {
+                "textId": "source:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:3",
+                "start": 166,
+                "end": 337,
+                "quote": "This process gives us the space to explore the full range of emotions that make us human, and allows us to safely sit with a feeling, in relative comfort, until it passes."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation:paper-mock-hebei-tangshan-2025-01:seven-choices",
+                "paragraphId": "tr-3",
+                "start": 57,
+                "end": 116,
+                "quote": "这个过程给了我们空间，去体验让我们之所以为人的全部情绪，也让我们能在相对舒适的状态下，安然与某种感受共处，直到它过去。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-tangshan-2025-01:36": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:36",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "frosts advance in",
+        "prepare our homes and ourselves",
+        "the winter months",
+        "safe and warm"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+        "beforeQuote": "As the trees drop their leaves and frosts advance in, we prepare our homes and ourselves for the winter months.",
+        "afterQuote": "When the seasons change, we know that we have to change our behavior to keep ourselves safe and warm."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "prepare our homes and ourselves",
+          "signalSide": "context-before",
+          "targetText": "Thick socks and cosy blankets are brought out",
+          "relation": "空前笼统说为冬天收拾家和自己，选项给出家里实际做的一件准备。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Thick socks and cosy blankets",
+          "signalSide": "option",
+          "targetText": "the winter months / safe and warm",
+          "relation": "厚袜子和毯子是过冬保暖的东西，前接冬天，后接保暖。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "safe and warm",
+          "signalSide": "context-after",
+          "targetText": "Thick socks and cosy blankets",
+          "relation": "空后说改变行为是为了暖和，把拿出袜子毯子这一做法归结成道理。"
+        }
+      ],
+      "lock": [
+        "prepare our homes",
+        "cosy blankets",
+        "warm"
+      ],
+      "find": {
+        "text": "先看空前 \"prepare our homes\" 说为过冬做准备，空后又落在 \"warm\"；七个选项里只有 \"cosy blankets\" 是具体的保暖准备。",
+        "quotes": [
+          "prepare our homes",
+          "warm",
+          "cosy blankets"
+        ]
+      },
+      "explain": "这句把空前笼统的“为冬天做准备”落到家里一件看得见的事上；空后再把它上升为道理：换季就得改变行为来保暖，为下文拿季节比情绪铺好路。",
+      "distractors": [
+        {
+          "label": "A",
+          "text": "A 项复现了 \"prepare\"，但它说为春天做准备，而空前讲的正是准备过冬，方向对不上。",
+          "quotes": [
+            "prepare"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "we prepare our homes and ourselves for the winter months",
+            "optionSide": "Thick socks and cosy blankets are brought out",
+            "relation": "选项是空前“为冬天做准备”的具体做法。"
+          },
+          {
+            "contextSide": "to keep ourselves safe and warm",
+            "optionSide": "Thick socks and cosy blankets",
+            "relation": "袜子和毯子正是空后说的保暖手段。"
+          }
+        ],
+        "correctOptionLabel": "E",
+        "fitSummary": "这句把空前笼统的“为冬天做准备”落到家里一件看得见的事上；空后再把它上升为道理：换季就得改变行为来保暖，为下文拿季节比情绪铺好路。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 项复现了 \"prepare\"，但它说为春天做准备，而空前讲的正是准备过冬，方向对不上。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:37": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:37",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Our feelings change like the seasons",
+        "joyful and positive like summer",
+        "hopeless like winter",
+        "feel wonderful all the time"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:1",
+        "beforeQuote": "Laughing, joyful and positive like summer; sad, angry, and hopeless like winter.",
+        "afterQuote": "However, it would not be practical to feel wonderful all the time."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "context-after",
+          "targetText": "We expect to always live in our emotional summers",
+          "relation": "However 表示转折，前面必须先有一个“想一直开心”的期望，后面才能说它不现实。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "always live in our emotional summers",
+          "signalSide": "option",
+          "targetText": "feel wonderful all the time",
+          "relation": "always 对应 all the time，emotional summers 对应 feel wonderful。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "like summer",
+          "signalSide": "context-before",
+          "targetText": "emotional summers",
+          "relation": "空前把开心比作夏天，选项沿用这个比喻说“情绪的夏天”。"
+        }
+      ],
+      "lock": [
+        "However",
+        "all the time",
+        "always"
+      ],
+      "find": {
+        "text": "先看空后 \"However\"：前面要先有一个被否定的想法。\"all the time\" 对上 \"always live in our emotional summers\"，只有它在说想一直开心。",
+        "quotes": [
+          "However",
+          "all the time",
+          "always live in our emotional summers"
+        ]
+      },
+      "explain": "空前把开心比作夏天、难过比作冬天，这句说出人们心里的愿望；空后用转折指出这个愿望不现实，文章由此从讲比喻转到“该接受情绪的冬天”。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "However, it would not be practical to feel wonderful all the time",
+            "optionSide": "We expect to always live in our emotional summers",
+            "relation": "空后否定的正是选项里的期望，转折两边说的是同一件事。"
+          },
+          {
+            "contextSide": "joyful and positive like summer",
+            "optionSide": "emotional summers",
+            "relation": "选项用“情绪的夏天”接住空前夏天的比喻。"
+          }
+        ],
+        "correctOptionLabel": "F",
+        "fitSummary": "空前把开心比作夏天、难过比作冬天，这句说出人们心里的愿望；空后用转折指出这个愿望不现实，文章由此从讲比喻转到“该接受情绪的冬天”。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "选项的 \"Different emotions\" 像是在概括第 37 题空前的 \"Laughing, joyful and positive\" 和 \"sad, angry, and hopeless\"。但空后 \"However\" 反驳的是 \"feel wonderful all the time\" 这种只想开心的期望，人人都有各种情绪这句话和它构不成转折。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:38": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:38",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "emotional wintering",
+        "difficult or uncomfortable feelings",
+        "as winters",
+        "get ready for and live through"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+        "beforeQuote": "She mentions emotional wintering asks us to see our difficult or uncomfortable feelings as winters which we can get ready for and live through.",
+        "afterQuote": "Sometimes the emotional winters are caused by an event that makes us feel as though we want to withdraw into ourselves."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "emotional wintering",
+          "relation": "It 回指空前的 emotional wintering，接着说这种做法带来什么。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "emotional wintering",
+          "signalSide": "context-before",
+          "targetText": "It",
+          "relation": "空前唯一的单数主体是 emotional wintering，给 It 提供了先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "live through",
+          "signalSide": "context-before",
+          "targetText": "the coming spring",
+          "relation": "冬天熬过去就是春天，the coming spring 顺着 live through 往下走。"
+        }
+      ],
+      "lock": [
+        "emotional wintering",
+        "live through",
+        "It"
+      ],
+      "find": {
+        "text": "先看空前：把难受当冬天来 \"get ready for and live through\"。\"It\" 回指 \"emotional wintering\"，熬过冬天正好迎来 \"the coming spring\"。",
+        "quotes": [
+          "get ready for and live through",
+          "It",
+          "emotional wintering",
+          "the coming spring"
+        ]
+      },
+      "explain": "空前解释这个说法的意思，这句补上它的好处：难熬的日子是在为好转做准备，冬天的比喻因此有了积极的一面；空后再转入讲情绪的冬天从哪里来。",
+      "distractors": [
+        {
+          "label": "C",
+          "text": "C 项复现空前的 \"emotional wintering asks us\"，但这里还在解释这个比喻，C 讲要改变，空后 \"Sometimes\" 讲起因，接不上。",
+          "quotes": [
+            "emotional wintering asks us",
+            "Sometimes"
+          ]
+        }
+      ],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "emotional wintering asks us",
+            "optionSide": "It prepares us",
+            "relation": "It 承接空前的主语，us 也与空前的 us 一致。"
+          },
+          {
+            "contextSide": "winters which we can get ready for and live through",
+            "optionSide": "the coming spring",
+            "relation": "能准备、能熬过的冬天之后就是春天，选项顺着比喻往前推一步。"
+          }
+        ],
+        "correctOptionLabel": "A",
+        "fitSummary": "空前解释这个说法的意思，这句补上它的好处：难熬的日子是在为好转做准备，冬天的比喻因此有了积极的一面；空后再转入讲情绪的冬天从哪里来。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 项复现空前的 \"emotional wintering asks us\"，但这里还在解释这个比喻，C 讲要改变，空后 \"Sometimes\" 讲起因，接不上。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:39": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:39",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Sometimes",
+        "caused by an event",
+        "withdraw into ourselves",
+        "replenish (补充) them",
+        "accepting that we are sad"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:2",
+        "beforeQuote": "Sometimes the emotional winters are caused by an event that makes us feel as though we want to withdraw into ourselves.",
+        "afterQuote": "We need to take time to replenish (补充) them while accepting that we are sad."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Sometimes",
+          "signalSide": "context-before",
+          "targetText": "At other times",
+          "relation": "Sometimes 先说一种情况，后面要有 At other times 引出另一种。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "At other times",
+          "signalSide": "option",
+          "targetText": "Sometimes",
+          "relation": "选项开头和空前的 Sometimes 配成一对，并列两种原因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them",
+          "signalSide": "context-after",
+          "targetText": "our supplies of positivity",
+          "relation": "them 要补充的对象只能是选项里耗尽的 supplies of positivity。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "use up our supplies",
+          "signalSide": "option",
+          "targetText": "replenish",
+          "relation": "先耗尽、再补充，选项的 use up 与空后的 replenish 正好相反相承。"
+        }
+      ],
+      "lock": [
+        "Sometimes",
+        "At other times",
+        "replenish (补充) them"
+      ],
+      "find": {
+        "text": "空前 \"Sometimes\" 讲一种起因，\"At other times\" 接出另一种；空后 \"replenish (补充) them\" 要补的正是 \"supplies of positivity\"。",
+        "quotes": [
+          "Sometimes",
+          "At other times",
+          "replenish (补充) them",
+          "supplies of positivity"
+        ]
+      },
+      "explain": "空前的起因是一件让人想缩回自己的事，这句给出第二种：没出什么事，只是积极情绪用光了；空后顺势说要花时间补回来，下一句的 Whatever the cause 再把两种起因一并收住。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "Sometimes the emotional winters are caused by an event",
+            "optionSide": "At other times",
+            "relation": "两句并列交代情绪冬天的两种来源。"
+          },
+          {
+            "contextSide": "replenish (补充) them",
+            "optionSide": "use up our supplies of positivity",
+            "relation": "耗尽的储备正是空后要补充的 them。"
+          }
+        ],
+        "correctOptionLabel": "G",
+        "fitSummary": "空前的起因是一件让人想缩回自己的事，这句给出第二种：没出什么事，只是积极情绪用光了；空后顺势说要花时间补回来，下一句的 Whatever the cause 再把两种起因一并收住。"
+      },
+      "keyDistractors": []
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:40": {
+      "blankId": "blank:paper-mock-hebei-tangshan-2025-01:40",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "To manage through challenging times",
+        "adjust our habits",
+        "reassess our expectations of ourselves",
+        "sustain ourselves appropriately",
+        "This process"
+      ],
+      "contextEvidence": {
+        "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:seven-choices:3",
+        "beforeQuote": "",
+        "afterQuote": "To manage through challenging times, we need to adjust our habits, reassess our expectations of ourselves, and ensure that we sustain ourselves appropriately."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "asks us to change",
+          "signalSide": "option",
+          "targetText": "adjust our habits / reassess our expectations",
+          "relation": "change 概括空后三件具体要做的事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "adjust our habits",
+          "signalSide": "context-after",
+          "targetText": "change",
+          "relation": "调整习惯是改变的第一项具体内容。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "reassess our expectations",
+          "signalSide": "context-after",
+          "targetText": "change",
+          "relation": "重新评估期望是改变的又一项内容。"
+        }
+      ],
+      "lock": [
+        "change",
+        "adjust our habits",
+        "reassess"
+      ],
+      "find": {
+        "text": "空在段首，看空后：\"adjust our habits\"、\"reassess our expectations\" 都是改做法，只有 \"asks us to change\" 能把它们概括起来。",
+        "quotes": [
+          "adjust our habits",
+          "reassess our expectations",
+          "asks us to change"
+        ]
+      },
+      "explain": "这句先亮出过冬对人的要求，空后列出调整习惯、重估期望、照顾自己三件事把它落实，再用 This process 说明这番改变留出了与情绪共处的空间。",
+      "distractors": [],
+      "optionFit": {
+        "matchedClues": [
+          {
+            "contextSide": "adjust our habits, reassess our expectations of ourselves",
+            "optionSide": "asks us to change",
+            "relation": "空后列出的做法都是选项所说改变的具体内容。"
+          },
+          {
+            "contextSide": "To manage through challenging times",
+            "optionSide": "Emotional wintering",
+            "relation": "选项点明是情绪过冬提出这些要求，承接上一段对这一说法的介绍。"
+          }
+        ],
+        "correctOptionLabel": "C",
+        "fitSummary": "这句先亮出过冬对人的要求，空后列出调整习惯、重估期望、照顾自己三件事把它落实，再用 This process 说明这番改变留出了与情绪共处的空间。"
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "选项的 \"challenging\" 复现第 40 题空后的 \"challenging times\"，像段首总起。但空后列的 \"adjust our habits\"、\"reassess our expectations\" 都是要做的改变，没有讲成长。也可能误填第 38 题：空前说冬天能 \"live through\"，可空后转去讲情绪冬天的起因，没有接成长的话题。"
+        }
+      ]
+    }
+  }
+}

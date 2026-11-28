@@ -1,0 +1,1045 @@
+{
+  "schemaVersion": "listening-analysis-v1",
+  "paperId": "paper-mock-hebei-tangshan-2025-01",
+  "sourceAssetVersion": 1,
+  "materials": {
+    "listening-text-1": {
+      "segmentId": "listening-text-1",
+      "questionIds": [
+        "question:listening:1"
+      ],
+      "transcript": "When can we expect you for dinner? I’ve got a new dish that I want to try out on you. Can you come tonight? Not tonight. I promised to go to a concert with my sister. Oh, no worries. We can plan for another night.",
+      "translationZh": "你什么时候来吃晚饭？我做了一道新菜，想让你尝尝。今晚能来吗？今晚不行。我答应了和我姐姐一起去听音乐会。哦，没关系。我们可以改天晚上再约。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "男士邀请女士来家里吃晚饭、尝尝他做的新菜，女士说明自己今晚的安排。",
+      "sentences": [
+        {
+          "id": "listening-text-1:1",
+          "zh": "你什么时候来吃晚饭？"
+        },
+        {
+          "id": "listening-text-1:2",
+          "zh": "我做了一道新菜，想让你尝尝。"
+        },
+        {
+          "id": "listening-text-1:3",
+          "zh": "今晚能来吗？"
+        },
+        {
+          "id": "listening-text-1:4",
+          "zh": "今晚不行。"
+        },
+        {
+          "id": "listening-text-1:5",
+          "zh": "我答应了和我姐姐一起去听音乐会。"
+        },
+        {
+          "id": "listening-text-1:6",
+          "zh": "哦，没关系。"
+        },
+        {
+          "id": "listening-text-1:7",
+          "zh": "我们可以改天晚上再约。"
+        }
+      ]
+    },
+    "listening-text-2": {
+      "segmentId": "listening-text-2",
+      "questionIds": [
+        "question:listening:2"
+      ],
+      "transcript": "This menu is very big. Why don’t we start with some fresh tomato soup? I think we don’t need to have a 1st course. How about going straight to the main course? We can have either chicken or a meat pie. Okay, the former one.",
+      "translationZh": "这份菜单真长。我们先来点新鲜的番茄汤怎么样？我觉得不用点头道菜了。直接上主菜怎么样？我们可以点鸡肉或者肉馅饼。好，就要前一个。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "个人生活"
+      },
+      "summaryZh": "两人在餐厅看菜单，商量要不要先点汤，以及主菜点哪一道。",
+      "sentences": [
+        {
+          "id": "listening-text-2:1",
+          "zh": "这份菜单真长。"
+        },
+        {
+          "id": "listening-text-2:2",
+          "zh": "我们先来点新鲜的番茄汤怎么样？"
+        },
+        {
+          "id": "listening-text-2:3",
+          "zh": "我觉得不用点头道菜了。"
+        },
+        {
+          "id": "listening-text-2:4",
+          "zh": "直接上主菜怎么样？"
+        },
+        {
+          "id": "listening-text-2:5",
+          "zh": "我们可以点鸡肉或者肉馅饼。"
+        },
+        {
+          "id": "listening-text-2:6",
+          "zh": "好，就要前一个。"
+        }
+      ]
+    },
+    "listening-text-3": {
+      "segmentId": "listening-text-3",
+      "questionIds": [
+        "question:listening:3"
+      ],
+      "transcript": "Welcome to Focus. Did you learn about our club on the internet? No, Thomas suggested it. Is he a member here? No, he is my cousin, but he had heard good things about your club.",
+      "translationZh": "欢迎来到 Focus。你是在网上了解到我们俱乐部的吗？不是，是托马斯推荐的。他是这里的会员吗？不是，他是我表哥，不过他听说过你们俱乐部的不少好评。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "Focus 俱乐部的工作人员接待新来的男士，问他是怎样知道这家俱乐部的。",
+      "sentences": [
+        {
+          "id": "listening-text-3:1",
+          "zh": "欢迎来到 Focus。"
+        },
+        {
+          "id": "listening-text-3:2",
+          "zh": "你是在网上了解到我们俱乐部的吗？"
+        },
+        {
+          "id": "listening-text-3:3",
+          "zh": "不是，是托马斯推荐的。"
+        },
+        {
+          "id": "listening-text-3:4",
+          "zh": "他是这里的会员吗？"
+        },
+        {
+          "id": "listening-text-3:5",
+          "zh": "不是，他是我表哥，不过他听说过你们俱乐部的不少好评。"
+        }
+      ]
+    },
+    "listening-text-4": {
+      "segmentId": "listening-text-4",
+      "questionIds": [
+        "question:listening:4"
+      ],
+      "transcript": "I’ve heard that Tom is going to move to Canada and live with his son next month. It’s a pity, we can’t have a better neighbor. I always appreciate Tom’s company. Maybe we can organize a small gathering to say goodbye.",
+      "translationZh": "我听说汤姆下个月要搬到加拿大和他儿子一起住。真可惜，我们再也找不到更好的邻居了。我一直很喜欢有汤姆作伴。也许我们可以办个小聚会和他道别。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "良好的人际关系"
+      },
+      "summaryZh": "两人谈起邻居汤姆下个月要搬去加拿大的消息，并商量怎样为他送行。",
+      "sentences": [
+        {
+          "id": "listening-text-4:1",
+          "zh": "我听说汤姆下个月要搬到加拿大和他儿子一起住。"
+        },
+        {
+          "id": "listening-text-4:2",
+          "zh": "真可惜，我们再也找不到更好的邻居了。"
+        },
+        {
+          "id": "listening-text-4:3",
+          "zh": "我一直很喜欢有汤姆作伴。"
+        },
+        {
+          "id": "listening-text-4:4",
+          "zh": "也许我们可以办个小聚会和他道别。"
+        }
+      ]
+    },
+    "listening-text-5": {
+      "segmentId": "listening-text-5",
+      "questionIds": [
+        "question:listening:5"
+      ],
+      "transcript": "Did you enjoy the football match you went to last Sunday, Andrew? Yes, even though the local team lost. I also enjoyed the atmosphere on the ground. Everyone singing and cheering together.",
+      "translationZh": "安德鲁，你上周日去看的那场足球赛看得开心吗？开心，尽管本地球队输了。我也很喜欢球场上的气氛。大家一起唱歌、欢呼。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "日常体育活动"
+      },
+      "summaryZh": "一人问安德鲁上周日外出看比赛玩得怎么样，安德鲁谈起比赛结果和现场气氛。",
+      "sentences": [
+        {
+          "id": "listening-text-5:1",
+          "zh": "安德鲁，你上周日去看的那场足球赛看得开心吗？"
+        },
+        {
+          "id": "listening-text-5:2",
+          "zh": "开心，尽管本地球队输了。"
+        },
+        {
+          "id": "listening-text-5:3",
+          "zh": "我也很喜欢球场上的气氛。"
+        },
+        {
+          "id": "listening-text-5:4",
+          "zh": "大家一起唱歌、欢呼。"
+        }
+      ]
+    },
+    "listening-text-6": {
+      "segmentId": "listening-text-6",
+      "questionIds": [
+        "question:listening:6",
+        "question:listening:7"
+      ],
+      "transcript": "Devon, I’ve heard that you took the train across Russia. Yes, I researched the trip 2 months before I actually took it. I started in Moscow on April 4th, traveled through Russia, Mongolia, and ended up in China on April 24 with 10 other people. What was the landscape like in Mongolia? For miles around, we could see absolutely nothing but some camels every once in a while. What? Only camels? I thought you would see the fantastic scenery. Would you do it again? Yes, but in several years.",
+      "translationZh": "德文，我听说你坐火车穿越了俄罗斯。是的，我在真正出发前两个月就开始研究这趟旅行了。我 4 月 4 日从莫斯科出发，途经俄罗斯、蒙古，4 月 24 日和另外 10 个人一起到了中国。蒙古的风景怎么样？方圆好几英里，除了偶尔看到几只骆驼，我们什么都看不到。什么？只有骆驼？我还以为你会看到很美的风景呢。你还会再去一次吗？会的，不过要过几年。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "丰富自我"
+      },
+      "summaryZh": "德文讲述自己乘火车从莫斯科出发、途经蒙古到达中国的旅行，两人谈起沿途的景色。"
+    },
+    "listening-text-7": {
+      "segmentId": "listening-text-7",
+      "questionIds": [
+        "question:listening:8",
+        "question:listening:9"
+      ],
+      "transcript": "Hello, how can I help you? Hello, I am phoning to make a complaint regarding a flight that I took recently? Okay, what is the nature of your complaint? Well, I was seated beneath an air conditioner. Unfortunately, the air conditioning on the plane was broken, so I spent the entire flight uncomfortably warm. Moreover, the in-flight staff seemed unaware of the issue. I see. I do apologize for this fault. We’d like to offer you some gifts as a goodwill gesture. A 20% discount on the cost of your hotel stay, or a phone card, with a credit of £25. Please feel free to choose. If it should be so, a discount. I hope you will provide better service in the future.",
+      "translationZh": "您好，有什么可以帮您？您好，我打电话是想投诉我最近乘坐的一次航班。好的，您投诉的是什么问题？是这样，我的座位在一台空调下面。不巧的是，飞机上的空调坏了，所以我整个航程都热得难受。而且，机上的乘务人员似乎都没有察觉这个问题。我明白了。对于这次故障，我深表歉意。我们想送您一些礼品，表示我们的诚意。您可以选择酒店住宿费用八折优惠，或者一张含 25 英镑话费的电话卡。请随意挑选。既然这样，那就要折扣吧。希望你们今后能提供更好的服务。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "社会服务与人际沟通",
+        "subtopic": "社会交往"
+      },
+      "summaryZh": "男士打电话向航空公司投诉最近乘坐的一次航班，客服道歉并提出补偿方案。",
+      "sentences": [
+        {
+          "id": "listening-text-7:1",
+          "zh": "您好，有什么可以帮您？"
+        },
+        {
+          "id": "listening-text-7:2",
+          "zh": "您好，我打电话是想投诉我最近乘坐的一次航班。"
+        },
+        {
+          "id": "listening-text-7:3",
+          "zh": "好的，您投诉的是什么问题？"
+        },
+        {
+          "id": "listening-text-7:4",
+          "zh": "是这样，我的座位在一台空调下面。"
+        },
+        {
+          "id": "listening-text-7:5",
+          "zh": "不巧的是，飞机上的空调坏了，所以我整个航程都热得难受。"
+        },
+        {
+          "id": "listening-text-7:6",
+          "zh": "而且，机上的乘务人员似乎都没有察觉这个问题。"
+        },
+        {
+          "id": "listening-text-7:7",
+          "zh": "我明白了。"
+        },
+        {
+          "id": "listening-text-7:8",
+          "zh": "对于这次故障，我深表歉意。"
+        },
+        {
+          "id": "listening-text-7:9",
+          "zh": "我们想送您一些礼品，表示我们的诚意。"
+        },
+        {
+          "id": "listening-text-7:10",
+          "zh": "您可以选择酒店住宿费用八折优惠，或者一张含 25 英镑话费的电话卡。"
+        },
+        {
+          "id": "listening-text-7:11",
+          "zh": "请随意挑选。"
+        },
+        {
+          "id": "listening-text-7:12",
+          "zh": "既然这样，那就要折扣吧。"
+        },
+        {
+          "id": "listening-text-7:13",
+          "zh": "希望你们今后能提供更好的服务。"
+        }
+      ]
+    },
+    "listening-text-8": {
+      "segmentId": "listening-text-8",
+      "questionIds": [
+        "question:listening:10",
+        "question:listening:11",
+        "question:listening:12",
+        "question:listening:13"
+      ],
+      "transcript": "Hello, I’ve seen your advertisement for people to lead cycle trips. Is that still open? Yes. Have you led cycle trips before? Yes, I’ve led several bike tours in Peru. The trip to India I arranged to lead has been cancelled, so when I saw your advertisement, I decided to apply. Okay, we’ve got a tour coming up soon in Spain. Would that suit you? It certainly would. Good. Now, is there anything you don’t eat? We usually have people who don’t eat meat or peanuts, so we’re always very careful about that. Yes, I am sensitive to cheese. Would that be a problem? No, we can deal with that. That’s great. Then fill in the form, return it by this Tuesday, and we can interview you this Friday. Fine. You are quite a long way from where I live. I’ll drive over on Thursday. Should I bring anything to the interview? Prepare a 10-minute long talk about your experience of being a tour guide. You don’t need slides or any complicated equipment. Okay.",
+      "translationZh": "您好，我看到了你们招聘骑行游领队的广告。这个职位还在招吗？在招。你以前带过骑行游吗？带过，我在秘鲁带过好几次自行车游。我原本安排要带的印度之行取消了，所以看到你们的广告，我就决定来应聘。好的，我们马上有一个去西班牙的团。这个适合你吗？当然合适。好。那么，有什么东西是你不吃的吗？我们团里常有不吃肉或花生的人，所以我们在这方面一直很小心。有的，我对奶酪过敏。这会有问题吗？没问题，我们能处理。太好了。那就请填好表格，在这周二之前交回来，我们这周五可以面试你。好的。你那里离我住的地方挺远的。我周四开车过去。面试时我需要带什么东西吗？准备一个 10 分钟的发言，讲讲你当导游的经历。你不需要幻灯片，也不需要任何复杂的设备。好的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "做人与做事",
+        "subtopic": "劳动实践"
+      },
+      "summaryZh": "女士看到招聘骑行游领队的广告后打电话应聘，与对方谈带队经历、饮食和面试安排。",
+      "sentences": [
+        {
+          "id": "listening-text-8:1",
+          "zh": "您好，我看到了你们招聘骑行游领队的广告。"
+        },
+        {
+          "id": "listening-text-8:2",
+          "zh": "这个职位还在招吗？"
+        },
+        {
+          "id": "listening-text-8:3",
+          "zh": "在招。"
+        },
+        {
+          "id": "listening-text-8:4",
+          "zh": "你以前带过骑行游吗？"
+        },
+        {
+          "id": "listening-text-8:5",
+          "zh": "带过，我在秘鲁带过好几次自行车游。"
+        },
+        {
+          "id": "listening-text-8:6",
+          "zh": "我原本安排要带的印度之行取消了，所以看到你们的广告，我就决定来应聘。"
+        },
+        {
+          "id": "listening-text-8:7",
+          "zh": "好的，我们马上有一个去西班牙的团。"
+        },
+        {
+          "id": "listening-text-8:8",
+          "zh": "这个适合你吗？"
+        },
+        {
+          "id": "listening-text-8:9",
+          "zh": "当然合适。"
+        },
+        {
+          "id": "listening-text-8:10",
+          "zh": "好。"
+        },
+        {
+          "id": "listening-text-8:11",
+          "zh": "那么，有什么东西是你不吃的吗？"
+        },
+        {
+          "id": "listening-text-8:12",
+          "zh": "我们团里常有不吃肉或花生的人，所以我们在这方面一直很小心。"
+        },
+        {
+          "id": "listening-text-8:13",
+          "zh": "有的，我对奶酪过敏。"
+        },
+        {
+          "id": "listening-text-8:14",
+          "zh": "这会有问题吗？"
+        },
+        {
+          "id": "listening-text-8:15",
+          "zh": "没问题，我们能处理。"
+        },
+        {
+          "id": "listening-text-8:16",
+          "zh": "太好了。"
+        },
+        {
+          "id": "listening-text-8:17",
+          "zh": "那就请填好表格，在这周二之前交回来，我们这周五可以面试你。"
+        },
+        {
+          "id": "listening-text-8:18",
+          "zh": "好的。"
+        },
+        {
+          "id": "listening-text-8:19",
+          "zh": "你那里离我住的地方挺远的。"
+        },
+        {
+          "id": "listening-text-8:20",
+          "zh": "我周四开车过去。"
+        },
+        {
+          "id": "listening-text-8:21",
+          "zh": "面试时我需要带什么东西吗？"
+        },
+        {
+          "id": "listening-text-8:22",
+          "zh": "准备一个 10 分钟的发言，讲讲你当导游的经历。"
+        },
+        {
+          "id": "listening-text-8:23",
+          "zh": "你不需要幻灯片，也不需要任何复杂的设备。"
+        },
+        {
+          "id": "listening-text-8:24",
+          "zh": "好的。"
+        }
+      ]
+    },
+    "listening-text-9": {
+      "segmentId": "listening-text-9",
+      "questionIds": [
+        "question:listening:14",
+        "question:listening:15",
+        "question:listening:16",
+        "question:listening:17"
+      ],
+      "transcript": "Hi, Thomas. How are you enjoying our university course so far? Yeah, I think it’s good. Why did you decide to study sports science? Didn’t you want to be a professional athlete when you were at high school? Yeah, that was my goal, and all my classmates assumed I would achieve it. Exactly. So what happened? Did your mom and dad want you to be more academic? Not at all. Perhaps they should have pushed me harder though. What makes you say that? I was chosen to go out to Kenya to train and run with some of the top teenage athletes in the world. But once we started competing, I quickly realized, I should have practiced more. I was far behind many. I’m sorry to hear that. It’s okay. I’m over it now, and I think it’s much better to do a university course, and this one has such a variety of sports related areas. I find the course to be a source of relief for me. Oh, I agree. That’s exactly what our professors showed us in the 1st class. I chose it because of that.",
+      "translationZh": "嗨，托马斯。到目前为止，你觉得我们的大学课程怎么样？嗯，我觉得挺好的。你为什么决定学运动科学？你上高中的时候不是想当职业运动员吗？是啊，那是我的目标，我所有的同学也都以为我能做到。没错。那后来怎么了？是你爸妈想让你多走学术这条路吗？完全不是。不过，也许他们当初该对我要求更严一些。你为什么这么说？我曾被选派去肯尼亚，和一些世界顶尖的青少年运动员一起训练、跑步。但一开始比赛，我很快就意识到，我本该多练练的。我远远落后于很多人。听你这么说我很难过。没事。我现在已经放下了，而且我觉得读大学课程要好得多，这门课涉及与体育相关的各种领域。我觉得这门课让我得到了解脱。哦，我同意。这正是我们的教授在第一节课上给我们讲的。我就是因为这个才选这门课的。",
+      "topic": {
+        "theme": "人与自我",
+        "themeGroup": "生活与学习",
+        "subtopic": "学校生活"
+      },
+      "summaryZh": "有人问托马斯为什么选读运动科学，托马斯讲起高中时的目标和后来的经历。",
+      "sentences": [
+        {
+          "id": "listening-text-9:1",
+          "zh": "嗨，托马斯。"
+        },
+        {
+          "id": "listening-text-9:2",
+          "zh": "到目前为止，你觉得我们的大学课程怎么样？"
+        },
+        {
+          "id": "listening-text-9:3",
+          "zh": "嗯，我觉得挺好的。"
+        },
+        {
+          "id": "listening-text-9:4",
+          "zh": "你为什么决定学运动科学？"
+        },
+        {
+          "id": "listening-text-9:5",
+          "zh": "你上高中的时候不是想当职业运动员吗？"
+        },
+        {
+          "id": "listening-text-9:6",
+          "zh": "是啊，那是我的目标，我所有的同学也都以为我能做到。"
+        },
+        {
+          "id": "listening-text-9:7",
+          "zh": "没错。"
+        },
+        {
+          "id": "listening-text-9:8",
+          "zh": "那后来怎么了？"
+        },
+        {
+          "id": "listening-text-9:9",
+          "zh": "是你爸妈想让你多走学术这条路吗？"
+        },
+        {
+          "id": "listening-text-9:10",
+          "zh": "完全不是。"
+        },
+        {
+          "id": "listening-text-9:11",
+          "zh": "不过，也许他们当初该对我要求更严一些。"
+        },
+        {
+          "id": "listening-text-9:12",
+          "zh": "你为什么这么说？"
+        },
+        {
+          "id": "listening-text-9:13",
+          "zh": "我曾被选派去肯尼亚，和一些世界顶尖的青少年运动员一起训练、跑步。"
+        },
+        {
+          "id": "listening-text-9:14",
+          "zh": "但一开始比赛，我很快就意识到，我本该多练练的。"
+        },
+        {
+          "id": "listening-text-9:15",
+          "zh": "我远远落后于很多人。"
+        },
+        {
+          "id": "listening-text-9:16",
+          "zh": "听你这么说我很难过。"
+        },
+        {
+          "id": "listening-text-9:17",
+          "zh": "没事。"
+        },
+        {
+          "id": "listening-text-9:18",
+          "zh": "我现在已经放下了，而且我觉得读大学课程要好得多，这门课涉及与体育相关的各种领域。"
+        },
+        {
+          "id": "listening-text-9:19",
+          "zh": "我觉得这门课让我得到了解脱。"
+        },
+        {
+          "id": "listening-text-9:20",
+          "zh": "哦，我同意。"
+        },
+        {
+          "id": "listening-text-9:21",
+          "zh": "这正是我们的教授在第一节课上给我们讲的。"
+        },
+        {
+          "id": "listening-text-9:22",
+          "zh": "我就是因为这个才选这门课的。"
+        }
+      ]
+    },
+    "listening-text-10": {
+      "segmentId": "listening-text-10",
+      "questionIds": [
+        "question:listening:18",
+        "question:listening:19",
+        "question:listening:20"
+      ],
+      "transcript": "A British woman named Preet Chandi recently skied alone to the South Pole, making history by being the first woman of color to complete it. Chandi grew up in a community in England. In 2012, she graduated from college, becoming the first in her family to earn a degree. After running her first half marathon, Chandi’s appetite for greater challenges started to grow. When her friend mentioned Antarctic, she had the thought to explore Antarctic. Having trained and prepared for many years, she set out. Chandi skied uphill against strong wind, stopping at night to put up a tent in low temperature. She put in up to 11 hours on certain days. During the journey, Chandi shared her experiences on the blog, where she documented activities, such as listening to adventurous stories, consuming various freeze dried meals, and reflecting on celebrating the holiday season, as one would in a typical year. On those days, when she felt depressed, the voice notes left by her friends inspired her to move on. After forty days' persistence, she finally arrived at the South Pole.",
+      "translationZh": "一位名叫普丽特·钱迪的英国女子最近独自滑雪到达南极，成为完成这一壮举的第一位有色人种女性，创造了历史。钱迪在英格兰的一个社区长大。2012 年，她大学毕业，成为家里第一个获得学位的人。跑完人生第一个半程马拉松后，钱迪对更大挑战的渴望开始增长。朋友提起南极时，她萌生了去南极探险的念头。经过多年的训练和准备，她出发了。钱迪顶着强风上坡滑行，晚上停下来在低温中搭帐篷。有些日子她要滑行长达 11 个小时。旅途中，钱迪在博客上分享自己的经历，记录了各种活动，比如听冒险故事、吃各种冻干食品，以及像平常年份一样回想如何庆祝节日。在那些情绪低落的日子里，朋友们留下的语音留言激励她继续前进。经过四十天的坚持，她终于到达了南极。",
+      "topic": {
+        "theme": "人与社会",
+        "themeGroup": "文学、艺术与体育",
+        "subtopic": "体育精神"
+      },
+      "summaryZh": "讲述英国女子普丽特·钱迪的成长经历，以及她独自滑雪前往南极的准备和旅程。",
+      "sentences": [
+        {
+          "id": "listening-text-10:1",
+          "zh": "一位名叫普丽特·钱迪的英国女子最近独自滑雪到达南极，成为完成这一壮举的第一位有色人种女性，创造了历史。"
+        },
+        {
+          "id": "listening-text-10:2",
+          "zh": "钱迪在英格兰的一个社区长大。"
+        },
+        {
+          "id": "listening-text-10:3",
+          "zh": "2012 年，她大学毕业，成为家里第一个获得学位的人。"
+        },
+        {
+          "id": "listening-text-10:4",
+          "zh": "跑完人生第一个半程马拉松后，钱迪对更大挑战的渴望开始增长。"
+        },
+        {
+          "id": "listening-text-10:5",
+          "zh": "朋友提起南极时，她萌生了去南极探险的念头。"
+        },
+        {
+          "id": "listening-text-10:6",
+          "zh": "经过多年的训练和准备，她出发了。"
+        },
+        {
+          "id": "listening-text-10:7",
+          "zh": "钱迪顶着强风上坡滑行，晚上停下来在低温中搭帐篷。"
+        },
+        {
+          "id": "listening-text-10:8",
+          "zh": "有些日子她要滑行长达 11 个小时。"
+        },
+        {
+          "id": "listening-text-10:9",
+          "zh": "旅途中，钱迪在博客上分享自己的经历，记录了各种活动，比如听冒险故事、吃各种冻干食品，以及像平常年份一样回想如何庆祝节日。"
+        },
+        {
+          "id": "listening-text-10:10",
+          "zh": "在那些情绪低落的日子里，朋友们留下的语音留言激励她继续前进。"
+        },
+        {
+          "id": "listening-text-10:11",
+          "zh": "经过四十天的坚持，她终于到达了南极。"
+        }
+      ]
+    }
+  },
+  "questions": {
+    "question:listening:1": {
+      "questionId": "question:listening:1",
+      "segmentId": "listening-text-1",
+      "stemTranslationZh": "女士今晚要做什么？",
+      "optionTranslationsZh": {
+        "A": "欣赏音乐会。",
+        "B": "吃一道新菜。",
+        "C": "为她姐姐做计划。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I promised to go to a concert with my sister."
+      },
+      "reasonZh": "女士说今晚答应了和姐姐去听音乐会（go to a concert），“欣赏音乐会”就是这件事，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "新菜（a new dish）是男士想请她来尝的，可她今晚来不了，这顿饭没吃成。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "计划（plan）是男士说改天晚上再约（plan for another night），姐姐（sister）是陪女士听音乐会的人，没有谁为姐姐做计划。"
+        }
+      ]
+    },
+    "question:listening:2": {
+      "questionId": "question:listening:2",
+      "segmentId": "listening-text-2",
+      "stemTranslationZh": "说话人可能会点什么？",
+      "optionTranslationsZh": {
+        "A": "汤。",
+        "B": "肉馅饼。",
+        "C": "鸡肉。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Okay, the former one."
+      },
+      "reasonZh": "对方提出鸡肉或肉馅饼二选一（either chicken or a meat pie），回答要前一个（the former），前一个就是鸡肉，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "先喝番茄汤（tomato soup）只是一人的提议，另一人说不需要头道菜（don’t need to have a 1st course），要直接上主菜。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "肉馅饼（a meat pie）是二选一里的后一个，回答选的是前一个（the former）。"
+        }
+      ]
+    },
+    "question:listening:3": {
+      "questionId": "question:listening:3",
+      "segmentId": "listening-text-3",
+      "stemTranslationZh": "男士是怎么知道 Focus 的？",
+      "optionTranslationsZh": {
+        "A": "在网上。",
+        "B": "从它的会员那里。",
+        "C": "通过一位亲戚。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "No, he is my cousin, but he had heard good things about your club."
+      },
+      "reasonZh": "男士说是托马斯推荐的（Thomas suggested it），又说托马斯是他表哥（my cousin），“通过一位亲戚”就是这层关系，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "在网上（on the internet）是工作人员问的，男士回答“不是”（No），说是托马斯推荐的。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "会员（a member）也是工作人员的猜测，男士否认，说托马斯不是会员而是他表哥。"
+        }
+      ]
+    },
+    "question:listening:4": {
+      "questionId": "question:listening:4",
+      "segmentId": "listening-text-4",
+      "stemTranslationZh": "是什么让男士有点难过？",
+      "optionTranslationsZh": {
+        "A": "一个小型聚会。",
+        "B": "汤姆的离开。",
+        "C": "一位新邻居的到来。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "It’s a pity, we can’t have a better neighbor."
+      },
+      "reasonZh": "前一句说汤姆下个月要搬去加拿大（move to Canada），男士接着说真可惜（It’s a pity），舍不得这位好邻居，让他难过的是汤姆要离开，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "小型聚会（a small gathering）是男士提议为汤姆送行办的，是接下来想做的事，不是让他难过的原因。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "录音里的邻居（neighbor）说的就是要搬走的汤姆，没有说有新邻居搬来。"
+        }
+      ]
+    },
+    "question:listening:5": {
+      "questionId": "question:listening:5",
+      "segmentId": "listening-text-5",
+      "stemTranslationZh": "两位说话人在谈论什么？",
+      "optionTranslationsZh": {
+        "A": "一支本地球队。",
+        "B": "一个周末计划。",
+        "C": "一场足球赛。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Did you enjoy the football match you went to last Sunday, Andrew?"
+      },
+      "reasonZh": "一人问安德鲁上周日看的足球赛（the football match）怎么样，安德鲁谈比赛结果和现场气氛，都围绕这场球赛，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "本地球队输了（the local team lost）是安德鲁顺带说的比赛结果，他接着讲的是现场气氛。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "比赛是上周日（last Sunday）已经看过的，两人谈的是看球的感受，不是打算周末做什么。"
+        }
+      ]
+    },
+    "question:listening:6": {
+      "questionId": "question:listening:6",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "这次旅行用了多少天？",
+      "optionTranslationsZh": {
+        "A": "21 天。",
+        "B": "24 天。",
+        "C": "60 天。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I started in Moscow on April 4th, traveled through Russia, Mongolia, and ended up in China on April 24 with 10 other people."
+      },
+      "reasonZh": "德文 4 月 4 日从莫斯科出发，4 月 24 日到达中国，出发和到达当天都算在内，24 − 4 + 1 = 21 天，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "24 是到达中国的日期（April 24），不是旅行的天数。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "两个月（2 months）是德文出发前研究这趟旅行的时间，不是旅行本身用的天数。"
+        }
+      ]
+    },
+    "question:listening:7": {
+      "questionId": "question:listening:7",
+      "segmentId": "listening-text-6",
+      "stemTranslationZh": "女士认为蒙古的风景怎么样？",
+      "optionTranslationsZh": {
+        "A": "很乏味。",
+        "B": "很令人兴奋。",
+        "C": "很吓人。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "For miles around, we could see absolutely nothing but some camels every once in a while."
+      },
+      "reasonZh": "德文说方圆几英里除了偶尔几只骆驼什么也看不到（absolutely nothing but some camels），景色单调，可见她觉得乏味，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "以为能看到美景（fantastic scenery）的是提问的人，德文本人说的是除了骆驼什么也看不到。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "德文只说一路上除了偶尔几只骆驼什么也看不到，景色单调，并没有说哪里让人害怕。"
+        }
+      ]
+    },
+    "question:listening:8": {
+      "questionId": "question:listening:8",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士为什么投诉？",
+      "optionTranslationsZh": {
+        "A": "乘务人员说了难听的话。",
+        "B": "制冷系统出了故障。",
+        "C": "座位不舒服。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Unfortunately, the air conditioning on the plane was broken, so I spent the entire flight uncomfortably warm."
+      },
+      "reasonZh": "男士说飞机上的空调坏了（the air conditioning … was broken），“制冷系统出了故障”就是这件事，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "男士提座位（seated beneath an air conditioner）只是说他坐在空调下面，难受（uncomfortably warm）是因为空调坏了太热，不是座位本身不舒服。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "男士说乘务人员似乎没察觉问题（seemed unaware of the issue），没有说他们说了难听的话。"
+        }
+      ]
+    },
+    "question:listening:9": {
+      "questionId": "question:listening:9",
+      "segmentId": "listening-text-7",
+      "stemTranslationZh": "男士会怎样评价这个解决办法？",
+      "optionTranslationsZh": {
+        "A": "令人失望的。",
+        "B": "可以接受的。",
+        "C": "完美的。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "If it should be so, a discount."
+      },
+      "reasonZh": "客服让男士在酒店八折和电话卡中二选一，男士说既然这样就要折扣（a discount），接受了补偿，可见他觉得这个办法可以接受，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "男士最后还说希望今后服务更好（provide better service in the future），说明他只是接受补偿，谈不上觉得完美。"
+        }
+      ]
+    },
+    "question:listening:10": {
+      "questionId": "question:listening:10",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士可能会去哪里？",
+      "optionTranslationsZh": {
+        "A": "秘鲁。",
+        "B": "印度。",
+        "C": "西班牙。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Okay, we’ve got a tour coming up soon in Spain."
+      },
+      "reasonZh": "对方说马上有个去西班牙的团（a tour … in Spain），问是否合适，女士答当然合适（It certainly would），所以她很可能去西班牙，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "秘鲁是女士以前带自行车游的地方（several bike tours in Peru），是她的经历，不是这次要去的地方。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "印度（India）之行是她原本要带的，已经取消了（has been cancelled）。"
+        }
+      ]
+    },
+    "question:listening:11": {
+      "questionId": "question:listening:11",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士要避开什么食物？",
+      "optionTranslationsZh": {
+        "A": "肉。",
+        "B": "花生。",
+        "C": "奶酪。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Yes, I am sensitive to cheese."
+      },
+      "reasonZh": "女士说自己对奶酪过敏（sensitive to cheese），所以要避开奶酪，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "不吃肉（don’t eat meat）的是对方说团里常有的其他游客，不是女士本人。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "不吃花生（peanuts）也是对方说的其他游客的情况，女士自己忌口的是奶酪。"
+        }
+      ]
+    },
+    "question:listening:12": {
+      "questionId": "question:listening:12",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "面试什么时候进行？",
+      "optionTranslationsZh": {
+        "A": "在周五。",
+        "B": "在周四。",
+        "C": "在周二。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "Then fill in the form, return it by this Tuesday, and we can interview you this Friday."
+      },
+      "reasonZh": "对方说这周五可以面试她（interview you this Friday），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "周四（on Thursday）是女士说自己开车过去的日子，面试在第二天周五。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "周二（this Tuesday）是交回表格的截止日，不是面试的日子。"
+        }
+      ]
+    },
+    "question:listening:13": {
+      "questionId": "question:listening:13",
+      "segmentId": "listening-text-8",
+      "stemTranslationZh": "女士在面试中要做什么？",
+      "optionTranslationsZh": {
+        "A": "展示幻灯片。",
+        "B": "展示设备。",
+        "C": "分享她的经历。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "Prepare a 10-minute long talk about your experience of being a tour guide."
+      },
+      "reasonZh": "对方让女士准备 10 分钟的发言，讲讲当导游的经历（a talk about your experience），“分享她的经历”就是这件事，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "对方明说不需要幻灯片（You don’t need slides）。"
+        },
+        {
+          "label": "B",
+          "explanationZh": "对方也说不需要任何复杂的设备（any complicated equipment），面试只要讲经历。"
+        }
+      ]
+    },
+    "question:listening:14": {
+      "questionId": "question:listening:14",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士曾梦想做什么？",
+      "optionTranslationsZh": {
+        "A": "去肯尼亚。",
+        "B": "成为运动员。",
+        "C": "读大学。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "Didn’t you want to be a professional athlete when you were at high school?"
+      },
+      "reasonZh": "对方问托马斯高中时是不是想当职业运动员（a professional athlete），托马斯答那就是他的目标（that was my goal），选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "去肯尼亚（Kenya）是他被选派去和顶尖青少年运动员一起训练，是追梦途中的一段经历，不是梦想本身。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "读大学（a university course）是他放下运动员梦想之后才做的选择。"
+        }
+      ]
+    },
+    "question:listening:15": {
+      "questionId": "question:listening:15",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "男士后悔什么？",
+      "optionTranslationsZh": {
+        "A": "他没有更早开始练习。",
+        "B": "他训练不够刻苦。",
+        "C": "他没有听从父母的建议。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "But once we started competing, I quickly realized, I should have practiced more."
+      },
+      "reasonZh": "托马斯说一比赛就意识到自己本该多练（should have practiced more），也就是训练下的功夫不够，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "他说的是本该练得更多（practiced more），后悔的是练得不够，不是开始得晚。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "父母并没有让他走学术路（Not at all），他只是说父母也许该对他要求更严（pushed me harder），并没有他没听的建议。"
+        }
+      ]
+    },
+    "question:listening:16": {
+      "questionId": "question:listening:16",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "学了这门课后男士感觉怎么样？",
+      "optionTranslationsZh": {
+        "A": "感到解脱。",
+        "B": "感到后悔。",
+        "C": "感到好奇。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "I find the course to be a source of relief for me."
+      },
+      "reasonZh": "托马斯说这门课让他得到解脱（a source of relief），选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "后悔是他说起没多练（should have practiced more）时的心情，现在他已经放下了（I’m over it now）。"
+        }
+      ]
+    },
+    "question:listening:17": {
+      "questionId": "question:listening:17",
+      "segmentId": "listening-text-9",
+      "stemTranslationZh": "两位说话人可能是什么关系？",
+      "optionTranslationsZh": {
+        "A": "母亲和儿子。",
+        "B": "同学。",
+        "C": "老师和学生。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "That’s exactly what our professors showed us in the 1st class."
+      },
+      "reasonZh": "对方开头问的是“我们的大学课程”（our university course），最后又说“我们的教授”第一节课就讲过（our professors showed us），两人上同一门课，是同学，选 B。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "对方问的是托马斯的爸妈（your mom and dad）是否想让他走学术路，可见对方不是他母亲。"
+        },
+        {
+          "label": "C",
+          "explanationZh": "教授（professors）是两人共同的老师，说话的两人都在听教授的课。"
+        }
+      ]
+    },
+    "question:listening:18": {
+      "questionId": "question:listening:18",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "钱迪为什么开始这次探险？",
+      "optionTranslationsZh": {
+        "A": "为了创造历史。",
+        "B": "为了做些研究。",
+        "C": "为了寻求更多挑战。"
+      },
+      "officialAnswer": "C",
+      "evidence": {
+        "quote": "After running her first half marathon, Chandi’s appetite for greater challenges started to grow."
+      },
+      "reasonZh": "跑完第一个半程马拉松后，钱迪想挑战更大目标的渴望越来越强（appetite for greater challenges），之后才有南极之行，“寻求更多挑战”就是她的动机，选 C。",
+      "distractors": [
+        {
+          "label": "A",
+          "explanationZh": "创造历史（making history）是她到达南极后取得的成就，成为第一位做到这件事的有色人种女性，不是出发的原因。"
+        }
+      ]
+    },
+    "question:listening:19": {
+      "questionId": "question:listening:19",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "是什么帮助钱迪熬过了情绪低落的日子？",
+      "optionTranslationsZh": {
+        "A": "自我反思。",
+        "B": "鼓舞人心的声音。",
+        "C": "冒险故事。"
+      },
+      "officialAnswer": "B",
+      "evidence": {
+        "quote": "On those days, when she felt depressed, the voice notes left by her friends inspired her to move on."
+      },
+      "reasonZh": "情绪低落时，朋友们留下的语音留言（the voice notes left by her friends）激励她继续前进，“鼓舞人心的声音”就是这些留言，选 B。",
+      "distractors": [
+        {
+          "label": "C",
+          "explanationZh": "听冒险故事（listening to adventurous stories）是她在博客上记录的日常活动之一，帮她走出低落的是朋友的语音留言。"
+        },
+        {
+          "label": "A",
+          "explanationZh": "博客里的回想（reflecting on）说的是回想怎样过节，也是日常记录，不是帮她熬过低落的力量。"
+        }
+      ]
+    },
+    "question:listening:20": {
+      "questionId": "question:listening:20",
+      "segmentId": "listening-text-10",
+      "stemTranslationZh": "哪个词最能形容钱迪？",
+      "optionTranslationsZh": {
+        "A": "意志坚定的。",
+        "B": "好胜的。",
+        "C": "体贴的。"
+      },
+      "officialAnswer": "A",
+      "evidence": {
+        "quote": "After forty days' persistence, she finally arrived at the South Pole."
+      },
+      "reasonZh": "钱迪顶着强风上坡滑行，有的日子滑 11 小时，坚持四十天（forty days' persistence）终于到达南极，可见她意志坚定，选 A。",
+      "distractors": [
+        {
+          "label": "B",
+          "explanationZh": "她追求的是更大的挑战（greater challenges），是给自己定更高的目标，录音里讲的不是她和别人争输赢。"
+        }
+      ]
+    }
+  }
+}

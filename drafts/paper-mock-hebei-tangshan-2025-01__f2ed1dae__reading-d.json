@@ -1,0 +1,751 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-hebei-tangshan-2025-01",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group:paper-mock-hebei-tangshan-2025-01:reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed"
+  },
+  "groups": {
+    "group:paper-mock-hebei-tangshan-2025-01:reading-d": {
+      "overview": "文章从赫拉克利特“人不能两次踏进同一条河流”说起，指出抗拒变化只会带来压力，介绍“应变稳态”这一在变化中求稳定的概念，并说明兼具坚韧与灵活才能从容应对变化。",
+      "fullTranslationZh": "古希腊哲学家赫拉克利特曾说，人不能两次踏进同一条河流，因为每次踏入时你已不是同一个人，河水也永远在流动。这是表现无常这一现实的有力方式：万物始终在变化。\n许多人与变化的关系很紧张。他们否认变化、抗拒变化或试图控制变化，结果几乎总是压力、焦虑和倦怠交织在一起。其实不必如此。\n一个叫作“应变稳态”（allostasis）的概念能有所帮助。这一概念由神经科学家彼得·斯特林和生物学家约瑟夫·艾尔于 20 世纪 80 年代末提出，被定义为“通过变化实现稳定”，巧妙地体现了它的双重含义：在变化过程中保持稳定的方法就是改变，至少在一定程度上改变。\n变化之河一直在无情地奔流，丝毫没有放缓的迹象。从社会层面看，我们经历了一场大流行病、随之而来的经济衰退以及社交媒体的广泛普及，这些因素共同改变了我们生活和工作的方式。在个人生活中，我们继续做着一直在做的事：搬家、找工作、辞职、换工作、升职、生病、结婚、生子、退休，如此等等。\n要在这条河中找到出路，既需要坚韧，也需要灵活。坚韧意味着强硬而坚定，清楚自己的核心价值和立场。灵活意味着积极应对不断变化的环境，能适应、能弯曲而不折断，能成长，甚至能改变想法。把这些品质结合起来，就会获得极强的耐力，它能帮你即使在脆弱的时刻也守住坚强的内核。它让你踏入应变稳态“有序—无序—重建秩序”的循环（这当然和踏入赫拉克利特的那条河是一回事），并巧妙地驾驭它，只要有可能，就让它为你所用。",
+      "selectedLongSentences": [
+        {
+          "sentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-d-1",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+          "sourceText": "Developed in the late 1980s by a neuroscientist, Peter Sterling, and a biologist, Joseph Eyer, allostasis is defined as “stability through change,” elegantly showing the concept’s double meaning: The way to stay stable through the process of change is by changing, at least to some extent.",
+          "displayText": "Developed in the late 1980s by a neuroscientist, Peter Sterling, and a biologist, Joseph Eyer, allostasis is defined as “stability through change,” elegantly showing the concept’s double meaning: The way to stay stable through the process of change is by changing, at least to some extent.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:32"
+          ],
+          "translationZh": "这一概念由神经科学家彼得·斯特林和生物学家约瑟夫·艾尔于 20 世纪 80 年代末提出，被定义为“通过变化实现稳定”，巧妙地体现了它的双重含义：在变化过程中保持稳定的方法就是改变，至少在一定程度上改变。",
+          "analysisZh": "主干是 allostasis is defined as “stability through change”，“应变稳态被定义为通过变化实现稳定”。句首的过去分词短语 Developed in the late 1980s by … 交代这个概念由谁、在什么时候提出，两个人名分别是前面职业名词的同位语。主干后的现在分词短语 elegantly showing … 补充说明这个定义的特点，冒号后再具体解释“双重含义”：The way … is by changing，保持稳定的方法是改变；at least to some extent 限定改变的程度。",
+          "underlineRanges": [
+            {
+              "start": 95,
+              "end": 147,
+              "quote": "allostasis is defined as “stability through change,”"
+            },
+            {
+              "start": 148,
+              "end": 194,
+              "quote": "elegantly showing the concept’s double meaning"
+            },
+            {
+              "start": 249,
+              "end": 288,
+              "quote": "is by changing, at least to some extent"
+            }
+          ]
+        },
+        {
+          "sentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-d-2",
+          "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:5",
+          "sourceText": "Put these qualities together and the result is a great endurance, one that helps you maintain your strong core even in fragile moments.",
+          "displayText": "Put these qualities together and the result is a great endurance, one that helps you maintain your strong core even in fragile moments.",
+          "relatedQuestionIds": [
+            "question:paper-mock-hebei-tangshan-2025-01:34"
+          ],
+          "translationZh": "把这些品质结合起来，就会获得极强的耐力，它能帮你即使在脆弱的时刻也守住坚强的内核。",
+          "analysisZh": "这是“祈使句 + and + 陈述句”的句型，相当于“如果把这些品质结合起来，结果就是……”。these qualities 指前文的坚韧和灵活。后半句主干是 the result is a great endurance；逗号后的 one 是 endurance 的同位语，后接 that 定语从句，说明这种耐力的作用：帮你在脆弱时刻也守住内核。",
+          "underlineRanges": [
+            {
+              "start": 0,
+              "end": 32,
+              "quote": "Put these qualities together and"
+            },
+            {
+              "start": 33,
+              "end": 64,
+              "quote": "the result is a great endurance"
+            },
+            {
+              "start": 66,
+              "end": 110,
+              "quote": "one that helps you maintain your strong core"
+            }
+          ]
+        }
+      ],
+      "teachingContent": {
+        "schemaVersion": "objective-teaching-content-v1",
+        "sourceTextId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+        "sourceAssetVersion": 1,
+        "translation": {
+          "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+          "legacyField": "fullTranslationZh",
+          "paragraphs": [
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p1",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-d:1"
+              ],
+              "start": 0,
+              "end": 76,
+              "quote": "古希腊哲学家赫拉克利特曾说，人不能两次踏进同一条河流，因为每次踏入时你已不是同一个人，河水也永远在流动。这是表现无常这一现实的有力方式：万物始终在变化。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p2",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-d:2"
+              ],
+              "start": 77,
+              "end": 136,
+              "quote": "许多人与变化的关系很紧张。他们否认变化、抗拒变化或试图控制变化，结果几乎总是压力、焦虑和倦怠交织在一起。其实不必如此。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p3",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-d:3"
+              ],
+              "start": 137,
+              "end": 269,
+              "quote": "一个叫作“应变稳态”（allostasis）的概念能有所帮助。这一概念由神经科学家彼得·斯特林和生物学家约瑟夫·艾尔于 20 世纪 80 年代末提出，被定义为“通过变化实现稳定”，巧妙地体现了它的双重含义：在变化过程中保持稳定的方法就是改变，至少在一定程度上改变。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p4",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-d:4"
+              ],
+              "start": 270,
+              "end": 407,
+              "quote": "变化之河一直在无情地奔流，丝毫没有放缓的迹象。从社会层面看，我们经历了一场大流行病、随之而来的经济衰退以及社交媒体的广泛普及，这些因素共同改变了我们生活和工作的方式。在个人生活中，我们继续做着一直在做的事：搬家、找工作、辞职、换工作、升职、生病、结婚、生子、退休，如此等等。"
+            },
+            {
+              "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p5",
+              "sourceParagraphIds": [
+                "block:paper-mock-hebei-tangshan-2025-01:reading-d:5"
+              ],
+              "start": 408,
+              "end": 605,
+              "quote": "要在这条河中找到出路，既需要坚韧，也需要灵活。坚韧意味着强硬而坚定，清楚自己的核心价值和立场。灵活意味着积极应对不断变化的环境，能适应、能弯曲而不折断，能成长，甚至能改变想法。把这些品质结合起来，就会获得极强的耐力，它能帮你即使在脆弱的时刻也守住坚强的内核。它让你踏入应变稳态“有序—无序—重建秩序”的循环（这当然和踏入赫拉克利特的那条河是一回事），并巧妙地驾驭它，只要有可能，就让它为你所用。"
+            }
+          ]
+        },
+        "completedSourceTexts": [],
+        "annotations": [
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-d-evidence-1",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:32"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+                "start": 133,
+                "end": 327,
+                "quote": "allostasis is defined as “stability through change,” elegantly showing the concept’s double meaning: The way to stay stable through the process of change is by changing, at least to some extent."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p3",
+                "start": 75,
+                "end": 132,
+                "quote": "被定义为“通过变化实现稳定”，巧妙地体现了它的双重含义：在变化过程中保持稳定的方法就是改变，至少在一定程度上改变。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-d-evidence-2",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:33"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:4",
+                "start": 0,
+                "end": 86,
+                "quote": "The river of change has been flowing mercilessly, and it shows no signs of letting up."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p4",
+                "start": 0,
+                "end": 23,
+                "quote": "变化之河一直在无情地奔流，丝毫没有放缓的迹象。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-d-evidence-3",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:34"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:5",
+                "start": 305,
+                "end": 440,
+                "quote": "Put these qualities together and the result is a great endurance, one that helps you maintain your strong core even in fragile moments."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p5",
+                "start": 88,
+                "end": 129,
+                "quote": "把这些品质结合起来，就会获得极强的耐力，它能帮你即使在脆弱的时刻也守住坚强的内核。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-d-evidence-4",
+            "kind": "answer-evidence",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:35"
+            ],
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:2",
+                "start": 50,
+                "end": 185,
+                "quote": "They deny it, resist it or attempt to control it-the result of which is almost always some combination of stress, anxiety, and burnout."
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:2",
+                "start": 186,
+                "end": 217,
+                "quote": "It doesn’t have to be that way."
+              },
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+                "start": 234,
+                "end": 327,
+                "quote": "The way to stay stable through the process of change is by changing, at least to some extent."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p2",
+                "start": 13,
+                "end": 52,
+                "quote": "他们否认变化、抗拒变化或试图控制变化，结果几乎总是压力、焦虑和倦怠交织在一起。"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p2",
+                "start": 52,
+                "end": 59,
+                "quote": "其实不必如此。"
+              },
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p3",
+                "start": 103,
+                "end": 132,
+                "quote": "在变化过程中保持稳定的方法就是改变，至少在一定程度上改变。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-d-structure-1",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:32"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-d-1",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+                "start": 38,
+                "end": 327,
+                "quote": "Developed in the late 1980s by a neuroscientist, Peter Sterling, and a biologist, Joseph Eyer, allostasis is defined as “stability through change,” elegantly showing the concept’s double meaning: The way to stay stable through the process of change is by changing, at least to some extent."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p3",
+                "start": 31,
+                "end": 132,
+                "quote": "这一概念由神经科学家彼得·斯特林和生物学家约瑟夫·艾尔于 20 世纪 80 年代末提出，被定义为“通过变化实现稳定”，巧妙地体现了它的双重含义：在变化过程中保持稳定的方法就是改变，至少在一定程度上改变。"
+              }
+            ]
+          },
+          {
+            "annotationId": "group:paper-mock-hebei-tangshan-2025-01:reading-d-structure-2",
+            "kind": "sentence-structure",
+            "questionIds": [
+              "question:paper-mock-hebei-tangshan-2025-01:34"
+            ],
+            "selectedSentenceId": "sentence-group:paper-mock-hebei-tangshan-2025-01:reading-d-2",
+            "sourceRanges": [
+              {
+                "textId": "source-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:5",
+                "start": 305,
+                "end": 440,
+                "quote": "Put these qualities together and the result is a great endurance, one that helps you maintain your strong core even in fragile moments."
+              }
+            ],
+            "translationRanges": [
+              {
+                "textId": "translation-group:paper-mock-hebei-tangshan-2025-01:reading-d",
+                "paragraphId": "zh-group:paper-mock-hebei-tangshan-2025-01:reading-d-p5",
+                "start": 88,
+                "end": 129,
+                "quote": "把这些品质结合起来，就会获得极强的耐力，它能帮你即使在脆弱的时刻也守住坚强的内核。"
+              }
+            ]
+          }
+        ]
+      },
+      "discourseStructure": {
+        "summary": "文章先用赫拉克利特的河流说明万物皆变，再指出人们抗拒变化的后果，接着介绍应变稳态这一在变化中求稳定的概念，然后说明变化无处不在，最后讲靠坚韧与灵活应对变化。",
+        "paragraphs": [
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:1",
+            "summary": "赫拉克利特说人不能两次踏进同一条河流，说明万物始终在变。",
+            "function": "用名言引出“变化”这一话题。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:2",
+            "summary": "许多人否认、抗拒或控制变化，结果带来压力、焦虑和倦怠，但其实不必如此。",
+            "function": "提出问题：人们与变化关系紧张。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+            "summary": "应变稳态的定义是“通过变化实现稳定”，即靠一定程度的改变来保持稳定。",
+            "function": "给出应对变化的思路。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:4",
+            "summary": "社会和个人生活中的变化接连不断，没有放缓的迹象。",
+            "function": "用社会和个人的例子说明变化无法回避。"
+          },
+          {
+            "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:5",
+            "summary": "坚韧加灵活能带来强大的耐力，让人在变化的循环中站稳并从中受益。",
+            "function": "说明具体怎样应对变化，并呼应首段的河流。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "question:paper-mock-hebei-tangshan-2025-01:32": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "读懂 allostasis 的定义，找出与之相符的概括。",
+      "stemTranslationZh": "关于应变稳态（allostasis），我们知道什么？",
+      "locateBy": "stem",
+      "locateFindZh": "看冒号后怎么解释双重含义",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它是一个自相矛盾的概念。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "elegantly showing the concept’s double meaning",
+            "sourceHighlight": "elegantly showing the concept’s double meaning",
+            "optionText": "It is a contradictory concept.",
+            "optionHighlight": "contradictory",
+            "explanation": "原文说这个定义巧妙地（elegantly）体现了双重含义：稳定和变化统一在一起，靠变化求稳定。选项把“双重含义”说成自相矛盾。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+              "quote": "elegantly showing the concept’s double meaning",
+              "anchor": "巧妙的双重含义"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它倾向于关注变化。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "allostasis is defined as “stability through change,”",
+            "sourceHighlight": "stability through change",
+            "optionText": "It tends to focus on change.",
+            "optionHighlight": "focus on change",
+            "explanation": "定义的落脚点是稳定（stability），变化只是途径（through change）；选项只抓住变化这一半。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+              "quote": "allostasis is defined as “stability through change,”",
+              "anchor": "定义"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它提倡动态的稳定。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+              "quote": "allostasis is defined as “stability through change,” elegantly showing the concept’s double meaning: The way to stay stable through the process of change is by changing, at least to some extent.",
+              "anchor": "在变化中求稳定"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它主张绝对的适应。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The way to stay stable through the process of change is by changing, at least to some extent.",
+            "sourceHighlight": "at least to some extent",
+            "optionText": "It claims absolute adaptability.",
+            "optionHighlight": "absolute adaptability",
+            "explanation": "原文说靠改变求稳定，只是在一定程度上改变（at least to some extent），选项说成绝对的适应，把程度说过了头。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+              "quote": "at least to some extent",
+              "anchor": "一定程度上"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "allostasis",
+          "sourceRole": "stem",
+          "targetText": "Developed in the late 1980s by a neuroscientist, Peter Sterling, and a biologist, Joseph Eyer, allostasis is defined as “stability through change,” elegantly showing the concept’s double meaning: The way to stay stable through the process of change is by changing, at least to some extent.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+          "relationType": "locationCue",
+          "answerText": "stability through change",
+          "note": "题干 allostasis 原词出现在原文。"
+        },
+        {
+          "sourceText": "It advocates dynamic stability.",
+          "sourceRole": "correctOption",
+          "targetText": "allostasis is defined as “stability through change,”",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+          "relationType": "paraphrase",
+          "note": "选项的“动态的稳定”（dynamic stability）就是定义里的“通过变化实现稳定”（stability through change）：要保持稳定，靠的恰恰是自己也跟着变（by changing），选 C。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:33": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "similarityProfile": {
+        "family": "word-meaning",
+        "subtype": "phrase",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "根据同句前半和下文推测短语 letting up 的意思。",
+      "stemTranslationZh": "下列哪一项最能解释第四段中画线的 letting up？",
+      "locateBy": "stem",
+      "locateFindZh": "看 and 前面变化之河怎么流",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "被抽水。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Being pumped.",
+            "explanation": "放进去成了“变化之河毫无被抽水的迹象”；这条河比喻的是变化，句子说的是流得急不急，与抽不抽水无关。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "放缓。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:4",
+              "quote": "The river of change has been flowing mercilessly, and it shows no signs of letting up.",
+              "anchor": "无情奔流"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:4",
+              "quote": "In our personal lives, we continue to do what we have always done",
+              "anchor": "变化仍在继续"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "受到污染。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Getting polluted.",
+            "explanation": "放进去成了“毫无被污染的迹象”；可这条河是变化的比喻，前半说的是流得猛（mercilessly），与水干不干净无关。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "上涨。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "The river of change has been flowing mercilessly, and it shows no signs of letting up.",
+            "sourceHighlight": "flowing mercilessly",
+            "optionText": "Rising up.",
+            "optionHighlight": "Rising up",
+            "explanation": "选项和 letting up 一样带 up，放进去却成了“毫无上涨的迹象”，等于说变化不会加剧；而前半说河一直无情奔流，要表达的是丝毫没有减弱。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:4",
+              "quote": "The river of change has been flowing mercilessly",
+              "anchor": "无情奔流"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "letting up",
+          "sourceRole": "stem",
+          "targetText": "The river of change has been flowing mercilessly, and it shows no signs of letting up.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:4",
+          "relationType": "locationCue",
+          "answerText": "has been flowing mercilessly",
+          "note": "题干 letting up 原词出现在原文。"
+        },
+        {
+          "sourceText": "Slowing down.",
+          "sourceRole": "correctOption",
+          "targetText": "The river of change has been flowing mercilessly, and it shows no signs of letting up.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:4",
+          "relationType": "paraphrase",
+          "note": "同句前半说变化之河一直在无情奔流（flowing mercilessly），后半顺着这层意思说，所以 letting up 必须是“变缓、减弱”。放回去：变化之河一直无情奔流，丝毫没有放缓的迹象；下文接着列出接连不断的变化，也对得上，选 B。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:34": {
+      "skill": {
+        "primary": "detail"
+      },
+      "similarityProfile": {
+        "family": "detail",
+        "subtype": "general-detail",
+        "detailScope": "single",
+        "technique": null
+      },
+      "questionFocus": "找出坚韧与灵活结合后带来的结果，并对应到选项的概括词。",
+      "stemTranslationZh": "根据最后一段，践行应变稳态你会得到什么？",
+      "locateBy": "stem",
+      "locateFindZh": "",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "受欢迎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Popularity.",
+            "explanation": "[[block:paper-mock-hebei-tangshan-2025-01:reading-d:5]] 讲的是一个人怎样应对变化，得到的是更能扛事的耐力，没提受人欢迎。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "自信。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Confidence.",
+            "explanation": "[[block:paper-mock-hebei-tangshan-2025-01:reading-d:5]] 说坚韧要清楚自己的核心价值（know your core values），但落脚在扛得住变化的耐力上，没说会变得自信。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "认可。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Recognition.",
+            "explanation": "[[block:paper-mock-hebei-tangshan-2025-01:reading-d:5]] 只说能让变化为你所用（to your own benefit），没说会得到别人的认可。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "毅力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:5",
+              "quote": "Put these qualities together and the result is a great endurance, one that helps you maintain your strong core even in fragile moments.",
+              "anchor": "极强的耐力"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "gain",
+          "sourceRole": "stem",
+          "targetText": "Put these qualities together and the result is a great endurance, one that helps you maintain your strong core even in fragile moments.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:5",
+          "relationType": "locationCue",
+          "targetCue": "the result",
+          "sourceZh": "得到",
+          "targetCueZh": "结果",
+          "answerText": "a great endurance",
+          "note": "题干 gain（得到）对应原文 the result（结果）。"
+        },
+        {
+          "sourceText": "Perseverance.",
+          "sourceRole": "correctOption",
+          "targetText": "Put these qualities together and the result is a great endurance, one that helps you maintain your strong core even in fragile moments.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:5",
+          "relationType": "paraphrase",
+          "note": "选项的“毅力”（Perseverance）就是原文的“极强的耐力”（a great endurance）：坚韧加灵活，能让人在脆弱时刻也守住内核，选 D。"
+        }
+      ]
+    },
+    "question:paper-mock-hebei-tangshan-2025-01:35": {
+      "skill": {
+        "primary": "title"
+      },
+      "similarityProfile": {
+        "family": "main-idea",
+        "subtype": "best-title",
+        "detailScope": null,
+        "technique": null
+      },
+      "questionFocus": "把握全文怎样看待变化，选出能概括全文的标题。",
+      "stemTranslationZh": "这篇文章最好的标题是什么？",
+      "locateBy": "passage",
+      "locateFindZh": "从 [[block:paper-mock-hebei-tangshan-2025-01:reading-d:2]] 人们与变化的紧张关系读起，看后文给出什么出路",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "向稳定说不",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "The way to stay stable through the process of change is by changing, at least to some extent.",
+            "sourceHighlight": "stay stable",
+            "optionText": "Say No to Stability",
+            "optionHighlight": "Say No to Stability",
+            "explanation": "原文并不拒绝稳定，应变稳态讲的正是怎样在变化中保持稳定（stay stable），选项与之相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+              "quote": "The way to stay stable through the process of change is by changing, at least to some extent.",
+              "anchor": "在变化中保持稳定"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "别再抗拒变化",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:2",
+              "quote": "They deny it, resist it or attempt to control it-the result of which is almost always some combination of stress, anxiety, and burnout.",
+              "anchor": "抗拒变化的后果"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:2",
+              "quote": "It doesn’t have to be that way.",
+              "anchor": "不必如此"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:3",
+              "quote": "The way to stay stable through the process of change is by changing, at least to some extent.",
+              "anchor": "靠改变求稳定"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为灵活而奋斗",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Finding ways in this river requires both ruggedness and flexibility.",
+            "sourceHighlight": "both ruggedness and flexibility",
+            "optionText": "Fight for Flexibility",
+            "optionHighlight": "Flexibility",
+            "explanation": "灵活（flexibility）只在 [[block:paper-mock-hebei-tangshan-2025-01:reading-d:5]] 讲应对方法时出现，而且要和坚韧（ruggedness）一起用；选项只取了一段里的一半，盖不住全文。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:5",
+              "quote": "Finding ways in this river requires both ruggedness and flexibility.",
+              "anchor": "坚韧和灵活"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "平衡生活与工作",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "work",
+            "optionText": "Work",
+            "matchType": "exact",
+            "relationNote": "生活和工作（how we live and work）只在 [[block:paper-mock-hebei-tangshan-2025-01:reading-d:4]] 列举变化时提到一次；全文讲怎样面对变化，不是怎样平衡生活与工作。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:4",
+              "quote": "the combination of which has shifted how we live and work",
+              "anchor": "改变了生活和工作方式"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Stop Resisting Change",
+          "sourceRole": "correctOption",
+          "targetText": "They deny it, resist it or attempt to control it-the result of which is almost always some combination of stress, anxiety, and burnout.",
+          "targetParagraphId": "block:paper-mock-hebei-tangshan-2025-01:reading-d:2",
+          "relationType": "paraphrase",
+          "note": "几段写的都是人该怎样对待变化：先用赫拉克利特的河说明万物皆变，再指出抗拒变化（resist it）只会带来压力和倦怠，接着介绍靠改变求稳定的应变稳态，最后讲凭坚韧和灵活顺着变化走。标题的“别再抗拒变化”正好把这几层都包进去，选 B。"
+        }
+      ]
+    }
+  }
+}
