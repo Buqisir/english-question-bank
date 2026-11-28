@@ -24,7 +24,8 @@ there only for papers inside a current Owner batch authorization.
    Dispatch the printed round-2 prompts (summaries, metadata, listening) in parallel.
 3. A listening group left `review_required` because its first reading drifts at a
    window boundary: `fast-import.mjs asr-extra <id> --start … --end … --tag …`, then
-   resume that worker with the new evidence paths.
+   resume that worker with the new evidence paths. Judge the boundary as described
+   in Rules; do not leave it to the Owner.
 4. `fast-import.mjs finish <id>`. Inspect every page of the four contact sheets and
    the printed writing-reference outline.
 5. Nothing blocking: `fast-import.mjs submit <id>` uploads the Candidate and captures
@@ -55,6 +56,23 @@ reused by ID, so do not redispatch workers.
   change an answer, and record why. An answer that the passage, the original article
   or other circulated keys clearly contradict is corrected the same way, with its
   evidence.
+- Listening boundaries are judged by the agent to 0.01 s, not handed to the Owner
+  (Owner 2026-11-28). Evidence: Apple word-level ASR and faster-whisper word times
+  over about 3 s on each side of the boundary, plus the ffmpeg `silencedetect` or
+  `astats` energy envelope; rerun a drifting window with `asr-extra`. A start sits in
+  the silence before the first word and excludes the "Text N" announcement; an end
+  sits 0.15–0.3 s after the last word's decay, inside silence, before the next
+  announcement. When the engines disagree on a word, the printed transcript decides
+  the word and the energy envelope decides the time. Record one line per boundary:
+  word, time, silence span.
+- Never keep a cut that clips a word to preserve lecture sentence timings, an older
+  spelling-review binding or a packaging gate. Realign that segment's sentence
+  start/end times to the new cut (text unchanged) and submit them together. If only
+  a code change gets past the gate, stop and report the gate; do not submit the
+  clipped version.
+- Use `listening-owner-review-pack.mjs` only when the recording has no silence to cut
+  in (overlapping speech, music over words) and say why. Engine disagreement, window
+  drift and lecture-timing conflicts do not qualify.
 - No formal verification suites before the Owner says Ship.
 
 ## Deliver

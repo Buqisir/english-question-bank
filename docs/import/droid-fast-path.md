@@ -153,7 +153,11 @@ Screen 的官方范文来自 `groups[*].writingTask.officialModelAnswer`。改�
 
 ### 出听核包
 
-听力 attempt 仍有需 Owner 耳听的不确定段时：
+首尾先由 Agent 判到 0.01 秒（Owner 2026-11-28）：边界前后各约 3 秒的 Apple 词级 ASR、
+faster-whisper 词级时间和 ffmpeg 能量包络；两引擎分歧时词以原文为准、时间以能量为准；
+末词被切就延长尾点，讲评句级时标跟着重对齐，不为保住时标或打包门禁退回切词的旧切点。
+两引擎分歧、窗口漂移、讲评时标对不上都不算判不了。只有录音本身无静音可切（语音重叠、
+音乐压词）时，才出听核包，并写明 Agent 为什么判不了：
 
 ```sh
 node scripts/import-pipeline/listening-owner-review-pack.mjs <id> [另一个id] \

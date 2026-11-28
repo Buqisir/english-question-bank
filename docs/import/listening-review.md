@@ -72,7 +72,9 @@ inspection scope. Do not claim direct listening when only ASR was read.
 
 ## 出听核包
 
-已有 attempt 的首尾、遍数或正文仍不确定，需要 Owner 耳听裁决时，运行只读命令：
+首尾由 Agent 判定，默认不交 Owner（Owner 2026-11-28），方法见
+[droid-fast-path 出听核包](droid-fast-path.md#出听核包)。只有录音本身无静音可切（语音重叠、
+音乐压词）或遍数、正文的问题 Agent 确实判不了时，才需要 Owner 耳听裁决，运行只读命令：
 
 ```sh
 node scripts/import-pipeline/listening-owner-review-pack.mjs <paperId> [另一个paperId] \
